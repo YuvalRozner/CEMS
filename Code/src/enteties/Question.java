@@ -8,7 +8,7 @@ public class Question {
 	private String question;
 	private int number;
 	private String lecturerCreated;
-	
+	private String lecturerCreated1;
 	private String[] answers;
 	private int correctAns;
 	private String instructions;
