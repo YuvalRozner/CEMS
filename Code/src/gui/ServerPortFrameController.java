@@ -58,18 +58,21 @@ public class ServerPortFrameController  {
 			//((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 			Stage primaryStage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
-			CEMSserverUI.runServer(p);
+			//CEMSserverUI.runServer(p);
+			new CEMSserverUI().runServer(p);
 		}
 	}
 	
 	public void setClientAddress(InetAddress clientAddress) {
-		clientIp.setText(clientAddress.getHostAddress());
 		System.out.println(clientAddress.getHostAddress());
+		clientIp.setEditable(true);
+		clientIp.setText(clientAddress.getHostAddress());
+		
 	}
 	
 	public void setClientHostName(String clientHostname) {
-		clientHostName.setText(clientHostname);
 		System.out.println(clientHostname);
+		clientHostName.setText(clientHostname);
 	}
 
 	public void start(Stage primaryStage) throws Exception {	

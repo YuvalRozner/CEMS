@@ -53,8 +53,11 @@ public class CEMSserver extends AbstractServer {
         InetAddress clientAddress = client.getInetAddress();
         String clientHostname = client.getInetAddress().getHostAddress();
         try {
-        	serverPortFrameController.setClientAddress(clientAddress);
-        	serverPortFrameController.setClientHostName(clientAddress.getHostAddress());
+        	if(serverPortFrameController!=null) {
+        		serverPortFrameController.setClientAddress(clientAddress);
+        		serverPortFrameController.setClientHostName(clientAddress.getHostAddress());
+        	}
+
         } catch(Throwable t) {System.out.println("error 1");};
         
         
@@ -66,6 +69,8 @@ public class CEMSserver extends AbstractServer {
 
 	public void setServerPortFrameController(ServerPortFrameController serverPortFrameController) {
 		this.serverPortFrameController = serverPortFrameController;
+		if(this.serverPortFrameController==null) System.out.println("nulllll");
+		else System.out.println("goodd");
 	}
 
 	/**

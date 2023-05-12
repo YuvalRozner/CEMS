@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class CEMSserverUI extends Application {
 	final public static int DEFAULT_PORT = 5555;
 		
-	public ServerPortFrameController aFrame;
+	public ServerPortFrameController aFrame = new ServerPortFrameController();
 	
 	//public static Vector<Student> students=new Vector<Student>();
 
@@ -21,12 +21,12 @@ public class CEMSserverUI extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub				  		
-		aFrame = new ServerPortFrameController(); // create StudentFrame
+		//aFrame = new ServerPortFrameController(); // create StudentFrame
 		 
 		aFrame.start(primaryStage);
 	}
 	
-	public static void runServer(String p)
+	public void runServer(String p)
 	{
 		 int port = 0; //Port to listen on
 
@@ -41,12 +41,7 @@ public class CEMSserverUI extends Application {
 	        }
 	    	
 	        CEMSserver sv = new CEMSserver(port);
-	        try {
-				sv.setServerPortFrameController(aFrame);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	        sv.setServerPortFrameController(aFrame);
 	        	
 	        try 
 	        {
