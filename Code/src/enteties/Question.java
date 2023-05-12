@@ -1,32 +1,46 @@
 package enteties;
 
+import java.util.ArrayList;
+
 public class Question {
 
-	private int id;
-	private int subjectNum;
+	private String id;
+	private String subjectNum;
 	private String courseName;
 	private String question;
-	private int number;
+	private String number;
 	private String lecturerCreated;
-	private String lecturerCreated1;
+	
 	private String[] answers;
 	private int correctAns;
 	private String instructions;
-	private int[] relevantCourses;
+	private ArrayList<Integer> relevantCourses;
+	
+	
+	public Question(String id, String subjectNum, String courseName, String question, String number,
+			String lecturerCreated) {
+		super();
+		this.id = id;
+		this.subjectNum = subjectNum;
+		this.courseName = courseName;
+		this.question = question;
+		this.number = number;
+		this.lecturerCreated = lecturerCreated;
+	}
 
-	public int getQNum() {
+	public String getQNum() {
 		return this.id;
 	}
 
-	public void setQNum(int qNum) {
+	public void setQNum(String qNum) {
 		this.id = qNum;
 	}
 
-	public int getSubjectNum() {
+	public String getSubjectNum() {
 		return this.subjectNum;
 	}
 
-	public void setSubjectNum(int subjectNum) {
+	public void setSubjectNum(String subjectNum) {
 		this.subjectNum = subjectNum;
 	}
 
@@ -63,18 +77,18 @@ public class Question {
 	}
 
 	public String getLecturereCreated() {
-		return this.lecturereCreated;
+		return this.lecturerCreated;
 	}
 
 	public void setLecturereCreated(String lecturereCreated) {
-		this.lecturereCreated = lecturereCreated;
+		this.lecturerCreated = lecturereCreated;
 	}
 
-	public int[] getRelevantCourses() {
+	public ArrayList<Integer> getRelevantCourses() {
 		return this.relevantCourses;
 	}
 
-	public void setRelevantCourses(int[] relevantCourses) {
+	public void setRelevantCourses(ArrayList<Integer> relevantCourses) {
 		this.relevantCourses = relevantCourses;
 	}
 
