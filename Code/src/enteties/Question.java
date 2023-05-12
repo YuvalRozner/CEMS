@@ -91,5 +91,9 @@ public class Question {
 	public void setRelevantCourses(ArrayList<Integer> relevantCourses) {
 		this.relevantCourses = relevantCourses;
 	}
-
+	
+	public String toString() {
+		return "{"+id+", "+subjectNum+", "+courseName+", "+question+", "+number+", "+lecturerCreated+"}";
+	
+	}
 }

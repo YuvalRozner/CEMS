@@ -112,6 +112,7 @@ public class CEMSserver extends AbstractServer
       try 
       {
     	  this.conn  = DriverManager.getConnection("jdbc:mysql://localhost/cems?serverTimezone=IST","root","DorShabat123");
+    	  //this.conn  = DriverManager.getConnection("jdbc:mysql://localhost/cems?serverTimezone=IST","root","yr13yr13");
       } catch (SQLException ex) 
 	    {/* handle any errors*/
       System.out.println("SQLException: " + ex.getMessage());
