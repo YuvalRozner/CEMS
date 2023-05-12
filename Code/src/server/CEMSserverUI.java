@@ -1,6 +1,8 @@
 package server;
 
-
+import gui.ServerPortFrameController;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 public class CEMSserverUI extends Application {
 	final public static int DEFAULT_PORT = 5555;
@@ -34,7 +36,7 @@ public class CEMSserverUI extends Application {
 	        	System.out.println("ERROR - Could not connect!");
 	        }
 	    	
-	        EchoServer sv = new EchoServer(port);
+	        CEMSserver sv = new CEMSserver(port);
 	        
 	        try 
 	        {

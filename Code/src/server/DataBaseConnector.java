@@ -1,4 +1,4 @@
-package CEMSserver;
+package server;
 
 public class DataBaseConnector {
 
