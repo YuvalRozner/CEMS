@@ -1,11 +1,18 @@
 package server;
 
+import java.net.InetAddress;
+
 import gui.ServerPortFrameController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class CEMSserverUI extends Application {
 	final public static int DEFAULT_PORT = 5555;
+	
+	public static InetAddress clientAddress;
+	public static String clientHostname;
+	
+	public static ServerPortFrameController aFrame;
 	
 	//public static Vector<Student> students=new Vector<Student>();
 
@@ -17,7 +24,7 @@ public class CEMSserverUI extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub				  		
-		ServerPortFrameController aFrame = new ServerPortFrameController(); // create StudentFrame
+		aFrame = new ServerPortFrameController(); // create StudentFrame
 		 
 		aFrame.start(primaryStage);
 	}
@@ -37,7 +44,15 @@ public class CEMSserverUI extends Application {
 	        }
 	    	
 	        CEMSserver sv = new CEMSserver(port);
-	        
+	        sv.getClientAddress();
+	        sv.getClientHostname();
+	        try {
+	        	aFrame.setClientAddress(clientAddress);
+	        	aFrame.setClientHostName(clientHostname);
+	        }
+	        catch(Throwable t) {
+	        	System.out.println("error printing the id and host name of client..");}
+	        	
 	        try 
 	        {
 	          sv.listen(); //Start listening for connections

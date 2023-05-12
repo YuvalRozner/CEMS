@@ -1,6 +1,9 @@
 package gui;
 
 import server.CEMSserverUI;
+
+import java.net.InetAddress;
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +21,15 @@ public class ServerPortFrameController  {
 	
 	String temp="";
 	
+    @FXML
+    private TextField clientHostName;
+
+    @FXML
+    private TextField clientIp;
+
+    @FXML
+    private TextField clientStatus;
+    
 	@FXML
 	private Button btnExit = null;
 	@FXML
@@ -43,11 +55,21 @@ public class ServerPortFrameController  {
 		}
 		else
 		{
-			((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+			//((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 			Stage primaryStage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
 			CEMSserverUI.runServer(p);
 		}
+	}
+	
+	public void setClientAddress(InetAddress clientAddress) {
+		clientIp.setText(clientAddress.getHostAddress());
+		System.out.println(clientAddress.getHostAddress());
+	}
+	
+	public void setClientHostName(String clientHostname) {
+		clientHostName.setText(clientHostname);
+		System.out.println(clientHostname);
 	}
 
 	public void start(Stage primaryStage) throws Exception {	
