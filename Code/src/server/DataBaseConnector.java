@@ -19,7 +19,7 @@ public class DataBaseConnector {
 	      try 
 	      {
 	    	  //conn  = DriverManager.getConnection("jdbc:mysql://localhost/cems?serverTimezone=IST","root","DorShabat123");
-	    	  Cserver.setConn(DriverManager.getConnection("jdbc:mysql://localhost/cems?serverTimezone=IST","root","yr13yr13"));
+	    	  Cserver.setConn(DriverManager.getConnection("jdbc:mysql://localhost/cems?serverTimezone=IST","root","DorShabat123"));
 	      } catch (SQLException ex) 
 		    {/* handle any errors*/
 	      System.out.println("SQLException: " + ex.getMessage());

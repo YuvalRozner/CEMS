@@ -4,14 +4,14 @@ import java.net.InetAddress;
 
 import gui.ServerPortFrameController;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class CEMSserverUI extends Application {
-	final public static int DEFAULT_PORT = 5555;
-		
-	public ServerPortFrameController aFrame = new ServerPortFrameController();
 	
-	//public static Vector<Student> students=new Vector<Student>();
+	final public static int DEFAULT_PORT = 5555;	
 
 	public static void main( String args[] ) throws Exception
 	   {   
@@ -20,13 +20,17 @@ public class CEMSserverUI extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub				  		
-		//aFrame = new ServerPortFrameController(); // create StudentFrame
-		 
-		aFrame.start(primaryStage);
+		Parent root = FXMLLoader.load(getClass().getResource("/gui/ServerPort.fxml"));
+		
+		Scene scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("/gui/ServerPort.css").toExternalForm());
+		primaryStage.setTitle("Client");
+		primaryStage.setScene(scene);
+		
+		primaryStage.show();	
 	}
-	
-	public void runServer(String p)
+	/*
+	public static void runServer(String p)
 	{
 		 int port = 0; //Port to listen on
 
@@ -40,8 +44,8 @@ public class CEMSserverUI extends Application {
 	        	System.out.println("ERROR - Could not connect!");
 	        }
 	    	
-	        CEMSserver sv = new CEMSserver(port);
-	        sv.setServerPortFrameController(aFrame);
+	        //CEMSserver sv = new CEMSserver(port);
+	        sv = new CEMSserver(port);
 	        	
 	        try 
 	        {
@@ -52,7 +56,7 @@ public class CEMSserverUI extends Application {
 	          System.out.println("ERROR - Could not listen for clients!");
 	        }
 	}
-	
+	*/
 
 }
 

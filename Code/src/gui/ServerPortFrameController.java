@@ -1,6 +1,8 @@
 package gui;
 
+import server.CEMSserver;
 import server.CEMSserverUI;
+import server.DataBaseConnector;
 
 import java.net.InetAddress;
 
@@ -18,7 +20,7 @@ import javafx.stage.Stage;
 
 public class ServerPortFrameController  {
 	private StudentFormController sfc;	
-	
+	private CEMSserver sv;
 	String temp="";
 	
     @FXML
@@ -45,6 +47,36 @@ public class ServerPortFrameController  {
 		return portxt.getText();			
 	}
 	
+	/*
+	public static void runServer(String p)
+	{
+		 int port = 0; //Port to listen on
+
+	        try
+	        {
+	        	port = Integer.parseInt(p); //Set port to 5555
+	          
+	        }
+	        catch(Throwable t)
+	        {
+	        	System.out.println("ERROR - Could not connect!");
+	        }
+	    	
+	        //CEMSserver sv = new CEMSserver(port);
+	        sv = new CEMSserver(port);
+	        	
+	        try 
+	        {
+	          sv.listen(); //Start listening for connections
+	        } 
+	        catch (Exception ex) 
+	        {
+	          System.out.println("ERROR - Could not listen for clients!");
+	        }
+	}
+	*/
+	
+	
 	public void Done(ActionEvent event) throws Exception {
 		String p;
 		
@@ -55,26 +87,41 @@ public class ServerPortFrameController  {
 		}
 		else
 		{
+			System.out.println("i am in done");
 			//((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-			Stage primaryStage = new Stage();
-			FXMLLoader loader = new FXMLLoader();
+			//Stage primaryStage = new Stage();
+			//FXMLLoader loader = new FXMLLoader();
 			//CEMSserverUI.runServer(p);
-			new CEMSserverUI().runServer(p);
+			//new CEMSserverUI().runServer(p);
+			sv = new CEMSserver(5555, this);
+			
+			try 
+	        {
+				//new DataBaseConnector().connectionToDataBase(sv);
+	          sv.listen(); //Start listening for connections
+	          } 
+	        catch (Exception ex) {}
 		}
 	}
 	
 	public void setClientAddress(InetAddress clientAddress) {
 		System.out.println(clientAddress.getHostAddress());
 		clientIp.setEditable(true);
-		clientIp.setText(clientAddress.getHostAddress());
+		this.clientIp.setText(clientAddress.getHostAddress());
 		
 	}
 	
 	public void setClientHostName(String clientHostname) {
 		System.out.println(clientHostname);
-		clientHostName.setText(clientHostname);
+		this.clientHostName.setText(clientHostname);
+	}
+	
+	
+	public void setClientStatus(String clientStatus) {
+		this.clientStatus.setText(clientStatus);
 	}
 
+	/*
 	public void start(Stage primaryStage) throws Exception {	
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/ServerPort.fxml"));
 				
@@ -83,9 +130,9 @@ public class ServerPortFrameController  {
 		primaryStage.setTitle("Client");
 		primaryStage.setScene(scene);
 		
-		primaryStage.show();		
+		primaryStage.show();	
 	}
-	
+	*/
 	public void getExitBtn(ActionEvent event) throws Exception {
 		System.out.println("exit Academic Tool");
 		System.exit(0);			
