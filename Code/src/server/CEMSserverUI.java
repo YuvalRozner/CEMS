@@ -8,11 +8,8 @@ import javafx.stage.Stage;
 
 public class CEMSserverUI extends Application {
 	final public static int DEFAULT_PORT = 5555;
-	
-	public static InetAddress clientAddress;
-	public static String clientHostname;
-	
-	public static ServerPortFrameController aFrame;
+		
+	public ServerPortFrameController aFrame;
 	
 	//public static Vector<Student> students=new Vector<Student>();
 
@@ -44,14 +41,12 @@ public class CEMSserverUI extends Application {
 	        }
 	    	
 	        CEMSserver sv = new CEMSserver(port);
-	        sv.getClientAddress();
-	        sv.getClientHostname();
 	        try {
-	        	aFrame.setClientAddress(clientAddress);
-	        	aFrame.setClientHostName(clientHostname);
-	        }
-	        catch(Throwable t) {
-	        	System.out.println("error printing the id and host name of client..");}
+				sv.setServerPortFrameController(aFrame);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	        	
 	        try 
 	        {

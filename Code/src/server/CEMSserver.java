@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import gui.ServerPortFrameController;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 
@@ -29,6 +30,7 @@ public class CEMSserver extends AbstractServer {
 	 */
 
 	Connection conn;
+	ServerPortFrameController serverPortFrameController;
 	
 	public InetAddress getClientAddress() {
 		return clientAddress;
@@ -50,12 +52,21 @@ public class CEMSserver extends AbstractServer {
         // Retrieve the client's IP address and hostname
         InetAddress clientAddress = client.getInetAddress();
         String clientHostname = client.getInetAddress().getHostAddress();
+        try {
+        	serverPortFrameController.setClientAddress(clientAddress);
+        	serverPortFrameController.setClientHostName(clientAddress.getHostAddress());
+        } catch(Throwable t) {System.out.println("error 1");};
+        
         
         // Print the client's IP address and hostname
         System.out.println("Client connected from " + clientAddress.getHostAddress() + " (" + clientHostname + ")");
     }
 
 	// Instance methods ************************************************
+
+	public void setServerPortFrameController(ServerPortFrameController serverPortFrameController) {
+		this.serverPortFrameController = serverPortFrameController;
+	}
 
 	/**
 	 * This method handles any messages received from the client.
