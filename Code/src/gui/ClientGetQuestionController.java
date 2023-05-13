@@ -48,7 +48,7 @@ public  class ClientGetQuestionController {
 		catch(Throwable t) {
 			System.out.println("error getExitBtn");
 		}
-	//	System.exit(0); //exit 
+		System.exit(0); //exit 
 	}
 	
 	public  void display(String message) {

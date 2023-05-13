@@ -112,7 +112,7 @@ public class CEMSserver extends AbstractServer {
 			}
 			else if (firstWord.equals("disconnected")) {
 				try {
-				System.out.println("clientDisconnected");
+				System.out.println("clientDisconnected" + client);
 		    	serverPortFrameController.setClientStatus("disconnected");
 		    	this.sendToAllClients("disconnected");
 				}catch(Throwable t) {};
