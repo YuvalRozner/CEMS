@@ -246,9 +246,13 @@ public class TableViewSample extends Application {
 		((Node)event.getSource()).getScene().getWindow().hide();
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AcademicFrame.fxml"));
 		Parent root1 = (Parent) fxmlLoader.load();
+		Scene scene = new Scene(root1);
 		Stage stage = new Stage();
-		stage.setScene(new Scene(root1));
+		scene.getStylesheets().add(getClass().getResource("/gui/AcademicFrame.css").toExternalForm());
+		stage.setTitle("Academic Managment Tool");
+		stage.setScene(scene);
 		stage.show();
+		
 	}
 
 }

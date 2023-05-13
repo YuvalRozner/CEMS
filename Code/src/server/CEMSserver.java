@@ -36,13 +36,6 @@ public class CEMSserver extends AbstractServer {
 		super(port);
 		CEMSserver.serverPortFrameController = sc;
 	}
-	public InetAddress getClientAddress() {
-		return clientAddress;
-	}
-
-	public String getClientHostname() {
-		return clientHostname;
-	}
 
 	InetAddress clientAddress;
 	String clientHostname;
@@ -115,7 +108,7 @@ public class CEMSserver extends AbstractServer {
 				stmt.executeUpdate((String) msg);
 				flag = true;
 				System.out.println("AFTER executeUpdate");
-				sendToAllClients("Updated");
+				sendToAllClients(msg);
 			} else if (firstWord.equals("SELECT")) {
 				System.out.println("i am in SELECT");
 				data = stmt.executeQuery((String) msg);
@@ -130,6 +123,12 @@ public class CEMSserver extends AbstractServer {
 					System.out.println("rowTemp is: " + rowTemp.toString()); ////////////////// checks for us
 				}
 				this.sendToAllClients(dataToClient);
+			}
+			else if (firstWord.equals("disconnected")) {
+				try {
+				System.out.println("clientDisconnected");
+		    	serverPortFrameController.setClientStatus("disconnected");
+				}catch(Throwable t) {};
 			}
 		} catch (SQLException ex) {/* handle any errors */
 			System.out.println("SQLException: " + ex.getMessage());

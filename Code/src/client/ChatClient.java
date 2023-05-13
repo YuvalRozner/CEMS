@@ -16,7 +16,7 @@ public class ChatClient extends AbstractClient {
 	 * method in the client.
 	 */
 	ChatIF clientUI;
-	public static ArrayList<Question> questionList = new ArrayList<Question>();
+	public static ArrayList<Question> questionList;
 	public static boolean awaitResponse = false;
 
 	// Constructors ****************************************************
@@ -57,7 +57,7 @@ public class ChatClient extends AbstractClient {
 			ArrayList<ArrayList<String>> dataFromServer = (ArrayList<ArrayList<String>>) msg;
 
 			awaitResponse = false;
-
+			questionList = new ArrayList<Question>();
 			Question tmpQ;
 			for (int i = 0; i < dataFromServer.size(); i++) {
 				if (dataFromServer.get(i) != null) {
@@ -104,12 +104,19 @@ public class ChatClient extends AbstractClient {
 	 * This method terminates the client.
 	 */
 	public void quit() {
-		try {
-			closeConnection();
-			System.out.println("after closeConnection");
-		} catch (IOException e) {
-			System.out.println("quit on quit");
-		}
+		//try {
+			ClientUI.chat.accept("disconnected");
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//closeConnection();
+			
+		//} catch (IOException e) {
+		//	System.out.println("quit on quit");
+		//}
 		System.exit(0);
 	}
 }
