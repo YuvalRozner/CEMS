@@ -30,9 +30,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-//array list
-//סידור מסך
-
 public class TableViewSample extends Application {
 
 	private ArrayList<Question> arrdup = new ArrayList<Question>();
@@ -44,7 +41,6 @@ public class TableViewSample extends Application {
 			arrdup.add(new Question(q.getID(), q.getSubjectNum(), q.getCourseName(), q.getQuestion(), q.getNumber(),q.getLecturereCreated()));
 		}
 		this.observableList = FXCollections.observableArrayList(arr);
-
 	}
 
 	@Override
@@ -150,7 +146,7 @@ public class TableViewSample extends Application {
 			}
 		});
 
-		// organize all element in location *lior*
+		// organize all element in location
 		final Pane pane = new Pane();
 		pane.getChildren().addAll(backbtn, label, savebtn, table);
 
@@ -167,8 +163,6 @@ public class TableViewSample extends Application {
 		savebtn.setLayoutY(520);
 
 		((Group) scene.getRoot()).getChildren().addAll(pane);
-
-		// backbtn.setOnMouseClicked(getBackbtn(backbtn.getE));
 
 		backbtn.setOnAction(e -> {
 			try {
@@ -196,46 +190,12 @@ public class TableViewSample extends Application {
 	}
 
 	public void getSavebtn(ActionEvent event) throws Exception {
-
-		try {
-			ArrayList<String> UpdateQueries = DB_controller.updateQuestions(table.getItems() , arrdup);
-		/*ArrayList<String> UpdateQueries = new ArrayList<String>();
-		
-		int i = 0;
-		ObservableList<Question> items = table.getItems();
-
-		for (Question q : items) {
-			if (!q.equals(arrdup.get(i))) {
-				StringBuilder sb = new StringBuilder();
-				sb.append("UPDATE cems.question SET number = '");
-				sb.append(q.getNumber());
-				sb.append("', question = '");
-				sb.append(q.getQuestion());
-				sb.append("' WHERE id = '");
-				sb.append(q.getID());
-				sb.append("';");
-				
-				//change arrdup
-				arrdup.get(i).setNumber(q.getNumber());
-				arrdup.get(i).setQuestion(q.getQuestion());
-				UpdateQueries.add(sb.toString());
-			}
-			
-			i++;
-		}*/
-		
-		
+		ArrayList<String> UpdateQueries = DB_controller.updateQuestions(table.getItems() , arrdup);
 		for (String query : UpdateQueries) {
 			System.out.println("Send to server update query -> " +query) ;
 			ClientUI.chat.accept(query);
 		}
-		
 		table.refresh();
-		}catch(Throwable t) {
-			System.out.println("Error getSavebtn in TableViewSample Class");
-		}
-			
-		
 	}
 
 	public void getBackbtn(ActionEvent event) throws Exception {
@@ -245,7 +205,6 @@ public class TableViewSample extends Application {
 		Parent root1 = (Parent) fxmlLoader.load();
 		Scene scene = new Scene(root1);
 		Stage stage = new Stage();
-		//scene.getStylesheets().add(getClass().getResource("/gui/ClientGetQuestion.css").toExternalForm());
 		stage.setTitle("Client Get Question");
 		stage.setScene(scene);
 		stage.show();
