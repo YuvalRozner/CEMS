@@ -1,8 +1,5 @@
 package server;
 
-import java.net.InetAddress;
-
-import gui.ServerPortFrameController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,7 +20,7 @@ public class CEMSserverUI extends Application {
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/ServerPort.fxml"));
 		
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("/gui/ServerPort.css").toExternalForm());
+		//scene.getStylesheets().add(getClass().getResource("/gui/ServerPort.css").toExternalForm());
 		primaryStage.setTitle("Server");
 		primaryStage.setScene(scene);
 		

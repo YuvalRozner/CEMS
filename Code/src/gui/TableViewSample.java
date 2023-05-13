@@ -3,6 +3,7 @@ package gui;
 import java.util.ArrayList;
 
 import client.ClientUI;
+import enteties.Question;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,7 +28,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import enteties.Question;
 
 //array list
 //סידור מסך
@@ -231,7 +231,7 @@ public class TableViewSample extends Application {
 		
 		table.refresh();
 		}catch(Throwable t) {
-			System.out.println("error getSavebtn in TableViewSample Class");
+			System.out.println("Error getSavebtn in TableViewSample Class");
 		}
 			
 		
@@ -240,15 +240,13 @@ public class TableViewSample extends Application {
 	public void getBackbtn(ActionEvent event) throws Exception {
 		System.out.println("Exit Student Form");
 		((Node)event.getSource()).getScene().getWindow().hide();
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AcademicFrame.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ClientGetQuestion.fxml"));
 		Parent root1 = (Parent) fxmlLoader.load();
 		Scene scene = new Scene(root1);
 		Stage stage = new Stage();
-		scene.getStylesheets().add(getClass().getResource("/gui/AcademicFrame.css").toExternalForm());
-		stage.setTitle("Academic Managment Tool");
+		//scene.getStylesheets().add(getClass().getResource("/gui/ClientGetQuestion.css").toExternalForm());
+		stage.setTitle("Client Get Question");
 		stage.setScene(scene);
 		stage.show();
-		
 	}
-
 }

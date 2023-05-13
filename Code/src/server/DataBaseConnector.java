@@ -1,12 +1,12 @@
 package server;
 
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DataBaseConnector {
 
-	  public boolean connectionToDataBase(CEMSserver Cserver)
+	  @SuppressWarnings("deprecation")
+	public boolean connectionToDataBase(CEMSserver Cserver)
 	  {
 		    try 
 			{
@@ -18,8 +18,7 @@ public class DataBaseConnector {
 	      	 }
 	      try 
 	      {
-	    	  //conn  = DriverManager.getConnection("jdbc:mysql://localhost/cems?serverTimezone=IST","root","DorShabat123");
-	    	  Cserver.setConn(DriverManager.getConnection("jdbc:mysql://localhost/cems?serverTimezone=IST","root","DorShabat123"));
+	    	  Cserver.setConn(DriverManager.getConnection("jdbc:mysql://localhost/cems?serverTimezone=IST","root","yr13yr13"));
 	      } catch (SQLException ex) 
 		    {/* handle any errors*/
 	      System.out.println("SQLException: " + ex.getMessage());
