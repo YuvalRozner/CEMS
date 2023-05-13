@@ -32,7 +32,7 @@ public class ChatClient extends AbstractClient {
 	public ChatClient(String host, int port, ChatIF clientUI) throws IOException {
 		super(host, port); // Call the superclass constructor
 		this.clientUI = clientUI;
-		// openConnection();
+		openConnection();
 	}
 
 	// Instance methods ************************************************
@@ -44,22 +44,30 @@ public class ChatClient extends AbstractClient {
 	 */
 	public void handleMessageFromServer(Object msg) {
 
-		System.out.println("--> handleMessageFromServer");
-
-		ArrayList<ArrayList<String>> dataFromServer = (ArrayList<ArrayList<String>>) msg;
-
-		awaitResponse = false;
-
-		Question tmpQ;
-		for (int i = 0; i < dataFromServer.size(); i++) {
-			if (dataFromServer.get(i) != null) {
-				tmpQ = new Question((String) dataFromServer.get(i).get(0), (String) dataFromServer.get(i).get(1),
-						(String) dataFromServer.get(i).get(2), (String) dataFromServer.get(i).get(3),
-						(String) dataFromServer.get(i).get(4), (String) dataFromServer.get(i).get(5));
-				questionList.add(tmpQ);
-			}
+		if (msg instanceof String ) {
+			System.out.println("updated");
 		}
+		else {
+			System.out.println("--> handleMessageFromServer");
+			
+			ArrayList<ArrayList<String>> dataFromServer = (ArrayList<ArrayList<String>>) msg;
 
+			awaitResponse = false;
+
+			Question tmpQ;
+			for (int i = 0; i < dataFromServer.size(); i++) {
+				if (dataFromServer.get(i) != null) {
+					tmpQ = new Question((String) dataFromServer.get(i).get(0), (String) dataFromServer.get(i).get(1),
+							(String) dataFromServer.get(i).get(2), (String) dataFromServer.get(i).get(3),
+							(String) dataFromServer.get(i).get(4), (String) dataFromServer.get(i).get(5));
+					questionList.add(tmpQ);
+				}
+			}
+			System.out.println(questionList.toString());
+		}
+		
+	
+		
 	}
 
 	/**
@@ -70,7 +78,7 @@ public class ChatClient extends AbstractClient {
 
 	public void handleMessageFromClientUI(String message) {
 		try {
-			openConnection();// in order to send more than one message
+			//openConnection();// in order to send more than one message
 			awaitResponse = true;
 			sendToServer(message);
 			// wait for response
@@ -94,7 +102,9 @@ public class ChatClient extends AbstractClient {
 	public void quit() {
 		try {
 			closeConnection();
+			System.out.println("after closeConnection");
 		} catch (IOException e) {
+			System.out.println("quit on quit");
 		}
 		System.exit(0);
 	}

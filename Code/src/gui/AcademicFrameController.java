@@ -18,26 +18,31 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import ocsf.client.AbstractClient;
 import enteties.Question;
 
 
 public  class AcademicFrameController   {
 	private StudentFormController sfc;	
+
+	
 	private static int itemIndex = 3;
 	
 	@FXML
 	private Button btnExit = null;
 	
 	@FXML
-	private Button btnSend = null;
+	private Button btnShow = null;
 	
-	@FXML
-	private TextField idtxt;
+	//@FXML
+	//private TextField idtxt;
 	
-	private String getID() {
-		return idtxt.getText();
-	}
 	
+	
+	//private String getID() {
+	//	return idtxt.getText();
+	//}
+	/*
 	public void Send(ActionEvent event) throws Exception {
 		String id;
 		FXMLLoader loader = new FXMLLoader();
@@ -75,6 +80,22 @@ public  class AcademicFrameController   {
 			}
 		}
 	}
+	*/
+	public void show(ActionEvent event) throws Exception {
+		
+		try {
+			ClientUI.chat.accept("SELECT * FROM cems.question;");
+		}catch(Throwable t) {System.out.println("accept dont work");};
+		
+		TableViewSample tableViewSample = new TableViewSample(ChatClient.questionList);
+		
+		
+		FXMLLoader loader = new FXMLLoader();
+		((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+		Stage primaryStage = new Stage();
+		
+		tableViewSample.start(primaryStage);
+	}
 
 	public void start(Stage primaryStage) throws Exception {	
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/AcademicFrame.fxml"));
@@ -88,7 +109,11 @@ public  class AcademicFrameController   {
 	}
 	
 	public void getExitBtn(ActionEvent event) throws Exception {
-		System.out.println("exit Academic Tool");	
+		System.out.println("exit Academic Tool");
+		try {ClientUI.chat.client.quit();}
+		catch(Throwable t) {
+			System.out.println("error getExitBtn");
+		}
 		System.exit(0); //exit 
 	}
 	/*

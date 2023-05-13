@@ -1,11 +1,13 @@
 package enteties;
 
+
 import java.util.ArrayList;
 
 public class Question {
 
-	private String id;
+	//private String id;
 	private String subjectNum;
+	private String ID;
 	private String courseName;
 	private String question;
 	private String number;
@@ -17,24 +19,60 @@ public class Question {
 	private ArrayList<Integer> relevantCourses;
 	
 	
-	public Question(String id, String subjectNum, String courseName, String question, String number,
+	public Question(String ID, String subjectNum, String courseName, String question, String number,
 			String lecturerCreated) {
-		super();
-		this.id = id;
+		//super();
+		this.ID = ID;
 		this.subjectNum = subjectNum;
 		this.courseName = courseName;
 		this.question = question;
 		this.number = number;
 		this.lecturerCreated = lecturerCreated;
 	}
-
-	public String getQNum() {
-		return this.id;
+	
+	
+	public String getID() {
+		return this.ID;
 	}
 
-	public void setQNum(String qNum) {
-		this.id = qNum;
+	public void setID(String ID) {
+		this.ID = ID;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Question q = (Question) obj;
+		if(!(this.ID.equals(q.getID()))){
+			return false;
+		}
+		if(!(this.subjectNum.equals(q.getSubjectNum()))){
+			return false;
+		}
+		if(!(this.courseName.equals(q.getCourseName()))){
+			return false;
+		}
+		if(!(this.question.equals(q.getQuestion()))){
+			return false;
+		}
+		if(!(this.number.equals(q.getNumber()))){
+			return false;
+		}
+		if(!(this.lecturerCreated.equals(q.getLecturereCreated()))){
+			return false;
+		}
+		return true;
+		//if(this.id.equals(q.getQNum()) && this.subjectNum.equals(q.getSubjectNum()) && this.courseName.equals(q.getCourseName()) && this.question.equals(q.getCourseName()) && this.number.equals(q.getNumber()) && this.lecturerCreated.equals(q.getLecturereCreated()))
+		//	return true;
+		//return false;
+	}
+	
+	//public String getQNum() {
+	//	return this.id;
+	//}
+
+	//public void setQNum(String QNum) {
+	//	this.id = QNum;
+	//}
 
 	public String getSubjectNum() {
 		return this.subjectNum;
@@ -42,6 +80,22 @@ public class Question {
 
 	public void setSubjectNum(String subjectNum) {
 		this.subjectNum = subjectNum;
+	}
+	//added by mor and lior
+	public String getCourseName() {
+		return this.courseName;
+	}
+	//added by mor and lior
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+	//added by mor and lior
+	public String getNumber() {
+		return this.number;
+	}
+	//added by mor and lior
+	public void setNumber(String number) {
+		this.number = number;
 	}
 
 	public String getQuestion() {
@@ -93,7 +147,8 @@ public class Question {
 	}
 	
 	public String toString() {
-		return "{"+id+", "+subjectNum+", "+courseName+", "+question+", "+number+", "+lecturerCreated+"}";
+		return "{"+ID+", "+subjectNum+", "+courseName+", "+question+", "+number+", "+lecturerCreated+"}";
 	
 	}
+
 }

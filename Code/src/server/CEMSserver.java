@@ -34,7 +34,6 @@ public class CEMSserver extends AbstractServer {
 	
 	public CEMSserver(int port, ServerPortFrameController sc) {
 		super(port);
-		System.out.println("i am in constractur");
 		CEMSserver.serverPortFrameController = sc;
 	}
 	public InetAddress getClientAddress() {
@@ -58,9 +57,6 @@ public class CEMSserver extends AbstractServer {
         InetAddress clientAddress = client.getInetAddress();
         String clientHostname = client.getInetAddress().getHostAddress();
         try {
-        	
-        	//serverPortFrameController.clientIp.setText(clientAddress.toString());
-        	
         	serverPortFrameController.setClientAddress(clientAddress);
         	serverPortFrameController.setClientHostName(clientAddress.getHostAddress());
         	serverPortFrameController.setClientStatus("connected");
@@ -75,6 +71,7 @@ public class CEMSserver extends AbstractServer {
     
     @Override
 	protected void clientDisconnected(ConnectionToClient client) {
+    	System.out.println("clientDisconnected");
     	serverPortFrameController.setClientStatus("disconnected");
     	
     	/*
@@ -114,9 +111,13 @@ public class CEMSserver extends AbstractServer {
 		try {
 			stmt = conn.createStatement();
 			if (firstWord.equals("UPDATE") || firstWord.equals("SET")) {
+				System.out.println("i am in UPDATE");
 				stmt.executeUpdate((String) msg);
 				flag = true;
+				System.out.println("AFTER executeUpdate");
+				sendToAllClients("Updated");
 			} else if (firstWord.equals("SELECT")) {
+				System.out.println("i am in SELECT");
 				data = stmt.executeQuery((String) msg);
 
 				data.toString();
