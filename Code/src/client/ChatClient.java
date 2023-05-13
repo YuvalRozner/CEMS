@@ -88,17 +88,17 @@ public class ChatClient extends AbstractClient {
 	public void quit() {
 		//try {
 			ClientUI.chat.accept("disconnected");
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
+		//	try {
+		//	Thread.sleep(2000);
+			//} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		//		e.printStackTrace();
+			//}
 			//closeConnection();
 			
 		//} catch (IOException e) {
 		//	System.out.println("quit on quit");
 		//}
-		System.exit(0);
+		//System.exit(0);
 	}
 }
