@@ -3,6 +3,7 @@ package gui;
 import java.util.ArrayList;
 
 import client.ClientUI;
+import controllers.JDBC.DB_controller;
 import enteties.Question;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -195,8 +196,10 @@ public class TableViewSample extends Application {
 	}
 
 	public void getSavebtn(ActionEvent event) throws Exception {
+
 		try {
-		ArrayList<String> UpdateQueries = new ArrayList<String>();
+			ArrayList<String> UpdateQueries = DB_controller.updateQuestions(table.getItems() , arrdup);
+		/*ArrayList<String> UpdateQueries = new ArrayList<String>();
 		
 		int i = 0;
 		ObservableList<Question> items = table.getItems();
@@ -219,7 +222,7 @@ public class TableViewSample extends Application {
 			}
 			
 			i++;
-		}
+		}*/
 		
 		
 		for (String query : UpdateQueries) {

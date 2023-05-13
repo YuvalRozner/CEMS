@@ -2,6 +2,7 @@ package gui;
 
 import client.ChatClient;
 import client.ClientUI;
+import controllers.JDBC.DB_controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +23,7 @@ public  class ClientGetQuestionController {
 	public void show(ActionEvent event) throws Exception {
 		
 		try {
-			ClientUI.chat.accept("SELECT * FROM cems.question;");
+			ClientUI.chat.accept(DB_controller.getAllQuestion());
 		}catch(Throwable t) {System.out.println("accept dont work");};
 		
 		TableViewSample tableViewSample = new TableViewSample(ChatClient.questionList);
