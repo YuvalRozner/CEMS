@@ -90,7 +90,6 @@ public class CEMSserver extends AbstractServer {
 
 		Statement stmt = null;
 		ResultSet data;
-		boolean flag = false; // if the update occurs or select return  -> true;
 		System.out.println("Message received: " + msg + " from " + client);
 		String[] msgToStringArr = ((String) msg).split("\\s+");
 		String firstWord = msgToStringArr[0];
@@ -99,7 +98,6 @@ public class CEMSserver extends AbstractServer {
 			stmt = conn.createStatement();
 			if (firstWord.equals("UPDATE") || firstWord.equals("SET")) {
 				stmt.executeUpdate((String) msg);
-				flag = true;
 				sendToAllClients("Update succeeded");
 			} else if (firstWord.equals("SELECT")) {
 				data = stmt.executeQuery((String) msg);

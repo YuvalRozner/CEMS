@@ -1,22 +1,14 @@
 package gui;
 
-import server.CEMSserver;
-import server.CEMSserverUI;
-import server.DataBaseConnector;
-
 import java.net.InetAddress;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import server.CEMSserver;
 
 public class ServerPortFrameController  {
 		
@@ -56,6 +48,7 @@ public class ServerPortFrameController  {
 		else
 		{
 			sv = new CEMSserver(Integer.valueOf(p), this);
+			btnDone.setDisable(true);
 			try 
 	        {
 	          sv.listen(); //Start listening for connections

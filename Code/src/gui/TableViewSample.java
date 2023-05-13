@@ -35,9 +35,7 @@ import javafx.util.Callback;
 public class TableViewSample extends Application {
 
 	private ArrayList<Question> arrdup = new ArrayList<Question>();
-
 	private ObservableList<Question> observableList;
-
 	private TableView<Question> table = new TableView<Question>();
 
 	public TableViewSample(ArrayList<Question> arr) {
