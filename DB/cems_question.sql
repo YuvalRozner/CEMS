@@ -39,7 +39,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES ('02105','02','infi','how much is 1+2?','105','alex'),('02106','02','logics','what is the meaning of zero?','106','dor');
+INSERT INTO `question` VALUES ('01101','01','thechnic english','what is the the best place on earth?','101','yuval'),('02105','02','infi','how much is 1+2?','105','alex'),('02106','02','logics','what is the meaning of zero?','106','dor'),('02108','02','logics','define what is the empty group {}.','108','dor'),('03102','03','project planning','what is the first step in panning a project?','102','mor');
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-11 14:56:43
+-- Dump completed on 2023-05-13 19:47:12
