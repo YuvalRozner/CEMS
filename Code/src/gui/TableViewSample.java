@@ -50,7 +50,6 @@ public class TableViewSample extends Application {
 
 	@Override
 	public void start(Stage stage) {
-		System.out.println(arrdup.toString());
 		Scene scene = new Scene(new Group());
 		stage.setTitle("Table View Sample");
 		stage.setWidth(700);
@@ -200,13 +199,10 @@ public class TableViewSample extends Application {
 	public void getSavebtn(ActionEvent event) throws Exception {
 		try {
 		ArrayList<String> UpdateQueries = new ArrayList<String>();
-		////// כאן נבצע update
-		///// לדאוג שאחרי שהשאילתה מתעדכנת לעדכן גם את arrdup
 		
 		int i = 0;
 		ObservableList<Question> items = table.getItems();
-		System.out.println(items);
-		System.out.println(arrdup);
+
 		for (Question q : items) {
 			if (!q.equals(arrdup.get(i))) {
 				StringBuilder sb = new StringBuilder();
@@ -216,7 +212,7 @@ public class TableViewSample extends Application {
 				sb.append(q.getQuestion());
 				sb.append("' WHERE id = '");
 				sb.append(q.getID());
-				sb.append("';\n");
+				sb.append("';");
 				
 				//change arrdup
 				arrdup.get(i).setNumber(q.getNumber());
@@ -229,6 +225,7 @@ public class TableViewSample extends Application {
 		
 		
 		for (String query : UpdateQueries) {
+			System.out.println("Send to server update query -> " +query) ;
 			ClientUI.chat.accept(query);
 		}
 		

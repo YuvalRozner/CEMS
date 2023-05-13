@@ -29,6 +29,7 @@ public class ChatClient extends AbstractClient {
 		super(host, port); // Call the superclass constructor
 		this.clientUI = clientUI;
 		openConnection();
+		System.out.println("connected to server");
 	}
 
 
@@ -38,11 +39,13 @@ public class ChatClient extends AbstractClient {
 	 * @param msg The message from the server.
 	 */
 	public void handleMessageFromServer(Object msg) {
-		if (msg instanceof String ) {
-			System.out.println("updated " + (String)msg);
+		System.out.print("Message recieved from server -> ");
+		if (msg instanceof String ) { // update
+			System.out.println((String)msg);
 			awaitResponse = false;	
 		}
 		else { //create a List of question out of the List of List got from the server:
+			System.out.println("list of questions");
 			@SuppressWarnings("unchecked") //ignore warning of casting types.
 			ArrayList<ArrayList<String>> dataFromServer = (ArrayList<ArrayList<String>>) msg;
 			awaitResponse = false;

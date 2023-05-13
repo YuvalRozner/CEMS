@@ -100,7 +100,7 @@ public class CEMSserver extends AbstractServer {
 			if (firstWord.equals("UPDATE") || firstWord.equals("SET")) {
 				stmt.executeUpdate((String) msg);
 				flag = true;
-				sendToAllClients(msg);
+				sendToAllClients("Update succeeded");
 			} else if (firstWord.equals("SELECT")) {
 				data = stmt.executeQuery((String) msg);
 				int colunmCount = data.getMetaData().getColumnCount();
