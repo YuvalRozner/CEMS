@@ -12,6 +12,7 @@ public class TestToExecuteController {
 		throw new UnsupportedOperationException();
 	}
 
+	@SuppressWarnings("unused")
 	private void checkCopies() {
 		// TODO - implement TestToExecuteController.checkCopies
 		throw new UnsupportedOperationException();
