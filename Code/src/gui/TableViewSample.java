@@ -226,16 +226,15 @@ public class TableViewSample extends Application {
 			
 			i++;
 		}
-		System.out.println(UpdateQueries.toString());
+		
 		
 		for (String query : UpdateQueries) {
 			ClientUI.chat.accept(query);
 		}
 		
-		System.out.println("after ClientUI.chat.accept(sb.toString());");
 		table.refresh();
 		}catch(Throwable t) {
-			System.out.println("error getSavebtn");
+			System.out.println("error getSavebtn in TableViewSample Class");
 		}
 			
 		

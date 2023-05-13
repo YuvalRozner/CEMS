@@ -21,7 +21,6 @@ public class Question {
 	
 	public Question(String ID, String subjectNum, String courseName, String question, String number,
 			String lecturerCreated) {
-		//super();
 		this.ID = ID;
 		this.subjectNum = subjectNum;
 		this.courseName = courseName;
@@ -39,8 +38,7 @@ public class Question {
 		this.ID = ID;
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
+	public boolean equals1(Object obj) {
 		Question q = (Question) obj;
 		if(!(this.ID.equals(q.getID()))){
 			return false;
@@ -61,19 +59,16 @@ public class Question {
 			return false;
 		}
 		return true;
-		//if(this.id.equals(q.getQNum()) && this.subjectNum.equals(q.getSubjectNum()) && this.courseName.equals(q.getCourseName()) && this.question.equals(q.getCourseName()) && this.number.equals(q.getNumber()) && this.lecturerCreated.equals(q.getLecturereCreated()))
-		//	return true;
-		//return false;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		Question q = (Question) obj;
+		if(ID.equals(q.getID()) && subjectNum.equals(q.getSubjectNum()) && courseName.equals(q.getCourseName())
+				&& question.equals(q.getQuestion())&& number.equals(q.getNumber()) && lecturerCreated.equals(q.getLecturereCreated()))
+			return true;
+		return false;
 	}
 	
-	//public String getQNum() {
-	//	return this.id;
-	//}
-
-	//public void setQNum(String QNum) {
-	//	this.id = QNum;
-	//}
-
 	public String getSubjectNum() {
 		return this.subjectNum;
 	}
@@ -81,19 +76,19 @@ public class Question {
 	public void setSubjectNum(String subjectNum) {
 		this.subjectNum = subjectNum;
 	}
-	//added by mor and lior
+
 	public String getCourseName() {
 		return this.courseName;
 	}
-	//added by mor and lior
+	
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
 	}
-	//added by mor and lior
+
 	public String getNumber() {
 		return this.number;
 	}
-	//added by mor and lior
+
 	public void setNumber(String number) {
 		this.number = number;
 	}

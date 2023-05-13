@@ -29,34 +29,6 @@ public class CEMSserverUI extends Application {
 		
 		primaryStage.show();	
 	}
-	/*
-	public static void runServer(String p)
-	{
-		 int port = 0; //Port to listen on
-
-	        try
-	        {
-	        	port = Integer.parseInt(p); //Set port to 5555
-	          
-	        }
-	        catch(Throwable t)
-	        {
-	        	System.out.println("ERROR - Could not connect!");
-	        }
-	    	
-	        //CEMSserver sv = new CEMSserver(port);
-	        sv = new CEMSserver(port);
-	        	
-	        try 
-	        {
-	          sv.listen(); //Start listening for connections
-	        } 
-	        catch (Exception ex) 
-	        {
-	          System.out.println("ERROR - Could not listen for clients!");
-	        }
-	}
-	*/
-
+	
 }
 

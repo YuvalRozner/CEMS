@@ -54,8 +54,7 @@ public class CEMSserver extends AbstractServer {
         	serverPortFrameController.setClientHostName(clientAddress.getHostAddress());
         	serverPortFrameController.setClientStatus("connected");
         	
-        } catch(Throwable t) {System.out.println("error 1");};
-        
+        } catch(Throwable t) {System.out.println("Error in clientConnected");};  
         
         // Print the client's IP address and hostname
         System.out.println("Client connected from " + clientAddress.getHostAddress() + " (" + clientHostname + ")");
@@ -79,12 +78,7 @@ public class CEMSserver extends AbstractServer {
 
 	// Instance methods ************************************************
 
-	public void setServerPortFrameController(ServerPortFrameController serverPortFrameController) {
-		this.serverPortFrameController = serverPortFrameController;
-		if(this.serverPortFrameController==null) System.out.println("nulllll");
-		else System.out.println("goodd");
-	}
-
+	
 	/**
 	 * This method handles any messages received from the client.
 	 *
@@ -96,31 +90,25 @@ public class CEMSserver extends AbstractServer {
 
 		Statement stmt = null;
 		ResultSet data;
-		boolean flag = false; // if the update occurs or select return non empty string -> true;
-		System.out.println("Message received: " + msg + " from " + client);//////////////////////////
+		boolean flag = false; // if the update occurs or select return  -> true;
+		System.out.println("Message received: " + msg + " from " + client);
 		String[] msgToStringArr = ((String) msg).split("\\s+");
 		String firstWord = msgToStringArr[0];
 		ArrayList<ArrayList<String>> dataToClient = new ArrayList<ArrayList<String>>();
 		try {
 			stmt = conn.createStatement();
 			if (firstWord.equals("UPDATE") || firstWord.equals("SET")) {
-				System.out.println("i am in UPDATE");
 				stmt.executeUpdate((String) msg);
 				flag = true;
-				System.out.println("AFTER executeUpdate");
 				sendToAllClients(msg);
 			} else if (firstWord.equals("SELECT")) {
-				System.out.println("i am in SELECT");
 				data = stmt.executeQuery((String) msg);
-
-				data.toString();
 				int colunmCount = data.getMetaData().getColumnCount();
 				while (data.next()) {
 					ArrayList<String> rowTemp = new ArrayList<String>(colunmCount);
 					for (int i = 1; i < colunmCount + 1; i++)
 						rowTemp.add(data.getString(i));
 					dataToClient.add(rowTemp);
-					System.out.println("rowTemp is: " + rowTemp.toString()); ////////////////// checks for us
 				}
 				this.sendToAllClients(dataToClient);
 			}
@@ -164,8 +152,6 @@ public class CEMSserver extends AbstractServer {
 	protected void serverStopped() {
 		System.out.println("Server has stopped listening for connections.");
 	}
-
-	
 }
 
 //End of EchoServer class
