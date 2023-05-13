@@ -45,7 +45,11 @@ public class ChatClient extends AbstractClient {
 	public void handleMessageFromServer(Object msg) {
 
 		if (msg instanceof String ) {
-			System.out.println("updated");
+		
+			System.out.println("updated " + (String)msg);
+			awaitResponse = false;
+			
+			
 		}
 		else {
 			System.out.println("--> handleMessageFromServer");

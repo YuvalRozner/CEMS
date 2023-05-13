@@ -17,11 +17,7 @@ public class ClientUI extends Application {
 		// TODO Auto-generated method stub
 						  		
 		AcademicFrameController aFrame = new AcademicFrameController(); // create StudentFrame
-		
-		 
 		aFrame.start(primaryStage);
 		
 	}
-	
-	
 }

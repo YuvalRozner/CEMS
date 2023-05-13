@@ -119,7 +119,8 @@ public class TableViewSample extends Application {
 		
 		table.setItems(observableList);
 		table.getColumns().addAll(idCol, subjectCol, courseCol, questionTextCol, questionNumberCol, lecturerCol);
-
+		
+		
 		DropShadow shadow = new DropShadow();
 		// Adding the shadow when the mouse cursor is on
 		backbtn.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
@@ -197,32 +198,46 @@ public class TableViewSample extends Application {
 	}
 
 	public void getSavebtn(ActionEvent event) throws Exception {
+		try {
+		ArrayList<String> UpdateQueries = new ArrayList<String>();
 		////// כאן נבצע update
 		///// לדאוג שאחרי שהשאילתה מתעדכנת לעדכן גם את arrdup
-		StringBuilder sb = new StringBuilder();
+		
 		int i = 0;
 		ObservableList<Question> items = table.getItems();
 		System.out.println(items);
 		System.out.println(arrdup);
 		for (Question q : items) {
 			if (!q.equals(arrdup.get(i))) {
-				sb.append("UPDATE cems.question SET number = \"");
+				StringBuilder sb = new StringBuilder();
+				sb.append("UPDATE cems.question SET number = '");
 				sb.append(q.getNumber());
-				sb.append("\", question = \"");
+				sb.append("', question = '");
 				sb.append(q.getQuestion());
-				sb.append("\" WHERE id = \"");
+				sb.append("' WHERE id = '");
 				sb.append(q.getID());
-				sb.append("\";");
+				sb.append("';\n");
 				
 				//change arrdup
 				arrdup.get(i).setNumber(q.getNumber());
 				arrdup.get(i).setQuestion(q.getQuestion());
+				UpdateQueries.add(sb.toString());
 			}
+			
 			i++;
 		}
-		System.out.println(sb);
-		if (!sb.equals(""))
-			ClientUI.chat.accept(sb.toString());
+		System.out.println(UpdateQueries.toString());
+		
+		for (String query : UpdateQueries) {
+			ClientUI.chat.accept(query);
+		}
+		
+		System.out.println("after ClientUI.chat.accept(sb.toString());");
+		table.refresh();
+		}catch(Throwable t) {
+			System.out.println("error getSavebtn");
+		}
+			
 		
 	}
 
