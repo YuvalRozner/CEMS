@@ -1,6 +1,7 @@
 package gui;
 
 import client.ChatClient;
+import client.ClientController;
 import client.ClientUI;
 import controllers.JDBC.DB_controller;
 import javafx.event.ActionEvent;
@@ -10,16 +11,41 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public  class ClientGetQuestionController {
 	
+    @FXML
+    private Button btnConnect;
+    
+    @FXML
+    private TextField inputIp;
+
+    @FXML
+    private TextField inputPort;
+
+    @FXML
+    private Label lblIP;
+
+    @FXML
+    private Label lblPort;
+    
 	@FXML
 	private Button btnExit = null;
 	
 	@FXML
 	private Button btnShow = null;
 	
+    @FXML
+    void connect(ActionEvent event) {
+    	try {
+    		ClientUI.chat = new ClientController(inputIp.getText(), Integer.valueOf(inputPort.getText()));
+    		btnShow.setDisable(false);
+    	} catch(Throwable t) {System.out.println("input ip and port - error connecting.");}    	
+    }
+    
 	public void show(ActionEvent event) throws Exception {
 		
 		try {
