@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import server.CEMSserver;
 
@@ -14,6 +15,9 @@ public class ServerPortFrameController  {
 	
 	private CEMSserver sv;
 	String temp="";
+	
+	@FXML
+	private PasswordField passwordTxt;
 	
     @FXML
     private TextField clientHostName;
@@ -48,7 +52,7 @@ public class ServerPortFrameController  {
 		else
 		{
 			sv = new CEMSserver(Integer.valueOf(p), this);
-			btnDone.setDisable(true);
+			CEMSserver.DBPassword = passwordTxt.getText();
 			try 
 	        {
 	          sv.listen(); //Start listening for connections
