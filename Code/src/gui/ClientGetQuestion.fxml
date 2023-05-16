@@ -9,7 +9,7 @@
 <AnchorPane prefHeight="240.0" prefWidth="246.0" style="-fx-background-color: cornflowerblue;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ClientGetQuestionController">
    <children>
       <Button id="btnExit" fx:id="btnExit" layoutX="196.0" layoutY="200.0" mnemonicParsing="false" onAction="#getExitBtn" text="Exit" />
-      <Button id="btnStudentInfo" fx:id="btnShow" disable="true" layoutX="100.0" layoutY="161.0" mnemonicParsing="false" onAction="#show" text="Show" />
+      <Button id="btnStudentInfo" fx:id="btnShow" layoutX="100.0" layoutY="161.0" mnemonicParsing="false" onAction="#show" text="Show" />
       <Label layoutX="25.0" layoutY="127.0" text="Show Questions Table" underline="true">
          <font>
             <Font size="20.0" />

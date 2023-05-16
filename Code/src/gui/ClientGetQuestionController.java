@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public  class ClientGetQuestionController {
+	public static boolean isconnected = false;
 	
     @FXML
     private Button btnConnect;
@@ -36,41 +37,46 @@ public  class ClientGetQuestionController {
 	private Button btnExit = null;
 	
 	@FXML
-	private Button btnShow = null;
+	public Button btnShow = null;
 	
     @FXML
     void connect(ActionEvent event) {
     	try {
     		ClientUI.chat = new ClientController(inputIp.getText(), Integer.valueOf(inputPort.getText()));
-    		btnShow.setDisable(false);
+    		isconnected = true;
+    		//btnShow.setDisable(false);
     	} catch(Throwable t) {System.out.println("input ip and port - error connecting.");}    	
     }
     
 	public void show(ActionEvent event) throws Exception {
 		
-		try {
-			ClientUI.chat.accept(DB_controller.getAllQuestion());
-		}catch(Throwable t) {System.out.println("accept dont work");};
-		
-		TableViewSample tableViewSample = new TableViewSample(ChatClient.questionList);
-		//FXMLLoader loader = new FXMLLoader();
-		((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-		Stage primaryStage = new Stage();
-		tableViewSample.start(primaryStage);
+		if(isconnected) {
+			try {
+				ClientUI.chat.accept(DB_controller.getAllQuestion());
+			}catch(Throwable t) {System.out.println("accept dont work");};
+			
+			TableViewSample tableViewSample = new TableViewSample(ChatClient.questionList);
+			//FXMLLoader loader = new FXMLLoader();
+			((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+			Stage primaryStage = new Stage();
+			tableViewSample.start(primaryStage);
+		}
+		else System.out.println("You have to connect first.");
 	}
 
-	public void start(Stage primaryStage) throws Exception {	
+	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/ClientGetQuestion.fxml"));	
 		Scene scene = new Scene(root);
 		//scene.getStylesheets().add(getClass().getResource("/gui/ClientGetQuestion.css").toExternalForm());
 		primaryStage.setTitle("Client Get Question");
 		primaryStage.setScene(scene);
-		primaryStage.show();	 	   
+		primaryStage.show();
 	}
 	
 	public void getExitBtn(ActionEvent event) throws Exception {
 		System.out.println("exit ClientGetQuestion");
-		try {ClientUI.chat.client.quit();}
+		try {ClientUI.chat.client.quit();
+			isconnected = false;}
 		catch(Throwable t) {
 			System.out.println("error getExitBtn");
 		}
