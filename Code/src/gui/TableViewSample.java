@@ -207,7 +207,6 @@ public class TableViewSample extends Application {
 		Stage stage = new Stage();
 		stage.setTitle("Client Get Question");
 		stage.setScene(scene);
-		ClientGetQuestionController.isconnected = true;
 		stage.show();
 	}
 }
