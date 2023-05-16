@@ -1,5 +1,6 @@
 package server;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -31,6 +32,7 @@ public class CEMSserver extends AbstractServer {
 
 	Connection conn;
 	private static ServerPortFrameController serverPortFrameController;
+	public static String DBPassword;
 	
 	public CEMSserver(int port, ServerPortFrameController sc) {
 		super(port);
@@ -132,8 +134,16 @@ public class CEMSserver extends AbstractServer {
 		System.out.println("Server listening for connections on port " + getPort());
 		if (new DataBaseConnector().connectionToDataBase(this))
 			System.out.println("SQL connection succeed");
-		else
+		else {
 			System.out.println("SQL connection fail");
+			try {
+				this.close();
+				System.out.println("Server closed.");
+			} catch (IOException e) {
+				System.out.println("Cant close server.");
+			}
+		}
+			
 
 	}
 
