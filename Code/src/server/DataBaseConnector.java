@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class DataBaseConnector {
 
-	@SuppressWarnings("deprecation")
+	  @SuppressWarnings("deprecation")
 	public boolean connectionToDataBase(CEMSserver Cserver)
 	  {
 		    try 
@@ -18,7 +18,7 @@ public class DataBaseConnector {
 	      	 }
 	      try 
 	      {
-	    	  Cserver.setConn(DriverManager.getConnection("jdbc:mysql://localhost/cems?serverTimezone=IST","root", CEMSserver.DBPassword));
+	    	  Cserver.setConn(DriverManager.getConnection("jdbc:mysql://localhost/cems?serverTimezone=IST","root","yr13yr13"));
 	      } catch (SQLException ex) 
 		    {/* handle any errors*/
 	      System.out.println("SQLException: " + ex.getMessage());
