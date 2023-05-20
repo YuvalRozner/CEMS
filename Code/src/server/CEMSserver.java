@@ -31,12 +31,12 @@ public class CEMSserver extends AbstractServer {
 	 */
 
 	Connection conn;
-	private static ServerPortFrameController serverPortFrameController;
+	public static ServerController serverController;
 	public static String DBPassword;
 	
-	public CEMSserver(int port, ServerPortFrameController sc) {
+	public CEMSserver(int port, ServerController sc) {
 		super(port);
-		CEMSserver.serverPortFrameController = sc;
+		CEMSserver.serverController = sc;
 	}
 
 	InetAddress clientAddress;
@@ -52,9 +52,8 @@ public class CEMSserver extends AbstractServer {
         InetAddress clientAddress = client.getInetAddress();
         String clientHostname = client.getInetAddress().getHostAddress();
         try {
-        	serverPortFrameController.setClientAddress(clientAddress);
-        	serverPortFrameController.setClientHostName(clientAddress.getHostAddress());
-        	serverPortFrameController.setClientStatus("connected");
+        	serverController.addConnected(clientAddress);
+        	
         	
         } catch(Throwable t) {System.out.println("Error in clientConnected");};  
         
@@ -66,7 +65,7 @@ public class CEMSserver extends AbstractServer {
     @Override
 	protected void clientDisconnected(ConnectionToClient client) {
     	System.out.println("clientDisconnected");
-    	serverPortFrameController.setClientStatus("disconnected");
+    	serverController.removeConnected(client.getInetAddress());
     	
     	/*
 		try {
@@ -115,7 +114,7 @@ public class CEMSserver extends AbstractServer {
 			else if (firstWord.equals("disconnected")) {
 				try {
 				System.out.println("clientDisconnected" + client);
-		    	serverPortFrameController.setClientStatus("disconnected");
+				serverController.removeConnected(client.getInetAddress());
 		    	this.sendToAllClients("disconnected");
 				}catch(Throwable t) {};
 			}
@@ -131,9 +130,13 @@ public class CEMSserver extends AbstractServer {
 	 * This method overrides the one in the superclass. Called when the server starts listening for connections.
 	 */
 	public void serverStarted() {
+		serverController.addConsole("Server listening for connections on port " + getPort() + ".\n");
 		System.out.println("Server listening for connections on port " + getPort());
-		if (new DataBaseConnector().connectionToDataBase(this))
+		if (new DataBaseConnector().connectionToDataBase(this)) {
+			serverController.addConsole("SQL connection succeed.\n");
 			System.out.println("SQL connection succeed");
+		}
+			
 		else {
 			System.out.println("SQL connection fail");
 			try {

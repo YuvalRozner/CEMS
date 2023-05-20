@@ -11,6 +11,7 @@ public class DataBaseConnector {
 		    try 
 			{
 	          Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+	          CEMSserver.serverController.addConsole("Driver definition succeed.\n");
 	          System.out.println("Driver definition succeed");
 	      } catch (Exception ex) {
 	      	/* handle the error*/
@@ -28,5 +29,9 @@ public class DataBaseConnector {
 	      }     
 		return true;
 	  }
+	
+	
+	
+
 
 }

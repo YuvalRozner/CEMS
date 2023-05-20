@@ -19,6 +19,8 @@ public class ServerPortFrameController  {
 	@FXML
 	private PasswordField passwordTxt;
 	
+
+	
     @FXML
     private TextField clientHostName;
 
@@ -51,7 +53,7 @@ public class ServerPortFrameController  {
 		}
 		else
 		{
-			sv = new CEMSserver(Integer.valueOf(p), this);
+			//sv = new CEMSserver(Integer.valueOf(p), this);
 			CEMSserver.DBPassword = passwordTxt.getText();
 			try 
 	        {
