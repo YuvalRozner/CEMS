@@ -17,10 +17,9 @@ public class CEMSserverUI extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("/gui/ServerPort.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/server/ServerPort.fxml"));
 		
 		Scene scene = new Scene(root);
-		//scene.getStylesheets().add(getClass().getResource("/gui/ServerPort.css").toExternalForm());
 		primaryStage.setTitle("Server");
 		primaryStage.setScene(scene);
 		
