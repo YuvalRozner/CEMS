@@ -70,7 +70,10 @@ public  class ClientGetQuestionController {
 	
 	public void getExitBtn(ActionEvent event) throws Exception {
 		System.out.println("exit ClientGetQuestion");
-		try {ClientUI.chat.client.quit();}
+		try {
+			//ClientUI.chat.client.quit();
+			ClientUI.chat.accept("disconnected");
+			System.exit(0);}
 		catch(Throwable t) {
 			System.out.println("error getExitBtn");
 		}

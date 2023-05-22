@@ -52,20 +52,11 @@ public class CEMSserver extends AbstractServer {
         try {
         	serverController.addConnected(clientAddress);
         	
-        	
         } catch(Throwable t) {System.out.println("Error in clientConnected");};  
         
         // Print the client's IP address and hostname
         System.out.println("Client connected from " + clientAddress.getHostAddress() + " (" + clientHostname + ")");
     }
-    
-    
-   /* @Override
-	protected void clientDisconnected(ConnectionToClient client) {
-    	System.out.println("clientDisconnected");
-    	serverController.removeConnected(client.getInetAddress());
-	}*/
-
 	
 	/**
 	 * This method handles any messages received from the client.
@@ -75,7 +66,6 @@ public class CEMSserver extends AbstractServer {
 	 * @param
 	 */
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
-
 		Statement stmt = null;
 		ResultSet data;
 		System.out.println("Message received: " + msg + " from " + client);
@@ -102,7 +92,7 @@ public class CEMSserver extends AbstractServer {
 				try {
 				System.out.println("clientDisconnected" + client);
 				serverController.removeConnected(client.getInetAddress());
-		    	this.sendToAllClients("disconnected");
+		    	this.sendToAllClients("");
 				}catch(Throwable t) {};
 			}
 		} catch (SQLException ex) {/* handle any errors */

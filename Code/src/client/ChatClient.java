@@ -43,14 +43,9 @@ public class ChatClient extends AbstractClient {
 		if (msg instanceof String ) { // update
 			System.out.println((String)msg);
 			awaitResponse = false;	
-			if (((String)msg).equals("disconected") ) { // update
-				try {
-					closeConnection();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}	
-			}
+			if (((String)msg).equals("disconected"))
+				System.out.println("client forced to stop by the server.");
+				System.exit(0);
 		}
 		else { //create a List of question out of the List of List got from the server:
 			System.out.println("list of questions");
@@ -87,13 +82,6 @@ public class ChatClient extends AbstractClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 			clientUI.display("Could not send message to server: Terminating client." + e);
-			quit();	}
-	}
-
-	/**
-	 * This method terminates the client.
-	 */
-	public void quit() {
-		ClientUI.chat.accept("disconnected");
+			ClientUI.chat.accept("disconnected");	}
 	}
 }

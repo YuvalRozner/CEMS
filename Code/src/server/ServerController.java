@@ -18,7 +18,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ServerController {
 	private ObservableList<InetAddress> connectedObserv = FXCollections.observableArrayList();
-	private CEMSserver sv;
+	
+	private CEMSserver cemsServer;
 	@FXML
 	private TextField DBNameTxt;
 
@@ -59,9 +60,9 @@ public class ServerController {
 		if (p.trim().isEmpty()) {
 			addConsole("You must enter a port number");
 		} else {
-			sv = new CEMSserver(Integer.valueOf(p), this);
+			cemsServer = new CEMSserver(Integer.valueOf(p), this);
 			try {
-				sv.listen(); // Start listening for connections
+				cemsServer.listen(); // Start listening for connections
 			} catch (Exception ex) {
 			}
 		}
@@ -73,12 +74,14 @@ public class ServerController {
 	@FXML
 	void disconnect(ActionEvent event) {
 		try {
-			sv.close();
+			cemsServer.sendToAllClients("disconected");
+			cemsServer.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		sv.setConn(null);
+		cemsServer.setConn(null);
+		connectedObserv.clear(); // clear the connections list.
 		btnDisconnect.setDisable(true);
 		btnConnect.setDisable(false);
 		addConsole("Server is close.\n");
@@ -146,5 +149,4 @@ public class ServerController {
 	public String getPasswordTxt() {
 		return passwordTxt.getText();
 	}
-
 }
