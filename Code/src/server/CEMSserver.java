@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import gui.ServerPortFrameController;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 
@@ -32,7 +31,6 @@ public class CEMSserver extends AbstractServer {
 
 	Connection conn;
 	public static ServerController serverController;
-	public static String DBPassword;
 	
 	public CEMSserver(int port, ServerController sc) {
 		super(port);
@@ -62,22 +60,11 @@ public class CEMSserver extends AbstractServer {
     }
     
     
-    @Override
+   /* @Override
 	protected void clientDisconnected(ConnectionToClient client) {
     	System.out.println("clientDisconnected");
     	serverController.removeConnected(client.getInetAddress());
-    	
-    	/*
-		try {
-			client.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		*/
-	}
-    
-
-	// Instance methods ************************************************
+	}*/
 
 	
 	/**
@@ -135,8 +122,10 @@ public class CEMSserver extends AbstractServer {
 		if (new DataBaseConnector().connectionToDataBase(this)) {
 			serverController.addConsole("SQL connection succeed.\n");
 			System.out.println("SQL connection succeed");
+			serverController.setConnectDisable(true);
+			serverController.setDisconnectDisable(false);
 		}
-			
+				
 		else {
 			System.out.println("SQL connection fail");
 			try {
@@ -146,8 +135,6 @@ public class CEMSserver extends AbstractServer {
 				System.out.println("Cant close server.");
 			}
 		}
-			
-
 	}
 
 	public Connection getConn() {
@@ -157,13 +144,4 @@ public class CEMSserver extends AbstractServer {
 	public void setConn(Connection conn) {
 		this.conn = conn;
 	}
-
-	/**
-	 * This method overrides the one in the superclass. Called when the server stops listening for connections.
-	 */
-	protected void serverStopped() {
-		System.out.println("Server has stopped listening for connections.");
-	}
 }
-
-//End of EchoServer class

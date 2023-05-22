@@ -11,8 +11,7 @@ public class ClientUI extends Application {
 	   }
 	 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
-		//chat= new ClientController("localhost", 5555);		  		
+	public void start(Stage primaryStage) throws Exception {		  		
 		ClientGetQuestionController clientGetQuestionController = new ClientGetQuestionController(); // create first client window.
 		clientGetQuestionController.start(primaryStage);
 	}

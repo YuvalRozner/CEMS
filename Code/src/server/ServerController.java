@@ -44,9 +44,6 @@ public class ServerController {
 	private TextArea console;
 
 	@FXML
-	private Button minimizeBtn;
-
-	@FXML
 	private PasswordField passwordTxt;
 
 	@FXML
@@ -60,14 +57,11 @@ public class ServerController {
 		String p;
 		p = getport();
 		if (p.trim().isEmpty()) {
-			System.out.println("You must enter a port number");
+			addConsole("You must enter a port number");
 		} else {
 			sv = new CEMSserver(Integer.valueOf(p), this);
-			CEMSserver.DBPassword = passwordTxt.getText();
 			try {
 				sv.listen(); // Start listening for connections
-				btnConnect.setDisable(true);
-				btnDisconnect.setDisable(false);
 			} catch (Exception ex) {
 			}
 		}
@@ -88,8 +82,7 @@ public class ServerController {
 		btnDisconnect.setDisable(true);
 		btnConnect.setDisable(false);
 		addConsole("Server is close.\n");
-	
-		
+		addConsole("Server has stopped listening for connections.\n"); 
 	}
 
 	@FXML
@@ -98,11 +91,6 @@ public class ServerController {
 		System.exit(0);
 	}
 
-	@FXML
-	void minimize(ActionEvent event) {
-
-		// primaryStage.setIconified(true)
-	}
 	/**
 	* Initializes the connected client table (when server app is up)
 	*/
@@ -133,6 +121,30 @@ public class ServerController {
 	public void addConsole(String msg) {
 		console.setText(console.getText() + msg);
 	}
-
 	
+	public void setConnectDisable(boolean flag) {
+		btnConnect.setDisable(flag);
+	}
+	
+	public void setDisconnectDisable(boolean flag) {
+		btnDisconnect.setDisable(flag);
+	}
+	
+	public String getDBNameTxt() {
+		return DBNameTxt.getText();
+	}
+	
+	public String getDBUsernameTxt() {
+		return DBUsernameTxt.getText();
+	}
+	
+	public String getServerIdTxt() {
+		return serverIdTxt.getText();
+	}
+
+
+	public String getPasswordTxt() {
+		return passwordTxt.getText();
+	}
+
 }

@@ -3,8 +3,7 @@ package server;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DataBaseConnector {
-
+public class DataBaseConnector { 
 	@SuppressWarnings("deprecation")
 	public boolean connectionToDataBase(CEMSserver Cserver)
 	  {
@@ -19,7 +18,9 @@ public class DataBaseConnector {
 	      	 }
 	      try 
 	      {
-	    	  Cserver.setConn(DriverManager.getConnection("jdbc:mysql://localhost/cems?serverTimezone=IST","root", CEMSserver.DBPassword));
+	    	  Cserver.setConn(DriverManager.getConnection("jdbc:mysql://"+CEMSserver.serverController.getServerIdTxt()+"/"+CEMSserver.serverController.getDBNameTxt()+"?serverTimezone=IST",
+	    			  CEMSserver.serverController.getDBUsernameTxt(),
+	    			  CEMSserver.serverController.getPasswordTxt()));
 	      } catch (SQLException ex) 
 		    {/* handle any errors*/
 	      System.out.println("SQLException: " + ex.getMessage());
@@ -29,9 +30,4 @@ public class DataBaseConnector {
 	      }     
 		return true;
 	  }
-	
-	
-	
-
-
 }
