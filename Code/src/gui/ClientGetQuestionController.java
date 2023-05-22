@@ -59,10 +59,9 @@ public  class ClientGetQuestionController {
 		tableViewSample.start(primaryStage);
 	}
 
-	public void start(Stage primaryStage) throws Exception {	
+	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/ClientGetQuestion.fxml"));	
 		Scene scene = new Scene(root);
-		//scene.getStylesheets().add(getClass().getResource("/gui/ClientGetQuestion.css").toExternalForm());
 		primaryStage.setTitle("Client Get Question");
 		primaryStage.setScene(scene);
 		primaryStage.show();	 	   
@@ -71,7 +70,6 @@ public  class ClientGetQuestionController {
 	public void getExitBtn(ActionEvent event) throws Exception {
 		System.out.println("exit ClientGetQuestion");
 		try {
-			//ClientUI.chat.client.quit();
 			ClientUI.chat.accept("disconnected");
 			System.exit(0);}
 		catch(Throwable t) {

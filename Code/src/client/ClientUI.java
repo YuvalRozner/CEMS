@@ -13,6 +13,17 @@ public class ClientUI extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {		  		
 		ClientGetQuestionController clientGetQuestionController = new ClientGetQuestionController(); // create first client window.
+		primaryStage.setOnCloseRequest(event -> {
+			event.consume(); // Prevent the default close action
+			try {
+				clientGetQuestionController.getExitBtn(null);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("Exit CEMS Server app.");
+			System.exit(0);
+		});
 		clientGetQuestionController.start(primaryStage);
 	}
 }
