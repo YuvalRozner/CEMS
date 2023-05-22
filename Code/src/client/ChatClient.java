@@ -2,8 +2,10 @@ package client;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import enteties.Question;
+import gui.ClientGetQuestionController;
 import ocsf.client.AbstractClient;
 
 
@@ -13,6 +15,9 @@ public class ChatClient extends AbstractClient {
 	 * The interface type variable. It allows the implementation of the display
 	 * method in the client.
 	 */
+	
+	public static HashMap<String, Object> screens = new HashMap<String, Object>();
+	
 	ChatIF clientUI;
 	public static ArrayList<Question> questionList;
 	public static boolean awaitResponse = false;
@@ -29,6 +34,8 @@ public class ChatClient extends AbstractClient {
 		super(host, port); // Call the superclass constructor
 		this.clientUI = clientUI;
 		openConnection();
+		//screens.put("ClientGetQuestionController", null);
+		//screens.put("TableViewSample", null);
 		System.out.println("connected to server");
 	}
 

@@ -13,6 +13,7 @@ public class ClientUI extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {		  		
 		ClientGetQuestionController clientGetQuestionController = new ClientGetQuestionController(); // create first client window.
+		ChatClient.screens.putIfAbsent("ClientGetQuestionController", clientGetQuestionController);
 		primaryStage.setOnCloseRequest(event -> {
 			event.consume(); // Prevent the default close action
 			try {

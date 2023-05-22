@@ -15,7 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public  class ClientGetQuestionController {
+public class ClientGetQuestionController extends AbstractController  {
 	
     @FXML
     private Button btnConnect;
@@ -60,6 +60,7 @@ public  class ClientGetQuestionController {
 	}
 
 	public void start(Stage primaryStage) throws Exception {
+		stage = primaryStage;
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/ClientGetQuestion.fxml"));	
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Client Get Question");
@@ -80,5 +81,12 @@ public  class ClientGetQuestionController {
 	
 	public  void display(String message) {
 		System.out.println("message");	
+	}
+	
+	public void show1(ActionEvent event) {
+		//Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Show the window
+        stage.show();
 	}
 }

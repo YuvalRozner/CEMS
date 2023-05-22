@@ -2,6 +2,7 @@ package gui;
 
 import java.util.ArrayList;
 
+import client.ChatClient;
 import client.ClientUI;
 import controllers.JDBC.DB_controller;
 import enteties.Question;
@@ -201,12 +202,8 @@ public class TableViewSample extends Application {
 	public void getBackbtn(ActionEvent event) throws Exception {
 		System.out.println("Exit Student Form");
 		((Node)event.getSource()).getScene().getWindow().hide();
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ClientGetQuestion.fxml"));
-		Parent root1 = (Parent) fxmlLoader.load();
-		Scene scene = new Scene(root1);
-		Stage stage = new Stage();
-		stage.setTitle("Client Get Question");
-		stage.setScene(scene);
-		stage.show();
+		((ClientGetQuestionController)ChatClient.screens.get("ClientGetQuestionController")).show1(event);
+		//ChatClient.getScreen("ClientGetQuestionController").show1(event);
+	
 	}
 }
