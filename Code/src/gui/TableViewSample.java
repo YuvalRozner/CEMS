@@ -11,10 +11,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -167,7 +165,7 @@ public class TableViewSample extends Application {
 
 		backbtn.setOnAction(e -> {
 			try {
-				getBackbtn(e);
+				backBtn(e);
 			} catch (Exception e1) {
 				System.out.println("back crash");
 				// TODO Auto-generated catch block
@@ -199,11 +197,8 @@ public class TableViewSample extends Application {
 		table.refresh();
 	}
 
-	public void getBackbtn(ActionEvent event) throws Exception {
-		System.out.println("Exit Student Form");
+	public void backBtn(ActionEvent event) throws Exception {
 		((Node)event.getSource()).getScene().getWindow().hide();
-		((ClientGetQuestionController)ChatClient.screens.get("ClientGetQuestionController")).show1(event);
-		//ChatClient.getScreen("ClientGetQuestionController").show1(event);
-	
+		ChatClient.getScreen("Menu").display();
 	}
 }

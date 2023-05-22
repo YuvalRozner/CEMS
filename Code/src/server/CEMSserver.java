@@ -92,7 +92,7 @@ public class CEMSserver extends AbstractServer {
 				try {
 				System.out.println("clientDisconnected" + client);
 				serverController.removeConnected(client.getInetAddress());
-		    	this.sendToAllClients("");
+		    	this.sendToAllClients("Bye");
 				}catch(Throwable t) {};
 			}
 		} catch (SQLException ex) {/* handle any errors */

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import enteties.Question;
-import gui.ClientGetQuestionController;
+import gui.AbstractController;
 import ocsf.client.AbstractClient;
 
 
@@ -16,7 +16,7 @@ public class ChatClient extends AbstractClient {
 	 * method in the client.
 	 */
 	
-	public static HashMap<String, Object> screens = new HashMap<String, Object>();
+	public static HashMap<String, AbstractController> screens = new HashMap<String, AbstractController>();
 	
 	ChatIF clientUI;
 	public static ArrayList<Question> questionList;
@@ -90,5 +90,9 @@ public class ChatClient extends AbstractClient {
 			e.printStackTrace();
 			clientUI.display("Could not send message to server: Terminating client." + e);
 			ClientUI.chat.accept("disconnected");	}
+	}
+	
+	public static AbstractController getScreen(String screenName) {
+		return screens.get(screenName);
 	}
 }
