@@ -18,6 +18,7 @@ public abstract class AbstractController {
 		scene = new Scene(root);
 		primaryStage.setTitle(fxmlName);
 		primaryStage.setScene(scene);
+		primaryStage.centerOnScreen();
 		primaryStage.show();	 	   
 	}
 

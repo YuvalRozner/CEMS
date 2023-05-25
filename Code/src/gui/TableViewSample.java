@@ -82,8 +82,7 @@ public class TableViewSample extends Application {
 		questionTextCol.setOnEditCommit(new EventHandler<CellEditEvent<Question, String>>() {
 			@Override
 			public void handle(CellEditEvent<Question, String> t) {
-				((Question) t.getTableView().getItems().get(t.getTablePosition().getRow()))
-						.setQuestion(t.getNewValue());
+				((Question) t.getTableView().getItems().get(t.getTablePosition().getRow())).setQuestion(t.getNewValue());
 
 			}
 		});

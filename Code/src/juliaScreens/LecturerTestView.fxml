@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="404.0" prefWidth="429.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="juliaScreens.LecturerTestViewController">
+   <children>
+      <Label layoutX="188.0" layoutY="20.0" text="Tests" underline="true">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="55.0" layoutY="70.0" text="Select a test and click the &quot;Show Statistics&quot; button." />
+      <TableView fx:id="table" layoutX="51.0" layoutY="102.0" prefHeight="200.0" prefWidth="327.0">
+        <columns>
+          <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="courseCol" prefWidth="100.0" text="Course" />
+            <TableColumn fx:id="dateCol" prefWidth="100.0" text="Date" />
+            <TableColumn fx:id="selectCol" prefWidth="50.0" style="-fx-alignment: CENTER;" text="Select" />
+        </columns>
+      </TableView>
+      <Button layoutX="160.0" layoutY="330.0" maxWidth="120.0" mnemonicParsing="false" prefHeight="50.0" text="Show Statistics">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="335.0" layoutY="355.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="Back">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

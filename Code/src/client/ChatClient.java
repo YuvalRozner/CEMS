@@ -50,9 +50,10 @@ public class ChatClient extends AbstractClient {
 		if (msg instanceof String ) { // update
 			System.out.println((String)msg);
 			awaitResponse = false;	
-			if (((String)msg).equals("disconected"))
+			if (((String)msg).equals("disconected")) {
 				System.out.println("client forced to stop by the server.");
 				System.exit(0);
+			}
 		}
 		else { //create a List of question out of the List of List got from the server:
 			System.out.println("list of questions");

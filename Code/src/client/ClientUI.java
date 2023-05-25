@@ -1,6 +1,10 @@
 package client;
+import java.util.ArrayList;
+
+import enteties.Question;
 import gui.AbstractController;
 import gui.ClientConnectionController;
+import gui.QuestionTableController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -25,5 +29,7 @@ public class ClientUI extends Application {
 			System.exit(0);
 		});
 		clientConnectionController.start("ClientConnection");
+		//QuestionTableController q = new QuestionTableController(new ArrayList<Question>());
+		//q.start(primaryStage);
 	}
 }
