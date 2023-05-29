@@ -1,7 +1,9 @@
-package juliaScreens;
+package julia;
 
 import java.util.ArrayList;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -41,18 +43,30 @@ public class CreateQuestionController {
     
         subjectComboBox.setItems(getSubjectNames());
 
+        subjectComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 
-        subjectComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                
-                Subject selectedSubject = findSubjectByName(newValue);
-                ArrayList<CourseWithAddition> courses = returnSubjectWithCheckbox(selectedSubject);
-                if (selectedSubject != null) {
-                    
-                    table.setItems(FXCollections.observableArrayList(courses));
+
+        	@Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue != null) {
+                    // Code to be executed when the selected item changes and newValue is not null
+
+                    // Find the Subject object based on the new value
+                    Subject selectedSubject = findSubjectByName(newValue);
+
+                    // Get the list of courses associated with the selected subject
+                    ArrayList<CourseWithAddition> courses = returnSubjectWithCheckbox(selectedSubject);
+
+                    if (selectedSubject != null) {
+                        // Set the items of a table with the list of courses
+                        table.setItems(FXCollections.observableArrayList(courses));
+                    }
                 }
             }
+
+			
         });
+
     }
 
     private ObservableList<String> getSubjectNames() {

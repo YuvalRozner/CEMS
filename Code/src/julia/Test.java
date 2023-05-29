@@ -1,4 +1,4 @@
-package juliaScreens;
+package julia;
 
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;

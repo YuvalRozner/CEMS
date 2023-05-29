@@ -1,4 +1,4 @@
-package juliaScreens;
+package julia;
 
 import java.util.ArrayList;
 import javafx.scene.control.RadioButton;

@@ -1,22 +1,15 @@
-package juliaScreens;
+package julia;
 
 import java.util.ArrayList;
-import client.ChatClient;
-import gui.AbstractController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class CreateTestController extends AbstractController{
+public class CreateTestController{
 	
 	private ArrayList<Question> arrQuestion;
 
@@ -66,6 +59,8 @@ public class CreateTestController extends AbstractController{
 		subjectComboBox.getItems().addAll("math", "software");
 	}
    
+    
+    
 
 
 }

@@ -1,4 +1,4 @@
-package juliaScreens;
+package julia;
 
 public class Course {
 	private String courseNum;

@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import juliaScreens.CreateTestController;
+import yey.CreateTestController;
 
 public class MenuController extends AbstractController  {
 	

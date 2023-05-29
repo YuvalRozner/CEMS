@@ -1,4 +1,4 @@
-package juliaScreens;
+package julia;
 
 import java.util.ArrayList;
 import javafx.application.Application;
@@ -9,16 +9,18 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	
-	static ArrayList<Question> arr; 
+	public static ArrayList<Question> arr; 
 	static {
 		arr = new ArrayList<Question>();
 		Question q1 = new Question("0124","math","logic","what is 1+1?","01","dor");
 		Question q2 = new Question("0125","math","logic","what is 2+2?","02","dor");
+		Question q3 = new Question("0141","math","infi","A={2n: n belong to N}. Is multiplying two terms in A is also a term in","01","julia");//added by mor
 		arr.add(q1);
 		arr.add(q2);
+		arr.add(q3);//added by mor
 	}
 	
-	static ArrayList<Subject> subject; 
+	public static ArrayList<Subject> subject; 
 	static {
 		Course c1 = new Course("1","infi");
 		Course c2 = new Course("2","logic");
@@ -38,7 +40,7 @@ public class Main extends Application {
 		subject.add(s2);
 		
 	}
-	static ArrayList<Test> tests; 
+	public static ArrayList<Test> tests; 
 	static {
 		Test t1 = new Test("1","infi","22/05/2023");
 		Test t2 = new Test("1","hedva","21/05/2023");
@@ -73,7 +75,7 @@ public class Main extends Application {
     	String LecturerStaticsReportTitle = "Lecturer Statics Report";
     	
         Parent root = FXMLLoader.load(getClass().getResource(LecturerStaticsReportfXML));
-        primaryStage.setTitle("Cems");
+        primaryStage.setTitle("Lecturer Tests Reports");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

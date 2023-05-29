@@ -1,4 +1,4 @@
-package juliaScreens;
+package julia;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -9,6 +9,7 @@ public class QuestionWithAddition extends Question{
 	
 	private CheckBox select;
 	private TextField points;
+	private int pointsnum = 0;
 	private Boolean flag = false;
 	
 	public QuestionWithAddition(Question question) {
@@ -24,7 +25,6 @@ public class QuestionWithAddition extends Question{
 						// Checkbox is pressed (checked)
 						flag = true;
 						points.setDisable(false);
-						// Add your logic here
 						System.out.println("Checkbox pressed");
 					}
 				}
@@ -36,17 +36,31 @@ public class QuestionWithAddition extends Question{
 				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 					if (!newValue) {
 						// Checkbox is unpressed (unchecked)
-						// Add your logic here
 						flag = false;
 						points.setDisable(true);
-						
 						System.out.println("Checkbox unpressed");
 					}
 				}
 			});
+			/*
+			this.points.textProperty().addListener(new ChangeListener<String>() {
+			    @Override
+			    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+			        // Code to be executed when the text property of 'points' TextField changes
+			        pointsnum = Integer.parseInt(newValue); // Assuming pointsnum is an integer variable
+			        System.out.println(pointsnum);
+			    }
+			});
+			*/
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	public int getPointsInt() {
+		return(Integer.parseInt(points.getText()));
+	}
+	
+	
 	public TextField getPoints() {
 		return points;
 	}
