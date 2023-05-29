@@ -1,5 +1,6 @@
 package julia;
 
+
 public class Course {
 	private String courseNum;
 	private String courseName;
