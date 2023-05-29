@@ -1,5 +1,5 @@
 package julia;
-
+// hi there///
 public class Course {
 	private String courseNum;
 	private String courseName;
