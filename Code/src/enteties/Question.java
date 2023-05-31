@@ -1,7 +1,12 @@
 package enteties;
 
-
 import java.util.ArrayList;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
+
 
 public class Question {
 
@@ -17,6 +22,10 @@ public class Question {
 	private int correctAns;
 	private String instructions;
 	private ArrayList<Integer> relevantCourses;
+	
+	private CheckBox select;
+	private TextField points;
+	private Boolean flag = false;
 	
 	
 	public Question(String ID, String subjectNum, String courseName, String question, String number,
@@ -143,7 +152,43 @@ public class Question {
 	
 	public String toString() {
 		return "{"+ID+", "+subjectNum+", "+courseName+", "+question+", "+number+", "+lecturerCreated+"}";
+	}
 	
+	public int getPointsInt() {
+		return(Integer.parseInt(points.getText()));
+	}
+	
+	
+	public TextField getPoints() {
+		return points;
 	}
 
+	public void setPoints(TextField points) {
+		this.points = points;	
+	}
+	
+	public void setNewPoints() {
+		this.points = new TextField();
+		points.setDisable(true);
+	}
+
+	public CheckBox getSelect() {
+		return select;
+	}
+
+	public void setSelect(CheckBox select) {
+		this.select = select;
+	}
+	
+	public void setNewSelect() { 
+		this.select = new CheckBox();
+		// Add event handler for pressed and unpressed (checked / unchecked) state of the checkbox.
+		this.select.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				flag = newValue;
+				points.setDisable(!newValue);
+				System.out.println("Checkbox " + (newValue ? "pressed" : "unpressed")); 	}
+		});
+	}
 }

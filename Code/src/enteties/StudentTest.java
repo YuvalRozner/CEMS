@@ -1,5 +1,7 @@
 package enteties;
 
+import java.sql.Time;
+
 public class StudentTest {
 
 	private Test test;

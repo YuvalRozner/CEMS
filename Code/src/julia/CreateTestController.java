@@ -1,6 +1,8 @@
 package julia;
 
 import java.util.ArrayList;
+
+import enteties.Question;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

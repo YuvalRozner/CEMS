@@ -2,6 +2,8 @@ package julia;
 
 import java.util.ArrayList;
 
+import enteties.Course;
+import enteties.Subject;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;

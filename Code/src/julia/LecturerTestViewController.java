@@ -1,6 +1,8 @@
 package julia;
 
 import java.util.ArrayList;
+
+import enteties.Test;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 

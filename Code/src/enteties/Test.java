@@ -1,87 +1,53 @@
 package enteties;
 
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+
 public class Test {
-
-	private int testNum;
-	private int courseNum;
-	private int subjectNum;
-	private Question[] questions;
-	private int duration;
-	private int[] points;
-	private String instructionsForStudents;
-	private String instructionsForLecturer;
-	private String lecturerCreated;
-
-	public int getTestNum() {
-		return this.testNum;
-	}
-
-	public void setTestNum(int testNum) {
-		this.testNum = testNum;
-	}
-
-	public int getCourseNum() {
-		return this.courseNum;
-	}
-
-	public void setCourseNum(int courseNum) {
-		this.courseNum = courseNum;
-	}
-
-	public int getSubjectNum() {
-		return this.subjectNum;
-	}
-
-	public void setSubjectNum(int subjectNum) {
-		this.subjectNum = subjectNum;
-	}
-
-	public Question[] getQuestions() {
-		return this.questions;
-	}
-
-	public void setQuestions(Question[] questions) {
-		this.questions = questions;
-	}
-
-	public int getDuration() {
-		return this.duration;
-	}
-
-	public void setDuration(int duration) {
-		this.duration = duration;
-	}
-
-	public int[] getPoints() {
-		return this.points;
-	}
-
-	public void setPoints(int[] points) {
-		this.points = points;
-	}
-
-	public String getInstructionsForStudents() {
-		return this.instructionsForStudents;
-	}
-
-	public void setInstructionsForStudents(String instructionsForStudents) {
-		this.instructionsForStudents = instructionsForStudents;
-	}
-
-	public String getInstructionsForLecturer() {
-		return this.instructionsForLecturer;
-	}
-
-	public void setInstructionsForLecturer(String instructionsForLecturer) {
-		this.instructionsForLecturer = instructionsForLecturer;
-	}
-
-	public String getLecturerCreated() {
-		return this.lecturerCreated;
-	}
-
-	public void setLecturerCreated(String lecturerCreated) {
-		this.lecturerCreated = lecturerCreated;
-	}
-
+    
+    private String id;
+    private String Course;
+    private String date;
+    private RadioButton radioButton;
+    
+    public Test(String id, String course, String date) {
+        super();
+        this.id = id;
+        Course = course;
+        this.date = date;
+        this.radioButton = new RadioButton();
+        this.radioButton.setToggleGroup(null); // Set the ToggleGroup to null initially
+    }
+    
+    public String getId() {
+        return id;
+    }
+    
+    public void setId(String id) {
+        this.id = id;
+    }
+    
+    public String getCourse() {
+        return Course;
+    }
+    
+    public void setCourse(String course) {
+        Course = course;
+    }
+    
+    public String getDate() {
+        return date;
+    }
+    
+    public void setDate(String date) {
+        this.date = date;
+    }
+    
+    public RadioButton getRadioButton() {
+        return radioButton;
+    }
+    
+    public void setToggleGroup(ToggleGroup toggleGroup) {
+        this.radioButton.setToggleGroup(toggleGroup); // Set the ToggleGroup for the radio button
+    }
 }

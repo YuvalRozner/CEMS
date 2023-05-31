@@ -1,6 +1,11 @@
 package julia;
 
 import java.util.ArrayList;
+
+import enteties.Course;
+import enteties.Question;
+import enteties.Subject;
+import enteties.Test;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
