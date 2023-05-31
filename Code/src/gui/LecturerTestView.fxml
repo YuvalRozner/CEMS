@@ -60,7 +60,7 @@
             <TableColumn fx:id="selectCol" prefWidth="50.0" style="-fx-alignment: CENTER;" text="Select" />
         </columns>
       </TableView>
-      <Button layoutX="36.0" layoutY="318.0" maxWidth="121.0" mnemonicParsing="false" prefHeight="1.0" prefWidth="121.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Show Statistics">
+      <Button layoutX="36.0" layoutY="318.0" maxWidth="121.0" mnemonicParsing="false" onAction="#showStatistics" prefHeight="1.0" prefWidth="121.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Show Statistics">
          <font>
             <Font name="Dosis Bold" size="14.5" />
          </font>

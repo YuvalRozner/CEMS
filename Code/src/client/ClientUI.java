@@ -1,7 +1,7 @@
 package client;
 import gui.AbstractController;
 import gui.ClientConnectionController;
-import gui.LecturerMenuController;
+import gui.LoginController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -28,8 +28,8 @@ public class ClientUI extends Application {
 		// original line:
 		//clientConnectionController.start("ClientConnection");
 		
-		ChatClient.screens.putIfAbsent("lecturerMenu", new LecturerMenuController());
-		ChatClient.getScreen("lecturerMenu").start("lecturerMenu");
+		ChatClient.screens.putIfAbsent("login", new LoginController());
+		ChatClient.getScreen("login").start("login");
 	
 	}
 }

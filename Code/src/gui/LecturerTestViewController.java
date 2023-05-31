@@ -52,4 +52,9 @@ public class LecturerTestViewController extends AbstractController {
 		((Node)event.getSource()).getScene().getWindow().hide();
 		ChatClient.getScreen("lecturerMenu").display();
 	}
+	
+	public void showStatistics(ActionEvent event) throws Exception {
+		ChatClient.screens.putIfAbsent("lecturerStaticsReport", new LecturerStaticsReportController());
+		ChatClient.getScreen("lecturerStaticsReport").start("lecturerStaticsReport");
+	}
 }
