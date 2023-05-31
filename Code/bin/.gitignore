@@ -1,4 +1,5 @@
 *.bin
+/Code/bin/
 /julia/
 /client/
 /controllers/
