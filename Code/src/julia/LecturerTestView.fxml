@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="404.0" prefWidth="429.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="julia.LecturerTestViewController">
+<Pane prefHeight="404.0" prefWidth="429.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LecturerTestViewController">
    <children>
       <ImageView fitHeight="120.0" fitWidth="134.0" layoutX="325.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
          <image>

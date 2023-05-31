@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="512.0" prefWidth="609.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="julia.LecturerStaticsReportController">
+<Pane prefHeight="512.0" prefWidth="609.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LecturerStaticsReportController">
    <children>
       <ImageView fitHeight="199.0" fitWidth="213.0" layoutX="461.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true">
          <image>
