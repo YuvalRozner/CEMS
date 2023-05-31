@@ -30,12 +30,12 @@ public class CreateTestController{
         
         arrQuestion = new ArrayList<Question>(Main.arr);
        
-        ArrayList<QuestionWithAddition> convertedList = new ArrayList<>();
+        //ArrayList<Question> convertedList = new ArrayList<>();
         for (Question question : Main.arr) {
-        	QuestionWithAddition questionWithAddition = new QuestionWithAddition(question);
-            convertedList.add(questionWithAddition);
+        	question.setNewPoints();
+        	question.setNewSelect();
         }
-        QTable = FXCollections.observableArrayList(convertedList);
+        QTable = FXCollections.observableArrayList(arrQuestion);
         for (Question q : arrQuestion) {
             arrdup.add(new Question(q.getID(), q.getSubjectNum(), q.getCourseName(), q.getQuestion(), q.getNumber(),q.getLecturereCreated()));
         }

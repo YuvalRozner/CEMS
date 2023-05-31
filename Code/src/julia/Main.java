@@ -74,7 +74,7 @@ public class Main extends Application {
     	String LecturerStaticsReportfXML = "LecturerStaticsReport.fxml";//6
     	String LecturerStaticsReportTitle = "Lecturer Statics Report";
     	
-        Parent root = FXMLLoader.load(getClass().getResource(CreateQuestionfXML));
+        Parent root = FXMLLoader.load(getClass().getResource(CreateTestfXML));
         primaryStage.setTitle(CreateQuestionTitle);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
