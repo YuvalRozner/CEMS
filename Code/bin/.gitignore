@@ -1,1 +1,7 @@
+*.bin
 /julia/
+/client/
+/controllers/
+/enteties/
+/gui/
+/server/
