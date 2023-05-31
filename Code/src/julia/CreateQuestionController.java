@@ -55,7 +55,7 @@ public class CreateQuestionController {
                     Subject selectedSubject = findSubjectByName(newValue);
 
                     // Get the list of courses associated with the selected subject
-                    ArrayList<CourseWithAddition> courses = returnSubjectWithCheckbox(selectedSubject);
+                    ArrayList<Course> courses = returnSubjectWithCheckbox(selectedSubject);
 
                     if (selectedSubject != null) {
                         // Set the items of a table with the list of courses
@@ -86,10 +86,12 @@ public class CreateQuestionController {
         return null; // Subject not found
     }
     
-    private ArrayList<CourseWithAddition> returnSubjectWithCheckbox(Subject subject) {
-    	ArrayList<CourseWithAddition> courses = new ArrayList<>();
+    private ArrayList<Course> returnSubjectWithCheckbox(Subject subject) {
+    	ArrayList<Course> courses = new ArrayList<>();
     	for (Course course : subject.getCourses()) {
-    		courses.add(new CourseWithAddition(course.getCourseNum(),course.getCourseName()));
+    		Course tmp = new Course(course.getCourseNum(),course.getCourseName());
+    		tmp.setNewSelect();
+    		courses.add(tmp);
         }
         return courses; 
     }
