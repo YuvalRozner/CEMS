@@ -11,7 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class LecturerTestViewController {
+public class LecturerTestViewController extends AbstractController {
     
     @FXML
     private TableColumn<Test, String> courseCol, dateCol, idCol, selectCol;

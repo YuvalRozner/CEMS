@@ -11,7 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class CreateTestController{
+public class CreateTestController extends AbstractController{
 	
 	private ArrayList<Question> arrQuestion;
 

@@ -1,13 +1,11 @@
 package gui;
 
-import java.util.ArrayList;
-
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 
-public class LecturerStaticsReportController {
+public class LecturerStaticsReportController extends AbstractController{
 
 	@FXML
 	private BarChart<String, Integer> barChart;

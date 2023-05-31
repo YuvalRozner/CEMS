@@ -15,7 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class CreateQuestionController {
+public class CreateQuestionController extends AbstractController{
 
     @FXML
     private ToggleGroup ChooseCorrectAnswerGroup;

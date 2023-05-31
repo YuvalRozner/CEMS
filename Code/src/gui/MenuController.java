@@ -12,7 +12,6 @@ public class MenuController extends AbstractController  {
 	
 	@FXML
 	private Button btnShow = null;
-	
     
 	public void show(ActionEvent event) throws Exception {
 		
@@ -20,24 +19,11 @@ public class MenuController extends AbstractController  {
 			ClientUI.chat.accept(DB_controller.getAllQuestion());
 		}catch(Throwable t) {System.out.println("accept dont work");};
 		
-		
-		
 		//the start of the new table
-		
 		QuestionTableController q = new QuestionTableController();
 		ChatClient.screens.putIfAbsent("questionTable",q );
-		ChatClient.getScreen("questionTable").start("questionTable");
-		
-		//the start of the old table
-		/*
-		TableViewSample tableViewSample = new TableViewSample(ChatClient.questionList);
-		//FXMLLoader loader = new FXMLLoader();
-		((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-		Stage primaryStage = new Stage();
-		tableViewSample.start(primaryStage);
-*/
+		ChatClient.getScreen("questionTable").start("questionTable");		
 	}
-	
 	
 	
 	public void backBtn(ActionEvent event) throws Exception {

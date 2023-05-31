@@ -27,7 +27,6 @@ public abstract class AbstractController {
 	}
 	
 	public void display() {
-		//((Stage)scene.getWindow()).show();
 		primaryStage.setTitle(fxmlName);
 		primaryStage.setScene(scene);
 		primaryStage.show();	

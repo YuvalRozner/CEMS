@@ -1,6 +1,7 @@
 package client;
 import gui.AbstractController;
 import gui.ClientConnectionController;
+import gui.CreateQuestionController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -16,8 +17,8 @@ public class ClientUI extends Application {
 		AbstractController.setPrimaryStage(primaryStage);
 		ClientConnectionController clientConnectionController = new ClientConnectionController(); // create first client window.
 		ChatClient.screens.putIfAbsent("ClientConnection", clientConnectionController);
-		primaryStage.setOnCloseRequest(event -> {
-			event.consume(); // Prevent the default close action
+		primaryStage.setOnCloseRequest(event -> { // Prevent the default close action
+			event.consume(); 
 			try {
 				clientConnectionController.exitBtn(null);
 			} catch (Exception e) {	e.printStackTrace();}
@@ -25,7 +26,6 @@ public class ClientUI extends Application {
 			System.exit(0);
 		});
 		clientConnectionController.start("ClientConnection");
-		//QuestionTableController q = new QuestionTableController(new ArrayList<Question>());
-		//q.start(primaryStage);
+
 	}
 }
