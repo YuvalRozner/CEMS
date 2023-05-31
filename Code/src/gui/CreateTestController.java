@@ -1,4 +1,4 @@
-package julia;
+package gui;
 
 import java.util.ArrayList;
 
@@ -10,6 +10,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import julia.Main;
 
 public class CreateTestController{
 	

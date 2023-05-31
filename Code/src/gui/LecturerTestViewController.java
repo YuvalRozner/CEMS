@@ -1,18 +1,16 @@
-package julia;
+package gui;
 
 import java.util.ArrayList;
 
 import enteties.Test;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import julia.Main;
 
 public class LecturerTestViewController {
     
