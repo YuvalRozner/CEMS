@@ -1,7 +1,6 @@
 package client;
 import gui.AbstractController;
 import gui.ClientConnectionController;
-import gui.CreateQuestionController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
