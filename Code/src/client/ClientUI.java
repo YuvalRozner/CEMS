@@ -1,10 +1,6 @@
 package client;
-import java.util.ArrayList;
-
-import enteties.Question;
 import gui.AbstractController;
 import gui.ClientConnectionController;
-import gui.QuestionTableController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
