@@ -1,6 +1,7 @@
 package client;
 import gui.AbstractController;
 import gui.ClientConnectionController;
+import gui.LecturerMenuController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -9,7 +10,7 @@ public class ClientUI extends Application {
 
 	public static void main( String args[] ) throws Exception { 
 		    launch(args);  
-	   }
+	}
 	 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -24,7 +25,11 @@ public class ClientUI extends Application {
 			System.out.println("Exit Client app.");
 			System.exit(0);
 		});
-		clientConnectionController.start("ClientConnection");
-
+		// original line:
+		//clientConnectionController.start("ClientConnection");
+		
+		ChatClient.screens.putIfAbsent("lecturerMenu", new LecturerMenuController());
+		ChatClient.getScreen("lecturerMenu").start("lecturerMenu");
+	
 	}
 }

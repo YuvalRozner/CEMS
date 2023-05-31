@@ -65,7 +65,7 @@
             <Font name="Dosis Bold" size="14.5" />
          </font>
       </Button>
-      <Button layoutX="304.0" layoutY="364.0" mnemonicParsing="false" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
+      <Button layoutX="304.0" layoutY="364.0" mnemonicParsing="false" onAction="#backBtn" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
          <font>
             <Font name="Dosis Bold" size="14.5" />
          </font>

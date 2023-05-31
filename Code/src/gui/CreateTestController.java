@@ -2,10 +2,13 @@ package gui;
 
 import java.util.ArrayList;
 
+import client.ChatClient;
 import enteties.Question;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -43,7 +46,6 @@ public class CreateTestController extends AbstractController{
         }
     }
 
-    
     @FXML
 	protected void initialize() {
     	idCol.setCellValueFactory(new PropertyValueFactory<Question, String>("ID"));
@@ -60,10 +62,11 @@ public class CreateTestController extends AbstractController{
 		table.refresh();
 		subjectComboBox.getItems().addAll("math", "software");
 	}
-   
     
-    
-
-
+	public void backBtn(ActionEvent event) throws Exception {
+		((Node)event.getSource()).getScene().getWindow().hide();
+		ChatClient.getScreen("lecturerMenu").display();
+	}
+	
 }
 

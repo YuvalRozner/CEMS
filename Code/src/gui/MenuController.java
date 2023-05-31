@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 
-public class MenuController extends AbstractController  {
+public class MenuController extends AbstractController {
 	
 	@FXML
 	private Button btnShow = null;
