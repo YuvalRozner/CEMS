@@ -1,5 +1,5 @@
 *.bin
-/Code/bin/
+*.class
 /julia/
 /client/
 /controllers/
