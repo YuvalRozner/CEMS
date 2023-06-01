@@ -1,5 +1,5 @@
 package enteties;
-///lior///
+
 import javafx.scene.control.CheckBox;
 
 public class Course {

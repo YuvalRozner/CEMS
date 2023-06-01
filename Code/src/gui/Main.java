@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import enteties.Course;
 import enteties.Question;
+import enteties.StudentTest;
 import enteties.Subject;
 import enteties.Test;
 import javafx.application.Application;
@@ -13,6 +14,31 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+	
+	///add by lior
+	public static ArrayList<StudentTest> arrStudentTest; 
+	static {
+		arrStudentTest = new ArrayList<StudentTest>();
+		StudentTest testLior = new StudentTest();
+		testLior.setStudentId("1234");
+		testLior.setGrade("75");
+		
+		StudentTest testYuval = new StudentTest();
+		testYuval.setStudentId("5678");
+		testYuval.setGrade("69");
+		
+		StudentTest testDor = new StudentTest();
+		testDor.setStudentId("91011");
+		testDor.setGrade("82");
+		
+		
+		arrStudentTest.add(testLior);
+		arrStudentTest.add(testYuval);
+		arrStudentTest.add(testDor);
+	}
+	
+	
+	///finish
 	
 	public static ArrayList<Question> arr; 
 	static {
@@ -79,8 +105,11 @@ public class Main extends Application {
     	String LecturerStaticsReportfXML = "/fxml/LecturerStaticsReport.fxml";//6
     	String LecturerStaticsReportTitle = "Lecturer Statics Report";
     	
-        Parent root = FXMLLoader.load(getClass().getResource(LecturerMenufXML));
-        primaryStage.setTitle(CreateQuestionTitle);
+    	String aprroveGradefXML = "/fxml/AprroveGrade.fxml";//7 ////lior
+    	String aprroveGradeTitle = "Aprrove Grade";
+    	
+        Parent root = FXMLLoader.load(getClass().getResource(aprroveGradefXML));
+        primaryStage.setTitle(aprroveGradeTitle);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

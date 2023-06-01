@@ -2,15 +2,72 @@ package enteties;
 
 import java.sql.Time;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
+
 public class StudentTest {
 
 	private Test test;
-	private int studentId;
+	private String studentId;//change lior change also get and set
 	private int submittingTime;
 	private Time time;
 	private TestToExexeute testToExecute;
 	private int[] answers;
-	private int grade;
+	private String grade;//change lior change also get and set
+	
+	///added by lior
+	private Button show;
+	private CheckBox select;
+	private TextField note;
+	
+	////////select
+	public CheckBox getSelect() {
+		return select;
+	}
+
+	public void setSelect(CheckBox select) {
+		this.select = select;
+	}
+	
+	public void setNewSelect() { 
+		this.select = new CheckBox();
+		// Add event handler for pressed and unpressed (checked / unchecked) state of the checkbox.
+		this.select.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				//flag = newValue; // why we need it again dor? -rozner.
+				//points.setDisable(!newValue);
+				System.out.println("Checkbox " + (newValue ? "pressed" : "unpressed")); 	}
+		});
+	}
+	////////note
+	public TextField getNote() {
+		return note;
+	}
+
+	public void setNote(TextField note) {
+		this.note = note;	
+	}
+	
+	public void setNewNote() {
+		this.note = new TextField();
+		//note.setDisable(true);
+	}
+	
+	////////show
+	public Button getShow() {
+		return show;
+	}
+
+	public void setNewShow() {
+		this.show = new Button();
+		show.setText("Show");
+	}
+	
+	/////lior finish/////////////////////////////////////////////////////
 
 	public Test getTest() {
 		return this.test;
@@ -20,11 +77,11 @@ public class StudentTest {
 		this.test = test;
 	}
 
-	public int getStudentId() {
+	public String getStudentId() {
 		return this.studentId;
 	}
 
-	public void setStudentId(int studentId) {
+	public void setStudentId(String studentId) {
 		this.studentId = studentId;
 	}
 
@@ -60,11 +117,11 @@ public class StudentTest {
 		this.answers = answers;
 	}
 
-	public int getGrade() {
+	public String getGrade() {///////////
 		return this.grade;
 	}
 
-	public void setGrade(int grade) {
+	public void setGrade(String grade) {//////////////
 		this.grade = grade;
 	}
 
