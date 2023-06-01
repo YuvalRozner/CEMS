@@ -14,7 +14,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-
+//// חסרה פונקציונליות של החלפת טבלה כשמחליפים מקצוע
+//// חסרה פונקציונליות של select all
 public class AprroveGradeController extends AbstractController{
 	
 	private ArrayList<StudentTest> arrStudentTest;	
@@ -58,17 +59,15 @@ public class AprroveGradeController extends AbstractController{
         //}
     }
     
+    
     @FXML
 	protected void initialize() {
-    	
+
     	idstuCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("studentId"));
     	gradeCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("grade"));
-    	//showCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("show"));
-    	//NoteCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("note"));
-    	//checkBoxCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("select"));
-    	checkBoxCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("studentId"));
-    	NoteCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("studentId"));
-    	showCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("studentId"));
+    	checkBoxCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("select"));
+    	NoteCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("note"));
+    	showCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("show"));
     	
 		table.setItems(TestTable);
 		table.refresh();
