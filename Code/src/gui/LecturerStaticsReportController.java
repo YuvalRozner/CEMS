@@ -1,13 +1,14 @@
-package julia;
+package gui;
 
-import java.util.ArrayList;
-
+import client.ChatClient;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 
-public class LecturerStaticsReportController {
+public class LecturerStaticsReportController extends AbstractController{
 
 	@FXML
 	private BarChart<String, Integer> barChart;
@@ -35,4 +36,10 @@ public class LecturerStaticsReportController {
 		barChart.setCategoryGap(0);
 		barChart.setLegendVisible(false);
 	}
+	
+	public void backBtn(ActionEvent event) throws Exception {
+		((Node)event.getSource()).getScene().getWindow().hide();
+		ChatClient.getScreen("lecturerTestView").display();
+	}
+	
 }

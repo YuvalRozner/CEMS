@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="404.0" prefWidth="429.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="julia.LecturerTestViewController">
+<Pane prefHeight="404.0" prefWidth="429.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LecturerTestViewController">
    <children>
       <ImageView fitHeight="120.0" fitWidth="134.0" layoutX="325.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -60,12 +60,12 @@
             <TableColumn fx:id="selectCol" prefWidth="50.0" style="-fx-alignment: CENTER;" text="Select" />
         </columns>
       </TableView>
-      <Button layoutX="36.0" layoutY="318.0" maxWidth="121.0" mnemonicParsing="false" prefHeight="1.0" prefWidth="121.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Show Statistics">
+      <Button layoutX="36.0" layoutY="318.0" maxWidth="121.0" mnemonicParsing="false" onAction="#showStatistics" prefHeight="1.0" prefWidth="121.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Show Statistics">
          <font>
             <Font name="Dosis Bold" size="14.5" />
          </font>
       </Button>
-      <Button layoutX="304.0" layoutY="364.0" mnemonicParsing="false" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
+      <Button layoutX="304.0" layoutY="364.0" mnemonicParsing="false" onAction="#backBtn" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
          <font>
             <Font name="Dosis Bold" size="14.5" />
          </font>

@@ -1,7 +1,10 @@
 *.bin
+*.class
 /julia/
 /client/
 /controllers/
 /enteties/
 /gui/
 /server/
+/fxmlNcss/
+/fxml/

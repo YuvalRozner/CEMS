@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="457.0" prefWidth="378.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<Pane prefHeight="457.0" prefWidth="378.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LecturerMenuController">
    <children>
       <Pane layoutX="149.0" layoutY="-107.0" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
       <ImageView fitHeight="171.0" fitWidth="175.0" layoutX="225.0" layoutY="-37.0" pickOnBounds="true" preserveRatio="true">
@@ -54,32 +54,32 @@
          <children>
             <VBox layoutX="67.0" layoutY="16.0" prefHeight="300.0" prefWidth="168.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="151.0" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Create Question">
+                  <Button mnemonicParsing="false" onAction="#createQuestion" prefHeight="35.0" prefWidth="151.0" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Create Question">
                      <font>
                         <Font name="Dosis Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="151.0" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Create Test">
+                  <Button mnemonicParsing="false" onAction="#createTest" prefHeight="35.0" prefWidth="151.0" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Create Test">
                      <font>
                         <Font name="Dosis Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="151.0" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Approve Grades">
+                  <Button mnemonicParsing="false" onAction="#approveGrades" prefHeight="35.0" prefWidth="151.0" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Approve Grades">
                      <font>
                         <Font name="Dosis Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="151.0" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Execute Test">
+                  <Button mnemonicParsing="false" onAction="#executeTest" prefHeight="35.0" prefWidth="151.0" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Execute Test">
                      <font>
                         <Font name="Dosis Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="151.0" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Running Test">
+                  <Button mnemonicParsing="false" onAction="#runningTest" prefHeight="35.0" prefWidth="151.0" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Running Test">
                      <font>
                         <Font name="Dosis Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="151.0" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Reports">
+                  <Button mnemonicParsing="false" onAction="#reports" prefHeight="35.0" prefWidth="151.0" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Reports">
                      <font>
                         <Font name="Dosis Bold" size="14.0" />
                      </font>
@@ -88,7 +88,7 @@
             </VBox>
          </children>
       </Pane>
-      <Button layoutX="273.0" layoutY="410.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="85.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Logout">
+      <Button layoutX="273.0" layoutY="410.0" mnemonicParsing="false" onAction="#logout" prefHeight="35.0" prefWidth="85.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Logout">
          <font>
             <Font name="Dosis Bold" size="14.5" />
          </font>

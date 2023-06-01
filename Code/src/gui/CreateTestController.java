@@ -1,15 +1,20 @@
-package julia;
+package gui;
 
 import java.util.ArrayList;
+
+import client.ChatClient;
+import enteties.Question;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class CreateTestController{
+public class CreateTestController extends AbstractController{
 	
 	private ArrayList<Question> arrQuestion;
 
@@ -30,18 +35,17 @@ public class CreateTestController{
         
         arrQuestion = new ArrayList<Question>(Main.arr);
        
-        ArrayList<QuestionWithAddition> convertedList = new ArrayList<>();
+        //ArrayList<Question> convertedList = new ArrayList<>();
         for (Question question : Main.arr) {
-        	QuestionWithAddition questionWithAddition = new QuestionWithAddition(question);
-            convertedList.add(questionWithAddition);
+        	question.setNewPoints();
+        	question.setNewSelect();
         }
-        QTable = FXCollections.observableArrayList(convertedList);
+        QTable = FXCollections.observableArrayList(arrQuestion);
         for (Question q : arrQuestion) {
             arrdup.add(new Question(q.getID(), q.getSubjectNum(), q.getCourseName(), q.getQuestion(), q.getNumber(),q.getLecturereCreated()));
         }
     }
 
-    
     @FXML
 	protected void initialize() {
     	idCol.setCellValueFactory(new PropertyValueFactory<Question, String>("ID"));
@@ -58,10 +62,11 @@ public class CreateTestController{
 		table.refresh();
 		subjectComboBox.getItems().addAll("math", "software");
 	}
-   
     
-    
-
-
+	public void backBtn(ActionEvent event) throws Exception {
+		((Node)event.getSource()).getScene().getWindow().hide();
+		ChatClient.getScreen("lecturerMenu").display();
+	}
+	
 }
 

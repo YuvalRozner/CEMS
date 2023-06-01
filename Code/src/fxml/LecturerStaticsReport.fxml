@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="512.0" prefWidth="609.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="julia.LecturerStaticsReportController">
+<Pane prefHeight="512.0" prefWidth="609.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LecturerStaticsReportController">
    <children>
       <ImageView fitHeight="199.0" fitWidth="213.0" layoutX="461.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -73,7 +73,7 @@
           <NumberAxis label="Amount of Students" side="LEFT" />
         </yAxis>
       </BarChart>
-      <Button layoutX="473.0" layoutY="463.0" mnemonicParsing="false" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
+      <Button layoutX="473.0" layoutY="463.0" mnemonicParsing="false" onAction="#backBtn" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
          <font>
             <Font name="Dosis Bold" size="14.5" />
          </font></Button>

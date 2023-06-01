@@ -1,19 +1,24 @@
-package julia;
+package gui;
 
 import java.util.ArrayList;
 
+import client.ChatClient;
+import enteties.Course;
+import enteties.Subject;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class CreateQuestionController {
+public class CreateQuestionController extends AbstractController{
 
     @FXML
     private ToggleGroup ChooseCorrectAnswerGroup;
@@ -55,7 +60,7 @@ public class CreateQuestionController {
                     Subject selectedSubject = findSubjectByName(newValue);
 
                     // Get the list of courses associated with the selected subject
-                    ArrayList<CourseWithAddition> courses = returnSubjectWithCheckbox(selectedSubject);
+                    ArrayList<Course> courses = returnSubjectWithCheckbox(selectedSubject);
 
                     if (selectedSubject != null) {
                         // Set the items of a table with the list of courses
@@ -63,7 +68,6 @@ public class CreateQuestionController {
                     }
                 }
             }
-
 			
         });
 
@@ -86,13 +90,20 @@ public class CreateQuestionController {
         return null; // Subject not found
     }
     
-    private ArrayList<CourseWithAddition> returnSubjectWithCheckbox(Subject subject) {
-    	ArrayList<CourseWithAddition> courses = new ArrayList<>();
+    private ArrayList<Course> returnSubjectWithCheckbox(Subject subject) {
+    	ArrayList<Course> courses = new ArrayList<>();
     	for (Course course : subject.getCourses()) {
-    		courses.add(new CourseWithAddition(course.getCourseNum(),course.getCourseName()));
+    		Course tmp = new Course(course.getCourseNum(),course.getCourseName());
+    		tmp.setNewSelect();
+    		courses.add(tmp);
         }
         return courses; 
     }
+    
+	public void backBtn(ActionEvent event) throws Exception {
+		((Node)event.getSource()).getScene().getWindow().hide();
+		ChatClient.getScreen("lecturerMenu").display();
+	}
 
     
 }

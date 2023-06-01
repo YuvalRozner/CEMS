@@ -34,11 +34,9 @@ public class ClientConnectionController extends AbstractController  {
     void connect(ActionEvent event) {
     	try {
     		ClientUI.chat = new ClientController(inputIp.getText(), Integer.valueOf(inputPort.getText()));
-    		
     		ChatClient.screens.putIfAbsent("Menu", new MenuController());
-    		ChatClient.getScreen("Menu").start("Menu");
-    		
-    		//btnShow.setDisable(false);
+    		ChatClient.getScreen("Menu").start("Menu"); 
+
     	} catch(Throwable t) {System.out.println("input ip and port - error connecting.");}    	
     }
     

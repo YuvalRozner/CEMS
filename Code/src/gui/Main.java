@@ -1,6 +1,11 @@
-package julia;
+package gui;
 
 import java.util.ArrayList;
+
+import enteties.Course;
+import enteties.Question;
+import enteties.Subject;
+import enteties.Test;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -56,26 +61,26 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
     	
-    	String LoginfXML = "Login.fxml"; //1
+    	String LoginfXML = "/fxml/Login.fxml"; //1
     	String LoginTitle = "Login";
     	
-    	String LecturerMenufXML = "LecturerMenu.fxml"; //2
+    	String LecturerMenufXML = "/fxml/LecturerMenu.fxml"; //2
     	String LecturerMenuTitle = "Lecturer Menu";
     	
-    	String CreateQuestionfXML = "CreateQuestion.fxml"; //3
+    	String CreateQuestionfXML = "/fxml/CreateQuestion.fxml"; //3
     	String CreateQuestionTitle = "Create Question";
     	
-    	String CreateTestfXML = "CreateTest.fxml"; //4 
+    	String CreateTestfXML = "/fxml/CreateTest.fxml"; //4 
     	String CreateTestTitle = "Create Test";
     	
-    	String LecturerTestViewfXML = "LecturerTestView.fxml";//5 
+    	String LecturerTestViewfXML = "/fxml/LecturerTestView.fxml";//5 
     	String LecturerTestViewTitle = "Lecturer Test View";
     	
-    	String LecturerStaticsReportfXML = "LecturerStaticsReport.fxml";//6
+    	String LecturerStaticsReportfXML = "/fxml/LecturerStaticsReport.fxml";//6
     	String LecturerStaticsReportTitle = "Lecturer Statics Report";
     	
-        Parent root = FXMLLoader.load(getClass().getResource(LecturerStaticsReportfXML));
-        primaryStage.setTitle("Lecturer Tests Reports");
+        Parent root = FXMLLoader.load(getClass().getResource(LecturerMenufXML));
+        primaryStage.setTitle(CreateQuestionTitle);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

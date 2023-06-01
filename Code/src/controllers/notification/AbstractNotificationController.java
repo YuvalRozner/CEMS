@@ -7,7 +7,7 @@ public abstract class AbstractNotificationController {
 	 * @param phoneNumber
 	 * @param text
 	 */
-	public boolean sendSMS(string phoneNumber, String text) {
+	public boolean sendSMS(String phoneNumber, String text) {
 		// TODO - implement AbstractNotificationController.sendSMS
 		throw new UnsupportedOperationException();
 	}
@@ -17,7 +17,7 @@ public abstract class AbstractNotificationController {
 	 * @param mail
 	 * @param text
 	 */
-	public boolean sendMail(string mail, string text) {
+	public boolean sendMail(String mail, String text) {
 		// TODO - implement AbstractNotificationController.sendMail
 		throw new UnsupportedOperationException();
 	}

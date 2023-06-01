@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="972.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="julia.CreateTestController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="972.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CreateTestController">
    <children>
       <Pane layoutX="723.0" layoutY="-95.0" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
       <ImageView fitHeight="215.0" fitWidth="220.0" layoutX="774.0" layoutY="-43.0" pickOnBounds="true" preserveRatio="true">
@@ -109,7 +109,7 @@
             <Font name="Dosis Bold" size="15.0" />
          </font></Label>
       <TextArea layoutX="488.0" layoutY="462.0" prefHeight="100.0" prefWidth="380.0" promptText="The students will not see these comments!" style="-fx-background-color: #F8FFFF; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #92bce3;" />
-      <Button layoutX="834.0" layoutY="597.0" mnemonicParsing="false" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
+      <Button layoutX="834.0" layoutY="597.0" mnemonicParsing="false" onAction="#backBtn" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
          <font>
             <Font name="Dosis Bold" size="14.5" />
          </font></Button>

@@ -1,18 +1,20 @@
-package julia;
+package gui;
 
 import java.util.ArrayList;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
 
+import client.ChatClient;
+import enteties.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class LecturerTestViewController {
+public class LecturerTestViewController extends AbstractController {
     
     @FXML
     private TableColumn<Test, String> courseCol, dateCol, idCol, selectCol;
@@ -44,7 +46,15 @@ public class LecturerTestViewController {
         
         table.setItems(testsTable);
         table.refresh();
-        
-       
     }
+    
+	public void backBtn(ActionEvent event) throws Exception {
+		((Node)event.getSource()).getScene().getWindow().hide();
+		ChatClient.getScreen("lecturerMenu").display();
+	}
+	
+	public void showStatistics(ActionEvent event) throws Exception {
+		ChatClient.screens.putIfAbsent("lecturerStaticsReport", new LecturerStaticsReportController());
+		ChatClient.getScreen("lecturerStaticsReport").start("lecturerStaticsReport");
+	}
 }
