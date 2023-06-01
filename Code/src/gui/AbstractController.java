@@ -14,7 +14,7 @@ public abstract class AbstractController {
 	
 	public void start(String fxmlName) throws Exception {
 		this.fxmlName = fxmlName;
-		Parent root = FXMLLoader.load(getClass().getResource("/gui/"+fxmlName+".fxml"));	
+		Parent root = FXMLLoader.load(getClass().getResource("/fxml/"+fxmlName+".fxml"));	
 		scene = new Scene(root);
 		primaryStage.setTitle(fxmlName);
 		primaryStage.setScene(scene);

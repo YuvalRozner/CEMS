@@ -61,10 +61,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
     	
-    	String LoginfXML = "Login.fxml"; //1
+    	String LoginfXML = "/fxml/Login.fxml"; //1
     	String LoginTitle = "Login";
     	
-    	String LecturerMenufXML = "LecturerMenu.fxml"; //2
+    	String LecturerMenufXML = "/fxml/LecturerMenu.fxml"; //2
     	String LecturerMenuTitle = "Lecturer Menu";
     	
     	String CreateQuestionfXML = "CreateQuestion.fxml"; //3
