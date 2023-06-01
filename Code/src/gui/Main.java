@@ -67,16 +67,16 @@ public class Main extends Application {
     	String LecturerMenufXML = "/fxml/LecturerMenu.fxml"; //2
     	String LecturerMenuTitle = "Lecturer Menu";
     	
-    	String CreateQuestionfXML = "CreateQuestion.fxml"; //3
+    	String CreateQuestionfXML = "/fxml/CreateQuestion.fxml"; //3
     	String CreateQuestionTitle = "Create Question";
     	
-    	String CreateTestfXML = "CreateTest.fxml"; //4 
+    	String CreateTestfXML = "/fxml/CreateTest.fxml"; //4 
     	String CreateTestTitle = "Create Test";
     	
-    	String LecturerTestViewfXML = "LecturerTestView.fxml";//5 
+    	String LecturerTestViewfXML = "/fxml/LecturerTestView.fxml";//5 
     	String LecturerTestViewTitle = "Lecturer Test View";
     	
-    	String LecturerStaticsReportfXML = "LecturerStaticsReport.fxml";//6
+    	String LecturerStaticsReportfXML = "/fxml/LecturerStaticsReport.fxml";//6
     	String LecturerStaticsReportTitle = "Lecturer Statics Report";
     	
         Parent root = FXMLLoader.load(getClass().getResource(LecturerMenufXML));
