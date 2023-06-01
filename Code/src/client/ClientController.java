@@ -64,6 +64,12 @@ public class ClientController implements ChatIF
 	  client.handleMessageFromClientUI(str);
   }
   
+  //new accept
+  public void accept(Object msg) 
+  {
+	  client.handleMessageFromClientUI(msg);
+  }
+  
   /**
    * This method overrides the method in the ChatIF interface.  It
    * displays a message onto the screen.

@@ -1,8 +1,12 @@
 package gui;
 
+import java.util.ArrayList;
+
 import client.ChatClient;
 import client.ClientUI;
 import controllers.JDBC.DB_controller;
+import controllers.JDBC.Msg;
+import controllers.JDBC.MsgType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -14,9 +18,15 @@ public class MenuController extends AbstractController {
 	private Button btnShow = null;
     
 	public void show(ActionEvent event) throws Exception {
-		
+		Msg tmpMsg = new Msg();
+		tmpMsg.setType(MsgType.select);
+		tmpMsg.getInfo().add(new ArrayList<String>());
+		tmpMsg.getInfo().add(new ArrayList<String>());
+		tmpMsg.getSelectInfo().add("*");
+		tmpMsg.getFromInfo().add("question");
 		try {
-			ClientUI.chat.accept(DB_controller.getAllQuestion());
+			ClientUI.chat.accept(tmpMsg);
+			//ClientUI.chat.accept(DB_controller.getAllQuestion());
 		}catch(Throwable t) {System.out.println("accept dont work");};
 		
 		//the start of the new table

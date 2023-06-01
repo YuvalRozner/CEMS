@@ -93,6 +93,23 @@ public class ChatClient extends AbstractClient {
 			ClientUI.chat.accept("disconnected");	}
 	}
 	
+	// new method.
+	public void handleMessageFromClientUI(Object msg) {
+		try {
+			awaitResponse = true;
+			sendToServer(msg); //send the msg to server.
+			// wait for response
+			while (awaitResponse) {
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {e.printStackTrace();}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			clientUI.display("Could not send message to server: Terminating client." + e);
+			ClientUI.chat.accept("disconnected");	}
+	}
+	
 	public static AbstractController getScreen(String screenName) {
 		return screens.get(screenName);
 	}
