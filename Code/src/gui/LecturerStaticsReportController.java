@@ -39,6 +39,7 @@ public class LecturerStaticsReportController extends AbstractController{
 	
 	public void backBtn(ActionEvent event) throws Exception {
 		((Node)event.getSource()).getScene().getWindow().hide();
+		ChatClient.screens.putIfAbsent("lecturerTestView", new LecturerTestViewController());
 		ChatClient.getScreen("lecturerTestView").display();
 	}
 	

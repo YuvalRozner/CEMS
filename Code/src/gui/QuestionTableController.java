@@ -45,6 +45,7 @@ public class QuestionTableController extends AbstractController{
     @FXML
     void backBtn(ActionEvent event) {
 		((Node)event.getSource()).getScene().getWindow().hide();
+		ChatClient.screens.putIfAbsent("Menu", new MenuController());
 		ChatClient.getScreen("Menu").display();
     }
 

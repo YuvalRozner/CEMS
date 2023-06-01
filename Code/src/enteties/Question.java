@@ -25,7 +25,6 @@ public class Question {
 	
 	private CheckBox select;
 	private TextField points;
-//	private Boolean flag = false; /////////////////////////////////// what is it dor? -rozner
 	
 	
 	public Question(String ID, String subjectNum, String courseName, String question, String number,
@@ -186,7 +185,6 @@ public class Question {
 		this.select.selectedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				//flag = newValue; // why we need it again dor? -rozner.
 				points.setDisable(!newValue);
 				System.out.println("Checkbox " + (newValue ? "pressed" : "unpressed")); 	}
 		});

@@ -55,6 +55,7 @@ public class LecturerTestViewController extends AbstractController {
 	
 	public void showStatistics(ActionEvent event) throws Exception {
 		ChatClient.screens.putIfAbsent("lecturerStaticsReport", new LecturerStaticsReportController());
+		ChatClient.screens.putIfAbsent("lecturerStaticsReport", new LecturerStaticsReportController());
 		ChatClient.getScreen("lecturerStaticsReport").start("lecturerStaticsReport");
 	}
 }
