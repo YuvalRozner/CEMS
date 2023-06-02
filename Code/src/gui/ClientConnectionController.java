@@ -19,16 +19,9 @@ public class ClientConnectionController extends AbstractController  {
 
     @FXML
     private TextField inputPort;
-
-    @FXML
-    private Label lblIP;
-
-    @FXML
-    private Label lblPort;
     
 	@FXML
 	private Button btnExit = null;
-	
 	
     @FXML
     void connect(ActionEvent event) {

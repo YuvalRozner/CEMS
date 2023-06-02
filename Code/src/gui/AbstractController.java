@@ -1,6 +1,8 @@
 package gui;
 
 import client.ClientUI;
+import controllers.JDBC.Msg;
+import controllers.JDBC.MsgType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,13 +35,19 @@ public abstract class AbstractController {
 	}
 	
 	public void exitBtn(ActionEvent event) throws Exception {
-		//System.out.println("exit " + getFxmlName()); // the name is not working..
 		try {
+			ClientUI.chat.accept(new Msg(MsgType.disconnect));
+		}catch(Throwable t) {
+			System.out.println("error getExitBtn");
+			System.exit(0);
+		}
+		
+		/*try {
 			ClientUI.chat.accept("disconnected");
 			System.exit(0);}
 		catch(Throwable t) {
 			System.out.println("error getExitBtn");
-		}
+		}*/
 		System.exit(0); //exit 
 	}
 

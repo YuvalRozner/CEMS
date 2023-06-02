@@ -10,6 +10,14 @@ public class Msg implements Serializable{
 	private MsgType type;
 	private ArrayList<Object> info = new ArrayList<>();
 	
+	public Msg() {
+	}
+	
+	//constructor using field.
+	public Msg(MsgType type) {
+		this.type = type;
+	}
+	
 	
 	public MsgType getType() {
 		return type;

@@ -2,7 +2,7 @@ package controllers.JDBC;
 
 public enum MsgType {
 	
-	systemCommand,
+	disconnect,
 	
 	select,
 	
