@@ -73,30 +73,9 @@ public class ChatClient extends AbstractClient {
 				}
 		}
 	}
-
-	/**
-	 * This method handles all data coming from the UI
-	 *
-	 * @param message The message from the UI.
-	 */
-	public void handleMessageFromClientUI(String message) {
-		try {
-			awaitResponse = true;
-			sendToServer(message); //send the msg to server.
-			// wait for response
-			while (awaitResponse) {
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {e.printStackTrace();}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			clientUI.display("Could not send message to server: Terminating client." + e);
-			ClientUI.chat.accept(new Msg(MsgType.disconnect));	}
-	}
 	
 	// new method.
-	public void handleMessageFromClientUI(Object msg) {
+	public void handleMessageFromClientUI(Msg msg) {
 		try {
 			awaitResponse = true;
 			sendToServer(msg); //send the msg to server.

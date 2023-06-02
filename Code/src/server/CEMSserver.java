@@ -67,89 +67,50 @@ public class CEMSserver extends AbstractServer {
 	 * @param
 	 */
 
-	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
-		
-
-		
+	public void handleMessageFromClient(Object msgObj, ConnectionToClient client) {
+		Msg msg = (Msg)msgObj;
 		java.sql.Statement stmt = null;
 		String queryStr;
 		ResultSet data;
 		System.out.println("Message received: " + msg + " from " + client);
-		ArrayList<ArrayList<String>> dataToClient = new ArrayList<ArrayList<String>>();
-		if(msg instanceof Msg) {
-			try {
-				switch (((Msg)msg).getType()) {
-					case select:
-						stmt = conn.createStatement();
-						queryStr = DB_controller.createSELECTquery(((Msg)msg).getSelectInfo(), ((Msg)msg).getFromInfo(), ((Msg)msg).getWhereColInfo(), ((Msg)msg).getWhereValueInfo());
-						System.out.println("query:\n"+ queryStr);
-						data = stmt.executeQuery(queryStr);
-						int colunmCount = data.getMetaData().getColumnCount();
-						while (data.next()) {
-							ArrayList<String> rowTemp = new ArrayList<String>(colunmCount);
-							for (int i = 1; i < colunmCount + 1; i++)
-								rowTemp.add(data.getString(i));
-							dataToClient.add(rowTemp);
-						}
-						this.sendToAllClients(dataToClient);
-						break;
-						
-					case update:
-						stmt = conn.createStatement();
-						queryStr = DB_controller.createUPDATEquery(((Msg)msg).getTableToUpdateInfo(), ((Msg)msg).getSetColInfo(), ((Msg)msg).getSetValueInfo(), ((Msg)msg).getWhereColInfo(), ((Msg)msg).getWhereValueInfo());
-						stmt.executeUpdate(queryStr);
-						sendToAllClients("Update succeeded");
-						break;
-						
-					case disconnect:
-						System.out.println("clientDisconnected" + client);
-						serverController.removeConnected(client.getInetAddress());
-				    	this.sendToAllClients("Bye");
-						break;
-						
-					case insert:
-						break;
-					default:
-						break;
-				}
-			} catch (SQLException ex) {/* handle any errors */}
-			return;
-		}
-
-		
-		
-		String[] msgToStringArr = ((String) msg).split("\\s+");
-		String firstWord = msgToStringArr[0];
-		
 		try {
-			stmt = conn.createStatement();
-			if (firstWord.equals("UPDATE") || firstWord.equals("SET")) {
-				stmt.executeUpdate((String) msg);
-				sendToAllClients("Update succeeded");
-			} else if (firstWord.equals("SELECT")) {
-				data = stmt.executeQuery((String) msg);
-				int colunmCount = data.getMetaData().getColumnCount();
-				while (data.next()) {
-					ArrayList<String> rowTemp = new ArrayList<String>(colunmCount);
-					for (int i = 1; i < colunmCount + 1; i++)
-						rowTemp.add(data.getString(i));
-					dataToClient.add(rowTemp);
-				}
-				this.sendToAllClients(dataToClient);
+			switch (((Msg)msg).getType()) {
+				case select:
+					stmt = conn.createStatement();
+					queryStr = DB_controller.createSELECTquery(((Msg)msg).getSelectInfo(), ((Msg)msg).getFromInfo(), ((Msg)msg).getWhereColInfo(), ((Msg)msg).getWhereValueInfo());
+					System.out.println("query:\n"+ queryStr);
+					data = stmt.executeQuery(queryStr);
+					ArrayList<ArrayList<String>> dataToClient = new ArrayList<ArrayList<String>>();
+					int colunmCount = data.getMetaData().getColumnCount();
+					while (data.next()) {
+						ArrayList<String> rowTemp = new ArrayList<String>(colunmCount);
+						for (int i = 1; i < colunmCount + 1; i++)
+							rowTemp.add(data.getString(i));
+						dataToClient.add(rowTemp);
+					}
+					this.sendToAllClients(dataToClient);
+					break;
+					
+				case update:
+					stmt = conn.createStatement();
+					queryStr = DB_controller.createUPDATEquery(((Msg)msg).getTableToUpdateInfo(), ((Msg)msg).getSetColInfo(), ((Msg)msg).getSetValueInfo(), ((Msg)msg).getWhereColInfo(), ((Msg)msg).getWhereValueInfo());
+					stmt.executeUpdate(queryStr);
+					sendToAllClients("Update succeeded");
+					break;
+					
+				case disconnect:
+					System.out.println("clientDisconnected" + client);
+					serverController.removeConnected(client.getInetAddress());
+			    	this.sendToAllClients("Bye");
+					break;
+					
+				case insert:
+					break;
+				default:
+					break;
 			}
-			else if (firstWord.equals("disconnected")) {
-				try {
-				System.out.println("clientDisconnected" + client);
-				serverController.removeConnected(client.getInetAddress());
-		    	this.sendToAllClients("Bye");
-				}catch(Throwable t) {};
-			}
-		} catch (SQLException ex) {/* handle any errors */
-			System.out.println("SQLException: " + ex.getMessage());
-			System.out.println("SQLState: " + ex.getSQLState());
-			System.out.println("VendorError: " + ex.getErrorCode());
-			this.sendToAllClients("Error");
-		}
+		} catch (SQLException ex) {/* handle any errors */}
+		return;
 	}
 	
 	/**
