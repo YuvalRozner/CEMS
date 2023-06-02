@@ -84,11 +84,6 @@ public class QuestionTableController extends AbstractController{
          question.setQuestion(newValue);
     }
  
-    
-    
-    
-    
-    
     //shadow
     
     @FXML

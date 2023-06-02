@@ -50,11 +50,8 @@ public class DB_controller {
 		return query.toString()+";";
 	}
 	
-	///////////////////////////////////////////////////
-	///////////////////////////////////////////////////
-	///////////////////////////////////////////////////
-	///////////////////////////////////////////////////
-	// UPDATE cems.question SET number = '106', question = 'what is the meaning of zero???' WHERE id = '02106';
+	/* the func gets 5 arraylists of parameters for an update query and return a string of the query. */
+	// example for me: UPDATE cems.question SET number = '106', question = 'what is the meaning of zero???' WHERE id = '02106';
 	public static String createUPDATEquery(ArrayList<String> tableToUpdate, ArrayList<String> setCol, ArrayList<Object> setValue, ArrayList<String> whereCol, ArrayList<Object> whereValue) {
 		if(tableToUpdate==null || tableToUpdate.size()==0 || setCol==null || setCol.size()==0 || setValue==null || setValue.size()==0 )
 			return "";
@@ -69,7 +66,7 @@ public class DB_controller {
 		return query.toString()+";";
 	}
 	
-	/* the func gets an arraylist of string parameters (selet/from) for a query and return a string of the parameters separated with commas. */
+	/* the func gets an arraylist of string parameters (select/from) for a query and return a string of the parameters separated with commas. */
 	private static String separateWithComma(ArrayList<String> lst) {
 		if(lst == null || lst.size()==0) return "";
 		StringBuilder res = new StringBuilder();
