@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import client.ChatClient;
 import client.ClientUI;
 import controllers.JDBC.DB_controller;
+import controllers.JDBC.Msg;
 import enteties.Question;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -51,10 +52,10 @@ public class QuestionTableController extends AbstractController{
 
     @FXML
     void saveBtn(ActionEvent event) {
-        ArrayList<String> UpdateQueries = DB_controller.updateQuestions(table.getItems(), arrdup);
-        for (String query : UpdateQueries) {
-            System.out.println("Send to server update query -> " + query);
-            ClientUI.chat.accept(query);
+        ArrayList<Msg> UpdateQueries = DB_controller.updateQuestions1(table.getItems(), arrdup);
+        for (Msg tmpMsg : UpdateQueries) {
+            System.out.println("Send to server update query -> " + tmpMsg);
+            ClientUI.chat.accept(tmpMsg);
         }
     }
     

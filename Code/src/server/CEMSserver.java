@@ -97,6 +97,8 @@ public class CEMSserver extends AbstractServer {
 					case update:
 						stmt = conn.createStatement();
 						queryStr = DB_controller.createUPDATEquery(((Msg)msg).getTableToUpdateInfo(), ((Msg)msg).getSetColInfo(), ((Msg)msg).getSetValueInfo(), ((Msg)msg).getWhereColInfo(), ((Msg)msg).getWhereValueInfo());
+						stmt.executeUpdate(queryStr);
+						sendToAllClients("Update succeeded");
 						break;
 						
 					case disconnect:

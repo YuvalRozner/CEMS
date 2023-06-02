@@ -27,6 +27,8 @@ public class ClientUI extends Application {
 		// original line:
 		clientConnectionController.start("ClientConnection");
 		
+		//to open another screen: 
+		
 		//ChatClient.screens.putIfAbsent("login", new LoginController());
 		//ChatClient.getScreen("login").start("login");
 	

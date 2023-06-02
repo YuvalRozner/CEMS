@@ -6,26 +6,27 @@ import enteties.Question;
 import javafx.collections.ObservableList;
 
 public class DB_controller {
-
-	public static ArrayList<String> updateQuestions(ObservableList<Question> items, ArrayList<Question> arrdup) {
-		ArrayList<String> UpdateQueries;
-		UpdateQueries = new ArrayList<String>();
+	
+	////////////////////////////////////////////////////////////////////////////////////
+	public static ArrayList<Msg> updateQuestions1(ObservableList<Question> items, ArrayList<Question> arrdup) {
+		ArrayList<Msg> UpdateQueries = new ArrayList<Msg>();
 		int i = 0;
 		for (Question q : items) {
 			if (!q.equals(arrdup.get(i))) {
-				StringBuilder sb = new StringBuilder();
-				sb.append("UPDATE cems.question SET number = '");
-				sb.append(q.getNumber());
-				sb.append("', question = '");
-				sb.append(q.getQuestion());
-				sb.append("' WHERE id = '");
-				sb.append(q.getID());
-				sb.append("';");
-
-				// change arrdup
-				arrdup.get(i).setNumber(q.getNumber());
-				arrdup.get(i).setQuestion(q.getQuestion());
-				UpdateQueries.add(sb.toString());
+				Msg tmpMsg = new Msg(MsgType.update);
+				tmpMsg.getInfo().add(new ArrayList<String>()); // tableToUpdate
+				tmpMsg.getInfo().add(new ArrayList<String>()); // setCol
+				tmpMsg.getInfo().add(new ArrayList<Object>()); // setValaue
+				tmpMsg.getInfo().add(new ArrayList<String>()); // whereCol
+				tmpMsg.getInfo().add(new ArrayList<Object>()); // whereValue
+				tmpMsg.getTableToUpdateInfo().add("question");
+				tmpMsg.getSetColInfo().add("number");
+				tmpMsg.getSetValueInfo().add(q.getNumber());
+				tmpMsg.getSetColInfo().add("question");
+				tmpMsg.getSetValueInfo().add(q.getQuestion());
+				tmpMsg.getWhereColInfo().add("id");
+				tmpMsg.getWhereValueInfo().add(q.getID());
+				UpdateQueries.add(tmpMsg);
 			}
 			i++;
 		}

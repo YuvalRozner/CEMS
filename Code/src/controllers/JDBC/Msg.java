@@ -59,17 +59,17 @@ public class Msg implements Serializable{
 	
 	@SuppressWarnings("unchecked")
 	public ArrayList<String> getTableToUpdateInfo() {
-		return (type==MsgType.select)? (ArrayList<String>) info.get(0) : null;
+		return (type==MsgType.update)? (ArrayList<String>) info.get(0) : null;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public ArrayList<String> getSetColInfo() {
-		return (type==MsgType.select)? (ArrayList<String>) info.get(1) : null;
+		return (type==MsgType.update)? (ArrayList<String>) info.get(1) : null;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public ArrayList<Object> getSetValueInfo() {
-		return (type==MsgType.select)? (ArrayList<Object>) info.get(2) : null;
+		return (type==MsgType.update)? (ArrayList<Object>) info.get(2) : null;
 	}
 	
 	@Override
