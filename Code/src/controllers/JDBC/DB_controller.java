@@ -45,8 +45,27 @@ public class DB_controller {
 		if(whereCol==null || whereCol.get(0)=="")
 			return query.toString()+";";
 		//get here if and only if there is WHRE to add:
-		query.append(" Where ");
-		query.append(buildWherePart(whereCol, whereValue));
+		query.append(" WHERE ");
+		query.append(buildConditionPart(whereCol, whereValue));
+		return query.toString()+";";
+	}
+	
+	///////////////////////////////////////////////////
+	///////////////////////////////////////////////////
+	///////////////////////////////////////////////////
+	///////////////////////////////////////////////////
+	// UPDATE cems.question SET number = '106', question = 'what is the meaning of zero???' WHERE id = '02106';
+	public static String createUPDATEquery(ArrayList<String> tableToUpdate, ArrayList<String> setCol, ArrayList<Object> setValue, ArrayList<String> whereCol, ArrayList<Object> whereValue) {
+		if(tableToUpdate==null || tableToUpdate.size()==0 || setCol==null || setCol.size()==0 || setValue==null || setValue.size()==0 )
+			return "";
+		StringBuilder query = new StringBuilder("UPDATE ");
+		query.append(tableToUpdate.get(0)); // append the name of table wanted to be updated.
+		query.append(" SET ");
+		query.append(buildConditionPart(setCol, setValue)); // append the parameters to be updated.
+		if(whereCol==null || whereCol.get(0)=="")
+			return query.toString()+";";
+		query.append(" WHERE ");
+		query.append(buildConditionPart(whereCol, whereValue));
 		return query.toString()+";";
 	}
 	
@@ -60,13 +79,14 @@ public class DB_controller {
 		return res.toString();
 	}
 	
-	/* the func gets 2 arraylists of string parameters (WHERE part) for a query and return a string of the parameters separated with commas. */
-	private static String buildWherePart(ArrayList<String> whereCol, ArrayList<Object> whereValue) {
+	/* the func gets 2 arraylists of string parameters (Condition part) for a query and return a string of the parameters separated with commas. */
+	private static String buildConditionPart(ArrayList<String> whereCol, ArrayList<Object> whereValue) {
 		if(whereCol==null || whereValue==null || whereCol.size()==0 || whereValue.size()==0 || whereCol.size()!=whereValue.size())
 			return "";
 		StringBuilder res = new StringBuilder();
 		for(int i=0; i<whereCol.size(); i++)
-			res.append(whereCol.get(i) + "=" + whereValue.get(i).toString() + ",");
+			if(whereValue.get(i) instanceof String) res.append(whereCol.get(i) + "='" + whereValue.get(i).toString() + "',");
+			else res.append(whereCol.get(i) + "=" + whereValue.get(i).toString() + ",");
 		res.deleteCharAt(res.length()-1);
 		return res.toString();
 	}

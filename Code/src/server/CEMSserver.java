@@ -72,15 +72,16 @@ public class CEMSserver extends AbstractServer {
 
 		
 		java.sql.Statement stmt = null;
+		String queryStr;
 		ResultSet data;
 		System.out.println("Message received: " + msg + " from " + client);
 		ArrayList<ArrayList<String>> dataToClient = new ArrayList<ArrayList<String>>();
 		if(msg instanceof Msg) {
-			switch (((Msg)msg).getType()) {
-				case select:
-					try {
+			try {
+				switch (((Msg)msg).getType()) {
+					case select:
 						stmt = conn.createStatement();
-						String queryStr = DB_controller.createSELECTquery(((Msg)msg).getSelectInfo(), ((Msg)msg).getFromInfo(), ((Msg)msg).getWhereColInfo(), ((Msg)msg).getWhereValueInfo());
+						queryStr = DB_controller.createSELECTquery(((Msg)msg).getSelectInfo(), ((Msg)msg).getFromInfo(), ((Msg)msg).getWhereColInfo(), ((Msg)msg).getWhereValueInfo());
 						System.out.println("query:\n"+ queryStr);
 						data = stmt.executeQuery(queryStr);
 						int colunmCount = data.getMetaData().getColumnCount();
@@ -91,12 +92,23 @@ public class CEMSserver extends AbstractServer {
 							dataToClient.add(rowTemp);
 						}
 						this.sendToAllClients(dataToClient);
-					} catch (SQLException ex) {/* handle any errors */}
-					
-					return;
-					//break;
+						break;
+					case update:
+						stmt = conn.createStatement();
+						queryStr = DB_controller.createUPDATEquery(((Msg)msg).getTableToUpdateInfo(), ((Msg)msg).getSetColInfo(), ((Msg)msg).getSetValueInfo(), ((Msg)msg).getWhereColInfo(), ((Msg)msg).getWhereValueInfo());
+						
+						break;
+					case insert:
+						break;
+					case systemCommand:
+						break;
+					default:
+						break;
 				}
+			} catch (SQLException ex) {/* handle any errors */}
+			return;
 		}
+
 		
 		
 		String[] msgToStringArr = ((String) msg).split("\\s+");
