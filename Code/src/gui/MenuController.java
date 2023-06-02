@@ -22,6 +22,8 @@ public class MenuController extends AbstractController {
 		tmpMsg.setType(MsgType.select);
 		tmpMsg.getInfo().add(new ArrayList<String>());
 		tmpMsg.getInfo().add(new ArrayList<String>());
+		tmpMsg.getInfo().add(null);
+		tmpMsg.getInfo().add(null);
 		tmpMsg.getSelectInfo().add("*");
 		tmpMsg.getFromInfo().add("question");
 		try {

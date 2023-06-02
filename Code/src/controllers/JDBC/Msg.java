@@ -26,22 +26,27 @@ public class Msg implements Serializable{
 	
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<Object> getSelectInfo() {
-		return (type==MsgType.select)? (ArrayList<Object>) info.get(0) : null;
+	public ArrayList<String> getSelectInfo() {
+		return (type==MsgType.select)? (ArrayList<String>) info.get(0) : null;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<Object> getFromInfo() {
-		return (type==MsgType.select)? (ArrayList<Object>) info.get(1) : null;
+	public ArrayList<String> getFromInfo() {
+		return (type==MsgType.select)? (ArrayList<String>) info.get(1) : null;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<Object> getWhereColInfo() {
-		return (type==MsgType.select)? (ArrayList<Object>) info.get(2) : null;
+	public ArrayList<String> getWhereColInfo() {
+		return (type==MsgType.select)? (ArrayList<String>) info.get(2) : null;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<Object> getWhereDataInfo() {
+	public ArrayList<Object> getWhereValueInfo() {
 		return (type==MsgType.select)? (ArrayList<Object>) info.get(3) : null;
+	}
+	
+	@Override
+	public String toString() {
+		return "Msg [type=" + type + ", info=" + info + "]";
 	}
 }

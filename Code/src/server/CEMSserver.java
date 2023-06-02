@@ -3,13 +3,11 @@ package server;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.mysql.cj.xdevapi.Statement;
-
+import controllers.JDBC.DB_controller;
 import controllers.JDBC.Msg;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
@@ -68,6 +66,7 @@ public class CEMSserver extends AbstractServer {
 	 * @param client The connection from which the message originated.
 	 * @param
 	 */
+
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		
 
@@ -76,31 +75,22 @@ public class CEMSserver extends AbstractServer {
 		ResultSet data;
 		System.out.println("Message received: " + msg + " from " + client);
 		ArrayList<ArrayList<String>> dataToClient = new ArrayList<ArrayList<String>>();
-		System.out.println("Im hereeeeeeeeeeeeeeeeeeeeeeeeeeeee 1");
 		if(msg instanceof Msg) {
-			System.out.println("Im hereeeeeeeeeeeeeeeeeeeeeeeeeeeee 2");
 			switch (((Msg)msg).getType()) {
 				case select:
-					System.out.println("Im hereeeeeeeeeeeeeeeeeeeeeeeeeeeee 3");
 					try {
-					//StringBuilder sb = new StringBuilder();
-					String selectStr = new String((String)((Msg)msg).getSelectInfo().get(0));
-					String FromStr = new String("cems."+(String)((Msg)msg).getFromInfo().get(0));
-					PreparedStatement query = conn.prepareStatement("SELECT "+selectStr+" FROM "+FromStr);
-					//query.setString(1, selectStr);
-					//query.setString(2, FromStr);
-					System.out.println("Im hereeeeeeeeeeeeeeeeeeeeeeeeeeeee 4");
-					System.out.println("query:\n"+query.toString());
-					data = query.executeQuery();
-					System.out.println("Im hereeeeeeeeeeeeeeeeeeeeeeeeeeeee 5");
-					int colunmCount = data.getMetaData().getColumnCount();
-					while (data.next()) {
-						ArrayList<String> rowTemp = new ArrayList<String>(colunmCount);
-						for (int i = 1; i < colunmCount + 1; i++)
-							rowTemp.add(data.getString(i));
-						dataToClient.add(rowTemp);
-					}
-					this.sendToAllClients(dataToClient);
+						stmt = conn.createStatement();
+						String queryStr = DB_controller.createSELECTquery(((Msg)msg).getSelectInfo(), ((Msg)msg).getFromInfo(), ((Msg)msg).getWhereColInfo(), ((Msg)msg).getWhereValueInfo());
+						System.out.println("query:\n"+ queryStr);
+						data = stmt.executeQuery(queryStr);
+						int colunmCount = data.getMetaData().getColumnCount();
+						while (data.next()) {
+							ArrayList<String> rowTemp = new ArrayList<String>(colunmCount);
+							for (int i = 1; i < colunmCount + 1; i++)
+								rowTemp.add(data.getString(i));
+							dataToClient.add(rowTemp);
+						}
+						this.sendToAllClients(dataToClient);
 					} catch (SQLException ex) {/* handle any errors */}
 					
 					return;
