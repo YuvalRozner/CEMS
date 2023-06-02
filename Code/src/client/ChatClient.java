@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import controllers.JDBC.Msg;
+import controllers.JDBC.MsgType;
 import enteties.Question;
 import gui.AbstractController;
 import ocsf.client.AbstractClient;
@@ -90,7 +92,7 @@ public class ChatClient extends AbstractClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 			clientUI.display("Could not send message to server: Terminating client." + e);
-			ClientUI.chat.accept("disconnected");	}
+			ClientUI.chat.accept(new Msg(MsgType.disconnect));	}
 	}
 	
 	// new method.
@@ -107,7 +109,7 @@ public class ChatClient extends AbstractClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 			clientUI.display("Could not send message to server: Terminating client." + e);
-			ClientUI.chat.accept("disconnected");	}
+			ClientUI.chat.accept(new Msg(MsgType.disconnect));	}
 	}
 	
 	public static AbstractController getScreen(String screenName) {

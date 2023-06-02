@@ -7,10 +7,6 @@ import javafx.collections.ObservableList;
 
 public class DB_controller {
 
-	public static String getAllQuestion() {
-		return "SELECT * FROM cems.question;";
-	}
-
 	public static ArrayList<String> updateQuestions(ObservableList<Question> items, ArrayList<Question> arrdup) {
 		ArrayList<String> UpdateQueries;
 		UpdateQueries = new ArrayList<String>();

@@ -41,13 +41,6 @@ public abstract class AbstractController {
 			System.out.println("error getExitBtn");
 			System.exit(0);
 		}
-		
-		/*try {
-			ClientUI.chat.accept("disconnected");
-			System.exit(0);}
-		catch(Throwable t) {
-			System.out.println("error getExitBtn");
-		}*/
 		System.exit(0); //exit 
 	}
 
