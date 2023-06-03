@@ -73,10 +73,9 @@ public class ChatClient extends AbstractClient {
 				default:
 					break;
 			}
-			awaitResponse = false; //important. magic line.
+			//awaitResponse = false; //important. magic line.
 		}
 	}
-	
 
 	public void handleMessageFromClientUI(Msg msg) {
 		try {

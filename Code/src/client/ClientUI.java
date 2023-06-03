@@ -24,7 +24,7 @@ public class ClientUI extends Application {
 			System.out.println("Exit Client app.");
 			System.exit(0);
 		});
-		// original line:
+		// original line: 
 		clientConnectionController.start("ClientConnection");
 		
 		//to open another screen: 
