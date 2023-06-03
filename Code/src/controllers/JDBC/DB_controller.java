@@ -1,6 +1,8 @@
 package controllers.JDBC;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import enteties.Question;
 import javafx.collections.ObservableList;
@@ -13,7 +15,8 @@ public class DB_controller {
 		int i = 0;
 		for (Question q : items) {
 			if (!q.equals(arrdup.get(i))) {
-				Msg tmpMsg = new Msg(MsgType.update);
+				
+				/*Msg tmpMsg = new Msg(MsgType.update);
 				tmpMsg.getInfo().add(new ArrayList<String>()); // tableToUpdate
 				tmpMsg.getInfo().add(new ArrayList<String>()); // setCol
 				tmpMsg.getInfo().add(new ArrayList<Object>()); // setValaue
@@ -27,6 +30,15 @@ public class DB_controller {
 				tmpMsg.getWhereColInfo().add("id");
 				tmpMsg.getWhereValueInfo().add(q.getID());
 				UpdateQueries.add(tmpMsg);
+				*/
+				
+				
+				Msg tmpMsg = new Msg(MsgType.update);
+				tmpMsg.setTableToUpdate("question");
+				tmpMsg.setSet("number",q.getNumber());
+				tmpMsg.setSet("question",q.getQuestion());
+				tmpMsg.setWhere("id", q.getID());
+				UpdateQueries.add(tmpMsg);
 			}
 			i++;
 		}
@@ -34,32 +46,29 @@ public class DB_controller {
 	}
 	
 	/* the func gets 4 arraylists of parameters for a select query and return a string of the query. */
-	public static String createSELECTquery(ArrayList<String> select, ArrayList<String> from, ArrayList<String> whereCol, ArrayList<Object> whereValue) {
+	public static String createSELECTquery(ArrayList<String> select, ArrayList<String> from, HashMap<String, Object> where) {
 		StringBuilder query = new StringBuilder("SELECT ");
 		query.append(separateWithComma(select));
 		query.append(" FROM ");
 		query.append(separateWithComma(from));
-		if(whereCol==null || whereCol.get(0)=="")
-			return query.toString()+";";
+		if(where==null)	return query.toString()+";";
 		//get here if and only if there is WHRE to add:
 		query.append(" WHERE ");
-		query.append(buildConditionPart(whereCol, whereValue));
+		query.append(buildConditionPart(where));
 		return query.toString()+";";
 	}
 	
 	/* the func gets 5 arraylists of parameters for an update query and return a string of the query. */
 	// example for me: UPDATE cems.question SET number = '106', question = 'what is the meaning of zero???' WHERE id = '02106';
-	public static String createUPDATEquery(ArrayList<String> tableToUpdate, ArrayList<String> setCol, ArrayList<Object> setValue, ArrayList<String> whereCol, ArrayList<Object> whereValue) {
-		if(tableToUpdate==null || tableToUpdate.size()==0 || setCol==null || setCol.size()==0 || setValue==null || setValue.size()==0 )
-			return "";
+	public static String createUPDATEquery(ArrayList<String> tableToUpdate, HashMap<String, Object> set, HashMap<String, Object> where) {
+		if(tableToUpdate==null || set==null) return "";
 		StringBuilder query = new StringBuilder("UPDATE ");
 		query.append(tableToUpdate.get(0)); // append the name of table wanted to be updated.
 		query.append(" SET ");
-		query.append(buildConditionPart(setCol, setValue)); // append the parameters to be updated.
-		if(whereCol==null || whereCol.get(0)=="")
-			return query.toString()+";";
+		query.append(buildConditionPart(set)); // append the parameters to be updated.
+		if(where==null)	return query.toString()+";";
 		query.append(" WHERE ");
-		query.append(buildConditionPart(whereCol, whereValue));
+		query.append(buildConditionPart(where));
 		return query.toString()+";";
 	}
 	
@@ -73,15 +82,18 @@ public class DB_controller {
 		return res.toString();
 	}
 	
-	/* the func gets 2 arraylists of string parameters (Condition part) for a query and return a string of the parameters separated with commas. */
-	private static String buildConditionPart(ArrayList<String> whereCol, ArrayList<Object> whereValue) {
-		if(whereCol==null || whereValue==null || whereCol.size()==0 || whereValue.size()==0 || whereCol.size()!=whereValue.size())
-			return "";
+	/* the func gets hashMap (Condition part) for a query and return a string of the parameters separated with commas. */
+	private static String buildConditionPart(HashMap<String, Object> condition) {
+		if(condition==null) return "";
 		StringBuilder res = new StringBuilder();
-		for(int i=0; i<whereCol.size(); i++)
-			if(whereValue.get(i) instanceof String) res.append(whereCol.get(i) + "='" + whereValue.get(i).toString() + "',");
-			else res.append(whereCol.get(i) + "=" + whereValue.get(i).toString() + ",");
-		res.deleteCharAt(res.length()-1);
+		
+        for (Map.Entry<String, Object> entry : condition.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            if(value instanceof String) res.append(key + "='" + value.toString() + "',");
+            else res.append(key + "=" + value.toString() + ",");
+        }
+        res.deleteCharAt(res.length()-1); //remove last comma.
 		return res.toString();
 	}
 }

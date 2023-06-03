@@ -77,7 +77,7 @@ public class CEMSserver extends AbstractServer {
 			switch (msg.getType()) {
 				case select:
 					stmt = conn.createStatement();
-					queryStr = DB_controller.createSELECTquery(msg.getSelectInfo(), msg.getFromInfo(), msg.getWhereColInfo(), msg.getWhereValueInfo());
+					queryStr = DB_controller.createSELECTquery(msg.getSelect(), msg.getFrom(), msg.getWhere());
 					System.out.println("query:\n"+ queryStr);
 					data = stmt.executeQuery(queryStr);
 					ArrayList<ArrayList<String>> dataToClient = new ArrayList<ArrayList<String>>();
@@ -93,7 +93,10 @@ public class CEMSserver extends AbstractServer {
 					
 				case update:
 					stmt = conn.createStatement();
-					queryStr = DB_controller.createUPDATEquery(msg.getTableToUpdateInfo(), msg.getSetColInfo(), msg.getSetValueInfo(), msg.getWhereColInfo(), msg.getWhereValueInfo());
+					System.out.println("here 1"); //////////////////////////////////////////////////
+					queryStr = DB_controller.createUPDATEquery(msg.getTableToUpdate(), msg.getSet(), msg.getWhere());
+					System.out.println("here 2"); //////////////////////////////////////////////////
+					System.out.println("query:\n"+ queryStr);
 					stmt.executeUpdate(queryStr);
 					sendToAllClients("Update succeeded");
 					break;

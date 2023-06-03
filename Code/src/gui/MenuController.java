@@ -1,7 +1,5 @@
 package gui;
 
-import java.util.ArrayList;
-
 import client.ChatClient;
 import client.ClientUI;
 import controllers.JDBC.Msg;
@@ -17,14 +15,10 @@ public class MenuController extends AbstractController {
 	private Button btnShow = null;
     
 	public void show(ActionEvent event) throws Exception {
-		Msg tmpMsg = new Msg();
-		tmpMsg.setType(MsgType.select);
-		tmpMsg.getInfo().add(new ArrayList<String>());
-		tmpMsg.getInfo().add(new ArrayList<String>());
-		tmpMsg.getInfo().add(null);
-		tmpMsg.getInfo().add(null);
-		tmpMsg.getSelectInfo().add("*");
-		tmpMsg.getFromInfo().add("question");
+		Msg tmpMsg = new Msg(MsgType.select);
+		tmpMsg.setSelect("*");
+		tmpMsg.setFrom("question");
+		
 		try {
 			ClientUI.chat.accept(tmpMsg);
 		}catch(Throwable t) {System.out.println("accept dont work");};
