@@ -19,8 +19,6 @@ public class ChatClient extends AbstractClient {
 	 */
 	
 	public static HashMap<String, AbstractController> screens = new HashMap<String, AbstractController>();
-	
-	ChatIF clientUI;
 	public static ArrayList<Question> questionList;
 	public static boolean awaitResponse = false;
 
@@ -32,12 +30,9 @@ public class ChatClient extends AbstractClient {
 	 * @param port     The port number to connect on.
 	 * @param clientUI The interface type variable.
 	 */
-	public ChatClient(String host, int port, ChatIF clientUI) throws IOException {
+	public ChatClient(String host, int port) throws IOException {
 		super(host, port); // Call the superclass constructor
-		this.clientUI = clientUI;
 		openConnection();
-		//screens.put("ClientGetQuestionController", null);
-		//screens.put("TableViewSample", null);
 		System.out.println("connected to server");
 	}
 
@@ -87,7 +82,7 @@ public class ChatClient extends AbstractClient {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			clientUI.display("Could not send message to server: Terminating client." + e);
+			System.out.println("Could not send message to server: Terminating client." + e);
 			ClientUI.send(new Msg(MsgType.disconnect));	}
 	}
 	

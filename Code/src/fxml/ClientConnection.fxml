@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="282.0" prefWidth="301.0" style="-fx-background-color: cornflowerblue;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ClientConnectionController">
+<AnchorPane prefHeight="282.0" prefWidth="301.0" style="-fx-background-color: cornflowerblue;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.ClientConnectionController">
    <children>
       <Label layoutX="90.0" layoutY="20.0" text="Connection" underline="true">
          <font>

@@ -1,8 +1,9 @@
-package gui;
+package client;
 
-import client.ChatClient;
-import client.ClientController;
-import client.ClientUI;
+import java.io.IOException;
+
+import gui.AbstractController;
+import gui.MenuController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,7 +26,9 @@ public class ClientConnectionController extends AbstractController  {
     @FXML
     void connect(ActionEvent event) {
     	try {
-    		ClientUI.chat = new ClientController(inputIp.getText(), Integer.valueOf(inputPort.getText()));
+    		try{ ClientUI.client = new ChatClient(inputIp.getText(), Integer.valueOf(inputPort.getText()));
+    		}catch (IOException exception) { System.out.println("Error: Can't setup connection!"+ " Terminating client.");
+    		      System.exit(1);  }
     		ChatClient.screens.putIfAbsent("Menu", new MenuController());
     		ChatClient.getScreen("Menu").start("Menu"); 
 
