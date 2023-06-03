@@ -15,24 +15,6 @@ public class DB_controller {
 		int i = 0;
 		for (Question q : items) {
 			if (!q.equals(arrdup.get(i))) {
-				
-				/*Msg tmpMsg = new Msg(MsgType.update);
-				tmpMsg.getInfo().add(new ArrayList<String>()); // tableToUpdate
-				tmpMsg.getInfo().add(new ArrayList<String>()); // setCol
-				tmpMsg.getInfo().add(new ArrayList<Object>()); // setValaue
-				tmpMsg.getInfo().add(new ArrayList<String>()); // whereCol
-				tmpMsg.getInfo().add(new ArrayList<Object>()); // whereValue
-				tmpMsg.getTableToUpdateInfo().add("question");
-				tmpMsg.getSetColInfo().add("number");
-				tmpMsg.getSetValueInfo().add(q.getNumber());
-				tmpMsg.getSetColInfo().add("question");
-				tmpMsg.getSetValueInfo().add(q.getQuestion());
-				tmpMsg.getWhereColInfo().add("id");
-				tmpMsg.getWhereValueInfo().add(q.getID());
-				UpdateQueries.add(tmpMsg);
-				*/
-				
-				
 				Msg tmpMsg = new Msg(MsgType.update);
 				tmpMsg.setTableToUpdate("question");
 				tmpMsg.setSet("number",q.getNumber());

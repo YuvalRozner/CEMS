@@ -8,6 +8,8 @@ public enum MsgType {
 	
 	update,
 	
-	insert
+	insert,
+	
+	manyMessages
 
 }

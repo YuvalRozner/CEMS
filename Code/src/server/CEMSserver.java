@@ -93,9 +93,7 @@ public class CEMSserver extends AbstractServer {
 					
 				case update:
 					stmt = conn.createStatement();
-					System.out.println("here 1"); //////////////////////////////////////////////////
 					queryStr = DB_controller.createUPDATEquery(msg.getTableToUpdate(), msg.getSet(), msg.getWhere());
-					System.out.println("here 2"); //////////////////////////////////////////////////
 					System.out.println("query:\n"+ queryStr);
 					stmt.executeUpdate(queryStr);
 					sendToAllClients("Update succeeded");
@@ -105,6 +103,12 @@ public class CEMSserver extends AbstractServer {
 					System.out.println("clientDisconnected" + client);
 					serverController.removeConnected(client.getInetAddress());
 			    	this.sendToAllClients("Bye");
+					break;
+					
+				case manyMessages:
+					for(Msg act : msg.getMsgLst()) 
+						handleMessageFromClient(act, client);
+					sendToAllClients("all messages succeeded.");
 					break;
 					
 				case insert:

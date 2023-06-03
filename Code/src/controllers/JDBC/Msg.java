@@ -14,10 +14,11 @@ public class Msg implements Serializable{
 	private HashMap<String, Object> where = null;
 	private ArrayList<String> tableToUpdate = null;
 	private HashMap<String, Object> set = null;
+	private ArrayList<Msg> msgLst = null;
 	
-	//private ArrayList<Object> dataToClient;
-	
-	
+
+
+
 	public Msg() {
 	}
 	
@@ -52,6 +53,19 @@ public class Msg implements Serializable{
 	
 	public ArrayList<String> getTableToUpdate() {
 		return tableToUpdate;
+	}
+	
+	public ArrayList<Msg> getMsgLst() {
+		return msgLst;
+	}
+
+	public void setMsgLst(Msg msg) {
+		if(msgLst==null) msgLst = new ArrayList<Msg>();
+		msgLst.add(msg);
+	}
+	
+	public void setMsgLst(ArrayList<Msg> msgLst) {
+		this.msgLst = msgLst;
 	}
 	
 	
