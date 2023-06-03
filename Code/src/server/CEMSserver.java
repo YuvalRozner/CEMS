@@ -88,7 +88,7 @@ public class CEMSserver extends AbstractServer {
 							rowTemp.add(data.getString(i));
 						dataToClient.add(rowTemp);
 					}
-					this.sendToAllClients(dataToClient);
+					sendToClient(dataToClient, client);
 					break;
 					
 				case update:
@@ -96,19 +96,19 @@ public class CEMSserver extends AbstractServer {
 					queryStr = DB_controller.createUPDATEquery(msg.getTableToUpdate(), msg.getSet(), msg.getWhere());
 					System.out.println("query:\n"+ queryStr);
 					stmt.executeUpdate(queryStr);
-					sendToAllClients("Update succeeded");
+					sendToClient("Update succeeded", client);
 					break;
 					
 				case disconnect:
 					System.out.println("clientDisconnected" + client);
 					serverController.removeConnected(client.getInetAddress());
-			    	this.sendToAllClients("Bye");
+			    	sendToClient("Bye", client);
 					break;
 					
 				case manyMessages:
 					for(Msg act : msg.getMsgLst()) 
 						handleMessageFromClient(act, client);
-					sendToAllClients("all messages succeeded.");
+					sendToClient("all messages succeeded.", client);
 					break;
 					
 				case insert:
@@ -150,5 +150,12 @@ public class CEMSserver extends AbstractServer {
 
 	public void setConn(Connection conn) {
 		this.conn = conn;
+	}
+	
+	private void sendToClient(Object msg, ConnectionToClient client) {
+	      try{
+	    	  client.sendToClient(msg);
+	      } catch (Exception ex) {System.out.println("error in sending msg to client.");}
+	    
 	}
 }
