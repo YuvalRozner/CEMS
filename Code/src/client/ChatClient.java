@@ -43,33 +43,41 @@ public class ChatClient extends AbstractClient {
 	 * @param msg The message from the server.
 	 */
 	public void handleMessageFromServer(Object msg) {
-		System.out.print("Message recieved from server -> ");
-		if (msg instanceof String ) { // update
-			System.out.println((String)msg);
-			awaitResponse = false;	
-			if (((String)msg).equals("disconected")) {
-				System.out.println("client forced to stop by the server.");
-				System.exit(0);
+		System.out.print("Message recieved from server -> ");	
+		if(msg instanceof Msg) {
+			switch (((Msg)msg).getType()) {
+				case succeeded:
+					System.out.println("server executed the query.");
+					break;
+				case succeededAll:
+					System.out.println("server handle all bunch of msgs.");
+					break;
+				case bye:
+					System.out.println("client forced to stop by the server.");
+					System.exit(0);
+					break;
+				case data:
+					@SuppressWarnings("unchecked") //ignore warning of casting types.
+					ArrayList<ArrayList<String>> dataFromServer = (ArrayList<ArrayList<String>>) ((Msg)msg).getData();
+					questionList = new ArrayList<Question>(); //resets the List of question.
+					Question tmpQ;
+					for (int i = 0; i < dataFromServer.size(); i++) 
+						if (dataFromServer.get(i) != null) {
+							tmpQ = new Question(dataFromServer.get(i).get(0), dataFromServer.get(i).get(1),
+									dataFromServer.get(i).get(2), dataFromServer.get(i).get(3),
+									dataFromServer.get(i).get(4), dataFromServer.get(i).get(5));
+							questionList.add(tmpQ); // add the question to the list.
+						}
+					break;
+					
+				default:
+					break;
 			}
-		}
-		else { //create a List of question out of the List of List got from the server:
-			System.out.println("list of questions");
-			@SuppressWarnings("unchecked") //ignore warning of casting types.
-			ArrayList<ArrayList<String>> dataFromServer = (ArrayList<ArrayList<String>>) msg;
-			awaitResponse = false;
-			questionList = new ArrayList<Question>(); //resets the List of question.
-			Question tmpQ;
-			for (int i = 0; i < dataFromServer.size(); i++) 
-				if (dataFromServer.get(i) != null) {
-					tmpQ = new Question(dataFromServer.get(i).get(0), dataFromServer.get(i).get(1),
-							dataFromServer.get(i).get(2), dataFromServer.get(i).get(3),
-							dataFromServer.get(i).get(4), dataFromServer.get(i).get(5));
-					questionList.add(tmpQ); // add the question to the list.
-				}
+			awaitResponse = false; //important. magic line.
 		}
 	}
 	
-	// new method.
+
 	public void handleMessageFromClientUI(Msg msg) {
 		try {
 			awaitResponse = true;

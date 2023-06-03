@@ -9,20 +9,18 @@ public class Msg implements Serializable{
 	private static final long serialVersionUID = 1L; //default serial
 	
 	private MsgType type;
-	private ArrayList<String> select = null;
-	private ArrayList<String> from = null;
-	private HashMap<String, Object> where = null;
-	private ArrayList<String> tableToUpdate = null;
-	private HashMap<String, Object> set = null;
-	private ArrayList<Msg> msgLst = null;
+	private ArrayList<String> select = null; // for the SELECT part of query.
+	private ArrayList<String> from = null; // for the FROM part of query.
+	private HashMap<String, Object> where = null; // for the WHERE part of query.
+	private ArrayList<String> tableToUpdate = null; // for the UPDATE part of query.
+	private HashMap<String, Object> set = null; // for the SET part of query.
+	private ArrayList<Msg> msgLst = null; //used to send a bunch of messages all at once.
+	private Object data = null; //data from DB to client.
+
+	/* original empty constructor. */
+	public Msg() {}
 	
-
-
-
-	public Msg() {
-	}
-	
-	//constructor using field.
+	/* constructor using field MsgType. */
 	public Msg(MsgType type) {
 		this.type = type;
 	}
@@ -68,8 +66,13 @@ public class Msg implements Serializable{
 		this.msgLst = msgLst;
 	}
 	
-	
-	
+	public Object getData() {
+		return data;
+	}
+
+	public void setData(Object data) {
+		this.data = data;
+	}	
 	
 	public void setSelect(String sel) {
 		if(select==null) select=new ArrayList<String>();
@@ -95,26 +98,7 @@ public class Msg implements Serializable{
 		if(set==null) set=new HashMap<String, Object>();
 		set.put(setCol, setValue);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-	
 	@Override
 	public String toString() {
 		return "Msg [type=" + type ;

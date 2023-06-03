@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import controllers.JDBC.DB_controller;
 import controllers.JDBC.Msg;
+import controllers.JDBC.MsgType;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 
@@ -88,27 +89,29 @@ public class CEMSserver extends AbstractServer {
 							rowTemp.add(data.getString(i));
 						dataToClient.add(rowTemp);
 					}
-					sendToClient(dataToClient, client);
+					Msg tmpMsg = new Msg(MsgType.data);
+					tmpMsg.setData(dataToClient);
+					sendToClient(tmpMsg, client);
 					break;
 					
 				case update:
 					stmt = conn.createStatement();
 					queryStr = DB_controller.createUPDATEquery(msg.getTableToUpdate(), msg.getSet(), msg.getWhere());
-					System.out.println("query:\n"+ queryStr);
+					System.out.println("query:   "+ queryStr);
 					stmt.executeUpdate(queryStr);
-					sendToClient("Update succeeded", client);
+					sendToClient(new Msg(MsgType.succeeded), client);
 					break;
 					
 				case disconnect:
 					System.out.println("clientDisconnected" + client);
 					serverController.removeConnected(client.getInetAddress());
-			    	sendToClient("Bye", client);
+					sendToClient(new Msg(MsgType.bye), client);
 					break;
 					
 				case manyMessages:
 					for(Msg act : msg.getMsgLst()) 
 						handleMessageFromClient(act, client);
-					sendToClient("all messages succeeded.", client);
+					sendToClient(new Msg(MsgType.succeededAll), client);
 					break;
 					
 				case insert:
