@@ -3,11 +3,17 @@ package server;
 import java.io.IOException;
 import java.net.InetAddress;
 
+import controllers.JDBC.Msg;
+import controllers.JDBC.MsgType;
+import gui.AbstractController;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
@@ -16,7 +22,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class ServerController {
+public class ServerController{
 	private ObservableList<InetAddress> connectedObserv = FXCollections.observableArrayList();
 	
 	private CEMSserver cemsServer;
@@ -52,6 +58,7 @@ public class ServerController {
 
 	@FXML
 	private TextField serverIdTxt;
+	
 
 	@FXML
 	void connect(ActionEvent event) {
@@ -74,10 +81,9 @@ public class ServerController {
 	@FXML
 	void disconnect(ActionEvent event) {
 		try {
-			cemsServer.sendToAllClients("disconected");
+			cemsServer.sendToAllClients(new Msg(MsgType.bye));
 			cemsServer.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		cemsServer.setConn(null);
