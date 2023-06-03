@@ -77,14 +77,6 @@ public class StudentTest {
 		this.test = test;
 	}
 
-	public String getStudentId() {
-		return this.studentId;
-	}
-
-	public void setStudentId(String studentId) {
-		this.studentId = studentId;
-	}
-
 	public int getSubmittingTime() {
 		return this.submittingTime;
 	}
@@ -123,6 +115,14 @@ public class StudentTest {
 
 	public void setGrade(String grade) {//////////////
 		this.grade = grade;
+	}
+
+	public void setStudentId(String studentId2) {/////////////////
+		this.studentId = studentId2;
+		
+	}
+	public String getStudentId() {////////////////////////
+		return this.studentId;
 	}
 
 }
