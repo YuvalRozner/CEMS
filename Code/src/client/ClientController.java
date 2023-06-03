@@ -4,8 +4,6 @@
 package client;
 import java.io.IOException;
 
-import controllers.JDBC.Msg;
-
 
 /**
  * This class constructs the UI for a chat client.  It implements the
@@ -56,12 +54,6 @@ public class ClientController implements ChatIF
 
   
   //Instance methods ************************************************
-  
-  //new accept
-  public void accept(Msg msg) 
-  {
-	  client.handleMessageFromClientUI(msg);
-  }
   
   /**
    * This method overrides the method in the ChatIF interface.  It

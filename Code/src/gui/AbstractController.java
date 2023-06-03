@@ -36,7 +36,7 @@ public abstract class AbstractController {
 	
 	public void exitBtn(ActionEvent event) throws Exception {
 		try {
-			ClientUI.chat.accept(new Msg(MsgType.disconnect));
+			ClientUI.send(new Msg(MsgType.disconnect));
 		}catch(Throwable t) {
 			System.out.println("error getExitBtn");
 			System.exit(0);

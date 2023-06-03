@@ -1,4 +1,5 @@
 package client;
+import controllers.JDBC.Msg;
 import gui.AbstractController;
 import gui.ClientConnectionController;
 import javafx.application.Application;
@@ -33,4 +34,8 @@ public class ClientUI extends Application {
 		//ChatClient.getScreen("login").start("login");
 	
 	}
+	
+	  public static void send(Msg msg) {
+		  chat.client.handleMessageFromClientUI(msg);
+	  }
 }
