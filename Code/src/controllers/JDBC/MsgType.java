@@ -18,6 +18,6 @@ public enum MsgType {
 	
 	succeededAll, // server ---> client. | indicate that list of queries executed successful.
 	
-	bye // server ---> client. | indicate that the server got the 'disconnect' msg from client and acted properly.
+	bye, // server ---> client. | indicate that the server got the 'disconnect' msg from client and acted properly.
 
 }

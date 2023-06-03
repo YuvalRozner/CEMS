@@ -16,6 +16,8 @@ public class Msg implements Serializable{
 	private HashMap<String, Object> set = null; // for the SET part of query.
 	private ArrayList<Msg> msgLst = null; //used to send a bunch of messages all at once.
 	private Object data = null; //data from DB to client.
+	private String dataType = null;
+
 
 	/* original empty constructor. */
 	public Msg() {}
@@ -98,9 +100,19 @@ public class Msg implements Serializable{
 		if(set==null) set=new HashMap<String, Object>();
 		set.put(setCol, setValue);
 	}
+	
+	public String getDataType() {
+		return dataType;
+	}
+
+	public void setDataType(String arrayList) {
+		this.dataType = arrayList;
+	}
 
 	@Override
 	public String toString() {
 		return "Msg [type=" + type ;
 	}
+	
+	
 }

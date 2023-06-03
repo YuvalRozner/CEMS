@@ -91,6 +91,7 @@ public class CEMSserver extends AbstractServer {
 					}
 					Msg tmpMsg = new Msg(MsgType.data);
 					tmpMsg.setData(dataToClient);
+					tmpMsg.setDataType(msg.getFrom().get(0));
 					sendToClient(tmpMsg, client);
 					break;
 					

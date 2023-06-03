@@ -36,7 +36,7 @@ public class DB_controller {
 		if(where==null)	return query.toString()+";";
 		//get here if and only if there is WHRE to add:
 		query.append(" WHERE ");
-		query.append(buildConditionPart(where));
+		query.append(buildConditionPartWithAnd(where));
 		return query.toString()+";";
 	}
 	
@@ -47,10 +47,10 @@ public class DB_controller {
 		StringBuilder query = new StringBuilder("UPDATE ");
 		query.append(tableToUpdate.get(0)); // append the name of table wanted to be updated.
 		query.append(" SET ");
-		query.append(buildConditionPart(set)); // append the parameters to be updated.
+		query.append(buildConditionPartWithComma(set)); // append the parameters to be updated.
 		if(where==null)	return query.toString()+";";
 		query.append(" WHERE ");
-		query.append(buildConditionPart(where));
+		query.append(buildConditionPartWithAnd(where));
 		return query.toString()+";";
 	}
 	
@@ -65,7 +65,7 @@ public class DB_controller {
 	}
 	
 	/* the func gets hashMap (Condition part) for a query and return a string of the parameters separated with commas. */
-	private static String buildConditionPart(HashMap<String, Object> condition) {
+	private static String buildConditionPartWithComma(HashMap<String, Object> condition) {
 		if(condition==null) return "";
 		StringBuilder res = new StringBuilder();
 		
@@ -75,6 +75,24 @@ public class DB_controller {
             if(value instanceof String) res.append(key + "='" + value.toString() + "',");
             else res.append(key + "=" + value.toString() + ",");
         }
+        res.deleteCharAt(res.length()-1); //remove last comma.
+		return res.toString();
+	}
+	
+	/* the func gets hashMap (Condition part) for a query and return a string of the parameters separated with commas. */
+	private static String buildConditionPartWithAnd(HashMap<String, Object> condition) {
+		if(condition==null) return "";
+		StringBuilder res = new StringBuilder();
+		
+        for (Map.Entry<String, Object> entry : condition.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            if(value instanceof String) res.append(key + "='" + value.toString() + "' AND ");
+            else res.append(key + "=" + value.toString() + " AND ");
+        }
+        res.deleteCharAt(res.length()-1); //remove last comma.
+        res.deleteCharAt(res.length()-1); //remove last comma.
+        res.deleteCharAt(res.length()-1); //remove last comma.
         res.deleteCharAt(res.length()-1); //remove last comma.
 		return res.toString();
 	}

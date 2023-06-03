@@ -7,6 +7,7 @@ import java.util.HashMap;
 import controllers.JDBC.Msg;
 import controllers.JDBC.MsgType;
 import enteties.Question;
+import enteties.User;
 import gui.AbstractController;
 import ocsf.client.AbstractClient;
 
@@ -20,6 +21,7 @@ public class ChatClient extends AbstractClient {
 	
 	public static HashMap<String, AbstractController> screens = new HashMap<String, AbstractController>();
 	public static ArrayList<Question> questionList;
+	public static User user;
 	public static boolean awaitResponse = false;
 
 	// Constructors ****************************************************
@@ -57,17 +59,25 @@ public class ChatClient extends AbstractClient {
 					System.exit(0);
 					break;
 				case data:
-					@SuppressWarnings("unchecked") //ignore warning of casting types.
-					ArrayList<ArrayList<String>> dataFromServer = (ArrayList<ArrayList<String>>) ((Msg)msg).getData();
-					questionList = new ArrayList<Question>(); //resets the List of question.
-					Question tmpQ;
-					for (int i = 0; i < dataFromServer.size(); i++) 
-						if (dataFromServer.get(i) != null) {
-							tmpQ = new Question(dataFromServer.get(i).get(0), dataFromServer.get(i).get(1),
-									dataFromServer.get(i).get(2), dataFromServer.get(i).get(3),
-									dataFromServer.get(i).get(4), dataFromServer.get(i).get(5));
-							questionList.add(tmpQ); // add the question to the list.
-						}
+					if(((Msg)msg).getDataType().equals("questions")) {
+						@SuppressWarnings("unchecked") //ignore warning of casting types.
+						ArrayList<ArrayList<String>> dataFromServer = (ArrayList<ArrayList<String>>) ((Msg)msg).getData();
+						questionList = new ArrayList<Question>(); //resets the List of question.
+						Question tmpQ;
+						for (int i = 0; i < dataFromServer.size(); i++) 
+							if (dataFromServer.get(i) != null) {
+								tmpQ = new Question(dataFromServer.get(i).get(0), dataFromServer.get(i).get(1),
+										dataFromServer.get(i).get(2), dataFromServer.get(i).get(3),
+										dataFromServer.get(i).get(4), dataFromServer.get(i).get(5));
+								questionList.add(tmpQ); // add the question to the list.
+							}
+					}
+					else if(((Msg)msg).getDataType().equals("cems.user")) {
+						@SuppressWarnings("unchecked")
+						ArrayList<ArrayList<String>> dataFromServer = (ArrayList<ArrayList<String>>) ((Msg)msg).getData();
+						user = new User(dataFromServer.get(0).get(0), dataFromServer.get(0).get(1), dataFromServer.get(0).get(2), dataFromServer.get(0).get(3), dataFromServer.get(0).get(4), dataFromServer.get(0).get(5));
+					}
+
 					break;
 					
 				default:
