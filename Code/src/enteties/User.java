@@ -4,7 +4,7 @@ public class User {
 
 	private int id;
 	private String name;
-	private String userName;
+	private String username;
 	private String password;
 	private String premission;
 
@@ -24,14 +24,6 @@ public class User {
 		this.name = name;
 	}
 
-	public String getUserName() {
-		return this.userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
 	public String getPassword() {
 		return this.password;
 	}
@@ -46,6 +38,14 @@ public class User {
 
 	public void setPremission(String premission) {
 		this.premission = premission;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }
