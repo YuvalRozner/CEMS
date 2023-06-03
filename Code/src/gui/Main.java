@@ -79,8 +79,11 @@ public class Main extends Application {
     	String LecturerStaticsReportfXML = "/fxml/LecturerStaticsReport.fxml";//6
     	String LecturerStaticsReportTitle = "Lecturer Statics Report";
     	
-        Parent root = FXMLLoader.load(getClass().getResource(LecturerMenufXML));
-        primaryStage.setTitle(CreateQuestionTitle);
+    	String CountDounTimerfXML = "/fxml/CountDownTimer.fxml";//6
+    	
+    	
+        Parent root = FXMLLoader.load(getClass().getResource(CountDounTimerfXML));
+        primaryStage.setTitle("counting time yey");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
