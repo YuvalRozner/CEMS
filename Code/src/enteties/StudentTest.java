@@ -11,17 +11,34 @@ import javafx.scene.control.TextField;
 public class StudentTest {
 
 	private Test test;
-	private String studentId;//change lior change also get and set
+	private Course course;
+	private String studentId;//change type lior change also get and set
 	private int submittingTime;
 	private Time time;
 	private TestToExexeute testToExecute;
 	private int[] answers;
-	private String grade;//change lior change also get and set
+	private String grade;//change type lior change also get and set
 	
 	///added by lior
 	private Button show;
 	private CheckBox select;
 	private TextField note;
+	private String comment;
+	
+	//emptyConstructor
+	public StudentTest() {
+		
+	}
+	
+	///constructor Grades
+	public StudentTest(Course course , String comment,String grade, Test test) {
+		this.course=course;
+		this.comment=comment;
+		this.grade=grade;
+		this.test=test;
+	}
+	
+	
 	
 	////////select
 	public CheckBox getSelect() {
@@ -56,6 +73,16 @@ public class StudentTest {
 		this.note = new TextField();
 		//note.setDisable(true);
 	}
+
+	//////////comment
+	public String getComment() {////////////////////////
+		return this.comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+		
+	}
 	
 	////////show
 	public Button getShow() {
@@ -65,6 +92,14 @@ public class StudentTest {
 	public void setNewShow() {
 		this.show = new Button();
 		show.setText("Show");
+	}
+	/////////Course
+	public Course getCourse() {
+		return this.course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 	
 	/////lior finish/////////////////////////////////////////////////////

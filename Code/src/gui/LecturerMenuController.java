@@ -16,7 +16,7 @@ public class LecturerMenuController extends AbstractController {
 
     @FXML
     void createQuestion(ActionEvent event) throws Exception {
-		ChatClient.screens.putIfAbsent("createQuestion", new CreateQuestionController());
+		ChatClient.screens.putIfAbsent("createQuestion", new ShowGradeController());
 		ChatClient.getScreen("createQuestion").start("createQuestion");
     }
 

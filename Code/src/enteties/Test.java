@@ -10,6 +10,11 @@ public class Test {
     private String date;
     private RadioButton radioButton;
     
+    //constructor by lior
+    public Test(String id) {
+    	this.id=id;
+    }
+    
     public Test(String id, String course, String date) {
         super();
         this.id = id;
