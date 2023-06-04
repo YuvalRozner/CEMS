@@ -23,15 +23,13 @@ public class MenuController extends AbstractController {
 		}catch(Throwable t) {System.out.println("accept dont work");};
 		
 		//the start of the new table
-		QuestionTableController q = new QuestionTableController();
-		ChatClient.screens.putIfAbsent("questionTable",q );
-		ChatClient.getScreen("questionTable").start("questionTable");		
+		new QuestionTableController().start("questionTable");
 	}
 	
 	
 	public void backBtn(ActionEvent event) throws Exception {
 		((Node)event.getSource()).getScene().getWindow().hide();
-		ChatClient.getScreen("ClientConnection").display();
+		ChatClient.getScreen("lecturerMenu").display();
 	}
 
 }

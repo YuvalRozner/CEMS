@@ -4,10 +4,8 @@ import java.io.IOException;
 
 import gui.AbstractController;
 import gui.LoginController;
-import gui.SceneSetter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 

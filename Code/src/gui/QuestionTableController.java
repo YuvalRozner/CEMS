@@ -35,7 +35,7 @@ public class QuestionTableController extends AbstractController{
 	
 	
 	public QuestionTableController() {
-		arrQuestion = new ArrayList<Question>(ChatClient.questionList);
+		arrQuestion = new ArrayList<Question>(msgReceived.convertData(Question.class));
 		QTable = FXCollections.observableArrayList(arrQuestion);
 		for (Question q : arrQuestion) {
 			arrdup.add(new Question(q.getID(), q.getSubjectNum(), q.getCourseName(), q.getQuestion(), q.getNumber(),q.getLecturereCreated()));
@@ -46,8 +46,7 @@ public class QuestionTableController extends AbstractController{
     @FXML
     void backBtn(ActionEvent event) {
 		((Node)event.getSource()).getScene().getWindow().hide();
-		ChatClient.screens.putIfAbsent("Menu", new MenuController());
-		ChatClient.getScreen("Menu").display();
+		ChatClient.getScreen("menu").display();
     }
 
     @FXML

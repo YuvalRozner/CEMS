@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 public abstract class AbstractController implements SceneSetter {
 	private static Stage primaryStage;
+	public static Msg msgReceived;
 	private Scene scene;
 	private String fxmlName;
 
@@ -62,5 +63,13 @@ public abstract class AbstractController implements SceneSetter {
 
 	public String getFxmlName() {
 		return fxmlName;
+	}
+	
+	public static Msg getMsgReceived() {
+		return msgReceived;
+	}
+
+	public static void setDataReceived(Msg msgReceived) {
+		AbstractController.msgReceived = msgReceived;
 	}
 }

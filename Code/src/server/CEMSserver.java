@@ -81,12 +81,12 @@ public class CEMSserver extends AbstractServer {
 					queryStr = DB_controller.createSELECTquery(msg.getSelect(), msg.getFrom(), msg.getWhere());
 					System.out.println("query:\n"+ queryStr);
 					data = stmt.executeQuery(queryStr);
-					ArrayList<ArrayList<String>> dataToClient = new ArrayList<ArrayList<String>>();
+					ArrayList<ArrayList<Object>> dataToClient = new ArrayList<>();
 					int colunmCount = data.getMetaData().getColumnCount();
 					while (data.next()) {
-						ArrayList<String> rowTemp = new ArrayList<String>(colunmCount);
+						ArrayList<Object> rowTemp = new ArrayList<>(colunmCount);
 						for (int i = 1; i < colunmCount + 1; i++)
-							rowTemp.add(data.getString(i));
+							rowTemp.add(data.getObject(i));
 						dataToClient.add(rowTemp);
 					}
 					Msg tmpMsg = new Msg(MsgType.data);

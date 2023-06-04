@@ -34,8 +34,8 @@ public class LecturerMenuController extends AbstractController {
     }
 
     @FXML
-    void executeTest(ActionEvent event) {
-
+    void executeTest(ActionEvent event) throws Exception {
+    	new MenuController().start("menu"); //temporary........................
     }
 
 

@@ -3,6 +3,7 @@ package controllers.JDBC;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Msg implements Serializable{
 	
@@ -15,7 +16,7 @@ public class Msg implements Serializable{
 	private ArrayList<String> tableToUpdate = null; // for the UPDATE part of query.
 	private HashMap<String, Object> set = null; // for the SET part of query.
 	private ArrayList<Msg> msgLst = null; //used to send a bunch of messages all at once.
-	private Object data = null; //data from DB to client.
+	private ArrayList<ArrayList<Object>> data = null; //data from DB to client.
 	private String dataType = null;
 
 
@@ -68,11 +69,11 @@ public class Msg implements Serializable{
 		this.msgLst = msgLst;
 	}
 	
-	public Object getData() {
+	public ArrayList<ArrayList<Object>> getData() {
 		return data;
 	}
 
-	public void setData(Object data) {
+	public void setData(ArrayList<ArrayList<Object>> data) {
 		this.data = data;
 	}	
 	
@@ -111,8 +112,24 @@ public class Msg implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Msg [type=" + type ;
+		return "Msg [type=" + type +"]" ;
 	}
 	
+	/**
+	 * @param <T>  class type of wanted return
+	 * @param type ClassName.class , ClassName of wanted type return
+	 * @return List of wanted class
+	 */
+	@SuppressWarnings("unchecked")
+	public <T> ArrayList<T> convertData(Class<T> type) {
+		ArrayList<T> converted = new ArrayList<>();
+		try {
+			for (List<Object> dataRow : data)
+				converted.add((T) type.getConstructors()[0].newInstance(dataRow.toArray()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return converted;
+	}
 	
 }

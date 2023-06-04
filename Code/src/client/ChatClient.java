@@ -1,11 +1,8 @@
 package client;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-
 import controllers.JDBC.Msg;
-import enteties.Question;
 import enteties.User;
 import gui.AbstractController;
 import ocsf.client.AbstractClient;
@@ -19,7 +16,6 @@ public class ChatClient extends AbstractClient {
 	 */
 	
 	public static HashMap<String, AbstractController> screens = new HashMap<String, AbstractController>();
-	public static ArrayList<Question> questionList;
 	public static User user;
 	public static boolean awaitResponse = false;
 
@@ -43,11 +39,12 @@ public class ChatClient extends AbstractClient {
 	 *
 	 * @param msg The message from the server.
 	 */
-	public void handleMessageFromServer(Object msg) {
+	public void handleMessageFromServer(Object tmpMsg) {
+		Msg msg = ((Msg)tmpMsg);
 		awaitResponse = false; //important. magic line.
-		System.out.print("Message recieved from server -> ");	
+		System.out.println("Message recieved from server -> " + msg);	
 		if(msg instanceof Msg) {
-			switch (((Msg)msg).getType()) {
+			switch (msg.getType()) {
 				case succeeded:
 					System.out.println("server executed the query.");
 					break;
@@ -59,23 +56,11 @@ public class ChatClient extends AbstractClient {
 					System.exit(0);
 					break;
 				case data:
-					if(((Msg)msg).getDataType().equals("questions")) {
-						@SuppressWarnings("unchecked") //ignore warning of casting types.
-						ArrayList<ArrayList<String>> dataFromServer = (ArrayList<ArrayList<String>>) ((Msg)msg).getData();
-						questionList = new ArrayList<Question>(); //resets the List of question.
-						Question tmpQ;
-						for (int i = 0; i < dataFromServer.size(); i++) 
-							if (dataFromServer.get(i) != null) {
-								tmpQ = new Question(dataFromServer.get(i).get(0), dataFromServer.get(i).get(1),
-										dataFromServer.get(i).get(2), dataFromServer.get(i).get(3),
-										dataFromServer.get(i).get(4), dataFromServer.get(i).get(5));
-								questionList.add(tmpQ); // add the question to the list.
-							}
-					}
-					else if(((Msg)msg).getDataType().equals("cems.user")) {
-						@SuppressWarnings("unchecked")
-						ArrayList<ArrayList<String>> dataFromServer = (ArrayList<ArrayList<String>>) ((Msg)msg).getData();
-						user = new User(dataFromServer.get(0).get(0), dataFromServer.get(0).get(1), dataFromServer.get(0).get(2), dataFromServer.get(0).get(3), dataFromServer.get(0).get(4), dataFromServer.get(0).get(5));
+					if(msg.getDataType().equals("question")) 
+						AbstractController.setDataReceived(msg);
+						//msg.convertData(Question.class);
+					else if(msg.getDataType().equals("cems.user")) {
+						user = msg.convertData(User.class).get(0);
 					}
 
 					break;
