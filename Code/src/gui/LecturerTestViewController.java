@@ -3,6 +3,8 @@ package gui;
 import java.util.ArrayList;
 
 import client.ChatClient;
+import controllers.JDBC.Msg;
+import controllers.JDBC.MsgType;
 import enteties.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,7 +31,12 @@ public class LecturerTestViewController extends AbstractController {
     private ToggleGroup toggleGroup; // ToggleGroup instance
     
     public LecturerTestViewController() {
-        arrdup = new ArrayList<Test>(Main.tests);
+        //arrdup = new ArrayList<Test>(Main.tests);
+    	Msg msg = new Msg(MsgType.select);
+    	msg.setSelect("*");
+    	msg.setFrom("test");
+    	sendMsg(msg);
+    	arrdup = new ArrayList<Test>(msgReceived.convertData(Test.class));
         testsTable = FXCollections.observableArrayList(arrdup);
         toggleGroup = new ToggleGroup(); // Initialize the ToggleGroup
         for (Test test : testsTable) {
