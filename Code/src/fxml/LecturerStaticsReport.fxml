@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.gluonhq.charm.glisten.control.TextField?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -18,49 +19,54 @@
 
 <Pane prefHeight="512.0" prefWidth="609.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LecturerStaticsReportController">
    <children>
-      <ImageView fitHeight="199.0" fitWidth="213.0" layoutX="461.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="199.0" fitWidth="213.0" layoutX="444.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Untitled%20design-7.png" />
+            <Image url="@../../images/arrows_statistics.png" />
          </image>
       </ImageView>
       <Pane layoutX="364.0" layoutY="-100.0" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
-      <ImageView fitHeight="170.0" fitWidth="170.0" layoutX="447.0" layoutY="-29.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="184.0" fitWidth="180.0" layoutX="437.0" layoutY="-29.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Cems-2.png" />
+            <Image url="@../../images/Cems-logo.png" />
          </image>
       </ImageView>
       <Pane layoutX="33.0" layoutY="91.0" prefHeight="448.0" prefWidth="189.0" style="-fx-background-color: #92bce3;" />
       <Circle fill="WHITE" layoutX="38.0" layoutY="463.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />
-      <Label layoutX="71.0" layoutY="48.0" text="Statistics">
+      <Pane layoutX="84.0" layoutY="414.0" prefHeight="70.0" prefWidth="199.0" style="-fx-background-color: #C5EFFF; -fx-background-radius: 0 50 50 0;" />
+      <Label layoutX="66.0" layoutY="39.0" text="Statistics">
          <font>
-            <Font name="Dosis Bold" size="40.0" />
+            <Font name="Marker Felt Thin" size="45.0" />
          </font>
          <effect>
-            <Lighting diffuseConstant="1.24" specularConstant="0.66" specularExponent="13.64" surfaceScale="3.35">
+            <Lighting specularConstant="0.8" specularExponent="0.5" surfaceScale="10.0">
                <bumpInput>
-                  <Shadow />
+                  <Shadow height="1.0" radius="0.0" width="0.0">
+                     <color>
+                        <Color green="0.7607843279838562" blue="0.7960784435272217" />
+                     </color></Shadow>
                </bumpInput>
                <light>
                   <Light.Distant>
                      <color>
-                        <Color green="0.8823529481887817" blue="0.8392156958580017" />
+                        <Color green="0.7607843279838562" blue="0.7960784435272217" />
                      </color>
                   </Light.Distant>
                </light>
             </Lighting>
          </effect>
       </Label>
-      <Pane layoutX="83.0" layoutY="400.0" prefHeight="41.0" prefWidth="180.0" style="-fx-background-radius: 0 50 50 0; -fx-background-color: #C5EFFF;" />
-      <VBox layoutX="83.0" layoutY="396.0" prefHeight="53.0" prefWidth="102.0" spacing="5.0">
+      <TextField layoutX="146.0" layoutY="419.0" prefHeight="28.0" prefWidth="95.0" style="-fx-background-radius: 7; -fx-border-radius: 7; -fx-background-color: #F8FFFF; -fx-border-color: #92bce3;" />
+      <TextField layoutX="146.0" layoutY="450.0" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-border-radius: 7; -fx-background-radius: 7;" />
+      <VBox layoutX="84.0" layoutY="421.0" prefHeight="53.0" prefWidth="102.0" spacing="10.0">
          <children>
-            <Label text="Average: 80">
+            <Label text="Average:">
                <font>
-                  <Font name="Dosis Bold" size="15.0" />
+                  <Font name="Comic Sans MS Bold" size="14.0" />
                </font>
             </Label>
-            <Label text="Median: 76">
+            <Label text="Median:">
                <font>
-                  <Font name="Dosis Bold" size="15.0" />
+                  <Font name="Comic Sans MS Bold" size="14.0" />
                </font>
             </Label>
          </children>
@@ -75,7 +81,7 @@
       </BarChart>
       <Button layoutX="473.0" layoutY="463.0" mnemonicParsing="false" onAction="#backBtn" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
          <font>
-            <Font name="Dosis Bold" size="14.5" />
+            <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>
    </children>
 </Pane>

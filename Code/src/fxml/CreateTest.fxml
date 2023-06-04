@@ -23,39 +23,50 @@
       <Pane layoutX="723.0" layoutY="-95.0" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
       <ImageView fitHeight="215.0" fitWidth="220.0" layoutX="774.0" layoutY="-43.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Cems-2.png" />
+            <Image url="@../../images/Cems-logo.png" />
          </image>
       </ImageView>
-      <Pane layoutX="58.0" layoutY="93.0" prefHeight="603.0" prefWidth="399.0" style="-fx-background-color: #92bce3;" />
+      <Pane layoutX="58.0" layoutY="93.0" prefHeight="603.0" prefWidth="399.0" style="-fx-background-color: #92bce3;">
+         <children>
+            <Button layoutX="150.0" layoutY="239.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="157.0" style="-fx-background-radius: 10;" stylesheets="@Button.css" text="Create New Question">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="13.0" />
+               </font>
+            </Button>
+            <TextField layoutX="150.0" layoutY="288.0" promptText="Minutes" style="-fx-background-color: #F8FFFF; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #92bce3;" />
+         </children></Pane>
       <ImageView fitHeight="564.0" fitWidth="641.0" layoutX="423.0" layoutY="424.0" pickOnBounds="true" preserveRatio="true" rotate="-16.5">
          <image>
-            <Image url="@../../../CEMS@reallygreatsystem.com-6.png" />
+            <Image url="@../../images/beautifulLineForCreateTest.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="564.0" fitWidth="641.0" layoutX="-130.0" layoutY="-48.0" pickOnBounds="true" preserveRatio="true" rotate="-25.2">
          <image>
-            <Image url="@../../../CEMS@reallygreatsystem.com-6.png" />
+            <Image url="@../../images/beautifulLineForCreateTest.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="818.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="130.0" fitWidth="140.0" layoutX="823.0" layoutY="313.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Untitled%20design-3.png" />
+            <Image url="@../../images/createTest.png" />
          </image>
       </ImageView>
       <Circle fill="WHITE" layoutX="57.0" layoutY="594.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />
-      <Label layoutX="57.0" layoutY="33.0" prefHeight="47.0" prefWidth="215.0" text="Create Test">
+      <Label layoutX="57.0" layoutY="25.0" prefHeight="66.0" prefWidth="285.0" text="Create Test">
          <font>
-            <Font name="Dosis Bold" size="40.0" />
+            <Font name="Marker Felt Thin" size="55.0" />
          </font>
          <effect>
-            <Lighting diffuseConstant="1.24" specularConstant="0.66" specularExponent="13.64" surfaceScale="3.35">
+            <Lighting specularConstant="0.8" specularExponent="0.5" surfaceScale="10.0">
                <bumpInput>
-                  <Shadow />
+                  <Shadow height="1.0" radius="0.0" width="0.0">
+                     <color>
+                        <Color green="0.7607843279838562" blue="0.7960784435272217" />
+                     </color></Shadow>
                </bumpInput>
                <light>
                   <Light.Distant>
                      <color>
-                        <Color green="0.8823529481887817" blue="0.8392156958580017" />
+                        <Color green="0.7607843279838562" blue="0.7960784435272217" />
                      </color>
                   </Light.Distant>
                </light>
@@ -64,12 +75,12 @@
       </Label>
       <Label layoutX="62.0" layoutY="96.0" text="Select Subject:">
          <font>
-            <Font name="Dosis Bold" size="15.0" />
+            <Font name="Comic Sans MS Bold" size="14.0" />
          </font></Label>
-      <ComboBox fx:id="subjectComboBox" layoutX="164.0" layoutY="94.0" prefWidth="150.0" promptText="Not Selected" stylesheets="@ComboBox.css" />
+      <ComboBox fx:id="subjectComboBox" layoutX="187.0" layoutY="93.0" prefWidth="150.0" promptText="Not Selected" stylesheets="@ComboBox.css" />
       <Label layoutX="62.0" layoutY="126.0" text="Select questions, for each question selected, enter a score.">
          <font>
-            <Font name="Dosis Bold" size="15.0" />
+            <Font name="Comic Sans MS Bold" size="14.0" />
          </font></Label>
       <TableView fx:id="table" layoutX="59.0" layoutY="155.0" prefHeight="160.0" prefWidth="883.0" stylesheets="@TableView.css">
         <columns>
@@ -85,37 +96,32 @@
       </TableView>
       <Label layoutX="60.0" layoutY="335.0" text="Add a new question:">
          <font>
-            <Font name="Dosis Bold" size="15.0" />
+            <Font name="Comic Sans MS Bold" size="14.0" />
          </font></Label>
-      <Button layoutX="196.0" layoutY="330.0" mnemonicParsing="false" prefHeight="1.0" prefWidth="147.0" style="-fx-background-radius: 10;" stylesheets="@Button.css" text="Create New Question">
-         <font>
-            <Font name="Dosis SemiBold" size="14.0" />
-         </font></Button>
       <Line endX="643.33349609375" layoutX="160.0" layoutY="369.0" startX="-100.0" />
       <Label layoutX="59.0" layoutY="386.0" text="Duration of the test:">
          <font>
-            <Font name="Dosis Bold" size="15.0" />
+            <Font name="Comic Sans MS Bold" size="14.0" />
          </font></Label>
-      <TextField layoutX="196.0" layoutY="384.0" promptText="Minutes" style="-fx-background-color: #F8FFFF; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #92bce3;" />
       <Line endX="643.33349609375" layoutX="160.0" layoutY="419.0" startX="-100.0" />
       <Label layoutX="60.0" layoutY="433.0" text="Comments for student (students can see the comments):">
          <font>
-            <Font name="Dosis Bold" size="15.0" />
+            <Font name="Comic Sans MS Bold" size="14.0" />
          </font></Label>
       <TextArea layoutX="60.0" layoutY="465.0" prefHeight="100.0" prefWidth="380.0" promptText="The students will see these comments!" style="-fx-background-color: #F8FFFF; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #92bce3;" />
       <Line endX="-100.0" endY="135.0" layoutX="567.0" layoutY="431.0" startX="-100.0" startY="-11.5" />
       <Label layoutX="487.0" layoutY="433.0" text="Comments for you (students can't see the comments):">
          <font>
-            <Font name="Dosis Bold" size="15.0" />
+            <Font name="Comic Sans MS Bold" size="14.0" />
          </font></Label>
       <TextArea layoutX="488.0" layoutY="462.0" prefHeight="100.0" prefWidth="380.0" promptText="The students will not see these comments!" style="-fx-background-color: #F8FFFF; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #92bce3;" />
       <Button layoutX="834.0" layoutY="597.0" mnemonicParsing="false" onAction="#backBtn" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
          <font>
-            <Font name="Dosis Bold" size="14.5" />
+            <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>
       <Button layoutX="708.0" layoutY="597.0" mnemonicParsing="false" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Save">
          <font>
-            <Font name="Dosis Bold" size="14.5" />
+            <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>
    </children>
 </Pane>
