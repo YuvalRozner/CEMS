@@ -28,8 +28,6 @@ public class ClientUI extends Application {
 		// original line: 
 		clientConnectionController.start("ClientConnection");
 		
-		//to open another screen: 
-		
 	}
 	
 	  public static void send(Msg msg) {
