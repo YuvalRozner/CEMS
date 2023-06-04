@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import controllers.JDBC.Msg;
-import controllers.JDBC.MsgType;
 import enteties.Question;
 import enteties.User;
 import gui.AbstractController;

@@ -1,8 +1,6 @@
 package gui;
 
 import client.ChatClient;
-import client.ClientConnectionController;
-import client.ClientUI;
 import controllers.JDBC.Msg;
 import controllers.JDBC.MsgType;
 import javafx.event.ActionEvent;

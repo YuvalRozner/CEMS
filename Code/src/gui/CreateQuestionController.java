@@ -33,12 +33,6 @@ public class CreateQuestionController extends AbstractController{
     @FXML
     private TableView<Course> table;
 
-    private ObservableList<Subject> subjectTable;
-    private ArrayList<Subject> arrQuestion;
-
-    public CreateQuestionController() {
-        arrQuestion = Main.subject;
-    }
 
     @FXML
     protected void initialize() {

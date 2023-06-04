@@ -1,11 +1,9 @@
 package gui;
 
 import controllers.CountDown;
-import controllers.TimeController;
 import controllers.TimeController1;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 

@@ -13,6 +13,7 @@ public class LecturerStaticsReportController extends AbstractController{
 	@FXML
 	private BarChart<String, Integer> barChart;
 
+	@SuppressWarnings("unchecked")
 	@FXML
 	protected void initialize() {
 		
