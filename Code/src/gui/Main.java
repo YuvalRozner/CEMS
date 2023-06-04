@@ -16,6 +16,25 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	
+	///add by lior runningTest
+		public static ArrayList<TestToExexeute> arrRuningTest; 
+		static {
+			arrRuningTest = new ArrayList<TestToExexeute>();
+			TestToExexeute testLior = new TestToExexeute("run","infi" , "3.5","1234");
+			
+			TestToExexeute testYuval = new TestToExexeute("lock" , "logic" , "2.5","5678");
+			
+			TestToExexeute testDor = new TestToExexeute("run","algebra","3","97454");
+			
+			
+			arrRuningTest.add(testLior);
+			arrRuningTest.add(testYuval);
+			arrRuningTest.add(testDor);
+		}
+		
+		
+		///finish
+	
 	///add by lior AprroveGrade
 	public static ArrayList<StudentTest> arrStudentTest; 
 	static {
@@ -140,8 +159,11 @@ public class Main extends Application {
     	String executeTestfXML = "/fxml/executeTest.fxml";//8 ////lior
     	String executeTestTitle = "execute Test";
     	
-        Parent root = FXMLLoader.load(getClass().getResource(executeTestfXML));
-        primaryStage.setTitle(executeTestTitle);
+    	String runningTestfXML = "/fxml/runningTest.fxml";//9 ////lior
+    	String runningTestTitle = "runing Test";
+    	
+        Parent root = FXMLLoader.load(getClass().getResource(runningTestfXML));
+        primaryStage.setTitle(runningTestTitle);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

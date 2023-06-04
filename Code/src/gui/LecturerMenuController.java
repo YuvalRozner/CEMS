@@ -45,6 +45,8 @@ public class LecturerMenuController extends AbstractController {
 
     @FXML
     void runningTest(ActionEvent event) throws Exception {
+    	ChatClient.screens.putIfAbsent("runningTest", new runningTestController());
+		ChatClient.getScreen("runningTest").start("runningTest");
     	
     }
     

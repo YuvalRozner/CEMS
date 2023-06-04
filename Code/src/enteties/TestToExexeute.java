@@ -19,11 +19,49 @@ public class TestToExexeute{
 	private int[] distribution;
 	
 	////add by lior
+	private String status;/// i did it in string lock and run , you make it bolean , think what you prefer status==lock
 	private String course;
 	private CheckBox select;
-	private TextField codeField;
-	private TextField type;
+	private TextField codeField=new TextField();
+	private TextField type=new TextField();
 	private Button show;
+	private String duration;
+	private TextField durationField=new TextField();
+	//constructor empty
+	public TestToExexeute() {
+		
+	}
+	////constructor for running test
+	public TestToExexeute(String status, String course, String duration,String testNum) {
+		this.status=status;
+		this.course=course;
+		this.duration=duration;
+		this.testNum=testNum;
+	}
+	///Testnum
+	public String getTestNum() {/////////////
+		return this.testNum;
+	}
+
+	public void setTestNum(String testNum) {////////////////
+		this.testNum = testNum;
+	}
+
+	////status
+	public String getStatus() {
+	    return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	////duration
+	public String getDuration() {
+	    return duration;
+	}
+	public void setDuration(String duration) {
+		this.duration = duration;
+	}
 	
 	//////code
 	public TextField getCodeField() {
@@ -33,6 +71,17 @@ public class TestToExexeute{
 	public void setNewCodeField() {
 		this.codeField = new TextField();
 		codeField.setDisable(true);
+		
+	}
+	//////DurationField
+	public TextField getDurationField() {
+	    return durationField;
+	}
+	
+	public void setNewDurationField() {
+		this.durationField = new TextField();
+		durationField.setDisable(true);
+		durationField.setText(duration);
 		
 	}
 	
@@ -55,6 +104,7 @@ public class TestToExexeute{
 				//flag = newValue; // why we need it again dor? -rozner.
 				codeField.setDisable(!newValue);
 				type.setDisable(!newValue);
+				durationField.setDisable(!newValue);
 				
 				System.out.println("Checkbox " + (newValue ? "pressed" : "unpressed")); 	}
 		});
@@ -94,13 +144,6 @@ public class TestToExexeute{
 		this.testCode = testCode;
 	}
 
-	public String getTestNum() {/////////////
-		return this.testNum;
-	}
-
-	public void setTestNum(String testNum) {////////////////
-		this.testNum = testNum;
-	}
 
 	public int getTestingType() {
 		return this.testingType;

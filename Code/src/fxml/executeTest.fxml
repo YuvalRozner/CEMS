@@ -16,7 +16,7 @@
           <TableColumn fx:id="coursnamecol" prefWidth="45.5999755859375" text="course" />
             <TableColumn fx:id="datecol" prefWidth="64.00006103515625" text="date" />
             <TableColumn fx:id="showcol" prefWidth="52.0" text="show" />
-            <TableColumn fx:id="selectcol" prefWidth="53.5999755859375" text="select" />
+            <TableColumn fx:id="selectcol" prefWidth="53.5999755859375" style="-fx-alignment: CENTER;" text="select" />
             <TableColumn fx:id="codecol" prefWidth="55.199951171875" text="code" />
             <TableColumn fx:id="typecol" prefWidth="55.20001220703125" text="type" />
         </columns>

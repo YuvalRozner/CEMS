@@ -121,7 +121,7 @@ public class StudentTest {
 		return this.studentId;
 	}
 
-	public void setStudentId(String studentId2) {//////////////////
+	public void setStudentId(String studentId2) {
 		this.studentId = studentId2;
 		
 	}

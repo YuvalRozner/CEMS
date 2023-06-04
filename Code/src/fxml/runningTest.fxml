@@ -14,12 +14,12 @@
       <Button fx:id="lockbtn" layoutX="96.0" layoutY="339.0" mnemonicParsing="false" onAction="#lockBtn" prefHeight="25.0" prefWidth="42.0" text="lock" />
       <Button fx:id="changebtn" layoutX="26.0" layoutY="339.0" mnemonicParsing="false" onAction="#changeBtn" text="change" />
       <Button fx:id="backbtn" layoutX="359.0" layoutY="339.0" mnemonicParsing="false" onAction="#backBtn" text="back" />
-      <TableView layoutX="31.0" layoutY="102.0" prefHeight="200.0" prefWidth="367.0">
+      <TableView fx:id="table" layoutX="31.0" layoutY="102.0" prefHeight="200.0" prefWidth="367.0">
         <columns>
           <TableColumn fx:id="numcol" prefWidth="69.59997367858887" text="num" />
           <TableColumn fx:id="corsecol" prefWidth="66.39997100830078" text="course" />
             <TableColumn fx:id="statuscol" prefWidth="63.99993896484375" text="status" />
-            <TableColumn fx:id="selectcol" prefWidth="63.99993896484375" text="select" />
+            <TableColumn fx:id="selectcol" prefWidth="63.99993896484375" style="-fx-alignment: CENTER;" text="select" />
             <TableColumn fx:id="durationcol" prefWidth="102.19998168945312" text="duration" />
         </columns>
       </TableView>

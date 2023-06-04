@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-////////////// code col is not working also the func that the tesxt filed is on when select on doesnt work
+
 public class executeTestController extends AbstractController{
 	
 	private ArrayList<TestToExexeute> arrExecuteTestLocal;
@@ -39,6 +39,7 @@ public class executeTestController extends AbstractController{
         	Test.setNewShow();
         	Test.setNewSelect();
         	Test.setNewType();
+        	Test.setNewCodeField();
         }
         ETTable = FXCollections.observableArrayList(arrExecuteTestLocal);
         //for (Question q : arrQuestion) {

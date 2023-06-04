@@ -24,7 +24,7 @@ public class Question {
 	private ArrayList<Integer> relevantCourses;
 	
 	private CheckBox select;
-	private TextField points;
+	private TextField points=new TextField();
 //	private Boolean flag = false; /////////////////////////////////// what is it dor? -rozner
 	
 	
