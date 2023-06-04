@@ -1,6 +1,5 @@
-/controllers/
-/gui/
-/fxml/
 /client/
+/controllers/
 /enteties/
+/gui/
 /server/
