@@ -56,15 +56,11 @@ public class ChatClient extends AbstractClient {
 					System.exit(0);
 					break;
 				case data:
-					if(msg.getDataType().equals("question")) 
-						AbstractController.setDataReceived(msg);
-						//msg.convertData(Question.class);
-					else if(msg.getDataType().equals("cems.user")) {
+					if(msg.isUser()) 
 						user = msg.convertData(User.class).get(0);
-					}
-
+					else 
+						AbstractController.setDataReceived(msg);
 					break;
-					
 				default:
 					break;
 			}

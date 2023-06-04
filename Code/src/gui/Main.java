@@ -17,9 +17,9 @@ public class Main extends Application {
 	public static ArrayList<Question> arr; 
 	static {
 		arr = new ArrayList<Question>();
-		Question q1 = new Question("0124","math","logic","what is 1+1?","01","dor");
-		Question q2 = new Question("0125","math","logic","what is 2+2?","02","dor");
-		Question q3 = new Question("0141","math","infi","A={2n: n belong to N}. Is multiplying two terms in A is also a term in","01","julia");//added by mor
+		Question q1 = new Question("0124","math","logic","what is 1+1?",01,"dor");
+		Question q2 = new Question("0125","math","logic","what is 2+2?",02,"dor");
+		Question q3 = new Question("0141","math","infi","A={2n: n belong to N}. Is multiplying two terms in A is also a term in",01,"julia");//added by mor
 		arr.add(q1);
 		arr.add(q2);
 		arr.add(q3);//added by mor

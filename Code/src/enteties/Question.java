@@ -15,7 +15,7 @@ public class Question {
 	private String ID;
 	private String courseName;
 	private String question;
-	private String number;
+	private int number;
 	private String lecturerCreated;
 	
 	private String[] answers;
@@ -27,7 +27,7 @@ public class Question {
 	private TextField points;
 	
 	
-	public Question(String ID, String subjectNum, String courseName, String question, String number,
+	public Question(String ID, String subjectNum, String courseName, String question, int number,
 			String lecturerCreated) {
 		this.ID = ID;
 		this.subjectNum = subjectNum;
@@ -60,7 +60,7 @@ public class Question {
 		if(!(this.question.equals(q.getQuestion()))){
 			return false;
 		}
-		if(!(this.number.equals(q.getNumber()))){
+		if(!(this.number==q.getNumber())){
 			return false;
 		}
 		if(!(this.lecturerCreated.equals(q.getLecturereCreated()))){
@@ -72,7 +72,7 @@ public class Question {
 	public boolean equals(Object obj) {
 		Question q = (Question) obj;
 		if(ID.equals(q.getID()) && subjectNum.equals(q.getSubjectNum()) && courseName.equals(q.getCourseName())
-				&& question.equals(q.getQuestion())&& number.equals(q.getNumber()) && lecturerCreated.equals(q.getLecturereCreated()))
+				&& question.equals(q.getQuestion())&& number==q.getNumber() && lecturerCreated.equals(q.getLecturereCreated()))
 			return true;
 		return false;
 	}
@@ -93,11 +93,11 @@ public class Question {
 		this.courseName = courseName;
 	}
 
-	public String getNumber() {
+	public int getNumber() {
 		return this.number;
 	}
 
-	public void setNumber(String number) {
+	public void setNumber(int number) {
 		this.number = number;
 	}
 

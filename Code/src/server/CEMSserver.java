@@ -72,7 +72,7 @@ public class CEMSserver extends AbstractServer {
 		Msg msg = (Msg)msgObj;
 		java.sql.Statement stmt = null;
 		String queryStr;
-		ResultSet data;
+		ResultSet rs;
 		System.out.println("Message received: " + msg + " from " + client);
 		try {
 			switch (msg.getType()) {
@@ -80,18 +80,9 @@ public class CEMSserver extends AbstractServer {
 					stmt = conn.createStatement();
 					queryStr = DB_controller.createSELECTquery(msg.getSelect(), msg.getFrom(), msg.getWhere());
 					System.out.println("query:\n"+ queryStr);
-					data = stmt.executeQuery(queryStr);
-					ArrayList<ArrayList<Object>> dataToClient = new ArrayList<>();
-					int colunmCount = data.getMetaData().getColumnCount();
-					while (data.next()) {
-						ArrayList<Object> rowTemp = new ArrayList<>(colunmCount);
-						for (int i = 1; i < colunmCount + 1; i++)
-							rowTemp.add(data.getObject(i));
-						dataToClient.add(rowTemp);
-					}
-					Msg tmpMsg = new Msg(MsgType.data);
-					tmpMsg.setData(dataToClient);
-					tmpMsg.setDataType(msg.getFrom().get(0));
+					rs = stmt.executeQuery(queryStr);
+					boolean isUser = (msg.getFrom().get(0).equals("cems.user")) ? true : false;
+					Msg tmpMsg = createDataMsg(isUser, rs);
 					sendToClient(tmpMsg, client);
 					break;
 					
@@ -122,6 +113,27 @@ public class CEMSserver extends AbstractServer {
 			}
 		} catch (SQLException ex) {/* handle any errors */}
 		return;
+	}
+
+	/**
+	 * @param msg
+	 * @param rs
+	 * @return
+	 * @throws SQLException
+	 */
+	private Msg createDataMsg(boolean isUser,ResultSet rs) throws SQLException {
+		ArrayList<ArrayList<Object>> dataToClient = new ArrayList<>();
+		int colunmCount = rs.getMetaData().getColumnCount();
+		while (rs.next()) {
+			ArrayList<Object> rowTemp = new ArrayList<>(colunmCount);
+			for (int i = 1; i < colunmCount + 1; i++)
+				rowTemp.add(rs.getObject(i));
+			dataToClient.add(rowTemp);
+		}
+		Msg tmpMsg = new Msg(MsgType.data);
+		tmpMsg.setData(dataToClient);
+		tmpMsg.setIsUser(isUser);
+		return tmpMsg;
 	}
 	
 	/**
