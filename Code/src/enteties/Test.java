@@ -6,14 +6,14 @@ import javafx.scene.control.ToggleGroup;
 public class Test {
     
     private String id;
-    private String Course;
+    private String course;
     private String date;
     private RadioButton radioButton;
     
     public Test(String id, String course, String date) {
         super();
         this.id = id;
-        Course = course;
+        this.course = course;
         this.date = date;
         this.radioButton = new RadioButton();
         this.radioButton.setToggleGroup(null); // Set the ToggleGroup to null initially
@@ -28,11 +28,11 @@ public class Test {
     }
     
     public String getCourse() {
-        return Course;
+        return course;
     }
     
     public void setCourse(String course) {
-        Course = course;
+    	this.course = course;
     }
     
     public String getDate() {

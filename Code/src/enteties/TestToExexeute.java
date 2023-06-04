@@ -1,9 +1,14 @@
 package enteties;
 
-public class TestToExexeute {
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
 
+public class TestToExexeute{
 	private int testCode;
-	private int testNum;
+	private String testNum;
 	private int testingType;
 	private StudentTest studentsTestsLst;
 	private boolean lock;
@@ -12,6 +17,74 @@ public class TestToExexeute {
 	private double average;
 	private double median;
 	private int[] distribution;
+	
+	////add by lior
+	private String course;
+	private CheckBox select;
+	private TextField codeField;
+	private TextField type;
+	private Button show;
+	
+	//////code
+	public TextField getCodeField() {
+	    return codeField;
+	}
+	
+	public void setNewCodeField() {
+		this.codeField = new TextField();
+		codeField.setDisable(true);
+		
+	}
+	
+	//cours
+	public String getCourse() {
+		return course;
+	}
+	
+	public void setCourse(String course) {
+		this.course = course;
+	}
+	
+	////select
+	public void setNewSelect() { 
+		this.select = new CheckBox();
+		// Add event handler for pressed and unpressed (checked / unchecked) state of the checkbox.
+		this.select.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				//flag = newValue; // why we need it again dor? -rozner.
+				codeField.setDisable(!newValue);
+				type.setDisable(!newValue);
+				
+				System.out.println("Checkbox " + (newValue ? "pressed" : "unpressed")); 	}
+		});
+	}
+	
+	public CheckBox getSelect() {
+		return select;
+	}
+	////////show
+	public Button getShow() {
+		return show;
+	}
+
+	public void setNewShow() {
+		this.show = new Button();
+		show.setText("Show");
+	}
+	
+	//////type
+	public TextField getType() {
+		return type;
+	}
+	
+	public void setNewType() {
+		this.type = new TextField();
+		type.setDisable(true);
+	}
+	
+	
+	//finish lior
 
 	public int getTestCode() {
 		return this.testCode;
@@ -21,11 +94,11 @@ public class TestToExexeute {
 		this.testCode = testCode;
 	}
 
-	public int getTestNum() {
+	public String getTestNum() {/////////////
 		return this.testNum;
 	}
 
-	public void setTestNum(int testNum) {
+	public void setTestNum(String testNum) {////////////////
 		this.testNum = testNum;
 	}
 

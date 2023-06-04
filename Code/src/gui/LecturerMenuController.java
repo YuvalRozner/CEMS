@@ -7,6 +7,7 @@ import javafx.scene.Node;
 
 public class LecturerMenuController extends AbstractController {
 	
+	
 	@FXML
     void approveGrades(ActionEvent event) throws Exception {
 		ChatClient.screens.putIfAbsent("aprroveGrade", new AprroveGradeController());
@@ -26,8 +27,9 @@ public class LecturerMenuController extends AbstractController {
     }
 
     @FXML
-    void executeTest(ActionEvent event) {
-
+    void executeTest(ActionEvent event) throws Exception{
+    	ChatClient.screens.putIfAbsent("executeTest", new executeTestController());
+		ChatClient.getScreen("executeTest").start("executeTest");
     }
 
     @FXML

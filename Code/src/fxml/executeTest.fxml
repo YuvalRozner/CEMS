@@ -6,18 +6,19 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="404.0" prefWidth="429.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="404.0" prefWidth="429.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.executeTestController">
    <children>
       <Label layoutX="14.0" layoutY="43.0" prefHeight="17.0" prefWidth="316.0" text="select a test  , add code and click the &quot;execute test&quot; button." />
       <Label layoutX="14.0" layoutY="26.0" prefHeight="17.0" prefWidth="149.0" text="execute test" />
-      <TableView layoutX="70.0" layoutY="102.0" prefHeight="200.0" prefWidth="289.0">
+      <TableView fx:id="table" layoutX="37.0" layoutY="102.0" prefHeight="200.0" prefWidth="376.0">
         <columns>
           <TableColumn fx:id="numTestcol" prefWidth="47.99994087219238" text="Num" />
           <TableColumn fx:id="coursnamecol" prefWidth="45.5999755859375" text="course" />
-            <TableColumn fx:id="showcol" prefWidth="50.40001678466797" text="show" />
-            <TableColumn fx:id="selectcol" prefWidth="52.79998779296875" text="select" />
-            <TableColumn fx:id="codecol" prefWidth="40.79998779296875" text="code" />
-            <TableColumn fx:id="typecol" prefWidth="53.60002136230469" text="type" />
+            <TableColumn fx:id="datecol" prefWidth="64.00006103515625" text="date" />
+            <TableColumn fx:id="showcol" prefWidth="52.0" text="show" />
+            <TableColumn fx:id="selectcol" prefWidth="53.5999755859375" text="select" />
+            <TableColumn fx:id="codecol" prefWidth="55.199951171875" text="code" />
+            <TableColumn fx:id="typecol" prefWidth="55.20001220703125" text="type" />
         </columns>
       </TableView>
       <Label layoutX="14.0" layoutY="60.0" prefHeight="17.0" prefWidth="289.0" text="Note! code must be 4 digit only." />

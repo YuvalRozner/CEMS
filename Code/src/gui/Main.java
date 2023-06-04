@@ -7,6 +7,7 @@ import enteties.Question;
 import enteties.StudentTest;
 import enteties.Subject;
 import enteties.Test;
+import enteties.TestToExexeute;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +16,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	
-	///add by lior
+	///add by lior AprroveGrade
 	public static ArrayList<StudentTest> arrStudentTest; 
 	static {
 		arrStudentTest = new ArrayList<StudentTest>();
@@ -24,7 +25,7 @@ public class Main extends Application {
 		testLior.setGrade("75");
 		
 		StudentTest testYuval = new StudentTest();
-		testYuval.setStudentId("5678");
+		testYuval.setStudentId("123");
 		testYuval.setGrade("69");
 		
 		StudentTest testDor = new StudentTest();
@@ -38,6 +39,34 @@ public class Main extends Application {
 	}
 	
 	
+	///finish
+	
+	///add by lior executeTest
+	public static ArrayList<TestToExexeute> arrExecuteTest; 
+	static {
+		arrExecuteTest = new ArrayList<TestToExexeute>();
+		TestToExexeute exTestLior = new TestToExexeute();
+		exTestLior.setCourse("infi");
+		exTestLior.setDate("21.4.23");
+		exTestLior.setTestNum("1234");
+		
+			
+		TestToExexeute exTestYuval = new TestToExexeute();
+		exTestYuval.setCourse("logic");
+		exTestYuval.setDate("28.4.23");
+		exTestYuval.setTestNum("5678");
+		
+		TestToExexeute exTestDor = new TestToExexeute();
+		exTestDor.setCourse("data structure");
+		exTestDor.setDate("3.5.23");
+		exTestDor.setTestNum("91001");
+		
+		arrExecuteTest.add(exTestLior);
+		arrExecuteTest.add(exTestYuval);
+		arrExecuteTest.add(exTestDor);
+	}
+		
+		
 	///finish
 	
 	public static ArrayList<Question> arr; 
@@ -108,8 +137,11 @@ public class Main extends Application {
     	String aprroveGradefXML = "/fxml/AprroveGrade.fxml";//7 ////lior
     	String aprroveGradeTitle = "Aprrove Grade";
     	
-        Parent root = FXMLLoader.load(getClass().getResource(aprroveGradefXML));
-        primaryStage.setTitle(aprroveGradeTitle);
+    	String executeTestfXML = "/fxml/executeTest.fxml";//8 ////lior
+    	String executeTestTitle = "execute Test";
+    	
+        Parent root = FXMLLoader.load(getClass().getResource(executeTestfXML));
+        primaryStage.setTitle(executeTestTitle);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
