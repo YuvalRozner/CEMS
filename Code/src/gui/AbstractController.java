@@ -1,5 +1,6 @@
 package gui;
 
+import client.ChatClient;
 import client.ClientUI;
 import controllers.JDBC.Msg;
 import controllers.JDBC.MsgType;
@@ -9,19 +10,30 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public abstract class AbstractController {
+public abstract class AbstractController implements SceneSetter{
 	private static Stage primaryStage;
 	private Scene scene; 
 	private String fxmlName;
 	
 	public void start(String fxmlName) throws Exception {
 		this.fxmlName = fxmlName;
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/"+fxmlName+".fxml"));	
+		
+		FXMLLoader loader =  new FXMLLoader(getClass().getResource("/fxml/"+fxmlName+".fxml"));
+		Parent root = 	loader.load();
+		ChatClient.screens.put(fxmlName,loader.getController());
+		
 		scene = new Scene(root);
+		
+		((SceneSetter)loader.getController()).setScene(scene);
+		
 		primaryStage.setTitle(fxmlName);
 		primaryStage.setScene(scene);
 		primaryStage.centerOnScreen();
 		primaryStage.show();	 	   
+	}
+
+	 public void setScene(Scene scene) {
+			this.scene = scene;
 	}
 
 	public static void setPrimaryStage(Stage primaryStage) {

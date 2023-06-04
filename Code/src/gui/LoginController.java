@@ -32,7 +32,7 @@ public class LoginController extends AbstractController{
     	User user = ChatClient.user;
     	if(user!=null) {
     		System.out.println("user:  "+user);
-    		if(user.getLoggedin().equals("no")) {
+    		//if(user.getLoggedin().equals("no")) {
 	    		msg = new Msg(MsgType.update);
 	    		msg.setTableToUpdate("cems.user");
 	    		msg.setSet("loggedin", "yes");
@@ -41,20 +41,18 @@ public class LoginController extends AbstractController{
 	        	ClientUI.send(msg);
 	        	switch(user.getPremission()) {
 	    		case "lecturer":
-	    	    	ChatClient.screens.putIfAbsent("lecturerMenu", new LecturerMenuController());
-	    			ChatClient.getScreen("lecturerMenu").start("lecturerMenu");
+	        		new LecturerMenuController().start("lecturerMenu");
+	        		((LecturerMenuController)ChatClient.getScreen("lecturerMenu")).setWelcome("Welcome " + user.getName());
 	    			break;
 	    		case "student":
-	    	    	//ChatClient.screens.putIfAbsent("studentMenu", new StudentMenuController());
-	    			//ChatClient.getScreen("studentMenu").start("studentMenu");
+	    			//new StudentMenuController().start("studentMenu");
 	    			break;
 	    		case "hod":
-	    	    	//ChatClient.screens.putIfAbsent("hodMenu", new HODMenuController());
-	    			//ChatClient.getScreen("hodMenu").start("hodMenu");
+	    			//new HODMenuController().start("hodMenu");
 	    			break;
 				default:
 					break;
-	    	}
+	    	//}
     		}
     	}
 

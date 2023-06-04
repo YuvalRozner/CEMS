@@ -9,11 +9,16 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 
+
 public class LecturerMenuController extends AbstractController {
 	
     @FXML
     private Label welcomeLbl;
-	
+ 
+    
+    public LecturerMenuController() {
+    	
+    }
 	@FXML
     void approveGrades(ActionEvent event) {
 		
@@ -21,14 +26,12 @@ public class LecturerMenuController extends AbstractController {
 
     @FXML
     void createQuestion(ActionEvent event) throws Exception {
-		ChatClient.screens.putIfAbsent("createQuestion", new CreateQuestionController());
-		ChatClient.getScreen("createQuestion").start("createQuestion");
+		new CreateQuestionController().start("createQuestion");
     }
 
     @FXML
     void createTest(ActionEvent event) throws Exception {
-    	ChatClient.screens.putIfAbsent("createTest", new CreateTestController());
-		ChatClient.getScreen("createTest").start("createTest");
+		new CreateTestController().start("createTest");
     }
 
     @FXML
@@ -39,8 +42,7 @@ public class LecturerMenuController extends AbstractController {
 
     @FXML
     void reports(ActionEvent event) throws Exception {
-    	ChatClient.screens.putIfAbsent("lecturerTestView", new LecturerTestViewController());
-		ChatClient.getScreen("lecturerTestView").start("lecturerTestView");
+		new LecturerTestViewController().start("lecturerTestView");
     }
 
     @FXML
@@ -55,9 +57,12 @@ public class LecturerMenuController extends AbstractController {
     	msg.setWhere("username", ChatClient.user.getUsername());
     	msg.setWhere("password", ChatClient.user.getPassword());
     	ClientUI.send(msg);
+    	
 		((Node)event.getSource()).getScene().getWindow().hide();
-		ChatClient.screens.putIfAbsent("login", new LoginController());
 		ChatClient.getScreen("login").display();
 	}
 
+	public void setWelcome(String name) {
+		welcomeLbl.setText(name);
+	}
 }

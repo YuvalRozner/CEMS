@@ -1,6 +1,7 @@
 package client;
 import controllers.JDBC.Msg;
 import gui.AbstractController;
+import gui.CountDownTimerController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -29,9 +30,6 @@ public class ClientUI extends Application {
 		
 		//to open another screen: 
 		
-		//ChatClient.screens.putIfAbsent("login", new LoginController());
-		//ChatClient.getScreen("login").start("login");
-	
 	}
 	
 	  public static void send(Msg msg) {

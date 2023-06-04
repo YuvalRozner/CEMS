@@ -13,7 +13,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-	
+	CountDownTimerController c;
 	public static ArrayList<Question> arr; 
 	static {
 		arr = new ArrayList<Question>();
@@ -82,13 +82,21 @@ public class Main extends Application {
     	String CountDounTimerfXML = "/fxml/CountDownTimer.fxml";//6
     	
     	
-        Parent root = FXMLLoader.load(getClass().getResource(CountDounTimerfXML));
+    	FXMLLoader f = new FXMLLoader();
+        Parent root = f.load(getClass().getResource(CountDounTimerfXML));
+        c = f.getController();
+      
         primaryStage.setTitle("counting time yey");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+        
     }
 
+    
+    
+    
     public static void main(String[] args) {
         launch(args);
+       
     }
 }

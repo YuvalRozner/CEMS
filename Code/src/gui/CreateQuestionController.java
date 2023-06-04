@@ -101,7 +101,6 @@ public class CreateQuestionController extends AbstractController{
     
 	public void backBtn(ActionEvent event) throws Exception {
 		((Node)event.getSource()).getScene().getWindow().hide();
-		ChatClient.screens.putIfAbsent("lecturerMenu", new LecturerMenuController());
 		ChatClient.getScreen("lecturerMenu").display();
 	}
 
