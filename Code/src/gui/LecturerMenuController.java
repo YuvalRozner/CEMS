@@ -56,7 +56,7 @@ public class LecturerMenuController extends AbstractController {
 		msg.setSet("loggedin", "no");
     	msg.setWhere("username", ChatClient.user.getUsername());
     	msg.setWhere("password", ChatClient.user.getPassword());
-    	ClientUI.send(msg);
+    	sendMsg(msg);
     	
 		((Node)event.getSource()).getScene().getWindow().hide();
 		ChatClient.getScreen("login").display();

@@ -40,7 +40,7 @@
             </Lighting>
          </effect>
       </Label>
-      <Label fx:id="welcomeLbl" layoutX="14.0" layoutY="117.0" prefHeight="34.0" prefWidth="136.0" text="Welcome Julia!">
+      <Label fx:id="welcomeLbl" layoutX="14.0" layoutY="117.0" text="Welcome!">
          <font>
             <Font name="Dosis Medium" size="16.0" />
          </font>

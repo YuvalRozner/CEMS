@@ -28,7 +28,7 @@ public class LoginController extends AbstractController{
     	msg.setFrom("cems.user");
     	msg.setWhere("username", username);
     	msg.setWhere("password", password);
-    	ClientUI.send(msg);
+    	sendMsg(msg);
     	User user = ChatClient.user;
     	if(user!=null) {
     		System.out.println("user:  "+user);
@@ -38,7 +38,7 @@ public class LoginController extends AbstractController{
 	    		msg.setSet("loggedin", "yes");
 	        	msg.setWhere("username", username);
 	        	msg.setWhere("password", password);
-	        	ClientUI.send(msg);
+	        	sendMsg(msg);
 	        	switch(user.getPremission()) {
 	    		case "lecturer":
 	        		new LecturerMenuController().start("lecturerMenu");

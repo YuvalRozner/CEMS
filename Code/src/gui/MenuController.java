@@ -21,8 +21,7 @@ public class MenuController extends AbstractController {
 		tmpMsg.setFrom("question");
 		
 		try {
-			//ClientUI.chat.accept(tmpMsg);
-			ClientUI.send(tmpMsg);
+			sendMsg(tmpMsg);
 		}catch(Throwable t) {System.out.println("accept dont work");};
 		
 		//the start of the new table

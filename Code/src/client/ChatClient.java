@@ -45,6 +45,7 @@ public class ChatClient extends AbstractClient {
 	 * @param msg The message from the server.
 	 */
 	public void handleMessageFromServer(Object msg) {
+		awaitResponse = false; //important. magic line.
 		System.out.print("Message recieved from server -> ");	
 		if(msg instanceof Msg) {
 			switch (((Msg)msg).getType()) {
@@ -83,7 +84,6 @@ public class ChatClient extends AbstractClient {
 				default:
 					break;
 			}
-			awaitResponse = false; //important. magic line.
 		}
 	}
 
@@ -99,8 +99,7 @@ public class ChatClient extends AbstractClient {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("Could not send message to server: Terminating client." + e);
-			ClientUI.send(new Msg(MsgType.disconnect));	}
+			System.out.println("Could not send message to server: Terminating client." + e);}
 	}
 	
 	public static AbstractController getScreen(String screenName) {

@@ -56,11 +56,7 @@ public class QuestionTableController extends AbstractController{
         ArrayList<Msg> UpdateQueries = DB_controller.updateQuestions1(table.getItems(), arrdup);
         Msg msg = new Msg(MsgType.manyMessages);
         msg.setMsgLst(UpdateQueries);
-        ClientUI.send(msg);
-        /*for (Msg tmpMsg : UpdateQueries) {
-            System.out.println("Send to server update query -> " + tmpMsg);
-            ClientUI.chat.accept(tmpMsg);
-        }*/
+        sendMsg(msg);
     }
     
     @FXML

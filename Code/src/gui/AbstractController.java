@@ -10,50 +10,54 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public abstract class AbstractController implements SceneSetter{
+public abstract class AbstractController implements SceneSetter {
 	private static Stage primaryStage;
-	private Scene scene; 
+	private Scene scene;
 	private String fxmlName;
-	
+
 	public void start(String fxmlName) throws Exception {
 		this.fxmlName = fxmlName;
-		
-		FXMLLoader loader =  new FXMLLoader(getClass().getResource("/fxml/"+fxmlName+".fxml"));
-		Parent root = 	loader.load();
-		ChatClient.screens.put(fxmlName,loader.getController());
-		
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlName + ".fxml"));
+		Parent root = loader.load();
+		ChatClient.screens.put(fxmlName, loader.getController());
+
 		scene = new Scene(root);
-		
-		((SceneSetter)loader.getController()).setScene(scene);
-		
+
+		((SceneSetter) loader.getController()).setScene(scene);
+
 		primaryStage.setTitle(fxmlName);
 		primaryStage.setScene(scene);
 		primaryStage.centerOnScreen();
-		primaryStage.show();	 	   
+		primaryStage.show();
 	}
 
-	 public void setScene(Scene scene) {
-			this.scene = scene;
+	public void setScene(Scene scene) {
+		this.scene = scene;
+	}
+
+	public static void sendMsg(Msg msg) {
+		ClientUI.client.handleMessageFromClientUI(msg);
 	}
 
 	public static void setPrimaryStage(Stage primaryStage) {
 		AbstractController.primaryStage = primaryStage;
 	}
-	
+
 	public void display() {
 		primaryStage.setTitle(fxmlName);
 		primaryStage.setScene(scene);
-		primaryStage.show();	
+		primaryStage.show();
 	}
-	
+
 	public void exitBtn(ActionEvent event) throws Exception {
 		try {
-			ClientUI.send(new Msg(MsgType.disconnect));
-		}catch(Throwable t) {
+			sendMsg(new Msg(MsgType.disconnect));
+		} catch (Throwable t) {
 			System.out.println("error getExitBtn");
 			System.exit(0);
 		}
-		System.exit(0); //exit 
+		System.exit(0); // exit
 	}
 
 	public String getFxmlName() {
