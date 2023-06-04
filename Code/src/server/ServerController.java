@@ -60,16 +60,15 @@ public class ServerController{
 	void connect(ActionEvent event) {
 		String p;
 		p = getport();
-		if (p.trim().isEmpty()) {
-			addConsole("You must enter a port number");
-		} else {
+		if (p.trim().isEmpty()) 
+			addConsole("You must enter a port number.");
+		else {
 			cemsServer = new CEMSserver(Integer.valueOf(p), this);
-			try {
-				cemsServer.listen(); // Start listening for connections
-			} catch (Exception ex) {
-			}
+			try { cemsServer.listen(); // Start listening for connections
+			} catch (Exception ex) {}
 		}
 	}
+	
 	private String getport() {
 		return portxt.getText();
 	}
@@ -87,7 +86,8 @@ public class ServerController{
 		btnDisconnect.setDisable(true);
 		btnConnect.setDisable(false);
 		addConsole("Server is close.\n");
-		addConsole("Server has stopped listening for connections.\n"); 
+		addConsole("Server has stopped listening for connections.\n");
+		CEMSserver.serverController.addConsole("\n_______________________________________  clear  __________________________________\n\n");
 	}
 
 	@FXML

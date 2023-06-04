@@ -53,59 +53,57 @@ public class CEMSserver extends AbstractServer {
         String clientHostname = client.getInetAddress().getHostAddress();
         try {
         	serverController.addConnected(clientAddress);
-        	
-        } catch(Throwable t) {System.out.println("Error in clientConnected");};  
-        
+        } catch(Throwable t) {System.out.println("Error in clientConnected");
+        serverController.addConsole("Error in clientConnected");};  
         // Print the client's IP address and hostname
+        serverController.addConsole("Client connected from " + clientAddress.getHostAddress() + " (" + clientHostname + ")");
         System.out.println("Client connected from " + clientAddress.getHostAddress() + " (" + clientHostname + ")");
     }
 	
 	/**
 	 * This method handles any messages received from the client.
-	 *
 	 * @param msg    The message received from the client.
 	 * @param client The connection from which the message originated.
 	 * @param
 	 */
-
 	public void handleMessageFromClient(Object msgObj, ConnectionToClient client) {
 		Msg msg = (Msg)msgObj;
 		java.sql.Statement stmt = null;
 		String queryStr;
 		ResultSet rs;
+		serverController.addConsole("Message received: " + msg + " from " + client);
 		System.out.println("Message received: " + msg + " from " + client);
 		try {
 			switch (msg.getType()) {
 				case select:
 					stmt = conn.createStatement();
 					queryStr = DB_controller.createSELECTquery(msg.getSelect(), msg.getFrom(), msg.getWhere());
-					System.out.println("query:\n"+ queryStr);
+					serverController.addConsole("query: ->"+ queryStr);
+					System.out.println("query: ->"+ queryStr);
 					rs = stmt.executeQuery(queryStr);
 					boolean isUser = (msg.getFrom().get(0).equals("cems.user")) ? true : false;
 					Msg tmpMsg = createDataMsg(isUser, rs);
 					sendToClient(tmpMsg, client);
 					break;
-					
 				case update:
 					stmt = conn.createStatement();
 					queryStr = DB_controller.createUPDATEquery(msg.getTableToUpdate(), msg.getSet(), msg.getWhere());
-					System.out.println("query:   "+ queryStr);
+					System.out.println("query: ->"+ queryStr);
+					System.out.println("query: ->"+ queryStr);
 					stmt.executeUpdate(queryStr);
 					sendToClient(new Msg(MsgType.succeeded), client);
 					break;
-					
 				case disconnect:
+					serverController.addConsole("clientDisconnected" + client);
 					System.out.println("clientDisconnected" + client);
 					serverController.removeConnected(client.getInetAddress());
 					sendToClient(new Msg(MsgType.bye), client);
 					break;
-					
 				case manyMessages:
 					for(Msg act : msg.getMsgLst()) 
 						handleMessageFromClient(act, client);
 					sendToClient(new Msg(MsgType.succeededAll), client);
 					break;
-					
 				case insert:
 					break;
 				default:
@@ -150,11 +148,14 @@ public class CEMSserver extends AbstractServer {
 		}
 				
 		else {
+			serverController.addConsole("SQL connection fail");
 			System.out.println("SQL connection fail");
 			try {
 				this.close();
+				serverController.addConsole("Server closed.");
 				System.out.println("Server closed.");
 			} catch (IOException e) {
+				serverController.addConsole("Cant close server.");
 				System.out.println("Cant close server.");
 			}
 		}
@@ -171,7 +172,7 @@ public class CEMSserver extends AbstractServer {
 	private void sendToClient(Object msg, ConnectionToClient client) {
 	      try{
 	    	  client.sendToClient(msg);
-	      } catch (Exception ex) {System.out.println("error in sending msg to client.");}
-	    
+	      } catch (Exception ex) { serverController.addConsole("error in sending msg to client.");
+	    	  System.out.println("error in sending msg to client.");}
 	}
 }
