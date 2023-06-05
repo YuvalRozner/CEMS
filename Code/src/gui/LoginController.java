@@ -22,9 +22,9 @@ public class LoginController extends AbstractController{
 		ChatClient.getScreen("lecturerMenu").start("lecturerMenu");
     }
     
-    
+    /*
      // conect with student user.
-     /*
+     
     @FXML
     void connect(ActionEvent event) throws Exception {
     	//temporary, it will take us to the lecturer munu: ......
