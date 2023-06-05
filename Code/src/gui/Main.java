@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import enteties.Course;
 import enteties.Question;
+import enteties.QuestionToShow;
 import enteties.StudentTest;
 import enteties.Subject;
 import enteties.Test;
@@ -15,6 +16,18 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+	////show test arrQuestionTest
+	/*
+		public static ArrayList<QuestionToShow> arrTestsToShow; 
+		static {
+			ArrayList<QuestionToShow> arrTestsToShow=new ArrayList<QuestionToShow>();
+			QuestionToShow Q1= new QuestionToShow("2","10","1","10","how much is 1+1?","2");
+			QuestionToShow Q2= new QuestionToShow("1","20","2","0","how much is 7+8?","3");
+			arrTestsToShow.add(Q1);
+			arrTestsToShow.add(Q2);
+	
+		}*/
+	
 	///add by lior Grades
 			public static ArrayList<StudentTest> arrGrades; 
 			static {
@@ -183,8 +196,11 @@ public class Main extends Application {
     	String StartTestfXML = "/fxml/StartTest.fxml";//11 ////lior
     	String StartTestTitle = "Start Test";
     	
-        Parent root = FXMLLoader.load(getClass().getResource(StartTestfXML));
-        primaryStage.setTitle(StartTestTitle);
+    	String ShowTestfXML = "/fxml/ShowTest.fxml";//12 ////lior
+    	String ShowTestTitle = "Start Test";
+    	
+        Parent root = FXMLLoader.load(getClass().getResource(ShowTestfXML));
+        primaryStage.setTitle(ShowTestTitle);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

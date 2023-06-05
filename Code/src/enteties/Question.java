@@ -1,7 +1,5 @@
 package enteties;
 
-import java.util.ArrayList;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.CheckBox;
@@ -9,7 +7,6 @@ import javafx.scene.control.TextField;
 
 
 public class Question {
-
 	//private String id;
 	private String subjectNum;
 	private String ID;
@@ -19,9 +16,9 @@ public class Question {
 	private String lecturerCreated;
 	
 	private String[] answers;
-	private int correctAns;
+	private String correctAns;
 	private String instructions;
-	private ArrayList<Integer> relevantCourses;
+	//private ArrayList<Integer> relevantCourses;
 	
 	private CheckBox select;
 	private TextField points=new TextField();
@@ -37,7 +34,6 @@ public class Question {
 		this.number = number;
 		this.lecturerCreated = lecturerCreated;
 	}
-	
 	
 	public String getID() {
 		return this.ID;
@@ -118,11 +114,11 @@ public class Question {
 		this.answers = answers;
 	}
 
-	public int getCorrectAns() {
+	public String getCorrectAns() {
 		return this.correctAns;
 	}
 
-	public void setCorrectAns(int correctAns) {
+	public void setCorrectAns(String correctAns) {
 		this.correctAns = correctAns;
 	}
 
@@ -141,22 +137,22 @@ public class Question {
 	public void setLecturereCreated(String lecturereCreated) {
 		this.lecturerCreated = lecturereCreated;
 	}
-
+	/*
 	public ArrayList<Integer> getRelevantCourses() {
 		return this.relevantCourses;
 	}
 
 	public void setRelevantCourses(ArrayList<Integer> relevantCourses) {
 		this.relevantCourses = relevantCourses;
-	}
+	}*/
 	
 	public String toString() {
 		return "{"+ID+", "+subjectNum+", "+courseName+", "+question+", "+number+", "+lecturerCreated+"}";
 	}
-	
+	/*
 	public int getPointsInt() {
 		return(Integer.parseInt(points.getText()));
-	}
+	}*/
 	
 	
 	public TextField getPoints() {

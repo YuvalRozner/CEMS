@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ShowTestController">
+   <children>
+      <Label layoutX="35.0" layoutY="25.0" text="Cours:" />
+      <Label layoutX="38.0" layoutY="49.0" text="Date:" />
+      <Label layoutX="38.0" layoutY="73.0" text="student id:" />
+      <Label layoutX="38.0" layoutY="98.0" text="finel grade:" />
+      <TableView fx:id="table" layoutX="35.0" layoutY="134.0" prefHeight="200.0" prefWidth="540.0">
+        <columns>
+          <TableColumn fx:id="numCol" prefWidth="75.0" text="number" />
+          <TableColumn fx:id="questionCol" prefWidth="75.0" text="Question" />
+            <TableColumn fx:id="questionPointCol" prefWidth="95.20001220703125" text="Question Point" />
+            <TableColumn fx:id="StudentPointCol" prefWidth="100.79998779296875" text="Student point" />
+            <TableColumn fx:id="correctAnswerCol" prefWidth="99.20001220703125" text="correct answer" />
+            <TableColumn fx:id="MarkedAnswerCol" prefWidth="94.4000244140625" text="Marked answer" />
+        </columns>
+      </TableView>
+      <Label fx:id="courseName" layoutX="80.0" layoutY="25.0" text="logic" />
+      <Label fx:id="date" layoutX="80.0" layoutY="49.0" text="20.05.23" />
+      <Label fx:id="studentId" layoutX="108.0" layoutY="73.0" text="316375187" />
+      <Label fx:id="grade" layoutX="108.0" layoutY="98.0" text="95" />
+      <Button fx:id="exitBtn" layoutX="523.0" layoutY="353.0" mnemonicParsing="false" onAction="#ExitBtn" text="Exit" />
+   </children>
+</Pane>

@@ -1,6 +1,7 @@
 package enteties;
 
 import java.sql.Time;
+import java.util.ArrayList;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -16,7 +17,7 @@ public class StudentTest {
 	private int submittingTime;
 	private Time time;
 	private TestToExexeute testToExecute;
-	private int[] answers;
+	private ArrayList<String> answers;
 	private String grade;//change type lior change also get and set
 	
 	///added by lior
@@ -31,15 +32,14 @@ public class StudentTest {
 	}
 	
 	///constructor Grades
-	public StudentTest(Course course , String comment,String grade, Test test) {
+
+	public StudentTest(Course course, String comment, String grade, Test test) {
 		this.course=course;
 		this.comment=comment;
 		this.grade=grade;
 		this.test=test;
 	}
-	
-	
-	
+
 	////////select
 	public CheckBox getSelect() {
 		return select;
@@ -132,11 +132,11 @@ public class StudentTest {
 		this.testToExecute = testToExecute;
 	}
 
-	public int[] getAnswers() {
+	public ArrayList<String> getAnswers() {
 		return this.answers;
 	}
 
-	public void setAnswers(int[] answers) {
+	public void setAnswers(ArrayList<String> answers) {
 		this.answers = answers;
 	}
 
