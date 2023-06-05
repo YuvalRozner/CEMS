@@ -1,8 +1,6 @@
 package gui;
 
 import client.ChatClient;
-import controllers.JDBC.Msg;
-import controllers.JDBC.MsgType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -50,12 +48,7 @@ public class LecturerMenuController extends AbstractController {
     }
     
 	public void logout(ActionEvent event) throws Exception {
-    	Msg msg = new Msg(MsgType.update);
-		msg.setTableToUpdate("cems.user");
-		msg.setSet("loggedin", "no");
-    	msg.setWhere("username", ChatClient.user.getUsername());
-    	msg.setWhere("password", ChatClient.user.getPassword());
-    	sendMsg(msg);
+    	super.logout();
     	((Node)event.getSource()).getScene().getWindow().hide();
     	ChatClient.getScreen("login").display();
 	}

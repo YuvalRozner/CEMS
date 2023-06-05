@@ -60,6 +60,7 @@ public abstract class AbstractController implements SceneSetter {
 
 	public void exitBtn(ActionEvent event) throws Exception {
 		try {
+			logout();
 			sendMsg(new Msg(MsgType.disconnect));
 		} catch (Throwable t) {
 			System.out.println("error getExitBtn");
@@ -83,5 +84,15 @@ public abstract class AbstractController implements SceneSetter {
 	public void backBtn(ActionEvent event) throws Exception {
 		((Node)event.getSource()).getScene().getWindow().hide();
 		ChatClient.getScreen(prevScreen).display();
+	}
+	
+	public void logout() throws Exception {
+		if(ChatClient.user==null) return;
+    	Msg msg = new Msg(MsgType.update);
+		msg.setTableToUpdate("cems.user");
+		msg.setSet("loggedin", "no");
+    	msg.setWhere("username", ChatClient.user.getUsername());
+    	msg.setWhere("password", ChatClient.user.getPassword());
+    	sendMsg(msg);
 	}
 }
