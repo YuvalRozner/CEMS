@@ -20,7 +20,6 @@ public class LoginController extends AbstractController{
     @FXML
     void connect(ActionEvent event) throws Exception {
     	ChatClient.resetUser();
-    	System.out.println("user1:  "+ChatClient.user);
     	if(!login(userNameTxt.getText(), passwordTxt.getText())) return; 
     	User user = ChatClient.user;
 	    switch(user.getPremission()) {
@@ -49,7 +48,6 @@ public class LoginController extends AbstractController{
     	sendMsg(msg);
     	User user = ChatClient.user;
     	if(user==null) { System.out.println("cant find this usename."); return false;}
-    	System.out.println("user2:  "+user);
     	if(!user.getPassword().equals(password)) { System.out.println("username or password are wrong."); return false;}
     	//if(user.getLoggedin().equals("yes")) { System.out.println("this user is already loggedin in another device."); return false;}
     	msg = new Msg(MsgType.update);
