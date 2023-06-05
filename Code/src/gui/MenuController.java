@@ -21,6 +21,6 @@ public class MenuController extends AbstractController {
 		}catch(Throwable t) {System.out.println("accept dont work");};
 		
 		//the start of the new table
-		new QuestionTableController().start("questionTable", "menu");
+		start("questionTable", "menu");
 	}
 }

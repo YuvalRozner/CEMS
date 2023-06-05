@@ -17,7 +17,6 @@ public class Msg implements Serializable{
 	private HashMap<String, Object> set = null; // for the SET part of query.
 	private ArrayList<Msg> msgLst = null; //used to send a bunch of messages all at once.
 	private ArrayList<ArrayList<Object>> data = null; //data from DB to client.
-	private boolean isUser;
 
 	/* original empty constructor. */
 	public Msg() {}
@@ -99,14 +98,6 @@ public class Msg implements Serializable{
 	public void setSet(String setCol, Object setValue) {
 		if(set==null) set=new HashMap<String, Object>();
 		set.put(setCol, setValue);
-	}
-	
-	public boolean isUser() {
-		return isUser;
-	}
-
-	public void setIsUser(boolean isUser) {
-		this.isUser = isUser;
 	}
 
 	@Override

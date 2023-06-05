@@ -54,6 +54,6 @@ public class LecturerTestViewController extends AbstractController {
     }
 	
 	public void showStatistics(ActionEvent event) throws Exception {
-		new LecturerStaticsReportController().start("lecturerStaticsReport", "lecturerTestView");
+		start("lecturerStaticsReport", "lecturerTestView");
 	}
 }

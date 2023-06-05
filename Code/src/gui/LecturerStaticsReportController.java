@@ -38,9 +38,4 @@ public class LecturerStaticsReportController extends AbstractController{
 		barChart.setLegendVisible(false);
 	}
 	
-	public void backBtn(ActionEvent event) throws Exception {
-		((Node)event.getSource()).getScene().getWindow().hide();
-		ChatClient.getScreen("lecturerTestView").display();
-	}
-	
 }

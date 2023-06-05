@@ -81,8 +81,11 @@ public class CEMSserver extends AbstractServer {
 					serverController.addConsole("query: ->"+ queryStr);
 					System.out.println("query: ->"+ queryStr);
 					rs = stmt.executeQuery(queryStr);
-					boolean isUser = (msg.getFrom().get(0).equals("cems.user")) ? true : false;
-					Msg tmpMsg = createDataMsg(isUser, rs);
+					
+					MsgType type = (msg.getFrom().get(0).equals("cems.user")) ? MsgType.user : MsgType.data;
+					Msg tmpMsg = createDataMsg(type, rs);
+					if(tmpMsg.getData()==null || tmpMsg.getData().isEmpty())
+						tmpMsg = new Msg(MsgType.empty);
 					sendToClient(tmpMsg, client);
 					break;
 				case update:
@@ -119,7 +122,7 @@ public class CEMSserver extends AbstractServer {
 	 * @return
 	 * @throws SQLException
 	 */
-	private Msg createDataMsg(boolean isUser,ResultSet rs) throws SQLException {
+	private Msg createDataMsg(MsgType type, ResultSet rs) throws SQLException {
 		ArrayList<ArrayList<Object>> dataToClient = new ArrayList<>();
 		int colunmCount = rs.getMetaData().getColumnCount();
 		while (rs.next()) {
@@ -128,9 +131,8 @@ public class CEMSserver extends AbstractServer {
 				rowTemp.add(rs.getObject(i));
 			dataToClient.add(rowTemp);
 		}
-		Msg tmpMsg = new Msg(MsgType.data);
+		Msg tmpMsg = new Msg(type);
 		tmpMsg.setData(dataToClient);
-		tmpMsg.setIsUser(isUser);
 		return tmpMsg;
 	}
 	

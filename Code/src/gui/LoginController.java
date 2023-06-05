@@ -19,40 +19,47 @@ public class LoginController extends AbstractController{
 
     @FXML
     void connect(ActionEvent event) throws Exception {
-    	
-    	String username = userNameTxt.getText();
-    	String password = passwordTxt.getText();
+    	ChatClient.resetUser();
+    	System.out.println("user1:  "+ChatClient.user);
+    	if(!login(userNameTxt.getText(), passwordTxt.getText())) return; 
+    	User user = ChatClient.user;
+	    switch(user.getPremission()) {
+    		case "lecturer":
+        		start("lecturerMenu", "login");
+        		((LecturerMenuController)ChatClient.getScreen("lecturerMenu")).setWelcome("Welcome " + user.getName());
+    			break;
+    		case "student":
+    			//new StudentMenuController().start("studentMenu");
+    			break;
+    		case "hod":
+    			//new HODMenuController().start("hodMenu");
+    			break;
+			default:
+				break;
+    	}
+    }
+
+	private boolean login(String username, String password) {
     	Msg msg = new Msg(MsgType.select);
     	msg.setSelect("*");
     	msg.setFrom("cems.user");
     	msg.setWhere("username", username);
-    	msg.setWhere("password", password);
+    	//msg.setWhere("password", password);
+    	
     	sendMsg(msg);
     	User user = ChatClient.user;
-    	if(user!=null) {
-    		System.out.println("user:  "+user);
-    		//if(user.getLoggedin().equals("no")) {
-	    		msg = new Msg(MsgType.update);
-	    		msg.setTableToUpdate("cems.user");
-	    		msg.setSet("loggedin", "yes");
-	        	msg.setWhere("username", username);
-	        	msg.setWhere("password", password);
-	        	sendMsg(msg);
-	        	switch(user.getPremission()) {
-	    		case "lecturer":
-	        		new LecturerMenuController().start("lecturerMenu", "login");
-	        		((LecturerMenuController)ChatClient.getScreen("lecturerMenu")).setWelcome("Welcome " + user.getName());
-	    			break;
-	    		case "student":
-	    			//new StudentMenuController().start("studentMenu");
-	    			break;
-	    		case "hod":
-	    			//new HODMenuController().start("hodMenu");
-	    			break;
-				default:
-					break;
-	    	//}
-    		}
-    	}
-    }
+    	if(user==null) { System.out.println("cant find this usename."); return false;}
+    	System.out.println("user2:  "+user);
+    	if(!user.getPassword().equals(password)) { System.out.println("username or password are wrong."); return false;}
+    	//if(user.getLoggedin().equals("yes")) { System.out.println("this user is already loggedin in another device."); return false;}
+    	msg = new Msg(MsgType.update);
+		msg.setTableToUpdate("cems.user");
+		msg.setSet("loggedin", "yes");
+    	msg.setWhere("username", username);
+    	//msg.setWhere("password", password);
+    	sendMsg(msg);
+    	
+    	
+    	return true;
+	}
 }

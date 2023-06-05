@@ -23,23 +23,23 @@ public class LecturerMenuController extends AbstractController {
 
     @FXML
     void createQuestion(ActionEvent event) throws Exception {
-		new CreateQuestionController().start("createQuestion", "lecturerMenu");
+		start("createQuestion", "lecturerMenu");
     }
 
     @FXML
     void createTest(ActionEvent event) throws Exception {
-		new CreateTestController().start("createTest", "lecturerMenu");
+		start("createTest", "lecturerMenu");
     }
 
     @FXML
     void executeTest(ActionEvent event) throws Exception {
-    	new MenuController().start("menu", "lecturerMenu"); //temporary........................
+    	start("menu", "lecturerMenu"); //temporary........................
     }
 
 
     @FXML
     void reports(ActionEvent event) throws Exception {
-		new LecturerTestViewController().start("lecturerTestView", "lecturerMenu");
+		start("lecturerTestView", "lecturerMenu");
     }
 
     @FXML

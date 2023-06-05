@@ -56,10 +56,13 @@ public class ChatClient extends AbstractClient {
 					System.exit(0);
 					break;
 				case data:
-					if(msg.isUser()) 
-						user = msg.convertData(User.class).get(0);
-					else 
-						AbstractController.setDataReceived(msg);
+					AbstractController.setDataReceived(msg);
+					break;
+				case user:
+					user = msg.convertData(User.class).get(0);
+					break;
+				case empty:
+					System.out.println("server didn't find any data matching this query.");
 					break;
 				default:
 					break;
@@ -84,5 +87,9 @@ public class ChatClient extends AbstractClient {
 	
 	public static AbstractController getScreen(String screenName) {
 		return screens.get(screenName);
+	}
+	
+	public static void resetUser() {
+		user = null;
 	}
 }

@@ -16,7 +16,7 @@ public abstract class AbstractController implements SceneSetter {
 	public static Msg msgReceived;
 	private Scene scene;
 	private String fxmlName;
-	private String prevScreen = null;
+	private String prevScreen;
 
 	public void start(String fxmlName, String prevScreen) throws Exception {
 		this.fxmlName = fxmlName;
@@ -24,14 +24,13 @@ public abstract class AbstractController implements SceneSetter {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlName + ".fxml"));
 		Parent root = loader.load();
 		ChatClient.screens.put(fxmlName, loader.getController());
+		Scene tmpScene = new Scene(root);
 
-		scene = new Scene(root);
-
-		((SceneSetter)loader.getController()).setScene(scene);
-		((AbstractController)loader.getController()).setPrevScreen(prevScreen);
+		((SceneSetter)loader.getController()).setScene(tmpScene);
+		((SceneSetter)loader.getController()).setPrevScreen(prevScreen);
 
 		primaryStage.setTitle(fxmlName);
-		primaryStage.setScene(scene);
+		primaryStage.setScene(tmpScene);
 		primaryStage.centerOnScreen();
 		primaryStage.show();
 	}

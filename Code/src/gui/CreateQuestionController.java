@@ -90,10 +90,4 @@ public class CreateQuestionController extends AbstractController{
         return courses; 
     }
     
-	/*public void backBtn(ActionEvent event) throws Exception {
-		((Node)event.getSource()).getScene().getWindow().hide();
-		ChatClient.getScreen("lecturerMenu").display();
-	}*/
-
-    
 }
