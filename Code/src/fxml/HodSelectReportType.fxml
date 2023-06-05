@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane prefHeight="316.0" prefWidth="378.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="gui.HodSelectReportTypeController">
+   <children>
+      <Label layoutX="25.0" layoutY="77.0" text="Please select a filter:" />
+      <Label layoutX="25.0" layoutY="151.0" text="Please select from the list:" />
+      <RadioButton layoutX="33.0" layoutY="112.0" mnemonicParsing="false" onAction="#lecturerRB" text="By Lecturer">
+         <toggleGroup>
+            <ToggleGroup fx:id="reportFilter" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton layoutX="253.0" layoutY="112.0" mnemonicParsing="false" onAction="#studentRB" text="By Student" toggleGroup="$reportFilter" />
+      <RadioButton layoutX="141.0" layoutY="112.0" mnemonicParsing="false" onAction="#courseRB" text="By Course" toggleGroup="$reportFilter" />
+      <ComboBox fx:id="comboBoxInfo" layoutX="33.0" layoutY="175.0" prefHeight="25.0" prefWidth="308.0" promptText="Not Selected" />
+      <Label layoutX="133.0" layoutY="20.0" text="Report Type" underline="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="134.0" layoutY="233.0" mnemonicParsing="false" onAction="#showReportsBtn" prefHeight="43.0" prefWidth="106.0" text="Show Report" />
+      <Button layoutX="292.0" layoutY="255.0" mnemonicParsing="false" onAction="#backBtn" prefHeight="43.0" prefWidth="62.0" text="Back" />
+   </children>
+</Pane>
