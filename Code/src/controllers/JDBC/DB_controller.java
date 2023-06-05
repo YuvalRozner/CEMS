@@ -54,12 +54,42 @@ public class DB_controller {
 		return query.toString()+";";
 	}
 	
+	/*  */
+	// example for me: INSERT INTO lab3.students (ID, FirstName, LastName,Faculty)	VALUES ('1', 'Dor','shabat', 'a'), ('2', 'Dor1','shabat1', 'b');
+	public static String createINSERTquery(ArrayList<String> tableToUpdate, ArrayList<String> colNames, ArrayList<ArrayList<Object>> values) {
+		if(tableToUpdate==null || colNames==null || values==null || colNames.size()!=values.size()) return "";
+		StringBuilder query = new StringBuilder("INSET INTO ");
+		query.append(tableToUpdate.get(0)); // append the name of table wanted to be insert to.
+		query.append(" (");
+		query.append(separateWithComma(colNames)); // append the columns names to be updated.
+		query.append(") VALUES ");
+		query.append(separateValuesWithComma(values)); // append the values to insert.
+		return query.toString()+";";
+	}
+	
 	/* the func gets an arraylist of string parameters (select/from) for a query and return a string of the parameters separated with commas. */
 	private static String separateWithComma(ArrayList<String> lst) {
 		if(lst == null || lst.size()==0) return "";
 		StringBuilder res = new StringBuilder();
 		for(String str : lst)
 			res.append(str + ",");
+		res.deleteCharAt(res.length()-1);
+		return res.toString();
+	}
+	
+	/* the func gets an arraylist of arraylist of objects (values) for insert query and return a string of the parameters separated with commas int breclets. */
+	private static String separateValuesWithComma(ArrayList<ArrayList<Object>> lists) { 
+		if(lists == null || lists.size()==0) return "";
+		StringBuilder res = new StringBuilder();
+		for(ArrayList<Object> lst : lists) {
+			res.append("(");
+			for(Object val : lst) {
+				if(val instanceof String) res.append("'"+val+"',");
+				else res.append(val+",");
+			}
+			res.deleteCharAt(res.length()-1);
+			res.append("),");
+		}
 		res.deleteCharAt(res.length()-1);
 		return res.toString();
 	}

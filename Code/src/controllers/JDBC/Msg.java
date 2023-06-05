@@ -17,6 +17,8 @@ public class Msg implements Serializable{
 	private HashMap<String, Object> set = null; // for the SET part of query.
 	private ArrayList<Msg> msgLst = null; //used to send a bunch of messages all at once.
 	private ArrayList<ArrayList<Object>> data = null; //data from DB to client.
+	private ArrayList<String> colNames = null;
+	private ArrayList<ArrayList<Object>> values = null;
 
 	/* original empty constructor. */
 	public Msg() {}
@@ -105,6 +107,28 @@ public class Msg implements Serializable{
 		return "Msg [type=" + type +"]" ;
 	}
 	
+	public ArrayList<String> getColNames() {
+		return colNames;
+	}
+
+	public void setColNames(ArrayList<String> colNames) {
+		this.colNames = colNames;
+	}
+	
+	public void setColNames(String name) {
+		if(colNames==null) colNames=new ArrayList<String>();
+		colNames.add(name);
+	}
+
+	public ArrayList<ArrayList<Object>> getValues() {
+		return values;
+	}
+	
+	public void setValues(ArrayList<Object> lst) {
+		if(values==null) values=new ArrayList<ArrayList<Object>>();
+		values.add(lst);
+	}
+
 	/**
 	 * @param <T>  class type of wanted return
 	 * @param type ClassName.class , ClassName of wanted type return
