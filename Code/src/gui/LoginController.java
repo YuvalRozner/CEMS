@@ -39,6 +39,7 @@ public class LoginController extends AbstractController{
     }
 
 	private boolean login(String username, String password) {
+		if(username==null || password==null) { System.out.println("you must enter username and password."); return false;}
     	Msg msg = new Msg(MsgType.select);
     	msg.setSelect("*");
     	msg.setFrom("cems.user");
