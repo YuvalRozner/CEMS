@@ -31,15 +31,14 @@ public class StudentTest {
 	}
 	
 	///constructor Grades
-	public StudentTest(Course course , String comment,String grade, Test test) {
+	
+	public StudentTest(Course course, String comment, String grade, Test test) {
 		this.course=course;
 		this.comment=comment;
 		this.grade=grade;
 		this.test=test;
 	}
-	
-	
-	
+
 	////////select
 	public CheckBox getSelect() {
 		return select;

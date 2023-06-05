@@ -1,11 +1,12 @@
 package gui;
 
+import client.ChatClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class StartTestController {
+public class StartTestController extends AbstractController{
 
     @FXML
     private Button backbtn;
@@ -33,8 +34,12 @@ public class StartTestController {
     }
 
     @FXML
-    void startBtn(ActionEvent event) {
-
+    void startBtn(ActionEvent event) throws Exception{
+    	////start manual test
+    	ChatClient.screens.putIfAbsent("ManualTest", new ManualTestController());
+		ChatClient.getScreen("ManualTest").start("ManualTest");
+		
+		//start online test
     }
     public StartTestController() {
     	idTextField=new TextField();
