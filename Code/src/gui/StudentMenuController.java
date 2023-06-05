@@ -17,12 +17,13 @@ public class StudentMenuController extends AbstractController{
     @FXML
     void showGrade(ActionEvent event) throws Exception {
     	ChatClient.screens.putIfAbsent("ShowGrades", new ShowGradeController());
-		ChatClient.getScreen("ShowGrades").start("ShowGrades");
+		ChatClient.getScreen("ShowGrades").start("ShowGrade");
     }
 
     @FXML
-    void startTest(ActionEvent event) {
-
+    void startTest(ActionEvent event) throws Exception{
+    	ChatClient.screens.putIfAbsent("StartTest", new ShowGradeController());
+		ChatClient.getScreen("StartTest").start("StartTest");
     }
 
 }

@@ -178,10 +178,13 @@ public class Main extends Application {
     	String runningTestTitle = "runing Test";
     	
     	String ShowGradesfXML = "/fxml/ShowGrade.fxml";//10 ////lior
-    	String ShowGradesTitle = "show Grades";
+    	String ShowGradesTitle = "Show Grades";
     	
-        Parent root = FXMLLoader.load(getClass().getResource(ShowGradesfXML));
-        primaryStage.setTitle(ShowGradesTitle);
+    	String StartTestfXML = "/fxml/StartTest.fxml";//11 ////lior
+    	String StartTestTitle = "Start Test";
+    	
+        Parent root = FXMLLoader.load(getClass().getResource(StartTestfXML));
+        primaryStage.setTitle(StartTestTitle);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

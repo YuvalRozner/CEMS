@@ -14,12 +14,13 @@ public abstract class AbstractController {
 	
 	public void start(String fxmlName) throws Exception {
 		this.fxmlName = fxmlName;
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/"+fxmlName+".fxml"));	
+		Parent root = FXMLLoader.load(getClass().getResource("/fxml/"+fxmlName+".fxml"));
 		scene = new Scene(root);
 		primaryStage.setTitle(fxmlName);
 		primaryStage.setScene(scene);
 		primaryStage.centerOnScreen();
-		primaryStage.show();	 	   
+		primaryStage.show();	 	  
+
 	}
 
 	public static void setPrimaryStage(Stage primaryStage) {

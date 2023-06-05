@@ -11,9 +11,6 @@ public class Test {
     private RadioButton radioButton;
     
     //constructor by lior
-    public Test(String id) {
-    	this.id=id;
-    }
     
     public Test(String id, String course, String date) {
         super();
@@ -24,7 +21,11 @@ public class Test {
         this.radioButton.setToggleGroup(null); // Set the ToggleGroup to null initially
     }
     
-    public String getId() {
+    public Test(String id) {
+    	this.id=id;
+	}
+
+	public String getId() {
         return id;
     }
     

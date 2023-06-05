@@ -89,10 +89,6 @@ public class StudentTest {
 		return show;
 	}
 
-	public void setNewShow() {
-		this.show = new Button();
-		show.setText("Show");
-	}
 	/////////Course
 	public Course getCourse() {
 		return this.course;
@@ -160,5 +156,11 @@ public class StudentTest {
 		this.studentId = studentId2;
 		
 	}
-
+	//////////show
+	public void setNewShow() {
+		this.show = new Button();
+		show.setText("Show");
+		
+	}
+	/////////////show
 }

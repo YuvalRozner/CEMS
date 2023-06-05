@@ -37,14 +37,11 @@ public class ShowGradeController extends AbstractController{
 		ChatClient.getScreen("studentMenu").display();
     }
     public ShowGradeController() {
-        
     	arrGrades = new ArrayList<StudentTest>(Main.arrGrades);
-    	
         for (StudentTest Grade : Main.arrGrades) {
         	Grade.setNewShow();
         }
         gradesTable = FXCollections.observableArrayList(arrGrades);
-       
         //for (StudentTest T : arrStudentTest) {
         //    arrdup.add(new StudentTest(T.getStudentId(), T.getGrade(), T.getShow(), T.getNote(), T.getSelect()));
             
@@ -53,13 +50,9 @@ public class ShowGradeController extends AbstractController{
     
     @FXML
 	protected void initialize() {
-    	System.out.println("1");
     	CommentCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("comment"));
-    	System.out.println("2");
     	GradeCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("grade"));
-    	System.out.println("3");
     	ShowCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("show"));
-    	System.out.println("4");
 
     	
     	
@@ -69,26 +62,20 @@ public class ShowGradeController extends AbstractController{
     	        return new SimpleStringProperty(param.getValue().getCourse().getCourseName());
     	    }
     	});
-    	System.out.println("5");
     	NumCourseCol.setCellValueFactory(new Callback<CellDataFeatures<StudentTest, String>, ObservableValue<String>>() {
     	    @Override
     	    public ObservableValue<String> call(CellDataFeatures<StudentTest, String> param) {
     	        return new SimpleStringProperty(param.getValue().getCourse().getCourseNum());
     	    }
     	});
-    	System.out.println("6");
     	NumTestCol.setCellValueFactory(new Callback<CellDataFeatures<StudentTest, String>, ObservableValue<String>>() {
     	    @Override
     	    public ObservableValue<String> call(CellDataFeatures<StudentTest, String> param) {
     	        return new SimpleStringProperty(param.getValue().getTest().getId());
     	    }
     	});
-    	System.out.println("7");
 		table.setItems(gradesTable);
-		System.out.println("8");
 		table.refresh();
-		System.out.println("9");
 		
 	}
-
 }
