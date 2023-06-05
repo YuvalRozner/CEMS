@@ -15,11 +15,11 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="578.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AprroveGradeController">
+<Pane maxHeight="608.0" maxWidth="578.0" minHeight="608.0" minWidth="578.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AprroveGradeController">
    <children>
-      <Pane layoutX="36.0" layoutY="108.0" prefHeight="571.0" prefWidth="200.0" style="-fx-background-color: #92bce3;" />
-      <Pane layoutX="337.0" layoutY="-95.0" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
-      <Pane layoutX="42.0" layoutY="163.0" prefHeight="40.0" prefWidth="493.0" style="-fx-background-color: #C5EFFF; -fx-background-radius: 0 50 50 0;" />
+      <Pane layoutX="36.0" layoutY="110.0" maxHeight="569.0" maxWidth="200.0" minHeight="569.0" minWidth="200.0" style="-fx-background-color: #92bce3;" />
+      <Pane layoutX="337.0" layoutY="-95.0" maxHeight="182.0" maxWidth="220.0" minHeight="182.0" minWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
+      <Pane layoutX="42.0" layoutY="163.0" maxHeight="40.0" maxWidth="493.0" minHeight="40.0" minWidth="493.0" style="-fx-background-color: #C5EFFF; -fx-background-radius: 0 50 50 0;" />
       <Circle fill="WHITE" layoutX="60.0" layoutY="561.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />
       <ImageView fitHeight="181.0" fitWidth="229.0" layoutX="20.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -30,13 +30,13 @@
          <font>
             <Font name="Comic Sans MS Bold" size="14.0" />
          </font></Label>
-      <Button layoutX="432.0" layoutY="561.0" mnemonicParsing="false" onAction="#backBtn" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="back">
+      <Button layoutX="432.0" layoutY="561.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#backBtn" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>
-      <Label layoutX="44.0" layoutY="58.0" prefHeight="60.0" prefWidth="408.0" text="Grades Confirmation">
+      <Label layoutX="32.0" layoutY="64.0" text="Grades Confirmation">
          <font>
-            <Font name="Marker Felt Thin" size="45.0" />
+            <Font name="Comic Sans MS Bold" size="40.0" />
          </font>
          <effect>
             <Lighting specularConstant="0.8" specularExponent="0.5" surfaceScale="10.0">
@@ -56,7 +56,7 @@
                </light>
             </Lighting>
          </effect></Label>
-      <Label layoutX="44.0" layoutY="161.0" prefHeight="21.0" prefWidth="292.0" text="To show a test - click &quot;show&quot;.">
+      <Label layoutX="44.0" layoutY="161.0" text="To show a test - click &quot;show&quot;.">
          <font>
             <Font name="Comic Sans MS Bold" size="14.0" />
          </font></Label>
@@ -64,12 +64,12 @@
          <font>
             <Font name="Comic Sans MS Bold" size="14.0" />
          </font></Label>
-      <Button layoutX="401.0" layoutY="478.0" mnemonicParsing="false" onAction="#aprroveBtn" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Confirm">
+      <Button layoutX="401.0" layoutY="478.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#aprroveBtn" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Confirm">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>
       <ComboBox fx:id="corseComboBox" layoutX="146.0" layoutY="124.0" prefHeight="25.0" prefWidth="301.0" promptText="Not Selected" stylesheets="@ComboBox.css" />
-      <TableView fx:id="table" layoutX="44.0" layoutY="222.0" prefHeight="249.0" prefWidth="475.0" stylesheets="@TableView.css">
+      <TableView fx:id="table" layoutX="44.0" layoutY="222.0" prefHeight="249.0" stylesheets="@TableView.css">
         <columns>
             <TableColumn fx:id="idstuCol" minWidth="40.00000190734863" prefWidth="85.0" text="ID" />
             <TableColumn fx:id="gradeCol" minWidth="29.5" prefWidth="95.5" text="Grade" />

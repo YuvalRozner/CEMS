@@ -13,17 +13,17 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="457.0" prefWidth="378.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LecturerMenuController">
+<Pane maxHeight="457.0" maxWidth="378.0" minHeight="457.0" minWidth="378.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LecturerMenuController">
    <children>
-      <Pane layoutX="149.0" layoutY="-107.0" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
+      <Pane layoutX="149.0" layoutY="-107.0" maxHeight="182.0" maxWidth="220.0" minHeight="182.0" minWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
       <ImageView fitHeight="171.0" fitWidth="175.0" layoutX="225.0" layoutY="-37.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/Cems-logo.png" />
          </image>
       </ImageView>
-      <Label layoutX="14.0" layoutY="72.0" prefHeight="61.0" prefWidth="324.0" text="Lecturer Menu">
+      <Label layoutX="19.0" layoutY="78.0" text="Lecturer Menu">
          <font>
-            <Font name="Marker Felt Thin" size="45.0" />
+            <Font name="Comic Sans MS Bold" size="40.0" />
          </font>
          <effect>
             <Lighting specularConstant="0.8" specularExponent="0.5" surfaceScale="10.0">
@@ -44,7 +44,7 @@
             </Lighting>
          </effect>
       </Label>
-      <Label layoutX="19.0" layoutY="123.0" prefHeight="21.0" prefWidth="168.0" text="Welcome Lecturer!">
+      <Label layoutX="19.0" layoutY="123.0" text="Welcome Lecturer!">
          <font>
             <Font name="Comic Sans MS" size="15.0" />
          </font>
@@ -54,36 +54,36 @@
             <Image url="@../../images/forMenu.png" />
          </image>
       </ImageView>
-      <Pane layoutX="-15.0" layoutY="142.0" prefHeight="292.0" prefWidth="218.0" style="-fx-background-color: #92bce3; -fx-background-radius: 0;">
+      <Pane layoutX="-15.0" layoutY="142.0" maxHeight="292.0" maxWidth="218.0" minHeight="292.0" minWidth="218.0" style="-fx-background-color: #92bce3; -fx-background-radius: 0;">
          <children>
             <VBox layoutX="67.0" layoutY="16.0" prefHeight="300.0" prefWidth="168.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#createQuestion" prefHeight="35.0" prefWidth="151.0" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Create Question">
+                  <Button maxHeight="35.0" maxWidth="151.0" minHeight="35.0" minWidth="151.0" mnemonicParsing="false" onAction="#createQuestion" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Create Question">
                      <font>
                         <Font name="Comic Sans MS Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#createTest" prefHeight="35.0" prefWidth="151.0" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Create Test">
+                  <Button maxHeight="35.0" maxWidth="151.0" minHeight="35.0" minWidth="151.0" mnemonicParsing="false" onAction="#createTest" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Create Test">
                      <font>
                         <Font name="Comic Sans MS Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#approveGrades" prefHeight="35.0" prefWidth="151.0" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Approve Grades">
+                  <Button maxHeight="35.0" maxWidth="151.0" minHeight="35.0" minWidth="151.0" mnemonicParsing="false" onAction="#approveGrades" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Confirm Grades">
                      <font>
                         <Font name="Comic Sans MS Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#executeTest" prefHeight="35.0" prefWidth="151.0" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Execute Test">
+                  <Button maxHeight="35.0" maxWidth="151.0" minHeight="35.0" minWidth="151.0" mnemonicParsing="false" onAction="#executeTest" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Execute Test">
                      <font>
                         <Font name="Comic Sans MS Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#runningTest" prefHeight="35.0" prefWidth="151.0" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Running Test">
+                  <Button maxHeight="35.0" maxWidth="151.0" minHeight="35.0" minWidth="151.0" mnemonicParsing="false" onAction="#runningTest" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Running Test">
                      <font>
                         <Font name="Comic Sans MS Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#reports" prefHeight="35.0" prefWidth="151.0" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Reports">
+                  <Button maxHeight="35.0" maxWidth="151.0" minHeight="35.0" minWidth="151.0" mnemonicParsing="false" onAction="#reports" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Reports">
                      <font>
                         <Font name="Comic Sans MS Bold" size="14.0" />
                      </font>
@@ -92,16 +92,16 @@
             </VBox>
          </children>
       </Pane>
-      <Button layoutX="252.0" layoutY="420.0" mnemonicParsing="false" onAction="#logout" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Logout">
+      <Button layoutX="252.0" layoutY="420.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Logout">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font>
          <effect>
             <Blend />
          </effect></Button>
-      <ImageView fitHeight="39.0" fitWidth="212.0" layoutX="-3.0" layoutY="426.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="43.0" fitWidth="222.0" layoutX="-3.0" layoutY="422.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../CEMS@reallygreatsystem.com-2.png" />
+            <Image url="@../../images/CEMS@reallygreatsystem.com.png" />
          </image>
       </ImageView>
    </children>

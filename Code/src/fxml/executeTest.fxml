@@ -16,15 +16,15 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="578.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.executeTestController">
    <children>
-      <Pane layoutX="338.0" layoutY="-99.0" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
-      <Pane layoutX="34.0" layoutY="129.0" prefHeight="510.0" prefWidth="231.0" style="-fx-background-color: #92bce3;" />
-      <Label layoutX="38.0" layoutY="139.0" prefHeight="19.0" prefWidth="460.0" text="Select a test, add the code and click the &quot;Execute&quot; button.">
+      <Pane layoutX="338.0" layoutY="-99.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
+      <Pane layoutX="34.0" layoutY="129.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="231.0" style="-fx-background-color: #92bce3;" />
+      <Label layoutX="38.0" layoutY="139.0" text="Select a test, add the code and click the &quot;Execute&quot; button.">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Label>
-      <Label layoutX="38.0" layoutY="66.0" prefHeight="60.0" prefWidth="292.0" text="Execute Test">
+      <Label layoutX="34.0" layoutY="75.0" text="Execute Test">
          <font>
-            <Font name="Marker Felt Thin" size="55.0" />
+            <Font name="Comic Sans MS Bold" size="45.0" />
          </font>
          <effect>
             <Lighting specularConstant="0.8" specularExponent="0.5" surfaceScale="10.0">
@@ -44,13 +44,13 @@
                </light>
             </Lighting>
          </effect></Label>
-      <ImageView fitHeight="171.0" fitWidth="177.0" layoutX="413.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="193.0" fitWidth="216.0" layoutX="407.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/Cems-logo.png" />
          </image>
       </ImageView>
       <Circle fill="WHITE" layoutX="54.0" layoutY="565.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />
-      <TableView fx:id="table" layoutX="38.0" layoutY="158.0" prefHeight="260.0" prefWidth="487.0" stylesheets="@TableView.css">
+      <TableView fx:id="table" layoutX="38.0" layoutY="158.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="260.0" stylesheets="@TableView.css">
         <columns>
           <TableColumn fx:id="numTestcol" prefWidth="65.0" text="Num" />
           <TableColumn fx:id="coursnamecol" prefWidth="73.0" text="course" />
@@ -66,16 +66,16 @@
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="286.0" layoutY="418.0" prefHeight="19.0" prefWidth="39.0" text="Note!" textFill="#c60707">
+      <Label layoutX="286.0" layoutY="418.0" text="Note!" textFill="#c60707">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Label>
-      <Button fx:id="executebtn" layoutX="407.0" layoutY="444.0" mnemonicParsing="false" onAction="#executeTestBtn" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Execute">
+      <Button fx:id="executebtn" layoutX="407.0" layoutY="444.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#executeTestBtn" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Execute">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="backbtn" layoutX="440.0" layoutY="565.0" mnemonicParsing="false" onAction="#backBtn" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
+      <Button fx:id="backbtn" layoutX="440.0" layoutY="565.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backBtn" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>

@@ -18,15 +18,15 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="972.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CreateTestController">
+<Pane maxHeight="649.0" maxWidth="972.0" minHeight="649.0" minWidth="972.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CreateTestController">
    <children>
-      <Pane layoutX="723.0" layoutY="-95.0" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
+      <Pane layoutX="723.0" layoutY="-95.0" maxHeight="182.0" maxWidth="220.0" minHeight="182.0" minWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
       <ImageView fitHeight="215.0" fitWidth="220.0" layoutX="774.0" layoutY="-43.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/Cems-logo.png" />
          </image>
       </ImageView>
-      <Pane layoutX="58.0" layoutY="93.0" prefHeight="603.0" prefWidth="399.0" style="-fx-background-color: #92bce3;">
+      <Pane layoutX="58.0" layoutY="93.0" maxHeight="603.0" maxWidth="399.0" minHeight="603.0" minWidth="399.0" style="-fx-background-color: #92bce3;">
          <children>
             <Button layoutX="150.0" layoutY="239.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="157.0" style="-fx-background-radius: 10;" stylesheets="@Button.css" text="Create New Question">
                <font>
@@ -51,9 +51,9 @@
          </image>
       </ImageView>
       <Circle fill="WHITE" layoutX="57.0" layoutY="594.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />
-      <Label layoutX="57.0" layoutY="25.0" prefHeight="66.0" prefWidth="285.0" text="Create Test">
+      <Label layoutX="57.0" layoutY="30.0" text="Create Test">
          <font>
-            <Font name="Marker Felt Thin" size="55.0" />
+            <Font name="Comic Sans MS Bold" size="50.0" />
          </font>
          <effect>
             <Lighting specularConstant="0.8" specularExponent="0.5" surfaceScale="10.0">
@@ -82,7 +82,7 @@
          <font>
             <Font name="Comic Sans MS Bold" size="14.0" />
          </font></Label>
-      <TableView fx:id="table" layoutX="59.0" layoutY="155.0" prefHeight="160.0" prefWidth="883.0" stylesheets="@TableView.css">
+      <TableView fx:id="table" layoutX="59.0" layoutY="155.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="160.0" stylesheets="@TableView.css">
         <columns>
           <TableColumn fx:id="idCol" minWidth="100.0" prefWidth="100.0" text="ID" />
           <TableColumn fx:id="subjectCol" minWidth="100.0" prefWidth="120.0" text="Subject" />
@@ -108,18 +108,18 @@
          <font>
             <Font name="Comic Sans MS Bold" size="14.0" />
          </font></Label>
-      <TextArea layoutX="60.0" layoutY="465.0" prefHeight="100.0" prefWidth="380.0" promptText="The students will see these comments!" style="-fx-background-color: #F8FFFF; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #92bce3;" />
+      <TextArea layoutX="60.0" layoutY="465.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="380.0" promptText="The students will see these comments!" style="-fx-background-color: #F8FFFF; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #92bce3;" />
       <Line endX="-100.0" endY="135.0" layoutX="567.0" layoutY="431.0" startX="-100.0" startY="-11.5" />
       <Label layoutX="487.0" layoutY="433.0" text="Comments for you (students can't see the comments):">
          <font>
             <Font name="Comic Sans MS Bold" size="14.0" />
          </font></Label>
-      <TextArea layoutX="488.0" layoutY="462.0" prefHeight="100.0" prefWidth="380.0" promptText="The students will not see these comments!" style="-fx-background-color: #F8FFFF; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #92bce3;" />
-      <Button layoutX="834.0" layoutY="597.0" mnemonicParsing="false" onAction="#backBtn" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
+      <TextArea layoutX="488.0" layoutY="462.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="380.0" promptText="The students will not see these comments!" style="-fx-background-color: #F8FFFF; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #92bce3;" />
+      <Button layoutX="834.0" layoutY="597.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#backBtn" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>
-      <Button layoutX="708.0" layoutY="597.0" mnemonicParsing="false" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Save">
+      <Button layoutX="708.0" layoutY="597.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Save">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>

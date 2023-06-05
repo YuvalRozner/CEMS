@@ -22,7 +22,7 @@ public class StudentMenuController extends AbstractController{
 
     @FXML
     void startTest(ActionEvent event) throws Exception{
-    	ChatClient.screens.putIfAbsent("StartTest", new ShowGradeController());
+    	ChatClient.screens.putIfAbsent("StartTest", new StartTestController());
 		ChatClient.getScreen("StartTest").start("StartTest");
     }
 

@@ -1,26 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StudentTestRunController">
    <children>
-      <Label fx:id="number" layoutX="23.0" layoutY="26.0" text="question number 1" />
-      <Label fx:id="question" layoutX="23.0" layoutY="58.0" text="how much is 1+1?" />
-      <RadioButton fx:id="a" layoutX="27.0" layoutY="153.0" mnemonicParsing="false" text="c." />
-      <RadioButton fx:id="b" layoutX="27.0" layoutY="126.0" mnemonicParsing="false" text="b." />
-      <RadioButton fx:id="c" layoutX="27.0" layoutY="99.0" mnemonicParsing="false" text="a." />
-      <RadioButton fx:id="d" layoutX="27.0" layoutY="182.0" mnemonicParsing="false" text="d." />
-      <Label fx:id="Answer_a" layoutX="83.0" layoutY="182.0" text="5" />
-      <Label fx:id="Answer_b" layoutX="83.0" layoutY="153.0" text="4" />
-      <Label fx:id="Answer_c" layoutX="83.0" layoutY="126.0" text="3" />
-      <Label fx:id="Answer_d" layoutX="83.0" layoutY="99.0" text="2" />
-      <Button fx:id="backbtn" layoutX="510.0" layoutY="321.0" mnemonicParsing="false" text="submit" />
-      <Button fx:id="nextbtn" layoutX="97.0" layoutY="321.0" mnemonicParsing="false" text="next" />
-      <Button fx:id="submitbtn" layoutX="26.0" layoutY="321.0" mnemonicParsing="false" text="back" />
-      <Label fx:id="timer" layoutX="510.0" layoutY="35.0" prefHeight="17.0" prefWidth="41.0" text="Timer:" />
+      <ScrollPane prefHeight="608.0" style="-fx-background-color: #b2cfeb;">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" style="-fx-background-color: #b2cfeb;">
+               <children>
+                  <HBox alignment="TOP_CENTER" spacing="20.0">
+                     <children>
+                        <VBox spacing="10.0">
+                           <children>
+                              <HBox alignment="CENTER" spacing="10.0">
+                                 <children>
+                                    <Label text="Test">
+                                       <font>
+                                          <Font name="Comic Sans MS Bold" size="50.0" />
+                                       </font>
+                                       <effect>
+                                          <Lighting specularConstant="0.8" specularExponent="0.5" surfaceScale="10.0">
+                                             <bumpInput>
+                                                <Shadow height="1.0" radius="0.0" width="0.0">
+                                                   <color>
+                                                      <Color green="0.7607843279838562" blue="0.7960784435272217" />
+                                                   </color>
+                                                </Shadow>
+                                             </bumpInput>
+                                             <light>
+                                                <Light.Distant>
+                                                   <color>
+                                                      <Color green="0.7607843279838562" blue="0.7960784435272217" />
+                                                   </color>
+                                                </Light.Distant>
+                                             </light>
+                                          </Lighting>
+                                       </effect>
+                                    </Label>
+                                    <Pane prefHeight="200.0" prefWidth="200.0" />
+                                    <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 130; -fx-border-color: #00c2cb; -fx-border-radius: 130;">
+                                       <children>
+                                          <ImageView fitHeight="191.0" fitWidth="211.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../images/Cems-logo.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <VBox fx:id="dataVbox" spacing="10.0">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox alignment="BOTTOM_RIGHT">
+                                       <children>
+                                          <Button alignment="CENTER" mnemonicParsing="false" onAction="#endBtn" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Submmit">
+                                             <font>
+                                                <Font name="Comic Sans MS Bold" size="13.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
    </children>
 </Pane>

@@ -88,7 +88,7 @@ public class StudentTest {
 	public Button getShow() {
 		return show;
 	}
-
+	
 	/////////Course
 	public Course getCourse() {
 		return this.course;
@@ -157,10 +157,16 @@ public class StudentTest {
 		
 	}
 	//////////show
-	public void setNewShow() {
-		this.show = new Button();
-		show.setText("Show");
-		
-	}
+	public void setNewShow() { ///added by Mor //add style to show button
+        this.show = new Button();
+        show.setText("Show");
+        show.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30;");
+        // Add hover effect
+        show.setOnMouseEntered(e -> show.setStyle("-fx-background-color: #009494; -fx-background-radius: 30 0 0 30;"));
+        show.setOnMouseExited(e -> show.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30;"));
+        // Add pressed effect
+        show.setOnMousePressed(e -> show.setStyle("-fx-background-color: #82bfb6; -fx-background-radius: 30 0 0 30;"));
+        show.setOnMouseReleased(e -> show.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30;"));
+    }
 	/////////////show
 }
