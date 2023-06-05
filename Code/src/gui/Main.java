@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	////show test arrQuestionTest
+	/*
 		public static ArrayList<QuestionToShow> arrTestsToShow; 
 		static {
 			ArrayList<QuestionToShow> arrTestsToShow=new ArrayList<QuestionToShow>();
@@ -25,7 +26,7 @@ public class Main extends Application {
 			arrTestsToShow.add(Q1);
 			arrTestsToShow.add(Q2);
 	
-		}
+		}*/
 	
 	///add by lior Grades
 			public static ArrayList<StudentTest> arrGrades; 

@@ -28,10 +28,10 @@ public class QuestionToShow {
 			this.answerOfStudent=answerOfStudent;
 		}
 		/////pointOfQuestion
-		public String getPointOfStuden() {
+		public String getPointOfStudent() {
 			return pointOfStudent;
 		}
-		public void setPointOfStuden(String pointOfStudent) {
+		public void setPointOfStudent(String pointOfStudent) {
 			this.pointOfStudent=pointOfStudent;
 		}
 		//////numberInTest

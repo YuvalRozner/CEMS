@@ -16,6 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 public class ShowGradeController extends AbstractController{
@@ -40,6 +41,13 @@ public class ShowGradeController extends AbstractController{
     	arrGrades = new ArrayList<StudentTest>(Main.arrGrades);
         for (StudentTest Grade : Main.arrGrades) {
         	Grade.setNewShow();
+        	Grade.getShow().setOnMouseClicked(event -> {
+        		try {
+        			showTestOpen(event);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+        	});
         }
         gradesTable = FXCollections.observableArrayList(arrGrades);
         //for (StudentTest T : arrStudentTest) {
@@ -78,4 +86,11 @@ public class ShowGradeController extends AbstractController{
 		table.refresh();
 		
 	}
+    
+    @FXML
+    private void showTestOpen(MouseEvent event) throws Exception{
+    	ChatClient.screens.putIfAbsent("showTest", new ShowTestController());
+		ChatClient.getScreen("showTest").start("showTest");
+        System.out.println("Button clicked!");
+    }
 }

@@ -15,8 +15,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ShowTestController extends AbstractController{
 	
-	private ArrayList<QuestionToShow> arrQuestionsToShow;	
-	private ObservableList<QuestionToShow> QuestionsToSowTable;
+	private ArrayList<QuestionToShow> arrQuestionsToShow=new ArrayList<QuestionToShow>();	
+	private ObservableList<QuestionToShow> QuestionsToShowTable;
 
     @FXML
     private TableColumn<QuestionToShow, String> MarkedAnswerCol,StudentPointCol,correctAnswerCol,numCol,questionCol,questionPointCol;
@@ -36,10 +36,13 @@ public class ShowTestController extends AbstractController{
     	
     }
     public ShowTestController() {
+    	QuestionToShow Q1= new QuestionToShow("2","10","1","10","how much is 1+1?","2");
+		QuestionToShow Q2= new QuestionToShow("1","20","2","0","how much is 7+8?","3");
+		arrQuestionsToShow.add(Q1);
+		arrQuestionsToShow.add(Q2);
     	System.out.println("1");
-    	arrQuestionsToShow = new ArrayList<QuestionToShow>(Main.arrTestsToShow);
     	System.out.println("2");
-    	QuestionsToSowTable = FXCollections.observableArrayList(arrQuestionsToShow);
+    	QuestionsToShowTable = FXCollections.observableArrayList(arrQuestionsToShow);
     	System.out.println("3");
         //for (StudentTest T : arrStudentTest) {
         //    arrdup.add(new StudentTest(T.getStudentId(), T.getGrade(), T.getShow(), T.getNote(), T.getSelect()));
@@ -49,9 +52,9 @@ public class ShowTestController extends AbstractController{
     @FXML
    	protected void initialize() {
     	System.out.println("4");
-    	MarkedAnswerCol.setCellValueFactory(new PropertyValueFactory<QuestionToShow, String>("answerOfStudent"));
-    	System.out.println("5");
     	StudentPointCol.setCellValueFactory(new PropertyValueFactory<QuestionToShow, String>("pointOfStudent"));
+    	System.out.println("5");
+    	MarkedAnswerCol.setCellValueFactory(new PropertyValueFactory<QuestionToShow, String>("answerOfStudent"));
     	System.out.println("6");
     	correctAnswerCol.setCellValueFactory(new PropertyValueFactory<QuestionToShow, String>("correctAns"));
     	System.out.println("7");
@@ -61,7 +64,7 @@ public class ShowTestController extends AbstractController{
     	System.out.println("9");
     	questionPointCol.setCellValueFactory(new PropertyValueFactory<QuestionToShow, String>("point"));
     	System.out.println("10");
-    	table.setItems(QuestionsToSowTable);
+    	table.setItems(QuestionsToShowTable);
     	System.out.println("11");
 		table.refresh();
 		System.out.println("12");
