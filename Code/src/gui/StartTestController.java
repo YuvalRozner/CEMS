@@ -3,6 +3,7 @@ package gui;
 import client.ChatClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
@@ -25,7 +26,8 @@ public class StartTestController extends AbstractController{
 
     @FXML
     void backBtn(ActionEvent event) {
-
+    	((Node)event.getSource()).getScene().getWindow().hide();
+		ChatClient.getScreen("studentMenu").display();
     }
 
     @FXML
