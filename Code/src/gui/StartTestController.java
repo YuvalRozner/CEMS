@@ -37,9 +37,15 @@ public class StartTestController extends AbstractController{
 
     @FXML
     void startBtn(ActionEvent event) throws Exception {
+    	
     	((Node)event.getSource()).getScene().getWindow().hide();
-    	ChatClient.screens.putIfAbsent("OnlineTest", new StudentTestRunController());
+    	ChatClient.screens.putIfAbsent("OnlineTest", new OnlineTestController());
 		ChatClient.getScreen("OnlineTest").start("OnlineTest");
+		
+    	/*
+		((Node)event.getSource()).getScene().getWindow().hide();
+    	ChatClient.screens.putIfAbsent("ManualTest", new ManualTestController());
+		ChatClient.getScreen("ManualTest").start("ManualTest");*/
     }
     public StartTestController() {
     	idTextField=new TextField();
