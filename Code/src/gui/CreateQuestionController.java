@@ -2,16 +2,13 @@ package gui;
 
 import java.util.ArrayList;
 
-import client.ChatClient;
 import enteties.Course;
 import enteties.Subject;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -93,10 +90,10 @@ public class CreateQuestionController extends AbstractController{
         return courses; 
     }
     
-	public void backBtn(ActionEvent event) throws Exception {
+	/*public void backBtn(ActionEvent event) throws Exception {
 		((Node)event.getSource()).getScene().getWindow().hide();
 		ChatClient.getScreen("lecturerMenu").display();
-	}
+	}*/
 
     
 }

@@ -6,6 +6,7 @@ import controllers.JDBC.Msg;
 import controllers.JDBC.MsgType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -15,8 +16,9 @@ public abstract class AbstractController implements SceneSetter {
 	public static Msg msgReceived;
 	private Scene scene;
 	private String fxmlName;
+	private String prevScreen = null;
 
-	public void start(String fxmlName) throws Exception {
+	public void start(String fxmlName, String prevScreen) throws Exception {
 		this.fxmlName = fxmlName;
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlName + ".fxml"));
@@ -25,12 +27,17 @@ public abstract class AbstractController implements SceneSetter {
 
 		scene = new Scene(root);
 
-		((SceneSetter) loader.getController()).setScene(scene);
+		((SceneSetter)loader.getController()).setScene(scene);
+		((AbstractController)loader.getController()).setPrevScreen(prevScreen);
 
 		primaryStage.setTitle(fxmlName);
 		primaryStage.setScene(scene);
 		primaryStage.centerOnScreen();
 		primaryStage.show();
+	}
+
+	public void setPrevScreen(String prevScreen) {
+		this.prevScreen = prevScreen;
 	}
 
 	public void setScene(Scene scene) {
@@ -71,5 +78,10 @@ public abstract class AbstractController implements SceneSetter {
 
 	public static void setDataReceived(Msg msgReceived) {
 		AbstractController.msgReceived = msgReceived;
+	}
+	
+	public void backBtn(ActionEvent event) throws Exception {
+		((Node)event.getSource()).getScene().getWindow().hide();
+		ChatClient.getScreen(prevScreen).display();
 	}
 }

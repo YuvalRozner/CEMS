@@ -16,7 +16,7 @@ public class ClientUI extends Application {
 		AbstractController.setPrimaryStage(primaryStage);
 
 		// original line:
-		new ClientConnectionController().start("ClientConnection");
+		new ClientConnectionController().start("ClientConnection", null);
 
 		primaryStage.setOnCloseRequest(event -> { // Prevent the default close action
 			event.consume();

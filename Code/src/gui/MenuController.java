@@ -1,11 +1,9 @@
 package gui;
 
-import client.ChatClient;
 import controllers.JDBC.Msg;
 import controllers.JDBC.MsgType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 
 public class MenuController extends AbstractController {
@@ -23,13 +21,6 @@ public class MenuController extends AbstractController {
 		}catch(Throwable t) {System.out.println("accept dont work");};
 		
 		//the start of the new table
-		new QuestionTableController().start("questionTable");
+		new QuestionTableController().start("questionTable", "menu");
 	}
-	
-	
-	public void backBtn(ActionEvent event) throws Exception {
-		((Node)event.getSource()).getScene().getWindow().hide();
-		ChatClient.getScreen("lecturerMenu").display();
-	}
-
 }

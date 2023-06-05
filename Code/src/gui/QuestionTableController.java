@@ -2,7 +2,6 @@ package gui;
 
 import java.util.ArrayList;
 
-import client.ChatClient;
 import controllers.JDBC.DB_controller;
 import controllers.JDBC.Msg;
 import controllers.JDBC.MsgType;
@@ -11,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -41,13 +39,6 @@ public class QuestionTableController extends AbstractController{
 			arrdup.add(new Question(q.getID(), q.getSubjectNum(), q.getCourseName(), q.getQuestion(), q.getNumber(),q.getLecturereCreated()));
 		}
 	}
-
-    
-    @FXML
-    void backBtn(ActionEvent event) {
-		((Node)event.getSource()).getScene().getWindow().hide();
-		ChatClient.getScreen("menu").display();
-    }
 
     @FXML
     void saveBtn(ActionEvent event) {

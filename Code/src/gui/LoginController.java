@@ -40,7 +40,7 @@ public class LoginController extends AbstractController{
 	        	sendMsg(msg);
 	        	switch(user.getPremission()) {
 	    		case "lecturer":
-	        		new LecturerMenuController().start("lecturerMenu");
+	        		new LecturerMenuController().start("lecturerMenu", "login");
 	        		((LecturerMenuController)ChatClient.getScreen("lecturerMenu")).setWelcome("Welcome " + user.getName());
 	    			break;
 	    		case "student":
@@ -54,11 +54,5 @@ public class LoginController extends AbstractController{
 	    	//}
     		}
     	}
-
-    	
-    	
-    	//temporary, it will take us to the lecturer menu: ......
-    	//ChatClient.screens.putIfAbsent("lecturerMenu", new LecturerMenuController());
-		//ChatClient.getScreen("lecturerMenu").start("lecturerMenu");
     }
 }

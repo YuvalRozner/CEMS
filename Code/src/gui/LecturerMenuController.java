@@ -25,23 +25,23 @@ public class LecturerMenuController extends AbstractController {
 
     @FXML
     void createQuestion(ActionEvent event) throws Exception {
-		new CreateQuestionController().start("createQuestion");
+		new CreateQuestionController().start("createQuestion", "lecturerMenu");
     }
 
     @FXML
     void createTest(ActionEvent event) throws Exception {
-		new CreateTestController().start("createTest");
+		new CreateTestController().start("createTest", "lecturerMenu");
     }
 
     @FXML
     void executeTest(ActionEvent event) throws Exception {
-    	new MenuController().start("menu"); //temporary........................
+    	new MenuController().start("menu", "lecturerMenu"); //temporary........................
     }
 
 
     @FXML
     void reports(ActionEvent event) throws Exception {
-		new LecturerTestViewController().start("lecturerTestView");
+		new LecturerTestViewController().start("lecturerTestView", "lecturerMenu");
     }
 
     @FXML
@@ -56,9 +56,8 @@ public class LecturerMenuController extends AbstractController {
     	msg.setWhere("username", ChatClient.user.getUsername());
     	msg.setWhere("password", ChatClient.user.getPassword());
     	sendMsg(msg);
-    	
-		((Node)event.getSource()).getScene().getWindow().hide();
-		ChatClient.getScreen("login").display();
+    	((Node)event.getSource()).getScene().getWindow().hide();
+    	ChatClient.getScreen("login").display();
 	}
 
 	public void setWelcome(String name) {
