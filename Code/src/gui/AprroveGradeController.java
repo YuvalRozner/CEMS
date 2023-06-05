@@ -14,6 +14,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 //// חסרה פונקציונליות של החלפת טבלה כשמחליפים מקצוע
 //// חסרה פונקציונליות של select all
 public class AprroveGradeController extends AbstractController{
@@ -50,6 +51,13 @@ public class AprroveGradeController extends AbstractController{
         	studentTest.setNewNote();
         	studentTest.setNewShow();
         	studentTest.setNewSelect();
+        	studentTest.getShow().setOnMouseClicked(event -> {
+        		try {
+        			showTestOpen(event);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+        	});
         }
         TestTable = FXCollections.observableArrayList(arrStudentTest);
        
@@ -81,7 +89,12 @@ public class AprroveGradeController extends AbstractController{
 	public void aprroveBtn(ActionEvent event) throws Exception {
 		return;
 	}
-    
+	@FXML
+    private void showTestOpen(MouseEvent event) throws Exception{
+    	ChatClient.screens.putIfAbsent("showTest", new ShowTestController());
+		ChatClient.getScreen("showTest").start("showTest");
+        System.out.println("Button clicked!");
+    }
     
     
     

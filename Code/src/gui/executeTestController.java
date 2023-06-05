@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 public class executeTestController extends AbstractController{
 	
@@ -40,6 +41,13 @@ public class executeTestController extends AbstractController{
         	Test.setNewSelect();
         	Test.setNewType();
         	Test.setNewCodeField();
+        	Test.getShow().setOnMouseClicked(event -> {
+        		try {
+        			showTestOpen(event);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+        	});
         }
         ETTable = FXCollections.observableArrayList(arrExecuteTestLocal);
         //for (Question q : arrQuestion) {
@@ -71,6 +79,12 @@ public class executeTestController extends AbstractController{
 
     @FXML
     void executeTestBtn(ActionEvent event) {
+    }
+    @FXML
+    private void showTestOpen(MouseEvent event) throws Exception{
+    	ChatClient.screens.putIfAbsent("ExecuteTestShowTest", new ExecuteTestShowTestController());
+		ChatClient.getScreen("ExecuteTestShowTest").start("ExecuteTestShowTest");
+        System.out.println("Button clicked!");
     }
 
 }

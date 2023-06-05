@@ -10,6 +10,13 @@ public class QuestionToShow {
 		private String point;
 		private String question;
 		private String correctAns;
+		public QuestionToShow(String numberInTest,String point,String question,String correctAns) {
+			this.numberInTest=numberInTest;
+			this.point=point;
+			this.question=question;
+			this.correctAns=correctAns;
+
+		}
 		
 		public QuestionToShow(String answerOfStudent,String pointOfStudent,String numberInTest,String point,String question,String correctAns) {
 			this.answerOfStudent=answerOfStudent;
