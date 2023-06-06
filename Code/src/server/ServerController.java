@@ -3,6 +3,8 @@ package server;
 import java.io.IOException;
 import java.net.InetAddress;
 
+import controllers.JDBC.Msg;
+import controllers.JDBC.MsgType;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +18,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class ServerController {
+public class ServerController{
 	private ObservableList<InetAddress> connectedObserv = FXCollections.observableArrayList();
 	
 	private CEMSserver cemsServer;
@@ -52,21 +54,21 @@ public class ServerController {
 
 	@FXML
 	private TextField serverIdTxt;
+	
 
 	@FXML
 	void connect(ActionEvent event) {
 		String p;
 		p = getport();
-		if (p.trim().isEmpty()) {
-			addConsole("You must enter a port number");
-		} else {
+		if (p.trim().isEmpty()) 
+			addConsole("You must enter a port number.\n");
+		else {
 			cemsServer = new CEMSserver(Integer.valueOf(p), this);
-			try {
-				cemsServer.listen(); // Start listening for connections
-			} catch (Exception ex) {
-			}
+			try { cemsServer.listen(); // Start listening for connections
+			} catch (Exception ex) {}
 		}
 	}
+	
 	private String getport() {
 		return portxt.getText();
 	}
@@ -74,10 +76,9 @@ public class ServerController {
 	@FXML
 	void disconnect(ActionEvent event) {
 		try {
-			cemsServer.sendToAllClients("disconected");
+			cemsServer.sendToAllClients(new Msg(MsgType.bye));
 			cemsServer.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		cemsServer.setConn(null);
@@ -85,7 +86,8 @@ public class ServerController {
 		btnDisconnect.setDisable(true);
 		btnConnect.setDisable(false);
 		addConsole("Server is close.\n");
-		addConsole("Server has stopped listening for connections.\n"); 
+		addConsole("Server has stopped listening for connections.\n");
+		CEMSserver.serverController.addConsole("\n________________________________________________________  clear  _______________________________________________\n\n");
 	}
 
 	@FXML

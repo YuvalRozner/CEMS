@@ -13,9 +13,8 @@ public class DataBaseConnector {
 	          CEMSserver.serverController.addConsole("Driver definition succeed.\n");
 	          System.out.println("Driver definition succeed");
 	      } catch (Exception ex) {
-	      	/* handle the error*/
-	      	 System.out.println("Driver definition failed");
-	      	 }
+	    	 CEMSserver.serverController.addConsole("Driver definition failed.\n");
+	      	 System.out.println("Driver definition failed"); 	 }
 	      try 
 	      {
 	    	  Cserver.setConn(DriverManager.getConnection("jdbc:mysql://"+CEMSserver.serverController.getServerIdTxt()+"/"+CEMSserver.serverController.getDBNameTxt()+"?serverTimezone=IST",
@@ -23,6 +22,9 @@ public class DataBaseConnector {
 	    			  CEMSserver.serverController.getPasswordTxt()));
 	      } catch (SQLException ex) 
 		    {/* handle any errors*/
+	    	  CEMSserver.serverController.addConsole("SQLException: " + ex.getMessage()+".\n");
+	    	  CEMSserver.serverController.addConsole("SQLState: " + ex.getSQLState()+".\n");
+	    	  CEMSserver.serverController.addConsole("VendorError: " + ex.getErrorCode()+".\n");
 	      System.out.println("SQLException: " + ex.getMessage());
 	      System.out.println("SQLState: " + ex.getSQLState());
 	      System.out.println("VendorError: " + ex.getErrorCode());

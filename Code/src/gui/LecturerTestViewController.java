@@ -2,13 +2,13 @@ package gui;
 
 import java.util.ArrayList;
 
-import client.ChatClient;
+import controllers.JDBC.Msg;
+import controllers.JDBC.MsgType;
 import enteties.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
@@ -29,7 +29,12 @@ public class LecturerTestViewController extends AbstractController {
     private ToggleGroup toggleGroup; // ToggleGroup instance
     
     public LecturerTestViewController() {
-        arrdup = new ArrayList<Test>(Main.tests);
+        //arrdup = new ArrayList<Test>(Main.tests);
+    	Msg msg = new Msg(MsgType.select);
+    	msg.setSelect("*");
+    	msg.setFrom("test");
+    	sendMsg(msg);
+    	arrdup = new ArrayList<Test>(msgReceived.convertData(Test.class));
         testsTable = FXCollections.observableArrayList(arrdup);
         toggleGroup = new ToggleGroup(); // Initialize the ToggleGroup
         for (Test test : testsTable) {
@@ -47,14 +52,8 @@ public class LecturerTestViewController extends AbstractController {
         table.setItems(testsTable);
         table.refresh();
     }
-    
-	public void backBtn(ActionEvent event) throws Exception {
-		((Node)event.getSource()).getScene().getWindow().hide();
-		ChatClient.getScreen("lecturerMenu").display();
-	}
 	
 	public void showStatistics(ActionEvent event) throws Exception {
-		ChatClient.screens.putIfAbsent("lecturerStaticsReport", new LecturerStaticsReportController());
-		ChatClient.getScreen("lecturerStaticsReport").start("lecturerStaticsReport");
+		start("lecturerStaticsReport", "lecturerTestView");
 	}
 }

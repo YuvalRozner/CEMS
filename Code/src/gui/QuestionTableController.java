@@ -2,15 +2,14 @@ package gui;
 
 import java.util.ArrayList;
 
-import client.ChatClient;
-import client.ClientUI;
 import controllers.JDBC.DB_controller;
+import controllers.JDBC.Msg;
+import controllers.JDBC.MsgType;
 import enteties.Question;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -34,27 +33,19 @@ public class QuestionTableController extends AbstractController{
 	
 	
 	public QuestionTableController() {
-		arrQuestion = new ArrayList<Question>(ChatClient.questionList);
+		arrQuestion = new ArrayList<Question>(msgReceived.convertData(Question.class));
 		QTable = FXCollections.observableArrayList(arrQuestion);
 		for (Question q : arrQuestion) {
 			arrdup.add(new Question(q.getID(), q.getSubjectNum(), q.getCourseName(), q.getQuestion(), q.getNumber(),q.getLecturereCreated()));
 		}
 	}
 
-    
-    @FXML
-    void backBtn(ActionEvent event) {
-		((Node)event.getSource()).getScene().getWindow().hide();
-		ChatClient.getScreen("Menu").display();
-    }
-
     @FXML
     void saveBtn(ActionEvent event) {
-        ArrayList<String> UpdateQueries = DB_controller.updateQuestions(table.getItems(), arrdup);
-        for (String query : UpdateQueries) {
-            System.out.println("Send to server update query -> " + query);
-            ClientUI.chat.accept(query);
-        }
+        ArrayList<Msg> UpdateQueries = DB_controller.updateQuestions1(table.getItems(), arrdup);
+        Msg msg = new Msg(MsgType.manyMessages);
+        msg.setMsgLst(UpdateQueries);
+        sendMsg(msg);
     }
     
     @FXML
@@ -83,11 +74,6 @@ public class QuestionTableController extends AbstractController{
          question.setQuestion(newValue);
     }
  
-    
-    
-    
-    
-    
     //shadow
     
     @FXML
