@@ -17,25 +17,14 @@ import ocsf.server.ConnectionToClient;
 
 //EchoServer
 public class CEMSserver extends AbstractServer {
-	// Class variables *************************************************
-
-	/**
-	 * The default port to listen on.
-	 */
-	// final public static int DEFAULT_PORT = 5555;
-
-	// Constructors ****************************************************
-
-	/**
-	 * Constructs an instance of the echo server.
-	 *
-	 * @param port The port number to connect on.
-	 * 
-	 */
 
 	Connection conn;
 	public static ServerController serverController;
-	
+
+	/**
+	 * Constructs an instance of the echo server.
+	 * @param port The port number to connect on.
+	 */
 	public CEMSserver(int port, ServerController sc) {
 		super(port);
 		CEMSserver.serverController = sc;
@@ -83,7 +72,6 @@ public class CEMSserver extends AbstractServer {
 					serverController.addConsole("query: ->"+ queryStr+".\n");
 					System.out.println("query: ->"+ queryStr);
 					rs = stmt.executeQuery(queryStr);
-					
 					MsgType type = (msg.getFrom().get(0).equals("cems.user")) ? MsgType.user : MsgType.data;
 					Msg tmpMsg = createDataMsg(type, rs);
 					if(tmpMsg.getData()==null || tmpMsg.getData().isEmpty())

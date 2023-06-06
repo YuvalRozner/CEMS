@@ -61,7 +61,7 @@
             <InnerShadow height="0.0" radius="0.0" width="0.0" />
          </effect>
       </Label>
-      <TextArea fx:id="console" layoutX="9.0" layoutY="401.0" prefHeight="143.0" prefWidth="619.0" style="-fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-background-radius: 7; -fx-border-radius: 7;">
+      <TextArea fx:id="console" editable="false" layoutX="9.0" layoutY="401.0" prefHeight="143.0" prefWidth="619.0" style="-fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-background-radius: 7; -fx-border-radius: 7;">
          <font>
             <Font size="11.0" />
          </font>

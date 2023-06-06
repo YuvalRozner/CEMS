@@ -9,8 +9,6 @@ import javafx.stage.Stage;
 
 public class CEMSserverUI extends Application {
 
-	final public static int DEFAULT_PORT = 5555;
-
 	public static void main(String args[]) throws Exception {
 		launch(args);
 	} 
@@ -32,5 +30,4 @@ public class CEMSserverUI extends Application {
 		});
 		primaryStage.show();
 	}
-
 }

@@ -19,9 +19,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import server.CEMSserver;
 
-public class ServerController{
+public class ServerController {
 	private ObservableList<InetAddress> connectedObserv = FXCollections.observableArrayList();
-	
+
 	private CEMSserver cemsServer;
 	@FXML
 	private TextField DBNameTxt;
@@ -36,13 +36,10 @@ public class ServerController{
 	private Button btnDisconnect;
 
 	@FXML
-	private Button btnExit;
-	
-	@FXML
 	private TableView<InetAddress> clientsTable;
-	
+
 	@FXML
-	private TableColumn<InetAddress, String> clientHostName,clientIp,clientStatus;
+	private TableColumn<InetAddress, String> clientHostName, clientIp, clientStatus;
 
 	@FXML
 	private TextArea console;
@@ -55,25 +52,26 @@ public class ServerController{
 
 	@FXML
 	private TextField serverIdTxt;
-	
 
 	@FXML
 	public void connect(ActionEvent event) {
 		String p;
 		p = getport();
-		if (p.trim().isEmpty()) 
+		if (p.trim().isEmpty())
 			addConsole("You must enter a port number.\n");
 		else {
 			cemsServer = new CEMSserver(Integer.valueOf(p), this);
-			try { cemsServer.listen(); // Start listening for connections
-			} catch (Exception ex) {}
+			try {
+				cemsServer.listen(); // Start listening for connections
+			} catch (Exception ex) {
+			}
 		}
 	}
-	
+
 	private String getport() {
 		return portxt.getText();
 	}
-	
+
 	@FXML
 	public void disconnect(ActionEvent event) {
 		try {
@@ -98,8 +96,8 @@ public class ServerController{
 	}
 
 	/**
-	* Initializes the connected client table (when server app is up)
-	*/
+	 * Initializes the connected client table (when server app is up)
+	 */
 	@FXML
 	protected void initialize() {
 		clientHostName.setCellValueFactory(new PropertyValueFactory<InetAddress, String>("HostName"));
@@ -107,47 +105,49 @@ public class ServerController{
 		clientStatus.setCellValueFactory(cellData -> new ReadOnlyStringWrapper("Connected"));
 		clientsTable.setItems(connectedObserv);
 	}
-	
+
 	/**
-	* Adds the given IP to connectedObserv
-	* @param connected The InetAddress IP to be added
-	*/
+	 * Adds the given IP to connectedObserv
+	 * 
+	 * @param connected The InetAddress IP to be added
+	 */
 	public void addConnected(InetAddress connected) {
 		connectedObserv.add(connected);
 	}
+
 	/**
-	* Removes the given IP from connectedObserv
-	* @param connected The InetAddress IP to be removed
-	*/
+	 * Removes the given IP from connectedObserv
+	 * 
+	 * @param connected The InetAddress IP to be removed
+	 */
 	public void removeConnected(InetAddress connected) {
 		connectedObserv.remove(connected);
 	}
-	
 
 	public void addConsole(String msg) {
-		console.setText(console.getText() + msg);
+		// console.setText(console.getText() + msg); //old line, show dor and then delete.
+		console.appendText(msg); // append without read the prev text & scroll down automatically.
 	}
-	
+
 	public void setConnectDisable(boolean flag) {
 		btnConnect.setDisable(flag);
 	}
-	
+
 	public void setDisconnectDisable(boolean flag) {
 		btnDisconnect.setDisable(flag);
 	}
-	
+
 	public String getDBNameTxt() {
 		return DBNameTxt.getText();
 	}
-	
+
 	public String getDBUsernameTxt() {
 		return DBUsernameTxt.getText();
 	}
-	
+
 	public String getServerIdTxt() {
 		return serverIdTxt.getText();
 	}
-
 
 	public String getPasswordTxt() {
 		return passwordTxt.getText();
