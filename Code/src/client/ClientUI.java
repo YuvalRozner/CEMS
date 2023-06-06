@@ -1,35 +1,33 @@
 package client;
+
 import gui.AbstractController;
-import gui.ClientConnectionController;
-import gui.LoginController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class ClientUI extends Application {
-	public static ClientController chat; //only one instance
+	public static ChatClient client;
 
-	public static void main( String args[] ) throws Exception { 
-		    launch(args);  
+	public static void main(String args[]) throws Exception {
+		launch(args);
 	}
-	 
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		AbstractController.setPrimaryStage(primaryStage);
-		ClientConnectionController clientConnectionController = new ClientConnectionController(); // create first client window.
-		ChatClient.screens.putIfAbsent("ClientConnection", clientConnectionController);
+
+		// original line:
+		new ClientConnectionController().start("ClientConnection", null);
+
 		primaryStage.setOnCloseRequest(event -> { // Prevent the default close action
-			event.consume(); 
+			event.consume();
 			try {
-				clientConnectionController.exitBtn(null);
-			} catch (Exception e) {	e.printStackTrace();}
+				ChatClient.getScreen("ClientConnection").exitBtn(null);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			System.out.println("Exit Client app.");
 			System.exit(0);
 		});
-		// original line:
-		//clientConnectionController.start("ClientConnection");
-		
-		ChatClient.screens.putIfAbsent("login", new LoginController());
-		ChatClient.getScreen("login").start("login");
-	
+
 	}
 }

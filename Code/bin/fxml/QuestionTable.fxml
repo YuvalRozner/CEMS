@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.QuestionTableController">
+   <children>
+      <Label layoutX="399.0" layoutY="27.0" text="Question List" underline="true">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="829.0" layoutY="418.0" mnemonicParsing="false" onAction="#backBtn" onMouseEntered="#onMouseEnterdBackBtn" onMouseExited="#onMouseExitedBackBtn" prefHeight="40.0" prefWidth="80.0" text="Back">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <TableView fx:id="table" layoutX="27.0" layoutY="92.0" prefHeight="295.0">
+        <columns>
+          <TableColumn fx:id="idCol" minWidth="100.0" prefWidth="100.0" text="ID" />
+          <TableColumn fx:id="subjectCol" minWidth="100.0" prefWidth="120.0" text="Subject" />
+            <TableColumn fx:id="courseCol" minWidth="100.0" prefWidth="120.0" text="Course" />
+            <TableColumn fx:id="questionTextCol" minWidth="100.0" onEditCommit="#onEditCommitQuestionTextCol" prefWidth="300.0" text="Question Text" />
+            <TableColumn fx:id="questionNumberCol" minWidth="100.0" prefWidth="120.0" text="Question Number" />
+            <TableColumn fx:id="lecturerCol" minWidth="100.0" prefWidth="120.0" text="Lecturer" />
+        </columns>
+      </TableView>
+      <Button layoutX="413.0" layoutY="401.0" mnemonicParsing="false" onAction="#saveBtn" onMouseEntered="#onMouseEnteredSaveBtn" onMouseExited="#onMouseExitedSaveBtn" prefHeight="50.0" prefWidth="100.0" text="Save">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+   </children>
+</Pane>

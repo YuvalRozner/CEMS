@@ -12,19 +12,20 @@ public class CEMSserverUI extends Application {
 
 	public static void main(String args[]) throws Exception {
 		launch(args);
-	} // end main
+	} 
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-
-		Parent root = FXMLLoader.load(getClass().getResource("/server/ServerPort.fxml"));
-
+		FXMLLoader loader =  new FXMLLoader(getClass().getResource("/server/ServerPort.fxml"));
+		Parent root = 	loader.load();
+		ServerController serverController = loader.getController();
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Server");
 		primaryStage.setScene(scene);
 
 		primaryStage.setOnCloseRequest(event -> {
 			event.consume(); // Prevent the default close action
+			serverController.disconnect(null);
 			System.out.println("Exit CEMS Server app.");
 			System.exit(0);
 		});

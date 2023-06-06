@@ -1,10 +1,10 @@
 package client;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import enteties.Question;
+import controllers.JDBC.Msg;
+import enteties.User;
 import gui.AbstractController;
 import ocsf.client.AbstractClient;
 
@@ -17,9 +17,7 @@ public class ChatClient extends AbstractClient {
 	 */
 	
 	public static HashMap<String, AbstractController> screens = new HashMap<String, AbstractController>();
-	
-	ChatIF clientUI;
-	public static ArrayList<Question> questionList;
+	public static User user;
 	public static boolean awaitResponse = false;
 
 	// Constructors ****************************************************
@@ -30,12 +28,9 @@ public class ChatClient extends AbstractClient {
 	 * @param port     The port number to connect on.
 	 * @param clientUI The interface type variable.
 	 */
-	public ChatClient(String host, int port, ChatIF clientUI) throws IOException {
+	public ChatClient(String host, int port) throws IOException {
 		super(host, port); // Call the superclass constructor
-		this.clientUI = clientUI;
 		openConnection();
-		//screens.put("ClientGetQuestionController", null);
-		//screens.put("TableViewSample", null);
 		System.out.println("connected to server");
 	}
 
@@ -45,42 +40,41 @@ public class ChatClient extends AbstractClient {
 	 *
 	 * @param msg The message from the server.
 	 */
-	public void handleMessageFromServer(Object msg) {
-		System.out.print("Message recieved from server -> ");
-		if (msg instanceof String ) { // update
-			System.out.println((String)msg);
-			awaitResponse = false;	
-			if (((String)msg).equals("disconected")) {
-				System.out.println("client forced to stop by the server.");
-				System.exit(0);
+	public void handleMessageFromServer(Object tmpMsg) {
+		Msg msg = ((Msg)tmpMsg);
+		awaitResponse = false; //important. magic line.
+		System.out.println("Message recieved from server -> " + msg);	
+		if(msg instanceof Msg) {
+			switch (msg.getType()) {
+				case succeeded:
+					System.out.println("server executed the query.");
+					break;
+				case succeededAll:
+					System.out.println("server handle all bunch of msgs.");
+					break;
+				case bye:
+					System.out.println("client forced to stop by the server.");
+					System.exit(0);
+					break;
+				case data:
+					AbstractController.setDataReceived(msg);
+					break;
+				case user:
+					user = msg.convertData(User.class).get(0);
+					break;
+				case empty:
+					System.out.println("server didn't find any data matching this query.");
+					break;
+				default:
+					break;
 			}
-		}
-		else { //create a List of question out of the List of List got from the server:
-			System.out.println("list of questions");
-			@SuppressWarnings("unchecked") //ignore warning of casting types.
-			ArrayList<ArrayList<String>> dataFromServer = (ArrayList<ArrayList<String>>) msg;
-			awaitResponse = false;
-			questionList = new ArrayList<Question>(); //resets the List of question.
-			Question tmpQ;
-			for (int i = 0; i < dataFromServer.size(); i++) 
-				if (dataFromServer.get(i) != null) {
-					tmpQ = new Question(dataFromServer.get(i).get(0), dataFromServer.get(i).get(1),
-							dataFromServer.get(i).get(2), dataFromServer.get(i).get(3),
-							dataFromServer.get(i).get(4), dataFromServer.get(i).get(5));
-					questionList.add(tmpQ); // add the question to the list.
-				}
 		}
 	}
 
-	/**
-	 * This method handles all data coming from the UI
-	 *
-	 * @param message The message from the UI.
-	 */
-	public void handleMessageFromClientUI(String message) {
+	public void handleMessageFromClientUI(Msg msg) {
 		try {
 			awaitResponse = true;
-			sendToServer(message); //send the msg to server.
+			sendToServer(msg); //send the msg to server.
 			// wait for response
 			while (awaitResponse) {
 				try {
@@ -89,11 +83,14 @@ public class ChatClient extends AbstractClient {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			clientUI.display("Could not send message to server: Terminating client." + e);
-			ClientUI.chat.accept("disconnected");	}
+			System.out.println("Could not send message to server: Terminating client." + e);}
 	}
 	
 	public static AbstractController getScreen(String screenName) {
 		return screens.get(screenName);
+	}
+	
+	public static void resetUser() {
+		user = null;
 	}
 }
