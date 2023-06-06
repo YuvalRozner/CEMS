@@ -11,7 +11,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 
 
-
 public class OnlineTestController extends AbstractController {
     private ArrayList<ArrayList<String>> quizData; // ArrayList of ArrayList of Strings
     private ArrayList<ToggleGroup> toggleGroups = new ArrayList<ToggleGroup>();
@@ -57,7 +56,6 @@ public class OnlineTestController extends AbstractController {
 
     }
 
-
     @FXML
     protected void initialize() {
     	for (ArrayList<String> questionData : quizData) {
@@ -73,7 +71,6 @@ public class OnlineTestController extends AbstractController {
         }
     }
  
-
     @FXML
     void submmitBtn(ActionEvent event) throws Exception {
     	for (int i = 0; i < toggleGroups.size(); i++) {
