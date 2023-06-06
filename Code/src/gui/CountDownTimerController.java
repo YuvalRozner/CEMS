@@ -12,7 +12,7 @@ public class CountDownTimerController extends AbstractController implements Coun
 	private TimeController1 timeController;
 	
 	@FXML
-	private Label countdown;
+	public Label countdown;
 
 	 
 	public CountDownTimerController() {
