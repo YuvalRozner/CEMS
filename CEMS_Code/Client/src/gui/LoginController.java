@@ -29,12 +29,12 @@ public class LoginController extends AbstractController{
     			break;
     		case "student":
     			start("studentMenu" , "login");
+    			((StudentMenuController)ChatClient.getScreen("studentMenu")).setWelcome("Welcome " + user.getName());
     			break;
     		case "hod":
     			//start("HODMenu" , "login");
+    			//((HODMenuController)ChatClient.getScreen("HODMenu")).setWelcome("Welcome " + user.getName());
     			break;
-			default:
-				break;
     	}
     }
 
