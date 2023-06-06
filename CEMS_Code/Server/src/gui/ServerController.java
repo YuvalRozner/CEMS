@@ -33,7 +33,7 @@ public class ServerController {
 	private Button btnConnect;
 
 	@FXML
-	private Button btnDisconnect;
+	public Button btnDisconnect;
 
 	@FXML
 	private TableView<InetAddress> clientsTable;
@@ -90,7 +90,8 @@ public class ServerController {
 	}
 
 	@FXML
-	void exit(ActionEvent event) {
+	public void exit(ActionEvent event) {
+		if(!btnDisconnect.isDisable()) disconnect(null);
 		System.out.println("Exit CEMS Server app.");
 		System.exit(0);
 	}

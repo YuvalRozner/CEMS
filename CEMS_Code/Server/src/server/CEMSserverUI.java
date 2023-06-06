@@ -24,9 +24,7 @@ public class CEMSserverUI extends Application {
 
 		primaryStage.setOnCloseRequest(event -> {
 			event.consume(); // Prevent the default close action
-			serverController.disconnect(null);
-			System.out.println("Exit CEMS Server app.");
-			System.exit(0);
+			serverController.exit(null);
 		});
 		primaryStage.show();
 	}
