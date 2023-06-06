@@ -11,11 +11,11 @@ public class CEMSserverUI extends Application {
 
 	public static void main(String args[]) throws Exception {
 		launch(args);
-	} 
+	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		FXMLLoader loader =  new FXMLLoader(getClass().getResource("/fxml/ServerPort.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ServerPort.fxml"));
 		Parent root = loader.load();
 		ServerController serverController = loader.getController();
 		Scene scene = new Scene(root);
