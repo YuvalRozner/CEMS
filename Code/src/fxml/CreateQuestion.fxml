@@ -22,53 +22,81 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="608.0" prefWidth="578.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CreateQuestionController">
+<Pane maxHeight="608.0" maxWidth="578.0" minHeight="608.0" minWidth="578.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CreateQuestionController">
    <children>
-      <Pane layoutX="331.0" layoutY="-97.0" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
-      <Pane layoutX="42.0" layoutY="146.0" prefHeight="520.0" prefWidth="151.0" style="-fx-background-color: #92bce3;">
+      <Pane layoutX="331.0" layoutY="-97.0" maxHeight="182.0" maxWidth="220.0" minHeight="182.0" minWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
+      <Pane layoutX="42.0" layoutY="146.0" maxHeight="533.0" maxWidth="151.0" minHeight="520.0" minWidth="151.0" style="-fx-background-color: #92bce3;">
          <children>
-            <Label layoutX="54.0" layoutY="156.0" text="Insert Question:">
+            <Label layoutX="43.0" layoutY="154.0" text="Insert Question:">
                <font>
-                  <Font name="Dosis Bold" size="15.0" />
+                  <Font name="Comic Sans MS Bold" size="14.0" />
                </font>
             </Label>
+            <Label layoutX="41.0" layoutY="-2.0" text="Select Subject:">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="35.0" text="Select Courses:">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="14.0" />
+               </font>
+            </Label>
+            <VBox layoutX="41.0" layoutY="216.0" prefHeight="138.0" prefWidth="131.0" spacing="17.0">
+               <children>
+                  <Label text="Insert Answer 1:">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Insert Answer 2:">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Insert Answer 3:">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Insert Answer 4:">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
          </children>
       </Pane>
-      <Circle fill="WHITE" layoutX="58.0" layoutY="553.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />
       <ImageView fitHeight="198.0" fitWidth="198.0" layoutX="398.0" layoutY="-41.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Cems-2.png" />
+            <Image url="@../../images/Cems-logo.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" layoutX="42.0" layoutY="83.0" prefHeight="42.0" prefWidth="282.0" text="Create Question">
+      <Label alignment="CENTER" layoutX="42.0" layoutY="75.0" text="Create Question">
          <font>
-            <Font name="Dosis Bold" size="40.0" />
+            <Font name="Comic Sans MS Bold" size="50.0" />
          </font>
          <effect>
-            <Lighting diffuseConstant="1.24" specularConstant="0.66" specularExponent="13.64" surfaceScale="3.35">
+            <Lighting specularConstant="0.8" specularExponent="0.5" surfaceScale="10.0">
                <bumpInput>
-                  <Shadow />
+                  <Shadow height="1.0" radius="0.0" width="0.0">
+                     <color>
+                        <Color green="0.7607843279838562" blue="0.7960784435272217" />
+                     </color></Shadow>
                </bumpInput>
                <light>
                   <Light.Distant>
                      <color>
-                        <Color green="0.8823529481887817" blue="0.8392156958580017" />
+                        <Color green="0.7607843279838562" blue="0.7960784435272217" />
                      </color>
                   </Light.Distant>
                </light>
             </Lighting>
          </effect>
       </Label>
-      <Label layoutX="99.0" layoutY="146.0" text="Select Subject:">
-         <font>
-            <Font name="Dosis Bold" size="15.0" />
-         </font></Label>
       <ComboBox fx:id="subjectComboBox" layoutX="215.0" layoutY="142.0" prefWidth="300.0" promptText="Not Selected" style="-fx-background-color: #F8FFFF;" stylesheets="@ComboBox.css" />
-      <Label layoutX="98.0" layoutY="189.0" text="Select Courses:">
-         <font>
-            <Font name="Dosis Bold" size="15.0" />
-         </font></Label>
-      <TableView fx:id="table" layoutX="214.0" layoutY="182.0" prefHeight="89.0" prefWidth="300.0" stylesheets="@TableView.css">
+      <TableView fx:id="table" layoutX="214.0" layoutY="182.0" prefHeight="89.0" stylesheets="@TableView.css">
         <columns>
           <TableColumn fx:id="courseCol" prefWidth="250.0" text="Course" />
           <TableColumn fx:id="selectCol" prefWidth="50.0" style="-fx-alignment: CENTER;" text="select" />
@@ -84,77 +112,54 @@
          </children>
       </VBox>
       <TextField layoutX="211.0" layoutY="300.0" prefWidth="300.0" style="-fx-background-radius: 10; -fx-background-color: #F8FFFF; -fx-border-radius: 10; -fx-border-color: #92bce3;" />
-      <VBox layoutX="95.0" layoutY="356.0" prefHeight="138.0" prefWidth="118.0" spacing="17.0">
-         <children>
-            <Label text="Insert Answer 1:">
-               <font>
-                  <Font name="Dosis Bold" size="15.0" />
-               </font>
-            </Label>
-            <Label text="Insert Answer 2:">
-               <font>
-                  <Font name="Dosis Bold" size="15.0" />
-               </font>
-            </Label>
-            <Label text="Insert Answer 3:">
-               <font>
-                  <Font name="Dosis Bold" size="15.0" />
-               </font>
-            </Label>
-            <Label text="Insert Answer 4:">
-               <font>
-                  <Font name="Dosis Bold" size="15.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
       <Line endX="322.0" layoutX="191.0" layoutY="345.0" startX="-100.0" />
       <Line endX="322.0" layoutX="187.0" layoutY="514.0" startX="-100.0" />
-      <Label layoutX="92.0" layoutY="527.0" text="Choose a correct answer:">
+      <Circle fill="WHITE" layoutX="15.0" layoutY="617.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />
+      <Label layoutX="86.0" layoutY="530.0" text="Choose a correct answer:">
          <font>
-            <Font name="Dosis Bold" size="15.0" />
+            <Font name="Comic Sans MS Bold" size="14.0" />
          </font></Label>
-      <HBox layoutX="260.0" layoutY="527.0" prefHeight="27.0" prefWidth="158.0" spacing="10.0">
+      <HBox layoutX="282.0" layoutY="528.0" prefHeight="24.0" prefWidth="162.0" spacing="10.0">
          <children>
             <RadioButton mnemonicParsing="false" selected="true" text="1">
                <toggleGroup>
                   <ToggleGroup fx:id="ChooseCorrectAnswerGroup" />
                </toggleGroup>
                <font>
-                  <Font name="Dosis Bold" size="13.0" />
+                  <Font name="Comic Sans MS Bold" size="13.0" />
                </font>
             </RadioButton>
             <RadioButton mnemonicParsing="false" text="2" toggleGroup="$ChooseCorrectAnswerGroup">
                <font>
-                  <Font name="Dosis Bold" size="13.0" />
+                  <Font name="Comic Sans MS Bold" size="13.0" />
                </font></RadioButton>
             <RadioButton mnemonicParsing="false" text="3" toggleGroup="$ChooseCorrectAnswerGroup">
                <font>
-                  <Font name="Dosis Bold" size="13.0" />
+                  <Font name="Comic Sans MS Bold" size="13.0" />
                </font></RadioButton>
             <RadioButton mnemonicParsing="false" text="4" toggleGroup="$ChooseCorrectAnswerGroup">
                <font>
-                  <Font name="Dosis Bold" size="13.0" />
+                  <Font name="Comic Sans MS Bold" size="13.0" />
                </font></RadioButton>
          </children>
       </HBox>
-      <Button layoutX="298.0" layoutY="565.0" mnemonicParsing="false" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 20;" stylesheets="@Button.css" text="Save">
+      <Button layoutX="298.0" layoutY="565.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" style="-fx-background-radius: 20;" stylesheets="@Button.css" text="Save">
          <font>
-            <Font name="Dosis Bold" size="14.5" />
+            <Font name="Comic Sans MS Bold" size="13.0" />
          </font>
          <effect>
             <Blend />
          </effect></Button>
-      <Button layoutX="438.0" layoutY="565.0" mnemonicParsing="false" onAction="#backBtn" prefHeight="1.0" prefWidth="118.0" style="-fx-background-radius: 20;" stylesheets="@Button.css" text="Back">
+      <Button layoutX="438.0" layoutY="565.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#backBtn" style="-fx-background-radius: 20;" stylesheets="@Button.css" text="Back">
          <font>
-            <Font name="Dosis Bold" size="14.5" />
+            <Font name="Comic Sans MS Bold" size="13.0" />
          </font>
          <effect>
             <Blend />
          </effect></Button>
-      <ImageView fitHeight="100.0" fitWidth="168.0" layoutX="52.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" rotate="14.6">
+      <ImageView fitHeight="74.0" fitWidth="114.0" layoutX="108.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" rotate="14.6">
          <image>
-            <Image url="@../../../Untitled%20design-2.png" />
+            <Image url="@../../images/questions.png" />
          </image>
       </ImageView>
    </children>
