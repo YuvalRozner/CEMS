@@ -28,7 +28,7 @@
       </ImageView>
       <Pane layoutX="58.0" layoutY="93.0" maxHeight="603.0" maxWidth="399.0" minHeight="603.0" minWidth="399.0" style="-fx-background-color: #92bce3;">
          <children>
-            <Button layoutX="150.0" layoutY="239.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="157.0" style="-fx-background-radius: 10;" stylesheets="@Button.css" text="Create New Question">
+            <Button layoutX="150.0" layoutY="239.0" mnemonicParsing="false" onAction="#createNewQuestion" prefHeight="28.0" prefWidth="157.0" style="-fx-background-radius: 10;" stylesheets="@Button.css" text="Create New Question">
                <font>
                   <Font name="Comic Sans MS Bold" size="13.0" />
                </font>

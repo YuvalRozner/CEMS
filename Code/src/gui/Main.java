@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import enteties.Course;
 import enteties.Question;
+import enteties.StudentTest;
 import enteties.Subject;
 import enteties.Test;
+import enteties.TestToExexeute;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -45,6 +47,19 @@ public class Main extends Application {
 		subject.add(s2);
 		
 	}
+	
+	///add by lior runningTest
+	public static ArrayList<TestToExexeute> arrRuningTest; 
+	static {
+		arrRuningTest = new ArrayList<TestToExexeute>();
+		TestToExexeute testLior = new TestToExexeute("run","infi" , "3.5","1234");
+		TestToExexeute testYuval = new TestToExexeute("lock" , "logic" , "2.5","5678");
+		TestToExexeute testDor = new TestToExexeute("run","algebra","3","97454");
+		arrRuningTest.add(testLior);
+		arrRuningTest.add(testYuval);
+		arrRuningTest.add(testDor);
+	}
+	
 	public static ArrayList<Test> tests; 
 	static {
 		Test t1 = new Test("1","infi","22/05/2023");
@@ -57,6 +72,59 @@ public class Main extends Application {
 		a1.add(t3);
 		tests = a1;
 	}
+	
+	///add by lior AprroveGrade
+	public static ArrayList<StudentTest> arrStudentTest; 
+	static {
+		arrStudentTest = new ArrayList<StudentTest>();
+		StudentTest testLior = new StudentTest();
+		testLior.setStudentId("1234");
+		testLior.setGrade("75");
+		
+		StudentTest testYuval = new StudentTest();
+		testYuval.setStudentId("123");
+		testYuval.setGrade("69");
+		
+		StudentTest testDor = new StudentTest();
+		testDor.setStudentId("91011");
+		testDor.setGrade("82");
+		
+		
+		arrStudentTest.add(testLior);
+		arrStudentTest.add(testYuval);
+		arrStudentTest.add(testDor);
+	}
+	
+	///finish
+	
+	///add by lior executeTest
+	public static ArrayList<TestToExexeute> arrExecuteTest; 
+	static {
+		arrExecuteTest = new ArrayList<TestToExexeute>();
+		TestToExexeute exTestLior = new TestToExexeute();
+		exTestLior.setCourse("infi");
+		exTestLior.setDate("21.4.23");
+		exTestLior.setTestNum("1234");
+		
+			
+		TestToExexeute exTestYuval = new TestToExexeute();
+		exTestYuval.setCourse("logic");
+		exTestYuval.setDate("28.4.23");
+		exTestYuval.setTestNum("5678");
+		
+		TestToExexeute exTestDor = new TestToExexeute();
+		exTestDor.setCourse("data structure");
+		exTestDor.setDate("3.5.23");
+		exTestDor.setTestNum("91001");
+		
+		arrExecuteTest.add(exTestLior);
+		arrExecuteTest.add(exTestYuval);
+		arrExecuteTest.add(exTestDor);
+	}
+	
+	
+	
+	
 
     @Override
     public void start(Stage primaryStage) throws Exception {

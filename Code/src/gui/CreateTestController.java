@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import enteties.Question;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -59,6 +60,11 @@ public class CreateTestController extends AbstractController{
 		table.refresh();
 		subjectComboBox.getItems().addAll("math", "software");
 	}
+    
+    @FXML
+    private void createNewQuestion(ActionEvent event) throws Exception{
+    	start("createQuestion", "createTest");
+    }
 	
 }
 

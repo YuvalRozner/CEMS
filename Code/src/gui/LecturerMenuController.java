@@ -12,13 +12,12 @@ public class LecturerMenuController extends AbstractController {
     @FXML
     private Label welcomeLbl;
  
-    
     public LecturerMenuController() {
-    	
     }
+    
 	@FXML
-    void approveGrades(ActionEvent event) {
-		
+    void approveGrades(ActionEvent event) throws Exception{
+		start("aprroveGrade", "lecturerMenu");
     }
 
     @FXML
@@ -33,9 +32,8 @@ public class LecturerMenuController extends AbstractController {
 
     @FXML
     void executeTest(ActionEvent event) throws Exception {
-    	start("menu", "lecturerMenu"); //temporary........................
+    	start("executeTest", "lecturerMenu"); 
     }
-
 
     @FXML
     void reports(ActionEvent event) throws Exception {
@@ -44,7 +42,7 @@ public class LecturerMenuController extends AbstractController {
 
     @FXML
     void runningTest(ActionEvent event) throws Exception {
-    	
+    	start("runningTest", "lecturerMenu");
     }
     
 	public void logout(ActionEvent event) throws Exception {
