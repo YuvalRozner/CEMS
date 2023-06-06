@@ -1,9 +1,7 @@
 package gui;
 
-import client.ChatClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 
 
@@ -47,8 +45,7 @@ public class LecturerMenuController extends AbstractController {
     
 	public void logout(ActionEvent event) throws Exception {
     	super.logout();
-    	((Node)event.getSource()).getScene().getWindow().hide();
-    	ChatClient.getScreen("login").display();
+    	super.backBtn(event);
 	}
 
 	public void setWelcome(String name) {

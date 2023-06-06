@@ -48,6 +48,19 @@ public class Main extends Application {
 		
 	}
 	
+	///add by lior Grades
+	public static ArrayList<StudentTest> arrGrades; 
+	static {
+		arrGrades = new ArrayList<StudentTest>();
+		StudentTest infi = new StudentTest(new Course("1234","infi"),"good job!","85",new Test("0025"));
+	
+		StudentTest logic = new StudentTest(new Course("5678","logic"),"you can better!","70",new Test("0068"));
+		
+		arrGrades.add(infi);
+		arrGrades.add(logic);
+
+	}
+	
 	///add by lior runningTest
 	public static ArrayList<TestToExexeute> arrRuningTest; 
 	static {

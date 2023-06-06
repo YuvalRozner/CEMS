@@ -72,7 +72,7 @@
                                     </VBox>
                                     <VBox alignment="BOTTOM_RIGHT">
                                        <children>
-                                          <Button alignment="CENTER" mnemonicParsing="false" onAction="#endBtn" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Submmit">
+                                          <Button alignment="CENTER" mnemonicParsing="false" onAction="#submmitBtn" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Submmit">
                                              <font>
                                                 <Font name="Comic Sans MS Bold" size="13.0" />
                                              </font>

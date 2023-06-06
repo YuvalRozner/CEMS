@@ -16,7 +16,7 @@ public abstract class AbstractController implements SceneSetter {
 	public static Msg msgReceived;
 	private Scene scene;
 	private String fxmlName;
-	private String prevScreen;
+	public String prevScreen;
 
 	public void start(String fxmlName, String prevScreen) throws Exception {
 		this.fxmlName = fxmlName;

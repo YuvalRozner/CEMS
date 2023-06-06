@@ -3,7 +3,6 @@ package client;
 import java.io.IOException;
 
 import gui.AbstractController;
-import gui.LoginController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,7 +29,7 @@ public class ClientConnectionController extends AbstractController{
     		}catch (IOException exception) { System.out.println("Error: Can't setup connection!"+ " Terminating client.");
     		      System.exit(1);  }
     		
-    		new LoginController().start("login", "clientConnection");
+    		start("login", "clientConnection");
 
     	} catch(Throwable t) {System.out.println("input ip and port - error connecting.");}    	
     }

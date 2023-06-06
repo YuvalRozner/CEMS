@@ -72,12 +72,6 @@ public class ExecuteTestController extends AbstractController{
 	}
 
     @FXML
-	public void backBtn(ActionEvent event) throws Exception {
-		((Node)event.getSource()).getScene().getWindow().hide();
-		ChatClient.getScreen("lecturerMenu").display();
-	}
-
-    @FXML
     void executeTestBtn(ActionEvent event) {
     }
     @FXML

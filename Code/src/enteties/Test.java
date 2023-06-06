@@ -18,6 +18,10 @@ public class Test {
         this.radioButton = new RadioButton();
         this.radioButton.setToggleGroup(null); // Set the ToggleGroup to null initially
     }
+
+	public Test(String id) { //lior
+		this.id=id;
+	}
     
     public String getId() {
         return id;

@@ -28,10 +28,10 @@ public class LoginController extends AbstractController{
         		((LecturerMenuController)ChatClient.getScreen("lecturerMenu")).setWelcome("Welcome " + user.getName());
     			break;
     		case "student":
-    			//new StudentMenuController().start("studentMenu");
+    			start("studentMenu" , "login");
     			break;
     		case "hod":
-    			//new HODMenuController().start("hodMenu");
+    			//start("HODMenu" , "login");
     			break;
 			default:
 				break;
