@@ -54,9 +54,9 @@ public class CEMSserver extends AbstractServer {
         try {
         	serverController.addConnected(clientAddress);
         } catch(Throwable t) {System.out.println("Error in clientConnected");
-        serverController.addConsole("Error in clientConnected");};  
+        serverController.addConsole("Error in clientConnected.\n");};  
         // Print the client's IP address and hostname
-        serverController.addConsole("Client connected from " + clientAddress.getHostAddress() + " (" + clientHostname + ")");
+        serverController.addConsole("Client connected from " + clientAddress.getHostAddress() + " (" + clientHostname + ").\n");
         System.out.println("Client connected from " + clientAddress.getHostAddress() + " (" + clientHostname + ")");
     }
 	
@@ -71,14 +71,14 @@ public class CEMSserver extends AbstractServer {
 		java.sql.Statement stmt = null;
 		String queryStr;
 		ResultSet rs;
-		serverController.addConsole("Message received: " + msg + " from " + client);
+		serverController.addConsole("Message received: " + msg + " from " + client+".\n");
 		System.out.println("Message received: " + msg + " from " + client);
 		try {
 			switch (msg.getType()) {
 				case select:
 					stmt = conn.createStatement();
 					queryStr = DB_controller.createSELECTquery(msg.getSelect(), msg.getFrom(), msg.getWhere());
-					serverController.addConsole("query: ->"+ queryStr);
+					serverController.addConsole("query: ->"+ queryStr+".\n");
 					System.out.println("query: ->"+ queryStr);
 					rs = stmt.executeQuery(queryStr);
 					
@@ -91,13 +91,13 @@ public class CEMSserver extends AbstractServer {
 				case update:
 					stmt = conn.createStatement();
 					queryStr = DB_controller.createUPDATEquery(msg.getTableToUpdate(), msg.getSet(), msg.getWhere());
-					serverController.addConsole("query: ->"+ queryStr);
+					serverController.addConsole("query: ->"+ queryStr+".\n");
 					System.out.println("query: ->"+ queryStr);
 					stmt.executeUpdate(queryStr);
 					sendToClient(new Msg(MsgType.succeeded), client);
 					break;
 				case disconnect:
-					serverController.addConsole("clientDisconnected" + client);
+					serverController.addConsole("clientDisconnected" + client+".\n");
 					System.out.println("clientDisconnected" + client);
 					serverController.removeConnected(client.getInetAddress());
 					sendToClient(new Msg(MsgType.bye), client);
@@ -110,7 +110,7 @@ public class CEMSserver extends AbstractServer {
 				case insert:
 					stmt = conn.createStatement();
 					queryStr = DB_controller.createINSERTquery(msg.getTableToUpdate(), msg.getColNames(), msg.getValues());
-					serverController.addConsole("query: ->"+ queryStr);
+					serverController.addConsole("query: ->"+ queryStr+".\n");
 					System.out.println("query: ->"+ queryStr);
 					stmt.executeQuery(queryStr);
 					sendToClient(new Msg(MsgType.succeeded), client);
