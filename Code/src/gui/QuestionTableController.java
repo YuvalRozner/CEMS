@@ -15,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 
@@ -34,12 +33,34 @@ public class QuestionTableController extends AbstractController{
 	
 	
 	public QuestionTableController() {
-		arrQuestion = new ArrayList<Question>(ChatClient.questionList);
+		
+		//arrQuestion = new ArrayList<Question>(ChatClient.questionList);
+		arrQuestion = new ArrayList<Question>();
+		arrQuestion.add(new Question("1234", "11200", "logic","how much is 1+1", "22","ilena"));
+		arrQuestion.add(new Question("5678", "12645", "infi","how much is 6+8", "23","dan"));
 		QTable = FXCollections.observableArrayList(arrQuestion);
-		for (Question q : arrQuestion) {
-			arrdup.add(new Question(q.getID(), q.getSubjectNum(), q.getCourseName(), q.getQuestion(), q.getNumber(),q.getLecturereCreated()));
-		}
+		for (Question Q : arrQuestion) {
+        	Q.setNewShowQ();
+        	Q.getShowQ().setOnMouseClicked(event -> {
+        		try {
+        			showQuestionOpen(event);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+        	});
+        }
+		//for (Question q : arrQuestion) {
+		//	arrdup.add(new Question(q.getID(), q.getSubjectNum(), q.getCourseName(), q.getQuestion(), q.getNumber(),q.getLecturereCreated()));
+		//}
+		
 	}
+	
+	@FXML
+    private void showQuestionOpen(MouseEvent event) throws Exception{
+    	ChatClient.screens.putIfAbsent("showQuestion", new ShowQuestionController());
+		ChatClient.getScreen("showQuestion").start("showQuestion");
+        System.out.println("Button clicked!");
+    }
 
     
     @FXML
@@ -59,7 +80,6 @@ public class QuestionTableController extends AbstractController{
     
     @FXML
 	protected void initialize() {
-    	
     	idCol.setCellValueFactory(new PropertyValueFactory<Question, String>("ID"));
 		subjectCol.setCellValueFactory(new PropertyValueFactory<Question, String>("SubjectNum"));
 		courseCol.setCellValueFactory(new PropertyValueFactory<Question, String>("CourseName"));
@@ -67,11 +87,11 @@ public class QuestionTableController extends AbstractController{
 		questionNumberCol.setCellValueFactory(new PropertyValueFactory<Question, String>("Number"));
 		lecturerCol.setCellValueFactory(new PropertyValueFactory<Question, String>("LecturereCreated"));
 		
-		questionTextCol.setCellValueFactory(new PropertyValueFactory<Question, String>("Question"));
-        questionTextCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        questionTextCol.setEditable(true); 
+		questionTextCol.setCellValueFactory(new PropertyValueFactory<Question, String>("ShowQ"));
+        //questionTextCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        //questionTextCol.setEditable(true); 
        
-		table.setEditable(true); // Set the table editable
+		//table.setEditable(true); // Set the table editable
 		table.setItems(QTable);
 		
 		table.refresh();

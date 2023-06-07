@@ -156,9 +156,11 @@ public class StudentTest {
 		this.studentId = studentId2;
 		
 	}
-	//////////show
-	public void setNewShow() { ///added by Mor //add style to show button
-        this.show = new Button();
+
+	/////////////show
+
+	public void setNewShow() {
+		this.show = new Button();
         show.setText("Show");
         show.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30;");
         // Add hover effect
@@ -167,6 +169,6 @@ public class StudentTest {
         // Add pressed effect
         show.setOnMousePressed(e -> show.setStyle("-fx-background-color: #82bfb6; -fx-background-radius: 30 0 0 30;"));
         show.setOnMouseReleased(e -> show.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30;"));
-    }
-	/////////////show
+		
+	}
 }

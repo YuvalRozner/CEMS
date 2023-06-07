@@ -17,10 +17,11 @@ public class LoginController extends AbstractController{
     
     @FXML
     void connect(ActionEvent event) throws Exception {
+    	/*
     	//temporary, it will take us to the lecturer munu: ......
     	ChatClient.screens.putIfAbsent("lecturerMenu", new LecturerMenuController());
 		ChatClient.getScreen("lecturerMenu").start("lecturerMenu");
-    }
+    }*/
     
     /*
      // conect with student user.
@@ -32,4 +33,8 @@ public class LoginController extends AbstractController{
 		ChatClient.getScreen("studentMenu").start("studentMenu");
 		
     }*/
+	  //temporary, it will take us to the lecturer munu: ......
+		ChatClient.screens.putIfAbsent("HodMenu", new HodMenuController());
+		ChatClient.getScreen("HodMenu").start("HodMenu");
+	}
 }

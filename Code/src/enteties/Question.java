@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 
 public class Question {
 	//private String id;
+	private javafx.scene.control.Button showQ = new javafx.scene.control.Button();
 	private String subjectNum;
 	private String ID;
 	private String courseName;
@@ -19,7 +20,6 @@ public class Question {
 	private String correctAns;
 	private String instructions;
 	//private ArrayList<Integer> relevantCourses;
-	
 	private CheckBox select;
 	private TextField points=new TextField();
 //	private Boolean flag = false; /////////////////////////////////// what is it dor? -rozner
@@ -186,5 +186,21 @@ public class Question {
 				points.setDisable(!newValue);
 				System.out.println("Checkbox " + (newValue ? "pressed" : "unpressed")); 	}
 		});
+	}
+
+	public javafx.scene.control.Button getShowQ() {
+		return showQ;
+	}
+
+	public void setNewShowQ() {
+		showQ.setText("Show");
+		showQ.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30;");
+        // Add hover effect
+		showQ.setOnMouseEntered(e -> showQ.setStyle("-fx-background-color: #009494; -fx-background-radius: 30 0 0 30;"));
+		showQ.setOnMouseExited(e -> showQ.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30;"));
+        // Add pressed effect
+		showQ.setOnMousePressed(e -> showQ.setStyle("-fx-background-color: #82bfb6; -fx-background-radius: 30 0 0 30;"));
+		showQ.setOnMouseReleased(e -> showQ.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30;"));
+		
 	}
 }

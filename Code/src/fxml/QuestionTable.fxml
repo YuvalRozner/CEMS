@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.QuestionTableController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.QuestionTableController">
    <children>
       <Label layoutX="399.0" layoutY="27.0" text="Question List" underline="true">
          <font>
@@ -23,7 +23,7 @@
           <TableColumn fx:id="idCol" minWidth="100.0" prefWidth="100.0" text="ID" />
           <TableColumn fx:id="subjectCol" minWidth="100.0" prefWidth="120.0" text="Subject" />
             <TableColumn fx:id="courseCol" minWidth="100.0" prefWidth="120.0" text="Course" />
-            <TableColumn fx:id="questionTextCol" minWidth="100.0" onEditCommit="#onEditCommitQuestionTextCol" prefWidth="300.0" text="Question Text" />
+            <TableColumn fx:id="questionTextCol" minWidth="100.0" onEditCommit="#onEditCommitQuestionTextCol" prefWidth="300.0" text="Show Question" />
             <TableColumn fx:id="questionNumberCol" minWidth="100.0" prefWidth="120.0" text="Question Number" />
             <TableColumn fx:id="lecturerCol" minWidth="100.0" prefWidth="120.0" text="Lecturer" />
         </columns>

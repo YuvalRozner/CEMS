@@ -1,41 +1,43 @@
 package gui;
 
+import client.ChatClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.Node;
 
-public class HodMenuController {
-
-    @FXML
-    private Button approve;
+public class HodMenuController extends AbstractController{
 
     @FXML
-    private Button logout;
-
-    @FXML
-    private Button report;
-
-    @FXML
-    private Button shoeData;
-
-    @FXML
-    void approveChange(ActionEvent event) {
-
+    void ShowQuestions(ActionEvent event) throws Exception {
+    	ChatClient.screens.putIfAbsent("questionTable", new QuestionTableController());
+		ChatClient.getScreen("questionTable").start("questionTable");
     }
 
     @FXML
-    void logout(ActionEvent event) {
-
+    void approveChange(ActionEvent event) throws Exception {
+    	ChatClient.screens.putIfAbsent("ApproveChanges", new ApproveChangesController());
+		ChatClient.getScreen("ApproveChanges").start("ApproveChanges");
     }
 
     @FXML
-    void reports(ActionEvent event) {
-
+    void logOut(ActionEvent event) throws Exception{
+    	((Node)event.getSource()).getScene().getWindow().hide();
+    	ChatClient.screens.putIfAbsent("login", new LoginController());
+    	ChatClient.getScreen("login").display();
     }
 
     @FXML
-    void showData(ActionEvent event) {
+    void reports(ActionEvent event) throws Exception {
+    	ChatClient.screens.putIfAbsent("ChooseReportType", new ChooseReportTypeController());
+    	AbstractController screen=ChatClient.getScreen("ChooseReportType");
+		screen.start("ChooseReportType");
+    }
 
+    @FXML
+    void showTest(ActionEvent event) throws Exception {
+    	ChatClient.screens.putIfAbsent("showTestsData", new ShowTestDataController());
+    	AbstractController screen=ChatClient.getScreen("showTestsData");
+		screen.start("showTestsData");
     }
 
 }
