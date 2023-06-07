@@ -2,6 +2,8 @@ package gui;
 
 import java.util.ArrayList;
 
+import controllers.CountDown;
+import controllers.TimeController1;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -11,16 +13,20 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 
 
-public class OnlineTestController extends AbstractController {
+public class OnlineTestController extends AbstractController implements CountDown{
     private ArrayList<ArrayList<String>> quizData; // ArrayList of ArrayList of Strings
     private ArrayList<ToggleGroup> toggleGroups = new ArrayList<ToggleGroup>();
     boolean flagForSubmmit = false; //added by mor
-
+    TimeController1 timeController;
     @FXML
     private VBox dataVbox;
 
+    @FXML
+    private Label timeLbl;
+    
     public OnlineTestController() {
         // Initialize quiz data (replace with your own data)
+    	timeController = new TimeController1(1,1,1,this);
         quizData = new ArrayList<>();
         ArrayList<String> question1 = new ArrayList<>();
         question1.add("1. What is the capital of France?");
@@ -69,6 +75,7 @@ public class OnlineTestController extends AbstractController {
             }
             toggleGroups.add(answerGroup);
         }
+    	timeController.startTimer();
     }
  
     @FXML
@@ -86,5 +93,11 @@ public class OnlineTestController extends AbstractController {
     	super.backBtn(event);
     }
 
+	@Override
+	public void setTextCountdown(String s) {
+		timeLbl.setText(s);
+		
+	}
+   
 
 }

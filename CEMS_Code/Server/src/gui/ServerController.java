@@ -126,7 +126,6 @@ public class ServerController {
 	}
 
 	public void addConsole(String msg) {
-		// console.setText(console.getText() + msg); //old line, show dor and then delete.
 		console.appendText(msg); // append without read the prev text & scroll down automatically.
 	}
 

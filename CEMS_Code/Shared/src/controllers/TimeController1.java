@@ -17,8 +17,8 @@ public class TimeController1 {
     private ScheduledExecutorService executor;
     private ScheduledFuture<?> scheduledFuture;
     Duration durationLeft;
-    public TimeController1(int hours, int minutes, int seconds, CountDown countDown) {
-        this.countDown = countDown;
+    public TimeController1(int hours, int minutes, int seconds, CountDown onlineTestController) {
+        this.countDown = onlineTestController;
 
         // Calculate the end time based on the provided hours, minutes, and seconds
         LocalDateTime now = LocalDateTime.now();
@@ -79,7 +79,7 @@ public class TimeController1 {
                     String timeRemaining = String.format("%02d:%02d:%02d", hours, minutes, seconds);
 
                     // Update the label with the time remaining
-                    countDown.setTextCountdown("Time left for the countdown is: " + timeRemaining);
+                    countDown.setTextCountdown(timeRemaining);
                 }
             });
         }

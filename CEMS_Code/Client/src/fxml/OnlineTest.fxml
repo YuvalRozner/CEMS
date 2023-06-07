@@ -51,7 +51,15 @@
                                           </Lighting>
                                        </effect>
                                     </Label>
-                                    <Pane prefHeight="200.0" prefWidth="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label fx:id="timeLbl" text="00:00:00">
+                                             <font>
+                                                <Font size="22.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
                                     <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 130; -fx-border-color: #00c2cb; -fx-border-radius: 130;">
                                        <children>
                                           <ImageView fitHeight="191.0" fitWidth="211.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
