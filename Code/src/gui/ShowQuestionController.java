@@ -5,27 +5,31 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class ShowQuestionController extends AbstractController{
 
-    @FXML
-    private TextField A1;
+	@FXML
+    private Label A1;
 
     @FXML
-    private TextField A2;
+    private Label A2;
 
     @FXML
-    private TextField A3;
+    private Label A3;
 
     @FXML
-    private TextField A4;
+    private Label A4;
+
+    @FXML
+    private Label answer;
 
     @FXML
     private Button back;
 
     @FXML
-    private TextField question;
+    private Label question;
 
     @FXML
     void backBtn(ActionEvent event) {

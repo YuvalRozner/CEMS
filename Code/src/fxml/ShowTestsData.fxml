@@ -14,10 +14,10 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="578.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ShowTestDataController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="578.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ShowTestDataController">
    <children>
       <Pane layoutX="338.0" layoutY="-99.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
-      <Pane layoutX="34.0" layoutY="129.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="231.0" style="-fx-background-color: #92bce3;" />
+      <Pane layoutX="34.0" layoutY="125.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="231.0" style="-fx-background-color: #92bce3;" />
       <Label layoutX="34.0" layoutY="75.0" text="Show Tests">
          <font>
             <Font name="Comic Sans MS Bold" size="45.0" />
@@ -40,27 +40,27 @@
                </light>
             </Lighting>
          </effect></Label>
-      <ImageView fitHeight="193.0" fitWidth="216.0" layoutX="407.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="216.0" fitWidth="221.0" layoutX="391.0" layoutY="-41.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/Cems-logo.png" />
          </image>
       </ImageView>
       <Circle fill="WHITE" layoutX="54.0" layoutY="565.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />
-      <TableView fx:id="table" layoutX="38.0" layoutY="158.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="260.0" stylesheets="@TableView.css">
+      <TableView fx:id="table" layoutX="38.0" layoutY="148.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="260.0" prefWidth="502.0" stylesheets="@TableView.css">
         <columns>
           <TableColumn fx:id="numTestcol" prefWidth="65.0" text="Num" />
-          <TableColumn fx:id="coursnamecol" prefWidth="73.0" text="course" />
-            <TableColumn fx:id="datecol" prefWidth="49.5" text="date" />
-            <TableColumn fx:id="showcol" prefWidth="78.0" text="show" />
-            <TableColumn fx:id="codecol" prefWidth="78.5" text="code" />
-            <TableColumn fx:id="typecol" prefWidth="83.0" text="type" />
+          <TableColumn fx:id="coursnamecol" prefWidth="90.0" text="course" />
+            <TableColumn fx:id="datecol" prefWidth="89.5" text="date" />
+            <TableColumn fx:id="showcol" prefWidth="86.0" text="show" />
+            <TableColumn fx:id="codecol" prefWidth="57.5" text="code" />
+            <TableColumn fx:id="typecol" prefWidth="112.0" text="type" />
         </columns>
       </TableView>
-      <Button fx:id="backbtn" layoutX="440.0" layoutY="565.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backBtn" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
+      <Button fx:id="backbtn" layoutX="440.0" layoutY="557.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backBtn" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>
-      <ImageView fitHeight="187.0" fitWidth="231.0" layoutX="26.0" layoutY="434.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="216.0" fitWidth="231.0" layoutX="26.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/ExecuteTest3.png" />
          </image>

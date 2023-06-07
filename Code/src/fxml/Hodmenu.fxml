@@ -12,29 +12,35 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="378.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HodMenuController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="378.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HodMenuController">
    <children>
-      <Pane layoutX="-15.0" layoutY="142.0" maxHeight="292.0" maxWidth="218.0" minHeight="292.0" minWidth="218.0" style="-fx-background-color: #92bce3;">
+      <Pane layoutX="-15.0" layoutY="142.0" maxHeight="292.0" maxWidth="218.0" minHeight="282.0" minWidth="218.0" prefHeight="288.0" prefWidth="218.0" style="-fx-background-color: #92bce3;">
          <children>
-            <ImageView fitHeight="204.0" fitWidth="203.0" layoutX="-9.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="133.0" layoutX="1.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/students3.png" />
+                  <Image url="@../../images/hodMenu.png" />
                </image>
             </ImageView>
             <VBox layoutX="67.0" layoutY="16.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#ShowQuestions" text="Show Questions" />
+                  <Button maxHeight="35.0" maxWidth="151.0" minHeight="35.0" minWidth="151.0" mnemonicParsing="false" onAction="#ShowQuestions" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Show Questions">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="14.0" />
+                     </font></Button>
                   <Button maxHeight="35.0" maxWidth="151.0" minHeight="35.0" minWidth="151.0" mnemonicParsing="false" onAction="#showTest" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Show Tests">
                      <font>
                         <Font name="Comic Sans MS Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button maxHeight="35.0" maxWidth="151.0" minHeight="35.0" minWidth="151.0" mnemonicParsing="false" onAction="#approveChange" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Approve Changes">
+                  <Button maxHeight="35.0" maxWidth="151.0" minHeight="35.0" minWidth="151.0" mnemonicParsing="false" onAction="#approveChange" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Confirm Durations">
                      <font>
                         <Font name="Comic Sans MS Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#reports" text="Reports" />
+                  <Button maxHeight="23.0" maxWidth="151.0" minHeight="35.0" minWidth="151.0" mnemonicParsing="false" onAction="#reports" style="-fx-background-radius: 30 0 0 30;" stylesheets="@Button.css" text="Reports">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="14.0" />
+                     </font></Button>
                </children>
             </VBox>
          </children>
@@ -49,11 +55,11 @@
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>
-      <Label layoutX="19.0" layoutY="123.0" text="Welcome Dvora!">
+      <Label layoutX="19.0" layoutY="123.0" text="Welcome Lecturer!">
          <font>
             <Font name="Comic Sans MS" size="15.0" />
          </font></Label>
-      <Label layoutX="19.0" layoutY="78.0" text="Hod Menu">
+      <Label layoutX="19.0" layoutY="78.0" text="H.o.d Menu">
          <font>
             <Font name="Comic Sans MS Bold" size="40.0" />
          </font>
