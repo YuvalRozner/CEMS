@@ -33,7 +33,7 @@
             <TableColumn fx:id="correctAnswerCol" prefWidth="108.5" text="correct answer" />
         </columns>
       </TableView>
-      <Button fx:id="exitBtn" layoutX="438.0" layoutY="552.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ExitBtn" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
+      <Button layoutX="438.0" layoutY="552.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backBtn" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>

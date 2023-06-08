@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import enteties.QuestionToShow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -21,9 +19,6 @@ public class ExecuteTestShowTestController extends AbstractController {
     @FXML
     private TableColumn<QuestionToShow, String> correctAnswerCol,numCol,questionCol,questionPointCol;
 
-    @FXML
-    private Button exitBtn;
-
 
     @FXML
     private Label courseName,date;
@@ -31,10 +26,6 @@ public class ExecuteTestShowTestController extends AbstractController {
     @FXML
     private TableView<QuestionToShow> table= new TableView<QuestionToShow>();
 
-    @FXML
-    void ExitBtn(ActionEvent event) {
-    	
-    }
     public ExecuteTestShowTestController() {
     	QuestionToShow Q1= new QuestionToShow("2","10","how much is 1+1?","2");
 		QuestionToShow Q2= new QuestionToShow("1","20","how much is 7+8?","3");

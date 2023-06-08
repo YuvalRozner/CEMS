@@ -29,8 +29,8 @@ public class StartTestController extends AbstractController{
 
     @FXML
     void startBtn(ActionEvent event) throws Exception {
-    	//start("onlineTest", "startTest");
-    	start("manualTest", "startTest");
+    	start("onlineTest", "startTest");
+    	//start("manualTest", "startTest");
     }
     public StartTestController() {
     	idTextField=new TextField();

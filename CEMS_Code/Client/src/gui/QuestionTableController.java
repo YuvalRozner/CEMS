@@ -3,8 +3,8 @@ package gui;
 import java.util.ArrayList;
 
 import JDBC.DB_controller;
-import JDBC.Msg;
-import JDBC.MsgType;
+import client.ChatClient;
+import client.ClientUI;
 import enteties.Question;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,7 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 
@@ -33,24 +32,46 @@ public class QuestionTableController extends AbstractController{
 	
 	
 	public QuestionTableController() {
-		arrQuestion = new ArrayList<Question>(msgReceived.convertData(Question.class));
+		
+		//arrQuestion = new ArrayList<Question>(ChatClient.questionList);
+		arrQuestion = new ArrayList<Question>();
+		arrQuestion.add(new Question("1234", "11200", "logic","how much is 1+1", 22,"ilena"));
+		arrQuestion.add(new Question("5678", "12645", "infi","how much is 6+8", 23,"dan"));
 		QTable = FXCollections.observableArrayList(arrQuestion);
-		for (Question q : arrQuestion) {
-			arrdup.add(new Question(q.getID(), q.getSubjectNum(), q.getCourseName(), q.getQuestion(), q.getNumber(),q.getLecturereCreated()));
-		}
+		for (Question Q : arrQuestion) {
+        	Q.setNewShowQ();
+        	Q.getShowQ().setOnMouseClicked(event -> {
+        		try {
+        			showQuestionOpen(event);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+        	});
+        }
+		//for (Question q : arrQuestion) {
+		//	arrdup.add(new Question(q.getID(), q.getSubjectNum(), q.getCourseName(), q.getQuestion(), q.getNumber(),q.getLecturereCreated()));
+		//}
+		
 	}
-
-    @FXML
-    void saveBtn(ActionEvent event) {
-        ArrayList<Msg> UpdateQueries = DB_controller.updateQuestions1(table.getItems(), arrdup);
-        Msg msg = new Msg(MsgType.manyMessages);
-        msg.setMsgLst(UpdateQueries);
-        sendMsg(msg);
+	
+	@FXML
+    private void showQuestionOpen(MouseEvent event) throws Exception{
+		start("showQuestion", "questionTable");
+        System.out.println("Button clicked!");
     }
+
+
+   /*@FXML
+    void saveBtn(ActionEvent event) {
+        ArrayList<String> UpdateQueries = DB_controller.updateQuestions(table.getItems(), arrdup);
+        for (String query : UpdateQueries) {
+            System.out.println("Send to server update query -> " + query);
+            ClientUI.chat.accept(query);
+        }
+    } */
     
     @FXML
 	protected void initialize() {
-    	
     	idCol.setCellValueFactory(new PropertyValueFactory<Question, String>("ID"));
 		subjectCol.setCellValueFactory(new PropertyValueFactory<Question, String>("SubjectNum"));
 		courseCol.setCellValueFactory(new PropertyValueFactory<Question, String>("CourseName"));
@@ -58,11 +79,11 @@ public class QuestionTableController extends AbstractController{
 		questionNumberCol.setCellValueFactory(new PropertyValueFactory<Question, String>("Number"));
 		lecturerCol.setCellValueFactory(new PropertyValueFactory<Question, String>("LecturereCreated"));
 		
-		questionTextCol.setCellValueFactory(new PropertyValueFactory<Question, String>("Question"));
-        questionTextCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        questionTextCol.setEditable(true); 
+		questionTextCol.setCellValueFactory(new PropertyValueFactory<Question, String>("ShowQ"));
+        //questionTextCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        //questionTextCol.setEditable(true); 
        
-		table.setEditable(true); // Set the table editable
+		//table.setEditable(true); // Set the table editable
 		table.setItems(QTable);
 		
 		table.refresh();
@@ -74,6 +95,11 @@ public class QuestionTableController extends AbstractController{
          question.setQuestion(newValue);
     }
  
+    
+    
+    
+    
+    
     //shadow
     
     @FXML

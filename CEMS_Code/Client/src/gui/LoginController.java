@@ -32,7 +32,7 @@ public class LoginController extends AbstractController{
     			((StudentMenuController)ChatClient.getScreen("studentMenu")).setWelcome("Welcome " + user.getName());
     			break;
     		case "hod":
-    			//start("HODMenu" , "login");
+    			start("hodMenu" , "login");
     			//((HODMenuController)ChatClient.getScreen("HODMenu")).setWelcome("Welcome " + user.getName());
     			break;
     	}

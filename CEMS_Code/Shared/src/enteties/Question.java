@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 
@@ -26,6 +27,8 @@ public class Question {
 	private CheckBox select;
 	private TextField points;
 	
+	private Button showQ = new Button();
+	
 	
 	public Question(String ID, String subjectNum, String courseName, String question, int number,
 			String lecturerCreated) {
@@ -36,8 +39,8 @@ public class Question {
 		this.number = number;
 		this.lecturerCreated = lecturerCreated;
 	}
-	
-	
+
+
 	public String getID() {
 		return this.ID;
 	}
@@ -188,5 +191,21 @@ public class Question {
 				points.setDisable(!newValue);
 				System.out.println("Checkbox " + (newValue ? "pressed" : "unpressed")); 	}
 		});
+	}
+	
+	public Button getShowQ() {
+		return showQ;
+	}
+
+	public void setNewShowQ() {
+		showQ.setText("Show");
+		showQ.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30;");
+        // Add hover effect
+		showQ.setOnMouseEntered(e -> showQ.setStyle("-fx-background-color: #009494; -fx-background-radius: 30 0 0 30;"));
+		showQ.setOnMouseExited(e -> showQ.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30;"));
+        // Add pressed effect
+		showQ.setOnMousePressed(e -> showQ.setStyle("-fx-background-color: #82bfb6; -fx-background-radius: 30 0 0 30;"));
+		showQ.setOnMouseReleased(e -> showQ.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30;"));
+		
 	}
 }
