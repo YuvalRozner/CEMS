@@ -51,6 +51,7 @@ public class StudentTest {
 	
 	public void setNewSelect() { 
 		this.select = new CheckBox();
+		this.select.setStyle("-fx-background-color: #F0F8FF; -fx-border-width: 1px; -fx-border-color: #92bce3;  -fx-border-radius: 3px; -fx-font-weight: bold; -fx-font-family: \"Comic Sans MS\";");
 		// Add event handler for pressed and unpressed (checked / unchecked) state of the checkbox.
 		this.select.selectedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
@@ -71,6 +72,7 @@ public class StudentTest {
 	
 	public void setNewNote() {
 		this.note = new TextField();
+		this.note.setStyle("-fx-background-color: #F0F8FF; -fx-border-width: 1px; -fx-border-color: #92bce3;  -fx-border-radius: 7px; -fx-font-weight: bold; -fx-font-family: \"Comic Sans MS\";");
 		//note.setDisable(true);
 	}
 
@@ -160,13 +162,13 @@ public class StudentTest {
 	public void setNewShow() { ///added by Mor //add style to show button
         this.show = new Button();
         show.setText("Show");
-        show.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30;");
+        show.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30; -fx-font-weight: bold; -fx-font-family: \\\"Comic Sans MS\\\";");
         // Add hover effect
-        show.setOnMouseEntered(e -> show.setStyle("-fx-background-color: #009494; -fx-background-radius: 30 0 0 30;"));
-        show.setOnMouseExited(e -> show.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30;"));
+        show.setOnMouseEntered(e -> show.setStyle("-fx-background-color: #009494; -fx-background-radius: 30 0 0 30; -fx-font-weight: bold; -fx-font-family: \\\"Comic Sans MS\\\";"));
+        show.setOnMouseExited(e -> show.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30; -fx-font-weight: bold; -fx-font-family: \\\"Comic Sans MS\\\";"));
         // Add pressed effect
-        show.setOnMousePressed(e -> show.setStyle("-fx-background-color: #82bfb6; -fx-background-radius: 30 0 0 30;"));
-        show.setOnMouseReleased(e -> show.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30;"));
+        show.setOnMousePressed(e -> show.setStyle("-fx-background-color: #82bfb6; -fx-background-radius: 30 0 0 30; -fx-font-weight: bold; -fx-font-family: \\\"Comic Sans MS\\\";"));
+        show.setOnMouseReleased(e -> show.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30; -fx-font-weight: bold; -fx-font-family: \\\"Comic Sans MS\\\";"));
     }
 	/////////////show
 }

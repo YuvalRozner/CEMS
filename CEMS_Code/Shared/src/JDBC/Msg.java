@@ -19,7 +19,7 @@ public class Msg implements Serializable{
 	private ArrayList<ArrayList<Object>> data = null; //data from DB to client.
 	private ArrayList<String> colNames = null;
 	private ArrayList<ArrayList<Object>> values = null;
-
+	
 	/* original empty constructor. */
 	public Msg() {}
 	
@@ -145,5 +145,4 @@ public class Msg implements Serializable{
 		}
 		return converted;
 	}
-	
 }

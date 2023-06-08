@@ -41,7 +41,6 @@ public class ChatClient extends AbstractClient {
 	 */
 	public void handleMessageFromServer(Object tmpMsg) {
 		Msg msg = ((Msg)tmpMsg);
-		awaitResponse = false; //important. magic line.
 		System.out.println("Message recieved from server -> " + msg);	
 		if(msg instanceof Msg) {
 			switch (msg.getType()) {
@@ -68,6 +67,7 @@ public class ChatClient extends AbstractClient {
 					break;
 			}
 		}
+		awaitResponse = false; //important. magic line.
 	}
 
 	public void handleMessageFromClientUI(Msg msg) {

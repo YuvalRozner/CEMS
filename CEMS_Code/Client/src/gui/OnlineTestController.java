@@ -66,10 +66,12 @@ public class OnlineTestController extends AbstractController implements CountDow
     protected void initialize() {
     	for (ArrayList<String> questionData : quizData) {
             Label questionLabel = new Label(questionData.get(0));
+            questionLabel.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-weight: bold; -fx-font-size: 14px;");
             dataVbox.getChildren().add(questionLabel);
             ToggleGroup answerGroup = new ToggleGroup();
             for (int i = 1; i < questionData.size(); i++) {
                 RadioButton answerRadioButton = new RadioButton(questionData.get(i));
+                //answerRadioButton.setStyle("-fx-border-color: #CCFFFF; -fx-border-width: 2px; -fx-border-radius: 50%; -fx-background-color: #FFFFFF; -fx-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);");
                 answerRadioButton.setToggleGroup(answerGroup);
                 dataVbox.getChildren().add(answerRadioButton);
             }

@@ -39,5 +39,6 @@ public class Course {
 	// Initialize the checkBok special field.
 	public void setNewSelect() {
 		this.select = new CheckBox();
+		this.select.setStyle("-fx-background-color: #F0F8FF; -fx-border-width: 1px; -fx-border-color: #92bce3;  -fx-border-radius: 3px; -fx-font-weight: bold; -fx-font-family: \"Comic Sans MS\";");
 	}
 }

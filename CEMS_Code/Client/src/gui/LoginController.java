@@ -44,7 +44,7 @@ public class LoginController extends AbstractController{
     	msg.setSelect("*");
     	msg.setFrom("cems.user");
     	msg.setWhere("username", username);
-    	//msg.setWhere("password", password);
+
     	
     	sendMsg(msg);
     	User user = ChatClient.user;
@@ -55,7 +55,7 @@ public class LoginController extends AbstractController{
 		msg.setTableToUpdate("cems.user");
 		msg.setSet("loggedin", "yes");
     	msg.setWhere("username", username);
-    	//msg.setWhere("password", password);
+
     	sendMsg(msg);
     	
     	

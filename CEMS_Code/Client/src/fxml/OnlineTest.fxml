@@ -55,7 +55,7 @@
                                        <children>
                                           <Label fx:id="timeLbl" text="00:00:00">
                                              <font>
-                                                <Font size="22.0" />
+                                                <Font name="Comic Sans MS Bold" size="22.0" />
                                              </font>
                                           </Label>
                                        </children>

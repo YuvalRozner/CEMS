@@ -91,7 +91,6 @@ public abstract class AbstractController implements SceneSetter {
 		msg.setTableToUpdate("cems.user");
 		msg.setSet("loggedin", "no");
     	msg.setWhere("username", ChatClient.user.getUsername());
-    	msg.setWhere("password", ChatClient.user.getPassword());
     	sendMsg(msg);
 	}
 }
