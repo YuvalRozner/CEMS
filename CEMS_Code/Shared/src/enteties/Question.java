@@ -26,6 +26,8 @@ public class Question {
 	//for FX:
 	CheckBox checkbox;
 	RadioButton radioButton;
+	TextField textField;
+	
 	
 	private CheckBox select;
 	private TextField points;
@@ -230,17 +232,17 @@ public class Question {
 	public RadioButton getRadioButton() {
 		return radioButton;
 	}
-
-	public void setNewSelect() { 
-		this.select = new CheckBox();
-		// Add event handler for pressed and unpressed (checked / unchecked) state of the checkbox.
-		this.select.selectedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				points.setDisable(!newValue);
-				System.out.println("Checkbox " + (newValue ? "pressed" : "unpressed")); 	}
-		});
+	
+	public void setNewTextField() {
+		textField = new TextField();
 	}
+	public TextField getTextField() {
+		return textField;
+	}
+	
+	
+
+	//////////////////////////
 	
 	public Button getShowQ() {
 		return showQ;
