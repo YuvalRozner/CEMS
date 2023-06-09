@@ -6,6 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
 public class TestToExecute{
@@ -26,6 +27,9 @@ public class TestToExecute{
 	private Test test;
 	private ArrayList<StudentTest> studentsTestsLst;
 	//for FX:
+	CheckBox checkbox;
+	RadioButton radioButton;
+	
 	private CheckBox select;
 	private TextField codeField=new TextField();
 	private TextField type=new TextField();
@@ -247,6 +251,22 @@ public class TestToExecute{
 		return "TestToExecute [testCode=" + testCode + ", testId=" + testId + ", testingType=" + testingType + ", date=" + date + ", average=" + average + ", median="
 				+ median + ", lock=" + lock + ", timeExtension=" + timeExtension + ", lecturerId=" + lecturerId + ", numberOfStudentsStarted=" + numberOfStudentsStarted
 				+ ", numberOfStudentsFinished=" + numberOfStudentsFinished + ", distribusion=" + Arrays.toString(distribusion) + "]";
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//for FX:
+	public void setNewCheckbox() {
+		checkbox = new CheckBox();
+	}
+	public CheckBox getCheckbox() {
+		return checkbox;
+	}
+	public void setNewRadioButton() {
+		radioButton = new RadioButton();
+	}
+	public RadioButton getRadioButton() {
+		return radioButton;
 	}
 
 	public void setNewCodeField() {

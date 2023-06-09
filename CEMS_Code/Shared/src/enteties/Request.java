@@ -1,5 +1,8 @@
 package enteties;
 
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
+
 public class Request {
 	//in DB:
 	private Integer testCode;
@@ -10,7 +13,8 @@ public class Request {
 	//not in DB:
 	
 	//for FX:
-	
+	CheckBox checkbox;
+	RadioButton radioButton;
 	
 	/**
 	 * empty constructor.
@@ -111,6 +115,22 @@ public class Request {
 	@Override
 	public String toString() {
 		return "Request [testCode=" + testCode + ", lecurerId=" + lecturerId + ", hodId=" + hodId + ", duration=" + duration + ", explanetion=" + explanetion + "]";
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//for FX:
+	public void setNewCheckbox() {
+		checkbox = new CheckBox();
+	}
+	public CheckBox getCheckbox() {
+		return checkbox;
+	}
+	public void setNewRadioButton() {
+		radioButton = new RadioButton();
+	}
+	public RadioButton getRadioButton() {
+		return radioButton;
 	}
 	
 }

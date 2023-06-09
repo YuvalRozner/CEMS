@@ -1,5 +1,8 @@
 package enteties;
 
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
+
 public class User {
     //in DB:
 	private String id;
@@ -11,12 +14,14 @@ public class User {
 	//not in DB:
 	
 	//for FX:
+	CheckBox checkbox;
+	RadioButton radioButton;
 	
 	/**
 	 * empty constructor.
 	 
-	public User() {super();} */
-	
+	public User() {super();} 
+	*/
 	/**
 	 * @param id
 	 * @param name
@@ -127,5 +132,21 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", username=" + username + ", password=" + password + ", premission=" + premission + ", loggedin=" + loggedin + "]";
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//for FX:
+	public void setNewCheckbox() {
+		checkbox = new CheckBox();
+	}
+	public CheckBox getCheckbox() {
+		return checkbox;
+	}
+	public void setNewRadioButton() {
+		radioButton = new RadioButton();
+	}
+	public RadioButton getRadioButton() {
+		return radioButton;
 	}
 }

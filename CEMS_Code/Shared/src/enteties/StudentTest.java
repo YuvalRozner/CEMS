@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
 public class StudentTest {
@@ -19,6 +20,9 @@ public class StudentTest {
 	private TestToExecute testToExecute;
 	private Test test;
 	//for FX:
+	CheckBox checkbox;
+	RadioButton radioButton;
+	
 	private Button show;
 	private CheckBox select;
 	private TextField note;
@@ -156,6 +160,22 @@ public class StudentTest {
 	public String toString() {
 		return "StudentTest [studentId=" + studentId + ", testCode=" + testCode + ", timePassed=" + timePassed + ", answers=" + answers + ", grade=" + grade
 				+ ", lecturerNotes=" + lecturerNotes + ", approved=" + approved + "]";
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//for FX:
+	public void setNewCheckbox() {
+		checkbox = new CheckBox();
+	}
+	public CheckBox getCheckbox() {
+		return checkbox;
+	}
+	public void setNewRadioButton() {
+		radioButton = new RadioButton();
+	}
+	public RadioButton getRadioButton() {
+		return radioButton;
 	}
 
 	public void setSelect(CheckBox select) {

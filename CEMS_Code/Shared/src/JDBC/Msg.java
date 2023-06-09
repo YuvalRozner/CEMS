@@ -1,6 +1,7 @@
 package JDBC;
 
 import java.io.Serializable;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -133,7 +134,7 @@ public class Msg implements Serializable{
 	 * @param <T>  class type of wanted return
 	 * @param type ClassName.class , ClassName of wanted type return
 	 * @return List of wanted class
-	 */
+	 
 	@SuppressWarnings("unchecked")
 	public <T> ArrayList<T> convertData(Class<T> type) {
 		ArrayList<T> converted = new ArrayList<>();
@@ -145,4 +146,40 @@ public class Msg implements Serializable{
 		}
 		return converted;
 	}
+	*/
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	public <T> ArrayList<T> convertData(Class<T> type) {
+	    ArrayList<T> converted = new ArrayList<>();
+	    try {
+	        for (List<Object> dataRow : data) {
+	            Constructor<?>[] constructors = type.getConstructors();
+	            for (Constructor<?> constructor : constructors) {
+	                Class<?>[] parameterTypes = constructor.getParameterTypes();
+	                if (parameterTypes.length == dataRow.size()) {
+	                    boolean match = true;
+	                    for (int i = 0; i < parameterTypes.length; i++) {
+	                        if (!parameterTypes[i].isInstance(dataRow.get(i))) {
+	                            match = false;
+	                            break;
+	                        }
+	                    }
+	                    if (match) {
+	                        converted.add((T) constructor.newInstance(dataRow.toArray()));
+	                        break;
+	                    }
+	                }
+	            }
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return converted;
+	}
+	
+	
+	
+	
 }

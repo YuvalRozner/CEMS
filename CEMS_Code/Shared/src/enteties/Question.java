@@ -6,6 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
 public class Question {
@@ -20,6 +21,9 @@ public class Question {
 	//not in DB:
 	private ArrayList<Course> courses;
 	//for FX:
+	CheckBox checkbox;
+	RadioButton radioButton;
+	
 	private CheckBox select;
 	private TextField points;
 	private Button showQ = new Button();
@@ -173,6 +177,22 @@ public class Question {
 	public String toString() {
 		return "Question [id=" + id + ", number=" + number + ", question=" + question + ", lecturerId=" + lecturerId + ", answers=" + Arrays.toString(answers)
 				+ ", correctAns=" + correctAns + ", instructions=" + instructions + ", courses=" + courses + "]";
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//for FX:
+	public void setNewCheckbox() {
+		checkbox = new CheckBox();
+	}
+	public CheckBox getCheckbox() {
+		return checkbox;
+	}
+	public void setNewRadioButton() {
+		radioButton = new RadioButton();
+	}
+	public RadioButton getRadioButton() {
+		return radioButton;
 	}
 
 	public void setNewSelect() { 

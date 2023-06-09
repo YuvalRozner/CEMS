@@ -1,6 +1,7 @@
 package enteties;
 
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
 
 public class Course {
     //in DB:
@@ -11,6 +12,7 @@ public class Course {
 	
 	//for FX:
 	CheckBox checkbox;
+	RadioButton radioButton;
 
 
 	/**
@@ -82,11 +84,19 @@ public class Course {
 		return "Course [number=" + number + ", name=" + name + ", subjectNum=" + subjectNum + "]";
 	}
 	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//for FX:
 	public void setNewCheckbox() {
 		checkbox = new CheckBox();
 	}
 	public CheckBox getCheckbox() {
 		return checkbox;
+	}
+	public void setNewRadioButton() {
+		radioButton = new RadioButton();
+	}
+	public RadioButton getRadioButton() {
+		return radioButton;
 	}
 }
