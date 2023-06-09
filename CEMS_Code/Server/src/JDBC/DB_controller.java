@@ -4,28 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import enteties.Question;
-import javafx.collections.ObservableList;
-
 public class DB_controller {
 
-	////////////////////////////////////////////////////////////////////////////////////
-	public static ArrayList<Msg> updateQuestions1(ObservableList<Question> items, ArrayList<Question> arrdup) {
-		ArrayList<Msg> UpdateQueries = new ArrayList<Msg>();
-		int i = 0;
-		for (Question q : items) {
-			if (!q.equals(arrdup.get(i))) {
-				Msg tmpMsg = new Msg(MsgType.update);
-				tmpMsg.setTableToUpdate("question");
-				tmpMsg.setSet("number", q.getNumber());
-				tmpMsg.setSet("question", q.getQuestion());
-				tmpMsg.setWhere("id", q.getID());
-				UpdateQueries.add(tmpMsg);
-			}
-			i++;
-		}
-		return UpdateQueries;
-	}
 
 	/* the func gets 4 arraylists of parameters for a select query and return a string of the query. */
 	public static String createSELECTquery(ArrayList<String> select, ArrayList<String> from, HashMap<String, Object> where) {
