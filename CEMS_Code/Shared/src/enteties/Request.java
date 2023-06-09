@@ -1,75 +1,116 @@
 package enteties;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.control.CheckBox;
-
 public class Request {
-	private String courseName;
-	private String explanation;
-	private String idTest;
-	private String lecturer;
-	private CheckBox select;
-	private String previousTime;
-	private String newTime;
+	//in DB:
+	private Integer testCode;
+	private Integer lecturerId;
+	private Integer hodId;
+	private Integer duration;
+	private String explanetion;
+	//not in DB:
 	
-	public Request(String courseName,String explanation,String idTest,String lecturer,String previousTime,String newTime) {
-		this.courseName=courseName;
-		this.explanation=explanation;
-		this.idTest=idTest;
-		this.lecturer=lecturer;
-		this.previousTime=previousTime;
-		this.newTime=newTime;
-		
+	//for FX:
+	
+	
+	/**
+	 * empty constructor.
+	 */
+	public Request() {super();}
+
+	/**
+	 * @param testCode
+	 * @param lecurerId
+	 * @param hodId
+	 * @param duration
+	 * @param explanetion
+	 */
+	public Request(Integer testCode, Integer lecurerId, Integer hodId, Integer duration, String explanetion) {
+		this.testCode = testCode;
+		this.lecturerId = lecurerId;
+		this.hodId = hodId;
+		this.duration = duration;
+		this.explanetion = explanetion;
 	}
-	public String getCourseName() {
-		return courseName;
+	
+	/**
+	 * @return the testCode
+	 */
+	public Integer getTestCode() {
+		return testCode;
 	}
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
+
+	/**
+	 * @param testCode the testCode to set
+	 */
+	public void setTestCode(Integer testCode) {
+		this.testCode = testCode;
 	}
-	public String getExplanation() {
-		return explanation;
+
+	/**
+	 * @return the lecurerId
+	 */
+	public Integer getLecturerId() {
+		return lecturerId;
 	}
-	public void setExplanation(String explanation) {
-		this.explanation = explanation;
+
+	/**
+	 * @param lecurerId the lecurerId to set
+	 */
+	public void setLecurerId(Integer lecurerId) {
+		this.lecturerId = lecurerId;
 	}
-	public String getIdTest() {
-		return idTest;
+
+	/**
+	 * @return the hodId
+	 */
+	public Integer getHodId() {
+		return hodId;
 	}
-	public void setIdTest(String idTest) {
-		this.idTest = idTest;
+
+	/**
+	 * @param hodId the hodId to set
+	 */
+	public void setHodId(Integer hodId) {
+		this.hodId = hodId;
 	}
-	public String getLecturer() {
-		return lecturer;
+
+	/**
+	 * @return the duration
+	 */
+	public Integer getDuration() {
+		return duration;
 	}
-	public void setLecturer(String lecturer) {
-		this.lecturer = lecturer;
+
+	/**
+	 * @param duration the duration to set
+	 */
+	public void setDuration(Integer duration) {
+		this.duration = duration;
 	}
-	public CheckBox getSelect() {
-		return select;
+
+	/**
+	 * @return the explanetion
+	 */
+	public String getExplanetion() {
+		return explanetion;
 	}
-	public void setSelect() {
-		this.select = new CheckBox();
-		// Add event handler for pressed and unpressed (checked / unchecked) state of the checkbox.
-		this.select.selectedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				//flag = newValue; // why we need it again dor? -rozner.
-				//points.setDisable(!newValue);
-				System.out.println("Checkbox " + (newValue ? "pressed" : "unpressed")); 	}
-		});
+
+	/**
+	 * @param explanetion the explanetion to set
+	 */
+	public void setExplanetion(String explanetion) {
+		this.explanetion = explanetion;
 	}
-	public String getPreviousTime() {
-		return previousTime;
+	
+	@Override
+	public boolean equals(Object obj) {
+		Request r = (Request) obj;
+		return ( testCode.equals(r.getTestCode()) && lecturerId.equals(r.getLecturerId()));
 	}
-	public void setPreviousTime(String previousTime) {
-		this.previousTime = previousTime;
+
+	@Override
+	public String toString() {
+		return "Request [testCode=" + testCode + ", lecurerId=" + lecturerId + ", hodId=" + hodId + ", duration=" + duration + ", explanetion=" + explanetion + "]";
 	}
-	public String getNewTime() {
-		return newTime;
-	}
-	public void setNewTime(String newTime) {
-		this.newTime = newTime;
-	}
+	
 }

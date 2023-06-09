@@ -1,44 +1,80 @@
 package enteties;
 
-import javafx.scene.control.CheckBox;
-
 public class Course {
-	private String courseNum;
-	private String courseName;
-	private CheckBox select;
-
-	public Course(String courseNum, String courseName) {
-		this.courseNum = courseNum;
-		this.courseName = courseName;
-	}
-
-	public String getCourseNum() {
-		return this.courseNum;
-	}
-
-	public void setCourseNum(String courseNum) {
-		this.courseNum = courseNum;
-	}
-
-	public String getCourseName() {
-		return this.courseName;
-	}
-
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
+    //in DB:
+	private String number;
+	private String name;
+	private String subjectNum;
+	//not in DB:
+	
+	//for FX:
+	
+	/**
+	 * empty constructor.
+	 */
+	public Course() {super();}
+	
+	/**
+	 * @param number
+	 * @param name
+	 * @param subjectNum
+	 */
+	public Course(String number, String name, String subjectNum) {
+		this.number = number;
+		this.name = name;
+		this.subjectNum = subjectNum;
 	}
 	
-	public CheckBox getSelect() {
-		return select;
-	}
-
-	public void setSelect(CheckBox select) {
-		this.select = select;
+	/**
+	 * @return the number
+	 */
+	public String getNumber() {
+		return number;
 	}
 	
-	// Initialize the checkBok special field.
-	public void setNewSelect() {
-		this.select = new CheckBox();
-		this.select.setStyle("-fx-background-color: #F0F8FF; -fx-border-width: 1px; -fx-border-color: #92bce3;  -fx-border-radius: 3px; -fx-font-weight: bold; -fx-font-family: \"Comic Sans MS\";");
+	/**
+	 * @param number the number to set
+	 */
+	public void setNumber(String number) {
+		this.number = number;
+	}
+	
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	/**
+	 * @return the subjectNum
+	 */
+	public String getSubjectNum() {
+		return subjectNum;
+	}
+	
+	/**
+	 * @param subjectNum the subjectNum to set
+	 */
+	public void setSubjectNum(String subjectNum) {
+		this.subjectNum = subjectNum;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Course c = (Course) obj;
+		return number.equals(c.getNumber());
+	}
+	
+	@Override
+	public String toString() {
+		return "Course [number=" + number + ", name=" + name + ", subjectNum=" + subjectNum + "]";
 	}
 }

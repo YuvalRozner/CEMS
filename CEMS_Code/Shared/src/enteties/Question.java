@@ -1,187 +1,180 @@
 package enteties;
 
 import java.util.ArrayList;
-
+import java.util.Arrays;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 
-
 public class Question {
-
-	//private String id;
-	private String subjectNum;
-	private String ID;
-	private String courseName;
+	//in DB:
+	private String id;
+	private Integer number;
 	private String question;
-	private int number;
-	private String lecturerCreated;
-	
-	private String[] answers;
-	private int correctAns;
+	private String lecturerId;
+	private String[] answers = new String[4]; //in DB its 4 separate strings
+	private Integer correctAns;
 	private String instructions;
-	private ArrayList<Integer> relevantCourses;
-	
+	//not in DB:
+	private ArrayList<Course> courses;
+	//for FX:
 	private CheckBox select;
 	private TextField points;
-	
 	private Button showQ = new Button();
 	
+
+	/**
+	 * empty constructor.
+	 */
+	public Question() {super();}
 	
-	public Question(String ID, String subjectNum, String courseName, String question, int number,
-			String lecturerCreated) {
-		this.ID = ID;
-		this.subjectNum = subjectNum;
-		this.courseName = courseName;
+	/**
+	 * @param id
+	 * @param number
+	 * @param question
+	 * @param lecturerId
+	 * @param answers
+	 * @param correctAns
+	 * @param instructions
+	 * @param courses
+	 */
+	public Question(String id, Integer number, String question, String lecturerId, String[] answers, Integer correctAns, String instructions, ArrayList<Course> courses) {
+		this.id = id;
+		this.number = number;
 		this.question = question;
-		this.number = number;
-		this.lecturerCreated = lecturerCreated;
+		this.lecturerId = lecturerId;
+		this.answers = answers;
+		this.correctAns = correctAns;
+		this.instructions = instructions;
+		this.courses = courses;
 	}
 
-
-	public String getID() {
-		return this.ID;
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
 	}
 
-	public void setID(String ID) {
-		this.ID = ID;
-	}
-	
-	public boolean equals1(Object obj) {
-		Question q = (Question) obj;
-		if(!(this.ID.equals(q.getID()))){
-			return false;
-		}
-		if(!(this.subjectNum.equals(q.getSubjectNum()))){
-			return false;
-		}
-		if(!(this.courseName.equals(q.getCourseName()))){
-			return false;
-		}
-		if(!(this.question.equals(q.getQuestion()))){
-			return false;
-		}
-		if(!(this.number==q.getNumber())){
-			return false;
-		}
-		if(!(this.lecturerCreated.equals(q.getLecturereCreated()))){
-			return false;
-		}
-		return true;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		Question q = (Question) obj;
-		if(ID.equals(q.getID()) && subjectNum.equals(q.getSubjectNum()) && courseName.equals(q.getCourseName())
-				&& question.equals(q.getQuestion())&& number==q.getNumber() && lecturerCreated.equals(q.getLecturereCreated()))
-			return true;
-		return false;
-	}
-	
-	public String getSubjectNum() {
-		return this.subjectNum;
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public void setSubjectNum(String subjectNum) {
-		this.subjectNum = subjectNum;
+	/**
+	 * @return the number
+	 */
+	public Integer getNumber() {
+		return number;
 	}
 
-	public String getCourseName() {
-		return this.courseName;
-	}
-	
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
-	}
-
-	public int getNumber() {
-		return this.number;
-	}
-
-	public void setNumber(int number) {
+	/**
+	 * @param number the number to set
+	 */
+	public void setNumber(Integer number) {
 		this.number = number;
 	}
 
+	/**
+	 * @return the question
+	 */
 	public String getQuestion() {
-		return this.question;
+		return question;
 	}
 
+	/**
+	 * @param question the question to set
+	 */
 	public void setQuestion(String question) {
 		this.question = question;
 	}
 
-	public String[] getAnswers() {
-		return this.answers;
+	/**
+	 * @return the lecturerId
+	 */
+	public String getLecturerId() {
+		return lecturerId;
 	}
 
+	/**
+	 * @param lecturerId the lecturerId to set
+	 */
+	public void setLecturerId(String lecturerId) {
+		this.lecturerId = lecturerId;
+	}
+
+	/**
+	 * @return the answers
+	 */
+	public String[] getAnswers() {
+		return answers;
+	}
+
+	/**
+	 * @param answers the answers to set
+	 */
 	public void setAnswers(String[] answers) {
 		this.answers = answers;
 	}
 
-	public int getCorrectAns() {
-		return this.correctAns;
+	/**
+	 * @return the correctAns
+	 */
+	public Integer getCorrectAns() {
+		return correctAns;
 	}
 
-	public void setCorrectAns(int correctAns) {
+	/**
+	 * @param correctAns the correctAns to set
+	 */
+	public void setCorrectAns(Integer correctAns) {
 		this.correctAns = correctAns;
 	}
 
+	/**
+	 * @return the instructions
+	 */
 	public String getInstructions() {
-		return this.instructions;
+		return instructions;
 	}
 
+	/**
+	 * @param instructions the instructions to set
+	 */
 	public void setInstructions(String instructions) {
 		this.instructions = instructions;
 	}
 
-	public String getLecturereCreated() {
-		return this.lecturerCreated;
+	/**
+	 * @return the courses
+	 */
+	public ArrayList<Course> getCourses() {
+		return courses;
 	}
 
-	public void setLecturereCreated(String lecturereCreated) {
-		this.lecturerCreated = lecturereCreated;
+	/**
+	 * @param courses the courses to set
+	 */
+	public void setCourses(ArrayList<Course> courses) {
+		this.courses = courses;
 	}
 
-	public ArrayList<Integer> getRelevantCourses() {
-		return this.relevantCourses;
-	}
-
-	public void setRelevantCourses(ArrayList<Integer> relevantCourses) {
-		this.relevantCourses = relevantCourses;
+	@Override
+	public boolean equals(Object obj) {
+		Question q = (Question) obj;
+		return id.equals(q.getId());
 	}
 	
+	@Override
 	public String toString() {
-		return "{"+ID+", "+subjectNum+", "+courseName+", "+question+", "+number+", "+lecturerCreated+"}";
-	}
-	
-	public int getPointsInt() {
-		return(Integer.parseInt(points.getText()));
-	}
-	
-	
-	public TextField getPoints() {
-		return points;
+		return "Question [id=" + id + ", number=" + number + ", question=" + question + ", lecturerId=" + lecturerId + ", answers=" + Arrays.toString(answers)
+				+ ", correctAns=" + correctAns + ", instructions=" + instructions + ", courses=" + courses + "]";
 	}
 
-	public void setPoints(TextField points) {
-		this.points = points;	
-	}
-	
-	public void setNewPoints() {
-		this.points = new TextField();
-		points.setDisable(true);
-	}
-
-	public CheckBox getSelect() {
-		return select;
-	}
-
-	public void setSelect(CheckBox select) {
-		this.select = select;
-	}
-	
 	public void setNewSelect() { 
 		this.select = new CheckBox();
 		// Add event handler for pressed and unpressed (checked / unchecked) state of the checkbox.

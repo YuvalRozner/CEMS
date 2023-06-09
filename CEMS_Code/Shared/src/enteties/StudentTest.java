@@ -1,8 +1,5 @@
 package enteties;
 
-import java.sql.Time;
-import java.util.ArrayList;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
@@ -10,39 +7,155 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 
 public class StudentTest {
-
+	//in DB:
+	private String studentId;
+	private Integer testCode; //connection between StudentTest and TestToExecute.
+	private Integer timePassed; //in minutes.
+	private String answers; //for exaple- "2113" meanes ans1=2, ans2=1, ans3=1, ans4=3.
+	private Integer grade = null;
+	private String lecturerNotes = null;
+	private Boolean approved = false;
+	//not in DB:
+	private TestToExecute testToExecute;
 	private Test test;
-	private Course course;
-	private String studentId;//change type lior change also get and set
-	private int submittingTime;
-	private Time time;
-	private TestToExexeute testToExecute;
-	private ArrayList<String> answers;
-	private String grade;//change type lior change also get and set
-	
-	///added by lior
+	//for FX:
 	private Button show;
 	private CheckBox select;
 	private TextField note;
-	private String comment;
-	
-	//emptyConstructor
-	public StudentTest() {
-		
-	}
-	
-	///constructor Grades
 
-	public StudentTest(Course course, String comment, String grade, Test test) {
-		this.course=course;
-		this.comment=comment;
-		this.grade=grade;
-		this.test=test;
+	
+	/**
+	 * empty constructor.
+	 */
+	public StudentTest() {super();}
+	
+	/**
+	 * @param studentId
+	 * @param testCode
+	 * @param timePassed
+	 * @param answers
+	 * @param grade
+	 * @param lecturerNotes
+	 * @param approved
+	 */
+	public StudentTest(String studentId, Integer testCode, Integer timePassed, String answers, Integer grade, String lecturerNotes, Boolean approved) {
+		this.studentId = studentId;
+		this.testCode = testCode;
+		this.timePassed = timePassed;
+		this.answers = answers;
+		this.grade = grade;
+		this.lecturerNotes = lecturerNotes;
+		this.approved = approved;
 	}
 
-	////////select
-	public CheckBox getSelect() {
-		return select;
+	/**
+	 * @return the studentId
+	 */
+	public String getStudentId() {
+		return studentId;
+	}
+
+	/**
+	 * @param studentId the studentId to set
+	 */
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
+	}
+
+	/**
+	 * @return the testCode
+	 */
+	public Integer getTestCode() {
+		return testCode;
+	}
+
+	/**
+	 * @param testCode the testCode to set
+	 */
+	public void setTestCode(Integer testCode) {
+		this.testCode = testCode;
+	}
+
+	/**
+	 * @return the timePassed
+	 */
+	public Integer getTimePassed() {
+		return timePassed;
+	}
+
+	/**
+	 * @param timePassed the timePassed to set
+	 */
+	public void setTimePassed(Integer timePassed) {
+		this.timePassed = timePassed;
+	}
+
+	/**
+	 * @return the answers
+	 */
+	public String getAnswers() {
+		return answers;
+	}
+
+	/**
+	 * @param answers the answers to set
+	 */
+	public void setAnswers(String answers) {
+		this.answers = answers;
+	}
+
+	/**
+	 * @return the grade
+	 */
+	public Integer getGrade() {
+		return grade;
+	}
+
+	/**
+	 * @param grade the grade to set
+	 */
+	public void setGrade(Integer grade) {
+		this.grade = grade;
+	}
+
+	/**
+	 * @return the lecturerNotes
+	 */
+	public String getLecturerNotes() {
+		return lecturerNotes;
+	}
+
+	/**
+	 * @param lecturerNotes the lecturerNotes to set
+	 */
+	public void setLecturerNotes(String lecturerNotes) {
+		this.lecturerNotes = lecturerNotes;
+	}
+
+	/**
+	 * @return the approved
+	 */
+	public Boolean getApproved() {
+		return approved;
+	}
+
+	/**
+	 * @param approved the approved to set
+	 */
+	public void setApproved(Boolean approved) {
+		this.approved = approved;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		StudentTest st = (StudentTest) obj;
+		return ( studentId.equals(st.getStudentId()) && testCode.equals(st.getTestCode()));
+	}
+
+	@Override
+	public String toString() {
+		return "StudentTest [studentId=" + studentId + ", testCode=" + testCode + ", timePassed=" + timePassed + ", answers=" + answers + ", grade=" + grade
+				+ ", lecturerNotes=" + lecturerNotes + ", approved=" + approved + "]";
 	}
 
 	public void setSelect(CheckBox select) {
@@ -61,14 +174,6 @@ public class StudentTest {
 				System.out.println("Checkbox " + (newValue ? "pressed" : "unpressed")); 	}
 		});
 	}
-	////////note
-	public TextField getNote() {
-		return note;
-	}
-
-	public void setNote(TextField note) {
-		this.note = note;	
-	}
 	
 	public void setNewNote() {
 		this.note = new TextField();
@@ -76,88 +181,6 @@ public class StudentTest {
 		//note.setDisable(true);
 	}
 
-	//////////comment
-	public String getComment() {////////////////////////
-		return this.comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-		
-	}
-	
-	////////show
-	public Button getShow() {
-		return show;
-	}
-	
-	/////////Course
-	public Course getCourse() {
-		return this.course;
-	}
-
-	public void setCourse(Course course) {
-		this.course = course;
-	}
-	
-	/////lior finish/////////////////////////////////////////////////////
-
-	public Test getTest() {
-		return this.test;
-	}
-
-	public void setTest(Test test) {
-		this.test = test;
-	}
-
-	public int getSubmittingTime() {
-		return this.submittingTime;
-	}
-
-	public void setSubmittingTime(int submittingTime) {
-		this.submittingTime = submittingTime;
-	}
-
-	public Time getTime() {
-		return this.time;
-	}
-
-	public void setTime(Time time) {
-		this.time = time;
-	}
-
-	public TestToExexeute getTestToExecute() {
-		return this.testToExecute;
-	}
-
-	public void setTestToExecute(TestToExexeute testToExecute) {
-		this.testToExecute = testToExecute;
-	}
-
-	public ArrayList<String> getAnswers() {
-		return this.answers;
-	}
-
-	public void setAnswers(ArrayList<String> answers) {
-		this.answers = answers;
-	}
-
-	public String getGrade() {///////////
-		return this.grade;
-	}
-
-	public void setGrade(String grade) {//////////////
-		this.grade = grade;
-	}
-
-	public String getStudentId() {////////////////////////
-		return this.studentId;
-	}
-
-	public void setStudentId(String studentId2) {
-		this.studentId = studentId2;
-		
-	}
 	//////////show
 	public void setNewShow() { ///added by Mor //add style to show button
         this.show = new Button();
