@@ -2,6 +2,9 @@ package gui;
 
 import java.util.ArrayList;
 
+import JDBC.Msg;
+import JDBC.MsgType;
+import client.ChatClient;
 import enteties.Course;
 import enteties.Subject;
 import javafx.beans.value.ChangeListener;
@@ -22,72 +25,53 @@ public class CreateQuestionController extends AbstractController{
 
     @FXML
     private ToggleGroup ChooseCorrectAnswerGroup;
-
     @FXML
     private TableColumn<Course, String> courseCol;
     @FXML
     private TableColumn<Course, String> selectCol;
     @FXML
     private ComboBox<String> subjectComboBox;
-
     @FXML
     private TableView<Course> coursesTable;
-
-
     @FXML
-    private TextField answer1TextField , answer2TextField;
-
-
-
-    @FXML
-    private TextField answer3TextField;
-
-    @FXML
-    private TextField answer4TextField;
-    
-    
+    private TextField answer1TextField , answer2TextField, answer3TextField, answer4TextField;
     @FXML
     private TextField instructionTextField;
-
     @FXML
     private TextField questionTextField;
-
     @FXML
-    private RadioButton radioButton1;
-
-    @FXML
-    private RadioButton radioButton2;
-
-    @FXML
-    private RadioButton radioButton3;
-
-    @FXML
-    private RadioButton radioButton4;
-
+    private RadioButton radioButton1, radioButton2, radioButton3, radioButton4;
     
     public  ArrayList<Subject> subjectsFake; 
-	
     
     
-    
-   public  CreateQuestionController() {
-	   // start build fake data /////////////////////////////////////////////////////
-	   	Course course1 = new Course("1","infi", "03");
-		Course course2 = new Course("2","logic", "04");
-		Course course3 = new Course("3","data sturcture","04");
+    public  CreateQuestionController() {
+    	
+    	Msg msg = new Msg(MsgType.select);
+    	msg.setSelect("subject.number, subject.name");
+    	msg.setFrom("cems.subject, cems.user_subject");
+    	msg.setWhereCol("subject.number", "user_subject.subjectNum"); 
+    	msg.setWhere("user_subject.userId", ChatClient.user.getId()); 
+    	sendMsg(msg);
+    	subjectsFake = msgReceived.convertData(Subject.class);
+	    System.out.println("subjectsFake = " + subjectsFake);
+	    // start build fake data /////////////////////////////////////////////////////
+	   	//Course course1 = new Course("1","infi", "03");
+		//Course course2 = new Course("2","logic", "04");
+		//Course course3 = new Course("3","data sturcture","04");
 		ArrayList<Course> CoursesArray1 = new ArrayList<Course>();
-		CoursesArray1.add(course1);
-		CoursesArray1.add(course2);
+		//CoursesArray1.add(course1);
+		//CoursesArray1.add(course2);
 		ArrayList<Course> CoursesArray2 = new ArrayList<Course>();
-		CoursesArray2.add(course3);
+		//CoursesArray2.add(course3);
 		
-		subjectsFake = new ArrayList<Subject>();
+		//subjectsFake = new ArrayList<Subject>();
 		
-		Subject s1 = new Subject("1","math",CoursesArray1);
-		Subject s2 = new Subject("1","software",CoursesArray2);
+		//Subject s1 = new Subject("1","math",CoursesArray1);
+		//Subject s2 = new Subject("1","software",CoursesArray2);
 		
-		subjectsFake.add(s1);
-		subjectsFake.add(s2);
+		//subjectsFake.add(s1);
+		//subjectsFake.add(s2);
 	// end build fake data /////////////////////////////////////////////////////////////
    }
    @FXML
@@ -106,7 +90,9 @@ public class CreateQuestionController extends AbstractController{
 
                     // Find the Subject object based on the new value
                     Subject selectedSubject = findSubjectByName(newValue);
-
+                    sendMsg(selectedSubject.getMsgForCourses());
+                    selectedSubject.setCourses(msgReceived.convertData(Course.class)); 
+                    //ArrayList<Course> courses = selectedSubject.getCourses();
                     // Get the list of courses associated with the selected subject
                     ArrayList<Course> courses = returnCoursesWithCheckbox(selectedSubject);
 

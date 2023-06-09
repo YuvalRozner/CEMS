@@ -14,6 +14,7 @@ public class Msg implements Serializable{
 	private ArrayList<String> select = null; // for the SELECT part of query.
 	private ArrayList<String> from = null; // for the FROM part of query.
 	private HashMap<String, Object> where = null; // for the WHERE part of query.
+	private HashMap<String, Object> whereCol = null; // for the WHERE part of query between two coloums.
 	private ArrayList<String> tableToUpdate = null; // for the UPDATE part of query.
 	private HashMap<String, Object> set = null; // for the SET part of query.
 	private ArrayList<Msg> msgLst = null; //used to send a bunch of messages all at once.
@@ -47,6 +48,10 @@ public class Msg implements Serializable{
 	
 	public HashMap<String, Object> getWhere() {
 		return where;
+	}
+	
+	public HashMap<String, Object> getWhereCol() {
+		return whereCol;
 	}
 
 	public HashMap<String, Object> getSet() {
@@ -91,6 +96,11 @@ public class Msg implements Serializable{
 	public void setWhere(String whereCol, Object whereValue) {
 		if(where==null) where=new HashMap<String, Object>();
 		where.put(whereCol, whereValue);
+	}
+	
+	public void setWhereCol(String whereCol1, String whereValue) {
+		if(whereCol==null) whereCol=new HashMap<String, Object>();
+		whereCol.put(whereCol1, whereValue);
 	}
 	
 	public void setTableToUpdate(String table) {

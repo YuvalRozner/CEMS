@@ -8,7 +8,7 @@ public class DB_controller {
 
 
 	/* the func gets 4 arraylists of parameters for a select query and return a string of the query. */
-	public static String createSELECTquery(ArrayList<String> select, ArrayList<String> from, HashMap<String, Object> where) {
+	public static String createSELECTquery(ArrayList<String> select, ArrayList<String> from, HashMap<String, Object> where, HashMap<String, Object> whereCol) {
 		StringBuilder query = new StringBuilder("SELECT ");
 		query.append(separateWithComma(select));
 		query.append(" FROM ");
@@ -17,7 +17,9 @@ public class DB_controller {
 			return query.toString() + ";";
 		// get here if and only if there is WHRE to add:
 		query.append(" WHERE ");
-		query.append(buildConditionPartWithAnd(where));
+		query.append(buildConditionPartWithAnd(where, true));
+		if(whereCol!=null && where!=null) query.append(" AND ");
+		query.append(buildConditionPartWithAnd(whereCol, false));
 		return query.toString() + ";";
 	}
 
@@ -33,7 +35,7 @@ public class DB_controller {
 		if (where == null)
 			return query.toString() + ";";
 		query.append(" WHERE ");
-		query.append(buildConditionPartWithAnd(where));
+		query.append(buildConditionPartWithAnd(where, true));
 		return query.toString() + ";";
 	}
 
@@ -101,7 +103,7 @@ public class DB_controller {
 	}
 
 	/* the func gets hashMap (Condition part) for a query and return a string of the parameters separated with commas. */
-	private static String buildConditionPartWithAnd(HashMap<String, Object> condition) {
+	private static String buildConditionPartWithAnd(HashMap<String, Object> condition, boolean needGeresh) {
 		if (condition == null)
 			return "";
 		StringBuilder res = new StringBuilder();
@@ -109,7 +111,7 @@ public class DB_controller {
 		for (Map.Entry<String, Object> entry : condition.entrySet()) {
 			String key = entry.getKey();
 			Object value = entry.getValue();
-			if (value instanceof String)
+			if (needGeresh && value instanceof String)
 				res.append(key + "='" + value.toString() + "' AND ");
 			else
 				res.append(key + "=" + value.toString() + " AND ");
