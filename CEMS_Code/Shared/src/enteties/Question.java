@@ -14,6 +14,7 @@ public class Question {
 	private String id;
 	private Integer number;
 	private String question;
+	private String subjectNum;
 	private String lecturerId;
 	private String[] answers = new String[4]; //in DB its 4 separate strings
 	private Integer correctAns;
@@ -38,16 +39,18 @@ public class Question {
 	 * @param id
 	 * @param number
 	 * @param question
+	 * @param subjectNum
 	 * @param lecturerId
 	 * @param answers
 	 * @param correctAns
 	 * @param instructions
 	 * @param courses
 	 */
-	public Question(String id, Integer number, String question, String lecturerId, String[] answers, Integer correctAns, String instructions, ArrayList<Course> courses) {
+	public Question(String id, Integer number, String question, String subjectNum, String lecturerId, String[] answers, Integer correctAns, String instructions, ArrayList<Course> courses) {
 		this.id = id;
 		this.number = number;
 		this.question = question;
+		this.subjectNum = subjectNum;
 		this.lecturerId = lecturerId;
 		this.answers = answers;
 		this.correctAns = correctAns;
@@ -165,6 +168,20 @@ public class Question {
 	 */
 	public void setCourses(ArrayList<Course> courses) {
 		this.courses = courses;
+	}
+
+	/**
+	 * @return the subjectNum
+	 */
+	public String getSubjectNum() {
+		return subjectNum;
+	}
+
+	/**
+	 * @param subjectNum the subjectNum to set
+	 */
+	public void setSubjectNum(String subjectNum) {
+		this.subjectNum = subjectNum;
 	}
 
 	@Override
