@@ -2,6 +2,7 @@ package enteties;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
@@ -20,6 +21,7 @@ public class Question {
 	private Integer correctAns;
 	private String instructions;
 	//not in DB:
+	private Subject subject;
 	private ArrayList<Course> courses;
 	//for FX:
 	CheckBox checkbox;
@@ -56,6 +58,23 @@ public class Question {
 		this.correctAns = correctAns;
 		this.instructions = instructions;
 		this.courses = courses;
+	}
+	
+	public Question(String id, Integer number, String question, String subjectNum, String lecturerId, String[] answers, Integer correctAns, String instructions, ArrayList<Course> courses, String subjectName) {
+		this.id = id;
+		this.number = number;
+		this.question = question;
+		this.subjectNum = subjectNum;
+		this.lecturerId = lecturerId;
+		this.answers = answers;
+		this.correctAns = correctAns;
+		this.instructions = instructions;
+		this.courses = courses;
+		this.subject = new Subject(subjectNum, subjectName);
+	}
+	
+	public String getSubjectName() {
+		return subject.getName();
 	}
 
 	/**
