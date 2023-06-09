@@ -8,10 +8,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -28,11 +31,39 @@ public class CreateQuestionController extends AbstractController{
     private ComboBox<String> subjectComboBox;
 
     @FXML
-    private TableView<Course> table;
+    private TableView<Course> coursesTable;
 
 
     @FXML
+    private TextField answer1TextField , answer2TextField;
+
+
+
+    @FXML
+    private TextField answer3TextField;
+
+    @FXML
+    private TextField answer4TextField;
     
+    
+    @FXML
+    private TextField instructionTextField;
+
+    @FXML
+    private TextField questionTextField;
+
+    @FXML
+    private RadioButton radioButton1;
+
+    @FXML
+    private RadioButton radioButton2;
+
+    @FXML
+    private RadioButton radioButton3;
+
+    @FXML
+    private RadioButton radioButton4;
+
     
     public  ArrayList<Subject> subjectsFake; 
 	
@@ -81,18 +112,21 @@ public class CreateQuestionController extends AbstractController{
 
                     if (selectedSubject != null) {
                         // Set the items of a table with the list of courses
-                        table.setItems(FXCollections.observableArrayList(courses));
+                    	coursesTable.setItems(FXCollections.observableArrayList(courses));
                     }
                 }
             }
 			
         });
     }
+	   @FXML
+	   void save(ActionEvent event) {
+	
+	   }
 
     private ObservableList<String> getSubjectNames() {
         ObservableList<String> subjectNames = FXCollections.observableArrayList();
         for (Subject subject : subjectsFake) {
-        	System.out.println("1");
             subjectNames.add(subject.getName());
         }
         return subjectNames;
