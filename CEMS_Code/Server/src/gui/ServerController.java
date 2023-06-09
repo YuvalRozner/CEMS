@@ -52,6 +52,12 @@ public class ServerController {
 
 	@FXML
 	private TextField serverIdTxt;
+	
+	//////////////////////////////
+	@FXML
+	public void tryBtn(ActionEvent event) {
+		cemsServer.sendToAllClients(new Msg(MsgType.succeeded));
+	}////////////////////////////////////////////
 
 	@FXML
 	public void connect(ActionEvent event) {

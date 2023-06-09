@@ -14,8 +14,8 @@ public class User {
 	
 	/**
 	 * empty constructor.
-	 */
-	public User() {super();}
+	 
+	public User() {super();} */
 	
 	/**
 	 * @param id
