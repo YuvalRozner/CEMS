@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import JDBC.Msg;
 import JDBC.MsgType;
 import client.ChatClient;
+import controllers.QuestionController;
 import enteties.Course;
+import enteties.Question;
 import enteties.Subject;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -42,8 +44,10 @@ public class CreateQuestionController extends AbstractController{
     @FXML
     private RadioButton radioButton1, radioButton2, radioButton3, radioButton4;
     
-    public  ArrayList<Subject> subjectsFake; 
+    public ArrayList<Subject> subjectsFake;
+    Subject selectedSubject;
     
+    public static QuestionController questionController = new QuestionController();
     
     public  CreateQuestionController() {
     	
@@ -89,7 +93,7 @@ public class CreateQuestionController extends AbstractController{
                     // Code to be executed when the selected item changes and newValue is not null
 
                     // Find the Subject object based on the new value
-                    Subject selectedSubject = findSubjectByName(newValue);
+                    selectedSubject = findSubjectByName(newValue);
                     sendMsg(selectedSubject.getMsgForCourses());
                     selectedSubject.setCourses(msgReceived.convertData(Course.class)); 
                     //ArrayList<Course> courses = selectedSubject.getCourses();
@@ -105,10 +109,17 @@ public class CreateQuestionController extends AbstractController{
 			
         });
     }
-	   @FXML
-	   void save(ActionEvent event) {
 	
-	   }
+   
+    @FXML
+    void save(ActionEvent event) {
+    	Question newQuestion  = questionController.checkInputs(selectedSubject.getNumber()+"222", 222, questionTextField.getText(), selectedSubject.getNumber(), ChatClient.user.getId(), "answer1",  "answer2", "answer3", "answer4", 2, "this is the instructions.");
+    	if(newQuestion==null) {System.out.println("cant create this question.."); return;}
+    	Msg msg = questionController.insertQuestion(newQuestion);
+    	if(msg==null) {System.out.println("cant create this question.."); return;}
+    	sendMsg(msg);
+    	System.out.println("inserted");
+    }
 
     private ObservableList<String> getSubjectNames() {
         ObservableList<String> subjectNames = FXCollections.observableArrayList();
