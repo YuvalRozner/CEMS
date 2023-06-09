@@ -67,27 +67,7 @@ public class Main extends Application {
 		tests = a1;
 	}
 	
-	///add by lior AprroveGrade
-	public static ArrayList<StudentTest> arrStudentTest; 
-	static {
-		arrStudentTest = new ArrayList<StudentTest>();
-		StudentTest testLior = new StudentTest();
-		testLior.setStudentId("1234");
-		testLior.setGrade("75");
-		
-		StudentTest testYuval = new StudentTest();
-		testYuval.setStudentId("123");
-		testYuval.setGrade("69");
-		
-		StudentTest testDor = new StudentTest();
-		testDor.setStudentId("91011");
-		testDor.setGrade("82");
-		
-		
-		arrStudentTest.add(testLior);
-		arrStudentTest.add(testYuval);
-		arrStudentTest.add(testDor);
-	}
+
 	
 	///finish
 	

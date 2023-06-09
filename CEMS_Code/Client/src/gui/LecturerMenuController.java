@@ -15,7 +15,7 @@ public class LecturerMenuController extends AbstractController {
     
 	@FXML
     void approveGrades(ActionEvent event) throws Exception{
-		start("aprroveGrade", "lecturerMenu");
+		start("approveGrade", "lecturerMenu");
     }
 
     @FXML

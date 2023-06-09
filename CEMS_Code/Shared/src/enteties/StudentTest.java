@@ -19,9 +19,16 @@ public class StudentTest {
 	//not in DB:
 	private TestToExecute testToExecute;
 	private Test test;
+	
+	private String studentName;
+
+
 	//for FX:
-	CheckBox checkbox;
+	CheckBox checkBox;
 	RadioButton radioButton;
+	Button button;
+	TextField textField;
+	TextField textField1;
 	
 	private Button show;
 	private CheckBox select;
@@ -52,6 +59,17 @@ public class StudentTest {
 		this.approved = approved;
 	}
 
+	public StudentTest(String studentId, Integer testCode, Integer timePassed, String answers, Integer grade, String lecturerNotes, Boolean approved,String studentName ) {
+		this.studentId = studentId;
+		this.testCode = testCode;
+		this.timePassed = timePassed;
+		this.answers = answers;
+		this.grade = grade;
+		this.lecturerNotes = lecturerNotes;
+		this.approved = approved;
+		this.studentName = studentName;
+	}
+	
 	/**
 	 * @return the studentId
 	 */
@@ -150,6 +168,16 @@ public class StudentTest {
 		this.approved = approved;
 	}
 
+	
+	
+	public String getStudentName() {
+		return studentName;
+	}
+
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		StudentTest st = (StudentTest) obj;
@@ -165,11 +193,11 @@ public class StudentTest {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//for FX:
-	public void setNewCheckbox() {
-		checkbox = new CheckBox();
+	public void setNewCheckBox() {
+		checkBox = new CheckBox();
 	}
-	public CheckBox getCheckbox() {
-		return checkbox;
+	public CheckBox getCheckBox() {
+		return checkBox;
 	}
 	public void setNewRadioButton() {
 		radioButton = new RadioButton();
@@ -177,10 +205,34 @@ public class StudentTest {
 	public RadioButton getRadioButton() {
 		return radioButton;
 	}
-
 	public void setSelect(CheckBox select) {
 		this.select = select;
 	}
+	public void setNewButton() {
+		button = new Button();
+	}
+	public Button getButton() {
+		return button;
+	}
+	public void setButtonText(String s) {
+		button.setText(s);
+	}
+	
+	
+	public void setNewTextField() {
+		textField = new TextField();
+	}
+	public TextField getTextField() {
+		return textField;
+	}
+	public void setNewTextField1() {
+		textField1 = new TextField();
+	}
+	public TextField getTextField1() {
+		return textField1;
+	}
+	
+	
 	
 	public void setNewSelect() { 
 		this.select = new CheckBox();
