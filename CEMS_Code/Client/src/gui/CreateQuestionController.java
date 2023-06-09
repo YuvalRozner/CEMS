@@ -32,15 +32,41 @@ public class CreateQuestionController extends AbstractController{
 
 
     @FXML
-    protected void initialize() {
-        courseCol.setCellValueFactory(new PropertyValueFactory<Course, String>("CourseName"));
-        selectCol.setCellValueFactory(new PropertyValueFactory<Course, String>("Select"));
-
     
+    
+    public  ArrayList<Subject> subjectsFake; 
+	
+    
+    
+    
+   public  CreateQuestionController() {
+	   // start build fake data /////////////////////////////////////////////////////
+	   	Course course1 = new Course("1","infi", "03");
+		Course course2 = new Course("2","logic", "04");
+		Course course3 = new Course("3","data sturcture","04");
+		ArrayList<Course> CoursesArray1 = new ArrayList<Course>();
+		CoursesArray1.add(course1);
+		CoursesArray1.add(course2);
+		ArrayList<Course> CoursesArray2 = new ArrayList<Course>();
+		CoursesArray2.add(course3);
+		
+		subjectsFake = new ArrayList<Subject>();
+		
+		Subject s1 = new Subject("1","math",CoursesArray1);
+		Subject s2 = new Subject("1","software",CoursesArray2);
+		
+		subjectsFake.add(s1);
+		subjectsFake.add(s2);
+	// end build fake data /////////////////////////////////////////////////////////////
+   }
+   @FXML
+    protected void initialize() {
+        courseCol.setCellValueFactory(new PropertyValueFactory<Course, String>("name"));
+        selectCol.setCellValueFactory(new PropertyValueFactory<Course, String>("checkbox"));
+
         subjectComboBox.setItems(getSubjectNames());
 
         subjectComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-
 
         	@Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -51,7 +77,7 @@ public class CreateQuestionController extends AbstractController{
                     Subject selectedSubject = findSubjectByName(newValue);
 
                     // Get the list of courses associated with the selected subject
-                    ArrayList<Course> courses = returnSubjectWithCheckbox(selectedSubject);
+                    ArrayList<Course> courses = returnCoursesWithCheckbox(selectedSubject);
 
                     if (selectedSubject != null) {
                         // Set the items of a table with the list of courses
@@ -65,27 +91,26 @@ public class CreateQuestionController extends AbstractController{
 
     private ObservableList<String> getSubjectNames() {
         ObservableList<String> subjectNames = FXCollections.observableArrayList();
-        for (Subject subject : Main.subject) {
-            subjectNames.add(subject.getSubjectName());
+        for (Subject subject : subjectsFake) {
+        	System.out.println("1");
+            subjectNames.add(subject.getName());
         }
         return subjectNames;
     }
 
     private Subject findSubjectByName(String subjectName) {
-        for (Subject subject : Main.subject) {
-            if (subject.getSubjectName().equals(subjectName)) {
+        for (Subject subject : subjectsFake) {
+            if (subject.getName().equals(subjectName)) {
                 return subject;
             }
         }
         return null; // Subject not found
     }
     
-    private ArrayList<Course> returnSubjectWithCheckbox(Subject subject) {
-    	ArrayList<Course> courses = new ArrayList<>();
-    	for (Course course : subject.getCourses()) {
-    		Course tmp = new Course(course.getCourseNum(),course.getCourseName());
-    		tmp.setNewSelect();
-    		courses.add(tmp);
+    private ArrayList<Course> returnCoursesWithCheckbox(Subject subject) {
+    	ArrayList<Course> courses = subject.getCourses();
+    	for (Course course : courses) {
+    		course.setNewCheckbox();
         }
         return courses; 
     }

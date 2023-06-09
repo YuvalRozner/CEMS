@@ -61,4 +61,29 @@ public class LoginController extends AbstractController{
     	
     	return true;
 	}
+	
+	
+    @FXML
+    void openClient(ActionEvent event) throws Exception {
+    	ChatClient.resetUser();
+    	login("rozi","123");
+    	User user = ChatClient.user;
+    	start("studentMenu" , "login");
+    }
+
+    @FXML
+    void openHOD(ActionEvent event) throws Exception {
+    	ChatClient.resetUser();
+    	login("mori","123");
+    	User user = ChatClient.user;
+    	start("hodMenu" , "login");
+    }
+
+    @FXML
+    void openLecturer(ActionEvent event) throws Exception {
+    	ChatClient.resetUser();
+    	login("geek","123");
+    	User user = ChatClient.user;
+    	start("lecturerMenu" , "login");
+    }
 }

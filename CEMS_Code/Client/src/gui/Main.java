@@ -19,34 +19,15 @@ public class Main extends Application {
 	public static ArrayList<Question> arr; 
 	static {
 		arr = new ArrayList<Question>();
-		Question q1 = new Question("0124","math","logic","what is 1+1?",01,"dor");
+	/	Question q1 = new Question("0124","math","logic","what is 1+1?",01,"dor");
 		Question q2 = new Question("0125","math","logic","what is 2+2?",02,"dor");
-		Question q3 = new Question("0141","math","infi","A={2n: n belong to N}. Is multiplying two terms in A is also a term in",01,"julia");//added by mor
+	//Question q3 = new Question("0141","math","infi","A={2n: n belong to N}. Is multiplying two terms in A is also a term in",01,"julia");//added by mor
 		arr.add(q1);
-		arr.add(q2);
+	//	arr.add(q2);
 		arr.add(q3);//added by mor
 	}
 	
-	public static ArrayList<Subject> subject; 
-	static {
-		Course c1 = new Course("1","infi");
-		Course c2 = new Course("2","logic");
-		Course c3 = new Course("3","data sturcture");
-		ArrayList<Course> a1 = new ArrayList<Course>();
-		a1.add(c1);
-		a1.add(c2);
-		ArrayList<Course> a2 = new ArrayList<Course>();
-		a2.add(c3);
-		
-		subject = new ArrayList<Subject>();
-		
-		Subject s1 = new Subject("1","math",a1);
-		Subject s2 = new Subject("1","software",a2);
-		
-		subject.add(s1);
-		subject.add(s2);
-		
-	}
+	
 	
 	///add by lior Grades
 	public static ArrayList<StudentTest> arrGrades; 

@@ -1,5 +1,7 @@
 package enteties;
 
+import javafx.scene.control.CheckBox;
+
 public class Course {
     //in DB:
 	private String number;
@@ -8,7 +10,9 @@ public class Course {
 	//not in DB:
 	
 	//for FX:
-	
+	CheckBox checkbox;
+
+
 	/**
 	 * empty constructor.
 	 */
@@ -76,5 +80,13 @@ public class Course {
 	@Override
 	public String toString() {
 		return "Course [number=" + number + ", name=" + name + ", subjectNum=" + subjectNum + "]";
+	}
+	
+	//for FX:
+	public void setNewCheckbox() {
+		checkbox = new CheckBox();
+	}
+	public CheckBox getCheckbox() {
+		return checkbox;
 	}
 }
