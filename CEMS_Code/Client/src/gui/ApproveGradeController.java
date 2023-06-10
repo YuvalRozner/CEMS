@@ -61,9 +61,9 @@ int counter = 0;
 	public  ArrayList<StudentTest> fakeDataToTabel(){
 		ArrayList<StudentTest> fakeArrayListStudentTest = new ArrayList<StudentTest>();
 
-		StudentTest student1 = new StudentTest("111", 2, 120, "1,2,1,4",50,"note from the lecturer",false,"Dor Shabat");
-		StudentTest student2 = new StudentTest("222", 2, 120, "2,1,2,4",75,"note from the lecturer",false, "Yuval Rozner");
-		StudentTest student3 = new StudentTest("333", 2, 120, "1,1,2,4",100,"note from the lecturer",false, "Yuval Mintz");
+		StudentTest student1 = new StudentTest("111", 2, 120, "1214",50,"note from the lecturer","false","Dor Shabat");
+		StudentTest student2 = new StudentTest("222", 2, 120, "2124",75,"note from the lecturer","false", "Yuval Rozner");
+		StudentTest student3 = new StudentTest("333", 2, 120, "1124",100,"note from the lecturer","false", "Yuval Mintz");
 		
 		fakeArrayListStudentTest.add(student1);
 		fakeArrayListStudentTest.add(student2);

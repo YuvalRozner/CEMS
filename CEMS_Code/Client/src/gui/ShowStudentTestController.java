@@ -171,7 +171,7 @@ public class ShowStudentTestController extends AbstractController {
 	    for (int i = 0; i < toggleGroups.size(); i++) {
 	    	System.out.println(studentTest.getAnswers());
 	    	
-	    	String[] answers = studentTest.getAnswers().split(",");
+	    	String[] answers = studentTest.getAnswers().split("");
 	        ToggleGroup toggleGroup = toggleGroups.get(i);
 	        int correctAnswerIndex = correctAnswerIndices.get(i);
 	        RadioButton correctRadioButton = (RadioButton) toggleGroup.getToggles().get(correctAnswerIndex);

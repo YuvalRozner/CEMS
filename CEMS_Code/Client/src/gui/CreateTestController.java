@@ -147,7 +147,7 @@ public class CreateTestController extends AbstractController{
     	answer3RadioButton.setText(selectedQuestion.getAnswers()[2]);
     	answer4RadioButton.setText(selectedQuestion.getAnswers()[3]);
     	ObservableList<Toggle> toggles = answersToggleGroup.getToggles();
-        Toggle toggle = toggles.get(selectedQuestion.getCorrectAns());  // Index 2 represents the third toggle
+        Toggle toggle = toggles.get(selectedQuestion.getCorrectAnswer());  // Index 2 represents the third toggle
         answersToggleGroup.selectToggle(toggle);
         
     }
