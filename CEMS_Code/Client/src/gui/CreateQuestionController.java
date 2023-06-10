@@ -59,24 +59,7 @@ public class CreateQuestionController extends AbstractController{
     	sendMsg(msg);
     	subjectsFake = msgReceived.convertData(Subject.class);
 	    System.out.println("subjectsFake = " + subjectsFake);
-	    // start build fake data /////////////////////////////////////////////////////
-	   	//Course course1 = new Course("1","infi", "03");
-		//Course course2 = new Course("2","logic", "04");
-		//Course course3 = new Course("3","data sturcture","04");
-		ArrayList<Course> CoursesArray1 = new ArrayList<Course>();
-		//CoursesArray1.add(course1);
-		//CoursesArray1.add(course2);
-		ArrayList<Course> CoursesArray2 = new ArrayList<Course>();
-		//CoursesArray2.add(course3);
-		
-		//subjectsFake = new ArrayList<Subject>();
-		
-		//Subject s1 = new Subject("1","math",CoursesArray1);
-		//Subject s2 = new Subject("1","software",CoursesArray2);
-		
-		//subjectsFake.add(s1);
-		//subjectsFake.add(s2);
-	// end build fake data /////////////////////////////////////////////////////////////
+	  
    }
    @FXML
     protected void initialize() {

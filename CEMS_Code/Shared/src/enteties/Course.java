@@ -26,7 +26,6 @@ public class Course {
 	 * @param subjectNum
 	 */
 	public Course(String number, String name, String subjectNum) {
-		System.out.println("hi hi");
 		this.number = number;
 		this.name = name;
 		this.subjectNum = subjectNum;
@@ -36,7 +35,6 @@ public class Course {
 	 * @return the number
 	 */
 	public String getNumber() {
-		System.out.println("2");
 		return number;
 	}
 	
