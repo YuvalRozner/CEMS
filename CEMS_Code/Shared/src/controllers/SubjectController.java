@@ -60,7 +60,12 @@ public class SubjectController {
         return courses; 
     }
     
-    
+    /**
+     * Constructs a database select message to retrieve subjects associated with a user.
+     *
+     * @param user The User object for whom to retrieve the subjects.
+     * @return A Msg object representing the database select message.
+     */
     public Msg selectSubjectByUser(User user) {
     	Msg msg = new Msg(MsgType.select);
     	msg.setSelect("subject.number, subject.name");
