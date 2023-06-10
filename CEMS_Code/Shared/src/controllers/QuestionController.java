@@ -1,27 +1,31 @@
 package controllers;
 
 import java.util.ArrayList;
-
 import JDBC.Msg;
 import JDBC.MsgType;
 import enteties.Question;
 
+/**
+ * Controller class for managing questions.
+ */
 public class QuestionController {
 
-	/**
-	 * 
-	 * @param question
-	 * @param parameter
-	 */
-	public Question createQuestion(Question question, int parameter) {
-		// TODO - implement QuestionController.createQuestion
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param qustionINPUTS
-	 */
+    /**
+     * Checks the inputs for creating a new question.
+     *
+     * @param id           The ID of the question.
+     * @param number       The number of the question.
+     * @param question     The content of the question.
+     * @param subjectNum   The subject number associated with the question.
+     * @param lecturerId   The ID of the lecturer creating the question.
+     * @param ans1         The first answer option.
+     * @param ans2         The second answer option.
+     * @param ans3         The third answer option.
+     * @param ans4         The fourth answer option.
+     * @param correctAns   The correct answer option (1-4).
+     * @param instructions The instructions for the question.
+     * @return An Object representing the new Question if the inputs are valid, or a String with an error message if the inputs are invalid.
+     */
 	public Object checkInputs(String id, String number, String question, String subjectNum, String lecturerId, String ans1, String ans2, String ans3, String ans4, Integer correctAns, String instructions) {
 		String error = new String("");
 		if(!id.equals(subjectNum+number.toString())) error+= "the question id must buit by the subject number + question number.\n";
@@ -36,7 +40,12 @@ public class QuestionController {
 		return new Question(id, Integer.valueOf(number), question, subjectNum, lecturerId, new String[] {ans1, ans2, ans3, ans4} , correctAns, instructions, null);
 	}
 	
-	
+    /**
+     * creates and returns a Msg for inserting a question to DB.
+     *
+     * @param q The Question object to be inserted.
+     * @return A Msg object representing the database insert message.
+     */
 	public Msg insertQuestion(Question q) {
 		Msg msg = new Msg(MsgType.insert);
 		msg.setTableToUpdate("cems.question");
@@ -56,5 +65,4 @@ public class QuestionController {
 		msg.setValues(tmp);
 		return msg;
 	}
-
 }
