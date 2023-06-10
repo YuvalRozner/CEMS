@@ -35,6 +35,7 @@ public class Course {
 	 * @return the number
 	 */
 	public String getNumber() {
+		System.out.println("2");
 		return number;
 	}
 	
