@@ -154,8 +154,15 @@ public class CreateQuestionController extends AbstractController{
     			instructionTextField.getText());
     	// if there are issues in inputs:
     	if(newQuestion instanceof String) {	notification.showErrorAlert((String)newQuestion); return; }
+    	//sets up the relevant courses in the question object by the selected courses in table:
+    	ArrayList<Course> relevantCourses = new ArrayList<>();
+    	for(Course c : coursesTable.getItems()) {
+    		if(c.getCheckbox().isSelected()) relevantCourses.add(c);
+    	}
+    	((Question)newQuestion).setCourses(relevantCourses);
+    	// insert the data into DB:
     	Msg msg = questionController.insertQuestion((Question)newQuestion); // create an insert query msg.
-    	if(msg==null) {System.out.println("cant create this question.."); return;}
+    	if(msg==null) {System.out.println("can't create this question.."); return;}
     	sendMsg(msg);
     	notification.showInformationAlert("Data inserted to the DB.");
     	resetFields();

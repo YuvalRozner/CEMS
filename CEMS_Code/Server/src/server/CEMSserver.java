@@ -103,7 +103,7 @@ public class CEMSserver extends AbstractServer {
 					break;
 				case insert:
 					stmt = conn.createStatement();
-					queryStr = DB_controller.createINSERTquery(msg.getTableToUpdate(), msg.getColNames(), msg.getValues());
+					queryStr = DB_controller.createINSERTquery(msg.getTableToUpdate(), msg.getColNames(), msg.getValues());					
 					serverController.addConsole("query: ->" + queryStr + ".\n");
 					System.out.println("query: ->" + queryStr);
 					try{stmt.executeUpdate(queryStr);

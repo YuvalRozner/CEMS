@@ -66,8 +66,7 @@ public class DB_controller {
 
 	/* the func gets an arraylist of arraylist of objects (values) for insert query and return a string of the parameters separated with commas int breclets. */
 	private static String separateValuesWithComma(ArrayList<ArrayList<Object>> lists) {
-		if (lists == null || lists.size() == 0)
-			return "";
+		if (lists == null || lists.size() == 0)	return "";
 		StringBuilder res = new StringBuilder();
 		for (ArrayList<Object> lst : lists) {
 			res.append("(");

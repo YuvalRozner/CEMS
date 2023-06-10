@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import JDBC.Msg;
 import JDBC.MsgType;
+import enteties.Course;
 import enteties.Question;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -48,13 +49,13 @@ public class QuestionController {
     /**
      * creates and returns a Msg for inserting a question to DB.
      *
-     * @param q The Question object to be inserted.
+     * @param q The Question with the courses field to be inserted.
      * @return A Msg object representing the database insert message.
      */
 	public Msg insertQuestion(Question q) {
-		Msg msg = new Msg(MsgType.insert);
-		msg.setTableToUpdate("cems.question");
-		msg.setColNames("id, number, question, subjectNum, lecturerId, answer1, answer2, answer3, answer4, correctAnswer, instructions");
+		Msg msgQ = new Msg(MsgType.insert);
+		msgQ.setTableToUpdate("cems.question");
+		msgQ.setColNames("id, number, question, subjectNum, lecturerId, answer1, answer2, answer3, answer4, correctAnswer, instructions");
 		ArrayList<Object> tmp = new ArrayList<>();
 		tmp.add(q.getId());
 		tmp.add(q.getNumber());
@@ -67,8 +68,22 @@ public class QuestionController {
 		tmp.add(q.getAnswers()[3]);
 		tmp.add(q.getCorrectAnswer());
 		tmp.add(q.getInstructions());
-		msg.setValues(tmp);
-		return msg;
+		msgQ.setValues(tmp);
+		
+		Msg msgM = new Msg(MsgType.manyMessages);
+		msgM.setMsgLst(msgQ);
+		
+		for(Course c : q.getCourses()) {
+			Msg msgQ_C = new Msg(MsgType.insert);
+			msgQ_C.setTableToUpdate("cems.question_course");
+			msgQ_C.setColNames("questionId, courseNum");
+			ArrayList<Object> qc = new ArrayList<Object>();
+			qc.add(q.getId());
+			qc.add(c.getNumber());
+			msgQ_C.setValues(qc);
+			msgM.setMsgLst(msgQ_C);
+		}
+		return msgM;
 	}
 
     /**
