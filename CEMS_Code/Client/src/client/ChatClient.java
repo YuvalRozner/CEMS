@@ -2,6 +2,7 @@ package client;
 
 import java.io.IOException;
 import java.util.HashMap;
+
 import JDBC.Msg;
 import enteties.User;
 import gui.AbstractController;
@@ -62,6 +63,12 @@ public class ChatClient extends AbstractClient {
 					break;
 				case empty:
 					System.out.println("server didn't find any data matching this query.");
+					break;
+				case insertFail:
+					System.out.println("Data inserted into DB.");
+					break;
+				case insertSucceeded:
+					System.out.println("can't insert data to DB.");
 					break;
 				default:
 					break;

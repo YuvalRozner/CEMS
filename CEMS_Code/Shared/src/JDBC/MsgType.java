@@ -24,6 +24,8 @@ public enum MsgType {
 	
 	empty, // server ---> client. | indicates that the select query found no data.
 	
-	 
+	insertFail, // server ---> client. | indicates that the insert query faild.
+	
+	insertSucceeded // server ---> client. | indicates that the isert query succeeded.
 
 }

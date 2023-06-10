@@ -1,7 +1,6 @@
 package gui;
 
 import java.util.ArrayList;
-
 import JDBC.Msg;
 import JDBC.MsgType;
 import client.ChatClient;
@@ -47,10 +46,12 @@ public class CreateQuestionController extends AbstractController{
     @FXML
     private RadioButton radioButton1, radioButton2, radioButton3, radioButton4;
     
-    private ArrayList<Subject> subjectsFake;
+    private ArrayList<Subject> subjectsLSt;
     private Subject selectedSubject;
     private static QuestionController questionController = new QuestionController();
     private static NotificationAlertsController notification = new NotificationAlertsController();
+    private boolean subjectChoose = false; //indicates that a subject was chosen.
+   
     
     public  CreateQuestionController() {
     	Msg msg = new Msg(MsgType.select);
@@ -59,22 +60,20 @@ public class CreateQuestionController extends AbstractController{
     	msg.setWhereCol("subject.number", "user_subject.subjectNum"); 
     	msg.setWhere("user_subject.userId", ChatClient.user.getId()); 
     	sendMsg(msg);
-    	subjectsFake = msgReceived.convertData(Subject.class);
-	    System.out.println("subjectsFake = " + subjectsFake);
+    	subjectsLSt = msgReceived.convertData(Subject.class);
+	    System.out.println("subjectsFake = " + subjectsLSt);
 	  
    }
    @FXML
     protected void initialize() {
         courseCol.setCellValueFactory(new PropertyValueFactory<Course, String>("name"));
         selectCol.setCellValueFactory(new PropertyValueFactory<Course, String>("checkbox"));
-
         subjectComboBox.setItems(getSubjectNames());
-
         subjectComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-
         	@Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if (newValue != null) {
+                	subjectChoose = true;
                     // Code to be executed when the selected item changes and newValue is not null
 
                     // Find the Subject object based on the new value
@@ -97,27 +96,40 @@ public class CreateQuestionController extends AbstractController{
    
     @FXML
     void save(ActionEvent event) {
+    	if(!subjectChoose) { notification.showErrorAlert("you must choose a subject."); return; }
     	Object newQuestion  = questionController.checkInputs(selectedSubject.getNumber()+questionNumberTextField.getText(),
-    			Integer.valueOf(questionNumberTextField.getText()), questionTextField.getText(), selectedSubject.getNumber(),
+    			questionNumberTextField.getText(), questionTextField.getText(), selectedSubject.getNumber(),
     			ChatClient.user.getId(), answer1TextField.getText(), answer2TextField.getText(), answer3TextField.getText(),
     			answer4TextField.getText(),	Integer.valueOf(((RadioButton)ChooseCorrectAnswerGroup.getSelectedToggle()).getText()), instructionTextField.getText());
     	if(newQuestion instanceof String) {	notification.showErrorAlert((String)newQuestion); return; }
     	Msg msg = questionController.insertQuestion((Question)newQuestion);
     	if(msg==null) {System.out.println("cant create this question.."); return;}
     	sendMsg(msg);
-    	notification.showInformationAlert("inserted");
+    	notification.showInformationAlert("Data inserted to the DB.");
+    	resetFields();
+    }
+    
+    private void resetFields() {
+    	answer1TextField.setText("");
+    	answer2TextField.setText("");
+    	answer3TextField.setText("");
+    	answer4TextField.setText("");
+    	instructionTextField.setText("");
+    	questionTextField.setText("");
+    	questionNumberTextField.setText("");
+    	radioButton1.setSelected(true);
     }
 
     private ObservableList<String> getSubjectNames() {
         ObservableList<String> subjectNames = FXCollections.observableArrayList();
-        for (Subject subject : subjectsFake) {
+        for (Subject subject : subjectsLSt) {
             subjectNames.add(subject.getName());
         }
         return subjectNames;
     }
 
     private Subject findSubjectByName(String subjectName) {
-        for (Subject subject : subjectsFake) {
+        for (Subject subject : subjectsLSt) {
             if (subject.getName().equals(subjectName)) {
                 return subject;
             }
@@ -132,5 +144,4 @@ public class CreateQuestionController extends AbstractController{
         }
         return courses; 
     }
-    
 }
