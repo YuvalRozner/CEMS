@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import JDBC.Msg;
 import JDBC.MsgType;
-import enteties.Course;
 import enteties.Question;
 
 public class QuestionController {
@@ -23,7 +22,8 @@ public class QuestionController {
 	 * 
 	 * @param qustionINPUTS
 	 */
-	public Question checkInputs(String id, Integer number, String question, String subjectNum, String lecturerId, String ans1, String ans2, String ans3, String ans4, Integer correctAns, String instructions) {
+	public Object checkInputs(String id, Integer number, String question, String subjectNum, String lecturerId, String ans1, String ans2, String ans3, String ans4, Integer correctAns, String instructions) {
+		if(number>999 || number<100) return new String("the question number must be between 100 and 999.");
 		return new Question(id,  number,  question,  subjectNum,  lecturerId, new String[] {ans1, ans2, ans3, ans4} ,  correctAns, instructions, null);
 	}
 	

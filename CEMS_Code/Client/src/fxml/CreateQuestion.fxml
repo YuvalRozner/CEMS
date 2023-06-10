@@ -24,9 +24,9 @@
 
 <Pane maxHeight="690.0" maxWidth="578.0" minHeight="608.0" minWidth="578.0" prefHeight="690.0" prefWidth="578.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CreateQuestionController">
    <children>
-      <Pane layoutX="42.0" layoutY="146.0" maxHeight="533.0" maxWidth="151.0" minHeight="387.0" minWidth="151.0" prefHeight="400.0" prefWidth="151.0" style="-fx-background-color: #92bce3;">
+      <Pane layoutX="43.0" layoutY="129.0" maxHeight="533.0" maxWidth="151.0" minHeight="387.0" minWidth="151.0" prefHeight="495.0" prefWidth="151.0" style="-fx-background-color: #92bce3;">
          <children>
-            <Label layoutX="43.0" layoutY="154.0" text="Insert Question:">
+            <Label layoutX="39.0" layoutY="208.0" text="Insert Question:">
                <font>
                   <Font name="Comic Sans MS Bold" size="14.0" />
                </font>
@@ -41,7 +41,7 @@
                   <Font name="Comic Sans MS Bold" size="14.0" />
                </font>
             </Label>
-            <VBox layoutX="41.0" layoutY="216.0" prefHeight="138.0" prefWidth="131.0" spacing="17.0">
+            <VBox layoutX="37.0" layoutY="253.0" prefHeight="138.0" prefWidth="131.0" spacing="17.0">
                <children>
                   <Label text="Insert Answer 1:">
                      <font>
@@ -68,7 +68,7 @@
          </children>
       </Pane>
       <Circle fill="WHITE" layoutX="15.0" layoutY="617.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />
-      <Label layoutX="86.0" layoutY="576.0" text="Instructions:">
+      <Label layoutX="86.0" layoutY="595.0" text="Instructions:">
          <font>
             <Font name="Comic Sans MS Bold" size="14.0" />
          </font>
@@ -79,7 +79,7 @@
             <Image url="@../../images/Cems-logo.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" layoutX="42.0" layoutY="72.0" text="Create Question">
+      <Label alignment="CENTER" layoutX="24.0" layoutY="51.0" text="Create Question">
          <font>
             <Font name="Comic Sans MS Bold" size="50.0" />
          </font>
@@ -101,15 +101,15 @@
             </Lighting>
          </effect>
       </Label>
-      <ComboBox fx:id="subjectComboBox" layoutX="209.0" layoutY="139.0" prefWidth="300.0" promptText="Not Selected" style="-fx-background-color: #F8FFFF;" stylesheets="@ComboBox.css" />
-      <TableView fx:id="coursesTable" layoutX="214.0" layoutY="182.0" prefHeight="89.0" stylesheets="@TableView.css">
+      <ComboBox fx:id="subjectComboBox" layoutX="209.0" layoutY="125.0" prefWidth="300.0" promptText="Not Selected" style="-fx-background-color: #F8FFFF;" stylesheets="@ComboBox.css" />
+      <TableView fx:id="coursesTable" layoutX="214.0" layoutY="168.0" prefHeight="89.0" stylesheets="@TableView.css">
         <columns>
           <TableColumn fx:id="courseCol" prefWidth="250.0" text="Course" />
           <TableColumn fx:id="selectCol" minWidth="40.0" prefWidth="-1.0" style="-fx-alignment: CENTER;" text="select" />
         </columns>
       </TableView>
-      <Line endX="322.0" layoutX="187.0" layoutY="283.0" startX="-100.0" />
-      <VBox layoutX="213.0" layoutY="358.0" prefHeight="143.0" prefWidth="296.0" spacing="10.0">
+      <Line endX="322.0" layoutX="187.0" layoutY="270.0" startX="-100.0" />
+      <VBox layoutX="213.0" layoutY="382.0" prefHeight="143.0" prefWidth="296.0" spacing="10.0">
          <children>
             <TextField fx:id="answer1TextField" prefWidth="300.0" promptText="Default correct answer" style="-fx-background-radius: 10; -fx-background-color: #F8FFFF; -fx-border-radius: 10; -fx-border-color: #92bce3;" />
             <TextField fx:id="answer2TextField" prefWidth="300.0" style="-fx-background-radius: 10; -fx-background-color: #F8FFFF; -fx-border-radius: 10; -fx-border-color: #92bce3;" />
@@ -117,14 +117,14 @@
             <TextField fx:id="answer4TextField" prefWidth="300.0" style="-fx-background-radius: 10; -fx-background-color: #F8FFFF; -fx-border-radius: 10; -fx-border-color: #92bce3;" />
          </children>
       </VBox>
-      <TextField fx:id="questionTextField" layoutX="211.0" layoutY="300.0" prefWidth="300.0" style="-fx-background-radius: 10; -fx-background-color: #F8FFFF; -fx-border-radius: 10; -fx-border-color: #92bce3;" />
-      <Line endX="322.0" layoutX="191.0" layoutY="345.0" startX="-100.0" />
-      <Line endX="322.0" layoutX="187.0" layoutY="514.0" startX="-100.0" />
-      <Label layoutX="84.0" layoutY="528.0" text="Choose a correct answer:">
+      <TextField fx:id="questionTextField" layoutX="214.0" layoutY="335.0" prefHeight="27.0" prefWidth="296.0" style="-fx-background-radius: 10; -fx-background-color: #F8FFFF; -fx-border-radius: 10; -fx-border-color: #92bce3;" />
+      <Line endX="322.0" layoutX="191.0" layoutY="373.0" startX="-100.0" />
+      <Line endX="322.0" layoutX="187.0" layoutY="536.0" startX="-100.0" />
+      <Label layoutX="84.0" layoutY="550.0" text="Choose a correct answer:">
          <font>
             <Font name="Comic Sans MS Bold" size="14.0" />
          </font></Label>
-      <HBox layoutX="278.0" layoutY="527.0" prefHeight="24.0" prefWidth="162.0" spacing="10.0">
+      <HBox layoutX="278.0" layoutY="549.0" prefHeight="24.0" prefWidth="162.0" spacing="10.0">
          <children>
             <RadioButton fx:id="radioButton1" mnemonicParsing="false" selected="true" stylesheets="@Radio.css" text="1">
                <toggleGroup>
@@ -162,12 +162,19 @@
          <effect>
             <Blend />
          </effect></Button>
-      <ImageView fitHeight="74.0" fitWidth="114.0" layoutX="108.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" rotate="14.6">
+      <ImageView fitHeight="74.0" fitWidth="114.0" layoutX="90.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" rotate="14.6">
          <image>
             <Image url="@../../images/questions.png" />
          </image>
       </ImageView>
-      <TextField fx:id="instructionTextField" layoutX="213.0" layoutY="573.0" prefWidth="300.0" promptText="Instruction for student" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #F8FFFF; -fx-border-color: #92bce3;" />
-      <Line endX="322.0" layoutX="187.0" layoutY="564.0" startX="-100.0" />
+      <TextField fx:id="instructionTextField" layoutX="213.0" layoutY="594.0" prefWidth="300.0" promptText="Instruction for student" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #F8FFFF; -fx-border-color: #92bce3;" />
+      <Line endX="322.0" layoutX="187.0" layoutY="586.0" startX="-100.0" />
+      <Line endX="322.0" layoutX="192.0" layoutY="321.0" startX="-100.0" />
+      <TextField fx:id="questionNumberTextField" layoutX="216.0" layoutY="283.0" prefHeight="27.0" prefWidth="131.0" style="-fx-background-radius: 10; -fx-background-color: #F8FFFF; -fx-border-radius: 10; -fx-border-color: #92bce3;" />
+      <Label layoutX="77.0" layoutY="285.0" text="Question number:">
+         <font>
+            <Font name="Comic Sans MS Bold" size="14.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
