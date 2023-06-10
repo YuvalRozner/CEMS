@@ -15,7 +15,7 @@ public class StudentTest {
 	private String answers; //for exaple- "2113" meanes ans1=2, ans2=1, ans3=1, ans4=3.
 	private Integer grade = null;
 	private String lecturerNotes = null;
-	private Boolean approved = false;
+	private String approved = "false";
 	//not in DB:
 	private TestToExecute testToExecute;
 	private Test test;
@@ -49,7 +49,7 @@ public class StudentTest {
 	 * @param lecturerNotes
 	 * @param approved
 	 */
-	public StudentTest(String studentId, Integer testCode, Integer timePassed, String answers, Integer grade, String lecturerNotes, Boolean approved) {
+	public StudentTest(String studentId, Integer testCode, Integer timePassed, String answers, Integer grade, String lecturerNotes, String approved) {
 		this.studentId = studentId;
 		this.testCode = testCode;
 		this.timePassed = timePassed;
@@ -59,7 +59,7 @@ public class StudentTest {
 		this.approved = approved;
 	}
 
-	public StudentTest(String studentId, Integer testCode, Integer timePassed, String answers, Integer grade, String lecturerNotes, Boolean approved,String studentName ) {
+	public StudentTest(String studentId, Integer testCode, Integer timePassed, String answers, Integer grade, String lecturerNotes, String approved,String studentName ) {
 		this.studentId = studentId;
 		this.testCode = testCode;
 		this.timePassed = timePassed;
@@ -157,14 +157,14 @@ public class StudentTest {
 	/**
 	 * @return the approved
 	 */
-	public Boolean getApproved() {
+	public String getApproved() {
 		return approved;
 	}
 
 	/**
 	 * @param approved the approved to set
 	 */
-	public void setApproved(Boolean approved) {
+	public void setApproved(String approved) {
 		this.approved = approved;
 	}
 
