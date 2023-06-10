@@ -74,4 +74,18 @@ public class SubjectController {
     	msg.setWhere("user_subject.userId", user.getId()); 
     	return msg;
     }
+    
+    /**
+     * Constructs a database select message to retrieve courses associated with a subject.
+     *
+     * @param subject The Subject object for whom to retrieve the courses.
+     * @return A Msg object representing the database select message.
+     */
+	public Msg getMsgForCourses(Subject subject) {
+		Msg msg = new Msg(MsgType.select);
+		msg.setSelect("*");
+		msg.setFrom("cems.course");
+		msg.setWhere("subjectNum" ,subject.getNumber());
+		return msg;
+	}
 }

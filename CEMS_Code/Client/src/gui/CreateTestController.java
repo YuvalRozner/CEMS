@@ -1,15 +1,20 @@
 package gui;
 
 import java.util.ArrayList;
+
+import JDBC.Msg;
+import client.ChatClient;
+import controllers.CourseController;
+import controllers.QuestionController;
+import controllers.SubjectController;
 import enteties.Course;
 import enteties.Question;
+import enteties.Subject;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -40,104 +45,110 @@ public class CreateTestController extends AbstractController{
     private TableColumn<Question, String>  idCol, lecturerCol, questionTextCol,checkBoxCol,pointsCol;
     @FXML
     private ComboBox<String> subjectComboBox;
-    
+    @FXML
+    private ComboBox<String> courseComboBox;
     @FXML
     private TextArea commentsForLecturerTextArea;
-    
-    
     @FXML
     private TextArea commentsForStudentTextArea;
     @FXML
     private TextField durationTextField;
-    private ArrayList<Question> questionsArrayList;
-    private ObservableList<Question> questionsObservableList;
+    
+    /**
+	 * the list of subject for the comboBox according to the subjects which match the user.
+	 */
+    private ArrayList<Subject> subjectsLst;
+    /**
+	 * the subject selected from the comboBox.
+	 */
+    private Subject selectedSubject;
+    /**
+	 * the list of course for the comboBox according to the subjects which match the user.
+	 */
+    private ArrayList<Course> coursesLst;
+    /**
+	 * the course selected from the comboBox.
+	 */
+    private Course selectedCourse;
+    /**
+	 * object to use the SubjectController class method.
+	 */
+    private static SubjectController subjectController = new SubjectController();
+    /**
+	 * object to use the CourseController class method.
+	 */
+    private static CourseController courseController = new CourseController();
+    /**
+	 * object to use the QuestionController class method.
+	 */
+    private static QuestionController questionController = new QuestionController();
     
     
-    private ArrayList<Question> arrdup = new ArrayList<Question>();
-	
-
-	
-	
-
+    
 
     public CreateTestController() {
-    	
-    	//START fake data //////////////////////////////////////////
-    	ArrayList<Question> questionFake; // fake
-    	Course course1 = new Course("1","infi", "03");
-		Course course2 = new Course("2","logic", "04");
-		Course course3 = new Course("3","data sturcture","04");
-		ArrayList<Course> CoursesArray1 = new ArrayList<Course>();
-		CoursesArray1.add(course1);
-		CoursesArray1.add(course2);
-		ArrayList<Course> CoursesArray2 = new ArrayList<Course>();
-		CoursesArray2.add(course3);
-    	
-    	String[] answers1 = new String[4];
-    	answers1[0] = "nothing";
-    	answers1[1] = "1 or 2";
-    	answers1[2] = "2";
-    	answers1[3] = "i dont know math";
-    	Question q1 = new Question("0124",5,"what is 1+1?","03","01", answers1,2,"goodluck",CoursesArray1);
-
-    	String[] answers2 = new String[4];
-    	answers2[0] = "i think it 4";
-    	answers2[1] = "i know it for";
-    	answers2[2] = "it is four";
-    	answers2[3] = "for what?";
-    	Question q2 = new Question("0125",6,"what is 2+2?","03","01",answers2,2,"you got it",CoursesArray1 );
-
-    	String[] answers3 = new String[4];
-    	answers3[0] = "rozni wrote this question, he should answer";
-    	answers3[1] = "i dont care ";
-    	answers3[2] = "it only for my fun";
-    	answers3[3] = "all the answers are correct";
-    	Question q3 = new Question("0141",7,"A={2n: n belong to N}. Is multiplying two terms in A is also a term in","03","02",answers3,3,"",CoursesArray2);
-    	
-    	questionFake = new ArrayList<Question>();
-    	questionFake.add(q1);
-		questionFake.add(q2);
-		questionFake.add(q3);
-		//end fake data //////////////////////////////////////////
-    	
-    	
-		questionsArrayList = new ArrayList<Question>(questionFake);
-       
-        //ArrayList<Question> convertedList = new ArrayList<>();
-        for (Question question : questionFake) {
-        	question.setNewCheckbox();
-        	question.setNewTextField();
-        	question.getTextField().setDisable(true);
-        	question.getCheckbox().selectedProperty().addListener(new ChangeListener<Boolean>() {
-    			@Override
-    			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-    				question.getTextField().setDisable(!newValue);
-    				System.out.println("Checkbox " + (newValue ? "pressed" : "unpressed")); 	}
-    		});
-        }
-      
-        
-        questionsObservableList = FXCollections.observableArrayList(questionsArrayList);
-        
+    	Msg msg = subjectController.selectSubjectByUser(ChatClient.user);
+    	sendMsg(msg);
+    	subjectsLst = msgReceived.convertData(Subject.class);
     }
 
     @FXML
 	protected void initialize() {
+    	subjectComboBox.setItems(subjectController.getSubjectNames(subjectsLst));
+    	//initialize what happens when choosing a subject in the comboBox:
+        subjectComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+        	@Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue != null) {
+                    // Code to be executed when the selected item changes and newValue is not null
+                    // Find the Subject object based on the new value:
+                    selectedSubject = subjectController.findSubjectByName(newValue, subjectsLst);
+                    sendMsg(subjectController.getMsgForCourses(selectedSubject));
+                    selectedSubject.setCourses(msgReceived.convertData(Course.class)); 
+                    // Get the list of courses associated with the selected subject
+                    if (selectedSubject != null) {
+                    	coursesLst = subjectController.returnCoursesWithCheckbox(selectedSubject);
+                        // Set the items of a comboBox with the list of courses:
+                    	courseComboBox.setItems(courseController.getCourseNames(coursesLst));
+                    }
+                }
+            }
+        });
+        
+    	//initialize what happens when choosing a course in the comboBox:
+        courseComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+        	@Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue != null) {
+                    // Code to be executed when the selected item changes and newValue is not null
+                    // Find the course object based on the new value:
+                	selectedCourse = courseController.findCourseByName(newValue, coursesLst);
+                    sendMsg(courseController.getMsgForQuestions(selectedCourse));
+                    System.out.println("is data empty?  " + (msgReceived.getData()));
+                    selectedCourse.setQuestions(msgReceived.convertData(Question.class)); 
+                    // Get the list of question associated with the selected subject
+                    if (selectedCourse != null) {
+                    	ObservableList<Question> questionsObservableList = questionController.getQuestionsForTable(selectedCourse.getQuestions());
+                        // Set the items of a table with the list of questions:
+                    	table.setItems(questionsObservableList);
+                		table.refresh();
+                    }
+                }
+            }
+        });
+        
     	idCol.setCellValueFactory(new PropertyValueFactory<Question, String>("id"));
     	questionTextCol.setCellValueFactory(new PropertyValueFactory<Question, String>("Question"));
     	lecturerCol.setCellValueFactory(new PropertyValueFactory<Question, String>("id"));
 		checkBoxCol.setCellValueFactory(new PropertyValueFactory<Question, String>("checkbox"));
 		pointsCol.setCellValueFactory(new PropertyValueFactory<Question, String>("textField"));
-		
-		table.setItems(questionsObservableList);
-		table.refresh();
-		subjectComboBox.getItems().addAll("math", "software");
 	}
     
     @FXML
     private void createNewQuestion(ActionEvent event) throws Exception{
     	start("createQuestion", "createTest");
     }
+    
     @FXML
     void showAnswers(MouseEvent event) {
     	Question selectedQuestion = table.getSelectionModel().getSelectedItem();

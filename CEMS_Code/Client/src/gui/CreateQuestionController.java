@@ -124,11 +124,11 @@ public class CreateQuestionController extends AbstractController{
                     // Code to be executed when the selected item changes and newValue is not null
                     // Find the Subject object based on the new value
                     selectedSubject = subjectController.findSubjectByName(newValue, subjectsLst);
-                    sendMsg(selectedSubject.getMsgForCourses());
+                    sendMsg(subjectController.getMsgForCourses(selectedSubject));
                     selectedSubject.setCourses(msgReceived.convertData(Course.class)); 
                     // Get the list of courses associated with the selected subject
-                    ArrayList<Course> courses = subjectController.returnCoursesWithCheckbox(selectedSubject);
                     if (selectedSubject != null) {
+                    	ArrayList<Course> courses = subjectController.returnCoursesWithCheckbox(selectedSubject);
                         // Set the items of a table with the list of courses
                     	coursesTable.setItems(FXCollections.observableArrayList(courses));
                     }

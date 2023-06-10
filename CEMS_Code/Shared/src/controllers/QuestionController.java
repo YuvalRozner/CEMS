@@ -1,9 +1,14 @@
 package controllers;
 
 import java.util.ArrayList;
+
 import JDBC.Msg;
 import JDBC.MsgType;
 import enteties.Question;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * Controller class for managing questions.
@@ -64,5 +69,27 @@ public class QuestionController {
 		tmp.add(q.getInstructions());
 		msg.setValues(tmp);
 		return msg;
+	}
+
+    /**
+     * Retrieves the questions of the subjects as an ObservableList with checkBox and textField for each question.
+     * 
+     * @param questions The list of the questions.
+     * @return The ObservableList of questions with checkBox and textField.
+     */
+	public ObservableList<Question> getQuestionsForTable(ArrayList<Question> questions) {
+		ObservableList<Question> res = FXCollections.observableArrayList();
+		for(Question q : questions) {
+			q.setNewCheckbox();
+			q.setNewTextField();
+        	q.getTextField().setDisable(true);
+        	q.getCheckbox().selectedProperty().addListener(new ChangeListener<Boolean>() {
+    			@Override
+    			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+    				q.getTextField().setDisable(!newValue);}
+    		});
+			res.add(q);
+		}
+		return res;
 	}
 }

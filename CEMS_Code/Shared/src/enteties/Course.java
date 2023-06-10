@@ -1,5 +1,7 @@
 package enteties;
 
+import java.util.ArrayList;
+
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 
@@ -9,6 +11,7 @@ public class Course {
 	private String name;
 	private String subjectNum;
 	//not in DB:
+	ArrayList<Question> questions;
 	
 	//for FX:
 	CheckBox checkbox;
@@ -71,6 +74,21 @@ public class Course {
 	 */
 	public void setSubjectNum(String subjectNum) {
 		this.subjectNum = subjectNum;
+	}
+	
+
+	/**
+	 * @return the questions
+	 */
+	public ArrayList<Question> getQuestions() {
+		return questions;
+	}
+
+	/**
+	 * @param questions the questions to set
+	 */
+	public void setQuestions(ArrayList<Question> questions) {
+		this.questions = questions;
 	}
 
 	@Override

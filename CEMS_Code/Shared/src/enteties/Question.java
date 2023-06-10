@@ -3,8 +3,6 @@ package enteties;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
@@ -60,6 +58,27 @@ public class Question {
 		this.correctAnswer = correctAnswer;
 		this.instructions = instructions;
 		this.courses = courses;
+	}
+	
+	/**
+	 * @param id
+	 * @param number
+	 * @param question
+	 * @param subjectNum
+	 * @param lecturerId
+	 * @param answers
+	 * @param correctAns
+	 * @param instructions
+	 */
+	public Question(String id, Integer number, String question, String subjectNum, String lecturerId, String ans1, String ans2, String ans3, String ans4, Integer correctAnswer, String instructions) {
+		this.id = id;
+		this.number = number;
+		this.question = question;
+		this.subjectNum = subjectNum;
+		this.lecturerId = lecturerId;
+		this.answers = new String[] {ans1, ans2, ans3, ans4};
+		this.correctAnswer = correctAnswer;
+		this.instructions = instructions;
 	}
 	
 	public Question(String id, Integer number, String question, String subjectNum, String lecturerId, String[] answers, Integer correctAnswer, String instructions, ArrayList<Course> courses, String subjectName) {

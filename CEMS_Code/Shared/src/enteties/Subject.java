@@ -2,8 +2,6 @@ package enteties;
 
 import java.util.ArrayList;
 
-import JDBC.Msg;
-import JDBC.MsgType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 
@@ -95,14 +93,6 @@ public class Subject {
 	@Override
 	public String toString() {
 		return "Subject [number=" + number + ", name=" + name + ", courses=" + courses + "]";
-	}
-	
-	public Msg getMsgForCourses() {
-		Msg msg = new Msg(MsgType.select);
-		msg.setSelect("*");
-		msg.setFrom("cems.course");
-		msg.setWhere("subjectNum" ,this.number);
-		return msg;
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
