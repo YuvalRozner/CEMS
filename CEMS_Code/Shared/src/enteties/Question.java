@@ -18,7 +18,7 @@ public class Question {
 	private String subjectNum;
 	private String lecturerId;
 	private String[] answers = new String[4]; //in DB its 4 separate strings
-	private Integer correctAns;
+	private Integer correctAnswer;
 	private String instructions;
 	//not in DB:
 	private Subject subject;
@@ -50,26 +50,26 @@ public class Question {
 	 * @param instructions
 	 * @param courses
 	 */
-	public Question(String id, Integer number, String question, String subjectNum, String lecturerId, String[] answers, Integer correctAns, String instructions, ArrayList<Course> courses) {
+	public Question(String id, Integer number, String question, String subjectNum, String lecturerId, String[] answers, Integer correctAnswer, String instructions, ArrayList<Course> courses) {
 		this.id = id;
 		this.number = number;
 		this.question = question;
 		this.subjectNum = subjectNum;
 		this.lecturerId = lecturerId;
 		this.answers = answers;
-		this.correctAns = correctAns;
+		this.correctAnswer = correctAnswer;
 		this.instructions = instructions;
 		this.courses = courses;
 	}
 	
-	public Question(String id, Integer number, String question, String subjectNum, String lecturerId, String[] answers, Integer correctAns, String instructions, ArrayList<Course> courses, String subjectName) {
+	public Question(String id, Integer number, String question, String subjectNum, String lecturerId, String[] answers, Integer correctAnswer, String instructions, ArrayList<Course> courses, String subjectName) {
 		this.id = id;
 		this.number = number;
 		this.question = question;
 		this.subjectNum = subjectNum;
 		this.lecturerId = lecturerId;
 		this.answers = answers;
-		this.correctAns = correctAns;
+		this.correctAnswer = correctAnswer;
 		this.instructions = instructions;
 		this.courses = courses;
 		this.subject = new Subject(subjectNum, subjectName);
@@ -152,15 +152,15 @@ public class Question {
 	/**
 	 * @return the correctAns
 	 */
-	public Integer getCorrectAns() {
-		return correctAns;
+	public Integer getCorrectAnswer() {
+		return correctAnswer;
 	}
 
 	/**
 	 * @param correctAns the correctAns to set
 	 */
-	public void setCorrectAns(Integer correctAns) {
-		this.correctAns = correctAns;
+	public void setCorrectAnswer(Integer correctAnswer) {
+		this.correctAnswer = correctAnswer;
 	}
 
 	/**
@@ -214,7 +214,7 @@ public class Question {
 	@Override
 	public String toString() {
 		return "Question [id=" + id + ", number=" + number + ", question=" + question + ", lecturerId=" + lecturerId + ", answers=" + Arrays.toString(answers)
-				+ ", correctAns=" + correctAns + ", instructions=" + instructions + ", courses=" + courses + "]";
+				+ ", correctAns=" + correctAnswer + ", instructions=" + instructions + ", courses=" + courses + "]";
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

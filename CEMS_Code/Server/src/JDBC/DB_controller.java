@@ -44,7 +44,7 @@ public class DB_controller {
 	public static String createINSERTquery(ArrayList<String> tableToUpdate, ArrayList<String> colNames, ArrayList<ArrayList<Object>> values) {
 		if (tableToUpdate == null || colNames == null || values == null || colNames.size() != values.size())
 			return "";
-		StringBuilder query = new StringBuilder("INSET INTO ");
+		StringBuilder query = new StringBuilder("INSERT INTO ");
 		query.append(tableToUpdate.get(0)); // append the name of table wanted to be insert to.
 		query.append(" (");
 		query.append(separateWithComma(colNames)); // append the columns names to be updated.

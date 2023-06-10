@@ -24,7 +24,6 @@ public class QuestionController {
 	 * @param qustionINPUTS
 	 */
 	public Question checkInputs(String id, Integer number, String question, String subjectNum, String lecturerId, String ans1, String ans2, String ans3, String ans4, Integer correctAns, String instructions) {
-		
 		return new Question(id,  number,  question,  subjectNum,  lecturerId, new String[] {ans1, ans2, ans3, ans4} ,  correctAns, instructions, null);
 	}
 	
@@ -35,13 +34,14 @@ public class QuestionController {
 		ArrayList<Object> tmp = new ArrayList<>();
 		tmp.add(q.getId());
 		tmp.add(q.getNumber());
+		tmp.add(q.getQuestion());
 		tmp.add(q.getSubjectNum());
 		tmp.add(q.getLecturerId());
 		tmp.add(q.getAnswers()[0]);
 		tmp.add(q.getAnswers()[1]);
 		tmp.add(q.getAnswers()[2]);
 		tmp.add(q.getAnswers()[3]);
-		tmp.add(q.getCorrectAns());
+		tmp.add(q.getCorrectAnswer());
 		tmp.add(q.getInstructions());
 		msg.setValues(tmp);
 		return msg;

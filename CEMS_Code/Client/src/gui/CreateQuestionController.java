@@ -113,7 +113,11 @@ public class CreateQuestionController extends AbstractController{
    
     @FXML
     void save(ActionEvent event) {
-    	Question newQuestion  = questionController.checkInputs(selectedSubject.getNumber()+"222", 222, questionTextField.getText(), selectedSubject.getNumber(), ChatClient.user.getId(), "answer1",  "answer2", "answer3", "answer4", 2, "this is the instructions.");
+    	System.out.println("here1");
+    	System.out.println("is it null? " + (questionController==null));
+    	//Question newQuestion  = questionController.checkInputs(selectedSubject.getNumber()+"222", 222, questionTextField.getText(), selectedSubject.getNumber(), ChatClient.user.getId(), "answer1",  "answer2", "answer3", "answer4", 2, "this is the instructions.");
+    	Question newQuestion  = questionController.checkInputs("02222", 222, "try", "02", "11111", "answer1",  "answer2", "answer3", "answer4", 2, "this is the instructions.");
+    	System.out.println("here2");
     	if(newQuestion==null) {System.out.println("cant create this question.."); return;}
     	Msg msg = questionController.insertQuestion(newQuestion);
     	if(msg==null) {System.out.println("cant create this question.."); return;}
