@@ -27,9 +27,8 @@ public class RunningTestController extends AbstractController{
     private Button changebtn;
 
     @FXML
-    private TableColumn<TestToExecute, String> corsecol,numcol,selectcol;
-    @FXML
-    private TableColumn<TestToExecute, Integer> durationcol;
+    private TableColumn<TestToExecute, String> corsecol,numcol,selectcol,durationcol;
+   
     
     
     @FXML
@@ -73,6 +72,22 @@ public class RunningTestController extends AbstractController{
         	runingTest.setNewRadioButton();
         	toggleGroupOfTestToExecute.getToggles().add((RadioButton)runingTest.getRadioButton());
         	runingTest.setNewTextField();
+        	runingTest.getTextField().setText(Integer.toString(runingTest.getTest().getDuration()));
+        	runingTest.getTextField().setDisable(true);
+        	
+        
+        	runingTest.getRadioButton().selectedProperty().addListener((observable, oldValue, newValue) -> {
+        		if (newValue == true) {
+        			runingTest.getTextField().setDisable(false);
+        		}
+        		else {
+        			runingTest.getTextField().setDisable(true);
+        			//return to the initial number, need to change only when press change
+        			//runingTest.getTextField().setText(Integer.toString(runingTest.getTest().getDuration())); 
+        		}
+        		
+                 
+             });
         }
         RuningTestTable = FXCollections.observableArrayList(arrRunningTest);
     }
@@ -82,18 +97,21 @@ public class RunningTestController extends AbstractController{
     	numcol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("testCode"));
     	corsecol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("testCode"));
     	selectcol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("radioButton"));
-    	
-    	
+    	durationcol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("textField"));
+    
     	/*problem : i want to get duration but i dont have it in testtoexecute
     	 * i noticed i have test and in test i have duration
     	 * this is the solotion for it:
     	 * */
+    	/*
     	durationcol.setCellValueFactory(data -> {
     	    TestToExecute testToExecute = data.getValue();
     	    Test test = testToExecute.getTest();
     	    Integer duration = test.getDuration();
     	    return new SimpleIntegerProperty(duration).asObject();
-    	});	
+    	});
+    	
+    		*/
 		table.setItems(RuningTestTable);
 		table.refresh();
 		
@@ -102,12 +120,29 @@ public class RunningTestController extends AbstractController{
 
     @FXML
     void changeBtn(ActionEvent event) {
-
-    }
+    	int oldvalue = 0;
+    	String newvalue = null;
+    	for (TestToExecute test : RuningTestTable) {
+    		if (test.getRadioButton().isSelected()) {
+    			oldvalue = 	test.getTest().getDuration();
+    			newvalue = test.getTextField().getText();
+    			break;
+    		}
+    	}
+    	System.out.println("the old value was: " + oldvalue + " ,the new value is " + newvalue);
+    } 
 
     @FXML
     void lockBtn(ActionEvent event) {
-
+    	System.out.println("i locked the test sucsesfully");
+    	TestToExecute testtodelete = null;
+    	for (TestToExecute test : RuningTestTable) {
+    		if (test.getRadioButton().isSelected()) {
+    			testtodelete = test;
+    			break;
+    		}
+    	}
+    	RuningTestTable.remove(testtodelete);
     }
 
 }
