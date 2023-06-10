@@ -93,7 +93,7 @@ public class CreateQuestionController extends AbstractController{
 	 */
     private static NotificationAlertsController notification = new NotificationAlertsController();
     /**
-	 * boolean variable to indicate that any subject has already been chose. for not leting the user create a question without choosing subject.
+	 * boolean variable to indicate that any subject has already been chose. for not letting the user create a question without choosing subject.
 	 */
     private boolean subjectChoose = false; //indicates that a subject was chosen.
    

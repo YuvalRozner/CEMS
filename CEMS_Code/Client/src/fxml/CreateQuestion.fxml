@@ -170,7 +170,7 @@
       <TextField fx:id="instructionTextField" layoutX="213.0" layoutY="594.0" prefWidth="300.0" promptText="Instruction for student" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #F8FFFF; -fx-border-color: #92bce3;" />
       <Line endX="322.0" layoutX="187.0" layoutY="586.0" startX="-100.0" />
       <Line endX="322.0" layoutX="192.0" layoutY="321.0" startX="-100.0" />
-      <TextField fx:id="questionNumberTextField" layoutX="216.0" layoutY="283.0" prefHeight="27.0" prefWidth="131.0" style="-fx-background-radius: 10; -fx-background-color: #F8FFFF; -fx-border-radius: 10; -fx-border-color: #92bce3;" />
+      <TextField fx:id="questionNumberTextField" layoutX="216.0" layoutY="283.0" prefHeight="27.0" prefWidth="131.0" promptText="100-999" style="-fx-background-radius: 10; -fx-background-color: #F8FFFF; -fx-border-radius: 10; -fx-border-color: #92bce3;" />
       <Label layoutX="77.0" layoutY="285.0" text="Question number:">
          <font>
             <Font name="Comic Sans MS Bold" size="14.0" />

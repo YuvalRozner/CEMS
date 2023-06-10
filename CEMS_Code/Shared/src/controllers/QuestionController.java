@@ -35,7 +35,7 @@ public class QuestionController {
 		String error = new String("");
 		if(!id.equals(subjectNum+number.toString())) error+= "the question id must buit by the subject number + question number.\n";
 		try { if(Integer.valueOf(number)>999 || Integer.valueOf(number)<100) error+="the question number must be between 100 and 999.\n";
-		}catch(Exception e) {error+= "the question number must be an integer between 100 and 999.\\n";}
+		}catch(Exception e) {error+= "the question number must be an integer between 100 and 999.\n";}
 		if(question.length()==0) error+="the question content can't be empty.\n";
 		if(Integer.valueOf(subjectNum)<1 || Integer.valueOf(subjectNum)>99) error+= "the subject number must be a number between 01 to 99.\n";
 		if(ans1.length()==0 || ans2.length()==0 || ans3.length()==0 || ans4.length()==0) error+= "you can't enter an empty answer.\n";
