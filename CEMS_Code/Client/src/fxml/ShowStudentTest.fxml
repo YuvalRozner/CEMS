@@ -53,50 +53,28 @@
                                     </Label>
                                     <HBox alignment="BOTTOM_CENTER" prefWidth="200.0">
                                        <children>
-                                          <VBox alignment="CENTER">
+                                          <VBox alignment="CENTER_LEFT">
                                              <children>
-                                                <HBox>
-                                                   <children>
-                                                      <Label text="Test:">
-                                                         <font>
-                                                            <Font name="Comic Sans MS Bold" size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label fx:id="testNameLabel" text="Label">
-                                                         <font>
-                                                            <Font name="Comic Sans MS Bold" size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                </HBox>
-                                                <HBox>
-                                                   <children>
-                                                      <Label text="Student Name:">
-                                                         <font>
-                                                            <Font name="Comic Sans MS Bold" size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label fx:id="studentNameLabel" text="Label">
-                                                         <font>
-                                                            <Font name="Comic Sans MS Bold" size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                </HBox>
-                                                <HBox>
-                                                   <children>
-                                                      <Label text="Grade:">
-                                                         <font>
-                                                            <Font name="Comic Sans MS Bold" size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label fx:id="gradeLabel" text="Label">
-                                                         <font>
-                                                            <Font name="Comic Sans MS Bold" size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                </HBox>
+                                                <Label fx:id="info1" text=":">
+                                                   <font>
+                                                      <Font name="Comic Sans MS Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="info2" text=":">
+                                                   <font>
+                                                      <Font name="Comic Sans MS Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="info3" text=":">
+                                                   <font>
+                                                      <Font name="Comic Sans MS Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="info4" text=":">
+                                                   <font>
+                                                      <Font name="Comic Sans MS Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
                                              </children>
                                           </VBox>
                                        </children></HBox>

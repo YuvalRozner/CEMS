@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import client.ChatClient;
 import enteties.StudentTest;
+import enteties.TestToExecute;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -15,15 +16,9 @@ import javafx.scene.layout.VBox;
 public class ShowStudentTestController extends AbstractController {
 	@FXML
     private VBox dataVbox;
-    @FXML
-    private Label gradeLabel;
+	@FXML
+    private Label info1,info2,info3,info4;
 
-    @FXML
-    private Label studentNameLabel;
-
-    @FXML
-    private Label testNameLabel;
-	
 	
 	private ArrayList<ArrayList<String>> quizData; // ArrayList of ArrayList of Strings
     private ArrayList<ToggleGroup> toggleGroups = new ArrayList<ToggleGroup>();
@@ -33,6 +28,7 @@ public class ShowStudentTestController extends AbstractController {
     ArrayList<Label> pointsLabels =new ArrayList<>();
     
     StudentTest studentTest;// from approveGradeController
+    TestToExecute testToExecute;// from ExecuteTestController
     String testName; //need to bring test name ....
     
     public ShowStudentTestController() {
@@ -44,10 +40,26 @@ public class ShowStudentTestController extends AbstractController {
     	points.add(25);
     	points.add(25);
     	points.add(25);
-    	studentTest =  ((ApproveGradeController)ChatClient.screens.get("approveGrade")).getStudentTestToShow(); //get the studenttest to show from the last screen
-    	System.out.println("i am print from ShowStudentTestController and now i got  " +studentTest);
+    	
+    	try {
+    		studentTest =  ((ApproveGradeController)ChatClient.screens.get("approveGrade")).getStudentTestToShow(); //get the studenttest to show from the last screen
+    		System.out.println("i am print from ShowStudentTestController and now i got  " +studentTest);
+        	System.out.println("now i can extract all the data i need here insted of using fake data..........");
+        
+    	}catch(Throwable t) {
+    		System.out.println("it wasnt ApproveGradeController");
+    	}
+		
+    	try {
+		testToExecute =  ((ExecuteTestController)ChatClient.screens.get("executeTest")).getTestToShow(); //get the studenttest to show from the last screen
+		System.out.println("i am print from ShowStudentTestController and now i got  " +testToExecute);
     	System.out.println("now i can extract all the data i need here insted of using fake data..........");
-    	//the correct answers
+    	}catch(Throwable t) {
+    		System.out.println("it wasnt ExecuteTestController");
+    	}
+    	
+    	
+    		//the correct answers
     	correctAnswerIndices.add(0);
     	correctAnswerIndices.add(0);
     	correctAnswerIndices.add(1);
@@ -90,10 +102,21 @@ public class ShowStudentTestController extends AbstractController {
 
     @FXML
     protected void initialize() {
-    	//set the testname, testgrade and student name
-    	testNameLabel.setText(testName);
-    	studentNameLabel.setText(studentTest.getStudentName());
-    	gradeLabel.setText(String.valueOf(studentTest.getGrade()));
+    	
+    	
+    	
+    	//set the info of the test
+    	if (studentTest!= null) {
+    		info1.setText("Test:" + testName);
+    		info2.setText("Student Name:" + studentTest.getStudentName());
+    		info3.setText("Grade:" + String.valueOf(studentTest.getGrade()));
+    	}
+    	else {
+    		info1.setText("Test:" + testName);
+    		info2.setText("Duration:" +  testToExecute.getTest().getDuration());
+    		info3.setText("Instuction for lecturer:" + testToExecute.getTest().getInstructionsForLecturer());
+    		info4.setText("Instuction for student:" + testToExecute.getTest().getInstructionsForStudent());
+    	}
     	
     	int questionCounter = 1;
         GridPane gridPane = new GridPane();
@@ -124,12 +147,25 @@ public class ShowStudentTestController extends AbstractController {
             toggleGroups.add(answerGroup);
         }
         dataVbox.getChildren().add(gridPane);
-        showCorrectAnswersAndStudentAnswer();
+        if (studentTest!= null) {
+        	showCorrectAnswersAndStudentAnswer();
+        	}
+        else {showCorrectAnswers();};
+        
+        
 
     }
  
 
-
+    public void showCorrectAnswers() {
+	    for (int i = 0; i < toggleGroups.size(); i++) {
+	        ToggleGroup toggleGroup = toggleGroups.get(i);
+	        int correctAnswerIndex = correctAnswerIndices.get(i);
+	        RadioButton correctRadioButton = (RadioButton) toggleGroup.getToggles().get(correctAnswerIndex);
+	        correctRadioButton.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
+	        correctRadioButton.setText(correctRadioButton.getText() + " - Correct answer"); 
+	    }
+	}
 	
 	public void showCorrectAnswersAndStudentAnswer() {
 	    for (int i = 0; i < toggleGroups.size(); i++) {

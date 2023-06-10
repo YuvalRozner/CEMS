@@ -6,6 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
@@ -29,6 +30,11 @@ public class TestToExecute{
 	//for FX:
 	CheckBox checkbox;
 	RadioButton radioButton;
+	Button button;
+	ComboBox comboBox;
+	TextField textField;
+	TextField textField1;
+	
 	
 	private CheckBox select;
 	private TextField codeField=new TextField();
@@ -71,6 +77,8 @@ public class TestToExecute{
 		this.numberOfStudentsFinished = numberOfStudentsFinished;
 		this.distribusion = distribusion;
 	}
+
+
 
 	/**
 	 * @return the testCode
@@ -240,6 +248,15 @@ public class TestToExecute{
 		this.distribusion = distribusion;
 	}
 	
+	public Test getTest() {
+		return test;
+	}
+
+	public void setTest(Test test) {
+		this.test = test;
+	}
+	
+
 	@Override
 	public boolean equals(Object obj) {
 		TestToExecute t = (TestToExecute) obj;
@@ -252,6 +269,7 @@ public class TestToExecute{
 				+ median + ", lock=" + lock + ", timeExtension=" + timeExtension + ", lecturerId=" + lecturerId + ", numberOfStudentsStarted=" + numberOfStudentsStarted
 				+ ", numberOfStudentsFinished=" + numberOfStudentsFinished + ", distribusion=" + Arrays.toString(distribusion) + "]";
 	}
+	
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -268,7 +286,40 @@ public class TestToExecute{
 	public RadioButton getRadioButton() {
 		return radioButton;
 	}
-
+	public void setNewButton() {
+		button = new Button();
+	}
+	public Button getButton() {
+		return button;
+	}
+	public void setButtonText(String s) {
+		button.setText(s);
+	}
+	public void setNewComboBox() {
+		comboBox = new ComboBox();
+	}
+	public ComboBox getComboBox() {
+		return comboBox;
+	}
+	public void setNewTextField() {
+		textField = new TextField();
+	}
+	public TextField getTextField() {
+		return textField;
+	}
+	public void setNewTextField1() {
+		textField1 = new TextField();
+	}
+	public TextField getTextField1() {
+		return textField1;
+	}
+	
+	
+	
+	
+	
+	
+	
 	public void setNewCodeField() {
 		this.codeField = new TextField();
 		this.codeField.setStyle("-fx-background-color: #F0F8FF; -fx-border-width: 1px; -fx-border-color: #92bce3;  -fx-border-radius: 7px; -fx-font-weight: bold; -fx-font-family: \"Comic Sans MS\";");

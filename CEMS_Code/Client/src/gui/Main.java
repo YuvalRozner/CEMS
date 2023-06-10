@@ -15,21 +15,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-	CountDownTimerController c;
-	public static ArrayList<Question> arr; 
-	static {
-		arr = new ArrayList<Question>();
-	/	Question q1 = new Question("0124","math","logic","what is 1+1?",01,"dor");
-		Question q2 = new Question("0125","math","logic","what is 2+2?",02,"dor");
-	//Question q3 = new Question("0141","math","infi","A={2n: n belong to N}. Is multiplying two terms in A is also a term in",01,"julia");//added by mor
-		arr.add(q1);
-	//	arr.add(q2);
-		arr.add(q3);//added by mor
-	}
-	
-	
-	
-	///add by lior Grades
+
 	public static ArrayList<StudentTest> arrGrades; 
 	static {
 		arrGrades = new ArrayList<StudentTest>();
@@ -41,17 +27,42 @@ public class Main extends Application {
 		arrGrades.add(logic);
 
 	}
-	
-	///add by lior runningTest
-	public static ArrayList<TestToExexeute> arrRuningTest; 
+
+	public static ArrayList<TestToExecute> arrRuningTest; 
 	static {
-		arrRuningTest = new ArrayList<TestToExexeute>();
-		TestToExexeute testLior = new TestToExexeute("run","infi" , "3.5","1234");
-		TestToExexeute testYuval = new TestToExexeute("lock" , "logic" , "2.5","5678");
-		TestToExexeute testDor = new TestToExexeute("run","algebra","3","97454");
+		arrRuningTest = new ArrayList<TestToExecute>();
+		TestToExexeute testLior = new TestToExecute("run","infi" , "3.5","1234");
+		TestToExexeute testYuval = new TestToExecute("lock" , "logic" , "2.5","5678");
+		TestToExexeute testDor = new TestToExecute("run","algebra","3","97454");
 		arrRuningTest.add(testLior);
 		arrRuningTest.add(testYuval);
 		arrRuningTest.add(testDor);
+	}
+	
+
+
+	public static ArrayList<TestToExecute> arrExecuteTest; 
+	static {
+		arrExecuteTest = new ArrayList<TestToExecute>();
+		TestToExecute exTestLior = new TestToExecute();
+		exTestLior.setCourse("infi");
+		exTestLior.setDate("21.4.23");
+		exTestLior.setTestNum("1234");
+		
+			
+		TestToExecute exTestYuval = new TestToExecute();
+		exTestYuval.setCourse("logic");
+		exTestYuval.setDate("28.4.23");
+		exTestYuval.setTestNum("5678");
+		
+		TestToExecute exTestDor = new TestToExecute();
+		exTestDor.setCourse("data structure");
+		exTestDor.setDate("3.5.23");
+		exTestDor.setTestNum("91001");
+		
+		arrExecuteTest.add(exTestLior);
+		arrExecuteTest.add(exTestYuval);
+		arrExecuteTest.add(exTestDor);
 	}
 	
 	public static ArrayList<Test> tests; 
@@ -66,79 +77,4 @@ public class Main extends Application {
 		a1.add(t3);
 		tests = a1;
 	}
-	
-
-	
-	///finish
-	
-	///add by lior executeTest
-	public static ArrayList<TestToExexeute> arrExecuteTest; 
-	static {
-		arrExecuteTest = new ArrayList<TestToExexeute>();
-		TestToExexeute exTestLior = new TestToExexeute();
-		exTestLior.setCourse("infi");
-		exTestLior.setDate("21.4.23");
-		exTestLior.setTestNum("1234");
-		
-			
-		TestToExexeute exTestYuval = new TestToExexeute();
-		exTestYuval.setCourse("logic");
-		exTestYuval.setDate("28.4.23");
-		exTestYuval.setTestNum("5678");
-		
-		TestToExexeute exTestDor = new TestToExexeute();
-		exTestDor.setCourse("data structure");
-		exTestDor.setDate("3.5.23");
-		exTestDor.setTestNum("91001");
-		
-		arrExecuteTest.add(exTestLior);
-		arrExecuteTest.add(exTestYuval);
-		arrExecuteTest.add(exTestDor);
-	}
-	
-	
-	
-	
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-    	
-    	String LoginfXML = "/fxml/Login.fxml"; //1
-    	String LoginTitle = "Login";
-    	
-    	String LecturerMenufXML = "/fxml/LecturerMenu.fxml"; //2
-    	String LecturerMenuTitle = "Lecturer Menu";
-    	
-    	String CreateQuestionfXML = "/fxml/CreateQuestion.fxml"; //3
-    	String CreateQuestionTitle = "Create Question";
-    	
-    	String CreateTestfXML = "/fxml/CreateTest.fxml"; //4 
-    	String CreateTestTitle = "Create Test";
-    	
-    	String LecturerTestViewfXML = "/fxml/LecturerTestView.fxml";//5 
-    	String LecturerTestViewTitle = "Lecturer Test View";
-    	
-    	String LecturerStaticsReportfXML = "/fxml/LecturerStaticsReport.fxml";//6
-    	String LecturerStaticsReportTitle = "Lecturer Statics Report";
-    	
-    	String CountDounTimerfXML = "/fxml/CountDownTimer.fxml";//6
-    	
-    	
-    	FXMLLoader f = new FXMLLoader();
-        Parent root = f.load(getClass().getResource(CountDounTimerfXML));
-        c = f.getController();
-      
-        primaryStage.setTitle("counting time yey");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
-        
-    }
-
-    
-    
-    
-    public static void main(String[] args) {
-        launch(args);
-       
-    }
 }
