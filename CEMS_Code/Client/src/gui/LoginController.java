@@ -1,13 +1,13 @@
 package gui;
 
-import JDBC.Msg;
-import JDBC.MsgType;
 import client.ChatClient;
+import controllers.UserController;
 import enteties.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import notifications.NotificationAlertsController;
 
 public class LoginController extends AbstractController{
 	
@@ -16,6 +16,15 @@ public class LoginController extends AbstractController{
     
     @FXML
     private PasswordField passwordTxt;
+    
+    /**
+	 * object to use the UserController class method.
+	 */
+    private static UserController userController = new UserController();
+    /**
+	 * object to use the notifications class.
+	 */
+    private static NotificationAlertsController notification = new NotificationAlertsController();
 
     @FXML
     void connect(ActionEvent event) throws Exception {
@@ -39,29 +48,15 @@ public class LoginController extends AbstractController{
     }
 
 	private boolean login(String username, String password) {
-		if(username==null || password==null) { System.out.println("you must enter username and password."); return false;}
-    	Msg msg = new Msg(MsgType.select);
-    	msg.setSelect("*");
-    	msg.setFrom("cems.user");
-    	msg.setWhere("username", username);
-
-    	
-    	sendMsg(msg);
+		if(username==null || password==null) { notification.showErrorAlert("you must enter username and password."); return false;}
+    	sendMsg(userController.selectUser(username));
     	User user = ChatClient.user;
-    	if(user==null) { System.out.println("cant find this usename."); return false;}
-    	if(!user.getPassword().equals(password)) { System.out.println("username or password are wrong."); return false;}
-    	//if(user.getLoggedin().equals("yes")) { System.out.println("this user is already loggedin in another device."); return false;}
-    	msg = new Msg(MsgType.update);
-		msg.setTableToUpdate("cems.user");
-		msg.setSet("loggedin", "yes");
-    	msg.setWhere("username", username);
-
-    	sendMsg(msg);
-    	
-    	
+    	if(user==null) { notification.showErrorAlert("cant find this usename."); return false;}
+    	if(!user.getPassword().equals(password)) { notification.showErrorAlert("username or password are wrong."); return false;}
+    	//if(user.getLoggedin().equals("yes")) { notification.showErrorAlert("this user is already loggedin in another device."); return false;}
+    	sendMsg(userController.getLoggedinMsg(user, "yes"));
     	return true;
 	}
-	
 	
     @FXML
     void openClient(ActionEvent event) throws Exception {

@@ -4,6 +4,7 @@ import JDBC.Msg;
 import JDBC.MsgType;
 import client.ChatClient;
 import client.ClientUI;
+import controllers.UserController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -17,6 +18,11 @@ public abstract class AbstractController implements SceneSetter {
 	private Scene scene;
 	private String fxmlName;
 	public String prevScreen;
+	
+    /**
+	 * object to use the UserController class method.
+	 */
+    private static UserController userController = new UserController();
 
 	public void start(String fxmlName, String prevScreen) throws Exception {
 		this.fxmlName = convertToSentence(fxmlName);
@@ -82,18 +88,13 @@ public abstract class AbstractController implements SceneSetter {
 	
 	public void backBtn(ActionEvent event) throws Exception {
 		((Node)event.getSource()).getScene().getWindow().hide();
-		
 		ChatClient.getScreen(prevScreen).display();
 		primaryStage.setTitle(convertToSentence(prevScreen));
 	}
 	
 	public void logout() throws Exception {
 		if(ChatClient.user==null) return;
-    	Msg msg = new Msg(MsgType.update);
-		msg.setTableToUpdate("cems.user");
-		msg.setSet("loggedin", "no");
-    	msg.setWhere("username", ChatClient.user.getUsername());
-    	sendMsg(msg);
+    	sendMsg(userController.getLoggedinMsg(ChatClient.user, "no"));
 	}
 	
 	/**
