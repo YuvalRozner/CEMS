@@ -107,4 +107,19 @@ public class QuestionController {
 		}
 		return res;
 	}
+	
+    /**
+     * Checks the inputs for questions points to insert to table test_question.
+     *
+     * @param questionWithPoints The list of questions with points.
+
+     * @return An Object representing the list of questions itself if the inputs are valid, or a String with an error message if the sum is not 100.
+     */
+	public Object checkPoints(ArrayList<Question> questionWithPoints) {
+		int sum = 0;
+		for(Question q : questionWithPoints)
+			sum += q.getPoints();
+		if(sum!=100) return new String("the points sum must be 100.");
+		return questionWithPoints;
+	}
 }

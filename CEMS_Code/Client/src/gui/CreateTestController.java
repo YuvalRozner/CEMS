@@ -34,35 +34,46 @@ import notifications.NotificationAlertsController;
  * Controller class for the Create Test screen.
  */
 public class CreateTestController extends AbstractController{
-
+    /**
+     * to show the answer.
+     */
     @FXML
     private RadioButton answer1RadioButton, answer2RadioButton,answer3RadioButton,answer4RadioButton;
-
+    /**
+     * to show the answer.
+     */
     @FXML
     private ToggleGroup answersToggleGroup;
+    /**
+     * to show the answer.
+     */
     @FXML
     private Label questionLabel;
-	//@FXML
-   // private TableView<Question> table = new TableView<Question>();
+    /**
+     * inputs of the test.
+     */
     @FXML
     private TableView<Question> table;
+    /**
+     * inputs of the test.
+     */
     @FXML
     private TableColumn<Question, String>  idCol, lecturerCol, questionTextCol,checkBoxCol,pointsCol;
-    @FXML
-    private ComboBox<String> subjectComboBox;
-    @FXML
-    private ComboBox<String> courseComboBox;
-    @FXML
-    private TextArea commentsForLecturerTextArea;
-    @FXML
-    private TextArea commentsForStudentTextArea;
-    @FXML
-    private TextField durationTextField;
     /**
-	 * the number of the question (01-99).
-	 */
+     * inputs of the test.
+     */
     @FXML
-    private TextField testNumberTextField;
+    private ComboBox<String> subjectComboBox, courseComboBox;
+    /**
+     * inputs of the test.
+     */
+    @FXML
+    private TextArea commentsForStudentTextArea, commentsForLecturerTextArea;
+    /**
+     * inputs of the test.
+     */
+    @FXML
+    private TextField testNumberTextField, durationTextField;
     /**
 	 * boolean variable to indicate that any subject has already been chose. for not letting the user create a test without choosing subject.
 	 */
@@ -108,7 +119,6 @@ public class CreateTestController extends AbstractController{
 	 */
     private static NotificationAlertsController notification = new NotificationAlertsController();
     
-    
     /**
      * Default constructor for the CreateTestController class.
      * Initializes the subjectsLst.
@@ -146,7 +156,6 @@ public class CreateTestController extends AbstractController{
                 }
             }
         });
-        
     	//initialize what happens when choosing a course in the comboBox:
         courseComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
         	@Override
@@ -208,8 +217,20 @@ public class CreateTestController extends AbstractController{
         answersToggleGroup.selectToggle(toggle); 
     }
     
-    @FXML
+    @SuppressWarnings("unchecked")
+	@FXML
     void save(ActionEvent event) {
+    	//get the list of selected questions including points for each question:
+    	ArrayList<Question> questionWithPoints = new ArrayList<>();
+    	for(Question q : table.getItems()) {
+    		if(q.getCheckbox().isSelected()) {
+    			try{q.setPoints(Integer.valueOf(q.getTextField().getText()));}
+    			catch(Exception e) {q.setPoints(0);}
+    			questionWithPoints.add(q);
+    		}
+    	}
+    	//checks inputs:
+    	if(questionWithPoints.size()==0) { notification.showErrorAlert("you must choose at least one question."); return; } //checks if chose questions.
     	if(!subjectChoose) { notification.showErrorAlert("you must choose a subject."); return; } //checks if chose subject.
     	if(!courseChoose) { notification.showErrorAlert("you must choose a course."); return; } //checks if chose course.
     	//tries to create a Test Object:
@@ -218,7 +239,12 @@ public class CreateTestController extends AbstractController{
     			commentsForStudentTextArea.getText(), commentsForLecturerTextArea.getText());
     	// if there are issues in inputs:
     	if(newTest instanceof String) {	notification.showErrorAlert((String)newTest); return; }
-    	Msg msg = testController.insertTest((Test)newTest); // create an insert query msg.
+    	//tries to check the sum of points:
+    	Object newTest_question = questionController.checkPoints(questionWithPoints);
+    	// if there are issues in inputs:
+    	if(newTest_question instanceof String) { notification.showErrorAlert((String)newTest_question); return; }
+    	// inserting data to DB:
+    	Msg msg = testController.insertTest((Test)newTest, (ArrayList<Question>)newTest_question); // create an insert query msg.
     	if(msg==null) {System.out.println("cant create this test.."); return;}
     	sendMsg(msg);
     	notification.showInformationAlert("Data inserted to the DB.");
@@ -236,4 +262,3 @@ public class CreateTestController extends AbstractController{
     	table.refresh();
     }
 }
-

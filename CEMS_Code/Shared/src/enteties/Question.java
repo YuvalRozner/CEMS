@@ -19,16 +19,17 @@ public class Question {
 	private Integer correctAnswer;
 	private String instructions;
 	//not in DB:
-	private Subject subject;
-	private ArrayList<Course> courses;
+	private Subject subject = null;
+	private ArrayList<Course> courses = null;
+	private Integer points = null;
 	//for FX:
 	CheckBox checkbox;
 	RadioButton radioButton;
 	TextField textField;
 	
 	
-	private CheckBox select;
-	private TextField points;
+	//private CheckBox select;
+	//private TextField points;
 	private Button showQ = new Button();
 	
 
@@ -222,6 +223,20 @@ public class Question {
 	 */
 	public void setSubjectNum(String subjectNum) {
 		this.subjectNum = subjectNum;
+	}
+
+	/**
+	 * @return the points
+	 */
+	public Integer getPoints() {
+		return points;
+	}
+
+	/**
+	 * @param points the points to set
+	 */
+	public void setPoints(Integer points) {
+		this.points = points;
 	}
 
 	@Override

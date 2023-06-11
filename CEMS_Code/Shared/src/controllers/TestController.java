@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import JDBC.Msg;
 import JDBC.MsgType;
+import enteties.Question;
 import enteties.Test;
 
 public class TestController {
@@ -32,15 +33,16 @@ public class TestController {
 	}
 
     /**
-     * creates and returns a Msg for inserting a test to DB.
+     * creates and returns a Msg for inserting a test to DB including lines for test_question.
      *
      * @param t The Test object to be inserted.
+     * @param newTest_question 
      * @return A Msg object representing the database insert message.
      */
-	public Msg insertTest(Test t) {
-		Msg msg = new Msg(MsgType.insert);
-		msg.setTableToUpdate("cems.test");
-		msg.setColNames("id, number, courseNumber, duration, instructionsForStudent, instructionsForLecturer");
+	public Msg insertTest(Test t, ArrayList<Question> newTest_question) {
+		Msg msgT = new Msg(MsgType.insert);
+		msgT.setTableToUpdate("cems.test");
+		msgT.setColNames("id, number, courseNumber, duration, instructionsForStudent, instructionsForLecturer");
 		ArrayList<Object> tmp = new ArrayList<>();
 		tmp.add(t.getId());
 		tmp.add(t.getNumber());
@@ -48,8 +50,23 @@ public class TestController {
 		tmp.add(t.getDuration());
 		tmp.add(t.getInstructionsForStudent());
 		tmp.add(t.getInstructionsForLecturer());
-		msg.setValues(tmp);
-		return msg;
+		msgT.setValues(tmp);
+		
+		Msg msgMany = new Msg(MsgType.manyMessages);
+		msgMany.setMsgLst(msgT);
+		
+		for(Question q : newTest_question) {
+			Msg msgTQ = new Msg(MsgType.insert);
+			msgTQ.setTableToUpdate("cems.test_question");
+			msgTQ.setColNames("testId, questionId, points");
+			tmp = new ArrayList<>();
+			tmp.add(t.getId());
+			tmp.add(q.getNumber());
+			tmp.add(q.getPoints());
+			msgTQ.setValues(tmp);
+			msgMany.setMsgLst(msgTQ);
+		}
+		return msgMany;
 	}
 	
 	
