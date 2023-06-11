@@ -74,6 +74,30 @@ INSERT INTO `question` VALUES ('22101',101,'Which logical operator represents th
 UNLOCK TABLES;
 
 --
+-- Table structure for table `question_course`
+--
+
+DROP TABLE IF EXISTS `question_course`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `question_course` (
+  `questionId` varchar(128) NOT NULL,
+  `courseNum` varchar(128) NOT NULL,
+  PRIMARY KEY (`questionId`,`courseNum`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `question_course`
+--
+
+LOCK TABLES `question_course` WRITE;
+/*!40000 ALTER TABLE `question_course` DISABLE KEYS */;
+INSERT INTO `question_course` VALUES ('22106','10'),('22107','10'),('22107','13'),('22109','10'),('22109','13'),('22110','13'),('23101','11'),('23101','12'),('23102','11'),('23102','12'),('23103','12'),('23104','11'),('23104','12');
+/*!40000 ALTER TABLE `question_course` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `request`
 --
 
@@ -311,4 +335,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-10 15:32:20
+-- Dump completed on 2023-06-11 12:01:49
