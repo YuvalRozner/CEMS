@@ -15,7 +15,6 @@ import javafx.scene.layout.VBox;
 //gui.OnlineTestWithAnswersController
 public class ShowStudentTestController extends AbstractController {
 	
-
 	@FXML
     private VBox dataVbox;
 	@FXML
@@ -152,8 +151,6 @@ public class ShowStudentTestController extends AbstractController {
         	}
         else {showCorrectAnswers();};
         
-        
-
     }
  
 
@@ -194,9 +191,6 @@ public class ShowStudentTestController extends AbstractController {
             	selectedRadioButton.setText(selectedRadioButton.getText() + " - Wrong answer");
             }
             
-           
 	    }
 	}
-
-
 }
