@@ -19,7 +19,7 @@ public abstract class AbstractController implements SceneSetter {
 	public String prevScreen;
 
 	public void start(String fxmlName, String prevScreen) throws Exception {
-		this.fxmlName = fxmlName;
+		this.fxmlName = convertToSentence(fxmlName);
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlName + ".fxml"));
 		Parent root = loader.load();
@@ -29,7 +29,7 @@ public abstract class AbstractController implements SceneSetter {
 		((SceneSetter)loader.getController()).setScene(tmpScene);
 		((SceneSetter)loader.getController()).setPrevScreen(prevScreen);
 
-		primaryStage.setTitle(fxmlName);
+		primaryStage.setTitle(convertToSentence(fxmlName));
 		primaryStage.setScene(tmpScene);
 		primaryStage.centerOnScreen();
 		primaryStage.show();
@@ -82,7 +82,9 @@ public abstract class AbstractController implements SceneSetter {
 	
 	public void backBtn(ActionEvent event) throws Exception {
 		((Node)event.getSource()).getScene().getWindow().hide();
+		
 		ChatClient.getScreen(prevScreen).display();
+		primaryStage.setTitle(convertToSentence(prevScreen));
 	}
 	
 	public void logout() throws Exception {
@@ -93,4 +95,29 @@ public abstract class AbstractController implements SceneSetter {
     	msg.setWhere("username", ChatClient.user.getUsername());
     	sendMsg(msg);
 	}
+	
+	/**
+	 * Converts a string in the format "thisIsTheStringNeedToBeConvertedToSentence" to a sentence format.
+	 *
+	 * @param input the input string to be converted
+	 * @return the converted string in sentence format
+	 */
+	private  static String convertToSentence(String input) {
+        StringBuilder output = new StringBuilder();
+        // Convert the first character to uppercase
+        output.append(Character.toUpperCase(input.charAt(0)));
+        // Iterate through the remaining characters
+        for (int i = 1; i < input.length(); i++) {
+            char currentChar = input.charAt(i);
+            // Check if the character is an uppercase letter
+            if (Character.isUpperCase(currentChar)) {
+                // Add a space before the uppercase letter
+                output.append(' ');
+            }
+            // Add the current character to the output
+            output.append(currentChar);
+        }
+        // Return the converted string
+        return output.toString();
+    }
 }
