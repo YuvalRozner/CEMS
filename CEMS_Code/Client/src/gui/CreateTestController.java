@@ -32,6 +32,8 @@ import notifications.NotificationAlertsController;
 
 /**
  * Controller class for the Create Test screen.
+ *  
+ * @author Yuval Rozner 
  */
 public class CreateTestController extends AbstractController{
     /**
@@ -245,7 +247,7 @@ public class CreateTestController extends AbstractController{
     	if(newTest_question instanceof String) { notification.showErrorAlert((String)newTest_question); return; }
     	// inserting data to DB:
     	Msg msg = testController.insertTest((Test)newTest, (ArrayList<Question>)newTest_question); // create an insert query msg.
-    	if(msg==null) {System.out.println("cant create this test.."); return;}
+    	if(msg==null) {System.out.println("can't create this test.."); return;}
     	sendMsg(msg);
     	notification.showInformationAlert("Data inserted to the DB.");
     	resetFields();

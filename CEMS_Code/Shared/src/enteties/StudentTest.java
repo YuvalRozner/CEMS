@@ -16,13 +16,12 @@ public class StudentTest {
 	private Integer grade = null;
 	private String lecturerNotes = null;
 	private String approved = "false";
+	private String changeReason = null;
 	//not in DB:
+	private String studentName;
 	private TestToExecute testToExecute;
 	private Test test;
 	
-	private String studentName;
-
-
 	//for FX:
 	CheckBox checkBox;
 	RadioButton radioButton;
@@ -41,6 +40,8 @@ public class StudentTest {
 	public StudentTest() {super();}
 	
 	/**
+	 * used to get object from DB including student name.
+	 * 
 	 * @param studentId
 	 * @param testCode
 	 * @param timePassed
@@ -48,8 +49,10 @@ public class StudentTest {
 	 * @param grade
 	 * @param lecturerNotes
 	 * @param approved
+	 * @param changeReason
+	 * @param studentName
 	 */
-	public StudentTest(String studentId, Integer testCode, Integer timePassed, String answers, Integer grade, String lecturerNotes, String approved) {
+	public StudentTest(String studentId, Integer testCode, Integer timePassed, String answers, Integer grade, String lecturerNotes, String approved, String changeReason, String studentName) {
 		this.studentId = studentId;
 		this.testCode = testCode;
 		this.timePassed = timePassed;
@@ -57,17 +60,29 @@ public class StudentTest {
 		this.grade = grade;
 		this.lecturerNotes = lecturerNotes;
 		this.approved = approved;
-	}
-
-	public StudentTest(String studentId, Integer testCode, Integer timePassed, String answers, Integer grade, String lecturerNotes, String approved,String studentName ) {
-		this.studentId = studentId;
-		this.testCode = testCode;
-		this.timePassed = timePassed;
-		this.answers = answers;
-		this.grade = grade;
-		this.lecturerNotes = lecturerNotes;
-		this.approved = approved;
+		this.changeReason = changeReason;
 		this.studentName = studentName;
+	}
+	
+	/**
+	 * @param studentId
+	 * @param testCode
+	 * @param timePassed
+	 * @param answers
+	 * @param grade
+	 * @param lecturerNotes
+	 * @param approved
+	 * @param changeReason
+	 */
+	public StudentTest(String studentId, Integer testCode, Integer timePassed, String answers, Integer grade, String lecturerNotes, String approved, String changeReason) {
+		this.studentId = studentId;
+		this.testCode = testCode;
+		this.timePassed = timePassed;
+		this.answers = answers;
+		this.grade = grade;
+		this.lecturerNotes = lecturerNotes;
+		this.approved = approved;
+		this.changeReason = changeReason;
 	}
 	
 	/**
@@ -168,12 +183,30 @@ public class StudentTest {
 		this.approved = approved;
 	}
 
-	
-	
+	/**
+	 * @return the changeReason
+	 */
+	public String getChangeReason() {
+		return changeReason;
+	}
+
+	/**
+	 * @param changeReason the changeReason to set
+	 */
+	public void setChangeReason(String changeReason) {
+		this.changeReason = changeReason;
+	}
+
+	/**
+	 * @return the studentName
+	 */
 	public String getStudentName() {
 		return studentName;
 	}
 
+	/**
+	 * @param studentName the studentName to set
+	 */
 	public void setStudentName(String studentName) {
 		this.studentName = studentName;
 	}

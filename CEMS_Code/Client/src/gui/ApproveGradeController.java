@@ -1,11 +1,10 @@
 package gui;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import JDBC.Msg;
 import client.ChatClient;
-import controllers.CourseController;
+import controllers.StudentTestController;
 import controllers.TestToExecuteController;
-import enteties.Course;
 import enteties.StudentTest;
 import enteties.TestToExecute;
 import javafx.beans.value.ChangeListener;
@@ -25,42 +24,74 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import notifications.NotificationAlertsController;
 
-
+/**
+ * Controller class for the Approve Grades screen.
+ * 
+ * @author Yuval Rozner 
+ */
 public class ApproveGradeController extends AbstractController{
-	
+	/**
+	 * the columns for the table.
+	 */
 	@FXML
     private TableColumn<StudentTest, String> idCol ,nameCol ,showCol,noteCol,radioButtonCol;
+	/**
+	 * the columns for the table.
+	 */
 	@FXML
 	private TableColumn<StudentTest, Integer> gradeCol;
+	/**
+	 * the table with all the grade should get approved.
+	 */
     @FXML
     private TableView<StudentTest> table;
+    /**
+     * comboBox for choosing a testToExecute.
+     */
     @FXML
     private ComboBox<String> testComboBox;
+    /**
+     * the change grade area.
+     */
     @FXML
     private VBox changeGradeVbox;
+    /**
+     * ToggleGroup for choosing if want to change the grade or not.
+     */
     @FXML
     private ToggleGroup changeGradeToggleGroup;
+    /**
+     * to select if want to change the grade or not.
+     */
     @FXML
-    private RadioButton noRadioButton;
+    private RadioButton noRadioButton, yesRadioButton;
+    /**
+     * inputs.
+     */
     @FXML
-    private RadioButton yesRadioButton;
-    @FXML
-    private TextField newGradeTextField;
-    @FXML
-    private TextField reasonTextField;
-   
-    public StudentTest StudentTestToShow;
-
-	private ArrayList<StudentTest> arrStudentTest;	
+    private TextField newGradeTextField, reasonTextField;
+    /**
+     * ObservableList of StudentTest for the table.
+     */
 	private ObservableList<StudentTest> TestTable;
-  
-    ToggleGroup testToggleGroup;
-	
-	
-    int counter = 0;
-    
-    
+    /**
+     * ToggleGroup for the studentTests in the table.
+     */
+	private ToggleGroup testToggleGroup;
+    /**
+	 * boolean variable to indicate that any testToExecute has already been chose.
+	 */
+    private boolean chooseTestToExecute=false;
+    /**
+     * the list of StudentTests.
+     */
+    private ArrayList<StudentTest> studentTestLst;
+    /**
+     * the chosen TestToExecute from the comboBox.
+     */
+    private TestToExecute selectedTestToExecute;
     /**
 	 * the list of course for the comboBox according to the user logged in.
 	 */
@@ -69,72 +100,82 @@ public class ApproveGradeController extends AbstractController{
 	 * object to use the TestToExecuteController class method.
 	 */
     private static TestToExecuteController testToExecuteController = new TestToExecuteController();
+    /**
+	 * object to use the StudentTestController class method.
+	 */
+    private static StudentTestController studentTestController = new StudentTestController();
+    /**
+	 * object to use the notifications class.
+	 */
+    private static NotificationAlertsController notification = new NotificationAlertsController();
+    /**
+     * the StudentTest test wanted to be shown. 
+     */
+    public StudentTest StudentTestToShow;
 	
-	
-	public  ArrayList<StudentTest> fakeDataToTabel(){
-		ArrayList<StudentTest> fakeArrayListStudentTest = new ArrayList<StudentTest>();
-
-		StudentTest student1 = new StudentTest("111", 2, 120, "1214",50,"note from the lecturer","false","Dor Shabat");
-		StudentTest student2 = new StudentTest("222", 2, 120, "2124",75,"note from the lecturer","false", "Yuval Rozner");
-		StudentTest student3 = new StudentTest("333", 2, 120, "1124",100,"note from the lecturer","false", "Yuval Mintz");
-		
-		fakeArrayListStudentTest.add(student1);
-		fakeArrayListStudentTest.add(student2);
-		fakeArrayListStudentTest.add(student3);
-		
-		return fakeArrayListStudentTest;
-		
-	}
-	
+    /**
+     * Constructs an instance of the ApproveGradeController.
+     * Retrieves the testToExecutes for the comboBox and initializes the necessary variables.
+     */
     public ApproveGradeController() {
     	Msg msg = testToExecuteController.selectTestToExecuteByUser(ChatClient.user);
     	sendMsg(msg);
     	testToExecuteLst = msgReceived.convertData(TestToExecute.class);
-    	
-    	
-    	
-    	arrStudentTest = new ArrayList<StudentTest>(fakeDataToTabel());
     	testToggleGroup = new ToggleGroup();
-        for (StudentTest studentTest :arrStudentTest) {
-        	studentTest.setNewTextField(); //change reason textfield
-        	studentTest.setNewTextField1(); // note textfield
-        	studentTest.setNewButton(); //show button
-        	
-        	
-        	studentTest.setButtonText("Show"); //set the button text
-        	studentTest.getButton().setOnMouseClicked(event -> { //set on action event - click show button
-        		try {
-        			showTestOpen(event);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-        	});
-        	studentTest.setNewRadioButton(); //select radio button
-        	testToggleGroup.getToggles().add(studentTest.getRadioButton()); // add the radio button into toggleGroup
-        	
-        	
-        }
-        TestTable = FXCollections.observableArrayList(arrStudentTest);      
     }
 
+    /**
+     * Initializes the controller after its root element has been completely processed.
+     * Sets up event listeners and populates the necessary data.
+     */
     @FXML
 	protected void initialize() {
-    	//testComboBox.setItems(testToExecuteController.getTestToExecuteNames(testToExecuteLst));
-    	System.out.println("testToExecuteLst: " + testToExecuteLst);
+    	// set the list of TestToExecute in the comboBox:
     	testComboBox.getItems().addAll(testToExecuteController.getTestToExecuteNames(testToExecuteLst));
-
+    	// initialize what happens when choosing a TestToExecute in the comboBox:
+    	testComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+        	@Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue != null) {
+                	chooseTestToExecute = true;
+                    // Code to be executed when the selected item changes and newValue is not null
+                    // Find the StudentTests object based on the new value:
+                    selectedTestToExecute = testToExecuteController.findTestToExecuteByName(newValue, testToExecuteLst);
+                    // Get the list of StudentTests associated with the selected TestToExecute:
+                    if (selectedTestToExecute != null) {
+                        sendMsg(studentTestController.getMsgForStudentTestsByTestToExecute(selectedTestToExecute));
+                        studentTestLst = new ArrayList<>(msgReceived.convertData(StudentTest.class));
+                        // set the table of StudentTests according to the selected TestToExecute:
+                        for (StudentTest s :studentTestLst) {
+                        	s.setNewTextField(); //change reason textField
+                        	s.setNewTextField1(); // note textField
+                        	s.setNewButton(); //show button
+                        	s.setButtonText("Show"); //set the button text
+                        	s.getButton().setOnMouseClicked(event -> { //set on action event - click show button
+                        		try {
+                        			showTestOpen(event);
+                				} catch (Exception e) {
+                					e.printStackTrace();
+                				}
+                        	});
+                        	s.setNewRadioButton(); //select radio button
+                        	testToggleGroup.getToggles().add(s.getRadioButton()); // add the radio button into toggleGroup
+                        }
+                        TestTable = FXCollections.observableArrayList(studentTestLst);
+                		table.setItems(TestTable);
+                		table.refresh();
+                    }
+                }
+            }
+        });
     	idCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("studentId"));
     	nameCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("studentName"));
     	gradeCol.setCellValueFactory(new PropertyValueFactory<StudentTest, Integer>("grade"));
     	showCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("button"));
     	noteCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("textField1"));
     	radioButtonCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("radioButton"));
-    	
-    	
-    	
 		table.setItems(TestTable);
 		table.refresh();
-		//testComboBox.getItems().addAll("infi - 17/02 - id ...", "logic");
 		
 		//add Listener to the toggle group of yes/no of change grade . if yes -> set enable the vbox that information needed for change, else -> set disable
 		changeGradeToggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
@@ -150,10 +191,14 @@ public class ApproveGradeController extends AbstractController{
 		        }
 		    }
 		});
-
 	}  
     
-  
+    /**
+     * Handles the event when the "Show" button is clicked to display a specific student test.
+     *
+     * @param event The MouseEvent representing the button click event.
+     * @throws Exception if an error occurs during the execution of the method.
+     */
     @FXML
     private void showTestOpen(MouseEvent event) throws Exception {
         Button clickedButton = (Button) event.getSource(); //get the button that has been clicked
@@ -164,51 +209,62 @@ public class ApproveGradeController extends AbstractController{
                 break;
             }
         }
-        
-        start("showStudentTest", "approveGrade");
-            
+        start("showStudentTest", "approveGrade"); 
     }
 
-    
+    /**
+     * Handles the event when the "Confirm" button is clicked to approve a grade.
+     *
+     * @param event The ActionEvent representing the button click event.
+     */
     @FXML
-    void confirm(ActionEvent event) {
+    void confirm(ActionEvent event) { 
+    	if(!chooseTestToExecute) {notification.showErrorAlert("you didnt select a grade to approve."); return;}
     	boolean found = false;
-    	for (StudentTest studentTest :TestTable) {
+    	for (StudentTest studentTest : TestTable) {
     		if (studentTest.getRadioButton().isSelected()) {
     			found = true;
-    			System.out.println("i found the one that the user want to change the student is: " +studentTest );
-    			if (changeGradeVbox.isDisable() == false && yesRadioButton.isSelected()) {
-    				
-        			String text = reasonTextField.getText();
-        		    if (text.isEmpty()) {
-        		    	System.out.println("alert: you didnt wrote a change reason");
-        		    } else {
-        		    	System.out.println("update chane of reason in the db?....");
-        		    	System.out.println("update the grade in the db....");
-        		    	System.out.println("update the approve boolean in the db....");
-        		    }
-        			
+    			if (!changeGradeVbox.isDisable() && yesRadioButton.isSelected()) { // wanted to change grade.
+        		    if (newGradeTextField.getText().isEmpty()) {notification.showErrorAlert("you must enter the new grade."); return;}
+        		    try{
+        		    	if(Integer.valueOf(newGradeTextField.getText())<0 || Integer.valueOf(newGradeTextField.getText())>100)
+        		    		{notification.showErrorAlert("the new grade must be a number between 0 and 100."); return;}
+        		    	studentTest.setGrade(Integer.valueOf(newGradeTextField.getText()));}
+        		    catch(Exception e) {notification.showErrorAlert("the new grade must be a number between 0 and 100."); return;}
+        		    if (reasonTextField.getText().isEmpty()) {notification.showErrorAlert("you must add a reason for changing the grade."); return;}
+        		    studentTest.setChangeReason(reasonTextField.getText()); 
     			}
-    			else {
-    				System.out.println("the user didnt want to change the grade....");
-    				System.out.println("update the approve boolean in the db....");
-    			}
-    			
-    			break;
+    			studentTest.setApproved("true");
+    			if (studentTest.getTextField1().getText().isEmpty()) {notification.showErrorAlert("you must add a note for the grade approved grade."); return;}
+    		    studentTest.setLecturerNotes(studentTest.getTextField1().getText());
+    		    notification.setOnCancelAction(new Runnable() {	@Override public void run() {return;}});
+    		    notification.setOnOkAction(new Runnable() {
+					@Override
+					public void run() {
+						Msg msg = studentTestController.getMsgToUpdateStudentTests(studentTest);
+				    	sendMsg(msg);
+				    	notification.showInformationAlert("grade approved in DB.");
+				    	resetFields();
+		    			return;
+					}});
+    		    notification.showConfirmationAlert("you can't unapprove after that.", "Are you sure you want to approve the grade?");
     		}
     	}
-    	if (found == false) {
-    		System.out.println("alert: you didnt selected");
-    	}
+    	if (found == false) notification.showErrorAlert("you didnt select a grade to approve.");
     }
     
-	
+    /**
+     * Resets all input fields to their default values.
+     */
+    private void resetFields() {
+    	reasonTextField.setText("");
+    	newGradeTextField.setText("");
+    	testComboBox.setValue(null);
+    	table.getItems().clear();
+		table.refresh();
+    }
     
     public StudentTest getStudentTestToShow() {
 		return StudentTestToShow;
 	}
-    
-    
-    
-
 }

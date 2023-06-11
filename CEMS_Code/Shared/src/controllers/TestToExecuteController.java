@@ -1,13 +1,10 @@
 package controllers;
 
 import java.util.ArrayList;
-
 import JDBC.Msg;
 import JDBC.MsgType;
 import enteties.TestToExecute;
 import enteties.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 public class TestToExecuteController {
 	
@@ -37,10 +34,22 @@ public class TestToExecuteController {
         //ObservableList<String> testToExecuteNames = FXCollections.observableArrayList();
 		ArrayList<String> testToExecuteNames = new ArrayList<String>();
         for (TestToExecute t : testToExecuteLst) {
-        	testToExecuteNames.add("(code-"+t.getTestCode()+") " + t.getTest().getCourse().getName() +" " + t.getDate());
-
+        	testToExecuteNames.add("(code-"+t.getTestCode()+")  " + t.getTest().getCourse().getName() +"  " + t.getDate());
         }
         return testToExecuteNames;
 	}
-	
+
+	/**
+	 * Finds a TestToExecute object from the given list based on the provided name.
+	 *
+	 * @param newValue       The name of the TestToExecute to find.
+	 * @param testToExecuteLst The list of TestToExecute objects to search in.
+	 * @return The TestToExecute object with the matching name, or null if not found.
+	 */
+	public TestToExecute findTestToExecuteByName(String newValue, ArrayList<TestToExecute> testToExecuteLst) {
+		for(TestToExecute t : testToExecuteLst)
+			if(newValue.equals("(code-"+t.getTestCode()+")  " + t.getTest().getCourse().getName() +"  " + t.getDate()))
+				return t;
+		return null;
+	}
 }

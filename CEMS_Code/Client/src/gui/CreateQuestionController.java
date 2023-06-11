@@ -25,6 +25,8 @@ import notifications.NotificationAlertsController;
 
 /**
  * Controller class for the Create Question screen.
+ *  
+ * @author Yuval Rozner 
  */
 public class CreateQuestionController extends AbstractController{
 	/**
