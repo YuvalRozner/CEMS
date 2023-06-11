@@ -2,7 +2,10 @@ package gui;
 
 import java.util.ArrayList;
 
-import enteties.StudentTest;
+import JDBC.Msg;
+import client.ChatClient;
+import controllers.TestController;
+import controllers.TestToExecuteController;
 import enteties.Test;
 import enteties.TestToExecute;
 import javafx.collections.FXCollections;
@@ -10,7 +13,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -20,16 +22,11 @@ import javafx.scene.input.MouseEvent;
 
 public class ExecuteTestController extends AbstractController{
 	
-	private ArrayList<TestToExecute> executeTests;
-	
 	ToggleGroup toggleGroupOfTestToExecute;
 	TestToExecute testToExecute;
 	
 	
-	
-	
-	
-	private ObservableList<TestToExecute> ETTable;
+	private ObservableList<TestToExecute> testToExecuteTable;
 	
     @FXML
     private TableView<TestToExecute> table = new TableView<TestToExecute>();
@@ -43,60 +40,52 @@ public class ExecuteTestController extends AbstractController{
     @FXML
     private Button executebtn;
     
-    public ArrayList<TestToExecute> fakeData(){
-    	ArrayList<TestToExecute> fakeDataArrzyList = new ArrayList<TestToExecute>();
-    	
-    	//public TestToExecute(String testCode, String testId, String testingType, String date, Double average, Double median, Boolean lock, Integer timeExtension,
-		//String lecturerId, Integer numberOfStudentsStarted, Integer numberOfStudentsFinished, Integer[] distribusion) {
-			
-    	double a = 1;
-    	TestToExecute testToExecute1 = new TestToExecute("1234","12","", "", a,a ,false, 0, "1111", 0,0, new Integer[1] );
-    	TestToExecute testToExecute2 = new TestToExecute("1278","12","", "", a,a ,false, 0, "1111", 0,0, new Integer[1] );
-    	TestToExecute testToExecute3 = new TestToExecute("1290","12","", "", a,a ,false, 0, "1111", 0,0, new Integer[1] );
-    	
-    	//public Test(String id, String number, String courseNumber, Integer duration, String instructionsForStudent, String instructionsForLecturer) {
-    	
-    	Test t1 = new Test("12","02","14",60,"read cerfully, wnjoy your time. you need to mark one answer of each questopn..", "this test is a tricky one, if you want to fuck your students avarage, give them this test");
-    	testToExecute1.setTest(t1);
-    	testToExecute2.setTest(t1);
-    	testToExecute3.setTest(t1);
-    	fakeDataArrzyList.add(testToExecute1);
-    	fakeDataArrzyList.add(testToExecute2);
-    	fakeDataArrzyList.add(testToExecute3);
-    	
-    	return fakeDataArrzyList;
-    }
     
     
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    
+    
+    
+    
+    
+    
+    /**
+	 * the list of testToExecute for the table created by the list of tests.
+	 */
+    private ArrayList<TestToExecute> executeTests;
+    /**
+	 * the list of tests for the comboBox according to the user logged in.
+	 */
+    private ArrayList<Test> testLst;
+    /**
+	 * object to use the TestController class method.
+	 */
+    private static TestController testController = new TestController();
+    /**
+	 * object to use the TestToExecuteController class method.
+	 */
+    private static TestToExecuteController testToExecuteController = new TestToExecuteController();
+    
+    
+  
+    
+    
+
 	public ExecuteTestController() {
-    	executeTests = new ArrayList<TestToExecute>(fakeData());
     	toggleGroupOfTestToExecute = new ToggleGroup();
-        //ArrayList<Question> convertedList = new ArrayList<>();
+    	Msg msg = testController.selectTestByUser(ChatClient.user);
+    	sendMsg(msg);
+    	testLst = msgReceived.convertData(Test.class);
+    	System.out.println("testLst: "+testLst); //////////////////////////////////////////////////////////////////
+    	executeTests = testToExecuteController.executeListOfTests(testLst, ChatClient.user);
+    	
+    	//executeTests = new ArrayList<TestToExecute>(fakeData());
+    	
         for (TestToExecute test : executeTests) {
-        	test.setNewButton();
-        	test.setButtonText("Show");
-        	test.setNewRadioButton();
-        	toggleGroupOfTestToExecute.getToggles().add((RadioButton)test.getRadioButton());
-        	test.setNewComboBox();
-        	((ComboBox)test.getComboBox()).getItems().addAll("Online", "Manual");
-        	((ComboBox)test.getComboBox()).setValue("Online");
-        	test.setNewTextField();
-        	test.setNewTextField1();
-        	test.getButton().setOnMouseClicked(event -> {
-        		try {
-        			showTestOpen(event);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-        	});
+        	toggleGroupOfTestToExecute.getToggles().add((RadioButton)test.getRadioButton()); //
+        	test.getButton().setOnMouseClicked(event -> { 
+        		try { showTestOpen(event);
+				} catch (Exception e) {	e.printStackTrace();} 	});
         	
-        	
-        	
-        	
-        	test.getComboBox().setDisable(true);
-        	test.getTextField().setDisable(true);
-         	test.getTextField1().setDisable(true);
         	test.getRadioButton().selectedProperty().addListener((observable, oldValue, newValue) -> {
         		if (newValue == true) {
         			test.getComboBox().setDisable(false);
@@ -107,28 +96,28 @@ public class ExecuteTestController extends AbstractController{
         			test.getComboBox().setDisable(true);
                 	test.getTextField().setDisable(true);
                  	test.getTextField1().setDisable(true);
-        		}
-        		
-                 
-             });
+        		} 
+        	});
         }
-        ETTable = FXCollections.observableArrayList(executeTests);
-       
+        testToExecuteTable = FXCollections.observableArrayList(executeTests);
+        
+        table.setItems(testToExecuteTable);
+		table.refresh();
     }
     	
     
     @FXML
 	protected void initialize() {
-    	numTestcol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("testCode"));
-    	coursnamecol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("testCode"));
+    	numTestcol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("testId"));
+    	coursnamecol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("courseName"));
     	datecol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("textField"));
     	showcol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("button"));
     	selectcol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("radioButton"));	
     	codecol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("textField1"));
     	typecol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("comboBox"));
     	
-    	
-		table.setItems(ETTable);
+    	System.out.println("testToExecuteTable: "+testToExecuteTable); //////////////////////////////////////////////////////////////////
+		table.setItems(testToExecuteTable);
 		table.refresh();
 
 	}
@@ -139,7 +128,7 @@ public class ExecuteTestController extends AbstractController{
     @FXML
     private void showTestOpen(MouseEvent event) throws Exception{
     	 Button clickedButton = (Button) event.getSource(); //get the button that has been clicked
-         for (TestToExecute testToExecute : ETTable) { 
+         for (TestToExecute testToExecute : testToExecuteTable) { 
              if (testToExecute.getButton() == clickedButton) { //search for he studenttest //need to change to equals? didnt have time to check it
              	System.out.println("i am print from ExecuteTestController and now i save "+ testToExecute);
              	this.testToExecute = testToExecute;

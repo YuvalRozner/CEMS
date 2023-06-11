@@ -1,10 +1,13 @@
 package controllers;
 
 import java.util.ArrayList;
+
 import JDBC.Msg;
 import JDBC.MsgType;
+import enteties.Test;
 import enteties.TestToExecute;
 import enteties.User;
+import javafx.scene.control.ComboBox;
 
 public class TestToExecuteController {
 	
@@ -51,5 +54,33 @@ public class TestToExecuteController {
 			if(newValue.equals("(code-"+t.getTestCode()+")  " + t.getTest().getCourse().getName() +"  " + t.getDate()))
 				return t;
 		return null;
+	}
+
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public ArrayList<TestToExecute> executeListOfTests(ArrayList<Test> testLst, User user) {
+		ArrayList<TestToExecute> lst = new ArrayList<>();
+		for(Test t : testLst) {
+			TestToExecute tmp = new TestToExecute();
+			tmp.setTestId(t.getId());
+			tmp.setAverage(-1.0);
+			tmp.setMedian(-1.0);
+			tmp.setLock("false");
+			tmp.setLecturerId(user.getId());
+			tmp.setCourse(t.getCourse());
+			tmp.setNewButton();
+			tmp.setButtonText("Show");
+			tmp.setNewRadioButton();
+			tmp.setNewComboBox();
+        	((ComboBox)tmp.getComboBox()).getItems().addAll("Online", "Manual");
+        	((ComboBox)tmp.getComboBox()).setValue("Online");
+        	tmp.setNewTextField();
+        	tmp.setNewTextField1();
+        	tmp.getComboBox().setDisable(true);
+        	tmp.getTextField().setDisable(true);
+        	tmp.getTextField1().setDisable(true);
+        	lst.add(tmp);
+		}
+		return lst;
 	}
 }

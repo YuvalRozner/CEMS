@@ -14,9 +14,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="578.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ExecuteTestController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="596.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ExecuteTestController">
    <children>
-      <Pane layoutX="338.0" layoutY="-99.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
+      <Pane layoutX="360.0" layoutY="-99.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
       <Pane layoutX="34.0" layoutY="129.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="231.0" style="-fx-background-color: #92bce3;" />
       <Label layoutX="38.0" layoutY="139.0" text="Select a test, add the code and click the &quot;Execute&quot; button.">
          <font>
@@ -44,21 +44,21 @@
                </light>
             </Lighting>
          </effect></Label>
-      <ImageView fitHeight="193.0" fitWidth="216.0" layoutX="407.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="193.0" fitWidth="216.0" layoutX="420.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/Cems-logo.png" />
          </image>
       </ImageView>
       <Circle fill="WHITE" layoutX="54.0" layoutY="565.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />
-      <TableView fx:id="table" layoutX="38.0" layoutY="158.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="260.0" stylesheets="@TableView.css">
+      <TableView fx:id="table" layoutX="38.0" layoutY="158.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="260.0" prefWidth="518.0" stylesheets="@TableView.css">
         <columns>
           <TableColumn fx:id="numTestcol" prefWidth="65.0" text="Num" />
-          <TableColumn fx:id="coursnamecol" prefWidth="73.0" text="course" />
-            <TableColumn fx:id="datecol" prefWidth="49.5" text="date" />
-            <TableColumn fx:id="showcol" prefWidth="78.0" text="show" />
-            <TableColumn fx:id="selectcol" prefWidth="58.0" style="-fx-alignment: CENTER;" text="select" />
-            <TableColumn fx:id="codecol" prefWidth="78.5" text="code" />
-            <TableColumn fx:id="typecol" prefWidth="83.0" text="type" />
+          <TableColumn fx:id="coursnamecol" prefWidth="88.79998016357422" text="course" />
+            <TableColumn fx:id="datecol" prefWidth="41.60003662109375" text="date" />
+            <TableColumn fx:id="showcol" prefWidth="90.39996337890625" text="show" />
+            <TableColumn fx:id="selectcol" prefWidth="39.2000732421875" style="-fx-alignment: CENTER;" text="select" />
+            <TableColumn fx:id="codecol" prefWidth="97.60003662109375" text="code" />
+            <TableColumn fx:id="typecol" prefWidth="97.60000610351562" text="type" />
         </columns>
       </TableView>
       <Label layoutX="325.0" layoutY="418.0" text="The code must be 4 digit only.">

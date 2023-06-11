@@ -27,6 +27,7 @@ public class TestToExecute{
 	private Integer [] distribusion = new Integer[10]; // 10 separate columns.
 	//not in DB: 
 	private Test test;
+	private Course course = null;
 	private ArrayList<StudentTest> studentsTestsLst;
 	//for FX:
 	CheckBox checkbox;
@@ -317,6 +318,27 @@ public class TestToExecute{
 		this.distribusion = distribusion;
 	}
 	
+	/**
+	 * @return the course
+	 */
+	public Course getCourse() {
+		return course;
+	}
+	
+	/**
+	 * @return the course name
+	 */
+	public String getCourseName() {
+		return course.getName();
+	}
+
+	/**
+	 * @param course the course to set
+	 */
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+
 	public Test getTest() {
 		return test;
 	}

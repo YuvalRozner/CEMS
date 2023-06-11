@@ -6,6 +6,7 @@ import JDBC.Msg;
 import JDBC.MsgType;
 import enteties.Question;
 import enteties.Test;
+import enteties.User;
 
 public class TestController {
 
@@ -67,6 +68,22 @@ public class TestController {
 			msgMany.setMsgLst(msgTQ);
 		}
 		return msgMany;
+	}
+
+    /**
+     * Constructs a database select message to retrieve tests associated with a user.
+     *
+     * @param user The User object for whom to retrieve the tests.
+     * @return A Msg object representing the database select message.
+     */
+	public Msg selectTestByUser(User user) {
+		Msg msg = new Msg(MsgType.select);
+		msg.setSelect("test.*, course.name, course.subjectNum");
+		msg.setFrom("cems.test, cems.user_subject, cems.course");
+		msg.setWhereCol("test.courseNumber", "course.number");
+		msg.setWhereCol("user_subject.subjectNum", "course.subjectNum");
+		msg.setWhere("user_subject.userId", user.getId());
+		return msg;
 	}
 	
 	

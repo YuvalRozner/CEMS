@@ -94,7 +94,7 @@ public class ApproveGradeController extends AbstractController{
      */
     private TestToExecute selectedTestToExecute;
     /**
-	 * the list of course for the comboBox according to the user logged in.
+	 * the list of testToExecute for the comboBox according to the user logged in.
 	 */
     private ArrayList<TestToExecute> testToExecuteLst;
     /**
