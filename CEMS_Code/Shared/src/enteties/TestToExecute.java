@@ -2,6 +2,7 @@ package enteties;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
@@ -18,7 +19,7 @@ public class TestToExecute{
 	private String date;
 	private Double average;
 	private Double median;
-	private Boolean lock;
+	private String lock;
 	private Integer timeExtension;
     private String lecturerId;
     private Integer numberOfStudentsStarted;
@@ -62,7 +63,7 @@ public class TestToExecute{
 	 * @param numberOfStudentsFinished
 	 * @param distribusion
 	 */
-	public TestToExecute(String testCode, String testId, String testingType, String date, Double average, Double median, Boolean lock, Integer timeExtension,
+	public TestToExecute(String testCode, String testId, String testingType, String date, Double average, Double median, String lock, Integer timeExtension,
 			String lecturerId, Integer numberOfStudentsStarted, Integer numberOfStudentsFinished, Integer[] distribusion) {
 		this.testCode = testCode;
 		this.testId = testId;
@@ -167,14 +168,14 @@ public class TestToExecute{
 	/**
 	 * @return the lock
 	 */
-	public Boolean getLock() {
+	public String getLock() {
 		return lock;
 	}
 
 	/**
 	 * @param lock the lock to set
 	 */
-	public void setLock(Boolean lock) {
+	public void setLock(String lock) {
 		this.lock = lock;
 	}
 

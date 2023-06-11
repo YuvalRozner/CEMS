@@ -144,22 +144,7 @@ public class Msg implements Serializable{
 	 * @param <T>  class type of wanted return
 	 * @param type ClassName.class , ClassName of wanted type return
 	 * @return List of wanted class
-	 
-	@SuppressWarnings("unchecked")
-	public <T> ArrayList<T> convertData(Class<T> type) {
-		ArrayList<T> converted = new ArrayList<>();
-		try {
-			for (List<Object> dataRow : data)
-				converted.add((T) type.getConstructors()[0].newInstance(dataRow.toArray()));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return converted;
-	}
-	*/
-	
-	
-	
+     */	
 	@SuppressWarnings("unchecked")
 	public <T> ArrayList<T> convertData(Class<T> type) {
 	    ArrayList<T> converted = new ArrayList<>();
@@ -188,8 +173,4 @@ public class Msg implements Serializable{
 	    }
 	    return converted;
 	}
-	
-	
-	
-	
 }

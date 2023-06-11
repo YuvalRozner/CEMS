@@ -26,6 +26,7 @@ public enum MsgType {
 	
 	insertFail, // server ---> client. | indicates that the insert query faild.
 	
-	insertSucceeded // server ---> client. | indicates that the isert query succeeded.
-
+	insertSucceeded, // server ---> client. | indicates that the isert query succeeded.
+	
+	lockTest // server ---> client. | indicates that a test got locked.
 }
