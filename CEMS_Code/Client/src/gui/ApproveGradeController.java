@@ -1,7 +1,13 @@
 package gui;
 import java.util.ArrayList;
 
+import JDBC.Msg;
+import client.ChatClient;
+import controllers.CourseController;
+import controllers.TestToExecuteController;
+import enteties.Course;
 import enteties.StudentTest;
+import enteties.TestToExecute;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -31,7 +37,6 @@ public class ApproveGradeController extends AbstractController{
     private TableView<StudentTest> table;
     @FXML
     private ComboBox<String> testComboBox;
-  
     @FXML
     private VBox changeGradeVbox;
     @FXML
@@ -46,8 +51,6 @@ public class ApproveGradeController extends AbstractController{
     private TextField reasonTextField;
    
     public StudentTest StudentTestToShow;
-	
-
 
 	private ArrayList<StudentTest> arrStudentTest;	
 	private ObservableList<StudentTest> TestTable;
@@ -55,7 +58,17 @@ public class ApproveGradeController extends AbstractController{
     ToggleGroup testToggleGroup;
 	
 	
-int counter = 0;
+    int counter = 0;
+    
+    
+    /**
+	 * the list of course for the comboBox according to the user logged in.
+	 */
+    private ArrayList<TestToExecute> testToExecuteLst;
+    /**
+	 * object to use the TestToExecuteController class method.
+	 */
+    private static TestToExecuteController testToExecuteController = new TestToExecuteController();
 	
 	
 	public  ArrayList<StudentTest> fakeDataToTabel(){
@@ -74,7 +87,12 @@ int counter = 0;
 	}
 	
     public ApproveGradeController() {
-       
+    	Msg msg = testToExecuteController.selectTestToExecuteByUser(ChatClient.user);
+    	sendMsg(msg);
+    	testToExecuteLst = msgReceived.convertData(TestToExecute.class);
+    	
+    	
+    	
     	arrStudentTest = new ArrayList<StudentTest>(fakeDataToTabel());
     	testToggleGroup = new ToggleGroup();
         for (StudentTest studentTest :arrStudentTest) {
@@ -101,6 +119,9 @@ int counter = 0;
 
     @FXML
 	protected void initialize() {
+    	//testComboBox.setItems(testToExecuteController.getTestToExecuteNames(testToExecuteLst));
+    	System.out.println("testToExecuteLst: " + testToExecuteLst);
+    	testComboBox.getItems().addAll(testToExecuteController.getTestToExecuteNames(testToExecuteLst));
 
     	idCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("studentId"));
     	nameCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("studentName"));
@@ -113,7 +134,7 @@ int counter = 0;
     	
 		table.setItems(TestTable);
 		table.refresh();
-		testComboBox.getItems().addAll("infi - 17/02 - id ...", "logic");
+		//testComboBox.getItems().addAll("infi - 17/02 - id ...", "logic");
 		
 		//add Listener to the toggle group of yes/no of change grade . if yes -> set enable the vbox that information needed for change, else -> set disable
 		changeGradeToggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {

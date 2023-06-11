@@ -50,6 +50,74 @@ public class TestToExecute{
 	public TestToExecute() {super();}
 	
 	/**
+	 * for getting the object properly from the DB including the Test Object and the Course object inside the Test.
+	 * 
+	 * @param testCode
+	 * @param testId
+	 * @param testingType
+	 * @param date
+	 * @param average
+	 * @param median
+	 * @param lock
+	 * @param timeExtension
+	 * @param lecturerId
+	 * @param numberOfStudentsStarted
+	 * @param numberOfStudentsFinished
+	 */
+	public TestToExecute(String testCode, String testId, String testingType, String date, Double average, Double median, String lock, Integer timeExtension,
+			String lecturerId, Integer numberOfStudentsStarted, Integer numberOfStudentsFinished,Integer numberOfStudents, Integer dis1,Integer dis2,Integer dis3,Integer dis4,Integer dis5,
+			Integer dis6,Integer dis7,Integer dis8,Integer dis9,Integer dis10, 
+			String id, String number, String courseNumber, Integer duration, String instructionsForStudent, String instructionsForLecturer,
+			String course_number, String name, String subjectNum) {
+		this.testCode = testCode;
+		this.testId = testId;
+		this.testingType = testingType;
+		this.date = date;
+		this.average = average;
+		this.median = median;
+		this.lock = lock;
+		this.timeExtension = timeExtension;
+		this.lecturerId = lecturerId;
+		this.numberOfStudentsStarted = numberOfStudentsStarted;
+		this.numberOfStudentsFinished = numberOfStudentsFinished;
+		this.distribusion = new Integer[] {dis1,dis2,dis3,dis4,dis5,dis6,dis7,dis8,dis9,dis10};
+		this.test = new Test(id, number, courseNumber, duration, instructionsForStudent, instructionsForLecturer);
+		this.test.setCourse(new Course(course_number, name, subjectNum));
+	}
+	
+	/**
+	 * for getting the object properly from the DB.
+	 * 
+	 * @param testCode
+	 * @param testId
+	 * @param testingType
+	 * @param date
+	 * @param average
+	 * @param median
+	 * @param lock
+	 * @param timeExtension
+	 * @param lecturerId
+	 * @param numberOfStudentsStarted
+	 * @param numberOfStudentsFinished
+	 */
+	public TestToExecute(String testCode, String testId, String testingType, String date, Double average, Double median, String lock, Integer timeExtension,
+			String lecturerId, Integer numberOfStudentsStarted, Integer numberOfStudentsFinished,Integer numberOfStudents, Integer dis1,Integer dis2,Integer dis3,Integer dis4,Integer dis5,
+			Integer dis6,Integer dis7,Integer dis8,Integer dis9,Integer dis10) {
+		this.testCode = testCode;
+		this.testId = testId;
+		this.testingType = testingType;
+		this.date = date;
+		this.average = average;
+		this.median = median;
+		this.lock = lock;
+		this.timeExtension = timeExtension;
+		this.lecturerId = lecturerId;
+		this.numberOfStudentsStarted = numberOfStudentsStarted;
+		this.numberOfStudentsFinished = numberOfStudentsFinished;
+		this.distribusion = new Integer[] {dis1,dis2,dis3,dis4,dis5,dis6,dis7,dis8,dis9,dis10};
+	}
+	
+	/**
 	 * @param testCode
 	 * @param testId
 	 * @param testingType

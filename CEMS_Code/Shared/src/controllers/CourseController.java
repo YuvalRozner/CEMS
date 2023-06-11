@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import JDBC.Msg;
 import JDBC.MsgType;
 import enteties.Course;
+import enteties.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -56,6 +57,20 @@ public class CourseController {
 		msg.setWhereCol("question_course.questionId" ,"question.id");
 		msg.setWhere("courseNum" ,course.getNumber());
 		return msg;
-		
-	}
+	}	
+	
+    /**
+     * Constructs a database select message to retrieve courses associated with a user.
+     *
+     * @param user The User object for whom to retrieve the courses.
+     * @return A Msg object representing the database select message.
+     */
+	public Msg selectCourseByUser(User user) {
+    	Msg msg = new Msg(MsgType.select);
+    	msg.setSelect("course.number, course.name, course.subjectNum");
+    	msg.setFrom("cems.course, cems.user_subject");
+    	msg.setWhereCol("user_subject.subjectNum", "course.subjectNum"); 
+    	msg.setWhere("user_subject.userId", user.getId()); 
+    	return msg;
+    }
 }
