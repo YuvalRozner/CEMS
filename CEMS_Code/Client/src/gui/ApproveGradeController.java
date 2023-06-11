@@ -1,6 +1,7 @@
 package gui;
 
 import java.util.ArrayList;
+
 import JDBC.Msg;
 import client.ChatClient;
 import controllers.StudentTestController;
@@ -202,14 +203,13 @@ public class ApproveGradeController extends AbstractController{
     @FXML
     private void showTestOpen(MouseEvent event) throws Exception {
         Button clickedButton = (Button) event.getSource(); //get the button that has been clicked
-        for (StudentTest studentTest : TestTable) { 
-            if (studentTest.getButton() == clickedButton) { //search for he studenttest //need to change to equals? didnt have time to check it
-            	System.out.println("i am print from approveGeadeController and now i save "+ studentTest);
+        for (StudentTest studentTest : TestTable) { //search for the studentTest.
+            if (studentTest.getButton().equals(clickedButton)) { 
                 StudentTestToShow = studentTest;
                 break;
             }
         }
-        start("showStudentTest", "approveGrade"); 
+        start("showStudentTest", "approveGrade");
     }
 
     /**

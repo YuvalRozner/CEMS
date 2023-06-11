@@ -14,6 +14,8 @@ import javafx.scene.layout.VBox;
 
 //gui.OnlineTestWithAnswersController
 public class ShowStudentTestController extends AbstractController {
+	
+
 	@FXML
     private VBox dataVbox;
 	@FXML
@@ -102,8 +104,6 @@ public class ShowStudentTestController extends AbstractController {
 
     @FXML
     protected void initialize() {
-    	
-    	
     	
     	//set the info of the test
     	if (studentTest!= null) {
@@ -197,10 +197,6 @@ public class ShowStudentTestController extends AbstractController {
            
 	    }
 	}
+
+
 }
-
-	
-
-   
-
-
