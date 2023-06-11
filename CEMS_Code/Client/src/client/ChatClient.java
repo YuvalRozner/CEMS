@@ -70,6 +70,9 @@ public class ChatClient extends AbstractClient {
 				case insertSucceeded:
 					System.out.println("Data inserted into DB.");
 					break;
+				case lockTest:
+					System.out.println("Lock test with code: "+msg.getTestCode());
+					break;
 				default:
 					break;
 			}

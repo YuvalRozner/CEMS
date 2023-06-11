@@ -19,8 +19,9 @@ public class Msg implements Serializable{
 	private HashMap<String, Object> set = null; // for the SET part of query.
 	private ArrayList<Msg> msgLst = null; //used to send a bunch of messages all at once.
 	private ArrayList<ArrayList<Object>> data = null; //data from DB to client.
-	private ArrayList<String> colNames = null;
-	private ArrayList<ArrayList<Object>> values = null;
+	private ArrayList<String> colNames = null; //for the INSERT INTO query.
+	private ArrayList<ArrayList<Object>> values = null;  //for the INSERT INTO query.
+	private String testCode = null;
 	
 	/* original empty constructor. */
 	public Msg() {}
@@ -138,6 +139,20 @@ public class Msg implements Serializable{
 	public void setValues(ArrayList<Object> lst) {
 		if(values==null) values=new ArrayList<ArrayList<Object>>();
 		values.add(lst);
+	}
+
+	/**
+	 * @return the testCode
+	 */
+	public String getTestCode() {
+		return testCode;
+	}
+
+	/**
+	 * @param testCode the testCode to set
+	 */
+	public void setTestCode(String testCode) {
+		this.testCode = testCode;
 	}
 
 	/**

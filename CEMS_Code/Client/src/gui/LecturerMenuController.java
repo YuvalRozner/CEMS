@@ -50,5 +50,5 @@ public class LecturerMenuController extends AbstractController {
 
 	public void setWelcome(String name) {
 		welcomeLbl.setText(name);
-	}
+	}	
 }
