@@ -2,7 +2,6 @@ package enteties;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
