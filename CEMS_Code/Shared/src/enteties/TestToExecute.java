@@ -44,14 +44,10 @@ public class TestToExecute{
 	private Button show;
 	private TextField durationField=new TextField();
 	
-	
 	/**
 	 * empty constructor.
 	 */
-	public TestToExecute() {super();
-	
-
-	
+	public TestToExecute() {super();}
 	
 	/**
 	 * for getting the object properly from the DB including the Test Object and the Course object inside the Test.
