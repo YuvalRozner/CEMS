@@ -62,6 +62,7 @@ public class ChatClient extends AbstractClient {
 					user = msg.convertData(User.class).get(0);
 					break;
 				case empty:
+					AbstractController.msgReceived=null;
 					System.out.println("server didn't find any data matching this query.");
 					break;
 				case insertFail:
