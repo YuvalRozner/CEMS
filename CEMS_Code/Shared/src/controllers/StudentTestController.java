@@ -4,8 +4,20 @@ import JDBC.Msg;
 import JDBC.MsgType;
 import enteties.StudentTest;
 import enteties.TestToExecute;
+import enteties.User;
 
 public class StudentTestController {
+	
+	public Msg getMsgForStudentTestsByID(User user) {
+		Msg msg = new Msg(MsgType.select);
+		msg.setSelect("studenttest.*,testtoexecute.*, test.*, course.*");
+		msg.setFrom("cems.studenttest,cems.testtoexecute, cems.test, cems.course");
+		msg.setWhereCol("testtoexecute.testId", "test.id");
+    	msg.setWhereCol("test.courseNumber", "course.number"); 
+    	msg.setWhereCol("studenttest.testCode", "testtoexecute.testCode"); 
+		msg.setWhere("studenttest.studentId", user.getId());
+		return msg;
+	}
 
     /**
      * Constructs a database select message to retrieve StudentTest including studentName associated with a TestToExecute.

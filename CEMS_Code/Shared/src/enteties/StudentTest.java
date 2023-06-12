@@ -32,7 +32,100 @@ public class StudentTest {
 	private Button show;
 	private CheckBox select;
 	private TextField note;
-
+	
+	/**
+	 * return string that build from two notes , one that the lecturer gave on the test and ond on the grade.
+	 * @return
+	 */
+	
+	public String getAllNotes() {
+		if (changeReason.equals("")) {
+			return lecturerNotes;
+		}
+		if(lecturerNotes.equals("")) {
+			return changeReason;
+		}
+		char lastChar = lecturerNotes.charAt(lecturerNotes.length() - 1);
+		if(lastChar=='.') {
+			lecturerNotes=lecturerNotes.substring(0, lecturerNotes.length() - 1);
+		}
+		lastChar = changeReason.charAt(changeReason.length() - 1);
+		if(lastChar=='.') {
+			changeReason=changeReason.substring(0, changeReason.length() - 1);
+		}
+		return lecturerNotes+","+changeReason+".";
+	}
+	
+	/**
+	 * for getting the object properly from the DB including the test to execute Object ,
+	 * test to execute include -Test Object 
+	 * test object include - the Course object.
+	 * 
+	 * @param studentId
+	 * @param testCode
+	 * @param timePassed
+	 * @param answers
+	 * @param grade
+	 * @param lecturerNotes
+	 * @param approved
+	 * @param changeReason
+	 * @param testCode1
+	 * @param testId
+	 * @param testingType
+	 * @param date
+	 * @param average
+	 * @param median
+	 * @param lock
+	 * @param timeExtension
+	 * @param lecturerId
+	 * @param numberOfStudentsStarted
+	 * @param numberOfStudentsFinished
+	 * @param numberOfStudents
+	 * @param dis1
+	 * @param dis2
+	 * @param dis3
+	 * @param dis4
+	 * @param dis5
+	 * @param dis6
+	 * @param dis7
+	 * @param dis8
+	 * @param dis9
+	 * @param dis10
+	 * @param id
+	 * @param number
+	 * @param courseNumber
+	 * @param duration
+	 * @param instructionsForStudent
+	 * @param instructionsForLecturer
+	 * @param course_number
+	 * @param name
+	 * @param subjectNum
+	 */
+	public StudentTest(String studentId, Integer testCode, Integer timePassed, String answers, Integer grade,
+			String lecturerNotes, String approved, String changeReason,Integer testCode1,///only 4
+			String testId, String testingType, String date, Double average, Double median,
+			String lock, Integer timeExtension,	String lecturerId, Integer numberOfStudentsStarted, Integer numberOfStudentsFinished,
+			Integer numberOfStudents, Integer dis1,Integer dis2,Integer dis3,Integer dis4,
+			Integer dis5,Integer dis6,Integer dis7,Integer dis8,Integer dis9,
+			Integer dis10, String id, String number, String courseNumber, Integer duration, 
+			String instructionsForStudent, String instructionsForLecturer,String course_number, String name, String subjectNum) {
+		this.studentId = studentId;
+		this.testCode = testCode;
+		this.timePassed = timePassed;
+		this.answers = answers;
+		this.grade = grade;
+		this.lecturerNotes = lecturerNotes;
+		this.approved = approved;
+		this.changeReason = changeReason;
+		this.testToExecute=new TestToExecute(testCode1,testId,testingType,date,average,
+				median,lock, timeExtension,lecturerId,  numberOfStudentsStarted,
+				numberOfStudentsFinished, numberOfStudents,  dis1, dis2, dis3,
+				dis4, dis5,	dis6, dis7, dis8,
+				dis9, dis10, id,  number,  courseNumber,
+				duration,  instructionsForStudent,  instructionsForLecturer,course_number,  name,
+				subjectNum);
+	}
+	
 	
 	/**
 	 * empty constructor.
@@ -210,6 +303,33 @@ public class StudentTest {
 	public void setStudentName(String studentName) {
 		this.studentName = studentName;
 	}
+	/**
+	 * @return the test
+	 */
+	public TestToExecute getTestToExecute() {
+		return testToExecute;
+	}
+
+	/**
+	 * @param test the test to set
+	 */
+	public void setTestToExecute(TestToExecute testToExecute) {
+		this.testToExecute = testToExecute;
+	}
+	
+	/**
+	 * @return the test
+	 */
+	public Test getTest() {
+		return test;
+	}
+
+	/**
+	 * @param test the test to set
+	 */
+	public void setTest(Test test) {
+		this.test = test;
+	}
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -285,7 +405,10 @@ public class StudentTest {
 		this.note.setStyle("-fx-background-color: #F0F8FF; -fx-border-width: 1px; -fx-border-color: #92bce3;  -fx-border-radius: 7px; -fx-font-weight: bold; -fx-font-family: \"Comic Sans MS\";");
 		//note.setDisable(true);
 	}
-
+	
+	public Button getShow() {
+		return show;
+	}
 	//////////show
 	public void setNewShow() { ///added by Mor //add style to show button
         this.show = new Button();

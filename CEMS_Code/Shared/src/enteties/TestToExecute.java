@@ -64,6 +64,26 @@ public class TestToExecute{
 	 * @param lecturerId
 	 * @param numberOfStudentsStarted
 	 * @param numberOfStudentsFinished
+	 * @param numberOfStudents
+	 * @param dis1
+	 * @param dis2
+	 * @param dis3
+	 * @param dis4
+	 * @param dis5
+	 * @param dis6
+	 * @param dis7
+	 * @param dis8
+	 * @param dis9
+	 * @param dis10
+	 * @param id
+	 * @param number
+	 * @param courseNumber
+	 * @param duration
+	 * @param instructionsForStudent
+	 * @param instructionsForLecturer
+	 * @param course_number
+	 * @param name
+	 * @param subjectNum
 	 */
 	public TestToExecute(Integer testCode, String testId, String testingType, String date, Double average, Double median, String lock, Integer timeExtension,
 			String lecturerId, Integer numberOfStudentsStarted, Integer numberOfStudentsFinished,Integer numberOfStudents, Integer dis1,Integer dis2,Integer dis3,Integer dis4,Integer dis5,
