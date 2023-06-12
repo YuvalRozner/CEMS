@@ -62,7 +62,7 @@ public class TestController {
 			msgTQ.setColNames("testId, questionId, points");
 			tmp = new ArrayList<>();
 			tmp.add(t.getId());
-			tmp.add(q.getNumber());
+			tmp.add(q.getId());
 			tmp.add(q.getPoints());
 			msgTQ.setValues(tmp);
 			msgMany.setMsgLst(msgTQ);
