@@ -48,7 +48,8 @@ public class TestToExecute{
 	/**
 	 * empty constructor.
 	 */
-	public TestToExecute() {super();}
+	public TestToExecute() {super();
+	System.out.println("2");}
 	
 	/**
 	 * for getting the object properly from the DB including the Test Object and the Course object inside the Test.
