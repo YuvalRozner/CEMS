@@ -8,6 +8,8 @@ import controllers.TestController;
 import controllers.TestToExecuteController;
 import enteties.Test;
 import enteties.TestToExecute;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -64,12 +66,16 @@ public class ExecuteTestController extends AbstractController{
 	 * object to use the TestToExecuteController class method.
 	 */
     private static TestToExecuteController testToExecuteController = new TestToExecuteController();
-    
+    /**
+	 * string to keep the preferred testing type.
+	 */
+    private String selectedTestingType;
     
   
     
     
 
+	@SuppressWarnings("unchecked")
 	public ExecuteTestController() {
     	toggleGroupOfTestToExecute = new ToggleGroup();
     	Msg msg = testController.selectTestByUser(ChatClient.user);
@@ -98,9 +104,19 @@ public class ExecuteTestController extends AbstractController{
                  	test.getTextField1().setDisable(true);
         		} 
         	});
+        	
+        	test.getComboBox().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            	@Override
+                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                    // Code to be executed when the selected item changes and newValue is not null
+                    // Find the StudentTests object based on the new value:
+                    selectedTestingType = (String) test.getComboBox().getValue(); 
+                    System.out.println("chose testing type: "+ selectedTestingType);
+                    table.refresh();
+                }
+            });
         }
         testToExecuteTable = FXCollections.observableArrayList(executeTests);
-        
         table.setItems(testToExecuteTable);
 		table.refresh();
     }
@@ -116,7 +132,6 @@ public class ExecuteTestController extends AbstractController{
     	codecol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("textField1"));
     	typecol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("comboBox"));
     	
-    	System.out.println("testToExecuteTable: "+testToExecuteTable); //////////////////////////////////////////////////////////////////
 		table.setItems(testToExecuteTable);
 		table.refresh();
 

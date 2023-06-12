@@ -7,7 +7,6 @@ import JDBC.MsgType;
 import enteties.Test;
 import enteties.TestToExecute;
 import enteties.User;
-import javafx.scene.control.ComboBox;
 
 public class TestToExecuteController {
 	
@@ -57,7 +56,7 @@ public class TestToExecuteController {
 	}
 
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "unchecked" })
 	public ArrayList<TestToExecute> executeListOfTests(ArrayList<Test> testLst, User user) {
 		ArrayList<TestToExecute> lst = new ArrayList<>();
 		for(Test t : testLst) {
@@ -72,8 +71,8 @@ public class TestToExecuteController {
 			tmp.setButtonText("Show");
 			tmp.setNewRadioButton();
 			tmp.setNewComboBox();
-        	((ComboBox)tmp.getComboBox()).getItems().addAll("Online", "Manual");
-        	((ComboBox)tmp.getComboBox()).setValue("Online");
+        	tmp.getComboBox().getItems().addAll("online", "manual");
+        	tmp.getComboBox().setValue("online");
         	tmp.setNewTextField();
         	tmp.setNewTextField1();
         	tmp.getComboBox().setDisable(true);

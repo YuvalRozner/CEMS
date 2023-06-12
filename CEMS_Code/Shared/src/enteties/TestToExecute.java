@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 
 public class TestToExecute{
 	//in DB:
-	private String testCode;
+	private Integer testCode;
 	private String testId;
 	private String testingType;
 	private String date;
@@ -65,7 +65,7 @@ public class TestToExecute{
 	 * @param numberOfStudentsStarted
 	 * @param numberOfStudentsFinished
 	 */
-	public TestToExecute(String testCode, String testId, String testingType, String date, Double average, Double median, String lock, Integer timeExtension,
+	public TestToExecute(Integer testCode, String testId, String testingType, String date, Double average, Double median, String lock, Integer timeExtension,
 			String lecturerId, Integer numberOfStudentsStarted, Integer numberOfStudentsFinished,Integer numberOfStudents, Integer dis1,Integer dis2,Integer dis3,Integer dis4,Integer dis5,
 			Integer dis6,Integer dis7,Integer dis8,Integer dis9,Integer dis10, 
 			String id, String number, String courseNumber, Integer duration, String instructionsForStudent, String instructionsForLecturer,
@@ -101,7 +101,7 @@ public class TestToExecute{
 	 * @param numberOfStudentsStarted
 	 * @param numberOfStudentsFinished
 	 */
-	public TestToExecute(String testCode, String testId, String testingType, String date, Double average, Double median, String lock, Integer timeExtension,
+	public TestToExecute(Integer testCode, String testId, String testingType, String date, Double average, Double median, String lock, Integer timeExtension,
 			String lecturerId, Integer numberOfStudentsStarted, Integer numberOfStudentsFinished,Integer numberOfStudents, Integer dis1,Integer dis2,Integer dis3,Integer dis4,Integer dis5,
 			Integer dis6,Integer dis7,Integer dis8,Integer dis9,Integer dis10) {
 		this.testCode = testCode;
@@ -132,7 +132,7 @@ public class TestToExecute{
 	 * @param numberOfStudentsFinished
 	 * @param distribusion
 	 */
-	public TestToExecute(String testCode, String testId, String testingType, String date, Double average, Double median, String lock, Integer timeExtension,
+	public TestToExecute(Integer testCode, String testId, String testingType, String date, Double average, Double median, String lock, Integer timeExtension,
 			String lecturerId, Integer numberOfStudentsStarted, Integer numberOfStudentsFinished, Integer[] distribusion) {
 		this.testCode = testCode;
 		this.testId = testId;
@@ -153,14 +153,14 @@ public class TestToExecute{
 	/**
 	 * @return the testCode
 	 */
-	public String getTestCode() {
+	public Integer getTestCode() {
 		return testCode;
 	}
 
 	/**
 	 * @param testCode the testCode to set
 	 */
-	public void setTestCode(String testCode) {
+	public void setTestCode(Integer testCode) {
 		this.testCode = testCode;
 	}
 
@@ -351,7 +351,8 @@ public class TestToExecute{
 	@Override
 	public boolean equals(Object obj) {
 		TestToExecute t = (TestToExecute) obj;
-		return testCode.equals(t.getTestCode());
+		try { return testCode.equals(t.getTestCode());}
+		catch(Exception e){return false;}
 	}
 
 	@Override
