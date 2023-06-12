@@ -23,11 +23,11 @@ public class ApproveChangesController extends AbstractController{
     public ApproveChangesController() {
         
     	arrchanges = new ArrayList<Request>();
-    	arrchanges.add(new Request("infi","ki cach ba li","1234","ilena","3","3.5"));
-    	arrchanges.add(new Request("logic","ki cach ba li 22","5678","dan","3","2.5"));
+    	//arrchanges.add(new Request("infi","ki cach ba li","1234","ilena","3","3.5"));
+    	//arrchanges.add(new Request("logic","ki cach ba li 22","5678","dan","3","2.5"));
     	
         for (Request R : arrchanges) {
-        	R.setSelect();
+        	//R.setSelect();
         }
         changesTable = FXCollections.observableArrayList(arrchanges);
     }

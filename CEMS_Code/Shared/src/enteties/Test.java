@@ -172,4 +172,8 @@ public class Test {
         this.radioButton.setOnMousePressed(e -> this.radioButton.setStyle("-fx-border-color: #CCFFFF; -fx-border-width: 2px; -fx-border-radius: 50%; -fx-background-color: #FFFFFF; -fx-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);"));
         this.radioButton.setOnMouseReleased(e -> this.radioButton.setStyle("-fx-border-color: #CCFFFF; -fx-border-width: 2px; -fx-border-radius: 50%; -fx-background-color: #FFFFFF; -fx-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);"));
     }
+
+	public RadioButton getRadioButton() {
+		return this.radioButton;
+	}
 }

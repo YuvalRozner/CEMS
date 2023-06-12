@@ -35,8 +35,8 @@ public class QuestionTableController extends AbstractController{
 		
 		//arrQuestion = new ArrayList<Question>(ChatClient.questionList);
 		arrQuestion = new ArrayList<Question>();
-		arrQuestion.add(new Question("1234", "11200", "logic","how much is 1+1", 22,"ilena"));
-		arrQuestion.add(new Question("5678", "12645", "infi","how much is 6+8", 23,"dan"));
+		//arrQuestion.add(new Question("1234", "11200", "logic","how much is 1+1", 22,"ilena"));
+		//arrQuestion.add(new Question("5678", "12645", "infi","how much is 6+8", 23,"dan"));
 		QTable = FXCollections.observableArrayList(arrQuestion);
 		for (Question Q : arrQuestion) {
         	Q.setNewShowQ();
