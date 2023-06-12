@@ -1,120 +1,97 @@
 package gui;
 
 import java.util.ArrayList;
-
-import enteties.Test;
+import JDBC.Msg;
+import client.ChatClient;
+import controllers.TestToExecuteController;
 import enteties.TestToExecute;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * Controller class for the RunningTest screen.
+ *  
+ * @author Yuval Rozner 
+ */
 public class RunningTestController extends AbstractController{
-	
-	private ArrayList<TestToExecute> arrRunningTest;	
-	private ObservableList<TestToExecute> RuningTestTable;
+		
+	/**
+	 * the table of the running tests.
+	 */
     @FXML
-    private Button backbtn;
+    private TableView<TestToExecute> table = new TableView<TestToExecute>();
+    /**
+     * columns for the table.
+     */
+    @FXML
+    private TableColumn<TestToExecute, String> selectCol, testCodeCol, courseCol, startedCol ,finishedCol ,durationCol, explanationCol;
 
-    @FXML
-    private Button changebtn;
-
-    @FXML
-    private TableColumn<TestToExecute, String> corsecol,numcol,selectcol,durationcol;
-   
+    /**
+     * the observable list of running test for the table.
+     */
+    private ObservableList<TestToExecute> RuningTestTable;
+    /**
+     * the toggleGrope for selecting a test to change or lock from table.
+     */
+    ToggleGroup toggleGroupOfTestToExecute = new ToggleGroup();
+    /**
+     * the list of running test (type TestToExecute) got from DB.
+     */
+    private ArrayList<TestToExecute> runningTestLst;
+    /**
+	 * object to use the TestToExecuteController class method.
+	 */
+    private static TestToExecuteController testToExecuteController = new TestToExecuteController();
     
     
-    @FXML
-    private Button lockbtn;
-    
-    @FXML
-    private TableView<TestToExecute> table= new TableView<TestToExecute>();
-    
-    ToggleGroup toggleGroupOfTestToExecute;
-    
-    
-    public ArrayList<TestToExecute> fakeData(){
-    	ArrayList<TestToExecute> fakeDataArrzyList = new ArrayList<TestToExecute>();
-    	
-    	//public TestToExecute(String testCode, String testId, String testingType, String date, Double average, Double median, Boolean lock, Integer timeExtension,
-		//String lecturerId, Integer numberOfStudentsStarted, Integer numberOfStudentsFinished, Integer[] distribusion) {
-			
-    	double a = 1;
-    	//TestToExecute testToExecute1 = new TestToExecute("1234","12","", "", a,a ,false, 0, "1111", 0,0, new Integer[1] );
-    	//TestToExecute testToExecute2 = new TestToExecute("1278","12","", "", a,a ,false, 0, "1111", 0,0, new Integer[1] );
-    	//TestToExecute testToExecute3 = new TestToExecute("1290","12","", "", a,a ,false, 0, "1111", 0,0, new Integer[1] );
-    	
-    	//public Test(String id, String number, String courseNumber, Integer duration, String instructionsForStudent, String instructionsForLecturer) {
-    	
-    	Test t1 = new Test("12","02","14",60,"read cerfully, wnjoy your time. you need to mark one answer of each questopn..", "this test is a tricky one, if you want to fuck your students avarage, give them this test");
-    	//testToExecute1.setTest(t1);
-    	//testToExecute2.setTest(t1);
-    	//testToExecute3.setTest(t1);
-    	//fakeDataArrzyList.add(testToExecute1);
-    	//fakeDataArrzyList.add(testToExecute2);
-    	//fakeDataArrzyList.add(testToExecute3);
-    	
-    	return fakeDataArrzyList;
-    }
     
     
     public RunningTestController() {
-    	arrRunningTest =new ArrayList<TestToExecute>(fakeData());
-    	toggleGroupOfTestToExecute = new ToggleGroup();
-        for (TestToExecute runingTest : arrRunningTest) {
-        	runingTest.setNewRadioButton();
-        	toggleGroupOfTestToExecute.getToggles().add((RadioButton)runingTest.getRadioButton());
-        	runingTest.setNewTextField();
-        	runingTest.getTextField().setText(Integer.toString(runingTest.getTest().getDuration()));
-        	runingTest.getTextField().setDisable(true);
-        	
-        
-        	runingTest.getRadioButton().selectedProperty().addListener((observable, oldValue, newValue) -> {
+    	Msg msg = testToExecuteController.selectRunningTestToExecuteByUser(ChatClient.user);
+    	sendMsg(msg);
+    	runningTestLst = msgReceived.convertData(TestToExecute.class);
+    	RuningTestTable = FXCollections.observableArrayList(runningTestLst);
+    	for (TestToExecute runningTest : runningTestLst) {
+    		runningTest.setNewTextField(); // duration
+    		runningTest.setNewTextField1(); // explanation for changing the duration.
+    		runningTest.setNewRadioButton(); //select
+    		toggleGroupOfTestToExecute.getToggles().add(runningTest.getRadioButton()); // duration
+    		runningTest.getTextField().setPromptText(runningTest.getTest().getDuration().toString()); // explanation
+    		runningTest.getTextField1().setPromptText("Explanation for change");
+    		runningTest.getTextField().setDisable(true); // duration
+    		runningTest.getTextField1().setDisable(true); // explanation
+    		runningTest.getRadioButton().selectedProperty().addListener((observable, oldValue, newValue) -> {
         		if (newValue == true) {
-        			runingTest.getTextField().setDisable(false);
+        			runningTest.getTextField().setDisable(false);
+        			runningTest.getTextField1().setDisable(false);
         		}
         		else {
-        			runingTest.getTextField().setDisable(true);
-        			//return to the initial number, need to change only when press change
-        			//runingTest.getTextField().setText(Integer.toString(runingTest.getTest().getDuration())); 
+        			runningTest.getTextField().setDisable(true);
+        			runningTest.getTextField1().setDisable(true);
         		}
-        		
-                 
              });
-        }
-        RuningTestTable = FXCollections.observableArrayList(arrRunningTest);
+    	}	
     }
+    
+    
     
     @FXML
 	protected void initialize() {
-    	numcol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("testCode"));
-    	corsecol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("testCode"));
-    	selectcol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("radioButton"));
-    	durationcol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("textField"));
-    
-    	/*problem : i want to get duration but i dont have it in testtoexecute
-    	 * i noticed i have test and in test i have duration
-    	 * this is the solotion for it:
-    	 * */
-    	/*
-    	durationcol.setCellValueFactory(data -> {
-    	    TestToExecute testToExecute = data.getValue();
-    	    Test test = testToExecute.getTest();
-    	    Integer duration = test.getDuration();
-    	    return new SimpleIntegerProperty(duration).asObject();
-    	});
-    	
-    		*/
+    	selectCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("radioButton"));
+    	testCodeCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("testCode"));
+    	courseCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("courseName"));
+    	startedCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("numberOfStudentsStarted"));
+    	finishedCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("numberOfStudentsFinished"));
+    	durationCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("textField"));
+    	explanationCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("textField1"));
 		table.setItems(RuningTestTable);
 		table.refresh();
-		
 	}
 
 

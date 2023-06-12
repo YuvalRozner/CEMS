@@ -342,13 +342,6 @@ public class TestToExecute{
 	public Course getCourse() {
 		return course;
 	}
-	
-	/**
-	 * @return the course name
-	 */
-	public String getCourseName() {
-		return course.getName();
-	}
 
 	/**
 	 * @param course the course to set
@@ -424,7 +417,14 @@ public class TestToExecute{
 		return textField1;
 	}
 	
-	
+	/**
+	 * @return the course name
+	 */
+	public String getCourseName() {
+		if(test==null) return null;
+		if(test.getCourse()==null) return null;
+		return test.getCourse().getName();
+	}
 	
 	
 	

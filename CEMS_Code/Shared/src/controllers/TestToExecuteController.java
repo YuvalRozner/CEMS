@@ -12,6 +12,7 @@ public class TestToExecuteController {
 	
     /**
      * Constructs a database select message to retrieve TestToExecute associated with a user.
+     * it includes the testToExecute object, the Test object inside it, and the Course object inside it.
      *
      * @param user The User object for whom to retrieve the TestToExecute.
      * @return A Msg object representing the database select message.
@@ -25,6 +26,28 @@ public class TestToExecuteController {
     	msg.setWhere("testtoexecute.lecturerId", user.getId()); 
     	return msg;
     }
+	
+	 /**
+     * Constructs a database select message to retrieve TestToExecute associated with a user according to the courses the user teaches.
+     * it includes the testToExecute object, the Test object inside it, and the Course object inside it.
+     * it returns only the tests which is still running. (not locked yet).
+     * 
+     * @param user The User object for whom to retrieve the TestToExecute.
+     * @return A Msg object representing the database select message.
+     */
+	public Msg selectRunningTestToExecuteByUser(User user) {
+    	Msg msg = new Msg(MsgType.select);
+    	msg.setSelect("testtoexecute.*, test.*, course.*");
+    	msg.setFrom("cems.testtoexecute, cems.test, cems.course");
+    	msg.setWhereCol("testtoexecute.testId", "test.id");
+    	msg.setWhereCol("test.courseNumber", "course.number"); 
+    	msg.setWhere("testtoexecute.lock", "false"); 
+    	msg.setWhere("testtoexecute.lecturerId", user.getId()); 
+    	return msg;
+    }
+	
+	
+	
 
     /**
      * Retrieves the names of the tests as an ObservableList.
@@ -87,6 +110,7 @@ public class TestToExecuteController {
         	tmp.getComboBox().setDisable(true);
         	tmp.getTextField().setDisable(true);
         	tmp.getTextField1().setDisable(true);
+        	tmp.setTest(t);
         	lst.add(tmp);
 		}
 		return lst;

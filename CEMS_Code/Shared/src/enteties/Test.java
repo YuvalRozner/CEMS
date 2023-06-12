@@ -28,16 +28,16 @@ public class Test {
 	 * @param duration
 	 * @param instructionsForStudent
 	 * @param instructionsForLecturer
-	 */
+	 */	
 	public Test(String id, String number, String courseNumber, Integer duration, String instructionsForStudent, String instructionsForLecturer,
-			String courseName, String subjectNum) {
+			String courseNumber1, String courseName, String subjectNum) {
 		this.id = id;
 		this.number = number;
 		CourseNumber = courseNumber;
 		this.duration = duration;
 		this.instructionsForStudent = instructionsForStudent;
 		this.instructionsForLecturer = instructionsForLecturer;
-		this.course = new Course(courseNumber, courseName, subjectNum);
+		this.course = new Course(courseNumber1, courseName, subjectNum);
 	}
 	
     /**
