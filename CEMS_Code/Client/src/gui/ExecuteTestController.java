@@ -81,13 +81,10 @@ public class ExecuteTestController extends AbstractController{
     	Msg msg = testController.selectTestByUser(ChatClient.user);
     	sendMsg(msg);
     	testLst = msgReceived.convertData(Test.class);
-    	System.out.println("testLst: "+testLst); //////////////////////////////////////////////////////////////////
     	executeTests = testToExecuteController.executeListOfTests(testLst, ChatClient.user);
     	
-    	//executeTests = new ArrayList<TestToExecute>(fakeData());
-    	
         for (TestToExecute test : executeTests) {
-        	toggleGroupOfTestToExecute.getToggles().add((RadioButton)test.getRadioButton()); //
+        	toggleGroupOfTestToExecute.getToggles().add((RadioButton)test.getRadioButton()); 
         	test.getButton().setOnMouseClicked(event -> { 
         		try { showTestOpen(event);
 				} catch (Exception e) {	e.printStackTrace();} 	});
@@ -108,12 +105,7 @@ public class ExecuteTestController extends AbstractController{
         	test.getComboBox().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             	@Override
                 public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                    // Code to be executed when the selected item changes and newValue is not null
-                    // Find the StudentTests object based on the new value:
-                    selectedTestingType = (String) test.getComboBox().getValue(); 
-                    System.out.println("chose testing type: "+ selectedTestingType);
-                    table.refresh();
-                }
+                    selectedTestingType = (String) test.getComboBox().getValue(); }
             });
         }
         testToExecuteTable = FXCollections.observableArrayList(executeTests);
@@ -131,15 +123,17 @@ public class ExecuteTestController extends AbstractController{
     	selectcol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("radioButton"));	
     	codecol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("textField1"));
     	typecol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("comboBox"));
-    	
 		table.setItems(testToExecuteTable);
 		table.refresh();
-
 	}
 
     @FXML
     void executeTestBtn(ActionEvent event) {
+    	
     }
+    
+    
+    
     @FXML
     private void showTestOpen(MouseEvent event) throws Exception{
     	 Button clickedButton = (Button) event.getSource(); //get the button that has been clicked
@@ -152,9 +146,10 @@ public class ExecuteTestController extends AbstractController{
          }
 		start("showStudentTest", "executeTest");
     }
+    
+    
     public TestToExecute getTestToShow() {
 		return testToExecute;
-    	
     }
 
 }
