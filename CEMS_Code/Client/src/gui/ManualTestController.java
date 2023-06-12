@@ -1,7 +1,9 @@
 package gui;
 
+import client.ChatClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
@@ -27,7 +29,7 @@ public class ManualTestController extends AbstractController{
     
     @FXML
     public void submmitBtn(ActionEvent event) throws Exception {
-    	////// submmit.....
-    	super.backBtn(event);
+    	start("startTest", "studentMenu");
     }
+    
 }

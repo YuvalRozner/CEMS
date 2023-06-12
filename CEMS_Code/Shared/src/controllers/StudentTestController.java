@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.ArrayList;
+
 import JDBC.Msg;
 import JDBC.MsgType;
 import enteties.StudentTest;
@@ -7,6 +9,30 @@ import enteties.TestToExecute;
 import enteties.User;
 
 public class StudentTestController {
+	
+    /**
+     * Constructs a database insert message to insert StudentTest.
+     *
+     * @param user The User object for whom to insert the Test..
+     * @return A Msg object representing the database insert message.
+     */
+	public Msg insertStudentTest(TestToExecute testToExecute,User user) {
+    	Msg msg = new Msg(MsgType.insert);
+    	msg.setTableToUpdate("cems.studenttest");
+    	msg.setColNames("studentId,testCode");
+    	ArrayList <Object> tmp = new ArrayList<Object>();
+    	tmp.add(user.getId());
+    	tmp.add(testToExecute.getTestCode());
+    	msg.setValues(tmp);
+    	return msg;
+    }
+	
+    /**
+     * Constructs a database select message to retrieve StudentTest including test to execute course and test for the right student.
+     *
+     * @param user The User object for whom to retrieve the Test..
+     * @return A Msg object representing the database select message.
+     */
 	
 	public Msg getMsgForStudentTestsByID(User user) {
 		Msg msg = new Msg(MsgType.select);
