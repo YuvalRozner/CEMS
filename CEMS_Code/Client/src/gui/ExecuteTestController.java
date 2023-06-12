@@ -37,7 +37,7 @@ public class ExecuteTestController extends AbstractController{
 	/**
 	 * the TestToExecute for the show button.
 	 */
-	TestToExecute testToExecute;
+	TestToExecute testToExecuteToShow;
 	/**
 	 * the ObservableList for the table.
 	 */
@@ -189,14 +189,11 @@ public class ExecuteTestController extends AbstractController{
     @FXML
     private void showTestOpen(MouseEvent event) throws Exception{
     	 Button clickedButton = (Button) event.getSource(); //get the button that has been clicked
-         for (TestToExecute testToExecute : testToExecuteTable) { 
-             if (testToExecute.getButton() == clickedButton) { //search for he studenttest //need to change to equals? didnt have time to check it
-             	System.out.println("i am print from ExecuteTestController and now i save "+ testToExecute);
-             	this.testToExecute = testToExecute;
-                break;
-             }
-         }
-		start("showStudentTest", "executeTest");
+         for (TestToExecute testToExecute : testToExecuteTable)  //search for the studentTest.
+        	 if (testToExecute.getButton().equals(clickedButton)) { 
+             	testToExecuteToShow = testToExecute;
+             	start("showStudentTest", "executeTest");
+             }		
     }
     
     /**
@@ -205,6 +202,6 @@ public class ExecuteTestController extends AbstractController{
      * @return The TestToExecute object to be shown.
      */
     public TestToExecute getTestToShow() {
-		return testToExecute;
+		return testToExecuteToShow;
     }
 }

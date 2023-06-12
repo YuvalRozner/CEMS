@@ -202,13 +202,11 @@ public class ApproveGradeController extends AbstractController{
     @FXML
     private void showTestOpen(MouseEvent event) throws Exception {
         Button clickedButton = (Button) event.getSource(); //get the button that has been clicked
-        for (StudentTest studentTest : TestTable) { //search for the studentTest.
+        for (StudentTest studentTest : TestTable)  //search for the studentTest.
             if (studentTest.getButton().equals(clickedButton)) { 
                 StudentTestToShow = studentTest;
-                break;
+                start("showStudentTest", "approveGrade");
             }
-        }
-        start("showStudentTest", "approveGrade");
     }
 
     /**
