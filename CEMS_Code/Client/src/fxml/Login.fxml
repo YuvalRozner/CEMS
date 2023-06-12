@@ -51,8 +51,8 @@
             </Lighting>
          </effect>
       </Label>
-      <PasswordField fx:id="passwordTxt" layoutX="109.0" layoutY="172.0" style="-fx-background-radius: 7; -fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-border-radius: 7;" text="1996lior" />
-      <TextField fx:id="userNameTxt" layoutX="109.0" layoutY="138.0" style="-fx-background-radius: 7; -fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-border-radius: 7;" text="liorZucker" />
+      <PasswordField fx:id="passwordTxt" layoutX="109.0" layoutY="172.0" style="-fx-background-radius: 7; -fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-border-radius: 7;" text="126dan" />
+      <TextField fx:id="userNameTxt" layoutX="109.0" layoutY="138.0" style="-fx-background-radius: 7; -fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-border-radius: 7;" text="danLemberg" />
       <Button layoutX="183.0" layoutY="216.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#connect" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Connect">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />

@@ -263,6 +263,11 @@ public class ApproveGradeController extends AbstractController{
 		table.refresh();
     }
     
+    /**
+     * Returns the StudentTest object to be shown.
+     *
+     * @return The StudentTest object to be shown.
+     */
     public StudentTest getStudentTestToShow() {
 		return StudentTestToShow;
 	}
