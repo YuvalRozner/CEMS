@@ -1,14 +1,7 @@
 package controllers;
 
-import gui.CountDownTimerController;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.util.Duration;
-
 public class TimeController {
-	private Integer hours;
+	/*private Integer hours;
 	private Integer minutes;
 	private Integer seconds;
 	private boolean isCountingDown = false;
@@ -75,4 +68,5 @@ public class TimeController {
 		return ("Time left for the countdown is: "+ String.format("%02d:%02d:%02d", hours, minutes, seconds));
 		 
 	 }
+	 */
 }
