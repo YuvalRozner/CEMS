@@ -2,7 +2,6 @@ package enteties;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
@@ -43,7 +42,6 @@ public class TestToExecute{
 	private TextField type=new TextField();
 	private Button show;
 	private TextField durationField=new TextField();
-	
 	
 	/**
 	 * empty constructor.

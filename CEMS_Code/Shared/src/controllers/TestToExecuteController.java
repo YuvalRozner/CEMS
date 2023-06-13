@@ -102,7 +102,14 @@ public class TestToExecuteController {
 		return null;
 	}
 
-	
+	/**
+	 * Executes a list of tests and generates a list of TestToExecute objects based on the provided test list and user.
+	 * including the FX fields needed for the table.
+	 *
+	 * @param testLst The list of tests to execute.
+	 * @param user The user executing the tests.
+	 * @return The list of generated TestToExecute objects.
+	 */
 	@SuppressWarnings({ "unchecked" })
 	public ArrayList<TestToExecute> executeListOfTests(ArrayList<Test> testLst, User user) {
 		ArrayList<TestToExecute> lst = new ArrayList<>();
@@ -120,13 +127,57 @@ public class TestToExecuteController {
 			tmp.setNewComboBox();
         	tmp.getComboBox().getItems().addAll("online", "manual");
         	tmp.getComboBox().setValue("online");
-        	tmp.setNewTextField();
-        	tmp.setNewTextField1();
+        	tmp.setNewTextField(); // date
+        	tmp.getTextField().setPromptText("22/06/2023");
+        	tmp.setNewTextField1(); // code
+        	tmp.getTextField1().setPromptText("4 digits");
         	tmp.getComboBox().setDisable(true);
         	tmp.getTextField().setDisable(true);
         	tmp.getTextField1().setDisable(true);
         	lst.add(tmp);
 		}
 		return lst;
+	}
+
+    /**
+     * Checks the inputs for creating a new question.
+     *
+     * @param selectedTest The TestToExecute to check the inputs for.
+
+     * @return An Object representing the new TestToExecute if the inputs are valid, or a String with an error message if the inputs are not invalid.
+     */
+	public Object checkInputs(TestToExecute selectedTest, User user) {
+		String error = new String("");
+		if(selectedTest.getTextField().getText().length()==0) error += "You must enter test date.\n";
+		selectedTest.setDate(selectedTest.getTextField().getText()); 
+		try{
+			if(Integer.valueOf(selectedTest.getTextField1().getText())>9999 || Integer.valueOf(selectedTest.getTextField1().getText())<1000)
+				error += "Test code must be a number between 1000 and 9999.\n";
+			selectedTest.setTestCode(Integer.valueOf(selectedTest.getTextField1().getText()));}
+		catch(Exception e) {error += "Test code must be an integer.\n";}
+		selectedTest.setTestingType((String)selectedTest.getComboBox().getValue());
+		if(error.length()!=0) return error;
+		selectedTest.setLecturerId(user.getId());
+		return selectedTest;
+	}
+	
+    /**
+     * creates and returns a Msg for inserting a TestToExecute to DB.
+     *
+     * @param newTestToExecute The newTestToExecute to insert.
+     * @return A Msg object representing the database insert message.
+     */
+	public Msg insertTestToExecute(TestToExecute t) {
+		Msg msg = new Msg(MsgType.insert);
+		msg.setTableToUpdate("cems.testtoexecute");
+		msg.setColNames("testCode, testId, testingType, date, lecturerId");
+		ArrayList<Object> tmp = new ArrayList<>();
+		tmp.add(t.getTestCode());
+		tmp.add(t.getTestId());
+		tmp.add(t.getTestingType());
+		tmp.add(t.getDate());
+		tmp.add(t.getLecturerId());
+		msg.setValues(tmp);
+		return msg;
 	}
 }
