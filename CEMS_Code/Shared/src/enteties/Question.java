@@ -22,6 +22,7 @@ public class Question {
 	private Subject subject = null;
 	private ArrayList<Course> courses = null;
 	private Integer points = null;
+	private Course course = null; //added by mor
 	//for FX:
 	CheckBox checkbox;
 	RadioButton radioButton;
@@ -93,6 +94,18 @@ public class Question {
 		this.instructions = instructions;
 		this.courses = courses;
 		this.subject = new Subject(subjectNum, subjectName);
+	}
+	
+	public Question(String id, Integer number, String question, String subjectNum, String lecturerId, String[] answers, Integer correctAnswer, String instructions, String numberCourse, String name, String subjectNumber) {
+		this.id = id;
+		this.number = number;
+		this.question = question;
+		this.subjectNum = subjectNum;
+		this.lecturerId = lecturerId;
+		this.answers = answers;
+		this.correctAnswer = correctAnswer;
+		this.instructions = instructions;
+		this.course = new Course(numberCourse, name, subjectNumber);
 	}
 	
 	public String getSubjectName() {
@@ -237,6 +250,14 @@ public class Question {
 	 */
 	public void setPoints(Integer points) {
 		this.points = points;
+	}
+	
+	public Course getCourse() {
+		return course;
+	}
+	
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 
 	@Override
