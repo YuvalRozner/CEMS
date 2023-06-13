@@ -57,5 +57,4 @@ public class RequestController {
 		msg.setValues(tmp);
 		return msg;
 	}
-
 }
