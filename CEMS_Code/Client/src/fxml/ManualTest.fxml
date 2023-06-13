@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="513.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ManualTestController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="513.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ManualTestController">
    <children>
       <ImageView fitHeight="116.0" fitWidth="120.0" layoutX="390.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true" rotate="11.7">
          <image>
@@ -46,7 +46,7 @@
             </Label>
          </children>
       </Pane>
-      <Button fx:id="downbtn" layoutX="45.0" layoutY="307.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Download Test">
+      <Button fx:id="downbtn" layoutX="45.0" layoutY="307.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#download" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Download Test">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>
@@ -72,7 +72,7 @@
                </light>
             </Lighting>
          </effect></Label>
-      <Button fx:id="upbtn" layoutX="184.0" layoutY="307.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Upload Test">
+      <Button fx:id="upbtn" layoutX="184.0" layoutY="307.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#upload" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Upload Test">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>

@@ -11,6 +11,7 @@ import JDBC.DB_controller;
 import JDBC.DataBaseConnector;
 import JDBC.Msg;
 import JDBC.MsgType;
+import controllers.CemsFileController;
 import gui.ServerController;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
@@ -19,6 +20,8 @@ public class CEMSserver extends AbstractServer {
 
 	Connection conn;
 	public static ServerController serverController;
+
+	private CemsFileController cemsFileController = new CemsFileController();
 
 	/**
 	 * Constructs an instance of the echo server.
@@ -50,7 +53,8 @@ public class CEMSserver extends AbstractServer {
 		}
 		;
 		// Print the client's IP address and hostname
-		serverController.addConsole("Client connected from " + clientAddress.getHostAddress() + " (" + clientHostname + ").\n");
+		serverController
+				.addConsole("Client connected from " + clientAddress.getHostAddress() + " (" + clientHostname + ").\n");
 		System.out.println("Client connected from " + clientAddress.getHostAddress() + " (" + clientHostname + ")");
 	}
 
@@ -70,48 +74,71 @@ public class CEMSserver extends AbstractServer {
 		System.out.println("Message received: " + msg + " from " + client);
 		try {
 			switch (msg.getType()) {
-				case select:
-					stmt = conn.createStatement();
-					queryStr = DB_controller.createSELECTquery(msg.getSelect(), msg.getFrom(), msg.getWhere(), msg.getWhereCol());
-					serverController.addConsole("query: ->" + queryStr + ".\n");
-					System.out.println("query: ->" + queryStr);
-					rs = stmt.executeQuery(queryStr);
-					MsgType type = (msg.getFrom().get(0).equals("cems.user")) ? MsgType.user : MsgType.data;
-					Msg tmpMsg = createDataMsg(type, rs);
-					if (tmpMsg.getData() == null || tmpMsg.getData().isEmpty())
-						tmpMsg = new Msg(MsgType.empty);
-					sendToClient(tmpMsg, client);
-					break;
-				case update:
-					stmt = conn.createStatement();
-					queryStr = DB_controller.createUPDATEquery(msg.getTableToUpdate(), msg.getSet(), msg.getWhere());
-					serverController.addConsole("query: ->" + queryStr + ".\n");
-					System.out.println("query: ->" + queryStr);
+			case select:
+				stmt = conn.createStatement();
+				queryStr = DB_controller.createSELECTquery(msg.getSelect(), msg.getFrom(), msg.getWhere(),
+						msg.getWhereCol());
+				serverController.addConsole("query: ->" + queryStr + ".\n");
+				System.out.println("query: ->" + queryStr);
+				rs = stmt.executeQuery(queryStr);
+				MsgType type = (msg.getFrom().get(0).equals("cems.user")) ? MsgType.user : MsgType.data;
+				Msg tmpMsg = createDataMsg(type, rs);
+				if (tmpMsg.getData() == null || tmpMsg.getData().isEmpty())
+					tmpMsg = new Msg(MsgType.empty);
+				sendToClient(tmpMsg, client);
+				break;
+			case update:
+				stmt = conn.createStatement();
+				queryStr = DB_controller.createUPDATEquery(msg.getTableToUpdate(), msg.getSet(), msg.getWhere());
+				serverController.addConsole("query: ->" + queryStr + ".\n");
+				System.out.println("query: ->" + queryStr);
+				stmt.executeUpdate(queryStr);
+				sendToClient(new Msg(MsgType.succeeded), client);
+				break;
+			case disconnect:
+				serverController.addConsole("clientDisconnected" + client + ".\n");
+				System.out.println("clientDisconnected" + client);
+				serverController.removeConnected(client.getInetAddress());
+				sendToClient(new Msg(MsgType.bye), client);
+				break;
+			case manyMessages:
+				for (Msg act : msg.getMsgLst())
+					handleMessageFromClient(act, client);
+				sendToClient(new Msg(MsgType.succeededAll), client);
+				break;
+			case insert:
+				stmt = conn.createStatement();
+				queryStr = DB_controller.createINSERTquery(msg.getTableToUpdate(), msg.getColNames(), msg.getValues());
+				serverController.addConsole("query: ->" + queryStr + ".\n");
+				System.out.println("query: ->" + queryStr);
+				try {
 					stmt.executeUpdate(queryStr);
-					sendToClient(new Msg(MsgType.succeeded), client);
+				} catch (SQLException e) {
+					System.out.println("insert faild");
+					sendToClient(new Msg(MsgType.insertFail), client);
 					break;
-				case disconnect:
-					serverController.addConsole("clientDisconnected" + client + ".\n");
-					System.out.println("clientDisconnected" + client);
-					serverController.removeConnected(client.getInetAddress());
-					sendToClient(new Msg(MsgType.bye), client);
-					break;
-				case manyMessages:
-					for (Msg act : msg.getMsgLst())
-						handleMessageFromClient(act, client);
-					sendToClient(new Msg(MsgType.succeededAll), client);
-					break;
-				case insert:
-					stmt = conn.createStatement();
-					queryStr = DB_controller.createINSERTquery(msg.getTableToUpdate(), msg.getColNames(), msg.getValues());					
-					serverController.addConsole("query: ->" + queryStr + ".\n");
-					System.out.println("query: ->" + queryStr);
-					try{stmt.executeUpdate(queryStr);
-					}catch(SQLException e) {System.out.println("insert faild"); sendToClient(new Msg(MsgType.insertFail), client); break;}
-					sendToClient(new Msg(MsgType.insertSucceeded), client);
-					break;
-				default:
-					break;
+				}
+				sendToClient(new Msg(MsgType.insertSucceeded), client);
+				break;
+			case file:
+				cemsFileController.saveFile(msg);
+				sendToClient(new Msg(MsgType.succeeded), client);
+				break;
+			case fileToSend:
+				String LocalfilePath = "C:\\Users\\liorz\\OneDrive\\Documents\\GitHub\\CEMS\\CEMS_Code\\Server\\file\\algebraTest.docx";
+				Msg msgToCleint = cemsFileController.createMsgWithFile(LocalfilePath);
+				sendToClient(msgToCleint, client);
+				break;
+			case updatePlusOne:
+				stmt = conn.createStatement();
+				queryStr = DB_controller.createUPDATEPlusOnequery(msg.getTableToUpdate(), msg.getSet(), msg.getWhere());
+				serverController.addConsole("query: ->" + queryStr + ".\n");
+				System.out.println("query: ->" + queryStr);
+				stmt.executeUpdate(queryStr);
+				sendToClient(new Msg(MsgType.succeeded), client);
+				
+			default:
+				break;
 			}
 		} catch (SQLException ex) {
 			/* handle any errors */}
@@ -139,7 +166,8 @@ public class CEMSserver extends AbstractServer {
 	}
 
 	/**
-	 * This method overrides the one in the superclass. Called when the server starts listening for connections.
+	 * This method overrides the one in the superclass. Called when the server
+	 * starts listening for connections.
 	 */
 	public void serverStarted() {
 		serverController.addConsole("Server listening for connections on port " + getPort() + ".\n");

@@ -9,6 +9,23 @@ import enteties.TestToExecute;
 import enteties.User;
 
 public class StudentTestController {
+	/**
+	 * constructs a database select message to check if user already did this test.
+	 * @param user
+	 * @param code of test 
+	 * @return msg representing select query.
+	 */
+	
+	public Msg studentAlreadyAccessed(User user,String code) {
+		Msg msg = new Msg(MsgType.select);
+		msg.setSelect("studenttest.studentId");
+		msg.setFrom("cems.studenttest");
+		msg.setWhereCol("studentId", user.getId());
+		msg.setWhere("testCode", code);
+		System.out.println("lior" +msg.getWhereCol());
+		return msg;
+		
+	}
 	
     /**
      * Constructs a database insert message to insert StudentTest.

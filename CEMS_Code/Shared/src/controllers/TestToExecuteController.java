@@ -11,6 +11,20 @@ import notifications.NotificationAlertsController;
 
 public class TestToExecuteController {
 	
+	/**
+	 * 
+	 * @param code key of the test in data.
+	 * @return Msg contain update query.
+	 */
+	public Msg updateNumberOfStudenByOne(String code) {
+    	Msg msg = new Msg(MsgType.updatePlusOne);
+    	msg.setTableToUpdate("cems.testtoexecute");
+    	msg.setSet("numberOfStudentStarted",1);
+    	msg.setWhere("testCode", code); 
+    	return msg;
+    }
+	
+	
     /**
      * Constructs a database select message to retrieve TestToExecute associated with a code.
      *

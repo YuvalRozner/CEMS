@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import enteties.CemsFile;
+
 public class Msg implements Serializable{
 	
 	private static final long serialVersionUID = 1L; //default serial
@@ -22,7 +24,8 @@ public class Msg implements Serializable{
 	private ArrayList<String> colNames = null; //for the INSERT INTO query.
 	private ArrayList<ArrayList<Object>> values = null;  //for the INSERT INTO query.
 	private String testCode = null;
-	
+	private CemsFile file =null;//for send file to student , and get file from student.
+
 	/* original empty constructor. */
 	public Msg() {}
 	
@@ -116,7 +119,7 @@ public class Msg implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Msg [type=" + type +"]" ;
+		return "Msg [type=" + type +"]";
 	}
 	
 	public ArrayList<String> getColNames() {
@@ -187,5 +190,20 @@ public class Msg implements Serializable{
 	        e.printStackTrace();
 	    }
 	    return converted;
+	}
+
+	/**
+	 * 
+	 * @return File
+	 */
+	public CemsFile getCemsFile() {
+		return file;
+	}
+	/**
+	 * 
+	 * @param file file to sent and receive.
+	 */
+	public void setCemsFile(CemsFile file) {
+		this.file = file;
 	}
 }
