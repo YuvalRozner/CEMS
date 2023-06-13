@@ -52,13 +52,17 @@ public class LecturerTestViewController extends AbstractController {
 	 */
     private static NotificationAlertsController notification = new NotificationAlertsController();
     
-    
-    
+    /**
+     * Constructs a new instance of LecturerTestViewController.
+     * This constructor is responsible for initializing the controller and retrieving the relevant TestToExecute data from the database.
+     * It populates the testTable with TestToExecute objects and configures the toggleGroupOfTestToExecute with the corresponding radio buttons.
+     */
     public LecturerTestViewController() {
     	// get the relevant TestToExecute from DB:
     	Msg msg = testToExecuteController.selectTestToExecuteByUser(ChatClient.user);
     	sendMsg(msg);
     	testLst = msgReceived.convertData(TestToExecute.class); //ArrayList
+    	if(testLst==null || testLst.isEmpty()) notification.showInformationAlert("There are no Test relate to you to show statistic on.");
     	// put some FX fields but only the RadioButton is relevant :
     	testTable = testToExecuteController.getObservLstWithFXValues(testLst); //ObservableList 
     	// toggle the radio in the table:
@@ -66,6 +70,12 @@ public class LecturerTestViewController extends AbstractController {
     		toggleGroupOfTestToExecute.getToggles().add(test.getRadioButton()); // duration
     }
     
+    /**
+     * Initializes the table view and sets up the cell value factories.
+     * This method is automatically called after the FXML file has been loaded.
+     * It configures the columns and binds them to the corresponding properties of the TestToExecute objects.
+     * It also sets the items of the table view and refreshes it.
+     */
     @FXML
     protected void initialize() {
     	selectCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("radioButton"));
@@ -76,9 +86,16 @@ public class LecturerTestViewController extends AbstractController {
     	studentsStartedCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("numberOfStudentsStarted"));
         table.setItems(testTable);
         table.refresh();
-        
     }
 	
+    /**
+     * Displays the statistics report for the lecturer.
+     * This method is called when the "Show Statistics" button is clicked.
+     * It opens the "lecturerStaticsReport" view and closes the "lecturerTestView" view.
+     *
+     * @param event The action event triggered by clicking the "Show Statistics" button.
+     * @throws Exception if an error occurs during the view transition.
+     */
 	public void showStatistics(ActionEvent event) throws Exception {
 		start("lecturerStaticsReport", "lecturerTestView");
 	}
