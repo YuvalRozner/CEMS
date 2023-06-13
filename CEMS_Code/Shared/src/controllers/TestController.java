@@ -8,6 +8,9 @@ import enteties.Question;
 import enteties.Test;
 import enteties.User;
 
+/**
+ * Controller class for managing Test.
+ */
 public class TestController {
 
 	/**
@@ -62,7 +65,7 @@ public class TestController {
 			msgTQ.setColNames("testId, questionId, points");
 			tmp = new ArrayList<>();
 			tmp.add(t.getId());
-			tmp.add(q.getNumber());
+			tmp.add(q.getId());
 			tmp.add(q.getPoints());
 			msgTQ.setValues(tmp);
 			msgMany.setMsgLst(msgTQ);
@@ -78,7 +81,7 @@ public class TestController {
      */
 	public Msg selectTestByUser(User user) {
 		Msg msg = new Msg(MsgType.select);
-		msg.setSelect("test.*, course.name, course.subjectNum");
+		msg.setSelect("test.*, course.*");
 		msg.setFrom("cems.test, cems.user_subject, cems.course");
 		msg.setWhereCol("test.courseNumber", "course.number");
 		msg.setWhereCol("user_subject.subjectNum", "course.subjectNum");

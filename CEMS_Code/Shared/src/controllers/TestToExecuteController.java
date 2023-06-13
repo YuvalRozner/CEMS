@@ -1,17 +1,24 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import JDBC.Msg;
 import JDBC.MsgType;
 import enteties.Test;
 import enteties.TestToExecute;
 import enteties.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
+/**
+ * Controller class for managing TestToExecute.
+ */
 public class TestToExecuteController {
 	
     /**
      * Constructs a database select message to retrieve TestToExecute associated with a user.
+     * it includes the testToExecute object, the Test object inside it, and the Course object inside it.
      *
      * @param user The User object for whom to retrieve the TestToExecute.
      * @return A Msg object representing the database select message.
@@ -22,6 +29,25 @@ public class TestToExecuteController {
     	msg.setFrom("cems.testtoexecute, cems.test, cems.course");
     	msg.setWhereCol("testtoexecute.testId", "test.id");
     	msg.setWhereCol("test.courseNumber", "course.number"); 
+    	msg.setWhere("testtoexecute.lecturerId", user.getId()); 
+    	return msg;
+    }
+	
+	 /**
+     * Constructs a database select message to retrieve TestToExecute associated with a user according to the courses the user teaches.
+     * it includes the testToExecute object, the Test object inside it, and the Course object inside it.
+     * it returns only the tests which is still running. (not locked yet).
+     * 
+     * @param user The User object for whom to retrieve the TestToExecute.
+     * @return A Msg object representing the database select message.
+     */
+	public Msg selectRunningTestToExecuteByUser(User user) {
+    	Msg msg = new Msg(MsgType.select);
+    	msg.setSelect("testtoexecute.*, test.*, course.*");
+    	msg.setFrom("cems.testtoexecute, cems.test, cems.course");
+    	msg.setWhereCol("testtoexecute.testId", "test.id");
+    	msg.setWhereCol("test.courseNumber", "course.number"); 
+    	msg.setWhere("testtoexecute.lock", "false"); 
     	msg.setWhere("testtoexecute.lecturerId", user.getId()); 
     	return msg;
     }
@@ -55,7 +81,14 @@ public class TestToExecuteController {
 		return null;
 	}
 
-	
+	/**
+	 * Executes a list of tests and generates a list of TestToExecute objects based on the provided test list and user.
+	 * including the FX fields needed for the table.
+	 *
+	 * @param testLst The list of tests to execute.
+	 * @param user The user executing the tests.
+	 * @return The list of generated TestToExecute objects.
+	 */
 	@SuppressWarnings({ "unchecked" })
 	public ArrayList<TestToExecute> executeListOfTests(ArrayList<Test> testLst, User user) {
 		ArrayList<TestToExecute> lst = new ArrayList<>();
@@ -73,13 +106,123 @@ public class TestToExecuteController {
 			tmp.setNewComboBox();
         	tmp.getComboBox().getItems().addAll("online", "manual");
         	tmp.getComboBox().setValue("online");
-        	tmp.setNewTextField();
-        	tmp.setNewTextField1();
+        	tmp.setNewTextField(); // date
+        	tmp.getTextField().setPromptText("22/06/2023");
+        	tmp.setNewTextField1(); // code
+        	tmp.getTextField1().setPromptText("4 digits");
         	tmp.getComboBox().setDisable(true);
         	tmp.getTextField().setDisable(true);
         	tmp.getTextField1().setDisable(true);
+        	tmp.setTest(t);
         	lst.add(tmp);
 		}
 		return lst;
+	}
+
+    /**
+     * Checks the inputs for creating a new question.
+     *
+     * @param selectedTest The TestToExecute to check the inputs for.
+
+     * @return An Object representing the new TestToExecute if the inputs are valid, or a String with an error message if the inputs are not invalid.
+     */
+	public Object checkInputs(TestToExecute selectedTest, User user) {
+		String error = new String("");
+		if(selectedTest.getTextField().getText().length()==0) error += "You must enter test date.\n";
+		selectedTest.setDate(selectedTest.getTextField().getText()); 
+		try{
+			if(Integer.valueOf(selectedTest.getTextField1().getText())>9999 || Integer.valueOf(selectedTest.getTextField1().getText())<1000)
+				error += "Test code must be a number between 1000 and 9999.\n";
+			selectedTest.setTestCode(Integer.valueOf(selectedTest.getTextField1().getText()));}
+		catch(Exception e) {error += "Test code must be an integer.\n";}
+		selectedTest.setTestingType((String)selectedTest.getComboBox().getValue());
+		if(error.length()!=0) return error;
+		selectedTest.setLecturerId(user.getId());
+		return selectedTest;
+	}
+	
+    /**
+     * creates and returns a Msg for inserting a TestToExecute to DB.
+     *
+     * @param newTestToExecute The newTestToExecute to insert.
+     * @return A Msg object representing the database insert message.
+     */
+	public Msg insertTestToExecute(TestToExecute t) {
+		Msg msg = new Msg(MsgType.insert);
+		msg.setTableToUpdate("cems.testtoexecute");
+		msg.setColNames("testCode, testId, testingType, date, lecturerId");
+		ArrayList<Object> tmp = new ArrayList<>();
+		tmp.add(t.getTestCode());
+		tmp.add(t.getTestId());
+		tmp.add(t.getTestingType());
+		tmp.add(t.getDate());
+		tmp.add(t.getLecturerId());
+		msg.setValues(tmp);
+		return msg;
+	}
+
+	/**
+	 * Returns an ObservableList of TestToExecute objects with FX values.
+	 *
+	 * @param runningTestLst The list of TestToExecute objects.
+	 * @return The ObservableList of TestToExecute objects with FX values.
+	 */
+	public ObservableList<TestToExecute> getObservLstWithFXValues(ArrayList<TestToExecute> runningTestLst) {
+		ObservableList<TestToExecute> runningTestTable = FXCollections.observableArrayList(runningTestLst);
+    	for (TestToExecute runningTest : runningTestLst) {
+    		runningTest.setNewTextField(); // duration
+    		runningTest.setNewTextField1(); // explanation for changing the duration.
+    		runningTest.setNewRadioButton(); //select
+    		runningTest.getTextField().setPromptText(runningTest.getTest().getDuration().toString()); // explanation
+    		runningTest.getTextField1().setPromptText("Explanation for change");
+    		runningTest.getTextField().setDisable(true); // duration
+    		runningTest.getTextField1().setDisable(true); // explanation
+    		runningTest.getRadioButton().selectedProperty().addListener((observable, oldValue, newValue) -> {
+        		if (newValue == true) {
+        			runningTest.getTextField().setDisable(false);
+        			runningTest.getTextField1().setDisable(false);
+        		}
+        		else {
+        			runningTest.getTextField().clear();
+        			runningTest.getTextField1().clear();
+        			runningTest.getTextField().setDisable(true);
+        			runningTest.getTextField1().setDisable(true);
+        		}
+             });
+    	}	
+		return runningTestTable;
+	}
+	
+	/**
+	 * Retrieves the selected TestToExecute object from a collection based on the selected radio button.
+	 *
+	 * @param lst The collection of TestToExecute objects.
+	 * @return The selected TestToExecute object, or null if none is selected or an exception occurs.
+	 */
+	public TestToExecute getSelectedTest(Collection<TestToExecute> lst) {
+		for(TestToExecute t : lst) {
+			try { if(t.getRadioButton().isSelected()) return t;
+			}catch(Exception e) {return null;}
+		}
+		return null;
+	}
+
+	/**
+	 * Generates a message to lock a test.
+	 *
+	 * @param test The TestToExecute object representing the test to be locked.
+	 * @return The message containing the lock instructions.
+	 */
+	public Msg getMsgToLockTest(TestToExecute test) {
+		Msg msgM = new Msg(MsgType.manyMessages);
+		Msg msgUpdate = new Msg(MsgType.update);
+		msgUpdate.setTableToUpdate("testtoexecute");
+		msgUpdate.setSet("`lock`", "true");
+		msgUpdate.setWhere("testCode", test.getTestCode());
+		Msg msgLock = new Msg(MsgType.lockTest);
+		msgLock.setTestCode(test.getTestCode());
+		msgM.setMsgLst(msgUpdate);
+		msgM.setMsgLst(msgLock);
+		return msgM;
 	}
 }

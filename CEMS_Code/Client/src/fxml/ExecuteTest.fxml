@@ -50,15 +50,15 @@
          </image>
       </ImageView>
       <Circle fill="WHITE" layoutX="54.0" layoutY="565.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />
-      <TableView fx:id="table" layoutX="38.0" layoutY="158.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="260.0" prefWidth="518.0" stylesheets="@TableView.css">
+      <TableView fx:id="table" layoutX="38.0" layoutY="158.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="260.0" prefWidth="526.0" stylesheets="@TableView.css">
         <columns>
-          <TableColumn fx:id="numTestcol" prefWidth="65.0" text="Num" />
-          <TableColumn fx:id="coursnamecol" prefWidth="88.79998016357422" text="course" />
-            <TableColumn fx:id="datecol" prefWidth="41.60003662109375" text="date" />
-            <TableColumn fx:id="showcol" prefWidth="90.39996337890625" text="show" />
-            <TableColumn fx:id="selectcol" prefWidth="39.2000732421875" style="-fx-alignment: CENTER;" text="select" />
-            <TableColumn fx:id="codecol" prefWidth="97.60003662109375" text="code" />
-            <TableColumn fx:id="typecol" prefWidth="97.60000610351562" text="type" />
+            <TableColumn fx:id="selectcol" prefWidth="42.399993896484375" style="-fx-alignment: CENTER;" text="select" />
+          <TableColumn fx:id="numTestcol" prefWidth="68.79998016357422" text="test num" />
+          <TableColumn fx:id="coursnamecol" prefWidth="62.4000244140625" text="course" />
+            <TableColumn fx:id="codecol" prefWidth="80.79998779296875" text="code" />
+            <TableColumn fx:id="datecol" prefWidth="94.4000244140625" text="date" />
+            <TableColumn fx:id="typecol" prefWidth="92.0" text="type" />
+            <TableColumn fx:id="showcol" prefWidth="83.60000610351562" text="show" />
         </columns>
       </TableView>
       <Label layoutX="325.0" layoutY="418.0" text="The code must be 4 digit only.">

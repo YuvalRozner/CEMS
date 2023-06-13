@@ -2,7 +2,6 @@ package enteties;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
@@ -44,7 +43,6 @@ public class TestToExecute{
 	private Button show;
 	private TextField durationField=new TextField();
 	
-	
 	/**
 	 * empty constructor.
 	 */
@@ -64,6 +62,26 @@ public class TestToExecute{
 	 * @param lecturerId
 	 * @param numberOfStudentsStarted
 	 * @param numberOfStudentsFinished
+	 * @param numberOfStudents
+	 * @param dis1
+	 * @param dis2
+	 * @param dis3
+	 * @param dis4
+	 * @param dis5
+	 * @param dis6
+	 * @param dis7
+	 * @param dis8
+	 * @param dis9
+	 * @param dis10
+	 * @param id
+	 * @param number
+	 * @param courseNumber
+	 * @param duration
+	 * @param instructionsForStudent
+	 * @param instructionsForLecturer
+	 * @param course_number
+	 * @param name
+	 * @param subjectNum
 	 */
 	public TestToExecute(Integer testCode, String testId, String testingType, String date, Double average, Double median, String lock, Integer timeExtension,
 			String lecturerId, Integer numberOfStudentsStarted, Integer numberOfStudentsFinished,Integer numberOfStudents, Integer dis1,Integer dis2,Integer dis3,Integer dis4,Integer dis5,
@@ -324,13 +342,6 @@ public class TestToExecute{
 	public Course getCourse() {
 		return course;
 	}
-	
-	/**
-	 * @return the course name
-	 */
-	public String getCourseName() {
-		return course.getName();
-	}
 
 	/**
 	 * @param course the course to set
@@ -406,7 +417,14 @@ public class TestToExecute{
 		return textField1;
 	}
 	
-	
+	/**
+	 * @return the course name
+	 */
+	public String getCourseName() {
+		if(test==null) return null;
+		if(test.getCourse()==null) return null;
+		return test.getCourse().getName();
+	}
 	
 	
 	

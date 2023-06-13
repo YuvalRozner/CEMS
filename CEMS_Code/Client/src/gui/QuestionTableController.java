@@ -25,41 +25,42 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
+
 /**
  * Controller class for the Question Table screen.
  * 
- * @author Mor Shmuel 
+ * @author Mor Shmuel
  */
-public class QuestionTableController extends AbstractController{
-	
-	private ArrayList<Question> questionList = new ArrayList<>();
+public class QuestionTableController extends AbstractController {
 
-	private ObservableList<Question> QTable;
-	
+    private ArrayList<Question> questionList = new ArrayList<>();
+
+    private ObservableList<Question> QTable;
+
     @FXML
     private TableView<Question> table = new TableView<Question>();
     /**
-	 * the columns for the table.
-	 */
+     * the columns for the table.
+     */
     @FXML
     private TableColumn<Question, String> idCol, questionTextCol, subjectCol, lecturerCol, courseCol;
-	
+
     /**
-	 * the columns for the table.
-	 */
+     * the columns for the table.
+     */
     @FXML
     private TableColumn<Question, Integer> questionNumberCol;
-    
+
     /**
-     * the Question test wanted to be shown. 
+     * the Question test wanted to be shown.
      */
     public Question questionToShow;
-    
+
     /**
      * to show the answer.
      */
     @FXML
-    private RadioButton answer1RadioButton, answer2RadioButton,answer3RadioButton,answer4RadioButton;
+    private RadioButton answer1RadioButton, answer2RadioButton, answer3RadioButton, answer4RadioButton;
     /**
      * to show the answer.
      */
@@ -70,71 +71,93 @@ public class QuestionTableController extends AbstractController{
      */
     @FXML
     private Label questionLabel;
-    
+
     /**
      * Default constructor for the CreateTestController class.
      * Initializes the subjectsLst.
      */
-	public QuestionTableController() {
-		Msg msg = new Msg(MsgType.select);
-    	msg.setSelect("question.*");
-    	msg.setFrom("cems.question");
-    	msg.setWhereCol("hod_subject.subjectNumber", "question.subjectNum");
-    	sendMsg(msg);
-    	System.out.println(AbstractController.msgReceived.getData());
-    	questionList = msgReceived.convertData(Question.class);
-    	
-		QTable = FXCollections.observableArrayList(questionList);
-		/*for (Question question : QTable) {
-            question.getShowQ().setOnMouseClicked(event -> {
+    public QuestionTableController() {
+        Msg msg = new Msg(MsgType.select);
+        msg.setSelect("question.*");
+        msg.setFrom("cems.question");
+        msg.setWhereCol("hod_subject.subjectNumber", "question.subjectNum");
+        sendMsg(msg);
+        System.out.println(AbstractController.msgReceived.getData());
+        questionList = msgReceived.convertData(Question.class);
+
+        QTable = FXCollections.observableArrayList(questionList);
+        /*
+         * for (Question question : QTable) {
+         * question.getShowQ().setOnMouseClicked(event -> {
+         * try {
+         * showQuestionToOpen(event);
+         * } catch (Exception e) {
+         * e.printStackTrace();
+         * }
+         * });
+         * }
+         */
+
+        // arrQuestion = new ArrayList<Question>(ChatClient.questionList);
+        arrQuestion = new ArrayList<Question>();
+        // arrQuestion.add(new Question("1234", "11200", "logic","how much is 1+1",
+        // 22,"ilena"));
+        // arrQuestion.add(new Question("5678", "12645", "infi","how much is 6+8",
+        // 23,"dan"));
+        QTable = FXCollections.observableArrayList(arrQuestion);
+        for (Question Q : arrQuestion) {
+            Q.setNewShowQ();
+            Q.getShowQ().setOnMouseClicked(event -> {
                 try {
-                	showQuestionToOpen(event);
+                    showQuestionOpen(event);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             });
-        }*/
-		
-		
-	}
-	
-	/**
+        }
+        // for (Question q : arrQuestion) {
+        // arrdup.add(new Question(q.getID(), q.getSubjectNum(), q.getCourseName(),
+        // q.getQuestion(), q.getNumber(),q.getLecturereCreated()));
+        // }
+
+    }
+
+    /**
      * Event handler for displaying the answers of the selected question.
      *
      * @param event The MouseEvent triggering the event.
      */
     @FXML
     void showAnswers(MouseEvent event) {
-    	// Get the selected question from the table.
-    	Question selectedQuestion = table.getSelectionModel().getSelectedItem();
-    	// Display the question and answers in the UI.
-    	questionLabel.setText(selectedQuestion.getQuestion());
-    	answer1RadioButton.setText(selectedQuestion.getAnswers()[0]);
-    	answer2RadioButton.setText(selectedQuestion.getAnswers()[1]);
-    	answer3RadioButton.setText(selectedQuestion.getAnswers()[2]);
-    	answer4RadioButton.setText(selectedQuestion.getAnswers()[3]);
-    	// Select the correct answer toggle.
-    	ObservableList<Toggle> toggles = answersToggleGroup.getToggles();
-        Toggle toggle = toggles.get(selectedQuestion.getCorrectAnswer());  // Index 2 represents the third toggle
-        answersToggleGroup.selectToggle(toggle); 
+        // Get the selected question from the table.
+        Question selectedQuestion = table.getSelectionModel().getSelectedItem();
+        // Display the question and answers in the UI.
+        questionLabel.setText(selectedQuestion.getQuestion());
+        answer1RadioButton.setText(selectedQuestion.getAnswers()[0]);
+        answer2RadioButton.setText(selectedQuestion.getAnswers()[1]);
+        answer3RadioButton.setText(selectedQuestion.getAnswers()[2]);
+        answer4RadioButton.setText(selectedQuestion.getAnswers()[3]);
+        // Select the correct answer toggle.
+        ObservableList<Toggle> toggles = answersToggleGroup.getToggles();
+        Toggle toggle = toggles.get(selectedQuestion.getCorrectAnswer()); // Index 2 represents the third toggle
+        answersToggleGroup.selectToggle(toggle);
     }
-	
-    
+
     @FXML
-	protected void initialize() {
-    	idCol.setCellValueFactory(new PropertyValueFactory<Question, String>("id"));
-		subjectCol.setCellValueFactory(new PropertyValueFactory<Question, String>("subjectNum"));
-		
-		//courseCol.setCellValueFactory(new PropertyValueFactory<Question, String>("course"));
-		
-		questionNumberCol.setCellValueFactory(new PropertyValueFactory<Question, Integer>("number"));
-		lecturerCol.setCellValueFactory(new PropertyValueFactory<Question, String>("lecturerId"));
-		questionTextCol.setCellValueFactory(new PropertyValueFactory<Question, String>("question"));
-        
-		table.setItems(QTable);
-		table.refresh();
-	}
-    
+    protected void initialize() {
+        idCol.setCellValueFactory(new PropertyValueFactory<Question, String>("id"));
+        subjectCol.setCellValueFactory(new PropertyValueFactory<Question, String>("subjectNum"));
+
+        // courseCol.setCellValueFactory(new PropertyValueFactory<Question,
+        // String>("course"));
+
+        questionNumberCol.setCellValueFactory(new PropertyValueFactory<Question, Integer>("number"));
+        lecturerCol.setCellValueFactory(new PropertyValueFactory<Question, String>("lecturerId"));
+        questionTextCol.setCellValueFactory(new PropertyValueFactory<Question, String>("question"));
+
+        table.setItems(QTable);
+        table.refresh();
+    }
 
     @FXML
     void onEditCommitQuestionTextCol(ActionEvent event) {
@@ -150,6 +173,5 @@ public class QuestionTableController extends AbstractController{
     void onMouseExitedBackBtn(MouseEvent event) {
 
     }
- 
 
 }

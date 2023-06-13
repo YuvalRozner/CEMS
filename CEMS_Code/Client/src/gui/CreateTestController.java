@@ -232,9 +232,9 @@ public class CreateTestController extends AbstractController{
     		}
     	}
     	//checks inputs:
-    	if(questionWithPoints.size()==0) { notification.showErrorAlert("you must choose at least one question."); return; } //checks if chose questions.
-    	if(!subjectChoose) { notification.showErrorAlert("you must choose a subject."); return; } //checks if chose subject.
-    	if(!courseChoose) { notification.showErrorAlert("you must choose a course."); return; } //checks if chose course.
+    	if(questionWithPoints.size()==0) { notification.showErrorAlert("You must choose at least one question."); return; } //checks if chose questions.
+    	if(!subjectChoose) { notification.showErrorAlert("You must choose a subject."); return; } //checks if chose subject.
+    	if(!courseChoose) { notification.showErrorAlert("You must choose a course."); return; } //checks if chose course.
     	//tries to create a Test Object:
     	Object newTest = testController.checkInputs(selectedSubject.getNumber()+selectedCourse.getNumber()+testNumberTextField.getText(),
     			testNumberTextField.getText(), selectedCourse.getNumber(), durationTextField.getText(),
@@ -247,7 +247,7 @@ public class CreateTestController extends AbstractController{
     	if(newTest_question instanceof String) { notification.showErrorAlert((String)newTest_question); return; }
     	// inserting data to DB:
     	Msg msg = testController.insertTest((Test)newTest, (ArrayList<Question>)newTest_question); // create an insert query msg.
-    	if(msg==null) {System.out.println("can't create this test.."); return;}
+    	if(msg==null) {System.out.println("Can't create this test.."); return;}
     	sendMsg(msg);
     	notification.showInformationAlert("Data inserted to the DB.");
     	resetFields();

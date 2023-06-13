@@ -28,16 +28,16 @@ public class Test {
 	 * @param duration
 	 * @param instructionsForStudent
 	 * @param instructionsForLecturer
-	 */
+	 */	
 	public Test(String id, String number, String courseNumber, Integer duration, String instructionsForStudent, String instructionsForLecturer,
-			String courseName, String subjectNum) {
+			String courseNumber1, String courseName, String subjectNum) {
 		this.id = id;
 		this.number = number;
 		CourseNumber = courseNumber;
 		this.duration = duration;
 		this.instructionsForStudent = instructionsForStudent;
 		this.instructionsForLecturer = instructionsForLecturer;
-		this.course = new Course(courseNumber, courseName, subjectNum);
+		this.course = new Course(courseNumber1, courseName, subjectNum);
 	}
 	
     /**
@@ -172,4 +172,8 @@ public class Test {
         this.radioButton.setOnMousePressed(e -> this.radioButton.setStyle("-fx-border-color: #CCFFFF; -fx-border-width: 2px; -fx-border-radius: 50%; -fx-background-color: #FFFFFF; -fx-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);"));
         this.radioButton.setOnMouseReleased(e -> this.radioButton.setStyle("-fx-border-color: #CCFFFF; -fx-border-width: 2px; -fx-border-radius: 50%; -fx-background-color: #FFFFFF; -fx-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);"));
     }
+
+	public RadioButton getRadioButton() {
+		return this.radioButton;
+	}
 }
