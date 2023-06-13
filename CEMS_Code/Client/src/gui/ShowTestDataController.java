@@ -3,17 +3,12 @@ package gui;
 import java.util.ArrayList;
 
 import JDBC.Msg;
-import JDBC.MsgType;
 import client.ChatClient;
 import controllers.TestToExecuteController;
-import enteties.Question;
-import enteties.Test;
 import enteties.TestToExecute;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -60,10 +55,14 @@ public class ShowTestDataController  extends AbstractController{
 	 */
 	TestToExecute testToExecuteToShow;
     
+	/**
+     * Default constructor for the ShowTestDataController class.
+     * initialize the showTestTable.
+     */
     public ShowTestDataController() {
     	Msg msg = testToExecuteController.selectTestToExecuteByHod(ChatClient.user);
     	sendMsg(msg);
-    	System.out.println("Data = " + AbstractController.msgReceived.getData());
+    	//System.out.println("Data = " + AbstractController.msgReceived.getData());
     	arrShowTest = msgReceived.convertData(TestToExecute.class);
         for (TestToExecute test : arrShowTest) {
         	test.setNewButton();
@@ -74,13 +73,13 @@ public class ShowTestDataController  extends AbstractController{
         }
         
         showTestTable = FXCollections.observableArrayList(arrShowTest);
-        System.out.println("showTestTable = " + showTestTable); 
+        //System.out.println("showTestTable = " + showTestTable); 
         table.setItems(showTestTable);
 		table.refresh();
     }
     
     /**
-     * Handles the event when a test execution is clicked to be shown.
+     * Handles the event when a test is clicked to be shown.
      * Retrieves the corresponding TestToExecute object based on the clicked button.
      * Sets the selected test execution to be shown and starts the "showStudentTest" view.
      *
@@ -97,6 +96,10 @@ public class ShowTestDataController  extends AbstractController{
              }		
     }
     
+    /**
+     * Initializes the Show Test Data screen.
+     * Configures the table columns and sets the table items.
+     */
     @FXML
 	protected void initialize() {
     	codecol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("testCode"));
