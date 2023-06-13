@@ -1,13 +1,19 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import JDBC.Msg;
 import JDBC.MsgType;
 import enteties.Test;
 import enteties.TestToExecute;
 import enteties.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
+/**
+ * Controller class for managing TestToExecute.
+ */
 public class TestToExecuteController {
 	
     /**
@@ -45,9 +51,6 @@ public class TestToExecuteController {
     	msg.setWhere("testtoexecute.lecturerId", user.getId()); 
     	return msg;
     }
-	
-	
-	
 
     /**
      * Retrieves the names of the tests as an ObservableList.
@@ -156,5 +159,70 @@ public class TestToExecuteController {
 		tmp.add(t.getLecturerId());
 		msg.setValues(tmp);
 		return msg;
+	}
+
+	/**
+	 * Returns an ObservableList of TestToExecute objects with FX values.
+	 *
+	 * @param runningTestLst The list of TestToExecute objects.
+	 * @return The ObservableList of TestToExecute objects with FX values.
+	 */
+	public ObservableList<TestToExecute> getObservLstWithFXValues(ArrayList<TestToExecute> runningTestLst) {
+		ObservableList<TestToExecute> runningTestTable = FXCollections.observableArrayList(runningTestLst);
+    	for (TestToExecute runningTest : runningTestLst) {
+    		runningTest.setNewTextField(); // duration
+    		runningTest.setNewTextField1(); // explanation for changing the duration.
+    		runningTest.setNewRadioButton(); //select
+    		runningTest.getTextField().setPromptText(runningTest.getTest().getDuration().toString()); // explanation
+    		runningTest.getTextField1().setPromptText("Explanation for change");
+    		runningTest.getTextField().setDisable(true); // duration
+    		runningTest.getTextField1().setDisable(true); // explanation
+    		runningTest.getRadioButton().selectedProperty().addListener((observable, oldValue, newValue) -> {
+        		if (newValue == true) {
+        			runningTest.getTextField().setDisable(false);
+        			runningTest.getTextField1().setDisable(false);
+        		}
+        		else {
+        			runningTest.getTextField().clear();
+        			runningTest.getTextField1().clear();
+        			runningTest.getTextField().setDisable(true);
+        			runningTest.getTextField1().setDisable(true);
+        		}
+             });
+    	}	
+		return runningTestTable;
+	}
+	
+	/**
+	 * Retrieves the selected TestToExecute object from a collection based on the selected radio button.
+	 *
+	 * @param lst The collection of TestToExecute objects.
+	 * @return The selected TestToExecute object, or null if none is selected or an exception occurs.
+	 */
+	public TestToExecute getSelectedTest(Collection<TestToExecute> lst) {
+		for(TestToExecute t : lst) {
+			try { if(t.getRadioButton().isSelected()) return t;
+			}catch(Exception e) {return null;}
+		}
+		return null;
+	}
+
+	/**
+	 * Generates a message to lock a test.
+	 *
+	 * @param test The TestToExecute object representing the test to be locked.
+	 * @return The message containing the lock instructions.
+	 */
+	public Msg getMsgToLockTest(TestToExecute test) {
+		Msg msgM = new Msg(MsgType.manyMessages);
+		Msg msgUpdate = new Msg(MsgType.update);
+		msgUpdate.setTableToUpdate("testtoexecute");
+		msgUpdate.setSet("`lock`", "true");
+		msgUpdate.setWhere("testCode", test.getTestCode());
+		Msg msgLock = new Msg(MsgType.lockTest);
+		msgLock.setTestCode(test.getTestCode());
+		msgM.setMsgLst(msgUpdate);
+		msgM.setMsgLst(msgLock);
+		return msgM;
 	}
 }

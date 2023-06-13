@@ -21,7 +21,7 @@ public class Msg implements Serializable{
 	private ArrayList<ArrayList<Object>> data = null; //data from DB to client.
 	private ArrayList<String> colNames = null; //for the INSERT INTO query.
 	private ArrayList<ArrayList<Object>> values = null;  //for the INSERT INTO query.
-	private String testCode = null;
+	private Integer testCode = null;
 	
 	/* original empty constructor. */
 	public Msg() {}
@@ -144,14 +144,14 @@ public class Msg implements Serializable{
 	/**
 	 * @return the testCode
 	 */
-	public String getTestCode() {
+	public Integer getTestCode() {
 		return testCode;
 	}
 
 	/**
 	 * @param testCode the testCode to set
 	 */
-	public void setTestCode(String testCode) {
+	public void setTestCode(Integer testCode) {
 		this.testCode = testCode;
 	}
 

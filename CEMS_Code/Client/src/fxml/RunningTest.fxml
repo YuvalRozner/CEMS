@@ -80,7 +80,7 @@
             <TableColumn fx:id="startedCol" prefWidth="85.60003662109375" text="started stud" />
             <TableColumn fx:id="finishedCol" prefWidth="103.20001220703125" text="finished stud" />
             <TableColumn fx:id="durationCol" prefWidth="88.79998779296875" text="new duration" />
-            <TableColumn fx:id="explanationCol" prefWidth="324.0000305175781" text="explanation" />
+            <TableColumn fx:id="explanationCol" prefWidth="317.60009765625" text="explanation" />
         </columns>
       </TableView>
    </children>

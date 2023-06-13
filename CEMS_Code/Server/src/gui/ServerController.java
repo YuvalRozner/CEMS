@@ -57,7 +57,7 @@ public class ServerController {
 	@FXML
 	public void tryBtn(ActionEvent event) {
 		Msg msg = new Msg(MsgType.lockTest);
-		msg.setTestCode("2345");
+		msg.setTestCode(2345);
 		cemsServer.sendToAllClients(msg);
 	}////////////////////////////////////////////
 

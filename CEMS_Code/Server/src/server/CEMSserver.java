@@ -110,6 +110,10 @@ public class CEMSserver extends AbstractServer {
 					}catch(SQLException e) {System.out.println("insert faild"); sendToClient(new Msg(MsgType.insertFail), client); break;}
 					sendToClient(new Msg(MsgType.insertSucceeded), client);
 					break;
+				case lockTest:
+					serverController.addConsole("asked to lock test with test code " + msg.getTestCode()+".\n");
+					System.out.println("asked to lock test with test code " + msg.getTestCode()+".");
+					break;
 				default:
 					break;
 			}

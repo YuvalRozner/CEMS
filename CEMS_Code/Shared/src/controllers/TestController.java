@@ -8,6 +8,9 @@ import enteties.Question;
 import enteties.Test;
 import enteties.User;
 
+/**
+ * Controller class for managing Test.
+ */
 public class TestController {
 
 	/**
