@@ -33,6 +33,24 @@ public class TestToExecuteController {
     	return msg;
     }
 	
+	/**
+     * Constructs a database select message to retrieve TestToExecute associated with hod user.
+     * it includes the testToExecute object, the Test object inside it, and the Course object inside it.
+     *
+     * @param user The User object for whom to retrieve the TestToExecute.
+     * @return A Msg object representing the database select message.
+     */
+	public Msg selectTestToExecuteByHod(User user) {
+    	Msg msg = new Msg(MsgType.select);
+    	msg.setSelect("testtoexecute.*, test.*, course.*");
+    	msg.setFrom("cems.testtoexecute, cems.test, cems.course, cems.hod_subject");
+    	msg.setWhereCol("testtoexecute.testId", "test.id");
+    	msg.setWhereCol("test.courseNumber", "course.number");
+    	msg.setWhereCol("hod_subject.subjectNumber", "course.subjectNum"); 
+    	msg.setWhere("hod_subject.hodId", user.getId()); 
+    	return msg;
+    }
+	
 	 /**
      * Constructs a database select message to retrieve TestToExecute associated with a user according to the courses the user teaches.
      * it includes the testToExecute object, the Test object inside it, and the Course object inside it.

@@ -95,14 +95,28 @@ public class Question {
 		this.courses = courses;
 		this.subject = new Subject(subjectNum, subjectName);
 	}
-	
-	public Question(String id, Integer number, String question, String subjectNum, String lecturerId, String[] answers, Integer correctAnswer, String instructions, String numberCourse, String name, String subjectNumber) {
+	/**
+	 * constructor for creating Question object with course parameter, belongs to that specific question
+	 * 
+	 * @param id
+	 * @param number
+	 * @param question
+	 * @param subjectNum
+	 * @param lecturerId
+	 * @param answers - ans1,ans2,ans3,ans4
+	 * @param correctAnswer
+	 * @param instructions
+	 * @param numberCourse
+	 * @param name
+	 * @param subjectNumber
+	 */
+	public Question(String id, Integer number, String question, String subjectNum, String lecturerId,  String ans1, String ans2, String ans3, String ans4, Integer correctAnswer, String instructions, String numberCourse, String name, String subjectNumber) {
 		this.id = id;
 		this.number = number;
 		this.question = question;
 		this.subjectNum = subjectNum;
 		this.lecturerId = lecturerId;
-		this.answers = answers;
+		this.answers = new String[] {ans1, ans2, ans3, ans4};
 		this.correctAnswer = correctAnswer;
 		this.instructions = instructions;
 		this.course = new Course(numberCourse, name, subjectNumber);
@@ -252,10 +266,25 @@ public class Question {
 		this.points = points;
 	}
 	
+	/**
+	 * @return the course object
+	 */
 	public Course getCourse() {
 		return course;
 	}
 	
+	/**
+	 * @return the course name
+	 */
+	public String getCourseName() {
+		if(course==null)
+			return null;
+		return course.getName();
+	}
+	
+	/**
+	 * @param course
+	 */
 	public void setCourse(Course course) {
 		this.course = course;
 	}

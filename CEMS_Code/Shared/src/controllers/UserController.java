@@ -51,4 +51,21 @@ public class UserController {
     	msg.setWhere("hod_subject.subjectNumber", subjectNumber);
     	return msg;
 	}
+	
+	/**
+	 * Generates a message to select a question from the database based on the hodId.
+	 *
+	 * @param hodId The ID of the hod to select by.
+	 * @return The generated Msg object for the user selection.
+	 */
+	public Msg selectQuestionByhodId(String hodId) {
+		Msg msg = new Msg(MsgType.select);
+		msg.setSelect("question.* , course.*");
+        msg.setFrom("cems.question , cems.course , cems.question_course , cems.hod_subject");
+        msg.setWhereCol("hod_subject.subjectNumber", "question.subjectNum");
+        msg.setWhereCol("question_course.questionId", "question.id");
+        msg.setWhereCol("question_course.courseNum", "course.number");
+        msg.setWhere("hod_subject.hodId",hodId);
+    	return msg;
+	}
 }

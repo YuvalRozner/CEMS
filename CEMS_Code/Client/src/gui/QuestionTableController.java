@@ -2,20 +2,14 @@ package gui;
 
 import java.util.ArrayList;
 
-import JDBC.DB_controller;
 import JDBC.Msg;
-import JDBC.MsgType;
 import client.ChatClient;
-import client.ClientUI;
+import controllers.UserController;
 import enteties.Question;
-import enteties.StudentTest;
-import enteties.Test;
-import enteties.TestToExecute;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
@@ -23,11 +17,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 
 /**
  * Controller class for the Question Table screen.
+ * Handles the interaction between the UI and the underlying logic for displaying questions.
  * 
  * @author Mor Shmuel
  */
@@ -36,6 +30,11 @@ public class QuestionTableController extends AbstractController {
     private ArrayList<Question> questionList = new ArrayList<>();
 
     private ObservableList<Question> QTable;
+    
+    /**
+	 * object to use the UserController class method.
+	 */
+    private static UserController userController = new UserController();
 
     @FXML
     private TableView<Question> table = new TableView<Question>();
@@ -43,7 +42,7 @@ public class QuestionTableController extends AbstractController {
      * the columns for the table.
      */
     @FXML
-    private TableColumn<Question, String> idCol, questionTextCol, subjectCol, lecturerCol, courseCol;
+    private TableColumn<Question, String> idCol, questionTextCol, lecturerCol, courseCol;
 
     /**
      * the columns for the table.
@@ -74,52 +73,16 @@ public class QuestionTableController extends AbstractController {
 
     /**
      * Default constructor for the CreateTestController class.
-     * Initializes the subjectsLst.
+     * initialize the questionList.
      */
     public QuestionTableController() {
-        Msg msg = new Msg(MsgType.select);
-        msg.setSelect("question.*");
-        msg.setFrom("cems.question");
-        msg.setWhereCol("hod_subject.subjectNumber", "question.subjectNum");
+        Msg msg = userController.selectQuestionByhodId(ChatClient.user.getId());
         sendMsg(msg);
-        System.out.println(AbstractController.msgReceived.getData());
+        //System.out.println("Data = " + AbstractController.msgReceived.getData());
         questionList = msgReceived.convertData(Question.class);
-
+        //System.out.println("questionList = " + questionList); 
+        //System.out.println("course? " + (questionList.get(0).getCourse()==null));
         QTable = FXCollections.observableArrayList(questionList);
-        /*
-         * for (Question question : QTable) {
-         * question.getShowQ().setOnMouseClicked(event -> {
-         * try {
-         * showQuestionToOpen(event);
-         * } catch (Exception e) {
-         * e.printStackTrace();
-         * }
-         * });
-         * }
-         */
-
-        // arrQuestion = new ArrayList<Question>(ChatClient.questionList);
-        arrQuestion = new ArrayList<Question>();
-        // arrQuestion.add(new Question("1234", "11200", "logic","how much is 1+1",
-        // 22,"ilena"));
-        // arrQuestion.add(new Question("5678", "12645", "infi","how much is 6+8",
-        // 23,"dan"));
-        QTable = FXCollections.observableArrayList(arrQuestion);
-        for (Question Q : arrQuestion) {
-            Q.setNewShowQ();
-            Q.getShowQ().setOnMouseClicked(event -> {
-                try {
-                    showQuestionOpen(event);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
-        }
-        // for (Question q : arrQuestion) {
-        // arrdup.add(new Question(q.getID(), q.getSubjectNum(), q.getCourseName(),
-        // q.getQuestion(), q.getNumber(),q.getLecturereCreated()));
-        // }
-
     }
 
     /**
@@ -143,13 +106,15 @@ public class QuestionTableController extends AbstractController {
         answersToggleGroup.selectToggle(toggle);
     }
 
+    /**
+     * Initializes the Question Table screen.
+     * Configures the table columns and sets the table items.
+     */
     @FXML
     protected void initialize() {
         idCol.setCellValueFactory(new PropertyValueFactory<Question, String>("id"));
-        subjectCol.setCellValueFactory(new PropertyValueFactory<Question, String>("subjectNum"));
 
-        // courseCol.setCellValueFactory(new PropertyValueFactory<Question,
-        // String>("course"));
+        courseCol.setCellValueFactory(new PropertyValueFactory<Question, String>("courseName"));
 
         questionNumberCol.setCellValueFactory(new PropertyValueFactory<Question, Integer>("number"));
         lecturerCol.setCellValueFactory(new PropertyValueFactory<Question, String>("lecturerId"));
@@ -159,16 +124,31 @@ public class QuestionTableController extends AbstractController {
         table.refresh();
     }
 
+    /**
+     * Event handler for committing changes to the question text column.
+     *
+     * @param event The ActionEvent triggering the event.
+     */
     @FXML
     void onEditCommitQuestionTextCol(ActionEvent event) {
 
     }
 
+    /**
+     * Event handler for when the mouse enters the "Back" button area.
+     *
+     * @param event The MouseEvent triggering the event.
+     */
     @FXML
     void onMouseEnterdBackBtn(MouseEvent event) {
 
     }
 
+    /**
+     * Event handler for when the mouse exits the "Back" button area.
+     *
+     * @param event The MouseEvent triggering the event.
+     */
     @FXML
     void onMouseExitedBackBtn(MouseEvent event) {
 

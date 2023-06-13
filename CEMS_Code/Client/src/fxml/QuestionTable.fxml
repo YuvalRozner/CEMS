@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="748.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.QuestionTableController">
+<Pane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="800.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.QuestionTableController">
    <children>
       <Pane layoutX="29.0" layoutY="161.0" prefHeight="504.0" prefWidth="442.0" style="-fx-background-color: #92bce3;">
          <children>
@@ -35,7 +35,7 @@
       <Circle fill="WHITE" layoutX="47.0" layoutY="591.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />
       <VBox layoutX="43.0" layoutY="445.0" spacing="5.0">
          <children>
-            <Label fx:id="questionLabel" text="Question">
+            <Label fx:id="questionLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Question">
                <font>
                   <Font name="Comic Sans MS Bold" size="13.0" />
                </font>
@@ -75,18 +75,17 @@
             <Image url="@../../images/hodQuestionsList.png" />
          </image>
       </ImageView>
-      <Button layoutX="598.0" layoutY="548.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backBtn" onMouseEntered="#onMouseEnterdBackBtn" onMouseExited="#onMouseExitedBackBtn" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
+      <Button layoutX="661.0" layoutY="554.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backBtn" onMouseEntered="#onMouseEnterdBackBtn" onMouseExited="#onMouseExitedBackBtn" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>
       <TableView fx:id="table" layoutX="37.0" layoutY="179.0" onMouseClicked="#showAnswers" prefHeight="237.0" prefWidth="678.0" stylesheets="@TableView.css">
         <columns>
           <TableColumn fx:id="idCol" minWidth="70.49710464477539" prefWidth="78.21512222290039" text="Question ID" />
-          <TableColumn fx:id="subjectCol" minWidth="68.66492462158203" prefWidth="95.40994262695312" text="Subject" />
-            <TableColumn fx:id="courseCol" minWidth="75.68901062011719" prefWidth="75.68901062011719" text="Course" />
-            <TableColumn fx:id="questionTextCol" minWidth="91.59378051757812" onEditCommit="#onEditCommitQuestionTextCol" prefWidth="231.84881591796875" text="Question Text" />
-            <TableColumn fx:id="questionNumberCol" minWidth="100.0" prefWidth="107.65121459960938" text="Question Number" />
-            <TableColumn fx:id="lecturerCol" minWidth="83.409912109375" prefWidth="89.60760498046875" text="Lecturer" />
+            <TableColumn fx:id="courseCol" minWidth="75.68901062011719" prefWidth="108.0" text="Course" />
+            <TableColumn fx:id="questionTextCol" minWidth="91.59378051757812" onEditCommit="#onEditCommitQuestionTextCol" prefWidth="274.5" text="Question Text" />
+            <TableColumn fx:id="questionNumberCol" minWidth="100.0" prefWidth="108.0" text="Question Number" />
+            <TableColumn fx:id="lecturerCol" minWidth="83.409912109375" prefWidth="108.0" text="Lecturer" />
         </columns>
       </TableView>
       <Label layoutX="37.0" layoutY="104.0" text="Questions List">
@@ -112,8 +111,8 @@
             </Lighting>
          </effect>
       </Label>
-      <Pane layoutX="507.0" layoutY="-98.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
-      <ImageView fitHeight="212.0" fitWidth="206.0" layoutX="558.0" layoutY="-37.0" pickOnBounds="true" preserveRatio="true">
+      <Pane layoutX="557.0" layoutY="-95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
+      <ImageView fitHeight="212.0" fitWidth="206.0" layoutX="608.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/Cems-logo.png" />
          </image>
