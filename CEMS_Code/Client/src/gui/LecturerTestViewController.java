@@ -1,14 +1,10 @@
 package gui;
 
 import java.util.ArrayList;
-
 import JDBC.Msg;
-import JDBC.MsgType;
 import client.ChatClient;
 import controllers.TestToExecuteController;
-import enteties.Test;
 import enteties.TestToExecute;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,23 +21,16 @@ import notifications.NotificationAlertsController;
  */
 public class LecturerTestViewController extends AbstractController {
     
-    
-    
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    
-    
-    
     /**
      * the table of the tests.
      */
 	@FXML
-    private TableColumn<Test, String> courseCol, dateCol, idCol, selectCol;
+    private TableColumn<TestToExecute, String> selectCol, testCodeCol, courseCol, dateCol, finishedCol, studentsStartedCol;
     /**
-     * 
+     * columns for the table.
      */
     @FXML
-    private TableView<Test> table;
+    private TableView<TestToExecute> table;
     /**
      * the toggleGrope for selecting a test to change or lock from table.
      */
@@ -75,35 +64,19 @@ public class LecturerTestViewController extends AbstractController {
     	// toggle the radio in the table:
     	for(TestToExecute test : testTable) //toggle the radio in the table.
     		toggleGroupOfTestToExecute.getToggles().add(test.getRadioButton()); // duration
-    	
-    	
-    	
-    	
-    	/*
-        //arrdup = new ArrayList<Test>(Main.tests);
-    	Msg msg = new Msg(MsgType.select);
-    	msg.setSelect("*");
-    	msg.setFrom("test");
-    	sendMsg(msg);
-    	arrdup = new ArrayList<Test>(msgReceived.convertData(Test.class));
-        testsTable = FXCollections.observableArrayList(arrdup);
-        toggleGroup = new ToggleGroup(); // Initialize the ToggleGroup
-        for (Test test : testsTable) {
-            test.getRadioButton().setToggleGroup(toggleGroup);
-        }
-        */
     }
     
     @FXML
-    protected void initialize() {/*
-        idCol.setCellValueFactory(new PropertyValueFactory<Test, String>("id"));
-        courseCol.setCellValueFactory(new PropertyValueFactory<Test, String>("Course"));
-        dateCol.setCellValueFactory(new PropertyValueFactory<Test, String>("Date"));
-        selectCol.setCellValueFactory(new PropertyValueFactory<Test, String>("radioButton"));
-        
-        table.setItems(testsTable);
+    protected void initialize() {
+    	selectCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("radioButton"));
+    	testCodeCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("testCode"));
+    	courseCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("courseName"));
+    	dateCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("date"));
+    	finishedCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("finished"));
+    	studentsStartedCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("numberOfStudentsStarted"));
+        table.setItems(testTable);
         table.refresh();
-        */
+        
     }
 	
 	public void showStatistics(ActionEvent event) throws Exception {
