@@ -23,7 +23,10 @@ public class TestToExecute{
     private String lecturerId;
     private Integer numberOfStudentsStarted;
     private Integer numberOfStudentsFinished;
+    private Integer numberOfStudents;
 	private Integer [] distribusion = new Integer[10]; // 10 separate columns.
+	 
+	 
 	//not in DB: 
 	private Test test;
 	private Course course = null;
@@ -42,6 +45,25 @@ public class TestToExecute{
 	private TextField type=new TextField();
 	private Button show;
 	private TextField durationField=new TextField();
+	
+	
+	/**
+	 * to get the number of student in general.
+	 * @param numberOfStudentsStarted
+	 * @param numberOfStudentsFinished
+	 * @param numberOfStudents
+	 */
+	public TestToExecute(Integer numberOfStudentsStarted,Integer numberOfStudentsFinished, Integer numberOfStudents) {
+		this.numberOfStudentsStarted=numberOfStudentsStarted;
+		this.numberOfStudentsFinished=numberOfStudentsFinished;
+		this.numberOfStudents=numberOfStudents;
+		
+	}
+	
+	/**
+	 * for getting the lock.
+	 */
+	public TestToExecute(String lock) {this.lock=lock;}
 	
 	/**
 	 * empty constructor.
@@ -163,6 +185,38 @@ public class TestToExecute{
 		this.lecturerId = lecturerId;
 		this.numberOfStudentsStarted = numberOfStudentsStarted;
 		this.numberOfStudentsFinished = numberOfStudentsFinished;
+		this.distribusion = distribusion;
+	}
+	/**
+	 * constructor for all the db information.
+	 * @param testCode
+	 * @param testId
+	 * @param testingType
+	 * @param date
+	 * @param average
+	 * @param median
+	 * @param lock
+	 * @param timeExtension
+	 * @param lecturerId
+	 * @param numberOfStudentsStarted
+	 * @param numberOfStudentsFinished
+	 * @param numberOfStudents
+	 * @param distribusion
+	 */
+	public TestToExecute(Integer testCode, String testId, String testingType, String date, Double average, Double median, String lock, Integer timeExtension,
+			String lecturerId, Integer numberOfStudentsStarted, Integer numberOfStudentsFinished,Integer numberOfStudents, Integer[] distribusion) {
+		this.testCode = testCode;
+		this.testId = testId;
+		this.testingType = testingType;
+		this.date = date;
+		this.average = average;
+		this.median = median;
+		this.lock = lock;
+		this.timeExtension = timeExtension;
+		this.lecturerId = lecturerId;
+		this.numberOfStudentsStarted = numberOfStudentsStarted;
+		this.numberOfStudentsFinished = numberOfStudentsFinished;
+		this.numberOfStudents = numberOfStudents;
 		this.distribusion = distribusion;
 	}
 
@@ -485,6 +539,20 @@ public class TestToExecute{
 		this.type = new TextField();
 		this.type.setStyle("-fx-background-color: #F0F8FF; -fx-border-width: 1px; -fx-border-color: #92bce3;  -fx-border-radius: 7px; -fx-font-weight: bold; -fx-font-family: \"Comic Sans MS\";");
 		type.setDisable(true);
+	}
+	/**
+	 * get the NumberOfStudents parameter.
+	 * @return Integer number of student that not succeed to submit.
+	 */
+	public Integer getNumberOfStudents() {
+		return numberOfStudents;
+	}
+	/**
+	 * set the NumberOfStudents parameter.
+	 * @param numberOfStudents
+	 */
+	public void setNumberOfStudents(Integer numberOfStudents) {
+		this.numberOfStudents = numberOfStudents;
 	}
 	
 

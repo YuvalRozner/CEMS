@@ -25,6 +25,7 @@ public class Msg implements Serializable{
 	private ArrayList<ArrayList<Object>> values = null;  //for the INSERT INTO query.
 	private CemsFile file =null;//for send file to student , and get file from student.
 	private Integer testCode = null;
+	private String pathFile = null;
 	
 	/* original empty constructor. */
 	public Msg() {}
@@ -205,5 +206,19 @@ public class Msg implements Serializable{
 	 */
 	public void setCemsFile(CemsFile file) {
 		this.file = file;
+	}
+	/**
+	 *get the path of the file.
+	 * @return String
+	 */
+	public String getPathFile() {
+		return pathFile;
+	}
+	/**
+	 * set the path of the file.
+	 * @param pathFile
+	 */
+	public void setPathFile(String pathFile) {
+		this.pathFile = pathFile;
 	}
 }

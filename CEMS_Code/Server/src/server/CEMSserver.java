@@ -121,6 +121,7 @@ public class CEMSserver extends AbstractServer {
 				sendToClient(new Msg(MsgType.insertSucceeded), client);
 				break;
 			case file:
+				msg.setPathFile("@../../file/");
 				cemsFileController.saveFile(msg);
 				sendToClient(new Msg(MsgType.succeeded), client);
 				break;
