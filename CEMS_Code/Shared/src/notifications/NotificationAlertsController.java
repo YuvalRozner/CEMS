@@ -1,18 +1,26 @@
 package notifications;
 
 import java.util.Optional;
-
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 
+/**
+ * The NotificationAlertsController class provides methods to show different types of alerts.
+ * 
+ * @author Mor Shmuel
+ */
 public class NotificationAlertsController{
 	
 	private Runnable onCancelAction;
     private Runnable onOkAction;
 
-	//Show a Information Alert
+    /**
+     * Shows an information alert with the specified label.
+     *
+     * @param label the content text for the alert
+     */
 	public void showInformationAlert(String label) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Information Alert");
@@ -39,7 +47,11 @@ public class NotificationAlertsController{
 		alert.showAndWait();
 	}
 	
-	//Show a Warning Alert
+    /**
+     * Shows a warning alert with the specified label.
+     *
+     * @param label the content text for the alert
+     */
 	public void showWarningAlert(String label) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Warning alert");
@@ -67,7 +79,11 @@ public class NotificationAlertsController{
 		alert.showAndWait();
 	}
 	
-	//Show a Error Alert
+    /**
+     * Shows an error alert with the specified label.
+     *
+     * @param label the content text for the alert
+     */
 	public void showErrorAlert(String label) {
 		Alert alert = new Alert(AlertType.ERROR);
 
@@ -96,7 +112,12 @@ public class NotificationAlertsController{
 		alert.showAndWait();
 	}
 	
-	//Show a Confirmation Alert
+    /**
+     * Shows a confirmation alert with the specified label and header label.
+     *
+     * @param label the content text for the alert
+     * @param headerLabel the header text for the alert
+     */
 	public void showConfirmationAlert(String label, String headerLabel) {
       Alert alert = new Alert(AlertType.CONFIRMATION);
       alert.setTitle("Delete File");
@@ -138,13 +159,21 @@ public class NotificationAlertsController{
       }
    }
 	
+    /**
+     * Sets the action to be executed when the cancel button is clicked.
+     *
+     * @param onCancelAction the action to be executed
+     */
 	public void setOnCancelAction(Runnable onCancelAction) {
         this.onCancelAction = onCancelAction;
     }
 
+    /**
+     * Sets the action to be executed when the OK button is clicked.
+     *
+     * @param onOkAction the action to be executed
+     */
     public void setOnOkAction(Runnable onOkAction) {
         this.onOkAction = onOkAction;
     }
-
-
 }

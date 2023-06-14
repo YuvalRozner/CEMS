@@ -23,37 +23,62 @@ import server.CEMSserver;
  * The ServerController class controls the GUI and handles events for the server application.
  */
 public class ServerController {
-	
+	/**
+	 * the observable list for the table of connected clients.
+	 */
 	private ObservableList<InetAddress> connectedObserv = FXCollections.observableArrayList();
-
+	/**
+	 * for the singleton design pattern
+	 */
 	private CEMSserver cemsServer;
+	/**
+	 * input field.
+	 */
 	@FXML
 	private TextField DBNameTxt;
-
+	/**
+	 * input field.
+	 */
 	@FXML
 	private TextField DBUsernameTxt;
-
+	/**
+	 * input field.
+	 */
 	@FXML
 	private Button btnConnect;
-
+	/**
+	 * button field.
+	 */
 	@FXML
 	public Button btnDisconnect;
-
+	/**
+	 * the table of connected clients.
+	 */
 	@FXML
 	private TableView<InetAddress> clientsTable;
-
+	/**
+	 * the columns of the table of connected clients.
+	 */
 	@FXML
 	private TableColumn<InetAddress, String> clientHostName, clientIp, clientStatus;
-
+	/**
+	 * server console.
+	 */
 	@FXML
 	private TextArea console;
-
+	/**
+	 * input field.
+	 */
 	@FXML
 	private PasswordField passwordTxt;
-
+	/**
+	 * input field.
+	 */
 	@FXML
 	private TextField portxt;
-
+	/**
+	 * input field.
+	 */
 	@FXML
 	private TextField serverIdTxt;
 	
@@ -85,7 +110,11 @@ public class ServerController {
 		}
 	}
 	
-	
+    /**
+     * gets the port as a String.
+     *
+     * @return String of the port.
+     */
 	private String getport() {
 		return portxt.getText();
 	}
