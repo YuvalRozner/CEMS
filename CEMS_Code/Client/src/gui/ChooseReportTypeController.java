@@ -6,8 +6,6 @@ import JDBC.Msg;
 import client.ChatClient;
 import controllers.UserController;
 import enteties.Course;
-import enteties.Question;
-import enteties.Subject;
 import enteties.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -67,7 +65,15 @@ public class ChooseReportTypeController extends AbstractController{
     /**
 	 * the user selected from the comboBox.
 	 */
-    private User selectedUser;
+    public User selectedLecturer, selectedStudent;
+    
+    /**
+	 * the course selected from the comboBox.
+	 */
+    public Course selectedCourse;
+    
+    //options - lecturer, student, course
+    public String reportType;
     
     /**
 	 * object to use the UserController class method.
@@ -80,7 +86,13 @@ public class ChooseReportTypeController extends AbstractController{
     /**
 	 * boolean variable to indicate that any subject has already been chose. for not letting the user create a question without choosing subject.
 	 */
-    private boolean userChoose = false; //indicates that a subject was chosen.
+    private boolean lecturerChoose = false, studentChoose = false; //indicates that a user was chosen.
+    /**
+	 * boolean variable to indicate that any subject has already been chose. for not letting the user create a question without choosing subject.
+	 */
+    private boolean courseChoose = false; //indicates that a course was chosen.
+    
+    LecturerStaticsReportController lecturerStaticsReportController = new LecturerStaticsReportController();
 
     /**
      * Default constructor for the ChooseReportTypeController class.
@@ -122,8 +134,9 @@ public class ChooseReportTypeController extends AbstractController{
         comboBoxNames.setItems(courseNames);
         
         comboBoxNames.setOnAction(e -> {
-            Course selectedCourse = getSelectedCourse();
+            selectedCourse = getSelectedCourse();
             if (selectedCourse != null) {
+            	courseChoose = true;
                 System.out.println("Selected Course Subject: " + selectedCourse.getSubjectNum());
             }
         });
@@ -139,9 +152,10 @@ public class ChooseReportTypeController extends AbstractController{
         comboBoxNames.setItems(uniqueLecturerNames);
         
         comboBoxNames.setOnAction(e -> {
-            User selectedUser = getSelectedLecturer();
-            if (selectedUser != null) {
-                System.out.println("Selected Lecturer ID: " + selectedUser.getId());
+            selectedLecturer = getSelectedLecturer();
+            if (selectedLecturer != null) {
+            	lecturerChoose = true;
+                System.out.println("Selected Lecturer ID: " + selectedLecturer.getId());
             }
         });
     }
@@ -156,9 +170,10 @@ public class ChooseReportTypeController extends AbstractController{
         comboBoxNames.setItems(uniqueStudentNames);
         
         comboBoxNames.setOnAction(e -> {
-            User selectedUser = getSelectedStudent();
-            if (selectedUser != null) {
-                System.out.println("Selected Lecturer ID: " + selectedUser.getId());
+            selectedStudent = getSelectedStudent();
+            if (selectedStudent != null) {
+            	studentChoose = true;
+                System.out.println("Selected Lecturer ID: " + selectedStudent.getId());
             }
         });
     }
@@ -195,7 +210,19 @@ public class ChooseReportTypeController extends AbstractController{
     
 
     @FXML
-    void showReport(ActionEvent event) {
-
+    void showReport(ActionEvent event) throws Exception {
+        if (lecturerChoose == true) {
+        	reportType = "lecturer";
+        	LecturerStaticsReportController.selectedLecturer = selectedLecturer;
+        }
+        else if(studentChoose == true) {
+        	reportType = "student";
+        	LecturerStaticsReportController.selectedStudent = selectedStudent;
+        }
+        else if(courseChoose == true) {
+        	reportType = "course";
+        	LecturerStaticsReportController.selectedCourse = selectedCourse;
+        }
+    	start("lecturerStaticsReport", "chooseReportType");
     }
 }
