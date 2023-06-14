@@ -6,10 +6,10 @@ import javafx.scene.control.RadioButton;
 public class Request {
 	//in DB:
 	private Integer testCode;
-	private Integer lecturerId;
-	private Integer hodId;
+	private String lecturerId;
+	private String hodId;
 	private Integer duration;
-	private String explanetion;
+	private String explanation;
 	//not in DB:
 	
 	//for FX:
@@ -28,12 +28,12 @@ public class Request {
 	 * @param duration
 	 * @param explanetion
 	 */
-	public Request(Integer testCode, Integer lecurerId, Integer hodId, Integer duration, String explanetion) {
+	public Request(Integer testCode, String lecurerId, String hodId, Integer duration, String explanation) {
 		this.testCode = testCode;
 		this.lecturerId = lecurerId;
 		this.hodId = hodId;
 		this.duration = duration;
-		this.explanetion = explanetion;
+		this.explanation = explanation;
 	}
 	
 	/**
@@ -53,28 +53,28 @@ public class Request {
 	/**
 	 * @return the lecurerId
 	 */
-	public Integer getLecturerId() {
+	public String getLecturerId() {
 		return lecturerId;
 	}
 
 	/**
 	 * @param lecurerId the lecurerId to set
 	 */
-	public void setLecurerId(Integer lecurerId) {
+	public void setLecturerId(String lecurerId) {
 		this.lecturerId = lecurerId;
 	}
 
 	/**
 	 * @return the hodId
 	 */
-	public Integer getHodId() {
+	public String getHodId() {
 		return hodId;
 	}
 
 	/**
 	 * @param hodId the hodId to set
 	 */
-	public void setHodId(Integer hodId) {
+	public void setHodId(String hodId) {
 		this.hodId = hodId;
 	}
 
@@ -93,17 +93,17 @@ public class Request {
 	}
 
 	/**
-	 * @return the explanetion
+	 * @return the explanation
 	 */
-	public String getExplanetion() {
-		return explanetion;
+	public String getExplanation() {
+		return explanation;
 	}
 
 	/**
-	 * @param explanetion the explanetion to set
+	 * @param explanetion the explanation to set
 	 */
-	public void setExplanetion(String explanetion) {
-		this.explanetion = explanetion;
+	public void setExplanation(String explanation) {
+		this.explanation = explanation;
 	}
 	
 	@Override
@@ -114,7 +114,7 @@ public class Request {
 
 	@Override
 	public String toString() {
-		return "Request [testCode=" + testCode + ", lecurerId=" + lecturerId + ", hodId=" + hodId + ", duration=" + duration + ", explanetion=" + explanetion + "]";
+		return "Request [testCode=" + testCode + ", lecurerId=" + lecturerId + ", hodId=" + hodId + ", duration=" + duration + ", explanation=" + explanation + "]";
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

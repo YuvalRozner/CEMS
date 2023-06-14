@@ -135,7 +135,6 @@ public class StudentTest {
 				subjectNum);
 	}
 	
-	
 	/**
 	 * empty constructor.
 	 */

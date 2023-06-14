@@ -55,15 +55,17 @@
          <font>
             <Font name="Comic Sans MS Bold" size="14.0" />
          </font></Label>
-      <TableView fx:id="table" layoutX="36.0" layoutY="117.0" prefHeight="363.0" stylesheets="@TableView.css">
+      <TableView fx:id="table" layoutX="33.0" layoutY="121.0" prefHeight="363.0" prefWidth="516.0" stylesheets="@TableView.css">
         <columns>
-          <TableColumn fx:id="idCol" prefWidth="96.0" text="ID" />
-          <TableColumn fx:id="courseCol" prefWidth="104.0" text="Course" />
-            <TableColumn fx:id="dateCol" prefWidth="115.0" text="Date" />
-            <TableColumn fx:id="selectCol" prefWidth="161.0" style="-fx-alignment: CENTER;" text="Select" />
+            <TableColumn fx:id="selectCol" prefWidth="72.79994201660156" style="-fx-alignment: CENTER;" text="Select" />
+            <TableColumn fx:id="testCodeCol" prefWidth="75.0" text="Test Code" />
+         	<TableColumn fx:id="courseCol" prefWidth="82.40003967285156" text="Course" />
+            <TableColumn fx:id="dateCol" prefWidth="78.4000244140625" text="Date" />
+            <TableColumn fx:id="finishedCol" prefWidth="82.4000244140625" style="-fx-alignment: CENTER;" text="Active?" />
+            <TableColumn fx:id="studentsStartedCol" prefWidth="121.5999755859375" style="-fx-alignment: CENTER;" text="Students Started" />
         </columns>
       </TableView>
-      <Button layoutX="36.0" layoutY="488.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showStatistics" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Show Statistics">
+      <Button layoutX="36.0" layoutY="492.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showStatistics" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Show Statistics">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font>

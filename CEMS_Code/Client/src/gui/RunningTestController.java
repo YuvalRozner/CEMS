@@ -1,148 +1,179 @@
 package gui;
 
 import java.util.ArrayList;
-
-import enteties.Test;
+import JDBC.Msg;
+import client.ChatClient;
+import controllers.RequestController;
+import controllers.TestToExecuteController;
+import controllers.UserController;
+import enteties.Request;
 import enteties.TestToExecute;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.collections.FXCollections;
+import enteties.User;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import notifications.NotificationAlertsController;
 
+/**
+ * Controller class for the RunningTest screen.
+ *  
+ * @author Yuval Rozner 
+ */
 public class RunningTestController extends AbstractController{
-	
-	private ArrayList<TestToExecute> arrRunningTest;	
-	private ObservableList<TestToExecute> RuningTestTable;
+		
+	/**
+	 * the table of the running tests.
+	 */
     @FXML
-    private Button backbtn;
-
+    private TableView<TestToExecute> table = new TableView<TestToExecute>();
+    /**
+     * columns for the table.
+     */
     @FXML
-    private Button changebtn;
-
-    @FXML
-    private TableColumn<TestToExecute, String> corsecol,numcol,selectcol,durationcol;
-   
+    private TableColumn<TestToExecute, String> selectCol, testCodeCol, courseCol, startedCol ,finishedCol ,durationCol, explanationCol;
+    /**
+     * the observable list of running test for the table.
+     */
+    private ObservableList<TestToExecute> runningTestTable;
+    /**
+     * the toggleGrope for selecting a test to change or lock from table.
+     */
+    ToggleGroup toggleGroupOfTestToExecute = new ToggleGroup();
+    /**
+     * the list of running test (type TestToExecute) got from DB.
+     */
+    private ArrayList<TestToExecute> runningTestLst;
+    /**
+     * the selected (by radio) testToExecute from the list in the table.
+     */
+    private TestToExecute selectedTest = null;
+    /**
+	 * object to use the TestToExecuteController class method.
+	 */
+    private static TestToExecuteController testToExecuteController = new TestToExecuteController();
+    /**
+	 * object to use the UserController class method.
+	 */
+    private static UserController userController = new UserController();
+    /**
+	 * object to use the RequestController class method.
+	 */
+    private static RequestController requestController = new RequestController();
+    /**
+	 * object to use the notifications class.
+	 */
+    private static NotificationAlertsController notification = new NotificationAlertsController();
     
-    
-    @FXML
-    private Button lockbtn;
-    
-    @FXML
-    private TableView<TestToExecute> table= new TableView<TestToExecute>();
-    
-    ToggleGroup toggleGroupOfTestToExecute;
-    
-    
-    public ArrayList<TestToExecute> fakeData(){
-    	ArrayList<TestToExecute> fakeDataArrzyList = new ArrayList<TestToExecute>();
-    	
-    	//public TestToExecute(String testCode, String testId, String testingType, String date, Double average, Double median, Boolean lock, Integer timeExtension,
-		//String lecturerId, Integer numberOfStudentsStarted, Integer numberOfStudentsFinished, Integer[] distribusion) {
-			
-    	double a = 1;
-    	TestToExecute testToExecute1 = new TestToExecute("1234","12","", "", a,a ,false, 0, "1111", 0,0, new Integer[1] );
-    	TestToExecute testToExecute2 = new TestToExecute("1278","12","", "", a,a ,false, 0, "1111", 0,0, new Integer[1] );
-    	TestToExecute testToExecute3 = new TestToExecute("1290","12","", "", a,a ,false, 0, "1111", 0,0, new Integer[1] );
-    	
-    	//public Test(String id, String number, String courseNumber, Integer duration, String instructionsForStudent, String instructionsForLecturer) {
-    	
-    	Test t1 = new Test("12","02","14",60,"read cerfully, wnjoy your time. you need to mark one answer of each questopn..", "this test is a tricky one, if you want to fuck your students avarage, give them this test");
-    	testToExecute1.setTest(t1);
-    	testToExecute2.setTest(t1);
-    	testToExecute3.setTest(t1);
-    	fakeDataArrzyList.add(testToExecute1);
-    	fakeDataArrzyList.add(testToExecute2);
-    	fakeDataArrzyList.add(testToExecute3);
-    	
-    	return fakeDataArrzyList;
-    }
-    
-    
+    /**
+     * Constructs a new RunningTestController object.
+     * Retrieves the running tests to execute for the user and initializes the necessary data structures.
+     */
     public RunningTestController() {
-    	arrRunningTest =new ArrayList<TestToExecute>(fakeData());
-    	toggleGroupOfTestToExecute = new ToggleGroup();
-        for (TestToExecute runingTest : arrRunningTest) {
-        	runingTest.setNewRadioButton();
-        	toggleGroupOfTestToExecute.getToggles().add((RadioButton)runingTest.getRadioButton());
-        	runingTest.setNewTextField();
-        	runingTest.getTextField().setText(Integer.toString(runingTest.getTest().getDuration()));
-        	runingTest.getTextField().setDisable(true);
-        	
-        
-        	runingTest.getRadioButton().selectedProperty().addListener((observable, oldValue, newValue) -> {
-        		if (newValue == true) {
-        			runingTest.getTextField().setDisable(false);
-        		}
-        		else {
-        			runingTest.getTextField().setDisable(true);
-        			//return to the initial number, need to change only when press change
-        			//runingTest.getTextField().setText(Integer.toString(runingTest.getTest().getDuration())); 
-        		}
-        		
-                 
-             });
-        }
-        RuningTestTable = FXCollections.observableArrayList(arrRunningTest);
+    	// get the running TestToExecute from DB:
+    	Msg msg = testToExecuteController.selectRunningTestToExecuteByUser(ChatClient.user);
+    	sendMsg(msg);
+    	runningTestLst = msgReceived.convertData(TestToExecute.class); //ArrayList
+    	runningTestTable = testToExecuteController.getObservLstWithFXValues(runningTestLst); //ObservableList
+    	// toggle the radio in the table:
+    	for(TestToExecute runningTest : runningTestTable) 
+    		toggleGroupOfTestToExecute.getToggles().add(runningTest.getRadioButton()); 
     }
     
+    /**
+     * Initializes the controller and sets up the necessary components.
+     */
     @FXML
 	protected void initialize() {
-    	numcol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("testCode"));
-    	corsecol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("testCode"));
-    	selectcol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("radioButton"));
-    	durationcol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("textField"));
-    
-    	/*problem : i want to get duration but i dont have it in testtoexecute
-    	 * i noticed i have test and in test i have duration
-    	 * this is the solotion for it:
-    	 * */
-    	/*
-    	durationcol.setCellValueFactory(data -> {
-    	    TestToExecute testToExecute = data.getValue();
-    	    Test test = testToExecute.getTest();
-    	    Integer duration = test.getDuration();
-    	    return new SimpleIntegerProperty(duration).asObject();
-    	});
-    	
-    		*/
-		table.setItems(RuningTestTable);
+    	selectCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("radioButton"));
+    	testCodeCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("testCode"));
+    	courseCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("courseName"));
+    	startedCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("numberOfStudentsStarted"));
+    	finishedCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("numberOfStudentsFinished"));
+    	durationCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("textField"));
+    	explanationCol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("textField1"));
+		table.setItems(runningTestTable);
 		table.refresh();
-		
 	}
 
-
+    /**
+     * Handles the change button action event.
+     *
+     * @param event The action event triggered by clicking the change button.
+     */
     @FXML
     void changeBtn(ActionEvent event) {
-    	int oldvalue = 0;
-    	String newvalue = null;
-    	for (TestToExecute test : RuningTestTable) {
-    		if (test.getRadioButton().isSelected()) {
-    			oldvalue = 	test.getTest().getDuration();
-    			newvalue = test.getTextField().getText();
-    			break;
-    		}
-    	}
-    	System.out.println("the old value was: " + oldvalue + " ,the new value is " + newvalue);
+    	// get the selected test from table:
+    	selectedTest = testToExecuteController.getSelectedTest(runningTestTable);
+    	if(selectedTest==null) { notification.showErrorAlert("You didn't choose any test to change duration for."); return; }
+    	// get the subject number from the test for searching for the matching hod:
+    	String subjectNumber = null;
+    	try {subjectNumber = selectedTest.getTest().getCourse().getSubjectNum();
+    	}catch (Exception e) {System.out.println("Error geting subject number for checking who is the relevant hod.");}
+    	if(subjectNumber==null) { notification.showErrorAlert("Error geting subject number for checking who is the relevant hod."); return; }
+    	// get the relevant hod from DB:
+    	User lecturer = ChatClient.user;
+    	User hod = null;
+    	Msg msg = userController.selectHodBySubjectNumber(subjectNumber);
+    	sendMsg(msg);
+    	try { hod = msgReceived.convertData(User.class).get(0);
+    	} catch (Exception e) { notification.showErrorAlert("There is no mathing HOD, so you can't send requests for changing duration."); return; }
+    	if(hod==null) { notification.showErrorAlert("There is no mathing HOD, so you can't send requests for changing duration."); return; }
+    	// create a Request object based on the test, the hod, and the hod:
+    	Object request = requestController.createRequestByTest(selectedTest, hod, lecturer); 
+    	if(request instanceof String) { notification.showErrorAlert((String)request); return; }
+    	// set up the OK and Cancel actions:
+    	notification.setOnCancelAction(new Runnable() {	@Override public void run() {return;}});
+    	notification.setOnOkAction(new Runnable() {
+			@Override
+			public void run() {
+				// insert the new Request object to request DB table:
+				Msg msg;
+				try{ msg = requestController.insertRequest((Request)request); //insert to request table.
+				}catch(Exception e) {System.out.println("there was a problem getting a msg for inserting the request"); return;}
+		    	sendMsg(msg);
+		    	notification.showInformationAlert("A request for changing duration sent to your HOD for consideration.");
+		    	resetFields();
+			}});
+    	// string for the confirmation alert:
+    	String str1 = "Are you sure you want to change the duration?";
+    	String str2 = "test code "+selectedTest.getTestCode()+",  from "+ selectedTest.getTest().getDuration()+
+    			"min to "+Integer.valueOf(selectedTest.getTextField().getText())+"min ?";
+    	notification.showConfirmationAlert(str2, str1);
     } 
 
+    /**
+     * Handles the lock button action event.
+     *
+     * @param event The action event triggered by clicking the lock button.
+     */
     @FXML
     void lockBtn(ActionEvent event) {
-    	System.out.println("i locked the test sucsesfully");
-    	TestToExecute testtodelete = null;
-    	for (TestToExecute test : RuningTestTable) {
-    		if (test.getRadioButton().isSelected()) {
-    			testtodelete = test;
-    			break;
-    		}
-    	}
-    	RuningTestTable.remove(testtodelete);
+    	// get the selected test from table:
+    	selectedTest = testToExecuteController.getSelectedTest(runningTestTable);
+    	if(selectedTest==null) { notification.showErrorAlert("You didn't choose any test to lock."); return; }
+    	// set up the OK and Cancel actions:
+    	notification.setOnCancelAction(new Runnable() {	@Override public void run() {return;}});
+    	notification.setOnOkAction(new Runnable() {
+			@Override
+			public void run() {
+				// update the lock field of the testToExecute in DB. and send a locking Msg.:
+				Msg msg = testToExecuteController.getMsgToLockTest(selectedTest); //manyMsg -> update & lockTest.
+		    	sendMsg(msg);
+		    	notification.showInformationAlert("The test (code "+selectedTest.getTestCode()+") got locked.");
+		    	resetFields();
+			}});
+    	notification.showConfirmationAlert("you can't unlock after that.", "Are you sure you want to lock test "+selectedTest.getTestCode()+" ?");
     }
-
+    
+    /**
+     * Resets all input fields to their default values.
+     */
+    private void resetFields() {
+    	try { start("runningTest", "lecturerMenu");
+		} catch (Exception e) {	e.printStackTrace();}
+    }
 }

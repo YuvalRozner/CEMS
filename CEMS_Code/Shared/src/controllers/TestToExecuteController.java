@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import JDBC.Msg;
 import JDBC.MsgType;
@@ -8,7 +9,12 @@ import enteties.Test;
 import enteties.TestToExecute;
 import enteties.User;
 import notifications.NotificationAlertsController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
+/**
+ * Controller class for managing TestToExecute.
+ */
 public class TestToExecuteController {
 	
 	/**
@@ -73,6 +79,7 @@ public class TestToExecuteController {
 	
     /**
      * Constructs a database select message to retrieve TestToExecute associated with a user.
+     * it includes the testToExecute object, the Test object inside it, and the Course object inside it.
      *
      * @param user The User object for whom to retrieve the TestToExecute.
      * @return A Msg object representing the database select message.
@@ -83,6 +90,25 @@ public class TestToExecuteController {
     	msg.setFrom("cems.testtoexecute, cems.test, cems.course");
     	msg.setWhereCol("testtoexecute.testId", "test.id");
     	msg.setWhereCol("test.courseNumber", "course.number"); 
+    	msg.setWhere("testtoexecute.lecturerId", user.getId()); 
+    	return msg;
+    }
+	
+	 /**
+     * Constructs a database select message to retrieve TestToExecute associated with a user according to the courses the user teaches.
+     * it includes the testToExecute object, the Test object inside it, and the Course object inside it.
+     * it returns only the tests which is still running. (not locked yet).
+     * 
+     * @param user The User object for whom to retrieve the TestToExecute.
+     * @return A Msg object representing the database select message.
+     */
+	public Msg selectRunningTestToExecuteByUser(User user) {
+    	Msg msg = new Msg(MsgType.select);
+    	msg.setSelect("testtoexecute.*, test.*, course.*");
+    	msg.setFrom("cems.testtoexecute, cems.test, cems.course");
+    	msg.setWhereCol("testtoexecute.testId", "test.id");
+    	msg.setWhereCol("test.courseNumber", "course.number"); 
+    	msg.setWhere("testtoexecute.lock", "false"); 
     	msg.setWhere("testtoexecute.lecturerId", user.getId()); 
     	return msg;
     }
@@ -148,6 +174,7 @@ public class TestToExecuteController {
         	tmp.getComboBox().setDisable(true);
         	tmp.getTextField().setDisable(true);
         	tmp.getTextField1().setDisable(true);
+        	tmp.setTest(t);
         	lst.add(tmp);
 		}
 		return lst;
@@ -193,5 +220,70 @@ public class TestToExecuteController {
 		tmp.add(t.getLecturerId());
 		msg.setValues(tmp);
 		return msg;
+	}
+
+	/**
+	 * Returns an ObservableList of TestToExecute objects with FX values.
+	 *
+	 * @param runningTestLst The list of TestToExecute objects.
+	 * @return The ObservableList of TestToExecute objects with FX values.
+	 */
+	public ObservableList<TestToExecute> getObservLstWithFXValues(ArrayList<TestToExecute> runningTestLst) {
+		ObservableList<TestToExecute> runningTestTable = FXCollections.observableArrayList(runningTestLst);
+    	for (TestToExecute runningTest : runningTestLst) {
+    		runningTest.setNewTextField(); // duration
+    		runningTest.setNewTextField1(); // explanation for changing the duration.
+    		runningTest.setNewRadioButton(); //select
+    		runningTest.getTextField().setPromptText(runningTest.getTest().getDuration().toString()); // explanation
+    		runningTest.getTextField1().setPromptText("Explanation for change");
+    		runningTest.getTextField().setDisable(true); // duration
+    		runningTest.getTextField1().setDisable(true); // explanation
+    		runningTest.getRadioButton().selectedProperty().addListener((observable, oldValue, newValue) -> {
+        		if (newValue == true) {
+        			runningTest.getTextField().setDisable(false);
+        			runningTest.getTextField1().setDisable(false);
+        		}
+        		else {
+        			runningTest.getTextField().clear();
+        			runningTest.getTextField1().clear();
+        			runningTest.getTextField().setDisable(true);
+        			runningTest.getTextField1().setDisable(true);
+        		}
+             });
+    	}	
+		return runningTestTable;
+	}
+	
+	/**
+	 * Retrieves the selected TestToExecute object from a collection based on the selected radio button.
+	 *
+	 * @param lst The collection of TestToExecute objects.
+	 * @return The selected TestToExecute object, or null if none is selected or an exception occurs.
+	 */
+	public TestToExecute getSelectedTest(Collection<TestToExecute> lst) {
+		for(TestToExecute t : lst) {
+			try { if(t.getRadioButton().isSelected()) return t;
+			}catch(Exception e) {return null;}
+		}
+		return null;
+	}
+
+	/**
+	 * Generates a message to lock a test.
+	 *
+	 * @param test The TestToExecute object representing the test to be locked.
+	 * @return The message containing the lock instructions.
+	 */
+	public Msg getMsgToLockTest(TestToExecute test) {
+		Msg msgM = new Msg(MsgType.manyMessages);
+		Msg msgUpdate = new Msg(MsgType.update);
+		msgUpdate.setTableToUpdate("testtoexecute");
+		msgUpdate.setSet("`lock`", "true");
+		msgUpdate.setWhere("testCode", test.getTestCode());
+		Msg msgLock = new Msg(MsgType.lockTest);
+		msgLock.setTestCode(test.getTestCode());
+		msgM.setMsgLst(msgUpdate);
+		msgM.setMsgLst(msgLock);
+		return msgM;
 	}
 }
