@@ -57,4 +57,23 @@ public class RequestController {
 		msg.setValues(tmp);
 		return msg;
 	}
+	
+	/**
+     * Constructs a database select message to retrieve Request associated with many objects.
+     * it includes the testToExecute object, the Test object inside it, the User object, and the Course object inside it.
+     *
+     * @param hod The User name String for whom to retrieve the TestToExecute.
+     * @return A Msg object representing the database select message.
+     */
+	public Msg selectRequest(String hod) {
+    	Msg msg = new Msg(MsgType.select);
+    	msg.setSelect("request.*, testtoexecute.*, test.*, user.*");
+    	msg.setFrom("cems.request, cems.testtoexecute, cems.test, cems.course, cems.user");
+    	msg.setWhereCol("request.testCode", "testoexecute.testCode");
+    	msg.setWhereCol("testtoexecute.testId", "test.id");
+    	msg.setWhereCol("request.lecturerId", "user.id");
+    	msg.setWhereCol("test.courseNumber", "course.number"); 
+    	msg.setWhere("request.hodId", hod); 
+    	return msg;
+    }
 }

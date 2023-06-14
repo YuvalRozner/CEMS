@@ -35,7 +35,7 @@
             <Image url="@../../images/durationConfirmation.png" />
          </image>
       </ImageView>
-      <Button layoutX="441.0" layoutY="561.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#backBtn" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
+      <Button fx:id="back" layoutX="441.0" layoutY="561.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#backBtn" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>
@@ -61,24 +61,24 @@
                </light>
             </Lighting>
          </effect></Label>
-      <Label layoutX="38.0" layoutY="191.0" prefHeight="21.0" prefWidth="478.0" text="To confirm change of duration - select request and click &quot;Confirm.">
+      <Label layoutX="38.0" layoutY="191.0" prefHeight="21.0" prefWidth="478.0" text="To confirm change of duration - select request and click &quot;Confirm&quot;">
          <font>
             <Font name="Comic Sans MS Bold" size="14.0" />
          </font>
       </Label>
-      <Button layoutX="441.0" layoutY="480.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#aprroveBtn" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Confirm">
+      <Button fx:id="confirm" layoutX="441.0" layoutY="480.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#aprroveBtn" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Confirm">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>
       <TableView fx:id="table" layoutX="14.0" layoutY="223.0" prefHeight="249.0" stylesheets="@TableView.css">
         <columns>
-            <TableColumn fx:id="IDTestCol" minWidth="40.00000190734863" prefWidth="53.60000991821289" text="ID Test" />
-            <TableColumn fx:id="LecturerCol" minWidth="29.5" prefWidth="62.39995574951172" text="lecturer" />
-            <TableColumn fx:id="CourseCol" minWidth="36.5" prefWidth="62.4000244140625" text="course" />
-            <TableColumn fx:id="previousCol" prefWidth="96.80000305175781" text="previous time" />
-            <TableColumn fx:id="newCol" prefWidth="89.0" text="new time" />
-            <TableColumn fx:id="ExplanationCol" maxWidth="208.800048828125" prefWidth="97.5" text="Explanation" />
-            <TableColumn fx:id="checkBoxCol" maxWidth="208.0" prefWidth="83.0" style="-fx-alignment: CENTER;" text="Select" />
+            <TableColumn fx:id="IDTestCol" minWidth="40.00000190734863" prefWidth="52.0" text="Test ID" />
+            <TableColumn fx:id="LecturerCol" minWidth="29.5" prefWidth="64.5" text="Lecturer" />
+            <TableColumn fx:id="CourseCol" minWidth="36.5" prefWidth="68.5" text="Course" />
+            <TableColumn fx:id="previousCol" prefWidth="78.0" text="Duration" />
+            <TableColumn fx:id="newDurationCol" prefWidth="114.0" text="Time Addition" />
+            <TableColumn fx:id="ExplanationCol" maxWidth="208.800048828125" prefWidth="127.5" text="Explanation" />
+            <TableColumn fx:id="checkBoxCol" maxWidth="208.0" prefWidth="41.0" style="-fx-alignment: CENTER;" text="Select" />
         </columns>
       </TableView>
       <ImageView fitHeight="181.0" fitWidth="201.0" layoutX="409.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true">
