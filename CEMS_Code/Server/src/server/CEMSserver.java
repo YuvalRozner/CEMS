@@ -125,7 +125,9 @@ public class CEMSserver extends AbstractServer {
 				sendToClient(new Msg(MsgType.succeeded), client);
 				break;
 			case fileToSend:
-				String LocalfilePath = "C:\\Users\\liorz\\OneDrive\\Documents\\GitHub\\CEMS\\CEMS_Code\\Server\\file\\algebraTest.docx";
+				//
+				String LocalfilePath = "@../../file/algebraTest.docx";
+				//String LocalfilePath = "C:\\Users\\liorz\\OneDrive\\Documents\\GitHub\\CEMS\\CEMS_Code\\Server\\file\\algebraTest.docx";
 				Msg msgToCleint = cemsFileController.createMsgWithFile(LocalfilePath);
 				sendToClient(msgToCleint, client);
 				break;

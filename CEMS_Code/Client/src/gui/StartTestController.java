@@ -48,7 +48,7 @@ public class StartTestController extends AbstractController{
         		Msg msgGetTesttoexeute = testToExecuteController.selectTestToExecuteByCode(code);
         		sendMsg(msgGetTesttoexeute);
         		ArrayList<TestToExecute>arr=msgReceived.convertData(TestToExecute.class);
-        		testToExecute=arr.get(0);
+        		setTestToExecute(arr.get(0));
         		idTextField.setDisable(false);
         		//idTextField.editableProperty();
         		idTextField.setEditable(true);
@@ -66,8 +66,8 @@ public class StartTestController extends AbstractController{
     	User user = ChatClient.user;
     	String id= idTextField.getText();
     	if(testToExecuteController.checkValidId(id,user)) {
-    		if (testToExecute!=null) {
-    			Msg msgInsert = studentTestController.insertStudentTest(testToExecute, user);
+    		if (getTestToExecute()!=null) {
+    			Msg msgInsert = studentTestController.insertStudentTest(getTestToExecute(), user);
     			sendMsg(msgInsert);
     			studentTest.setTestCode(Integer.valueOf(codeTextField.getText()));
     			studentTest.setStudentId(ChatClient.user.getId());
@@ -75,7 +75,7 @@ public class StartTestController extends AbstractController{
     			Msg msgUpdate = testToExecuteController.updateNumberOfStudenByOne(code);
     			sendMsg(msgUpdate);
     			
-    			if(testToExecute.getTestingType().equals("manual")) {
+    			if(getTestToExecute().getTestingType().equals("manual")) {
     				start("manualTest", "startTest");
     			}
     			else {start("onlineTest", "startTest");}
@@ -86,5 +86,11 @@ public class StartTestController extends AbstractController{
     	idTextField=new TextField();
     	idTextField.setDisable(true);
     }
+	public static TestToExecute getTestToExecute() {
+		return testToExecute;
+	}
+	public static void setTestToExecute(TestToExecute testToExecute) {
+		StartTestController.testToExecute = testToExecute;
+	}
 
 }

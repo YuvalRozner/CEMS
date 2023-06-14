@@ -9,6 +9,21 @@ import enteties.TestToExecute;
 import enteties.User;
 
 public class StudentTestController {
+	
+	
+	public Msg checkTimeLeft (Integer code) {
+		Msg msg = new Msg(MsgType.select);
+		msg.setSelect("test.duration");
+		msg.setFrom("cems.test");
+		msg.setFrom("cems.testtoexecute");
+		msg.setWhere("testtoexecute.testCode", code);
+		msg.setWhereCol("testtoexecute.testId","test.id");
+		return msg;
+		
+	}
+	
+	
+	
 	/**
 	 * constructs a database select message to check if user already did this test.
 	 * @param user
@@ -22,7 +37,6 @@ public class StudentTestController {
 		msg.setFrom("cems.studenttest");
 		msg.setWhereCol("studentId", user.getId());
 		msg.setWhere("testCode", code);
-		System.out.println("lior" +msg.getWhereCol());
 		return msg;
 		
 	}
@@ -59,6 +73,7 @@ public class StudentTestController {
     	msg.setWhereCol("test.courseNumber", "course.number"); 
     	msg.setWhereCol("studenttest.testCode", "testtoexecute.testCode"); 
 		msg.setWhere("studenttest.studentId", user.getId());
+		msg.setWhere("studenttest.approved", "true");
 		return msg;
 	}
 

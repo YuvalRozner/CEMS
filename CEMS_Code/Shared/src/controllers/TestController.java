@@ -9,6 +9,17 @@ import enteties.Test;
 import enteties.User;
 
 public class TestController {
+	
+	public Msg checkTimeLeft (Integer code) {
+		Msg msg = new Msg(MsgType.select);
+		msg.setSelect("test.duration");
+		msg.setFrom("cems.test");
+		msg.setFrom("cems.testtoexecute");
+		msg.setWhere("testtoexecute.testCode", code);
+		msg.setWhereCol("testtoexecute.testId","test.id");
+		return msg;
+		
+	}
 
 	/**
 	 * Checks the inputs for creating a new test.
