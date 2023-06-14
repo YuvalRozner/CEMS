@@ -7,18 +7,26 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 
+/**
+ * The NotificationAlertsController class provides methods to show different types of notification alerts in a JavaFX application.
+ * 
+ * @author Mor Shmuel
+ */
 public class NotificationAlertsController{
 	
 	private Runnable onCancelAction;
     private Runnable onOkAction;
 
-	//Show a Information Alert
+    /**
+     * Shows an information alert with the specified label as the content text.
+     * 
+     * @param label The label to be displayed in the alert.
+     */
 	public void showInformationAlert(String label) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Information Alert");
 		//alert.setHeaderText("Hello"); //set HeaderText we want
 		alert.setHeaderText(null); //without HeaderText
-		//alert.setContentText("Connect to the database successfully!");
 		
 		//Create a label for the content text
 	    Label contentLabel = new Label(label);
@@ -39,13 +47,16 @@ public class NotificationAlertsController{
 		alert.showAndWait();
 	}
 	
-	//Show a Warning Alert
+	/**
+     * Shows a warning alert with the specified label as the content text.
+     * 
+     * @param label The label to be displayed in the alert.
+     */
 	public void showWarningAlert(String label) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Warning alert");
 		//alert.setHeaderText("Hello"); //set HeaderText we want
 		alert.setHeaderText(null); //without HeaderText
-		//alert.setContentText("Battery charge is low");
 		
 		//Create a label for the content text
 	    Label contentLabel = new Label(label);
@@ -67,14 +78,17 @@ public class NotificationAlertsController{
 		alert.showAndWait();
 	}
 	
-	//Show a Error Alert
+	/**
+     * Shows an error alert with the specified label as the content text.
+     * 
+     * @param label The label to be displayed in the alert.
+     */
 	public void showErrorAlert(String label) {
 		Alert alert = new Alert(AlertType.ERROR);
 
 		alert.setTitle("Error alert");
 		//alert.setHeaderText("Can not add user"); //set HeaderText we want
 		alert.setHeaderText(null); //without HeaderText
-		//alert.setContentText("The user does not exists");
 		
 		//Create a label for the content text
 	    Label contentLabel = new Label(label);
@@ -96,12 +110,16 @@ public class NotificationAlertsController{
 		alert.showAndWait();
 	}
 	
-	//Show a Confirmation Alert
+	/**
+     * Shows a confirmation alert with the specified label as the content text and header label as the header text.
+     * 
+     * @param label        The label to be displayed in the alert.
+     * @param headerLabel  The header label to be displayed in the alert.
+     */
 	public void showConfirmationAlert(String label, String headerLabel) {
       Alert alert = new Alert(AlertType.CONFIRMATION);
       alert.setTitle("Delete File");
       alert.setHeaderText(headerLabel);
-      //alert.setContentText("C:/MyFile.txt");
       
 	  //Create a label for the content text
 	  Label contentLabel = new Label(label);
@@ -136,12 +154,22 @@ public class NotificationAlertsController{
               }
           }
       }
-   }
+	}
 	
+	/**
+     * Sets the action to be performed when the cancel button is clicked in the confirmation alert.
+     * 
+     * @param onCancelAction The action to be performed when the cancel button is clicked.
+     */
 	public void setOnCancelAction(Runnable onCancelAction) {
         this.onCancelAction = onCancelAction;
     }
 
+	/**
+     * Sets the action to be performed when the OK button is clicked in the confirmation alert.
+     * 
+     * @param onOkAction The action to be performed when the OK button is clicked.
+     */
     public void setOnOkAction(Runnable onOkAction) {
         this.onOkAction = onOkAction;
     }

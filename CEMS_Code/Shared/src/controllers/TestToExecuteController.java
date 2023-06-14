@@ -146,6 +146,23 @@ public class TestToExecuteController {
     	msg.setWhere("user.id", id); 
     	return msg;
     }
+	
+	/**
+     * Constructs a database select message to retrieve TestToExecute associated with Course.
+     * it includes the testToExecute object, the Test object and the Course object inside it.
+     * 
+     * @param name The Course name for whom to retrieve the TestToExecute.
+     * @return A Msg object representing the database select message.
+     */
+	public Msg selectTestToExecuteByCourseName(String name) {
+    	Msg msg = new Msg(MsgType.select);
+    	msg.setSelect("testtoexecute.*");
+    	msg.setFrom("cems.testtoexecute, cems.course, cems.test");
+    	msg.setWhereCol("course.number", "test.courseNumber");
+    	msg.setWhereCol("testtoexecute.testId", "test.id"); 
+    	msg.setWhere("course.name", name); 
+    	return msg;
+    }
 
     /**
      * Retrieves the names of the tests as an ObservableList.

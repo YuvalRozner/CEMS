@@ -111,4 +111,19 @@ public class StudentTestController {
 		return msg;
 	}
 	
+	/**
+     * Constructs a database select message to retrieve StudentTest.
+     *
+     * @param The ID for whom to retrieve the StudentTest.
+     * @return A Msg object representing the database select message.
+     */
+	public Msg getMsgForStudentTestsByID(String ID) {
+		Msg msg = new Msg(MsgType.select);
+		msg.setSelect("studenttest.*");
+		msg.setFrom("cems.studenttest, cems.user");
+		msg.setWhereCol("studenttest.studentId", "user.id");
+		msg.setWhere("user.id", ID);
+		return msg;
+	}
+	
 }
