@@ -8,6 +8,7 @@ import JDBC.MsgType;
 import enteties.Test;
 import enteties.TestToExecute;
 import enteties.User;
+import notifications.NotificationAlertsController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -15,6 +16,66 @@ import javafx.collections.ObservableList;
  * Controller class for managing TestToExecute.
  */
 public class TestToExecuteController {
+	
+	/**
+	 * 
+	 * @param code key of the test in data.
+	 * @return Msg contain update query.
+	 */
+	public Msg updateNumberOfStudenByOne(String code) {
+    	Msg msg = new Msg(MsgType.updatePlusOne);
+    	msg.setTableToUpdate("cems.testtoexecute");
+    	msg.setSet("numberOfStudentStarted",1);
+    	msg.setWhere("testCode", code); 
+    	return msg;
+    }
+	
+	
+    /**
+     * Constructs a database select message to retrieve TestToExecute associated with a code.
+     *
+     * @param code The code object for the right TestToExecute.
+     * @return A Msg object representing the database select message.
+     */
+	public Msg selectTestToExecuteByCode(String code) {
+    	Msg msg = new Msg(MsgType.select);
+    	msg.setSelect("*");
+    	msg.setFrom("cems.testtoexecute");
+    	msg.setWhere("testCode", code); 
+    	return msg;
+    }
+	
+    /**
+     * check if the id is valid.
+     *
+     * @param id the id that enter the user to enter a test.
+     * @param user the user to get the id of the user.
+     * @return true if the id is valid and corresponding to the user.
+     * @return false if the id is not valid.
+     */
+	
+	public boolean checkValidId(String id,User user) {
+		NotificationAlertsController alert = new NotificationAlertsController();
+		if (id.isEmpty() == true){alert.showWarningAlert("ID is empty!");return false;}
+		if (!user.getId().equals(id)) {alert.showWarningAlert("ID is worng!");return false;}
+		return true;
+	}
+	
+    /**
+     * check if the code is valid to enter a test.
+     *
+     * @param code the code for the write test.
+     * @return true if the code is valid.
+     * @return false if the code is not valid.
+     */
+	
+	public boolean checkValidCode(String code) {
+		NotificationAlertsController alert = new NotificationAlertsController();
+		if (code.isEmpty() == true){alert.showWarningAlert("You must enter code for a test, 4 digits!");return false;}
+		if (code.length()!=4) {alert.showWarningAlert("The code must be 4 in length!");return false;}
+		if (!code.matches("\\d+")) {alert.showWarningAlert("The code must consist of only digits!");return false;}
+		return true;
+	}
 	
     /**
      * Constructs a database select message to retrieve TestToExecute associated with a user.

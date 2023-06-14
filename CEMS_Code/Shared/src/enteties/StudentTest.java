@@ -34,6 +34,15 @@ public class StudentTest {
 	private TextField note;
 	
 	/**
+	 * to check if student aleady do this test.
+	 * @param studentId
+	 */
+	
+	public StudentTest(String studentId) {
+		this.studentId=studentId;
+	}
+	
+	/**
 	 * return string that build from two notes , one that the lecturer gave on the test and ond on the grade.
 	 * @return
 	 */

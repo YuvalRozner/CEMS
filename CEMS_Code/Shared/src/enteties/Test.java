@@ -15,6 +15,10 @@ public class Test {
     //for FX:
 	private RadioButton radioButton;
    
+	/**
+	 * to get duration.
+	 */
+	public Test(Integer duration) {this.duration=duration;}
 	
 	/**
 	 * empty constructor.

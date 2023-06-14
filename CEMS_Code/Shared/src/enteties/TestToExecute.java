@@ -258,6 +258,12 @@ public class TestToExecute{
 	public String getLock() {
 		return lock;
 	}
+	
+	public String getFinished() {
+		if(lock.equals("false")) return "running";
+		if(lock.equals("true")) return "finished";
+		return null;
+	}
 
 	/**
 	 * @param lock the lock to set

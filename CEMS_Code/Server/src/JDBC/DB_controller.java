@@ -6,6 +6,46 @@ import java.util.Map;
 
 public class DB_controller {
 
+	/**
+	 * make a query to update integer value by value.
+	 * @param tableToUpdate
+	 * @param set
+	 * @param where
+	 * @return String update query. 
+	 */
+	public static String createUPDATEPlusOnequery(ArrayList<String> tableToUpdate, HashMap<String, Object> set, HashMap<String, Object> where) {
+		if (tableToUpdate == null || set == null)
+			return "";
+		StringBuilder query = new StringBuilder("UPDATE ");
+		query.append(tableToUpdate.get(0)); // append the name of table wanted to be updated.
+		query.append(" SET ");
+		query.append(buildConditionPlusOnePartWithComma(set)); // append the parameters to be updated.
+		if (where == null)
+			return query.toString() + ";";
+		query.append(" WHERE ");
+		query.append(buildConditionPartWithAnd(where, true));
+		return query.toString() + ";";
+	}
+	
+	/**
+	 * build string of the parameters separated with commas.
+	 * @param condition
+	 * @return String set part of update query.
+	 */
+	private static String buildConditionPlusOnePartWithComma(HashMap<String, Object> condition) {
+		if (condition == null)
+			return "";
+		StringBuilder res = new StringBuilder();
+
+		for (Map.Entry<String, Object> entry : condition.entrySet()) {
+			String key = entry.getKey();
+			Object value = entry.getValue();
+			res.append(key + "=" + key+"+"+ value.toString() + ",");
+		}
+		System.out.println("res is : "+res);
+		res.deleteCharAt(res.length() - 1); // remove last comma.
+		return res.toString();
+	}
 
 	/* the func gets 4 arraylists of parameters for a select query and return a string of the query. */
 	public static String createSELECTquery(ArrayList<String> select, ArrayList<String> from, HashMap<String, Object> where, HashMap<String, Object> whereCol) {

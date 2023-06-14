@@ -8,6 +8,8 @@ public enum MsgType {
 	
 	update, // client ---> server. | update query.
 	
+	updatePlusOne,// client ---> server. | updatePlusOne query.
+	
 	insert, // client ---> server. | insert query.
 	
 	manyMessages, // client ---> server. | Msg of list of messages. (probably each msg is a query).
@@ -24,9 +26,14 @@ public enum MsgType {
 	
 	empty, // server ---> client. | indicates that the select query found no data.
 	
-	insertFail, // server ---> client. | indicates that the insert query faild.
+	insertFail, // server ---> client. | indicates that the insert query failed.
 	
-	insertSucceeded, // server ---> client. | indicates that the isert query succeeded.
+	insertSucceeded, // server ---> client. | indicates that the insert query succeeded.
 	
-	lockTest // server ---> client. | indicates that a test got locked.
+	lockTest, // server ---> client. | indicates that a test got locked.
+	
+	file, // client ---> server indicates that a student upload file.
+	
+	fileToSend // server--->client. | indicates that a student download file.
+
 }

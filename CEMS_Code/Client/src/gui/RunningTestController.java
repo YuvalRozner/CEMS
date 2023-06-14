@@ -78,8 +78,9 @@ public class RunningTestController extends AbstractController{
     	sendMsg(msg);
     	runningTestLst = msgReceived.convertData(TestToExecute.class); //ArrayList
     	runningTestTable = testToExecuteController.getObservLstWithFXValues(runningTestLst); //ObservableList
-    	for(TestToExecute runningTest : runningTestTable) //toggle the radio in the table.
-    		toggleGroupOfTestToExecute.getToggles().add(runningTest.getRadioButton()); // duration
+    	// toggle the radio in the table:
+    	for(TestToExecute runningTest : runningTestTable) 
+    		toggleGroupOfTestToExecute.getToggles().add(runningTest.getRadioButton()); 
     }
     
     /**

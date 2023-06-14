@@ -77,7 +77,9 @@ public abstract class AbstractController implements SceneSetter {
 	public String getFxmlName() {
 		return fxmlName;
 	}
-	
+	public static Stage getPrimaryStage() {
+		return primaryStage;
+	}
 	public static Msg getMsgReceived() {
 		return msgReceived;
 	}
