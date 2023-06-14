@@ -61,7 +61,7 @@ public class LoginController extends AbstractController{
     @FXML
     void openClient(ActionEvent event) throws Exception {
     	ChatClient.resetUser();
-    	login("rozi","123");
+    	login("morShmuel","mor2805");
     	User user = ChatClient.user;
     	start("studentMenu" , "login");
     }
@@ -77,7 +77,7 @@ public class LoginController extends AbstractController{
     @FXML
     void openLecturer(ActionEvent event) throws Exception {
     	ChatClient.resetUser();
-    	login("geek","123");
+    	login("danLemberg","126dan");
     	User user = ChatClient.user;
     	start("lecturerMenu" , "login");
     }
