@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The DB_controller class provides methods for generating SQL queries for database operations.
+ * it supports creating UPDATE, SELECT, and INSERT queries.
+ */
 public class DB_controller {
 
-	/**
-	 * make a query to update integer value by value.
-	 * @param tableToUpdate
-	 * @param set
-	 * @param where
-	 * @return String update query. 
-	 */
+    /**
+     * Creates an UPDATE query that increments the specified columns by one.
+     *
+     * @param tableToUpdate The ArrayList containing the name of the table to update.
+     * @param set           The HashMap containing the columns and their corresponding values to increment.
+     * @param where         The HashMap containing the conditions for the WHERE clause.
+     * @return The generated SQL UPDATE query.
+     */
 	public static String createUPDATEPlusOnequery(ArrayList<String> tableToUpdate, HashMap<String, Object> set, HashMap<String, Object> where) {
 		if (tableToUpdate == null || set == null)
 			return "";
@@ -27,16 +32,16 @@ public class DB_controller {
 		return query.toString() + ";";
 	}
 	
-	/**
-	 * build string of the parameters separated with commas.
-	 * @param condition
-	 * @return String set part of update query.
-	 */
+    /**
+     * Builds the SET clause of an UPDATE query to increment the specified columns by one.
+     *
+     * @param condition The HashMap containing the columns and their corresponding values to increment.
+     * @return The generated SET clause of the UPDATE query.
+     */
 	private static String buildConditionPlusOnePartWithComma(HashMap<String, Object> condition) {
 		if (condition == null)
 			return "";
 		StringBuilder res = new StringBuilder();
-
 		for (Map.Entry<String, Object> entry : condition.entrySet()) {
 			String key = entry.getKey();
 			Object value = entry.getValue();
@@ -46,8 +51,16 @@ public class DB_controller {
 		res.deleteCharAt(res.length() - 1); // remove last comma.
 		return res.toString();
 	}
-
-	/* the func gets 4 arraylists of parameters for a select query and return a string of the query. */
+	
+    /**
+     * Creates a SELECT query with the specified parameters.
+     *
+     * @param select    The ArrayList containing the columns to select.
+     * @param from      The ArrayList containing the tables to select from.
+     * @param where     The HashMap containing the conditions for the WHERE clause.
+     * @param whereCol  The HashMap containing the conditions for the WHERE clause (additional columns).
+     * @return The generated SQL SELECT query.
+     */
 	public static String createSELECTquery(ArrayList<String> select, ArrayList<String> from, HashMap<String, Object> where, HashMap<String, Object> whereCol) {
 		StringBuilder query = new StringBuilder("SELECT ");
 		query.append(separateWithComma(select));
@@ -63,8 +76,14 @@ public class DB_controller {
 		return query.toString() + ";";
 	}
 
-	/* the func gets 5 arraylists of parameters for an update query and return a string of the query. */
-	// example for me: UPDATE cems.question SET number = '106', question = 'what is the meaning of zero???' WHERE id = '02106';
+    /**
+     * Creates an UPDATE query with the specified parameters.
+     *
+     * @param tableToUpdate The ArrayList containing the name of the table to update.
+     * @param set           The HashMap containing the columns and their corresponding values to update.
+     * @param where         The HashMap containing the conditions for the WHERE clause.
+     * @return The generated SQL UPDATE query.
+     */
 	public static String createUPDATEquery(ArrayList<String> tableToUpdate, HashMap<String, Object> set, HashMap<String, Object> where) {
 		if (tableToUpdate == null || set == null)
 			return "";
@@ -79,8 +98,14 @@ public class DB_controller {
 		return query.toString() + ";";
 	}
 
-	/*  */
-	// example for me: INSERT INTO lab3.students (ID, FirstName, LastName,Faculty) VALUES ('1', 'Dor','shabat', 'a'), ('2', 'Dor1','shabat1', 'b');
+    /**
+     * Creates an INSERT query with the specified parameters.
+     *
+     * @param tableToUpdate The ArrayList containing the name of the table to insert into.
+     * @param colNames      The ArrayList containing the column names for insertion.
+     * @param values        The ArrayList containing the values to insert.
+     * @return The generated SQL INSERT query.
+     */
 	public static String createINSERTquery(ArrayList<String> tableToUpdate, ArrayList<String> colNames, ArrayList<ArrayList<Object>> values) {
 		if (tableToUpdate == null || colNames == null || values == null || colNames.size() != values.size())
 			return "";
@@ -93,7 +118,12 @@ public class DB_controller {
 		return query.toString() + ";";
 	}
 
-	/* the func gets an arraylist of string parameters (select/from) for a query and return a string of the parameters separated with commas. */
+    /**
+     * Separates the elements in the given ArrayList with commas.
+     *
+     * @param lst The ArrayList containing the elements to separate.
+     * @return A string with the elements separated by commas.
+     */
 	private static String separateWithComma(ArrayList<String> lst) {
 		if (lst == null || lst.size() == 0)
 			return "";
@@ -104,7 +134,12 @@ public class DB_controller {
 		return res.toString();
 	}
 
-	/* the func gets an arraylist of arraylist of objects (values) for insert query and return a string of the parameters separated with commas int breclets. */
+    /**
+     * Separates the values in the given ArrayList of ArrayLists with commas and parentheses.
+     *
+     * @param lists The ArrayList of ArrayLists containing the values to separate.
+     * @return A string with the values separated by commas and parentheses.
+     */
 	private static String separateValuesWithComma(ArrayList<ArrayList<Object>> lists) {
 		if (lists == null || lists.size() == 0)	return "";
 		StringBuilder res = new StringBuilder();
@@ -123,7 +158,12 @@ public class DB_controller {
 		return res.toString();
 	}
 
-	/* the func gets hashMap (Condition part) for a query and return a string of the parameters separated with commas. */
+    /**
+     * Builds the condition part of a query with commas between parameters.
+     *
+     * @param condition The HashMap containing the conditions.
+     * @return The generated condition part of the query.
+     */
 	private static String buildConditionPartWithComma(HashMap<String, Object> condition) {
 		if (condition == null)
 			return "";
@@ -141,7 +181,13 @@ public class DB_controller {
 		return res.toString();
 	}
 
-	/* the func gets hashMap (Condition part) for a query and return a string of the parameters separated with commas. */
+    /**
+     * Builds the condition part of a query with "AND" between parameters.
+     *
+     * @param condition  The HashMap containing the conditions.
+     * @param needGeresh A flag indicating if single quotes are needed for string values.
+     * @return The generated condition part of the query.
+     */
 	private static String buildConditionPartWithAnd(HashMap<String, Object> condition, boolean needGeresh) {
 		if (condition == null)
 			return "";
