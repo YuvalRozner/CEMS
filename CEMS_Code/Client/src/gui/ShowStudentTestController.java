@@ -2,8 +2,13 @@ package gui;
 
 import java.util.ArrayList;
 
+import JDBC.Msg;
 import client.ChatClient;
+import controllers.QuestionController;
+import controllers.TestToExecuteController;
+import enteties.Question;
 import enteties.StudentTest;
+import enteties.Test;
 import enteties.TestToExecute;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -20,87 +25,50 @@ public class ShowStudentTestController extends AbstractController {
 	@FXML
     private Label info1,info2,info3,info4;
 
-	
-	private ArrayList<ArrayList<String>> quizData; // ArrayList of ArrayList of Strings
-    private ArrayList<ToggleGroup> toggleGroups = new ArrayList<ToggleGroup>();
+	private ArrayList<ToggleGroup> toggleGroups = new ArrayList<ToggleGroup>();
 
-    ArrayList<Integer> correctAnswerIndices = new ArrayList<>();
-    ArrayList<Integer> points = new ArrayList<>();
     ArrayList<Label> pointsLabels =new ArrayList<>();
+    
+    /**
+	 * object to use the TestToExecuteController class method.
+	 */
+    private static QuestionController questionController = new QuestionController();
+    
     
     StudentTest studentTest;// from approveGradeController
     TestToExecute testToExecute;// from ExecuteTestController
+    Test test;
     String testName; //need to bring test name ....
     
+    String testId;
+    
+    ArrayList<Question> questions = new ArrayList<Question>();
+    
     public ShowStudentTestController() {
-    	
-        // Initialize quiz data (replace with your own data) fake data
-    	testName = "logic 23/7 111"; //need to bring in diffrent way, i have the test code...
-    	//points for each questions ,
-    	points.add(25); 
-    	points.add(25);
-    	points.add(25);
-    	points.add(25);
-    	
-    	try {
-    		studentTest =  ((ApproveGradeController)ChatClient.screens.get("approveGrade")).getStudentTestToShow(); //get the studenttest to show from the last screen
-    		System.out.println("i am print from ShowStudentTestController and now i got  " +studentTest);
-        	System.out.println("now i can extract all the data i need here insted of using fake data..........");
-        
-    	}catch(Throwable t) {
-    		System.out.println("it wasnt ApproveGradeController");
-    	}
-		
-    	try {
-		testToExecute =  ((ExecuteTestController)ChatClient.screens.get("executeTest")).getTestToShow(); //get the studenttest to show from the last screen
-		System.out.println("i am print from ShowStudentTestController and now i got  " +testToExecute);
-    	System.out.println("now i can extract all the data i need here insted of using fake data..........");
-    	}catch(Throwable t) {
-    		System.out.println("it wasnt ExecuteTestController");
-    	}
-    	
-    	
-    		//the correct answers
-    	correctAnswerIndices.add(0);
-    	correctAnswerIndices.add(0);
-    	correctAnswerIndices.add(1);
-    	correctAnswerIndices.add(3);
-  
-        quizData = new ArrayList<>();
-        ArrayList<String> question1 = new ArrayList<>();
-        question1.add("What is the capital of Israel?");
-        question1.add("Jerusalem");
-        question1.add("London");
-        question1.add("Berlin");
-        question1.add("Rome");
-        quizData.add(question1);
-
-        ArrayList<String> question2 = new ArrayList<>();
-        question2.add("Iphone or samsung?");
-        question2.add("iphone");
-        question2.add("samsung");
-        question2.add("answer 2 is the correct");
-        question2.add("answer 3 is the correct");
-        quizData.add(question2);
-        
-        ArrayList<String> question3 = new ArrayList<>();
-        question3.add("how much time was six day war?");
-        question3.add("60");
-        question3.add("six");
-        question3.add("it never heppen");
-        question3.add("i dont believe in wars");
-        quizData.add(question3);
-        
-        ArrayList<String> question4 = new ArrayList<>();
-        question4.add("who has the best project??");
-        question4.add("G10");
-        question4.add("G10");
-        question4.add("G10");
-        question4.add("All the answers are correct");
-        quizData.add(question4);
-
+    	Msg msg = initializeDataAndGetMsg();
+    	sendMsg(msg);
+    	questions = msgReceived.convertData(Question.class); //ArrayList
     }
-
+    
+    private Msg initializeDataAndGetMsg(){
+    	Msg msg = null;
+    	if (ChatClient.lastCurrentScreen instanceof ApproveGradeController) {
+    		studentTest =  ((ApproveGradeController)ChatClient.screens.get("approveGrade")).getStudentTestToShow(); //get the studenttest to show from the last screen
+    		test = studentTest.getTest();
+    		//testName = "(code-"+studentTest.getTestCode()+")  " + studentTest.getTest().getCourse().getName() +"  " + studentTest.getTestToExecute().getDate();
+    		testName = "dor";
+    		msg = questionController.getQuestionByTestCodeAndStudentId(studentTest.getTestCode(), studentTest.getStudentId());
+    
+    	}
+    	else if(ChatClient.lastCurrentScreen instanceof ExecuteTestController) {
+    		testToExecute =  ((ExecuteTestController)ChatClient.screens.get("executeTest")).getTestToShow(); //get the studenttest to show from the last screen
+		
+    		test = testToExecute.getTest();
+			testName = "(code-"+testToExecute.getTestCode()+")  " + testToExecute.getTest().getCourse().getName() +"  " + testToExecute.getDate();
+			msg = questionController.getQuestionByTestId(testToExecute.getTestId());
+    	}
+    	return msg;
+    }
     @FXML
     protected void initialize() {
     	
@@ -122,13 +90,14 @@ public class ShowStudentTestController extends AbstractController {
         gridPane.setHgap(10);
         gridPane.setVgap(10);
         int row = 0;
-        for (int i = 0; i < quizData.size(); i++) {
-            ArrayList<String> questionData = quizData.get(i); //get a question and 4 answers
+        for (int i = 0; i < questions.size(); i++) {
+            Question question = questions.get(i); //get a question and 4 answers
             
-            Label questionLabel = new Label(questionCounter + ". " + questionData.get(0)); //set the question label
+            Label questionLabel = new Label(questionCounter + ". " + question.getQuestion()); //set the question label
             questionCounter++;
             questionLabel.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-weight: bold; -fx-font-size: 14px;");
-            Label pointsLabel = new Label("Points: " + points.get(i)); //set the points label
+            Label pointsLabel = new Label("Points: " + "0"); //set the points label
+            //    Label pointsLabel = new Label("Points: " + question.getPoints()); //set the points label
             pointsLabels.add(pointsLabel); //save the pointslabel for later changes
             pointsLabel.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-size: 14px;");
             gridPane.add(questionLabel, 0, i + row);
@@ -136,10 +105,10 @@ public class ShowStudentTestController extends AbstractController {
             
             //setting the 4 radiobutton in a toggle group and set each answer
             ToggleGroup answerGroup = new ToggleGroup();
-            for (int j = 1; j < questionData.size(); j++) {
+            for (int j = 0; j < 4; j++) {
             	row++;
-                RadioButton answerRadioButton = new RadioButton(questionData.get(j));
-                answerRadioButton.setMouseTransparent(true);
+                RadioButton answerRadioButton = new RadioButton(question.getAnswers()[j]);
+                answerRadioButton.setMouseTransparent(true);  ////////////////////////////////////////////////////
                 answerRadioButton.setToggleGroup(answerGroup);
                 gridPane.add(answerRadioButton, 0, i + row); // Adjust the row and column indices as needed
             }
@@ -149,48 +118,44 @@ public class ShowStudentTestController extends AbstractController {
         if (studentTest!= null) {
         	showCorrectAnswersAndStudentAnswer();
         	}
-        else {showCorrectAnswers();};
+       // else {showCorrectAnswers();};
         
     }
  
-
+/*
     public void showCorrectAnswers() {
 	    for (int i = 0; i < toggleGroups.size(); i++) {
 	        ToggleGroup toggleGroup = toggleGroups.get(i);
-	        int correctAnswerIndex = correctAnswerIndices.get(i);
+	      //  int correctAnswerIndex = correctAnswerIndices.get(i);
 	        RadioButton correctRadioButton = (RadioButton) toggleGroup.getToggles().get(correctAnswerIndex);
 	        correctRadioButton.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
 	        correctRadioButton.setText(correctRadioButton.getText() + " - Correct answer"); 
 	    }
 	}
-	
+	*/
 	public void showCorrectAnswersAndStudentAnswer() {
+		//System.out.println("Real : the answers for the test  " + questions.get(0).getCorrectAnswer() + ", " + questions.get(1).getCorrectAnswer() + ", " +questions.get(2).getCorrectAnswer() + ", " +questions.get(3).getCorrectAnswer() + ", " +questions.get(4).getCorrectAnswer() + ", " );
+		//System.out.println("Student : the answers for the test  " + studentTest.getAnswers());
+
 	    for (int i = 0; i < toggleGroups.size(); i++) {
-	    	System.out.println(studentTest.getAnswers());
-	    	
+	    	Question question = questions.get(i); //get a question and 4 answers        
 	    	String[] answers = studentTest.getAnswers().split("");
-	        ToggleGroup toggleGroup = toggleGroups.get(i);
-	        int correctAnswerIndex = correctAnswerIndices.get(i);
-	        RadioButton correctRadioButton = (RadioButton) toggleGroup.getToggles().get(correctAnswerIndex);
-	        System.out.println(i + " correctAnswerIndex: " + correctAnswerIndex);
-	        // Set the style or text to indicate the correct answer
-	        
+	        ToggleGroup questionToggleGroup = toggleGroups.get(i);
+	        int correctAnswerIndex = question.getCorrectAnswer() - 1;
+	        RadioButton correctRadioButton = (RadioButton) questionToggleGroup.getToggles().get(correctAnswerIndex);
 	        correctRadioButton.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
 	        correctRadioButton.setText(correctRadioButton.getText() + " - Correct answer");
 	        // Get the student's selected answer index
 	        int selectedAnswerIndex = Integer.parseInt(answers[i]) - 1;
-	        RadioButton selectedRadioButton = (RadioButton) toggleGroup.getToggles().get(selectedAnswerIndex);
+	        RadioButton selectedRadioButton = (RadioButton) questionToggleGroup.getToggles().get(selectedAnswerIndex);
 	        selectedRadioButton.setSelected(true);
-           
+	        System.out.println("the selected is: " + selectedAnswerIndex  + " , and the corrected is: " +correctAnswerIndex +" -1 on evrything" );
             if (selectedAnswerIndex != correctAnswerIndex) {
             	pointsLabels.get(i).setText("Points: 0");
             	pointsLabels.get(i).setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
-            	
-            	
             	selectedRadioButton.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
             	selectedRadioButton.setText(selectedRadioButton.getText() + " - Wrong answer");
-            }
-            
+            }  
 	    }
 	}
 }
