@@ -68,4 +68,55 @@ public class UserController {
         msg.setWhere("hod_subject.hodId",hodId);
     	return msg;
 	}
+	
+	/**
+	 * Generates a message to select a Lecturer from the database based on the hod ID.
+	 *
+	 * @param ID The ID of the hod.
+	 * @return The generated Msg object for the user selection.
+	 */
+	public Msg selectUserByHodAndLecturer(String ID) {
+		Msg msg = new Msg(MsgType.select);
+    	msg.setSelect("user.*");
+    	msg.setFrom("cems.user, cems.user_subject,cems.hod_subject");
+    	msg.setWhereCol("hod_subject.subjectNumber", "user_subject.subjectNum");
+    	msg.setWhereCol("user.id", "user_subject.userId");
+    	msg.setWhere("hod_subject.hodId", ID);
+    	return msg;
+	}
+	
+	/**
+	 * Generates a message to select a Student from the database based on the hod ID.
+	 *
+	 * @param ID The ID of the hod.
+	 * @return The generated Msg object for the user selection.
+	 */
+	public Msg selectUserByHodAndStudent(String ID) {
+		Msg msg = new Msg(MsgType.select);
+    	msg.setSelect("user.*");
+    	msg.setFrom("cems.user, cems.studenttest,cems.testtoexecute, cems.test, cems.course, cems.hod_subject");
+    	msg.setWhereCol("user.id", "studenttest.studentId");
+    	msg.setWhereCol("studenttest.testCode", "testtoexecute.testCode");
+    	msg.setWhereCol("testtoexecute.testId", "test.id");
+    	msg.setWhereCol("test.courseNumber", "course.number");
+    	msg.setWhereCol("hod_subject.subjectNumber", "course.subjectNum");
+    	msg.setWhere("hod_subject.hodId", ID);
+    	return msg;
+	}
+	
+	/**
+	 * Generates a message to select a Course from the database based on the hod ID.
+	 *
+	 * @param ID The ID of the hod.
+	 * @return The generated Msg object for the user selection.
+	 */
+	public Msg selectUserByHodAndCourse(String ID) {
+		Msg msg = new Msg(MsgType.select);
+    	msg.setSelect("course.*");
+    	msg.setFrom("cems.course, cems.hod_subject");
+    	msg.setWhereCol("course.subjectNum", "hod_subject.subjectNumber");
+    	msg.setWhere("hod_subject.hodId", ID);
+    	return msg;
+	}
+	
 }
