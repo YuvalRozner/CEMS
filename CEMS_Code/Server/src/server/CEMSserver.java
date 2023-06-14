@@ -118,10 +118,6 @@ public class CEMSserver extends AbstractServer {
 			case lockTest:
 				serverController.addConsole("asked to lock test with test code " + msg.getTestCode()+".\n");
 				System.out.println("asked to lock test with test code " + msg.getTestCode()+".");
-				break;
-			default:
-					break;
-				}
 				sendToClient(new Msg(MsgType.insertSucceeded), client);
 				break;
 			case file:
