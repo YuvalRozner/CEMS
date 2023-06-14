@@ -6,6 +6,7 @@ import JDBC.Msg;
 import JDBC.MsgType;
 import enteties.Course;
 import enteties.Question;
+import enteties.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -122,4 +123,34 @@ public class QuestionController {
 		if(sum!=100) return new String("the points sum must be 100.");
 		return questionWithPoints;
 	}
+	
+
+	/**
+	 * Retrieves the questions related to the given test ID from the database.
+	 *
+	 * @param testId The ID of the test.
+	 * @return A Msg object containing the query information to retrieve the questions.
+	 */
+	public Msg getQuestionByTestId(String testId) {
+   	Msg msg = new Msg(MsgType.select);
+   	msg.setSelect("question.*");
+   	msg.setFrom("cems.test, cems.question, cems.test_question");
+   	msg.setWhereCol("test.id", "test_question.testId");
+   	msg.setWhereCol("test_question.questionId", "question.id"); 
+   	msg.setWhere("test.id", testId);
+   	return msg;
+   }
+	
+	
+	public Msg getQuestionByTestCodeAndStudentId(Integer testCode,String studentId) {
+   	Msg msg = new Msg(MsgType.select);
+   	msg.setSelect("question.*");
+   	msg.setFrom("cems.studentTest, cems.TestToExecute, cems.question, cems.test_question");
+	msg.setWhereCol("studentTest.testCode", "TestToExecute.testCode");
+	msg.setWhereCol("TestToExecute.testId", "test_question.testId");
+   	msg.setWhereCol("test_question.questionId", "question.id"); 
+   	msg.setWhere("studentTest.testCode", testCode);
+   	msg.setWhere("studentTest.studentId", studentId);
+   	return msg;
+   }
 }

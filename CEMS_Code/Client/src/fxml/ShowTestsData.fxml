@@ -48,12 +48,12 @@
       <Circle fill="WHITE" layoutX="54.0" layoutY="565.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />
       <TableView fx:id="table" layoutX="38.0" layoutY="148.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="260.0" prefWidth="502.0" stylesheets="@TableView.css">
         <columns>
-          <TableColumn fx:id="numTestcol" prefWidth="65.0" text="Num" />
-          <TableColumn fx:id="coursnamecol" prefWidth="90.0" text="course" />
-            <TableColumn fx:id="datecol" prefWidth="89.5" text="date" />
-            <TableColumn fx:id="showcol" prefWidth="86.0" text="show" />
-            <TableColumn fx:id="codecol" prefWidth="57.5" text="code" />
-            <TableColumn fx:id="typecol" prefWidth="112.0" text="type" />
+          <TableColumn fx:id="numTestcol" prefWidth="74.0" text="Test ID" />
+          <TableColumn fx:id="coursnamecol" prefWidth="99.0" text="Course" />
+            <TableColumn fx:id="datecol" prefWidth="94.5" text="Date" />
+            <TableColumn fx:id="showcol" prefWidth="67.0" text="Show Test" />
+            <TableColumn fx:id="codecol" prefWidth="86.5" text="Test Code" />
+            <TableColumn fx:id="typecol" prefWidth="79.0" text="Test Type" />
         </columns>
       </TableView>
       <Button fx:id="backbtn" layoutX="440.0" layoutY="557.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backBtn" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">

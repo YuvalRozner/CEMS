@@ -2,70 +2,123 @@ package gui;
 
 import java.util.ArrayList;
 
+import JDBC.Msg;
 import client.ChatClient;
-import enteties.Test;
+import controllers.TestToExecuteController;
+import enteties.TestToExecute;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * Controller class for the Show Test Data screen.
+ * Handles the interaction between the UI and the underlying logic for displaying tests.
+ * 
+ * @author Mor Shmuel
+ */
 public class ShowTestDataController  extends AbstractController{
-	private ArrayList<Test> arrShowTest;
+	
+	private ArrayList<TestToExecute> arrShowTest = new ArrayList<>();
 
-	private ObservableList<Test> shoeTestTable;
+	private ObservableList<TestToExecute> showTestTable;
+	
+	/**
+	 * object to use the TestToExecuteController class method.
+	 */
+    private static TestToExecuteController testToExecuteController = new TestToExecuteController();
+    
     @FXML
     private Button backbtn;
 
+    /**
+     * the columns for the table.
+     */
     @FXML
-    private TableColumn<Test, String> codecol,coursnamecol,datecol,numTestcol,showcol,typecol;
+    private TableColumn<TestToExecute, String> codecol,coursnamecol,datecol,showcol,typecol;
+    
+    /**
+     * the columns for the table.
+     */
+    @FXML
+    private TableColumn<TestToExecute, Integer> numTestcol;
     
     @FXML
-    private TableView<Test> table;
+    private TableView<TestToExecute> table = new TableView<TestToExecute>();
+    
+    /**
+	 * the TestToExecute for the show button.
+	 */
+	TestToExecute testToExecuteToShow;
+    
+	/**
+     * Default constructor for the ShowTestDataController class.
+     * initialize the showTestTable.
+     */
     public ShowTestDataController() {
-    	arrShowTest = new ArrayList<Test>();
-    	//arrShowTest.add(new Test("1234","logic","25.3.23","7896","online"));
-    	//arrShowTest.add(new Test("5678","infi","27.3.23","5942","manual"));
-        //ArrayList<Question> convertedList = new ArrayList<>();
-        for (Test Test : arrShowTest) {
-        	//Test.setShowT();
-        	//Test.getShowT().setOnMouseClicked(event -> {
-        		try {
-        			//showTestOpen(event);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-        	//});
+    	Msg msg = testToExecuteController.selectTestToExecuteByHod(ChatClient.user);
+    	sendMsg(msg);
+    	//System.out.println("Data = " + AbstractController.msgReceived.getData());
+    	arrShowTest = msgReceived.convertData(TestToExecute.class);
+        for (TestToExecute test : arrShowTest) {
+        	test.setNewButton();
+        	test.setButtonText("Show");
+        	test.getButton().setOnMouseClicked(event -> { 
+        		try { showTestOpen(event);
+				} catch (Exception e) {	e.printStackTrace();} 	});
         }
-        //shoeTestTable = FXCollections.observableArrayList(arrShowTest);
-        //for (Question q : arrQuestion) {
-        //    arrdup.add(new Question(q.getID(), q.getSubjectNum(), q.getCourseName(), q.getQuestion(), q.getNumber(),q.getLecturereCreated()));
-        //}
+        
+        showTestTable = FXCollections.observableArrayList(arrShowTest);
+        //System.out.println("showTestTable = " + showTestTable); 
+        table.setItems(showTestTable);
+		table.refresh();
     }
+    
+    /**
+     * Handles the event when a test is clicked to be shown.
+     * Retrieves the corresponding TestToExecute object based on the clicked button.
+     * Sets the selected test execution to be shown and starts the "showStudentTest" view.
+     *
+     * @param event The mouse event triggered by clicking the show button of a test execution.
+     * @throws Exception if an exception occurs during the process.
+     */
     @FXML
     private void showTestOpen(MouseEvent event) throws Exception{
-    	start("executeTestShowTest", "showTestData");
-        System.out.println("Button clicked!");
+    	 Button clickedButton = (Button) event.getSource(); //get the button that has been clicked
+         for (TestToExecute testToExecute : showTestTable)  //search for the studentTest.
+        	 if (testToExecute.getButton().equals(clickedButton)) { 
+             	testToExecuteToShow = testToExecute;
+             	start("showStudentTest", "showTestData");
+             }		
     }
     
+    /**
+     * Initializes the Show Test Data screen.
+     * Configures the table columns and sets the table items.
+     */
     @FXML
 	protected void initialize() {
-    	codecol.setCellValueFactory(new PropertyValueFactory<Test, String>("code"));
-    	coursnamecol.setCellValueFactory(new PropertyValueFactory<Test, String>("course"));
-    	datecol.setCellValueFactory(new PropertyValueFactory<Test, String>("date"));
-		
-    	numTestcol.setCellValueFactory(new PropertyValueFactory<Test, String>("id"));
-    	showcol.setCellValueFactory(new PropertyValueFactory<Test, String>("showT"));
-		
-    	typecol.setCellValueFactory(new PropertyValueFactory<Test, String>("type"));
+    	codecol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("testCode"));
+    	coursnamecol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("courseName"));
+    	datecol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("date"));
+    	numTestcol.setCellValueFactory(new PropertyValueFactory<TestToExecute, Integer>("testId"));
+    	showcol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("button"));
+    	typecol.setCellValueFactory(new PropertyValueFactory<TestToExecute, String>("testingType"));
 
-		table.setItems(shoeTestTable);
-		
+		table.setItems(showTestTable);
 		table.refresh();
 	}
+    
+    /**
+     * Returns the TestToExecute object to be shown.
+     *
+     * @return The TestToExecute object to be shown.
+     */
+    public TestToExecute getTestToShow() {
+		return testToExecuteToShow;
+    }
 }

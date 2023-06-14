@@ -2,8 +2,12 @@ package gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
 public class HodMenuController extends AbstractController{
+	
+	@FXML
+    private Label welcomeLbl;
 
     @FXML
     void ShowQuestions(ActionEvent event) throws Exception {
@@ -30,5 +34,9 @@ public class HodMenuController extends AbstractController{
     void showTest(ActionEvent event) throws Exception {
 		start("showTestsData", "hodMenu");
     }
+    
+    public void setWelcome(String name) {
+		welcomeLbl.setText(name);
+	}
 
 }

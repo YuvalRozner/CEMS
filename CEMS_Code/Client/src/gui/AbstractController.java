@@ -25,16 +25,17 @@ public abstract class AbstractController implements SceneSetter {
     private static UserController userController = new UserController();
 
 	public void start(String fxmlName, String prevScreen) throws Exception {
+		
 		this.fxmlName = convertToSentence(fxmlName);
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlName + ".fxml"));
 		Parent root = loader.load();
 		ChatClient.screens.put(fxmlName, loader.getController());
 		Scene tmpScene = new Scene(root);
-
+		
 		((SceneSetter)loader.getController()).setScene(tmpScene);
 		((SceneSetter)loader.getController()).setPrevScreen(prevScreen);
-
+		ChatClient.lastCurrentScreen = loader.getController();
 		primaryStage.setTitle(convertToSentence(fxmlName));
 		primaryStage.setScene(tmpScene);
 		primaryStage.centerOnScreen();
@@ -91,6 +92,7 @@ public abstract class AbstractController implements SceneSetter {
 	public void backBtn(ActionEvent event) throws Exception {
 		((Node)event.getSource()).getScene().getWindow().hide();
 		ChatClient.getScreen(prevScreen).display();
+		ChatClient.lastCurrentScreen = ChatClient.getScreen(prevScreen);
 		primaryStage.setTitle(convertToSentence(prevScreen));
 	}
 	

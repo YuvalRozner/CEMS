@@ -18,6 +18,7 @@ public class ChatClient extends AbstractClient {
 	 */
 
 	public static HashMap<String, AbstractController> screens = new HashMap<String, AbstractController>();
+	public static AbstractController lastCurrentScreen;
 	public static User user;
 	public static boolean awaitResponse = false;
 	private CemsFileController cemsFileController = new CemsFileController();

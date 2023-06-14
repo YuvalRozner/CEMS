@@ -40,9 +40,9 @@ public class LoginController extends AbstractController{
     			start("studentMenu" , "login");
     			((StudentMenuController)ChatClient.getScreen("studentMenu")).setWelcome("Welcome " + user.getName());
     			break;
-    		case "hod":
+    		case "Hod":
     			start("hodMenu" , "login");
-    			//((HODMenuController)ChatClient.getScreen("HODMenu")).setWelcome("Welcome " + user.getName());
+    			((HodMenuController)ChatClient.getScreen("hodMenu")).setWelcome("Welcome " + user.getName());
     			break;
     	}
     }
@@ -57,28 +57,4 @@ public class LoginController extends AbstractController{
     	sendMsg(userController.getLoggedinMsg(user, "yes"));
     	return true;
 	}
-	
-    @FXML
-    void openClient(ActionEvent event) throws Exception {
-    	ChatClient.resetUser();
-    	login("rozi","123");
-    	User user = ChatClient.user;
-    	start("studentMenu" , "login");
-    }
-
-    @FXML
-    void openHOD(ActionEvent event) throws Exception {
-    	ChatClient.resetUser();
-    	login("mori","123");
-    	User user = ChatClient.user;
-    	start("hodMenu" , "login");
-    }
-
-    @FXML
-    void openLecturer(ActionEvent event) throws Exception {
-    	ChatClient.resetUser();
-    	login("geek","123");
-    	User user = ChatClient.user;
-    	start("lecturerMenu" , "login");
-    }
 }

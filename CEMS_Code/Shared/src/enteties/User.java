@@ -128,6 +128,11 @@ public class User {
 		User u = (User) obj;
 		return id.equals(u.getId());
 	}
+	
+	@Override
+	public int hashCode() {
+		return id.hashCode();
+	}
 
 	@Override
 	public String toString() {
