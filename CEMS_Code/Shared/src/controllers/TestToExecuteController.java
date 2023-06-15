@@ -18,14 +18,94 @@ import javafx.collections.ObservableList;
 public class TestToExecuteController {
 	
 	/**
+	 * @param upOrDown
+	 * -1 to get doun the distribution with old grade.
+	 * 1 to ger up the distribution with new grade.
+	 * @param code key of the test in data.
+	 * @param grade grade of one sudent when he finish the test.
+	 * @return
+	 */
+	public Msg insertDistributionByCode(Integer code,Integer grade,Integer upOrDown ) {
+		Msg msg = new Msg(MsgType.updatePlusOne);
+		msg.setTableToUpdate("cems.testtoexecute");
+		if(grade>=0 && grade<10) {
+			msg.setSet("distrubition1", upOrDown);
+		}else if (grade>=10 && grade<20) {
+			msg.setSet("distrubition2", upOrDown);
+		}else if (grade>=20 && grade<30) {
+			msg.setSet("distrubition3", upOrDown);
+		}else if (grade>=30 && grade<40) {
+			msg.setSet("distrubition4", upOrDown);
+		}else if (grade>=40 && grade<50) {
+			msg.setSet("distrubition5", upOrDown);
+		}else if (grade>=50 && grade<60) {
+			msg.setSet("distrubition6", upOrDown);
+		}else if (grade>=60 && grade<70) {
+			msg.setSet("distrubition7", upOrDown);
+		}else if (grade>=70 && grade<80) {
+			msg.setSet("distrubition8", upOrDown);
+		}else if (grade>=80 && grade<90) {
+			msg.setSet("distrubition9", upOrDown);
+		}else if (grade>=90 && grade<=100) {
+			msg.setSet("distrubition10", upOrDown);
+		}
+		msg.setWhere("testCode", code);
+		return msg;
+	}
+	
+	/**
+	 * make query to get if the test is lock or not.
+	 * @param code key of the test in data.
+	 * @return Msg contain select query.
+	 */
+
+	public Msg checkIfTheTestIsLock(String code) {
+		Msg msg = new Msg (MsgType.select);
+		msg.setSelect("testtoexecute.`lock`");
+		msg.setFrom("cems.testtoexecute");
+		msg.setWhere("testCode", code);
+		return msg;
+	}
+	
+	/**
 	 * 
+	 * @param code
+	 * @return
+	 */
+
+	public Msg checkIfTheStudentIsLast(Integer code) {
+		Msg msg =new Msg(MsgType.select);
+		msg.setSelect("testtoexecute.numberOfStudentStarted");
+		msg.setSelect("testtoexecute.numberOfStudentFinished");
+		msg.setSelect("testtoexecute.numberOfStudent");
+		msg.setFrom("cems.testtoexecute");
+		msg.setWhere("testCode", code);
+		return msg;
+		
+	}	
+	
+	/**
+	 * @param numberToPlus How much would you like to add to the field.
+	 * @param whichField
+	 * start-for numberOfStudentStarted
+	 * finish - for numberOfStudentFinished
+	 * cantSubmit -for student that cant submit , numberOfStudentי
 	 * @param code key of the test in data.
 	 * @return Msg contain update query.
 	 */
-	public Msg updateNumberOfStudenByOne(String code) {
+	public Msg updateNumberOfStudenByOne(Integer numberToPlus,String code,String whichField) {
     	Msg msg = new Msg(MsgType.updatePlusOne);
     	msg.setTableToUpdate("cems.testtoexecute");
-    	msg.setSet("numberOfStudentStarted",1);
+    	if (whichField.equals("start")){
+    		msg.setSet("numberOfStudentStarted",numberToPlus);
+    		
+    	}
+    	if (whichField.equals("cantSubmit")) {
+    		msg.setSet("numberOfStudent",numberToPlus);
+    	}
+    	if(whichField.equals("finish")) {
+    		msg.setSet("numberOfStudentFinished",numberToPlus);
+    	}
     	msg.setWhere("testCode", code); 
     	return msg;
     }

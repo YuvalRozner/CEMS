@@ -77,6 +77,7 @@ public class ChatClient extends AbstractClient {
 				System.out.println("Lock test with code: " + msg.getTestCode());
 				break;
 			case file:
+				msg.setPathFile("@../../file/");
 				cemsFileController.saveFile(msg);
 				break;
 			default:

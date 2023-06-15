@@ -9,80 +9,96 @@ import enteties.TestToExecute;
 import enteties.User;
 
 public class StudentTestController {
-	
-	
-	public Msg checkTimeLeft (Integer code) {
-		Msg msg = new Msg(MsgType.select);
-		msg.setSelect("test.duration");
-		msg.setFrom("cems.test");
-		msg.setFrom("cems.testtoexecute");
-		msg.setWhere("testtoexecute.testCode", code);
-		msg.setWhereCol("testtoexecute.testId","test.id");
+
+	/**
+	 * Creates a message object to update the student's answers, grade, and other
+	 * details in the database for a manual test.
+	 *
+	 * @param approved   The approval status for the test.
+	 * @param timePassed The time passed by the student to complete the test (in
+	 *                   minutes).
+	 * @param answers    The answers provided by the student.
+	 * @param grade      The grade obtained by the student.
+	 * @param id         The ID of the student.
+	 * @param code       The code of the test.
+	 * @return The message object for updating the student's test details.
+	 */
+
+	public Msg InsertAnswersAndGradeManual(String approved, Integer timePassed, String ansewrs, Integer grade,
+			String id, Integer code) {
+		Msg msg = new Msg(MsgType.update);
+		msg.setTableToUpdate("cems.studenttest");
+		msg.setSet("answers", ansewrs);
+		msg.setSet("grade", grade);
+		msg.setSet("timePassed", timePassed);
+		msg.setSet("approved", approved);
+		msg.setWhere("studentId", id);
+		msg.setWhere("testCode", code);
 		return msg;
-		
 	}
-	
-	
-	
+
 	/**
 	 * constructs a database select message to check if user already did this test.
+	 * 
 	 * @param user
-	 * @param code of test 
+	 * @param code of test
 	 * @return msg representing select query.
 	 */
-	
-	public Msg studentAlreadyAccessed(User user,String code) {
+
+	public Msg studentAlreadyAccessed(User user, String code) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("studenttest.studentId");
 		msg.setFrom("cems.studenttest");
 		msg.setWhereCol("studentId", user.getId());
 		msg.setWhere("testCode", code);
 		return msg;
-		
+
 	}
-	
-    /**
-     * Constructs a database insert message to insert StudentTest.
-     *
-     * @param user The User object for whom to insert the Test..
-     * @return A Msg object representing the database insert message.
-     */
-	public Msg insertStudentTest(TestToExecute testToExecute,User user) {
-    	Msg msg = new Msg(MsgType.insert);
-    	msg.setTableToUpdate("cems.studenttest");
-    	msg.setColNames("studentId,testCode");
-    	ArrayList <Object> tmp = new ArrayList<Object>();
-    	tmp.add(user.getId());
-    	tmp.add(testToExecute.getTestCode());
-    	msg.setValues(tmp);
-    	return msg;
-    }
-	
-    /**
-     * Constructs a database select message to retrieve StudentTest including test to execute course and test for the right student.
-     *
-     * @param user The User object for whom to retrieve the Test..
-     * @return A Msg object representing the database select message.
-     */
-	
+
+	/**
+	 * Constructs a database insert message to insert StudentTest.
+	 *
+	 * @param user The User object for whom to insert the Test..
+	 * @return A Msg object representing the database insert message.
+	 */
+	public Msg insertStudentTest(TestToExecute testToExecute, User user) {
+		Msg msg = new Msg(MsgType.insert);
+		msg.setTableToUpdate("cems.studenttest");
+		msg.setColNames("studentId,testCode");
+		ArrayList<Object> tmp = new ArrayList<Object>();
+		tmp.add(user.getId());
+		tmp.add(testToExecute.getTestCode());
+		msg.setValues(tmp);
+		return msg;
+	}
+
+	/**
+	 * Constructs a database select message to retrieve StudentTest including test
+	 * to execute course and test for the right student.
+	 *
+	 * @param user The User object for whom to retrieve the Test..
+	 * @return A Msg object representing the database select message.
+	 */
+
 	public Msg getMsgForStudentTestsByID(User user) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("studenttest.*,testtoexecute.*, test.*, course.*");
 		msg.setFrom("cems.studenttest,cems.testtoexecute, cems.test, cems.course");
 		msg.setWhereCol("testtoexecute.testId", "test.id");
-    	msg.setWhereCol("test.courseNumber", "course.number"); 
-    	msg.setWhereCol("studenttest.testCode", "testtoexecute.testCode"); 
+		msg.setWhereCol("test.courseNumber", "course.number");
+		msg.setWhereCol("studenttest.testCode", "testtoexecute.testCode");
 		msg.setWhere("studenttest.studentId", user.getId());
 		msg.setWhere("studenttest.approved", "true");
 		return msg;
 	}
 
-    /**
-     * Constructs a database select message to retrieve StudentTest including studentName associated with a TestToExecute.
-     *
-     * @param t The TestToExecute object for whom to retrieve the StudentTest.
-     * @return A Msg object representing the database select message.
-     */
+	/**
+	 * Constructs a database select message to retrieve StudentTest including
+	 * studentName associated with a TestToExecute.
+	 *
+	 * @param t The TestToExecute object for whom to retrieve the StudentTest.
+	 * @return A Msg object representing the database select message.
+	 */
 	public Msg getMsgForStudentTestsByTestToExecute(TestToExecute t) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("studenttest.*, user.name");
@@ -92,13 +108,14 @@ public class StudentTestController {
 		msg.setWhere("approved", "false");
 		return msg;
 	}
-	
-    /**
-     * Constructs a database update message to update a StudentTest approved field, grade and lecturerNote.
-     *
-     * @param st The StudentTest object to be updated.
-     * @return A Msg object representing the database select message.
-     */
+
+	/**
+	 * Constructs a database update message to update a StudentTest approved field,
+	 * grade and lecturerNote.
+	 *
+	 * @param st The StudentTest object to be updated.
+	 * @return A Msg object representing the database select message.
+	 */
 	public Msg getMsgToUpdateStudentTests(StudentTest st) {
 		Msg msg = new Msg(MsgType.update);
 		msg.setTableToUpdate("cems.studenttest");
@@ -110,13 +127,13 @@ public class StudentTestController {
 		msg.setWhere("testCode", st.getTestCode());
 		return msg;
 	}
-	
+
 	/**
-     * Constructs a database select message to retrieve StudentTest.
-     *
-     * @param The ID for whom to retrieve the StudentTest.
-     * @return A Msg object representing the database select message.
-     */
+	 * Constructs a database select message to retrieve StudentTest.
+	 *
+	 * @param The ID for whom to retrieve the StudentTest.
+	 * @return A Msg object representing the database select message.
+	 */
 	public Msg getMsgForStudentTestsByID(String ID) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("studenttest.*");
@@ -125,5 +142,5 @@ public class StudentTestController {
 		msg.setWhere("user.id", ID);
 		return msg;
 	}
-	
+
 }

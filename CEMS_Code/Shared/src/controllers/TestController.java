@@ -13,15 +13,21 @@ import enteties.User;
  */
 public class TestController {
 	
-	public Msg checkTimeLeft (Integer code) {
+	/**
+	 * constructs a database select message to get the duration of he test.
+	 * @param code of test the student take.
+	 * @return msg representing select query.
+	 */
+
+	public Msg getDurationByCode(Integer code) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("test.duration");
 		msg.setFrom("cems.test");
 		msg.setFrom("cems.testtoexecute");
 		msg.setWhere("testtoexecute.testCode", code);
-		msg.setWhereCol("testtoexecute.testId","test.id");
+		msg.setWhereCol("testtoexecute.testId", "test.id");
 		return msg;
-		
+
 	}
 
 	/**

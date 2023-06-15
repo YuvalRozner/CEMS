@@ -1,5 +1,9 @@
 package JDBC;
 
+/**
+ * The {@code MsgType} enum represents the different types of messages exchanged between the client and server
+ * in the JDBC application.
+ */
 public enum MsgType {
 	
 	disconnect, // client ---> server. | indicates that the client want to disconnect from server.

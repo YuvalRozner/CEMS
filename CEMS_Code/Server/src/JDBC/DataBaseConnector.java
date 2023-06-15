@@ -5,7 +5,17 @@ import java.sql.SQLException;
 
 import server.CEMSserver;
 
+/**
+ * The DataBaseConnector class provides a method for establishing a connection to the database.
+ */
 public class DataBaseConnector {
+	
+    /**
+     * Establishes a connection to the database.
+     *
+     * @param Cserver The CEMSserver instance.
+     * @return True if the connection is successful, false otherwise.
+     */
 	@SuppressWarnings("deprecation")
 	public boolean connectionToDataBase(CEMSserver Cserver) {
 		try {

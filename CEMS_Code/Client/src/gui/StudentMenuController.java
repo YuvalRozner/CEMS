@@ -12,18 +12,37 @@ import javafx.scene.control.Label;
 import notifications.NotificationAlertsController;
 
 public class StudentMenuController extends AbstractController {
+	/**
+	 * lable for headline
+	 */
 
 	@FXML
 	private Label welcomeLbl;
-	
+	/**
+	 * save the test to shown.
+	 */
 	private ArrayList<StudentTest> allTest=new ArrayList<StudentTest>() ;	
+	
+	/**
+	 * object to use the StudentTestController class method.
+	 */
 	StudentTestController studentTestController =new StudentTestController();
-
+	
+	/**
+	 * logout from the system return to login screen and change in the db to lodged out.
+	 * @param event press on logout button.
+	 * @throws Exception
+	 */
 	@FXML
 	void logOut(ActionEvent event) throws Exception {
 		super.logout();
 		super.backBtn(event);
 	}
+	/**
+	 * show list of approved grades and option to see the test .
+	 * @param event press on show grade in menu.
+	 * @throws Exception
+	 */
 
 	@FXML
 	void showGrade(ActionEvent event) throws Exception {
@@ -38,12 +57,19 @@ public class StudentMenuController extends AbstractController {
         	}
 		start("showGrade", "studentMenu");
 	}
-
+	/**
+	 * go to start test window to connect for a test.
+	 * @param event press on start test in menu.
+	 * @throws Exception
+	 */
 	@FXML
 	void startTest(ActionEvent event) throws Exception {
 		start("startTest", "studentMenu");
 	}
-
+	/**
+	 * put for any clien his own name in the welcome lable.
+	 * @param name name of client that entered.
+	 */
 	public void setWelcome(String name) {
 		welcomeLbl.setText(name);
 	}

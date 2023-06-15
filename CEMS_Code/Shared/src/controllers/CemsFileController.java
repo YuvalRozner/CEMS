@@ -54,7 +54,8 @@ public class CemsFileController {
 		  System.out.println("file is "+file);
 		  int fileSize =file.getSize(); 
 			System.out.println("length "+ fileSize);
-			File myfile =new File("Recived_"+file.getFileName());
+			File myfile =new File(msg.getPathFile()+"Recived_"+file.getFileName());
+			System.out.println("File saved at: " + myfile.getAbsolutePath());//////////////
 			try {
 				FileOutputStream fos = new FileOutputStream(myfile);
 				BufferedOutputStream bos =new BufferedOutputStream(fos);
