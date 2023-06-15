@@ -6,11 +6,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import server.CEMSserver;
+
 /**
  * The DB_controller class provides methods for generating SQL queries for database operations.
  * it supports creating UPDATE, SELECT, and INSERT queries.
  */
 public class DB_controller {
+	
+	private static String dbName = CEMSserver.serverController.getDBNameTxt() + ".";
 
     /**
      * Creates an UPDATE query that increments the specified columns by one.
@@ -24,7 +28,7 @@ public class DB_controller {
 		if (tableToUpdate == null || set == null)
 			return "";
 		StringBuilder query = new StringBuilder("UPDATE ");
-		query.append(tableToUpdate.get(0)); // append the name of table wanted to be updated.
+		query.append(dbName + tableToUpdate.get(0)); // append the name of table wanted to be updated.
 		query.append(" SET ");
 		query.append(buildConditionPlusOnePartWithComma(set)); // append the parameters to be updated.
 		if (where == null)
@@ -65,9 +69,9 @@ public class DB_controller {
      */
 	public static String createSELECTquery(ArrayList<String> select, ArrayList<String> from, HashMap<String, Object> where, HashMap<String, Object> whereCol) {
 		StringBuilder query = new StringBuilder("SELECT ");
-		query.append(separateWithComma(select));
+		query.append(separateWithComma(select, false));
 		query.append(" FROM ");
-		query.append(separateWithComma(from));
+		query.append(separateWithComma(from, true));
 		if (where == null)
 			return query.toString() + ";";
 		// get here if and only if there is WHRE to add:
@@ -90,7 +94,7 @@ public class DB_controller {
 		if (tableToUpdate == null || set == null)
 			return "";
 		StringBuilder query = new StringBuilder("UPDATE ");
-		query.append(tableToUpdate.get(0)); // append the name of table wanted to be updated.
+		query.append(dbName + tableToUpdate.get(0)); // append the name of table wanted to be updated.
 		query.append(" SET ");
 		query.append(buildConditionPartWithComma(set)); // append the parameters to be updated.
 		if (where == null)
@@ -112,9 +116,9 @@ public class DB_controller {
 		if (tableToUpdate == null || colNames == null || values == null || colNames.size() != values.size())
 			return "";
 		StringBuilder query = new StringBuilder("INSERT INTO ");
-		query.append(tableToUpdate.get(0)); // append the name of table wanted to be insert to.
+		query.append(dbName + tableToUpdate.get(0)); // append the name of table wanted to be insert to.
 		query.append(" (");
-		query.append(separateWithComma(colNames)); // append the columns names to be updated.
+		query.append(separateWithComma(colNames, false)); // append the columns names to be updated.
 		query.append(") VALUES ");
 		query.append(separateValuesWithComma(values)); // append the values to insert.
 		return query.toString() + ";";
@@ -148,12 +152,12 @@ public class DB_controller {
      * @param lst The ArrayList containing the elements to separate.
      * @return A string with the elements separated by commas.
      */
-	private static String separateWithComma(ArrayList<String> lst) {
+	private static String separateWithComma(ArrayList<String> lst, boolean withDbName) {
 		if (lst == null || lst.size() == 0)
 			return "";
 		StringBuilder res = new StringBuilder();
 		for (String str : lst)
-			res.append(str + ",");
+			res.append((withDbName) ? (dbName + str + ",") : (str + ","));
 		res.deleteCharAt(res.length() - 1);
 		return res.toString();
 	}

@@ -46,7 +46,7 @@ public class RequestController {
      */
 	public Msg insertRequest(Request request) {
 		Msg msg = new Msg(MsgType.insert);
-		msg.setTableToUpdate("cems.request");
+		msg.setTableToUpdate("request");
 		msg.setColNames("testCode, lecturerId, hodId, duration, explanation");
 		ArrayList<Object> tmp = new ArrayList<>();
 		tmp.add(request.getTestCode());
@@ -68,7 +68,7 @@ public class RequestController {
 	public Msg selectRequest(String hod) {
     	Msg msg = new Msg(MsgType.select);
     	msg.setSelect("request.*, testtoexecute.*, test.*, user.*");
-    	msg.setFrom("cems.request, cems.testtoexecute, cems.test, cems.course, cems.user");
+    	msg.setFrom("request, testtoexecute, test, course, user");
     	msg.setWhereCol("request.testCode", "testoexecute.testCode");
     	msg.setWhereCol("testtoexecute.testId", "test.id");
     	msg.setWhereCol("request.lecturerId", "user.id");

@@ -54,7 +54,7 @@ public class QuestionController {
      */
 	public Msg insertQuestion(Question q) {
 		Msg msgQ = new Msg(MsgType.insert);
-		msgQ.setTableToUpdate("cems.question");
+		msgQ.setTableToUpdate("question");
 		msgQ.setColNames("id, number, question, subjectNum, lecturerId, answer1, answer2, answer3, answer4, correctAnswer, instructions");
 		ArrayList<Object> tmp = new ArrayList<>();
 		tmp.add(q.getId());
@@ -75,7 +75,7 @@ public class QuestionController {
 		
 		for(Course c : q.getCourses()) {
 			Msg msgQ_C = new Msg(MsgType.insert);
-			msgQ_C.setTableToUpdate("cems.question_course");
+			msgQ_C.setTableToUpdate("question_course");
 			msgQ_C.setColNames("questionId, courseNum");
 			ArrayList<Object> qc = new ArrayList<Object>();
 			qc.add(q.getId());
@@ -133,7 +133,7 @@ public class QuestionController {
 	public Msg getQuestionAndPointsByTestId(String testId) {
    	Msg msg = new Msg(MsgType.select);
    	msg.setSelect("question.*, test_question.points");
-   	msg.setFrom("cems.test, cems.question, cems.test_question");
+   	msg.setFrom("test, question, test_question");
    	msg.setWhereCol("test.id", "test_question.testId");
    	msg.setWhereCol("test_question.questionId", "question.id"); 
    	msg.setWhere("test.id", testId);
@@ -144,7 +144,7 @@ public class QuestionController {
 	public Msg getQuestionAndPointsByTestCodeAndStudentId(Integer testCode,String studentId) {
    	Msg msg = new Msg(MsgType.select);
    	msg.setSelect("question.*, test_question.points");
-   	msg.setFrom("cems.studentTest, cems.TestToExecute, cems.question, cems.test_question");
+   	msg.setFrom("studentTest, TestToExecute, question, test_question");
 	msg.setWhereCol("studentTest.testCode", "TestToExecute.testCode");
 	msg.setWhereCol("TestToExecute.testId", "test_question.testId");
    	msg.setWhereCol("test_question.questionId", "question.id"); 
@@ -156,7 +156,7 @@ public class QuestionController {
 	public Msg getQuestionAndPointsByTestCode(Integer testCode) {
 	   	Msg msg = new Msg(MsgType.select);
 	   	msg.setSelect("question.*, test_question.points");
-	   	msg.setFrom("cems.testToExecute, cems.question, cems.test_question");
+	   	msg.setFrom("testToExecute, question, test_question");
 		msg.setWhereCol("testToExecute.testid", "test_question.testId");
 	   	msg.setWhereCol("test_question.questionId", "question.id"); 
 	   	msg.setWhere("testToExecute.testCode", testCode);

@@ -22,8 +22,8 @@ public class TestController {
 	public Msg getDurationByCode(String code) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("test.duration");
-		msg.setFrom("cems.test");
-		msg.setFrom("cems.testtoexecute");
+		msg.setFrom("test");
+		msg.setFrom("testtoexecute");
 		msg.setWhere("testtoexecute.testCode", code);
 		msg.setWhereCol("testtoexecute.testId", "test.id");
 		return msg;
@@ -62,7 +62,7 @@ public class TestController {
      */
 	public Msg insertTest(Test t, ArrayList<Question> newTest_question) {
 		Msg msgT = new Msg(MsgType.insert);
-		msgT.setTableToUpdate("cems.test");
+		msgT.setTableToUpdate("test");
 		msgT.setColNames("id, number, courseNumber, duration, instructionsForStudent, instructionsForLecturer");
 		ArrayList<Object> tmp = new ArrayList<>();
 		tmp.add(t.getId());
@@ -78,7 +78,7 @@ public class TestController {
 		
 		for(Question q : newTest_question) {
 			Msg msgTQ = new Msg(MsgType.insert);
-			msgTQ.setTableToUpdate("cems.test_question");
+			msgTQ.setTableToUpdate("test_question");
 			msgTQ.setColNames("testId, questionId, points");
 			tmp = new ArrayList<>();
 			tmp.add(t.getId());
@@ -99,7 +99,7 @@ public class TestController {
 	public Msg selectTestByUser(User user) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("test.*, course.*");
-		msg.setFrom("cems.test, cems.user_subject, cems.course");
+		msg.setFrom("test, user_subject, course");
 		msg.setWhereCol("test.courseNumber", "course.number");
 		msg.setWhereCol("user_subject.subjectNum", "course.subjectNum");
 		msg.setWhere("user_subject.userId", user.getId());

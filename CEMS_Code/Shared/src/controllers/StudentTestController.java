@@ -25,7 +25,7 @@ public class StudentTestController {
 
 	public Msg InsertAnswersAndGradeManual(String approved, Integer timePassed, String ansewrs, Integer grade,String id, String code) {
 		Msg msg = new Msg(MsgType.update);
-		msg.setTableToUpdate("cems.studenttest");
+		msg.setTableToUpdate("studenttest");
 		msg.setSet("answers", ansewrs);
 		msg.setSet("grade", grade);
 		msg.setSet("timePassed", timePassed);
@@ -46,7 +46,7 @@ public class StudentTestController {
 	public Msg studentAlreadyAccessed(User user, String code) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("studenttest.studentId");
-		msg.setFrom("cems.studenttest");
+		msg.setFrom("studenttest");
 		msg.setWhereCol("studentId", user.getId());
 		msg.setWhere("testCode", code);
 		return msg;
@@ -61,7 +61,7 @@ public class StudentTestController {
 	 */
 	public Msg insertStudentTest(TestToExecute testToExecute, User user) {
 		Msg msg = new Msg(MsgType.insert);
-		msg.setTableToUpdate("cems.studenttest");
+		msg.setTableToUpdate("studenttest");
 		msg.setColNames("studentId,testCode");
 		ArrayList<Object> tmp = new ArrayList<Object>();
 		tmp.add(user.getId());
@@ -81,7 +81,7 @@ public class StudentTestController {
 	public Msg getMsgForStudentTestsByID(User user) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("studenttest.*,testtoexecute.*, test.*, course.*");
-		msg.setFrom("cems.studenttest,cems.testtoexecute, cems.test, cems.course");
+		msg.setFrom("studenttest, testtoexecute, test, course");
 		msg.setWhereCol("testtoexecute.testId", "test.id");
 		msg.setWhereCol("test.courseNumber", "course.number");
 		msg.setWhereCol("studenttest.testCode", "testtoexecute.testCode");
@@ -100,7 +100,7 @@ public class StudentTestController {
 	public Msg getMsgForStudentTestsByTestToExecute(TestToExecute t) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("studenttest.*, user.name");
-		msg.setFrom("cems.studenttest, cems.user");
+		msg.setFrom("studenttest, user");
 		msg.setWhereCol("studenttest.studentId", "user.id");
 		msg.setWhere("testCode", t.getTestCode());
 		msg.setWhere("approved", "false");
@@ -116,7 +116,7 @@ public class StudentTestController {
 	 */
 	public Msg getMsgToUpdateStudentTests(StudentTest st) {
 		Msg msg = new Msg(MsgType.update);
-		msg.setTableToUpdate("cems.studenttest");
+		msg.setTableToUpdate("studenttest");
 		msg.setSet("approved", st.getApproved());
 		msg.setSet("grade", st.getGrade());
 		msg.setSet("lecturerNotes", st.getLecturerNotes());
@@ -135,7 +135,7 @@ public class StudentTestController {
 	public Msg getMsgForStudentTestsByID(String ID) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("studenttest.*");
-		msg.setFrom("cems.studenttest, cems.user");
+		msg.setFrom("studenttest, user");
 		msg.setWhereCol("studenttest.studentId", "user.id");
 		msg.setWhere("user.id", ID);
 		return msg;
@@ -150,7 +150,7 @@ public class StudentTestController {
 	public Msg selectAllstudentBySpecificCodeTest(Integer code) {
 		Msg msg=new Msg(MsgType.select);
 		msg.setSelect("studenttest.grade");
-		msg.setFrom("cems.studenttest");
+		msg.setFrom("studenttest");
 		msg.setWhere("testCode",code);
 		return msg;
 	}
