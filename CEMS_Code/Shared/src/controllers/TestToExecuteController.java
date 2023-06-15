@@ -16,6 +16,22 @@ import javafx.collections.ObservableList;
  * Controller class for managing TestToExecute.
  */
 public class TestToExecuteController {
+	/**
+	 * Creates a message to update the median and average grades for a specific test in test to execute.
+	 *
+	 * @param code     The test code of the test to update.
+	 * @param average  The new average grade to set.
+	 * @param median   The new median grade to set.
+	 * @return A Msg object configured for the update operation.
+	 */
+	
+	public Msg updateMedianAndAverage (Integer code ,double average ,double median) {
+		Msg msg = new Msg(MsgType.update);
+		msg.setTableToUpdate("cems.testtoexecute");
+		msg.setSet("average", average);
+		msg.setSet("median", median);
+		return msg;
+	}
 	
 	/**
 	 * @param upOrDown

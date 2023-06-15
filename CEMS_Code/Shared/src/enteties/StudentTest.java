@@ -34,6 +34,14 @@ public class StudentTest {
 	private TextField note;
 	
 	/**
+	 * to get all grade to calculate average and median.
+	 * @param grade
+	 */
+	public StudentTest (Integer grade) {
+		this.grade=grade;
+	}
+	
+	/**
 	 * to check if student aleady do this test.
 	 * @param studentId
 	 */

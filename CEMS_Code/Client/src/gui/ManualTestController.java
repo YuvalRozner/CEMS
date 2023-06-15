@@ -1,5 +1,8 @@
 package gui;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import JDBC.Msg;
 import JDBC.MsgType;
 import client.ChatClient;
@@ -7,6 +10,7 @@ import controllers.CemsFileController;
 import controllers.StudentTestController;
 import controllers.TestController;
 import controllers.TestToExecuteController;
+import enteties.StudentTest;
 import enteties.Test;
 import enteties.TestToExecute;
 import javafx.event.ActionEvent;
@@ -84,6 +88,7 @@ public class ManualTestController extends AbstractController {
 				start("studentMenu", "login");
 			} catch (Exception e) {}}});
 		alert.showConfirmationAlert(ChatClient.user.getName()+" Are you sure ?","After clicking the OK button, the submission is final and there is no option to change it");
+		updateAverageAndMedian();
 		msg=testToExecuteController.checkIfTheStudentIsLast(StartTestController.getTestToExecute().getTestCode());
 		sendMsg(msg);
 		numbersOfStudent=msgReceived.convertData(TestToExecute.class).get(0);
@@ -93,8 +98,31 @@ public class ManualTestController extends AbstractController {
 			msg=testToExecuteController.getMsgToLockTest(StartTestController.getTestToExecute());
 			sendMsg(msg);
 		}
+	
+	}
+	/**
+	 * Updates the average and median grades for a specific test throw the server.
+	 */
+	public void updateAverageAndMedian(){
+		Msg msg;
+		double average=0 , median=0;
+		msg=studentTestController.selectAllstudentBySpecificCodeTest(StartTestController.getTestToExecute().getTestCode());
+		sendMsg(msg);
+		ArrayList<StudentTest> listOfStudent =msgReceived.convertData(StudentTest.class);
+		ArrayList<Integer> listOfGrades=new ArrayList<Integer>();
+		for(StudentTest student : listOfStudent) {
+			average+=student.getGrade();
+			listOfGrades.add(student.getGrade());
+		}
+		average=average/listOfGrades.size();
+		Collections.sort(listOfGrades);
+		median=listOfGrades.get(listOfGrades.size()/2);
+		msg=testToExecuteController.updateMedianAndAverage(StartTestController.getTestToExecute().getTestCode(),average,median);
+		sendMsg(msg);
 		
 	}
+	
+	
 	/**
 	 * Handles the submission of a test by a student.
 	 *
