@@ -130,6 +130,8 @@ public class ApproveGradeController extends AbstractController{
      */
     @FXML
 	protected void initialize() {
+    	try {
+    	if(testToExecuteLst==null) {notification.showErrorAlert("There are no tests to confirm grades for."); table.getItems().clear();	table.refresh(); return;}
     	// set the list of TestToExecute in the comboBox:
     	testComboBox.getItems().addAll(testToExecuteController.getTestToExecuteNames(testToExecuteLst));
     	// initialize what happens when choosing a TestToExecute in the comboBox:
@@ -144,6 +146,9 @@ public class ApproveGradeController extends AbstractController{
                     // Get the list of StudentTests associated with the selected TestToExecute:
                     if (selectedTestToExecute != null) {
                         sendMsg(studentTestController.getMsgForStudentTestsByTestToExecute(selectedTestToExecute));
+                        try {
+                        if(msgReceived==null || msgReceived.getData()==null) {notification.showErrorAlert("There are no grade to confirm in this test."); table.getItems().clear();	table.refresh(); return;}
+                        }catch(Exception e) {System.out.println("Error in initialize method."); return;}
                         studentTestLst = new ArrayList<>(msgReceived.convertData(StudentTest.class));
                         // set the table of StudentTests according to the selected TestToExecute:
                         for (StudentTest s :studentTestLst) {
@@ -168,6 +173,7 @@ public class ApproveGradeController extends AbstractController{
                 }
             }
         });
+    	}catch(Exception e) {System.out.println("Error in initialize method.");}
     	idCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("studentId"));
     	nameCol.setCellValueFactory(new PropertyValueFactory<StudentTest, String>("studentName"));
     	gradeCol.setCellValueFactory(new PropertyValueFactory<StudentTest, Integer>("grade"));
