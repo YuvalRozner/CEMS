@@ -2,130 +2,156 @@ package gui;
 
 import java.util.ArrayList;
 
-import JDBC.DB_controller;
+import JDBC.Msg;
 import client.ChatClient;
-import client.ClientUI;
+import controllers.UserController;
 import enteties.Question;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 
-public class QuestionTableController extends AbstractController{
-	
-	private ArrayList<Question> arrQuestion;
+/**
+ * Controller class for the Question Table screen.
+ * Handles the interaction between the UI and the underlying logic for displaying questions.
+ * 
+ * @author Mor Shmuel
+ */
+public class QuestionTableController extends AbstractController {
 
-	private ObservableList<Question> QTable;
-	
+    private ArrayList<Question> questionList = new ArrayList<>();
+
+    private ObservableList<Question> QTable;
+    
+    /**
+	 * object to use the UserController class method.
+	 */
+    private static UserController userController = new UserController();
+
     @FXML
     private TableView<Question> table = new TableView<Question>();
-
+    /**
+     * the columns for the table.
+     */
     @FXML
-    private TableColumn<Question, String> courseCol, idCol, lecturerCol, questionNumberCol, questionTextCol, subjectCol;
-    private ArrayList<Question> arrdup = new ArrayList<Question>();
-	
-	
-	public QuestionTableController() {
-		
-		//arrQuestion = new ArrayList<Question>(ChatClient.questionList);
-		arrQuestion = new ArrayList<Question>();
-		//arrQuestion.add(new Question("1234", "11200", "logic","how much is 1+1", 22,"ilena"));
-		//arrQuestion.add(new Question("5678", "12645", "infi","how much is 6+8", 23,"dan"));
-		QTable = FXCollections.observableArrayList(arrQuestion);
-		for (Question Q : arrQuestion) {
-        	Q.setNewShowQ();
-        	Q.getShowQ().setOnMouseClicked(event -> {
-        		try {
-        			showQuestionOpen(event);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-        	});
-        }
-		//for (Question q : arrQuestion) {
-		//	arrdup.add(new Question(q.getID(), q.getSubjectNum(), q.getCourseName(), q.getQuestion(), q.getNumber(),q.getLecturereCreated()));
-		//}
-		
-	}
-	
-	@FXML
-    private void showQuestionOpen(MouseEvent event) throws Exception{
-		start("showQuestion", "questionTable");
-        System.out.println("Button clicked!");
+    private TableColumn<Question, String> idCol, questionTextCol, lecturerCol, courseCol;
+
+    /**
+     * the columns for the table.
+     */
+    @FXML
+    private TableColumn<Question, Integer> questionNumberCol;
+
+    /**
+     * the Question test wanted to be shown.
+     */
+    public Question questionToShow;
+
+    /**
+     * to show the answer.
+     */
+    @FXML
+    private RadioButton answer1RadioButton, answer2RadioButton, answer3RadioButton, answer4RadioButton;
+    /**
+     * to show the answer.
+     */
+    @FXML
+    private ToggleGroup answersToggleGroup;
+    /**
+     * to show the answer.
+     */
+    @FXML
+    private Label questionLabel;
+
+    /**
+     * Default constructor for the CreateTestController class.
+     * initialize the questionList.
+     */
+    public QuestionTableController() {
+        Msg msg = userController.selectQuestionByhodId(ChatClient.user.getId());
+        sendMsg(msg);
+        //System.out.println("Data = " + AbstractController.msgReceived.getData());
+        questionList = msgReceived.convertData(Question.class);
+        //System.out.println("questionList = " + questionList); 
+        //System.out.println("course? " + (questionList.get(0).getCourse()==null));
+        QTable = FXCollections.observableArrayList(questionList);
     }
 
-
-   /*@FXML
-    void saveBtn(ActionEvent event) {
-        ArrayList<String> UpdateQueries = DB_controller.updateQuestions(table.getItems(), arrdup);
-        for (String query : UpdateQueries) {
-            System.out.println("Send to server update query -> " + query);
-            ClientUI.chat.accept(query);
-        }
-    } */
-    
+    /**
+     * Event handler for displaying the answers of the selected question.
+     *
+     * @param event The MouseEvent triggering the event.
+     */
     @FXML
-	protected void initialize() {
-    	idCol.setCellValueFactory(new PropertyValueFactory<Question, String>("ID"));
-		subjectCol.setCellValueFactory(new PropertyValueFactory<Question, String>("SubjectNum"));
-		courseCol.setCellValueFactory(new PropertyValueFactory<Question, String>("CourseName"));
-		
-		questionNumberCol.setCellValueFactory(new PropertyValueFactory<Question, String>("Number"));
-		lecturerCol.setCellValueFactory(new PropertyValueFactory<Question, String>("LecturereCreated"));
-		
-		questionTextCol.setCellValueFactory(new PropertyValueFactory<Question, String>("ShowQ"));
-        //questionTextCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        //questionTextCol.setEditable(true); 
-       
-		//table.setEditable(true); // Set the table editable
-		table.setItems(QTable);
-		
-		table.refresh();
-	}
-    @FXML
-    void onEditCommitQuestionTextCol(TableColumn.CellEditEvent<Question, String> event) {
-    	 String newValue = event.getNewValue();
-         Question question = event.getTableView().getItems().get(event.getTablePosition().getRow());
-         question.setQuestion(newValue);
+    void showAnswers(MouseEvent event) {
+        // Get the selected question from the table.
+        Question selectedQuestion = table.getSelectionModel().getSelectedItem();
+        // Display the question and answers in the UI.
+        questionLabel.setText(selectedQuestion.getQuestion());
+        answer1RadioButton.setText(selectedQuestion.getAnswers()[0]);
+        answer2RadioButton.setText(selectedQuestion.getAnswers()[1]);
+        answer3RadioButton.setText(selectedQuestion.getAnswers()[2]);
+        answer4RadioButton.setText(selectedQuestion.getAnswers()[3]);
+        // Select the correct answer toggle.
+        ObservableList<Toggle> toggles = answersToggleGroup.getToggles();
+        Toggle toggle = toggles.get(selectedQuestion.getCorrectAnswer()); // Index 2 represents the third toggle
+        answersToggleGroup.selectToggle(toggle);
     }
- 
-    
-    
-    
-    
-    
-    //shadow
-    
+
+    /**
+     * Initializes the Question Table screen.
+     * Configures the table columns and sets the table items.
+     */
+    @FXML
+    protected void initialize() {
+        idCol.setCellValueFactory(new PropertyValueFactory<Question, String>("id"));
+
+        courseCol.setCellValueFactory(new PropertyValueFactory<Question, String>("courseName"));
+
+        questionNumberCol.setCellValueFactory(new PropertyValueFactory<Question, Integer>("number"));
+        lecturerCol.setCellValueFactory(new PropertyValueFactory<Question, String>("lecturerId"));
+        questionTextCol.setCellValueFactory(new PropertyValueFactory<Question, String>("question"));
+
+        table.setItems(QTable);
+        table.refresh();
+    }
+
+    /**
+     * Event handler for committing changes to the question text column.
+     *
+     * @param event The ActionEvent triggering the event.
+     */
+    @FXML
+    void onEditCommitQuestionTextCol(ActionEvent event) {
+
+    }
+
+    /**
+     * Event handler for when the mouse enters the "Back" button area.
+     *
+     * @param event The MouseEvent triggering the event.
+     */
     @FXML
     void onMouseEnterdBackBtn(MouseEvent event) {
-    	 Button backbtn = (Button) event.getSource();
-         DropShadow shadow = new DropShadow();
-         backbtn.setEffect(shadow);
+
     }
 
-    @FXML
-    void onMouseEnteredSaveBtn(MouseEvent event) {
-    	 Button savebtn = (Button) event.getSource();
-         DropShadow shadow = new DropShadow();
-         savebtn.setEffect(shadow);
-    }
-    
+    /**
+     * Event handler for when the mouse exits the "Back" button area.
+     *
+     * @param event The MouseEvent triggering the event.
+     */
     @FXML
     void onMouseExitedBackBtn(MouseEvent event) {
-        Button backbtn = (Button) event.getSource();
-        backbtn.setEffect(null);
-    }
-    
-    @FXML
-    void onMouseExitedSaveBtn(MouseEvent event) {
-        Button backbtn = (Button) event.getSource();
-        backbtn.setEffect(null);
+
     }
 
 }

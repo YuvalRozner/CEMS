@@ -22,6 +22,7 @@ public class Question {
 	private Subject subject = null;
 	private ArrayList<Course> courses = null;
 	private Integer points = null;
+	private Course course = null; //added by mor
 	//for FX:
 	CheckBox checkbox;
 	RadioButton radioButton;
@@ -93,6 +94,32 @@ public class Question {
 		this.instructions = instructions;
 		this.courses = courses;
 		this.subject = new Subject(subjectNum, subjectName);
+	}
+	/**
+	 * constructor for creating Question object with course parameter, belongs to that specific question
+	 * 
+	 * @param id
+	 * @param number
+	 * @param question
+	 * @param subjectNum
+	 * @param lecturerId
+	 * @param answers - ans1,ans2,ans3,ans4
+	 * @param correctAnswer
+	 * @param instructions
+	 * @param numberCourse
+	 * @param name
+	 * @param subjectNumber
+	 */
+	public Question(String id, Integer number, String question, String subjectNum, String lecturerId,  String ans1, String ans2, String ans3, String ans4, Integer correctAnswer, String instructions, String numberCourse, String name, String subjectNumber) {
+		this.id = id;
+		this.number = number;
+		this.question = question;
+		this.subjectNum = subjectNum;
+		this.lecturerId = lecturerId;
+		this.answers = new String[] {ans1, ans2, ans3, ans4};
+		this.correctAnswer = correctAnswer;
+		this.instructions = instructions;
+		this.course = new Course(numberCourse, name, subjectNumber);
 	}
 	
 	public String getSubjectName() {
@@ -237,6 +264,29 @@ public class Question {
 	 */
 	public void setPoints(Integer points) {
 		this.points = points;
+	}
+	
+	/**
+	 * @return the course object
+	 */
+	public Course getCourse() {
+		return course;
+	}
+	
+	/**
+	 * @return the course name
+	 */
+	public String getCourseName() {
+		if(course==null)
+			return null;
+		return course.getName();
+	}
+	
+	/**
+	 * @param course
+	 */
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 
 	@Override
