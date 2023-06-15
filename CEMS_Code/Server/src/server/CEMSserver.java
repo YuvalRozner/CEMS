@@ -90,7 +90,7 @@ public class CEMSserver extends AbstractServer {
 				serverController.addConsole("query: ->" + queryStr + ".\n");
 				System.out.println("query: ->" + queryStr);
 				rs = stmt.executeQuery(queryStr);
-				MsgType type = (msg.getFrom().get(0).equals("cems.user")) ? MsgType.user : MsgType.data;
+				MsgType type = (msg.getFrom().get(0).equals("user")) ? MsgType.user : MsgType.data;
 				Msg tmpMsg = DB_controller.createDataMsg(type, rs);
 				if (tmpMsg.getData() == null || tmpMsg.getData().isEmpty())
 					tmpMsg = new Msg(MsgType.empty);

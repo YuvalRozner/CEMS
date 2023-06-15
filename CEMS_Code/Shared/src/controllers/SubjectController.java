@@ -69,7 +69,7 @@ public class SubjectController {
     public Msg selectSubjectByUser(User user) {
     	Msg msg = new Msg(MsgType.select);
     	msg.setSelect("subject.number, subject.name");
-    	msg.setFrom("cems.subject, cems.user_subject");
+    	msg.setFrom("subject, user_subject");
     	msg.setWhereCol("subject.number", "user_subject.subjectNum"); 
     	msg.setWhere("user_subject.userId", user.getId()); 
     	return msg;
@@ -84,7 +84,7 @@ public class SubjectController {
 	public Msg getMsgForCourses(Subject subject) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("*");
-		msg.setFrom("cems.course");
+		msg.setFrom("course");
 		msg.setWhere("subjectNum" ,subject.getNumber());
 		return msg;
 	}

@@ -46,7 +46,7 @@ public class RequestController {
      */
 	public Msg insertRequest(Request request) {
 		Msg msg = new Msg(MsgType.insert);
-		msg.setTableToUpdate("cems.request");
+		msg.setTableToUpdate("request");
 		msg.setColNames("testCode, lecturerId, hodId, duration, explanation");
 		ArrayList<Object> tmp = new ArrayList<>();
 		tmp.add(request.getTestCode());
