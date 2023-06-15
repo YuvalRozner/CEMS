@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HodMenuController extends AbstractController implements Menu{
+public class HodMenuController extends HodScreen implements Menu{
 	
 	@FXML
     private Label welcomeLbl;

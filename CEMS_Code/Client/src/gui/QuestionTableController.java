@@ -25,7 +25,7 @@ import javafx.scene.input.MouseEvent;
  * 
  * @author Mor Shmuel
  */
-public class QuestionTableController extends AbstractController {
+public class QuestionTableController extends HodScreen {
 
     private ArrayList<Question> questionList = new ArrayList<>();
 

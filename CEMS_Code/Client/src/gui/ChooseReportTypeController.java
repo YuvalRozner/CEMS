@@ -26,7 +26,7 @@ import notifications.NotificationAlertsController;
  * 
  * Author: Mor Shmuel
  */
-public class ChooseReportTypeController extends AbstractController{
+public class ChooseReportTypeController extends HodScreen{
 
     @FXML
     private Button back;
