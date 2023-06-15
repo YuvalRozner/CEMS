@@ -9,36 +9,22 @@ import enteties.TestToExecute;
 import enteties.User;
 
 public class StudentTestController {
-	
 	/**
-	 * Creates a message to select all student tests with a specific test code.
+	 * Creates a message object to update the student's answers, grade, and other
+	 * details in the database for a manual test.
 	 *
-	 * @param code The test code to filter the student tests.
-	 * @return A Msg object configured for the select operation.
-	 */
-	
-	public Msg selectAllstudentBySpecificCodeTest(Integer code) {
-		Msg msg=new Msg(MsgType.select);
-		msg.setSelect("studenttest.grade");
-		msg.setFrom("cems.studenttest");
-		msg.setWhere("testCode",code);
-		return msg;
-	}
-	
-	
-	/**
-	 * Creates a message object to update the student's answers, grade, and other details in the database for a manual test.
-	 *
-	 * @param approved    The approval status for the test.
-	 * @param timePassed  The time passed by the student to complete the test (in minutes).
-	 * @param answers     The answers provided by the student.
-	 * @param grade       The grade obtained by the student.
-	 * @param id          The ID of the student.
-	 * @param code        The code of the test.
+	 * @param approved   The approval status for the test.
+	 * @param timePassed The time passed by the student to complete the test (in
+	 *                   minutes).
+	 * @param answers    The answers provided by the student.
+	 * @param grade      The grade obtained by the student.
+	 * @param id         The ID of the student.
+	 * @param code       The code of the test.
 	 * @return The message object for updating the student's test details.
 	 */
 
-	public Msg InsertAnswersAndGradeManual(String approved,Integer timePassed,String ansewrs , Integer grade, String id , Integer code) {
+	public Msg InsertAnswersAndGradeManual(String approved, Integer timePassed, String ansewrs, Integer grade,
+			String id, Integer code) {
 		Msg msg = new Msg(MsgType.update);
 		msg.setTableToUpdate("cems.studenttest");
 		msg.setSet("answers", ansewrs);
@@ -49,7 +35,6 @@ public class StudentTestController {
 		msg.setWhere("testCode", code);
 		return msg;
 	}
-
 
 	/**
 	 * constructs a database select message to check if user already did this test.
@@ -139,6 +124,21 @@ public class StudentTestController {
 		msg.setSet("changeReason", st.getChangeReason());
 		msg.setWhere("studentId", st.getStudentId());
 		msg.setWhere("testCode", st.getTestCode());
+		return msg;
+	}
+
+	/**
+	 * Constructs a database select message to retrieve StudentTest.
+	 *
+	 * @param The ID for whom to retrieve the StudentTest.
+	 * @return A Msg object representing the database select message.
+	 */
+	public Msg getMsgForStudentTestsByID(String ID) {
+		Msg msg = new Msg(MsgType.select);
+		msg.setSelect("studenttest.*");
+		msg.setFrom("cems.studenttest, cems.user");
+		msg.setWhereCol("studenttest.studentId", "user.id");
+		msg.setWhere("user.id", ID);
 		return msg;
 	}
 

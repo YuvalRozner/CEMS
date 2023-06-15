@@ -1,38 +1,299 @@
 package gui;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
+import JDBC.Msg;
+import client.ChatClient;
+import controllers.TestToExecuteController;
+import controllers.StudentTestController;
+import enteties.Course;
+import enteties.StudentTest;
+import enteties.TestToExecute;
+import enteties.User;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
+import javafx.scene.control.Label;
 
+/**
+ * Controller class for the Lecturer Statistics Report screen.
+ * Generates statistics reports for lecturers, students, and courses.
+ * Displays the average and median grades in a BarChart.
+ * Calculates and displays the distribution of grades.
+ * Handles data retrieval from the database and populates the BarChart.
+ * Supports different types of reports based on the chosen report type.
+ * Supports generating reports for lecturers, students, and courses.
+ * 
+ * @author Mor Shmuel 
+ */
 public class LecturerStaticsReportController extends AbstractController{
 
+	public static User selectedLecturer, selectedStudent;
+	public static Course selectedCourse;
+	
+	@FXML
+    private Label avg;
+
+    @FXML
+    private Label median;
+	
 	@FXML
 	private BarChart<String, Integer> barChart;
-
+	
+	/**
+	 * object to use the StudentTestController class method.
+	 */
+    private static StudentTestController studentTestController = new StudentTestController();
+    
+    /**
+	 * object to use the TestToExecuteController class method.
+	 */
+    private static TestToExecuteController testToExecuteController = new TestToExecuteController();
+    
+    /**
+	 * the list of StudentTest for the BarChart according to the tests of the student.
+	 */
+    private ArrayList<StudentTest> studenntTestLst;
+    
+    /**
+	 * the list of TestToExecute for the BarChart according to the tests to execute of the user.
+	 */
+    private ArrayList<TestToExecute> testToExecuteLst;
+    
+    private boolean testToexec=false, studentTest=false; 
+	
+    /**
+     * Default constructor for the LecturerStaticsReportController class.
+     * Initializes the data for the BarChart.
+     */
+    public LecturerStaticsReportController() {
+        if (ChatClient.lastCurrentScreen instanceof ChooseReportTypeController) {
+            switch (((ChooseReportTypeController) ChatClient.lastCurrentScreen).getReportType()) {
+                case "lecturer":
+                    User selectedLecturer = ((ChooseReportTypeController) ChatClient.lastCurrentScreen).getSelectedLecturer();
+                    try {
+                        Msg msg1 = testToExecuteController.selectTestToExecuteByLecturer(selectedLecturer.getId());
+                        sendMsg(msg1);
+                        testToExecuteLst = msgReceived.convertData(TestToExecute.class);
+                        testToexec = true;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "student":
+                    User selectedStudent = ((ChooseReportTypeController) ChatClient.lastCurrentScreen).getSelectedStudent();
+                    try {
+                        Msg msg2 = studentTestController.getMsgForStudentTestsByID(selectedStudent.getId());
+                        sendMsg(msg2);
+                        studenntTestLst = msgReceived.convertData(StudentTest.class);
+                        studentTest = true;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "course":
+                    Course selectedCourse = ((ChooseReportTypeController) ChatClient.lastCurrentScreen).getSelectedCourse();
+                    try {
+                        Msg msg3 = testToExecuteController.selectTestToExecuteByCourseName(selectedCourse.getName());
+                        sendMsg(msg3);
+                        testToExecuteLst = msgReceived.convertData(TestToExecute.class);
+                        testToexec = true;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+            }
+        }
+    }
+    
+    /**
+     * Initializes the controller after its root element has been completely processed.
+     * Calculates the average, median, and grade distribution based on the selected report type and the retrieved data.
+     * Populates the BarChart with the calculated data.
+     */
 	@SuppressWarnings("unchecked")
 	@FXML
 	protected void initialize() {
-		
-		XYChart.Series<String, Integer> series1 = new XYChart.Series<String, Integer>();
-		series1.getData().add(new Data<String, Integer>("0-54.9", 7));
-		
-		XYChart.Series<String, Integer> series2 = new XYChart.Series<String, Integer>();
-		series2.getData().add(new Data<String, Integer>("55-64", 10));
-		series2.getData().add(new Data<String, Integer>("65-69", 10));
-		series2.getData().add(new Data<String, Integer>("70-74", 22));
-		series2.getData().add(new Data<String, Integer>("75-79", 23));
-		
-		
-		XYChart.Series<String, Integer> series3 = new XYChart.Series<String, Integer>();
-		series3.getData().add(new Data<String, Integer>("80-84", 17));
-		series3.getData().add(new Data<String, Integer>("85-89", 8));
-		series3.getData().add(new Data<String, Integer>("90-94", 3));
-		series3.getData().add(new Data<String, Integer>("95-100", 0));
-		barChart.getData().addAll(series1,series2,series3);
-		barChart.setBarGap(0); // Adjust the value to make the bars thicker
-		barChart.setCategoryGap(0);
-		barChart.setLegendVisible(false);
+		double avgByType=0, medianByType=0;
+    	
+		//Create series for the BarChart
+	    XYChart.Series<String, Integer> series1 = new XYChart.Series<>(); //red
+	    XYChart.Series<String, Integer> series2 = new XYChart.Series<>(); //orange
+	    XYChart.Series<String, Integer> series3 = new XYChart.Series<>(); //green
+	    
+	    int[] distributionByType = new int[10];
+	    if(testToexec) {
+	    	distributionByType = getDistributionForTestToExecute();
+	    	avgByType = getAvgForTestToExecute();
+	    	medianByType = getMedianForTestToExecute();
+	    } else if(studentTest) {
+	    	distributionByType = getDistributionForStudentTest();
+	    	avgByType = getAvgForStudentTest();
+	    	medianByType = getMedianForStudentTest();
+	    }
+	    
+	    avg.setText(String.format("%.2f", avgByType));
+	    median.setText(String.format("%.2f", medianByType));
+	    
+
+	    //Add the data points to the series
+	    for (int i = 0; i < 10; i++) {
+            if (i >= 0 && i<5) {
+            	String label = getLabelForIndex(i); //Replace with your label for each index
+                series1.getData().add(new Data<>(label, distributionByType[i]));
+            } else if (i >=5  && i<8){
+                String label = getLabelForIndex(i); //Replace with your label for each index
+                series2.getData().add(new Data<>(label, distributionByType[i]));
+            } else {
+            	String label = getLabelForIndex(i); //Replace with your label for each index
+                series3.getData().add(new Data<>(label, distributionByType[i]));
+            }
+	    }
+
+	    //Add the series to the BarChart
+	    barChart.getData().addAll(series1,series2,series3);
+	    barChart.setBarGap(0); //Adjust the value to make the bars thicker
+	    barChart.setCategoryGap(0);
+	    barChart.setLegendVisible(false);
+	}
+	
+	/**
+     * Calculates the grade distribution for TestToExecute.
+     *
+     * @return an array representing the grade distribution
+     */
+	private int[] getDistributionForTestToExecute() {
+		// Initialize the distribution array
+	    int[] distribution = new int[10];
+
+	    //Iterate over the testToExecuteLst and populate the distribution array
+	    for (TestToExecute test : testToExecuteLst) {
+	    	Integer[] distributionPerTest = test.getDistribusion();
+	    	for(int i=0; i<distribution.length; i++) {
+	    		distribution[i]+=distributionPerTest[i];
+	    	}
+	    }
+		return distribution;
+	}
+	
+	/**
+     * Calculates the grade distribution for StudentTest.
+     *
+     * @return an array representing the grade distribution
+     */
+	private int[] getDistributionForStudentTest() {
+		// Initialize the distribution array
+	    int[] distribution = new int[10];
+	    
+	  //Iterate over the StudentTest and populate the Grades
+	    for (StudentTest grade : studenntTestLst) {
+	    	Integer distributionPerGrade = grade.getGrade();
+	    	int index = (distributionPerGrade/10)-1;
+	    	distribution[index]++;
+	    }
+	    return distribution;
+	}
+	
+	/**
+     * Returns a label for a specific index in the grade distribution.
+     *
+     * @param index the index in the grade distribution array
+     * @return a label for the index
+     */
+	private String getLabelForIndex(int index) {
+	    int lowerBound = index * 10;
+	    int upperBound = (index * 10) + 10;
+	    return lowerBound + "-" + upperBound;
+	}
+	
+	/**
+     * Calculates the average grade for TestToExecute.
+     *
+     * @return the average grade
+     */
+	private double getAvgForTestToExecute() {
+	    double avg = 0;
+	    int cnt=0;
+	    //Iterate over the testToExecuteLst and populate the avg
+	    for (TestToExecute test : testToExecuteLst) {
+	    	avg += test.getAverage();
+	    	cnt++;
+	    }
+		return (avg/cnt);
+	}
+	
+	/**
+     * Calculates the average grade for StudentTest.
+     *
+     * @return the average grade
+     */
+	private double getAvgForStudentTest() {
+		double avg = 0;
+	    int cnt=0;
+	    //Iterate over the StudentTest and populate the Grades
+	    for (StudentTest grade : studenntTestLst) {
+	    	avg += grade.getGrade();
+	    	cnt++;
+	    }
+	    return (avg/cnt);
+	}
+	
+	/**
+     * Calculates the median grade for TestToExecute.
+     *
+     * @return the median grade
+     */
+	private double getMedianForTestToExecute() {
+		ArrayList<Double> medians = new ArrayList<>();
+	    //Iterate over the StudentTest and populate the Grades
+	    for (TestToExecute median : testToExecuteLst) {
+	    	medians.add(median.getMedian());
+	    }
+	    //Sort the ArrayList in ascending order
+        Collections.sort(medians);;
+        //Calculate the median
+        double median;
+        int size = medians.size();
+        if (size % 2 == 0) {
+            //ArrayList size is even
+            double middle1 = medians.get(size / 2 - 1);
+            double middle2 = medians.get(size / 2);
+            median = (middle1 + middle2) / 2.0;
+        } else {
+            //ArrayList size is odd
+            median = medians.get(size / 2);
+        }
+	    return median;
+	}
+	
+	/**
+     * Calculates the median grade for StudentTest.
+     *
+     * @return the median grade
+     */
+	private double getMedianForStudentTest() {
+		ArrayList<Integer> grades = new ArrayList<>();
+	    //Iterate over the StudentTest and populate the Grades
+	    for (StudentTest grade : studenntTestLst) {
+	    	grades.add(grade.getGrade());
+	    }
+	    //Sort the ArrayList in ascending order
+        Collections.sort(grades);
+        //Calculate the median
+        double median;
+        int size = grades.size();
+        if (size % 2 == 0) {
+            //ArrayList size is even
+            int middle1 = grades.get(size / 2 - 1);
+            int middle2 = grades.get(size / 2);
+            median = (middle1 + middle2) / 2.0;
+        } else {
+            //ArrayList size is odd
+            median = grades.get(size / 2);
+        }
+        return median;
 	}
 	
 }

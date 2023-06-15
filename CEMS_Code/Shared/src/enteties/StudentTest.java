@@ -21,6 +21,7 @@ public class StudentTest {
 	private String studentName;
 	private TestToExecute testToExecute;
 	private Test test;
+	private User user;
 	
 	//for FX:
 	CheckBox checkBox;
@@ -192,6 +193,34 @@ public class StudentTest {
 		this.lecturerNotes = lecturerNotes;
 		this.approved = approved;
 		this.changeReason = changeReason;
+	}
+	
+	/**
+	 * @param studentId
+	 * @param testCode
+	 * @param timePassed
+	 * @param answers
+	 * @param grade
+	 * @param lecturerNotes
+	 * @param approved
+	 * @param changeReason
+	 * @param userid
+	 * @param username
+	 * @param userName
+	 * @param password
+	 * @param premission
+	 * @param logedin
+	 */
+	public StudentTest(String studentId, Integer testCode, Integer timePassed, String answers, Integer grade, String lecturerNotes, String approved, String changeReason, String userid, String username, String userName, String password, String premission, String logedin) {
+		this.studentId = studentId;
+		this.testCode = testCode;
+		this.timePassed = timePassed;
+		this.answers = answers;
+		this.grade = grade;
+		this.lecturerNotes = lecturerNotes;
+		this.approved = approved;
+		this.changeReason = changeReason;
+		this.user = new User(userid, username, userName, password, premission, logedin);
 	}
 	
 	/**

@@ -122,6 +122,18 @@ public class Question {
 		this.course = new Course(numberCourse, name, subjectNumber);
 	}
 	
+	public Question(String id, Integer number, String question, String subjectNum, String lecturerId, String ans1, String ans2, String ans3, String ans4, Integer correctAnswer, String instructions,Integer points) {
+		this.id = id;
+		this.number = number;
+		this.question = question;
+		this.subjectNum = subjectNum;
+		this.lecturerId = lecturerId;
+		this.answers = new String[] {ans1, ans2, ans3, ans4};
+		this.correctAnswer = correctAnswer;
+		this.instructions = instructions;
+		this.points = points;
+	}
+	
 	public String getSubjectName() {
 		return subject.getName();
 	}
