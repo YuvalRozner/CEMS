@@ -26,7 +26,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import notifications.NotificationAlertsController;
 
-public class ApproveChangesController extends AbstractController{
+public class ApproveChangesController extends HodScreen{
 		
 	private ObservableList<Request> changesTable;
     @FXML

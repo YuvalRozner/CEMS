@@ -28,7 +28,7 @@ import javafx.scene.control.Label;
  * 
  * @author Mor Shmuel 
  */
-public class LecturerStaticsReportController extends AbstractController{
+public class LecturerStaticsReportController extends HodScreen{
 
 	public static User selectedLecturer, selectedStudent;
 	public static Course selectedCourse;

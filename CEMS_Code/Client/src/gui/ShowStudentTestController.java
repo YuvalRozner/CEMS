@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import JDBC.Msg;
 import client.ChatClient;
 import controllers.QuestionController;
-import controllers.TestToExecuteController;
 import enteties.Question;
 import enteties.StudentTest;
 import enteties.Test;
@@ -23,15 +22,14 @@ public class ShowStudentTestController extends AbstractController {
 	@FXML
     private VBox dataVbox;
 	@FXML
-    private Label info1,info2,info3,info4;
-
+    private Label info1,info2,info3,info4,info5,info6;
+	
+	
+    
 	private ArrayList<ToggleGroup> toggleGroups = new ArrayList<ToggleGroup>();
 
     ArrayList<Label> pointsLabels =new ArrayList<>();
-    
-    /**
-	 * object to use the TestToExecuteController class method.
-	 */
+ 
     private static QuestionController questionController = new QuestionController();
     
     
@@ -57,7 +55,7 @@ public class ShowStudentTestController extends AbstractController {
     		test = studentTest.getTest();
     		//testName = "(code-"+studentTest.getTestCode()+")  " + studentTest.getTest().getCourse().getName() +"  " + studentTest.getTestToExecute().getDate();
     		testName = "dor";
-    		msg = questionController.getQuestionByTestCodeAndStudentId(studentTest.getTestCode(), studentTest.getStudentId());
+    		msg = questionController.getQuestionAndPointsByTestCodeAndStudentId(studentTest.getTestCode(), studentTest.getStudentId());
     
     	}
     	else if(ChatClient.lastCurrentScreen instanceof ExecuteTestController) {
@@ -65,7 +63,7 @@ public class ShowStudentTestController extends AbstractController {
 		
     		test = testToExecute.getTest();
 			testName = "(code-"+testToExecute.getTestCode()+")  " + testToExecute.getTest().getCourse().getName() +"  " + testToExecute.getDate();
-			msg = questionController.getQuestionByTestId(testToExecute.getTestId());
+			msg = questionController.getQuestionAndPointsByTestId(testToExecute.getTestId());
     	}
     	return msg;
     }
@@ -77,12 +75,19 @@ public class ShowStudentTestController extends AbstractController {
     		info1.setText("Test:" + testName);
     		info2.setText("Student Name:" + studentTest.getStudentName());
     		info3.setText("Grade:" + String.valueOf(studentTest.getGrade()));
+    		//System.out.println(studentTest.getTest());
+    		//if (studentTest.getTest().getInstructionsForStudent() != null)
+    		//	info5.setText(studentTest.getTest().getInstructionsForStudent());
+    		//if (studentTest.getTest().getInstructionsForLecturer() != null)
+    		//	info6.setText(studentTest.getTest().getInstructionsForLecturer());
     	}
     	else {
     		info1.setText("Test:" + testName);
     		info2.setText("Duration:" +  testToExecute.getTest().getDuration());
     		info3.setText("Instuction for lecturer:" + testToExecute.getTest().getInstructionsForLecturer());
     		info4.setText("Instuction for student:" + testToExecute.getTest().getInstructionsForStudent());
+    		info5.setText(testToExecute.getTest().getInstructionsForStudent());
+    		info6.setText(testToExecute.getTest().getInstructionsForLecturer());
     	}
     	
     	int questionCounter = 1;
@@ -96,8 +101,8 @@ public class ShowStudentTestController extends AbstractController {
             Label questionLabel = new Label(questionCounter + ". " + question.getQuestion()); //set the question label
             questionCounter++;
             questionLabel.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-weight: bold; -fx-font-size: 14px;");
-            Label pointsLabel = new Label("Points: " + "0"); //set the points label
-            //    Label pointsLabel = new Label("Points: " + question.getPoints()); //set the points label
+            //Label pointsLabel = new Label("Points: " + "0"); //set the points label
+            Label pointsLabel = new Label("Points: " + question.getPoints()); //set the points label
             pointsLabels.add(pointsLabel); //save the pointslabel for later changes
             pointsLabel.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-size: 14px;");
             gridPane.add(questionLabel, 0, i + row);

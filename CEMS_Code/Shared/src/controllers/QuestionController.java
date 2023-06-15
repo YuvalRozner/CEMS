@@ -6,7 +6,6 @@ import JDBC.Msg;
 import JDBC.MsgType;
 import enteties.Course;
 import enteties.Question;
-import enteties.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -131,9 +130,9 @@ public class QuestionController {
 	 * @param testId The ID of the test.
 	 * @return A Msg object containing the query information to retrieve the questions.
 	 */
-	public Msg getQuestionByTestId(String testId) {
+	public Msg getQuestionAndPointsByTestId(String testId) {
    	Msg msg = new Msg(MsgType.select);
-   	msg.setSelect("question.*");
+   	msg.setSelect("question.*, test_question.points");
    	msg.setFrom("cems.test, cems.question, cems.test_question");
    	msg.setWhereCol("test.id", "test_question.testId");
    	msg.setWhereCol("test_question.questionId", "question.id"); 
@@ -142,9 +141,9 @@ public class QuestionController {
    }
 	
 	
-	public Msg getQuestionByTestCodeAndStudentId(Integer testCode,String studentId) {
+	public Msg getQuestionAndPointsByTestCodeAndStudentId(Integer testCode,String studentId) {
    	Msg msg = new Msg(MsgType.select);
-   	msg.setSelect("question.*");
+   	msg.setSelect("question.*, test_question.points");
    	msg.setFrom("cems.studentTest, cems.TestToExecute, cems.question, cems.test_question");
 	msg.setWhereCol("studentTest.testCode", "TestToExecute.testCode");
 	msg.setWhereCol("TestToExecute.testId", "test_question.testId");
@@ -153,4 +152,14 @@ public class QuestionController {
    	msg.setWhere("studentTest.studentId", studentId);
    	return msg;
    }
+	
+	public Msg getQuestionAndPointsByTestCode(Integer testCode) {
+	   	Msg msg = new Msg(MsgType.select);
+	   	msg.setSelect("question.*, test_question.points");
+	   	msg.setFrom("cems.testToExecute, cems.question, cems.test_question");
+		msg.setWhereCol("testToExecute.testid", "test_question.testId");
+	   	msg.setWhereCol("test_question.questionId", "question.id"); 
+	   	msg.setWhere("testToExecute.testCode", testCode);
+	   	return msg;
+	  }
 }

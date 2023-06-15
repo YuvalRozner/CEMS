@@ -1,5 +1,7 @@
 package JDBC;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -116,6 +118,28 @@ public class DB_controller {
 		query.append(") VALUES ");
 		query.append(separateValuesWithComma(values)); // append the values to insert.
 		return query.toString() + ";";
+	}
+	
+	/**
+	 * Creates a message object with data from a ResultSet.
+	 *
+	 * @param type The type of the message.
+	 * @param rs   The ResultSet containing the data.
+	 * @return The created message object.
+	 * @throws SQLException If an error occurs while accessing the ResultSet.
+	 */
+	public static Msg createDataMsg(MsgType type, ResultSet rs) throws SQLException {
+		ArrayList<ArrayList<Object>> dataToClient = new ArrayList<>();
+		int colunmCount = rs.getMetaData().getColumnCount();
+		while (rs.next()) {
+			ArrayList<Object> rowTemp = new ArrayList<>(colunmCount);
+			for (int i = 1; i < colunmCount + 1; i++)
+				rowTemp.add(rs.getObject(i));
+			dataToClient.add(rowTemp);
+		}
+		Msg tmpMsg = new Msg(type);
+		tmpMsg.setData(dataToClient);
+		return tmpMsg;
 	}
 
     /**

@@ -21,6 +21,7 @@ public class StudentTest {
 	private String studentName;
 	private TestToExecute testToExecute;
 	private Test test;
+	@SuppressWarnings("unused") // sometimes in use.
 	private User user;
 	
 	//for FX:
@@ -33,6 +34,14 @@ public class StudentTest {
 	private Button show;
 	private CheckBox select;
 	private TextField note;
+	
+	/**
+	 * to get all grade to calculate average and median.
+	 * @param grade
+	 */
+	public StudentTest (Integer grade) {
+		this.grade=grade;
+	}
 	
 	/**
 	 * to check if student aleady do this test.

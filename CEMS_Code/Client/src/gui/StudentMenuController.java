@@ -11,7 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import notifications.NotificationAlertsController;
 
-public class StudentMenuController extends AbstractController {
+public class StudentMenuController extends AbstractController implements Menu{
 	/**
 	 * lable for headline
 	 */
@@ -21,6 +21,7 @@ public class StudentMenuController extends AbstractController {
 	/**
 	 * save the test to shown.
 	 */
+	@SuppressWarnings("unused") // it uses to catch an exception if the grades list from DB is empty.
 	private ArrayList<StudentTest> allTest=new ArrayList<StudentTest>() ;	
 	
 	/**
@@ -67,9 +68,10 @@ public class StudentMenuController extends AbstractController {
 		start("startTest", "studentMenu");
 	}
 	/**
-	 * put for any clien his own name in the welcome lable.
+	 * put for any client his own name in the welcome lable.
 	 * @param name name of client that entered.
 	 */
+	@Override
 	public void setWelcome(String name) {
 		welcomeLbl.setText(name);
 	}

@@ -4,25 +4,31 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 
 public class Request {
-	//in DB:
+	// in DB:
 	private Integer testCode;
 	private String lecturerId;
 	private String hodId;
 	private Integer duration;
 	private String explanation;
-	//not in DB:
+	// not in DB:
+	@SuppressWarnings("unused") // sometimes in use.
 	private User user;
 	private Course course;
+	@SuppressWarnings("unused") // sometimes in use.
+	private TestToExecute testToExecute;
+	@SuppressWarnings("unused") // sometimes in use.
 	private Test test;
-	
-	//for FX:
+
+	// for FX:
 	CheckBox checkbox;
 	RadioButton radioButton;
-	
+
 	/**
 	 * empty constructor.
 	 */
-	public Request() {super();}
+	public Request() {
+		super();
+	}
 
 	/**
 	 * @param testCode
@@ -38,7 +44,7 @@ public class Request {
 		this.duration = duration;
 		this.explanation = explanation;
 	}
-	
+
 	/**
 	 * @param testCode
 	 * @param lecurerId
@@ -61,8 +67,10 @@ public class Request {
 	 * @param courseName
 	 * @param subjectNum
 	 */
-	public Request(Integer testCode, String lecurerId, String hodId, Integer duration, String explanation, 
-			String id, String number, String courseNumber, Integer testDuration, String instructionsForStudent, String instructionsForLecturer, String userId, String name, String username, String password, String premission, String loggedin, String courseNum, String courseName, String subjectNum) {
+	public Request(Integer testCode, String lecurerId, String hodId, Integer duration, String explanation,
+			String id, String number, String courseNumber, Integer testDuration, String instructionsForStudent,
+			String instructionsForLecturer, String userId, String name, String username, String password,
+			String premission, String loggedin, String courseNum, String courseName, String subjectNum) {
 		this.testCode = testCode;
 		this.lecturerId = lecurerId;
 		this.hodId = hodId;
@@ -72,7 +80,7 @@ public class Request {
 		this.user = new User(userId, name, username, password, premission, loggedin);
 		this.course = new Course(courseNum, courseName, subjectNum);
 	}
-	
+
 	/**
 	 * @return the testCode
 	 */
@@ -135,20 +143,20 @@ public class Request {
 	public String getExplanation() {
 		return explanation;
 	}
-	
-	public Integer getOriginalDuration(){
+
+	public Integer getOriginalDuration() {
 		return this.test.getDuration();
 	}
-	
-	public String getLecturerName(){
+
+	public String getLecturerName() {
 		return this.user.getName();
 	}
-	
-	public String getTestId(){
+
+	public String getTestId() {
 		return this.test.getId();
 	}
-	
-	public String getCourseName(){
+
+	public String getCourseName() {
 		return this.course.getName();
 	}
 
@@ -158,32 +166,38 @@ public class Request {
 	public void setExplanation(String explanation) {
 		this.explanation = explanation;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		Request r = (Request) obj;
-		return ( testCode.equals(r.getTestCode()) && lecturerId.equals(r.getLecturerId()));
+		return (testCode.equals(r.getTestCode()) && lecturerId.equals(r.getLecturerId()));
 	}
 
 	@Override
 	public String toString() {
-		return "Request [testCode=" + testCode + ", lecurerId=" + lecturerId + ", hodId=" + hodId + ", additionToDuration=" + duration + ", explanation=" + explanation +"id(test.id)="+ this.test.getId() + "courseName=" + this.course.getName() + "lecturerName=" + this.user.getName() + "testOriginalDuration=" + this.test.getDuration() + "]";
+		return "Request [testCode=" + testCode + ", lecurerId=" + lecturerId + ", hodId=" + hodId
+				+ ", additionToDuration=" + duration + ", explanation=" + explanation + "id(test.id)="
+				+ this.test.getId() + "courseName=" + this.course.getName() + "lecturerName=" + this.user.getName()
+				+ "testOriginalDuration=" + this.test.getDuration() + "]";
 	}
-	
+
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//for FX:
+	// for FX:
 	public void setNewCheckbox() {
 		checkbox = new CheckBox();
 	}
+
 	public CheckBox getCheckbox() {
 		return checkbox;
 	}
+
 	public void setNewRadioButton() {
 		radioButton = new RadioButton();
 	}
+
 	public RadioButton getRadioButton() {
 		return radioButton;
 	}
-	
+
 }

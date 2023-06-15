@@ -6,6 +6,7 @@ import java.net.InetAddress;
 import JDBC.Msg;
 import JDBC.MsgType;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,7 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
+import ocsf.server.ConnectionToClient;
 import server.CEMSserver;
 
 /**
@@ -26,7 +27,7 @@ public class ServerController {
 	/**
 	 * the observable list for the table of connected clients.
 	 */
-	private ObservableList<InetAddress> connectedObserv = FXCollections.observableArrayList();
+	private ObservableList<ConnectionToClient> connectedObserv = FXCollections.observableArrayList();
 	/**
 	 * for the singleton design pattern
 	 */
@@ -55,12 +56,12 @@ public class ServerController {
 	 * the table of connected clients.
 	 */
 	@FXML
-	private TableView<InetAddress> clientsTable;
+	private TableView<ConnectionToClient> clientsTable;
 	/**
 	 * the columns of the table of connected clients.
 	 */
 	@FXML
-	private TableColumn<InetAddress, String> clientHostName, clientIp, clientStatus;
+	private TableColumn<ConnectionToClient, String> clientHostName, clientIp, clientStatus;
 	/**
 	 * server console.
 	 */
@@ -81,14 +82,6 @@ public class ServerController {
 	 */
 	@FXML
 	private TextField serverIdTxt;
-	
-	//////////////////////////////
-	@FXML
-	public void tryBtn(ActionEvent event) {
-		Msg msg = new Msg(MsgType.lockTest);
-		msg.setTestCode(2345);
-		cemsServer.sendToAllClients(msg);
-	}////////////////////////////////////////////
 
     /**
      * Handles the event when the "Connect" button is clicked.
@@ -158,8 +151,18 @@ public class ServerController {
      */
 	@FXML
 	protected void initialize() {
-		clientHostName.setCellValueFactory(new PropertyValueFactory<InetAddress, String>("HostName"));
-		clientIp.setCellValueFactory(new PropertyValueFactory<InetAddress, String>("HostAddress"));
+		clientHostName.setCellValueFactory(data -> {
+			ConnectionToClient connectionToClient = data.getValue();
+			InetAddress inetAddress = connectionToClient.getInetAddress();
+    	    String hostName = inetAddress.getHostName();
+    	    return new SimpleStringProperty(hostName);
+    	});
+		clientIp.setCellValueFactory(data -> {
+			ConnectionToClient connectionToClient = data.getValue();
+			InetAddress inetAddress = connectionToClient.getInetAddress();
+    	    String hostAddress = inetAddress.getHostAddress();
+    	    return new SimpleStringProperty(hostAddress);
+    	});	
 		clientStatus.setCellValueFactory(cellData -> new ReadOnlyStringWrapper("Connected"));
 		clientsTable.setItems(connectedObserv);
 	}
@@ -167,18 +170,18 @@ public class ServerController {
     /**
      * Adds the given IP to the connectedObserv list.
      *
-     * @param connected The InetAddress IP to be added.
+     * @param connected The ConnectionToClient IP to be added.
      */
-	public void addConnected(InetAddress connected) {
+	public void addConnected(ConnectionToClient connected) {
 		connectedObserv.add(connected);
 	}
 
     /**
      * Removes the given IP from the connectedObserv list.
      *
-     * @param connected The InetAddress IP to be removed.
+     * @param connected The ConnectionToClient IP to be removed.
      */
-	public void removeConnected(InetAddress connected) {
+	public void removeConnected(ConnectionToClient connected) {
 		connectedObserv.remove(connected);
 	}
 

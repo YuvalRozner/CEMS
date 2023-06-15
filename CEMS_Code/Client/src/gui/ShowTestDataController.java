@@ -21,7 +21,7 @@ import javafx.scene.input.MouseEvent;
  * 
  * @author Mor Shmuel
  */
-public class ShowTestDataController  extends AbstractController{
+public class ShowTestDataController  extends HodScreen{
 	
 	private ArrayList<TestToExecute> arrShowTest = new ArrayList<>();
 

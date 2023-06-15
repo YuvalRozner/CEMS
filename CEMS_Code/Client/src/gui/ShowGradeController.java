@@ -2,8 +2,6 @@ package gui;
 
 import java.util.ArrayList;
 
-import JDBC.Msg;
-import client.ChatClient;
 import controllers.StudentTestController;
 import enteties.StudentTest;
 import javafx.beans.property.SimpleIntegerProperty;

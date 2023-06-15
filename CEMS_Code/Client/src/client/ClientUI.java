@@ -50,6 +50,5 @@ public class ClientUI extends Application {
 			System.out.println("Exit Client app.");
 			System.exit(0);
 		});
-
 	}
 }
