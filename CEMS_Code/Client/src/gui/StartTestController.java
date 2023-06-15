@@ -38,7 +38,10 @@ public class StartTestController extends AbstractController{
     NotificationAlertsController alert = new NotificationAlertsController();
     private String lock=null;
 
-    /**
+    
+    private String code;
+   
+	/**
      * after enter code of test user push connect , this fun check if code is valid and get the appropriate  testtoexeucte.
      * If everything was successful, permission is opened for the student to insert an ID.
      * @param event press on button connect after enter code.
@@ -78,7 +81,7 @@ public class StartTestController extends AbstractController{
      */
     @FXML
     void startBtn(ActionEvent event) throws Exception {
-    	String code= codeTextField.getText();
+    	code= codeTextField.getText();
     	User user = ChatClient.user;
     	String id= idTextField.getText();
     	if(testToExecuteController.checkValidId(id,user)) {
@@ -119,5 +122,7 @@ public class StartTestController extends AbstractController{
 	public static void setTestToExecute(TestToExecute testToExecute) {
 		StartTestController.testToExecute = testToExecute;
 	}
-
+	 public String getCode() {
+			return code;
+		}
 }
