@@ -1,6 +1,8 @@
 package gui;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import JDBC.Msg;
 import client.ChatClient;
@@ -16,9 +18,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import notifications.NotificationAlertsController;
-import java.util.Set;
-import java.util.HashSet;
-import javafx.scene.control.Toggle;
 
 /**
  * Controller class for the Choose Report Type screen.

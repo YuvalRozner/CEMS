@@ -6,7 +6,6 @@ import JDBC.Msg;
 import JDBC.MsgType;
 import enteties.Course;
 import enteties.Question;
-import enteties.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;

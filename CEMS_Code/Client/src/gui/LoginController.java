@@ -31,20 +31,8 @@ public class LoginController extends AbstractController{
     	ChatClient.resetUser();
     	if(!login(userNameTxt.getText(), passwordTxt.getText())) return; 
     	User user = ChatClient.user;
-	    switch(user.getPremission()) {
-    		case "lecturer":
-        		start("lecturerMenu", "login");
-        		((LecturerMenuController)ChatClient.getScreen("lecturerMenu")).setWelcome("Welcome " + user.getName());
-    			break;
-    		case "student":
-    			start("studentMenu" , "login");
-    			((StudentMenuController)ChatClient.getScreen("studentMenu")).setWelcome("Welcome " + user.getName());
-    			break;
-    		case "Hod":
-    			start("hodMenu" , "login");
-    			((HodMenuController)ChatClient.getScreen("hodMenu")).setWelcome("Welcome " + user.getName());
-    			break;
-    	}
+    	start(user.getPremission()+"Menu", "login");
+    	((Menu)ChatClient.getScreen(user.getPremission()+"Menu")).setWelcome("Welcome " + user.getName());
     }
 
 	private boolean login(String username, String password) {

@@ -149,6 +149,5 @@
             <InnerShadow height="0.0" radius="0.0" width="0.0" />
          </effect>
       </Label>
-      <Button layoutX="216.0" layoutY="12.0" mnemonicParsing="false" onAction="#tryBtn" text="Button" />
    </children>
 </Pane>

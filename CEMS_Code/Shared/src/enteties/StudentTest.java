@@ -21,6 +21,7 @@ public class StudentTest {
 	private String studentName;
 	private TestToExecute testToExecute;
 	private Test test;
+	@SuppressWarnings("unused") // sometimes in use.
 	private User user;
 	
 	//for FX:

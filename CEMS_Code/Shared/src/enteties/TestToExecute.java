@@ -30,11 +30,13 @@ public class TestToExecute{
 	//not in DB: 
 	private Test test;
 	private Course course = null;
+	@SuppressWarnings("unused") // sometimes in use.
 	private ArrayList<StudentTest> studentsTestsLst;
 	//for FX:
 	CheckBox checkbox;
 	RadioButton radioButton;
 	Button button;
+	@SuppressWarnings("rawtypes") //works without specific type.
 	ComboBox comboBox;
 	TextField textField;
 	TextField textField1;
@@ -458,9 +460,11 @@ public class TestToExecute{
 	public void setButtonText(String s) {
 		button.setText(s);
 	}
+	@SuppressWarnings("rawtypes")
 	public void setNewComboBox() {
 		comboBox = new ComboBox();
 	}
+	@SuppressWarnings("rawtypes")
 	public ComboBox getComboBox() {
 		return comboBox;
 	}

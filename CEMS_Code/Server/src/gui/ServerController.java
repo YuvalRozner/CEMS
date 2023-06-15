@@ -2,11 +2,9 @@ package gui;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.util.ArrayList;
 
 import JDBC.Msg;
 import JDBC.MsgType;
-import enteties.User;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -84,14 +82,6 @@ public class ServerController {
 	 */
 	@FXML
 	private TextField serverIdTxt;
-	
-	//////////////////////////////
-	@FXML
-	public void tryBtn(ActionEvent event) {
-		Msg msg = new Msg(MsgType.lockTest);
-		msg.setTestCode(2345);
-		cemsServer.sendToAllClients(msg);
-	}////////////////////////////////////////////
 
     /**
      * Handles the event when the "Connect" button is clicked.

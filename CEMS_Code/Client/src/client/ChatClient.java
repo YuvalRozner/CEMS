@@ -2,37 +2,45 @@ package client;
 
 import java.io.IOException;
 import java.util.HashMap;
-
 import JDBC.Msg;
 import controllers.CemsFileController;
 import enteties.User;
 import gui.AbstractController;
-import gui.ManualTestController;
-import gui.OnlineTestController;
 import gui.Testing;
 import ocsf.client.AbstractClient;
-//////////////CEMS////////////
 
+/**
+ * The ChatClient class is responsible for handling communication between the client and the server.
+ */
 public class ChatClient extends AbstractClient {
-	// Instance variables **********************************************
 	/**
-	 * The interface type variable. It allows the implementation of the display
-	 * method in the client.
+	 * The mapping of screen names to their corresponding AbstractController objects.
 	 */
-
 	public static HashMap<String, AbstractController> screens = new HashMap<String, AbstractController>();
+	
+	/**
+	 * The last displayed screen.
+	 */
 	public static AbstractController lastCurrentScreen;
+	
+	/**
+	 * The currently logged-in user.
+	 */
 	public static User user;
+	
+	/**
+	 * Indicates whether the client is awaiting a response from the server.
+	 */
 	public static boolean awaitResponse = false;
+	
 	private CemsFileController cemsFileController = new CemsFileController();
 
-	// Constructors ****************************************************
 	/**
-	 * Constructs an instance of the chat client.
+	 * Constructs an instance of the ChatClient.
 	 *
-	 * @param host     The server to connect to.
-	 * @param port     The port number to connect on.
-	 * @param clientUI The interface type variable.
+	 * @param host The server to connect to.
+	 * @param port The port number to connect on.
+	 * @throws IOException If an I/O error occurs while opening the connection.
 	 */
 	public ChatClient(String host, int port) throws IOException {
 		super(host, port); // Call the superclass constructor
@@ -43,7 +51,7 @@ public class ChatClient extends AbstractClient {
 	/**
 	 * This method handles all data that comes in from the server.
 	 *
-	 * @param msg The message from the server.
+	 * @param tmpMsg The message from the server.
 	 */
 	public void handleMessageFromServer(Object tmpMsg) {
 		Msg msg = ((Msg) tmpMsg);
@@ -92,6 +100,11 @@ public class ChatClient extends AbstractClient {
 		awaitResponse = false; // important. magic line.
 	}
 
+	/**
+	 * Sends a message from the client to the server and waits for a response.
+	 *
+	 * @param msg The message to send.
+	 */
 	public void handleMessageFromClientUI(Msg msg) {
 		try {
 			awaitResponse = true;
@@ -110,10 +123,19 @@ public class ChatClient extends AbstractClient {
 		}
 	}
 
+	/**
+	 * Retrieves the AbstractController object associated with the given screen name.
+	 *
+	 * @param screenName The name of the screen.
+	 * @return The AbstractController object associated with the screen name, or null if not found.
+	 */
 	public static AbstractController getScreen(String screenName) {
 		return screens.get(screenName);
 	}
 
+	/**
+	 * Resets the currently logged-in user to null.
+	 */
 	public static void resetUser() {
 		user = null;
 	}

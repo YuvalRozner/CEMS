@@ -11,8 +11,11 @@ public class Request {
 	private Integer duration;
 	private String explanation;
 	//not in DB:
+	@SuppressWarnings("unused") // sometimes in use.
 	private User user;
+	@SuppressWarnings("unused") // sometimes in use.
 	private TestToExecute testToExecute;
+	@SuppressWarnings("unused") // sometimes in use.
 	private Test test;
 	
 	//for FX:

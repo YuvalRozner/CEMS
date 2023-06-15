@@ -9,6 +9,7 @@ import javafx.application.Platform;
 */
 public class TimeController {
 
+	@SuppressWarnings("unused")
 	private int totalMinutes; // Total minutes for the timer
 	private CountDown countDown; // Reference to the CountDown object
 	private Timer timer; // Timer object for scheduling timer tasks

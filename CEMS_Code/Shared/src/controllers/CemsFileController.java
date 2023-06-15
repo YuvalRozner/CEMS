@@ -11,7 +11,6 @@ import java.io.IOException;
 import JDBC.Msg;
 import JDBC.MsgType;
 import enteties.CemsFile;
-import enteties.User;
 
 
 public class CemsFileController {
@@ -31,12 +30,13 @@ public class CemsFileController {
 			      CemsFile msg = new CemsFile(name);
 			      byte [] mybytearray  = new byte [(int)newFile.length()];
 			      FileInputStream fis = new FileInputStream(newFile);
-			      BufferedInputStream bis = new BufferedInputStream(fis);			  
+			      try (BufferedInputStream bis = new BufferedInputStream(fis)) {
+					msg.initArray(mybytearray.length);
+					  msg.setSize(mybytearray.length);
+					  
+					  bis.read(msg.getMybytearray(),0,mybytearray.length);
+				}			  
 			      
-			      msg.initArray(mybytearray.length);
-			      msg.setSize(mybytearray.length);
-			      
-			      bis.read(msg.getMybytearray(),0,mybytearray.length);
 			      msgToServer.setCemsFile(msg);
 		      
 			    }
@@ -58,13 +58,19 @@ public class CemsFileController {
 			System.out.println("File saved at: " + myfile.getAbsolutePath());//////////////
 			try {
 				FileOutputStream fos = new FileOutputStream(myfile);
-				BufferedOutputStream bos =new BufferedOutputStream(fos);
-				try {
-					bos.write(file.getMybytearray(), 0, fileSize);
-					bos.flush();
-					fos.flush();
+				try (BufferedOutputStream bos = new BufferedOutputStream(fos)) {
+					try {
+						bos.write(file.getMybytearray(), 0, fileSize);
+						bos.flush();
+						fos.flush();
+					} catch (IOException e) {
+						System.out.println("upload faild");
+					}
+				} catch (FileNotFoundException e) {
+					throw e;
 				} catch (IOException e) {
-					System.out.println("upload faild");
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 				
 			} catch (FileNotFoundException e) {

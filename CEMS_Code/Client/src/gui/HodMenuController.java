@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HodMenuController extends AbstractController{
+public class HodMenuController extends AbstractController implements Menu{
 	
 	@FXML
     private Label welcomeLbl;
@@ -35,8 +35,8 @@ public class HodMenuController extends AbstractController{
 		start("showTestsData", "hodMenu");
     }
     
+    @Override
     public void setWelcome(String name) {
 		welcomeLbl.setText(name);
 	}
-
 }
