@@ -67,9 +67,9 @@ public class RequestController {
      */
 	public Msg selectRequest(String hod) {
     	Msg msg = new Msg(MsgType.select);
-    	msg.setSelect("request.*, testtoexecute.*, test.*, user.*");
-    	msg.setFrom("request, testtoexecute, test, course, user");
-    	msg.setWhereCol("request.testCode", "testoexecute.testCode");
+    	msg.setSelect("request.*, test.*, user.*, course.*");
+    	msg.setFrom("cems.request, cems.testtoexecute, cems.test, cems.course, cems.user");
+    	msg.setWhereCol("request.testCode", "testtoexecute.testCode");
     	msg.setWhereCol("testtoexecute.testId", "test.id");
     	msg.setWhereCol("request.lecturerId", "user.id");
     	msg.setWhereCol("test.courseNumber", "course.number"); 

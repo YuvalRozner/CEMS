@@ -13,33 +13,44 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="608.0" maxWidth="578.0" minHeight="608.0" minWidth="578.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ApproveChangesController">
+<Pane maxHeight="608.0" maxWidth="708.0" minHeight="608.0" minWidth="578.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ApproveChangesController">
    <children>
-      <ImageView fitHeight="346.0" fitWidth="260.0" layoutX="131.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true">
+      <Pane layoutX="36.0" layoutY="87.0" maxHeight="592.0" maxWidth="249.0" minHeight="509.0" minWidth="200.0" prefHeight="592.0" prefWidth="249.0" style="-fx-background-color: #92bce3;" />
+      <ImageView fitHeight="346.0" fitWidth="260.0" layoutX="206.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/durationConfirmation.png" />
          </image>
       </ImageView>
-      <Pane layoutX="36.0" layoutY="170.0" maxHeight="569.0" maxWidth="200.0" minHeight="509.0" minWidth="200.0" prefHeight="509.0" prefWidth="200.0" style="-fx-background-color: #92bce3;" />
-      <Pane layoutX="337.0" layoutY="-95.0" maxHeight="182.0" maxWidth="220.0" minHeight="182.0" minWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
-      <ImageView fitHeight="340.0" fitWidth="478.0" layoutX="304.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true">
+      <Pane layoutX="464.0" layoutY="-96.0" maxHeight="182.0" maxWidth="220.0" minHeight="182.0" minWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
+      <Label layoutX="38.0" layoutY="388.0" text="Note!" textFill="#a80000">
+         <font>
+            <Font name="Comic Sans MS Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="78.0" layoutY="389.0" text="To see the full explanation, click on it.">
+         <font>
+            <Font name="Comic Sans MS Bold" size="13.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="340.0" fitWidth="478.0" layoutX="404.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/durationConfirmation.png" />
          </image>
       </ImageView>
-      <Pane layoutX="36.0" layoutY="193.0" maxHeight="40.0" maxWidth="493.0" minHeight="21.0" minWidth="493.0" prefHeight="21.0" prefWidth="493.0" style="-fx-background-color: #C5EFFF; -fx-background-radius: 0 50 50 0;" />
+      <Pane layoutX="36.0" layoutY="100.0" maxHeight="40.0" maxWidth="493.0" minHeight="21.0" minWidth="493.0" prefHeight="21.0" prefWidth="493.0" style="-fx-background-color: #C5EFFF; -fx-background-radius: 0 50 50 0;" />
       <Circle fill="WHITE" layoutX="60.0" layoutY="561.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />
-      <ImageView fitHeight="249.0" fitWidth="272.0" layoutX="12.0" layoutY="402.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="219.0" fitWidth="225.0" layoutX="12.0" layoutY="432.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/durationConfirmation.png" />
          </image>
       </ImageView>
-      <Button fx:id="back" layoutX="441.0" layoutY="561.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#backBtn" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
+      <Button fx:id="back" layoutX="563.0" layoutY="566.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#backBtn" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>
-      <Label layoutX="36.0" layoutY="123.0" text="Duration Confirmation">
+      <Label layoutX="38.0" layoutY="42.0" text="Duration Confirmation">
          <font>
             <Font name="Comic Sans MS Bold" size="40.0" />
          </font>
@@ -61,30 +72,35 @@
                </light>
             </Lighting>
          </effect></Label>
-      <Label layoutX="38.0" layoutY="191.0" prefHeight="21.0" prefWidth="478.0" text="To confirm change of duration - select request and click &quot;Confirm&quot;">
+      <Label layoutX="38.0" layoutY="100.0" prefHeight="21.0" text="To confirm change of duration - select request and click &quot;Confirm&quot;">
          <font>
             <Font name="Comic Sans MS Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="confirm" layoutX="441.0" layoutY="480.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#aprroveBtn" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Confirm">
+      <Button fx:id="confirm" layoutX="563.0" layoutY="485.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#aprroveBtn" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Confirm">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>
-      <TableView fx:id="table" layoutX="14.0" layoutY="223.0" prefHeight="249.0" stylesheets="@TableView.css">
+      <TableView fx:id="table" layoutX="14.0" layoutY="130.0" onMouseClicked="#showAnswers" prefHeight="249.0" prefWidth="667.0" stylesheets="@TableView.css">
         <columns>
             <TableColumn fx:id="IDTestCol" minWidth="40.00000190734863" prefWidth="52.0" text="Test ID" />
-            <TableColumn fx:id="LecturerCol" minWidth="29.5" prefWidth="64.5" text="Lecturer" />
-            <TableColumn fx:id="CourseCol" minWidth="36.5" prefWidth="68.5" text="Course" />
-            <TableColumn fx:id="previousCol" prefWidth="78.0" text="Duration" />
-            <TableColumn fx:id="newDurationCol" prefWidth="114.0" text="Time Addition" />
-            <TableColumn fx:id="ExplanationCol" maxWidth="208.800048828125" prefWidth="127.5" text="Explanation" />
-            <TableColumn fx:id="checkBoxCol" maxWidth="208.0" prefWidth="41.0" style="-fx-alignment: CENTER;" text="Select" />
+            <TableColumn fx:id="LecturerCol" minWidth="29.5" prefWidth="97.5" text="Lecturer" />
+            <TableColumn fx:id="CourseCol" minWidth="23.5" prefWidth="89.5" text="Course" />
+            <TableColumn fx:id="previousCol" minWidth="0.0" prefWidth="53.0" text="Duration" />
+            <TableColumn fx:id="newDurationCol" prefWidth="85.0" text="Time Addition" />
+            <TableColumn fx:id="ExplanationCol" maxWidth="250.5" prefWidth="247.5" text="Explanation" />
+            <TableColumn fx:id="checkBoxCol" maxWidth="208.0" prefWidth="41.5" style="-fx-alignment: CENTER;" text="Select" />
         </columns>
       </TableView>
-      <ImageView fitHeight="181.0" fitWidth="201.0" layoutX="409.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="181.0" fitWidth="201.0" layoutX="536.0" layoutY="-21.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/Cems-logo.png" />
          </image>
       </ImageView>
+      <Text fx:id="text" layoutX="36.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Comic Sans MS Bold" size="14.0" />
+         </font>
+      </Text>
    </children>
 </Pane>
