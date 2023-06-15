@@ -244,11 +244,6 @@ public class OnlineTestController extends AbstractController implements CountDow
 		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
 	}
 	
-	public void testGotManualyLockedByLecturer() {
-		alert.showErrorAlert("Sorry, but the test got locked by your lecturer..");
-		testIsLockInMiddleOfTest();
-	}
-	
 	/**
 	 * check if it lock
 	 * @return
@@ -282,5 +277,9 @@ public class OnlineTestController extends AbstractController implements CountDow
 		timeLbl.setText(s);
 	}
    
-
+	public void testGotManualyLockedByLecturer(String testCode) {
+		if(!testCode.equals(code)) return;
+		alert.showErrorAlert("Sorry, but the test got locked by your lecturer..");
+		testIsLockInMiddleOfTest();
+	}
 }

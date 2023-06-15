@@ -10,7 +10,6 @@ import controllers.CemsFileController;
 import controllers.StudentTestController;
 import controllers.TestController;
 import controllers.TestToExecuteController;
-import enteties.Question;
 import enteties.StudentTest;
 import enteties.Test;
 import enteties.TestToExecute;
@@ -224,7 +223,8 @@ public class ManualTestController extends AbstractController {
 		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
 	}
 	
-	public void testGotManualyLockedByLecturer() {
+	public void testGotManualyLockedByLecturer(String testCode) {
+		if(!testCode.equals(code)) return;
 		alert.showErrorAlert("Sorry, but the test got locked by your lecturer..");
 		testIsLockInMiddleOfTest();
 	}

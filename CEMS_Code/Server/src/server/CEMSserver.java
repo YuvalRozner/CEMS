@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import JDBC.DB_controller;
 import JDBC.DataBaseConnector;
 import JDBC.Msg;
@@ -46,7 +45,8 @@ public class CEMSserver extends AbstractServer {
 		InetAddress clientAddress = client.getInetAddress();
 		String clientHostname = client.getInetAddress().getHostAddress();
 		try {
-			serverController.addConnected(clientAddress);
+			//serverController.addConnected(clientAddress);
+			serverController.addConnected(client);
 		} catch (Throwable t) {
 			System.out.println("Error in clientConnected");
 			serverController.addConsole("Error in clientConnected.\n");
@@ -93,12 +93,14 @@ public class CEMSserver extends AbstractServer {
 				serverController.addConsole("query: ->" + queryStr + ".\n");
 				System.out.println("query: ->" + queryStr);
 				stmt.executeUpdate(queryStr);
+				//sendToClient(new Msg(MsgType.succeeded), client);
 				sendToClient(new Msg(MsgType.succeeded), client);
 				break;
 			case disconnect:
 				serverController.addConsole("clientDisconnected" + client + ".\n");
 				System.out.println("clientDisconnected" + client);
-				serverController.removeConnected(client.getInetAddress());
+				//serverController.removeConnected(client.getInetAddress());
+				serverController.removeConnected(client);
 				sendToClient(new Msg(MsgType.bye), client);
 				break;
 			case manyMessages:
@@ -118,8 +120,7 @@ public class CEMSserver extends AbstractServer {
 			case lockTest:
 				serverController.addConsole("client "+client+ " asked to lock test with test code " + msg.getTestCode()+".\n");
 				System.out.println("client "+client+ " asked to lock test with test code " + msg.getTestCode()+".");
-				sendToClient(new Msg(MsgType.insertSucceeded), client);
-				
+				sendToAllClients(msg);
 				break;
 			case file:
 				msg.setPathFile("@../../file/");
@@ -148,12 +149,7 @@ public class CEMSserver extends AbstractServer {
 		return;
 	}
 
-	/**
-	 * @param msg
-	 * @param rs
-	 * @return
-	 * @throws SQLException
-	 */
+
 	private Msg createDataMsg(MsgType type, ResultSet rs) throws SQLException {
 		ArrayList<ArrayList<Object>> dataToClient = new ArrayList<>();
 		int colunmCount = rs.getMetaData().getColumnCount();
@@ -211,9 +207,5 @@ public class CEMSserver extends AbstractServer {
 			serverController.addConsole("error in sending msg to client.");
 			System.out.println("error in sending msg to client.");
 		}
-	}
-	
-	private void getClientWhichCurrentlyTakingTest() {
-		
 	}
 }

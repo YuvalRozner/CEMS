@@ -8,6 +8,8 @@ import controllers.CemsFileController;
 import enteties.User;
 import gui.AbstractController;
 import gui.LecturerMenuController;
+import gui.ManualTestController;
+import gui.OnlineTestController;
 import ocsf.client.AbstractClient;
 //////////////CEMS////////////
 
@@ -76,10 +78,12 @@ public class ChatClient extends AbstractClient {
 				break;
 			case lockTest:
 				System.out.println("Lock test with code: " + msg.getTestCode());
-				if(lastCurrentScreen instanceof LecturerMenuController) {
-					LecturerMenuController lm = (LecturerMenuController)lastCurrentScreen;
-					lm.testGotManualyLockedByLecturer();
-				}
+				if(lastCurrentScreen instanceof LecturerMenuController) ////////////////////
+					((LecturerMenuController)lastCurrentScreen).testGotManualyLockedByLecturer(msg.getTestCode().toString());/////////////////////
+				if(lastCurrentScreen instanceof ManualTestController) 
+					((ManualTestController)lastCurrentScreen).testGotManualyLockedByLecturer(msg.getTestCode().toString());
+				if(lastCurrentScreen instanceof OnlineTestController) 
+					((OnlineTestController)lastCurrentScreen).testGotManualyLockedByLecturer(msg.getTestCode().toString());
 				break;
 			case file:
 				msg.setPathFile("@../../file/");
