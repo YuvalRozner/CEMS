@@ -20,7 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import notifications.NotificationAlertsController;
 
-public class ManualTestController extends AbstractController {
+public class ManualTestController extends AbstractController implements Testing {
 
 	@FXML
 	private Label Course;
@@ -223,6 +223,7 @@ public class ManualTestController extends AbstractController {
 		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
 	}
 	
+	@Override
 	public void testGotManualyLockedByLecturer(String testCode) {
 		if(!testCode.equals(code)) return;
 		alert.showErrorAlert("Sorry, but the test got locked by your lecturer..");

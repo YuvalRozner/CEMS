@@ -25,7 +25,7 @@ import javafx.scene.layout.VBox;
 import notifications.NotificationAlertsController;
 
 
-public class OnlineTestController extends AbstractController implements CountDown{
+public class OnlineTestController extends AbstractController implements CountDown, Testing{
    
 	private ArrayList<ToggleGroup> toggleGroups = new ArrayList<ToggleGroup>();
    
@@ -277,6 +277,7 @@ public class OnlineTestController extends AbstractController implements CountDow
 		timeLbl.setText(s);
 	}
    
+	@Override
 	public void testGotManualyLockedByLecturer(String testCode) {
 		if(!testCode.equals(code)) return;
 		alert.showErrorAlert("Sorry, but the test got locked by your lecturer..");

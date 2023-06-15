@@ -7,9 +7,9 @@ import JDBC.Msg;
 import controllers.CemsFileController;
 import enteties.User;
 import gui.AbstractController;
-import gui.LecturerMenuController;
 import gui.ManualTestController;
 import gui.OnlineTestController;
+import gui.Testing;
 import ocsf.client.AbstractClient;
 //////////////CEMS////////////
 
@@ -77,13 +77,9 @@ public class ChatClient extends AbstractClient {
 				System.out.println("Data inserted into DB.");
 				break;
 			case lockTest:
-				System.out.println("Lock test with code: " + msg.getTestCode());
-				if(lastCurrentScreen instanceof LecturerMenuController) ////////////////////
-					((LecturerMenuController)lastCurrentScreen).testGotManualyLockedByLecturer(msg.getTestCode().toString());/////////////////////
-				if(lastCurrentScreen instanceof ManualTestController) 
-					((ManualTestController)lastCurrentScreen).testGotManualyLockedByLecturer(msg.getTestCode().toString());
-				if(lastCurrentScreen instanceof OnlineTestController) 
-					((OnlineTestController)lastCurrentScreen).testGotManualyLockedByLecturer(msg.getTestCode().toString());
+				System.out.println("Test code " + msg.getTestCode() + " got locked.");
+				if(lastCurrentScreen instanceof Testing) 
+					((Testing)lastCurrentScreen).testGotManualyLockedByLecturer(msg.getTestCode().toString());
 				break;
 			case file:
 				msg.setPathFile("@../../file/");
