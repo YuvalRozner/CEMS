@@ -1,19 +1,28 @@
 package gui;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import JDBC.Msg;
 import client.ChatClient;
 import controllers.CountDown;
 import controllers.QuestionController;
+import controllers.StudentTestController;
+import controllers.TestController;
+import controllers.TestToExecuteController;
 import enteties.Question;
+import enteties.StudentTest;
+import enteties.Test;
+import enteties.TestToExecute;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import notifications.NotificationAlertsController;
 
 
 public class OnlineTestController extends AbstractController implements CountDown{
@@ -22,6 +31,10 @@ public class OnlineTestController extends AbstractController implements CountDow
    
     private static QuestionController questionController = new QuestionController();
     ArrayList<Question> questions = new ArrayList<Question>();
+    private NotificationAlertsController alert= new NotificationAlertsController();
+	private TestController testController =new TestController();
+	private TestToExecuteController testToExecuteController = new TestToExecuteController();
+	private StudentTestController studentTestController =new StudentTestController();
     
   
     @FXML
@@ -33,7 +46,15 @@ public class OnlineTestController extends AbstractController implements CountDow
     @FXML
     private Label info1,info2,info3,info4,info5,info6;
     
-    String code;
+    private String code="";
+	private Integer duration=0;
+	private String lock="";
+	private TestToExecute numbersOfStudent; 
+	private Integer grade=0;
+	private String answers="";
+	private Msg msg;
+	private Integer timeOfStudent = 100; //time fiktivy //dor
+    
     public OnlineTestController() {
     	
     	if (ChatClient.lastCurrentScreen instanceof StartTestController) {
@@ -42,10 +63,20 @@ public class OnlineTestController extends AbstractController implements CountDow
     	Msg msg = questionController.getQuestionAndPointsByTestCode(Integer.parseInt(code));
     	sendMsg(msg);
     	System.out.println();
-    	questions = msgReceived.convertData(Question.class); //ArrayList
-    	 
+    	questions = msgReceived.convertData(Question.class); //ArrayList    	 
     }
+    class NumberRadioButton extends RadioButton {
+        private int number;
 
+        public NumberRadioButton(String text, int number) {
+            super(text);
+            this.number = number;
+        }
+
+        public int getNumber() {
+            return number;
+        }
+    }
     @FXML
     protected void initialize() {
     	int questionCounter = 1;
@@ -69,7 +100,7 @@ public class OnlineTestController extends AbstractController implements CountDow
             ToggleGroup answerGroup = new ToggleGroup();
             for (int j = 0; j < 4; j++) {
             	row++;
-                RadioButton answerRadioButton = new RadioButton(question.getAnswers()[j]);
+            	NumberRadioButton answerRadioButton = new NumberRadioButton(question.getAnswers()[j],j+1);
                 answerRadioButton.setToggleGroup(answerGroup);
                 gridPane.add(answerRadioButton, 0, i + row); // Adjust the row and column indices as needed
             }
@@ -80,17 +111,171 @@ public class OnlineTestController extends AbstractController implements CountDow
  
     @FXML
     void submmitBtn(ActionEvent event) throws Exception {
-    	for (int i = 0; i < toggleGroups.size(); i++) {
+		
+		alert.setOnCancelAction(new Runnable() {	@Override public void run() {
+			((Node)event.getSource()).getScene().getWindow().hide();
+			ChatClient.getScreen("onlineTest").display();
+			getPrimaryStage().setTitle("onlineTest");
+		}});
+		
+		
+		alert.setOnOkAction(new Runnable() {	@Override public void run() {
+			Msg msg=testController.getDurationByCode(code);
+			sendMsg(msg);
+			duration=msgReceived.convertData(Test.class).get(0).getDuration();
+
+			
+			if(duration<timeOfStudent) {
+				timeOfStudentIsOverLoad();/////////dor
+				checkIfStudentIsTheLastOne();
+			}
+			else if (checkIfTestIsLock().equals("true")){
+				testIsLockInEndOfTest();/////////dor			
+			}
+			else {
+				testIsSubmit(timeOfStudent);
+				checkIfStudentIsTheLastOne();
+			}
+			try {
+				start("studentMenu", "login");
+			} catch (Exception e) {}}});
+		alert.showConfirmationAlert(ChatClient.user.getName()+" Are you sure ?","After clicking the OK button, the submission is final and there is no option to change it");
+		updateAverageAndMedian();
+    }
+    public void checkIfStudentIsTheLastOne() {
+		msg=testToExecuteController.checkIfTheStudentIsLast(StartTestController.getTestToExecute().getTestCode());
+		sendMsg(msg);
+		numbersOfStudent=msgReceived.convertData(TestToExecute.class).get(0);
+		Integer needToLock=numbersOfStudent.getNumberOfStudentsStarted()-numbersOfStudent.getNumberOfStudentsFinished()-numbersOfStudent.getNumberOfStudents();
+		if (needToLock==0) {
+			msg=testToExecuteController.getMsgToLockTest(StartTestController.getTestToExecute());
+			sendMsg(msg);
+		}
+    	
+    }
+	public void updateAverageAndMedian(){
+		double average=0 , median=0;
+		msg=studentTestController.selectAllstudentBySpecificCodeTest(StartTestController.getTestToExecute().getTestCode());
+		sendMsg(msg);
+		ArrayList<StudentTest> listOfStudent =msgReceived.convertData(StudentTest.class);
+		ArrayList<Integer> listOfGrades=new ArrayList<Integer>();
+		for(StudentTest student : listOfStudent) {
+			average+=student.getGrade();
+			listOfGrades.add(student.getGrade());
+		}
+		average=average/listOfGrades.size();
+		Collections.sort(listOfGrades);
+		median=listOfGrades.get(listOfGrades.size()/2);
+		msg=testToExecuteController.updateMedianAndAverage(StartTestController.getTestToExecute().getTestCode(),average,median);
+		sendMsg(msg);
+		
+	}
+	
+    public void getAnswers() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < toggleGroups.size(); i++) {
     		if (toggleGroups.get(i).getSelectedToggle() == null) { //checking if the user answer on the question
-    			System.out.println("you didnt answer on question "+ (i+1) + " , do you still want to submmit ? y/n ....");
+    			sb.append("0");
     		}
     		else {
-    			System.out.println("for question "  + (i + 1)+" ,selected answer was (by name): " + (((RadioButton)toggleGroups.get(i).getSelectedToggle()).getText()));		
+    			sb.append((((NumberRadioButton)toggleGroups.get(i).getSelectedToggle()).getNumber()));
     		}
     	}
- 
-    	//super.backBtn(event);
+		answers=sb.toString();
+    	
     }
+    public void calculateGrade() {
+		for (int i = 0; i < toggleGroups.size(); i++) {
+    		if (toggleGroups.get(i).getSelectedToggle() != null) { //checking if the user answer on the question
+    			if (questions.get(i).getCorrectAnswer()==(((NumberRadioButton)toggleGroups.get(i).getSelectedToggle()).getNumber())) {
+    				grade+=questions.get(i).getPoints();
+    				System.out.println(grade);
+    			}
+    		}
+		}	
+    }
+    
+    
+	public void testIsSubmit(Integer timeOfStudent) {
+		alert.showInformationAlert("The test was successfully submitted!");
+		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
+		////////update data
+		msg = testToExecuteController.updateNumberOfStudenByOne(1,code,"finish");
+		sendMsg(msg);
+		calculateGrade();
+		getAnswers();
+		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,answers,grade,ChatClient.user.getId() ,code);
+		sendMsg(msg);
+		msg=testToExecuteController.insertDistributionByCode(code,grade,1);
+		sendMsg(msg);
+
+	}
+	
+	
+    /**
+     * what heppen if test is lock
+     * @param timeOfStudent
+     */
+	public void testIsLockInEndOfTest() {
+		msg = testToExecuteController.updateNumberOfStudenByOne(1,code,"cantSubmit");
+		sendMsg(msg);
+		alert.showErrorAlert("The test is locked!\n You will not be able to submit the test!");
+		grade=0;
+		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"00000",grade,ChatClient.user.getId() ,code);
+		sendMsg(msg);
+		msg=testToExecuteController.insertDistributionByCode(code,grade,1);
+		sendMsg(msg);
+		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
+	}
+    /**
+     * what heppen if test is lock
+     * @param timeOfStudent
+     */
+	public void testIsLockInMiddleOfTest() {
+		msg = testToExecuteController.updateNumberOfStudenByOne(1,code,"cantSubmit");
+		sendMsg(msg);
+		//alert.showErrorAlert("The test is locked!\n You will not be able to submit the test!");
+		calculateGrade();
+		getAnswers();
+		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,answers,grade,ChatClient.user.getId() ,code);
+		sendMsg(msg);
+		msg=testToExecuteController.insertDistributionByCode(code,grade,1);
+		sendMsg(msg);
+		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
+	}
+	
+	public void testGotManualyLockedByLecturer() {
+		alert.showErrorAlert("Sorry, but the test got locked by your lecturer..");
+		testIsLockInMiddleOfTest();
+	}
+	
+	/**
+	 * check if it lock
+	 * @return
+	 */
+    public String checkIfTestIsLock() {
+    	msg=testToExecuteController.checkIfTheTestIsLock(code);
+		sendMsg(msg);
+		lock=msgReceived.convertData(TestToExecute.class).get(0).getLock();
+		return lock;
+    }
+	/**
+	 * Handles the case when the student has exceeded the allowed time for the test.
+	 *
+	 * @param timeOfStudent The time taken by the student to complete the test (in minutes).
+	 */
+	public void timeOfStudentIsOverLoad() {
+		alert.showErrorAlert("You have exceeded the allowed time!");
+		msg = testToExecuteController.updateNumberOfStudenByOne(1,code,"cantSubmit");
+		sendMsg(msg);
+		getAnswers();
+		calculateGrade();
+		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,answers.toString(),grade,ChatClient.user.getId() ,code);
+		sendMsg(msg);
+		msg=testToExecuteController.insertDistributionByCode(code,grade,1);
+		sendMsg(msg);
+		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
+	}
 
 	@Override
 	public void setTextCountdown(String s) {

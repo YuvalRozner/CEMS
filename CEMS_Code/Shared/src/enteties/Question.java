@@ -200,7 +200,12 @@ public class Question {
 	public String[] getAnswers() {
 		return answers;
 	}
-
+	/**
+	 * get one answer
+	 */
+	public String getOneAnswer(Integer i) {
+		return answers[i];
+	}
 	/**
 	 * @param answers the answers to set
 	 */
