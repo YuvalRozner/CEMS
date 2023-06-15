@@ -23,8 +23,7 @@ public class StudentTestController {
 	 * @return The message object for updating the student's test details.
 	 */
 
-	public Msg InsertAnswersAndGradeManual(String approved, Integer timePassed, String ansewrs, Integer grade,
-			String id, Integer code) {
+	public Msg InsertAnswersAndGradeManual(String approved, Integer timePassed, String ansewrs, Integer grade,String id, String code) {
 		Msg msg = new Msg(MsgType.update);
 		msg.setTableToUpdate("cems.studenttest");
 		msg.setSet("answers", ansewrs);

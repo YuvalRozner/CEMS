@@ -19,7 +19,7 @@ public class TestController {
 	 * @return msg representing select query.
 	 */
 
-	public Msg getDurationByCode(Integer code) {
+	public Msg getDurationByCode(String code) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("test.duration");
 		msg.setFrom("cems.test");

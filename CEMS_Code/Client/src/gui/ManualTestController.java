@@ -10,6 +10,7 @@ import controllers.CemsFileController;
 import controllers.StudentTestController;
 import controllers.TestController;
 import controllers.TestToExecuteController;
+import enteties.Question;
 import enteties.StudentTest;
 import enteties.Test;
 import enteties.TestToExecute;
@@ -40,9 +41,11 @@ public class ManualTestController extends AbstractController {
 	@FXML
 	private Button upbtn;
 	
-	private static Integer duration;
-	private static String lock;
+	private String code;
+	private Integer duration;
+	private String lock;
 	private TestToExecute numbersOfStudent; 
+	Integer timeOfStudent = 100; //time fiktivy //dor
 	
 	private CemsFileController cemsFileController = new CemsFileController();
 	private StudentTestController studentTestController =new StudentTestController();
@@ -50,6 +53,14 @@ public class ManualTestController extends AbstractController {
 	private TestController testController =new TestController();
 	private TestToExecuteController testToExecuteController = new TestToExecuteController();
 	
+    public ManualTestController() {
+    	
+    	if (ChatClient.lastCurrentScreen instanceof StartTestController) {
+    		code = ((StartTestController)ChatClient.lastCurrentScreen).getCode();
+    	}
+ 	 
+    }
+    
 	/**
 	 * Handles the action event for the submit button in a JavaFX application.
 	 *
@@ -60,14 +71,13 @@ public class ManualTestController extends AbstractController {
 	public void submmitBtn(ActionEvent event) throws Exception {
 		Msg msg;
 		Integer grade=75;
-		Integer timeOfStudent = 100; //time fiktivy //dor
 		alert.setOnCancelAction(new Runnable() {	@Override public void run() {
 			((Node)event.getSource()).getScene().getWindow().hide();
 			ChatClient.getScreen("manualTest").display();
 			getPrimaryStage().setTitle("Manual Test");
 		}});
 		alert.setOnOkAction(new Runnable() {	@Override public void run() {
-			Msg msg=testController.getDurationByCode(StartTestController.getTestToExecute().getTestCode());
+			Msg msg=testController.getDurationByCode(code);
 			sendMsg(msg);
 			duration=msgReceived.convertData(Test.class).get(0).getDuration();
 			if(duration<timeOfStudent) {
@@ -134,11 +144,11 @@ public class ManualTestController extends AbstractController {
 		alert.showInformationAlert("The test was successfully submitted!");
 		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
 		////////update data
-		Msg msgUpdate = testToExecuteController.updateNumberOfStudenByOne(1,Integer.toString(StartTestController.getTestToExecute().getTestCode()),"finish");
+		Msg msgUpdate = testToExecuteController.updateNumberOfStudenByOne(1,code,"finish");
 		sendMsg(msgUpdate);
-		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"23244",grade,ChatClient.user.getId() ,StartTestController.getTestToExecute().getTestCode());
+		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"23244",grade,ChatClient.user.getId() ,code);
 		sendMsg(msg);
-		msg=testToExecuteController.insertDistributionByCode(StartTestController.getTestToExecute().getTestCode(),grade,1);
+		msg=testToExecuteController.insertDistributionByCode(code,grade,1);
 		sendMsg(msg);
 	}
 	/**
@@ -151,9 +161,9 @@ public class ManualTestController extends AbstractController {
 		Msg msgUpdate = testToExecuteController.updateNumberOfStudenByOne(1,Integer.toString(StartTestController.getTestToExecute().getTestCode()),"cantSubmit");
 		sendMsg(msgUpdate);
 		alert.showErrorAlert("The test is locked!\n You will not be able to submit the test!");
-		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"",0,ChatClient.user.getId() ,StartTestController.getTestToExecute().getTestCode());
+		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"00000",0,ChatClient.user.getId() ,code);
 		sendMsg(msg);
-		msg=testToExecuteController.insertDistributionByCode(StartTestController.getTestToExecute().getTestCode(),0,1);
+		msg=testToExecuteController.insertDistributionByCode(code,0,1);
 		sendMsg(msg);
 		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
 	}
@@ -167,9 +177,9 @@ public class ManualTestController extends AbstractController {
 		alert.showErrorAlert("You have exceeded the allowed time!");
 		Msg msgUpdate = testToExecuteController.updateNumberOfStudenByOne(1,Integer.toString(StartTestController.getTestToExecute().getTestCode()),"cantSubmit");
 		sendMsg(msgUpdate);
-		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"",0,ChatClient.user.getId() ,StartTestController.getTestToExecute().getTestCode());
+		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"00000",0,ChatClient.user.getId() ,code);
 		sendMsg(msg);
-		msg=testToExecuteController.insertDistributionByCode(StartTestController.getTestToExecute().getTestCode(),0,1);
+		msg=testToExecuteController.insertDistributionByCode(code,0,1);
 		sendMsg(msg);
 		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
 	}
@@ -201,5 +211,21 @@ public class ManualTestController extends AbstractController {
 		NotificationAlertsController alert = new NotificationAlertsController();
 		alert.showInformationAlert("The test was uploaded successfully!");
 
+	}
+	public void testIsLockInMiddleOfTest() {
+		Msg msg;
+		msg = testToExecuteController.updateNumberOfStudenByOne(1,code,"cantSubmit");
+		sendMsg(msg);
+		//alert.showErrorAlert("The test is locked!\n You will not be able to submit the test!");
+		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"12000",20,ChatClient.user.getId() ,code);
+		sendMsg(msg);
+		msg=testToExecuteController.insertDistributionByCode(code,20,1);
+		sendMsg(msg);
+		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
+	}
+	
+	public void testGotManualyLockedByLecturer() {
+		alert.showErrorAlert("Sorry, but the test got locked by your lecturer..");
+		testIsLockInMiddleOfTest();
 	}
 }

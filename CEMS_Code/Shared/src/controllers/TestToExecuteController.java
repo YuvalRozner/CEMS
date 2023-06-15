@@ -41,7 +41,7 @@ public class TestToExecuteController {
 	 * @param grade grade of one sudent when he finish the test.
 	 * @return
 	 */
-	public Msg insertDistributionByCode(Integer code,Integer grade,Integer upOrDown ) {
+	public Msg insertDistributionByCode(String code,Integer grade,Integer upOrDown ) {
 		Msg msg = new Msg(MsgType.updatePlusOne);
 		msg.setTableToUpdate("cems.testtoexecute");
 		if(grade>=0 && grade<10) {
