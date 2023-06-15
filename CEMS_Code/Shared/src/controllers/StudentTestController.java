@@ -141,5 +141,18 @@ public class StudentTestController {
 		msg.setWhere("user.id", ID);
 		return msg;
 	}
-
+	/**
+	 * Creates a message to select all student tests with a specific test code.
+	 *
+	 * @param code The test code to filter the student tests.
+	 * @return A Msg object configured for the select operation.
+	 */
+	
+	public Msg selectAllstudentBySpecificCodeTest(Integer code) {
+		Msg msg=new Msg(MsgType.select);
+		msg.setSelect("studenttest.grade");
+		msg.setFrom("cems.studenttest");
+		msg.setWhere("testCode",code);
+		return msg;
+	}
 }
