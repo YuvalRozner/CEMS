@@ -116,9 +116,10 @@ public class CEMSserver extends AbstractServer {
 				sendToClient(new Msg(MsgType.insertSucceeded), client);
 				break;
 			case lockTest:
-				serverController.addConsole("asked to lock test with test code " + msg.getTestCode()+".\n");
-				System.out.println("asked to lock test with test code " + msg.getTestCode()+".");
+				serverController.addConsole("client "+client+ " asked to lock test with test code " + msg.getTestCode()+".\n");
+				System.out.println("client "+client+ " asked to lock test with test code " + msg.getTestCode()+".");
 				sendToClient(new Msg(MsgType.insertSucceeded), client);
+				
 				break;
 			case file:
 				msg.setPathFile("@../../file/");
@@ -139,7 +140,6 @@ public class CEMSserver extends AbstractServer {
 				System.out.println("query: ->" + queryStr);
 				stmt.executeUpdate(queryStr);
 				sendToClient(new Msg(MsgType.succeeded), client);
-				
 			default:
 				break;
 			}
@@ -211,5 +211,9 @@ public class CEMSserver extends AbstractServer {
 			serverController.addConsole("error in sending msg to client.");
 			System.out.println("error in sending msg to client.");
 		}
+	}
+	
+	private void getClientWhichCurrentlyTakingTest() {
+		
 	}
 }

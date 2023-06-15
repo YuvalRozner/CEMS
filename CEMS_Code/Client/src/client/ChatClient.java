@@ -7,6 +7,7 @@ import JDBC.Msg;
 import controllers.CemsFileController;
 import enteties.User;
 import gui.AbstractController;
+import gui.LecturerMenuController;
 import ocsf.client.AbstractClient;
 //////////////CEMS////////////
 
@@ -75,6 +76,10 @@ public class ChatClient extends AbstractClient {
 				break;
 			case lockTest:
 				System.out.println("Lock test with code: " + msg.getTestCode());
+				if(lastCurrentScreen instanceof LecturerMenuController) {
+					LecturerMenuController lm = (LecturerMenuController)lastCurrentScreen;
+					lm.testGotManualyLockedByLecturer();
+				}
 				break;
 			case file:
 				msg.setPathFile("@../../file/");
