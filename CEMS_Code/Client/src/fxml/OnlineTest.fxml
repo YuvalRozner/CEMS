@@ -114,6 +114,11 @@
                         </VBox>
                      </children>
                   </HBox>
+                  <Label fx:id="timeLabel">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="18.0" />
+                     </font>
+                  </Label>
                   <TextFlow fx:id="instructionsForStudentTextFlow" prefWidth="800.0" />
                   <TextFlow fx:id="instructionsForLecturerTextFlow" prefWidth="800.0" />
                   <HBox>

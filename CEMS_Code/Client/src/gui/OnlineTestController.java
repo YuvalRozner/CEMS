@@ -10,6 +10,7 @@ import controllers.QuestionController;
 import controllers.StudentTestController;
 import controllers.TestController;
 import controllers.TestToExecuteController;
+import controllers.TimeController;
 import enteties.Question;
 import enteties.StudentTest;
 import enteties.Test;
@@ -51,7 +52,7 @@ public class OnlineTestController extends AbstractController implements CountDow
      * Labels for displaying test information.
      */
     @FXML
-    private Label info1, info2, info3, info4, info5, info6, info7;
+    private Label info1, info2, info3, info4, info5, info6, info7,timeLabel;
     
     /**
      * Container for displaying instructions for students/lecturers.
@@ -66,8 +67,8 @@ public class OnlineTestController extends AbstractController implements CountDow
     
     GridPane gridPane;
     
-    private String code = "5789";
-    private Integer code1;
+
+    private Integer code;
 	private Integer duration=0;
 	private String lock="";
 	private TestToExecute numbersOfStudent; 
@@ -79,16 +80,20 @@ public class OnlineTestController extends AbstractController implements CountDow
     
 	private TestToExecute testToExecute;
 	
+	TimeController timeController;
     public OnlineTestController() {
     	
     	if (ChatClient.lastCurrentScreen instanceof StartTestController) {
     		testToExecute = ((StartTestController) ChatClient.lastCurrentScreen).getTestToExecuteToShow();
-    		code1 = testToExecute.getTestCode();;
+    		code = testToExecute.getTestCode();;
     	}
-    	Msg msg = questionController.getQuestionAndPointsByTestCode(code1);
+    	Msg msg = questionController.getQuestionAndPointsByTestCode(code);
     	sendMsg(msg);
+    	
     	System.out.println();
     	questions = msgReceived.convertData(Question.class); //ArrayList    	 
+    	//timeController = new TimeController(testToExecute.getTest().getDuration(),this);
+    	timeController = new TimeController(1,this);
     }
    
     /**
@@ -135,7 +140,7 @@ public class OnlineTestController extends AbstractController implements CountDow
             ToggleGroup answerGroup = new ToggleGroup();
             for (int j = 0; j < 4; j++) {
                 row++;
-                RadioButton answerRadioButton = new RadioButton(question.getAnswers()[j]);
+                NumberRadioButton answerRadioButton = new NumberRadioButton(question.getAnswers()[j],(j+1));
                 answerRadioButton.setToggleGroup(answerGroup);
                 gridPane.add(answerRadioButton, 0, i + row);
             }
@@ -145,7 +150,7 @@ public class OnlineTestController extends AbstractController implements CountDow
 
         // Add the grid pane to the data VBox
         dataVbox.getChildren().add(gridPane);
-
+        timeController.startTimer();
         
     }
 
@@ -175,19 +180,9 @@ public class OnlineTestController extends AbstractController implements CountDow
 
  
     @FXML
-    void submitBtn(ActionEvent event) throws Exception {
-		
-    	testIsSubmit(timeOfStudent);
-    	System.out.println("yey");
-		checkIfStudentIsTheLastOne();
-		updateAverageAndMedian();
-    	/*
-    	
+    void submitBtn(ActionEvent event) throws Exception {	
     	alert.setOnCancelAction(new Runnable() {	@Override public void run() {
-			
 		}});
-		
-		
 		alert.setOnOkAction(new Runnable() {	@Override public void run() {
 	
 			duration = testToExecute.getTest().getDuration();
@@ -205,18 +200,11 @@ public class OnlineTestController extends AbstractController implements CountDow
 			}
 			try {start("studentMenu", "login");} catch (Exception e) {}}});
 		alert.showConfirmationAlert(ChatClient.user.getName()+" Are you sure ?","After clicking the OK button, the submission is final and there is no option to change it");
-    */
+    
     }
     
     
-    /*
-     * if(duration<timeOfStudent) {
-				timeOfStudentIsOverLoad();
-				checkIfStudentIsTheLastOne();
-				updateAverageAndMedian();
-			}
-			
-     */
+   
     
     public void checkIfStudentIsTheLastOne() {
 		msg=testToExecuteController.checkIfTheStudentIsLast(StartTestController.getTestToExecute().getTestCode());
@@ -231,7 +219,7 @@ public class OnlineTestController extends AbstractController implements CountDow
     }
 	public void updateAverageAndMedian(){
 		double average=0 , median=0;
-		msg=studentTestController.selectAllstudentBySpecificCodeTest(code);
+		msg=studentTestController.selectAllstudentBySpecificCodeTest(code.toString());
 		sendMsg(msg);
 		ArrayList<StudentTest> listOfStudent =msgReceived.convertData(StudentTest.class);
 		ArrayList<Integer> listOfGrades=new ArrayList<Integer>();
@@ -242,7 +230,7 @@ public class OnlineTestController extends AbstractController implements CountDow
 		average=average/listOfGrades.size();
 		Collections.sort(listOfGrades);
 		median=listOfGrades.get(listOfGrades.size()/2);
-		msg=testToExecuteController.updateMedianAndAverage(code,average,median);
+		msg=testToExecuteController.updateMedianAndAverage(code.toString(),average,median);
 		sendMsg(msg);
 		
 	}
@@ -276,13 +264,13 @@ public class OnlineTestController extends AbstractController implements CountDow
 		alert.showInformationAlert("The test was successfully submitted!");
 		
 		////////update data
-		msg = testToExecuteController.updateNumberOfStudenByOne(1,code,"finish");
+		msg = testToExecuteController.updateNumberOfStudenByOne(1,code.toString(),"finish");
 		sendMsg(msg);
 		calculateGrade();
 		getAnswers();
-		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,answers,grade,ChatClient.user.getId() ,code);
+		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,answers,grade,ChatClient.user.getId() ,code.toString());
 		sendMsg(msg);
-		msg=testToExecuteController.insertDistributionByCode(code,grade,1);
+		msg=testToExecuteController.insertDistributionByCode(code.toString(),grade,1);
 		sendMsg(msg);
 		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
 
@@ -293,15 +281,15 @@ public class OnlineTestController extends AbstractController implements CountDow
 		alert.showErrorAlert("The test is locked!\n You will not be able to submit the test!");
 		if(flagEndOrMiddle.equals("End")) {
 			grade=0;
-			msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"00000",grade,ChatClient.user.getId() ,code);
+			msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"00000",grade,ChatClient.user.getId() ,code.toString());
 		}
 		else {
 			calculateGrade();
 			getAnswers();
-			msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,answers,grade,ChatClient.user.getId() ,code);
+			msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,answers,grade,ChatClient.user.getId() ,code.toString());
 		}
 		sendMsg(msg);
-		msg=testToExecuteController.insertDistributionByCode(code,0,1);
+		msg=testToExecuteController.insertDistributionByCode(code.toString(),0,1);
 		sendMsg(msg);
 		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
 	}
@@ -314,20 +302,28 @@ public class OnlineTestController extends AbstractController implements CountDow
 	 */
 	public void timeOfStudentIsOverLoad() {
 		alert.showErrorAlert("You have exceeded the allowed time!");
-		msg = testToExecuteController.updateNumberOfStudenByOne(1,code,"cantSubmit");
+		msg = testToExecuteController.updateNumberOfStudenByOne(1,code.toString(),"cantSubmit");
 		sendMsg(msg);
-		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"00000",0,ChatClient.user.getId() ,code);
+		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"00000",0,ChatClient.user.getId() ,code.toString());
 		sendMsg(msg);
-		msg=testToExecuteController.insertDistributionByCode(code,grade,1);
+		msg=testToExecuteController.insertDistributionByCode(code.toString(),grade,1);
 		sendMsg(msg);
 		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
 	}
 
 	@Override
 	public void setTextCountdown(String s) {
-		//timeLbl.setText(s);
+		timeLabel.setText(s);
 	}
-   
+	@Override
+	public void endOfTime() {
+		System.out.println("the time is up my freind");
+		/*
+		timeOfStudentIsOverLoad();
+		checkIfStudentIsTheLastOne();
+		updateAverageAndMedian();
+		*/
+	}
 	@Override
 	public void testGotManualyLockedByLecturer(String testCode) {
 		if(!testCode.equals(code)) return;
@@ -336,7 +332,6 @@ public class OnlineTestController extends AbstractController implements CountDow
 		testIsLockCantSubmmit();
 		updateAverageAndMedian();
 	}
-	
 	 class NumberRadioButton extends RadioButton {
 	        private int number;
 
@@ -349,4 +344,6 @@ public class OnlineTestController extends AbstractController implements CountDow
 	            return number;
 	        }
 	    }
+	
+	
 }

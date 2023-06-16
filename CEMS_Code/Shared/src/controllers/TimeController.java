@@ -41,6 +41,7 @@ public class TimeController {
 	            totalSeconds--; // Decrement the remaining seconds
 	            if (totalSeconds < 0) {
 	                timer.cancel();
+	                Platform.runLater(() -> countDown.endOfTime());
 	                return;
 	            }
 	            String time = String.format("%02d:%02d:%02d", (totalSeconds / 3600), ((totalSeconds % 3600) / 60), (totalSeconds % 60));
