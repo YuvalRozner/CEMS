@@ -10,7 +10,7 @@ import enteties.User;
 public class UserController {
 	public Msg getLecturerNameById(String id) {
 		Msg msg = new Msg(MsgType.select);
-		msg.setSelect("`user`.username");
+		msg.setSelect("`user`.name");
 		msg.setFrom("`user`");
 		msg.setWhere("id", id);
 		return msg;
