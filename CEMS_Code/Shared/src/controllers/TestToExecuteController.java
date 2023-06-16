@@ -20,7 +20,8 @@ public class TestToExecuteController {
 	
 	public Msg checkIfTheTestExict(String code) {
 		Msg msg = new Msg(MsgType.select);
-		msg.setTableToUpdate("testtoexecute");
+		msg.setSelect("testtoexecute.lecturerId");
+		msg.setSelect("testtoexecute.testCode");
 		msg.setFrom("testtoexecute");
 		msg.setWhere("testCode", code);
 		return msg;

@@ -61,10 +61,6 @@ public class StartTestController extends AbstractController{
     	if(msgReceived==null) {alert.showWarningAlert("A test with the code you provided is not found in the system. Please check that the code is correct.");return;}
     	lecturerId=msgReceived.convertData(TestToExecute.class).get(0).getLecturerId();
     	
-    	msg=userController.getLecturerNameById(lecturerId);
-    	sendMsg(msg);
-    	lecturerName=msgReceived.convertData(User.class).get(0).getName();
-    	alert.showWarningAlert("The test you are about to enter was written by the lecturer: "+lecturerName);
     	
     	msg = testToExecuteController.checkIfTheTestIsLock(code);
     	sendMsg(msg);
@@ -74,6 +70,10 @@ public class StartTestController extends AbstractController{
     	msg=studentTestController.studentAlreadyAccessed(ChatClient.user,code);
     	sendMsg(msg);
     	if (msgReceived==null) {
+    		msg=userController.getLecturerNameById(lecturerId);
+        	sendMsg(msg);
+        	lecturerName=msgReceived.convertData(User.class).get(0).getName();
+        	alert.showInformationAlert("The test you are about to enter was written by the lecturer: "+lecturerName);
         	Msg msgGetTesttoexeute = testToExecuteController.selectTestToExecuteByCode(code);
         	sendMsg(msgGetTesttoexeute);
         	ArrayList<TestToExecute>arr=msgReceived.convertData(TestToExecute.class);
