@@ -36,13 +36,13 @@ public class OnlineTestController extends AbstractController implements CountDow
      * Labels for displaying test information.
      */
     @FXML
-    private Label info1, info2, info3, info4, info5, info6, info7, timeLabel;
+    private Label info1, info2, info3, info4, info5, timeLabel;
 
     /**
-     * Container for displaying instructions for students/lecturers.
+     * Container for displaying instructions for students.
      */
     @FXML
-    private TextFlow instructionsForStudentTextFlow, instructionsForLecturerTextFlow;
+    private TextFlow instructionsForStudentTextFlow;
 
     /**
      * Labels for displaying points per question.
