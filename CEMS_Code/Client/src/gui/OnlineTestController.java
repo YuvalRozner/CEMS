@@ -2,22 +2,18 @@ package gui;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
 import JDBC.Msg;
 import client.ChatClient;
 import controllers.CountDown;
 import controllers.QuestionController;
 import controllers.StudentTestController;
-import controllers.TestController;
 import controllers.TestToExecuteController;
 import controllers.TimeController;
 import enteties.Question;
 import enteties.StudentTest;
-import enteties.Test;
 import enteties.TestToExecute;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -288,8 +284,7 @@ public class OnlineTestController extends AbstractController implements CountDow
         msg = testToExecuteController.updateMedianAndAverage(code.toString(), average, median);
         sendMsg(msg);
     }
-
-	
+    
     /**
      * Retrieves the selected answers from the toggle groups and builds a string representation of the answers.
      * If a toggle group does not have a selected toggle (no answer provided), a "0" is appended to the string.
@@ -330,7 +325,6 @@ public class OnlineTestController extends AbstractController implements CountDow
             }
         }
     }
-
 
     /**
      * Submits the test for the student.
@@ -395,8 +389,6 @@ public class OnlineTestController extends AbstractController implements CountDow
         }
     }
 
-	
-	
 	/**
 	 * Handles the case when the student has exceeded the allowed time for the test.
 	 *
@@ -413,7 +405,6 @@ public class OnlineTestController extends AbstractController implements CountDow
 		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
 	}
 
-	
 	/**
 	 * Sets the text of the countdown label to the specified string.
 	 *
@@ -424,7 +415,6 @@ public class OnlineTestController extends AbstractController implements CountDow
 	    timeLabel.setText(countdownText);
 	}
 
-	
 	/**
 	 * Callback method called when the time limit for the student has ended.
 	 * Performs necessary actions such as notifying the end of time, checking if the student is the last one,
