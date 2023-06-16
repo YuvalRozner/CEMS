@@ -142,7 +142,13 @@ public class QuestionController {
    	return msg;
    }
 	
-	
+	/**
+	 * Retrieves the question and points associated with a specific test code and student ID.
+	 *
+	 * @param testCode   The test code to search for.
+	 * @param studentId  The student ID to search for.
+	 * @return A Msg object containing the query details to retrieve the question and points.
+	 */
 	public Msg getQuestionAndPointsByTestCodeAndStudentId(Integer testCode,String studentId) {
    	Msg msg = new Msg(MsgType.select);
    	msg.setSelect("question.*, test_question.points");
@@ -158,6 +164,12 @@ public class QuestionController {
    	return msg;
    }
 	
+	/**
+	 * Retrieves the question and points associated with a specific test code.
+	 *
+	 * @param testCode The test code to search for.
+	 * @return A Msg object containing the query details to retrieve the question and points.
+	 */
 	public Msg getQuestionAndPointsByTestCode(Integer testCode) {
 	   	Msg msg = new Msg(MsgType.select);
 	   	msg.setSelect("question.*, test_question.points");

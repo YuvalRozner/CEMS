@@ -3,6 +3,9 @@ package enteties;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 
+/**
+ * The Request class represents a Request entity.
+ */
 public class Request {
 	// in DB:
 	private Integer testCode;
@@ -30,13 +33,15 @@ public class Request {
 		super();
 	}
 
-	/**
-	 * @param testCode
-	 * @param lecurerId
-	 * @param hodId
-	 * @param duration
-	 * @param explanetion
-	 */
+	 /**
+     * Constructs a Request object with the specified parameters.
+     *
+     * @param testCode     The test code.
+     * @param lecurerId    The lecturer ID.
+     * @param hodId        The HOD ID.
+     * @param duration     The duration.
+     * @param explanation  The explanation.
+     */
 	public Request(Integer testCode, String lecurerId, String hodId, Integer duration, String explanation) {
 		this.testCode = testCode;
 		this.lecturerId = lecurerId;
@@ -46,27 +51,29 @@ public class Request {
 	}
 
 	/**
-	 * @param testCode
-	 * @param lecurerId
-	 * @param hodId
-	 * @param duration
-	 * @param explanetion
-	 * @param id
-	 * @param number
-	 * @param courseNumber
-	 * @param testDuration
-	 * @param instructionsForStudent
-	 * @param instructionsForLecturer
-	 * @param userId
-	 * @param name
-	 * @param username
-	 * @param password
-	 * @param premission
-	 * @param loggedin
-	 * @param courseNum
-	 * @param courseName
-	 * @param subjectNum
-	 */
+     * Constructs a Request object with the specified parameters.
+     *
+     * @param testCode                The test code.
+     * @param lecurerId               The lecturer ID.
+     * @param hodId                   The HOD ID.
+     * @param duration                The duration.
+     * @param explanation             The explanation.
+     * @param id                      The ID.
+     * @param number                  The number.
+     * @param courseNumber            The course number.
+     * @param testDuration            The test duration.
+     * @param instructionsForStudent  The instructions for students.
+     * @param instructionsForLecturer The instructions for lecturers.
+     * @param userId                  The user ID.
+     * @param name                    The name.
+     * @param username                The username.
+     * @param password                The password.
+     * @param premission              The permission.
+     * @param loggedin                The logged-in status.
+     * @param courseNum               The course number.
+     * @param courseName              The course name.
+     * @param subjectNum              The subject number.
+     */
 	public Request(Integer testCode, String lecurerId, String hodId, Integer duration, String explanation,
 			String id, String number, String courseNumber, Integer testDuration, String instructionsForStudent,
 			String instructionsForLecturer, String userId, String name, String username, String password,
@@ -144,18 +151,38 @@ public class Request {
 		return explanation;
 	}
 
+	/**
+     * Returns the original duration from the associated test.
+     *
+     * @return The original duration.
+     */
 	public Integer getOriginalDuration() {
 		return this.test.getDuration();
 	}
 
+	/**
+     * Returns the lecturer name from the associated user.
+     *
+     * @return The lecturer name.
+     */
 	public String getLecturerName() {
 		return this.user.getName();
 	}
-
+	
+	/**
+     * Returns the test ID from the associated test.
+     *
+     * @return The test ID.
+     */
 	public String getTestId() {
 		return this.test.getId();
 	}
 
+	/**
+     * Returns the course name from the associated course.
+     *
+     * @return The course name.
+     */
 	public String getCourseName() {
 		return this.course.getName();
 	}
@@ -167,12 +194,24 @@ public class Request {
 		this.explanation = explanation;
 	}
 
+	/**
+     * Checks if this Request object is equal to the specified object.
+     * Two Request objects are considered equal if they have the same testCode and lecturerId.
+     *
+     * @param obj The object to compare with.
+     * @return true if the objects are equal, false otherwise.
+     */
 	@Override
 	public boolean equals(Object obj) {
 		Request r = (Request) obj;
 		return (testCode.equals(r.getTestCode()) && lecturerId.equals(r.getLecturerId()));
 	}
 
+	/**
+     * Returns a string representation of this Request object.
+     *
+     * @return A string representation of the object.
+     */
 	@Override
 	public String toString() {
 		return "Request [testCode=" + testCode + ", lecurerId=" + lecturerId + ", hodId=" + hodId
@@ -184,18 +223,34 @@ public class Request {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// for FX:
+	/**
+     * Sets a new CheckBox for this Request object.
+     */
 	public void setNewCheckbox() {
 		checkbox = new CheckBox();
 	}
 
+	/**
+     * Returns the CheckBox associated with this Request object.
+     *
+     * @return The CheckBox.
+     */
 	public CheckBox getCheckbox() {
 		return checkbox;
 	}
 
+	/**
+     * Sets a new RadioButton for this Request object.
+     */
 	public void setNewRadioButton() {
 		radioButton = new RadioButton();
 	}
 
+	/**
+     * Returns the RadioButton associated with this Request object.
+     *
+     * @return The RadioButton.
+     */
 	public RadioButton getRadioButton() {
 		return radioButton;
 	}

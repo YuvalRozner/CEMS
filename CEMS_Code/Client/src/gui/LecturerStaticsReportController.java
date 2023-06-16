@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import JDBC.Msg;
+//import JDBC.MsgType;
 import client.ChatClient;
 import controllers.TestToExecuteController;
 import controllers.StudentTestController;
@@ -16,6 +17,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.control.Label;
+import notifications.NotificationAlertsController;
 
 /**
  * Controller class for the Lecturer Statistics Report screen.
@@ -30,15 +32,30 @@ import javafx.scene.control.Label;
  */
 public class LecturerStaticsReportController extends HodScreen{
 
+	/**
+	 * Selected lecturer or the student users for the report.
+	 */
 	public static User selectedLecturer, selectedStudent;
+	
+	/**
+	 * Selected course for the report.
+	 */
 	public static Course selectedCourse;
 	
-	@FXML
-    private Label avg;
-
-    @FXML
-    private Label median;
+	/**
+	 * Selected test to execute for the report.
+	 */
+	public static TestToExecute selectedTest;
 	
+	/**
+	 * labels of the screen.
+	 */
+	@FXML
+    private Label avg, median, finishTest, notFinishTest, startTest, subTitle;
+	
+	/**
+	 * barChart for the report.
+	 */
 	@FXML
 	private BarChart<String, Integer> barChart;
 	
@@ -62,7 +79,15 @@ public class LecturerStaticsReportController extends HodScreen{
 	 */
     private ArrayList<TestToExecute> testToExecuteLst;
     
-    private boolean testToexec=false, studentTest=false; 
+    /**
+	 * object to use the notifications class.
+	 */
+    private static NotificationAlertsController notification = new NotificationAlertsController();
+    
+    /**
+	 * boolean flags for knowing what type of report is needed.
+	 */
+    private boolean testToexec=false, studentTest=false, courseFlag=false, testFlag=false;
 	
     /**
      * Default constructor for the LecturerStaticsReportController class.
@@ -74,12 +99,26 @@ public class LecturerStaticsReportController extends HodScreen{
                 case "lecturer":
                     User selectedLecturer = ((ChooseReportTypeController) ChatClient.lastCurrentScreen).getSelectedLecturer();
                     try {
+                    	//System.out.println("im here");
                         Msg msg1 = testToExecuteController.selectTestToExecuteByLecturer(selectedLecturer.getId());
+                        //System.out.println(msg1.getType());
+                        //if(msg1.getType()==MsgType.empty) {notification.showErrorAlert("There are no tests to see."); return;}
+                        //if(AbstractController.msgReceived.getType()==MsgType.empty) {notification.showErrorAlert("There are no tests to see."); return;}
+                        
+                        //System.out.println("Data= " + AbstractController.msgReceived.getData());
+                        //System.out.println("Type= " + AbstractController.msgReceived.getType());
+                        //if(AbstractController.msgReceived.getType()==MsgType.empty) {notification.showErrorAlert("There are no tests to see."); return;}
+                        //System.out.println("Data= " + AbstractController.msgReceived.getData());
                         sendMsg(msg1);
+                        //System.out.println("im here 2");
                         testToExecuteLst = msgReceived.convertData(TestToExecute.class);
+                        //System.out.println("im here 3");
+                        //System.out.println("testToExecuteLst= " + testToExecuteLst);
+                        if(testToExecuteLst==null) {notification.showErrorAlert("There are no tests to see."); return;}
                         testToexec = true;
                     } catch (Exception e) {
                         e.printStackTrace();
+                        return;
                     }
                     break;
                 case "student":
@@ -88,6 +127,7 @@ public class LecturerStaticsReportController extends HodScreen{
                         Msg msg2 = studentTestController.getMsgForStudentTestsByID(selectedStudent.getId());
                         sendMsg(msg2);
                         studenntTestLst = msgReceived.convertData(StudentTest.class);
+                        if(studenntTestLst==null) {notification.showErrorAlert("There are no tests to see."); return;}
                         studentTest = true;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -99,12 +139,19 @@ public class LecturerStaticsReportController extends HodScreen{
                         Msg msg3 = testToExecuteController.selectTestToExecuteByCourseName(selectedCourse.getName());
                         sendMsg(msg3);
                         testToExecuteLst = msgReceived.convertData(TestToExecute.class);
+                        if(testToExecuteLst==null) {notification.showErrorAlert("There are no tests to see."); return;}
                         testToexec = true;
+                        courseFlag = true;
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
             }
+        }
+        else if(ChatClient.lastCurrentScreen instanceof LecturerTestViewController) {
+        	TestToExecute selectedTest = ((LecturerTestViewController) ChatClient.lastCurrentScreen).getSelectedTest();
+        	testFlag = true;
+        	System.out.println("selectedTest= " + selectedTest);
         }
     }
     
@@ -125,13 +172,22 @@ public class LecturerStaticsReportController extends HodScreen{
 	    
 	    int[] distributionByType = new int[10];
 	    if(testToexec) {
+	    	if(courseFlag) {
+	    		subTitle.setText("By Course: " + selectedCourse.getName());
+	    	}else { subTitle.setText("By Lecturer: " + selectedLecturer.getName());}
 	    	distributionByType = getDistributionForTestToExecute();
 	    	avgByType = getAvgForTestToExecute();
 	    	medianByType = getMedianForTestToExecute();
 	    } else if(studentTest) {
+	    	subTitle.setText("By Student: " + selectedStudent.getName());
 	    	distributionByType = getDistributionForStudentTest();
 	    	avgByType = getAvgForStudentTest();
 	    	medianByType = getMedianForStudentTest();
+	    } else if(testFlag) {
+	    	subTitle.setText("By Test: " + selectedTest.getCourseName() + " - " + selectedTest.getTestId());
+	    	distributionByType = getDistributionForOneTestToExecute();
+	    	avgByType = selectedTest.getAverage();
+	    	medianByType = selectedTest.getMedian();
 	    }
 	    
 	    avg.setText(String.format("%.2f", avgByType));
@@ -167,15 +223,44 @@ public class LecturerStaticsReportController extends HodScreen{
 	private int[] getDistributionForTestToExecute() {
 		// Initialize the distribution array
 	    int[] distribution = new int[10];
+	    int start=0, finish=0, notFinish=0;
 
 	    //Iterate over the testToExecuteLst and populate the distribution array
 	    for (TestToExecute test : testToExecuteLst) {
+	    	start += test.getNumberOfStudentsStarted();
+	    	finish += test.getNumberOfStudentsFinished();
+	    	//notFinish += test.getNumberOfStudents();
 	    	Integer[] distributionPerTest = test.getDistribusion();
 	    	for(int i=0; i<distribution.length; i++) {
 	    		distribution[i]+=distributionPerTest[i];
 	    	}
 	    }
+	    startTest.setText("Number of students who started the test: " + start);
+	    finishTest.setText("Number of students who finished the test: " + finish);
+	    notFinishTest.setText("Number of students who did not finish the test on time: " + notFinish);
 		return distribution;
+	}
+	
+	/**
+     * Calculates the grade distribution for one TestToExecute.
+     *
+     * @return an array representing the grade distribution
+     */
+	private int[] getDistributionForOneTestToExecute() {
+		// Initialize the distribution array
+	    int[] distribution = new int[10];
+	    int start=0, finish=0, notFinish=0;
+	    start = selectedTest.getNumberOfStudentsStarted();
+	    finish = selectedTest.getNumberOfStudentsFinished();
+	    notFinish = selectedTest.getNumberOfStudents();
+	    Integer[] distributionTest = selectedTest.getDistribusion();
+	    for(int i=0; i<distribution.length; i++) {
+	    	distribution[i]+=distributionTest[i];
+    	}
+	    startTest.setText("Number of students who started the test: " + start);
+	    finishTest.setText("Number of students who finished the test: " + finish);
+	    notFinishTest.setText("Number of students who did not finish the test on time: " + notFinish);
+	    return distribution;
 	}
 	
 	/**
@@ -187,10 +272,13 @@ public class LecturerStaticsReportController extends HodScreen{
 		// Initialize the distribution array
 	    int[] distribution = new int[10];
 	    
-	  //Iterate over the StudentTest and populate the Grades
+	    //Iterate over the StudentTest and populate the Grades
 	    for (StudentTest grade : studenntTestLst) {
 	    	Integer distributionPerGrade = grade.getGrade();
 	    	int index = (distributionPerGrade/10)-1;
+	    	if(index<0) {
+	    		index=0;
+	    	}
 	    	distribution[index]++;
 	    }
 	    return distribution;

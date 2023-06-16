@@ -14,7 +14,7 @@ import javafx.collections.ObservableList;
  * Controller class for managing subjects.
  */
 public class SubjectController {
-	
+	 
     /**
      * Finds a subject by its name.
      *

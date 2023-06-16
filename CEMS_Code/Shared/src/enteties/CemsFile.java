@@ -2,6 +2,10 @@ package enteties;
 
 import java.io.Serializable;
 
+/**
+ * The CemsFile class represents a file entity in the CEMS system.
+ * It implements the Serializable interface for object serialization.
+ */
 public class CemsFile implements Serializable {
 
 	/**

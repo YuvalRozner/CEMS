@@ -28,8 +28,12 @@ import notifications.NotificationAlertsController;
  */
 public class ChooseReportTypeController extends HodScreen{
 
+	/**
+	 * back and shoe buttons.
+	 */
     @FXML
-    private Button back;
+    private Button back, show;
+    
     /**
 	 * ToggleGroup for selecting the report type.
 	 */
@@ -43,16 +47,22 @@ public class ChooseReportTypeController extends HodScreen{
     private ComboBox<String> comboBoxNames;
     
     /**
-	 * the options for the correct answer.
+	 * the options for the radio buttons(course,lecturer,student).
 	 */
     @FXML
     private RadioButton courseRadiobtn, lecturerRadiobtn, studentradiobtn;
-
-    @FXML
-    private Button show;
     
-    private ObservableList<User> studentTable, lecturerTable;
-    private ObservableList<Course> courseTable;
+    /**
+     * The observable list of users changes for the table.
+     */
+    @SuppressWarnings("unused")
+	private ObservableList<User> studentTable, lecturerTable;
+    
+    /**
+     * The observable list of course changes for the table.
+     */
+    @SuppressWarnings("unused")
+	private ObservableList<Course> courseTable;
     
     /**
 	 * the list of users for the comboBox according to the subjects which math the hod user.
@@ -60,7 +70,7 @@ public class ChooseReportTypeController extends HodScreen{
     private ArrayList<User> userLecturerLst, userStudentLst;
     
     /**
-	 * the list of users for the comboBox according to the subjects which math the hod user.
+	 * the list of users for the comboBox according to the subjects which match the hod user.
 	 */
     private ArrayList<Course> courseLst;
     
@@ -74,6 +84,9 @@ public class ChooseReportTypeController extends HodScreen{
 	 */
     private Course selectedCourse;
     
+    /**
+	 * string that represent the chosen radio button.
+	 */
     private String reportType;
     
     /**
@@ -84,15 +97,10 @@ public class ChooseReportTypeController extends HodScreen{
 	 * object to use the notifications class.
 	 */
     private static NotificationAlertsController notification = new NotificationAlertsController();
+ 
     /**
-	 * boolean variable to indicate that any subject has already been chose. for not letting the user create a question without choosing subject.
+	 * object to use the LecturerStaticsReportController class.
 	 */
-    private boolean lecturerChoose = false, studentChoose = false; //indicates that a user was chosen.
-    /**
-	 * boolean variable to indicate that any subject has already been chose. for not letting the user create a question without choosing subject.
-	 */
-    private boolean courseChoose = false; //indicates that a course was chosen.
-    
     LecturerStaticsReportController lecturerStaticsReportController = new LecturerStaticsReportController();
 
     
@@ -122,6 +130,10 @@ public class ChooseReportTypeController extends HodScreen{
     	courseTable = FXCollections.observableArrayList(courseLst);
     }
     
+    /**
+     * Initializes the controller after its root element has been completely processed.
+     * This method is called when loading the FXML file.
+     */
     @FXML
 	protected void initialize() {
     	//Disable the ComboBox and Show button initially

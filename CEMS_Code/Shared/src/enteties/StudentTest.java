@@ -7,6 +7,12 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
+/**
+ * Represents a student test.
+ * This class stores information about a student's test, including the student's ID, test code, time passed, answers, grade, lecturer notes, approval status, and change reason.
+ * It also contains additional attributes that are not stored in the database, such as the student's name, the test to execute, and the test itself.
+ * The class provides various constructors to create different instances of a student test object.
+ */
 public class StudentTest {
 	//in DB:
 	private String studentId;
@@ -377,12 +383,24 @@ public class StudentTest {
 		this.test = test;
 	}
 	
+	/**
+	 * Checks if this StudentTest object is equal to the specified object.
+	 * Two StudentTest objects are considered equal if they have the same studentId and testCode.
+	 *
+	 * @param obj The object to compare with.
+	 * @return true if the objects are equal, false otherwise.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		StudentTest st = (StudentTest) obj;
 		return ( studentId.equals(st.getStudentId()) && testCode.equals(st.getTestCode()));
 	}
 
+	/**
+	 * Returns a string representation of this StudentTest object.
+	 *
+	 * @return A string representation of the object.
+	 */
 	@Override
 	public String toString() {
 		return "StudentTest [studentId=" + studentId + ", testCode=" + testCode + ", timePassed=" + timePassed + ", answers=" + answers + ", grade=" + grade
@@ -392,47 +410,107 @@ public class StudentTest {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//for FX:
+	/**
+	 * Sets a new CheckBox for this StudentTest object.
+	 */
 	public void setNewCheckBox() {
 		checkBox = new CheckBox();
 	}
+	
+	/**
+	 * Returns the CheckBox associated with this StudentTest object.
+	 *
+	 * @return The CheckBox.
+	 */
 	public CheckBox getCheckBox() {
 		return checkBox;
 	}
+	
+	/**
+	 * Sets a new RadioButton for this StudentTest object.
+	 */
 	public void setNewRadioButton() {
 		radioButton = new RadioButton();
 	}
+	
+	/**
+	 * Returns the RadioButton associated with this StudentTest object.
+	 *
+	 * @return The RadioButton.
+	 */
 	public RadioButton getRadioButton() {
 		return radioButton;
 	}
+	
+	/**
+	 * Sets the CheckBox select for this StudentTest object.
+	 *
+	 * @param select The CheckBox select.
+	 */
 	public void setSelect(CheckBox select) {
 		this.select = select;
 	}
+	
+	/**
+	 * Sets a new Button for this StudentTest object.
+	 */
 	public void setNewButton() {
 		button = new Button();
 	}
+	
+	/**
+	 * Returns the Button associated with this StudentTest object.
+	 *
+	 * @return The Button.
+	 */
 	public Button getButton() {
 		return button;
 	}
+	
+	/**
+	 * Sets the text for the Button associated with this StudentTest object.
+	 *
+	 * @param s The text for the Button.
+	 */
 	public void setButtonText(String s) {
 		button.setText(s);
 	}
 	
-	
+	/**
+	 * Sets a new TextField for this StudentTest object.
+	 */
 	public void setNewTextField() {
 		textField = new TextField();
 	}
+	
+	/**
+	 * Returns the TextField associated with this StudentTest object.
+	 *
+	 * @return The TextField.
+	 */
 	public TextField getTextField() {
 		return textField;
 	}
+	
+	/**
+	 * Sets a new TextField1 for this StudentTest object.
+	 */
 	public void setNewTextField1() {
 		textField1 = new TextField();
 	}
+	
+	/**
+	 * Returns the TextField1 associated with this StudentTest object.
+	 *
+	 * @return The TextField1.
+	 */
 	public TextField getTextField1() {
 		return textField1;
 	}
 	
-	
-	
+	/**
+	 * Sets a new CheckBox select for this StudentTest object.
+	 */
 	public void setNewSelect() { 
 		this.select = new CheckBox();
 		this.select.setStyle("-fx-background-color: #F0F8FF; -fx-border-width: 1px; -fx-border-color: #92bce3;  -fx-border-radius: 3px; -fx-font-weight: bold; -fx-font-family: \"Comic Sans MS\";");
@@ -446,16 +524,27 @@ public class StudentTest {
 		});
 	}
 	
+	/**
+	 * Sets a new note TextField for this StudentTest object.
+	 */
 	public void setNewNote() {
 		this.note = new TextField();
 		this.note.setStyle("-fx-background-color: #F0F8FF; -fx-border-width: 1px; -fx-border-color: #92bce3;  -fx-border-radius: 7px; -fx-font-weight: bold; -fx-font-family: \"Comic Sans MS\";");
 		//note.setDisable(true);
 	}
 	
+	/**
+	 * Returns the show Button associated with this StudentTest object.
+	 *
+	 * @return The show Button.
+	 */
 	public Button getShow() {
 		return show;
 	}
-	//////////show
+	
+	/**
+	 * Sets a new show Button for this StudentTest object.
+	 */
 	public void setNewShow() { ///added by Mor //add style to show button
         this.show = new Button();
         show.setText("Show");
@@ -467,5 +556,4 @@ public class StudentTest {
         show.setOnMousePressed(e -> show.setStyle("-fx-background-color: #82bfb6; -fx-background-radius: 30 0 0 30; -fx-font-weight: bold; -fx-font-family: \\\"Comic Sans MS\\\";"));
         show.setOnMouseReleased(e -> show.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30; -fx-font-weight: bold; -fx-font-family: \\\"Comic Sans MS\\\";"));
     }
-	/////////////show
 }

@@ -12,7 +12,9 @@ import JDBC.Msg;
 import JDBC.MsgType;
 import enteties.CemsFile;
 
-
+/**
+ * The CemsFileController class handles operations related to CemsFile objects.
+ */
 public class CemsFileController {
 	/**
 	 * make path file to File.

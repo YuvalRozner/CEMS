@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 
+/**
+ * The Course class represents a course entity.
+ */
 public class Course {
     //in DB:
 	private String number;
@@ -24,10 +27,12 @@ public class Course {
 	public Course() {super();}
 	
 	/**
-	 * @param number
-	 * @param name
-	 * @param subjectNum
-	 */
+     * Constructs a Course object with the specified number, name, and subject number.
+     *
+     * @param number     The course number.
+     * @param name       The course name.
+     * @param subjectNum The subject number.
+     */
 	public Course(String number, String name, String subjectNum) {
 		this.number = number;
 		this.name = name;
@@ -91,12 +96,23 @@ public class Course {
 		this.questions = questions;
 	}
 
+	/**
+     * Compares this Course object with the specified object for equality.
+     *
+     * @param obj The object to compare.
+     * @return {@code true} if the specified object is equal to this Course, {@code false} otherwise.
+     */
 	@Override
 	public boolean equals(Object obj) {
 		Course c = (Course) obj;
 		return number.equals(c.getNumber());
 	}
 	
+	/**
+     * Returns a string representation of the Course object.
+     *
+     * @return A string representation of the Course object.
+     */
 	@Override
 	public String toString() {
 		return "Course [number=" + number + ", name=" + name + ", subjectNum=" + subjectNum + "]";
@@ -105,15 +121,34 @@ public class Course {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//for FX:
+	/**
+     * Sets a new CheckBox for the course.
+     */
 	public void setNewCheckbox() {
 		checkbox = new CheckBox();
 	}
+	
+	/**
+     * Returns the CheckBox associated with the course.
+     *
+     * @return The CheckBox object.
+     */
 	public CheckBox getCheckbox() {
 		return checkbox;
 	}
+	
+	/**
+     * Sets a new RadioButton for the course.
+     */
 	public void setNewRadioButton() {
 		radioButton = new RadioButton();
 	}
+	
+	/**
+     * Returns the RadioButton associated with the course.
+     *
+     * @return The RadioButton object.
+     */
 	public RadioButton getRadioButton() {
 		return radioButton;
 	}

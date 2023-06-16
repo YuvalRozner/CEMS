@@ -24,23 +24,32 @@ import notifications.NotificationAlertsController;
  * The controller class for the Approve Changes screen in the GUI.
  * This class handles the logic and behavior of the screen's components.
  * 
+ * @see HodScreen
  * @author Mor Shmuel
  */
 public class ApproveChangesController extends HodScreen{
-		
-	private ObservableList<Request> changesTable;
+	
+	 /**
+     * The table column for the course name, explanation, test ID, lecturer name, radio button, duration, new doration.
+     */
     @FXML
     private TableColumn<Request, String> CourseCol,ExplanationCol,IDTestCol,LecturerCol,checkBoxCol,previousCol,newDurationCol;
 
+    /**
+     * The table view for displaying the requests.
+     */
     @FXML
     private TableView<Request> table  = new TableView<Request>();
     
+    /**
+     * The back confirm buttons.
+     */
     @FXML
-    private Button back;
+    private Button back,  confirm;
 
-    @FXML
-    private Button confirm;
-    
+    /**
+     * The text field for displaying the explanation of the selected request.
+     */
     @FXML
     private Text textExplanation;
     
@@ -49,16 +58,18 @@ public class ApproveChangesController extends HodScreen{
      */
 	private ToggleGroup requestToggleGroup;
     
-    private Request chooseRequest; //not sure if i need it
+	/**
+     * The selected request.
+     */
+    private Request chooseRequest; 
     
     /**
 	 * object to use the notifications class.
 	 */
     private static NotificationAlertsController notification = new NotificationAlertsController();
-
     
     /**
-	 * the list of testToExecute for the comboBox according to the user logged in.
+	 * list of Requests.
 	 */
     private ArrayList<Request> request;
     
@@ -68,11 +79,15 @@ public class ApproveChangesController extends HodScreen{
     private static RequestController requestController = new RequestController();
     
     /**
+     * The observable list of changes for the table.
+     */
+    private ObservableList<Request> changesTable;
+    
+    /**
      * Initializes a new instance of the ApproveChangesController class.
      * This constructor is called when the screen is loaded.
      */
     public ApproveChangesController() {
-    	
     	requestToggleGroup = new ToggleGroup();
     	Msg msg = requestController.selectRequest(ChatClient.user.getId());
     	sendMsg(msg);
@@ -87,7 +102,7 @@ public class ApproveChangesController extends HodScreen{
    			 req.getRadioButton().selectedProperty().addListener((observable, oldValue, newValue) -> {
    		    		if (newValue == true) {
    		    			chooseRequest = req;
-   		    			confirm.setDisable(false); //Enable the "Approve" button
+   		    			confirm.setDisable(false); //Enable the "Confirm" button
    		    		} 
    			 	});
         	}

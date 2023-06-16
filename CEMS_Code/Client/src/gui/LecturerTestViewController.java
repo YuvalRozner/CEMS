@@ -8,6 +8,7 @@ import enteties.TestToExecute;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
@@ -51,6 +52,10 @@ public class LecturerTestViewController extends AbstractController {
 	 * object to use the notifications class.
 	 */
     private static NotificationAlertsController notification = new NotificationAlertsController();
+    /**
+	 * object to save the TestToExecute chosen by radio button.
+	 */
+    private TestToExecute selectedTest;
     
     /**
      * Constructs a new instance of LecturerTestViewController.
@@ -66,8 +71,16 @@ public class LecturerTestViewController extends AbstractController {
     	// put some FX fields but only the RadioButton is relevant :
     	testTable = testToExecuteController.getObservLstWithFXValues(testLst); //ObservableList 
     	// toggle the radio in the table:
-    	for(TestToExecute test : testTable) //toggle the radio in the table.
-    		toggleGroupOfTestToExecute.getToggles().add(test.getRadioButton()); // duration
+        for (TestToExecute test : testTable) {
+            RadioButton radioButton = test.getRadioButton();
+            toggleGroupOfTestToExecute.getToggles().add(radioButton);
+            //Add event handler to the radio button
+            radioButton.setOnAction(event -> {
+            	selectedTest = test;
+            });
+        }
+    	
+       
     }
     
     /**
@@ -89,6 +102,13 @@ public class LecturerTestViewController extends AbstractController {
     }
 	
     /**
+	 * @return the selectedTest
+	 */
+	public TestToExecute getSelectedTest() {
+		return selectedTest;
+	}
+    
+    /**
      * Displays the statistics report for the lecturer.
      * This method is called when the "Show Statistics" button is clicked.
      * It opens the "lecturerStaticsReport" view and closes the "lecturerTestView" view.
@@ -97,6 +117,7 @@ public class LecturerTestViewController extends AbstractController {
      * @throws Exception if an error occurs during the view transition.
      */
 	public void showStatistics(ActionEvent event) throws Exception {
+		LecturerStaticsReportController.selectedTest = selectedTest;
 		start("lecturerStaticsReport", "lecturerTestView");
 	}
 }

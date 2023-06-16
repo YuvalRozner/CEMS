@@ -22,7 +22,6 @@ public class StudentTestController {
 	 * @param code       The code of the test.
 	 * @return The message object for updating the student's test details.
 	 */
-
 	public Msg InsertAnswersAndGradeManual(String approved, Integer timePassed, String ansewrs, Integer grade,String id, String code) {
 		Msg msg = new Msg(MsgType.update);
 		msg.setTableToUpdate("studenttest");
@@ -42,7 +41,6 @@ public class StudentTestController {
 	 * @param code of test
 	 * @return msg representing select query.
 	 */
-
 	public Msg studentAlreadyAccessed(User user, String code) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("studenttest.studentId");
@@ -77,7 +75,6 @@ public class StudentTestController {
 	 * @param user The User object for whom to retrieve the Test..
 	 * @return A Msg object representing the database select message.
 	 */
-
 	public Msg getMsgForStudentTestsByID(User user) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("studenttest.*,testtoexecute.*, test.*, course.*");

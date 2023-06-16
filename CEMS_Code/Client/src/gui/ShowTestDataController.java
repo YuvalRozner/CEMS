@@ -21,10 +21,15 @@ import javafx.scene.input.MouseEvent;
  * 
  * @author Mor Shmuel
  */
-public class ShowTestDataController  extends HodScreen{
-	
+public class ShowTestDataController extends HodScreen{
+	/**
+	 * The list of all test executions to be shown.
+	 */
 	private ArrayList<TestToExecute> arrShowTest = new ArrayList<>();
 
+	/**
+	 * The observable list used to populate the show test table.
+	 */
 	private ObservableList<TestToExecute> showTestTable;
 	
 	/**
@@ -32,6 +37,9 @@ public class ShowTestDataController  extends HodScreen{
 	 */
     private static TestToExecuteController testToExecuteController = new TestToExecuteController();
     
+    /**
+     * The back button.
+     */
     @FXML
     private Button backbtn;
 
@@ -47,6 +55,9 @@ public class ShowTestDataController  extends HodScreen{
     @FXML
     private TableColumn<TestToExecute, Integer> numTestcol;
     
+    /**
+     * The table view that displays the test data.
+     */
     @FXML
     private TableView<TestToExecute> table = new TableView<TestToExecute>();
     
@@ -62,7 +73,6 @@ public class ShowTestDataController  extends HodScreen{
     public ShowTestDataController() {
     	Msg msg = testToExecuteController.selectTestToExecuteByHod(ChatClient.user);
     	sendMsg(msg);
-    	//System.out.println("Data = " + AbstractController.msgReceived.getData());
     	arrShowTest = msgReceived.convertData(TestToExecute.class);
         for (TestToExecute test : arrShowTest) {
         	test.setNewButton();
@@ -71,9 +81,7 @@ public class ShowTestDataController  extends HodScreen{
         		try { showTestOpen(event);
 				} catch (Exception e) {	e.printStackTrace();} 	});
         }
-        
-        showTestTable = FXCollections.observableArrayList(arrShowTest);
-        //System.out.println("showTestTable = " + showTestTable); 
+        showTestTable = FXCollections.observableArrayList(arrShowTest); 
         table.setItems(showTestTable);
 		table.refresh();
     }

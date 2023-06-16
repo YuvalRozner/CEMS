@@ -17,11 +17,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
+/**
+ * Controller class for the Show Grade screen.
+ * Handles the interaction between the UI and the underlying logic for displaying student grades.
+ */
 public class ShowGradeController extends AbstractController {
 	/**
 	 * save the test to shown.
 	 */
-
 	private ArrayList<StudentTest> allTest;
 	/**
 	 * ObservableList of grades for the table.

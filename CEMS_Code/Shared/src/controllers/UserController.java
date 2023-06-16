@@ -5,7 +5,13 @@ import JDBC.MsgType;
 import enteties.User;
 
 /**
- * Controller class for managing user.
+ * The UserController class is a controller class for managing user-related operations.
+ * It provides methods to generate messages for database operations related to users,
+ * such as logging out, selecting users, selecting users by specific criteria,
+ * and selecting associated data with users (e.g., questions, courses).
+ * The class serves as an intermediary between the user interface and the database,
+ * facilitating the retrieval and manipulation of user data.
+ * 
  */
 public class UserController {
 

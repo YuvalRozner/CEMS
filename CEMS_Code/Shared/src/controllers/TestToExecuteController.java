@@ -24,7 +24,6 @@ public class TestToExecuteController {
 	 * @param median   The new median grade to set.
 	 * @return A Msg object configured for the update operation.
 	 */
-	
 	public Msg updateMedianAndAverage (Integer code ,double average ,double median) {
 		Msg msg = new Msg(MsgType.update);
 		msg.setTableToUpdate("testtoexecute");
@@ -74,7 +73,6 @@ public class TestToExecuteController {
 	 * @param code key of the test in data.
 	 * @return Msg contain select query.
 	 */
-
 	public Msg checkIfTheTestIsLock(String code) {
 		Msg msg = new Msg (MsgType.select);
 		msg.setSelect("testtoexecute.`lock`");
@@ -84,11 +82,11 @@ public class TestToExecuteController {
 	}
 	
 	/**
-	 * 
-	 * @param code
-	 * @return
+	 * Checks if the student is the last one to finish the test.
+	 *
+	 * @param code The test code.
+	 * @return A message containing the selected information.
 	 */
-
 	public Msg checkIfTheStudentIsLast(Integer code) {
 		Msg msg =new Msg(MsgType.select);
 		msg.setSelect("testtoexecute.numberOfStudentStarted");
@@ -149,7 +147,6 @@ public class TestToExecuteController {
      * @return true if the id is valid and corresponding to the user.
      * @return false if the id is not valid.
      */
-	
 	public boolean checkValidId(String id,User user) {
 		NotificationAlertsController alert = new NotificationAlertsController();
 		if (id.isEmpty() == true){alert.showWarningAlert("ID is empty!");return false;}
@@ -164,7 +161,6 @@ public class TestToExecuteController {
      * @return true if the code is valid.
      * @return false if the code is not valid.
      */
-	
 	public boolean checkValidCode(String code) {
 		NotificationAlertsController alert = new NotificationAlertsController();
 		if (code.isEmpty() == true){alert.showWarningAlert("You must enter code for a test, 4 digits!");return false;}

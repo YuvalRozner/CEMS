@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import JDBC.Msg;
 import JDBC.MsgType;
 import enteties.Request;
-import enteties.StudentTest;
 import enteties.TestToExecute;
 import enteties.User;
 
@@ -78,6 +77,20 @@ public class RequestController {
     	msg.setWhereCol("testtoexecute.testId", "test.id");
     	msg.setWhereCol("request.lecturerId", "user.id");
     	msg.setWhereCol("test.courseNumber", "course.number"); 
+    	msg.setWhere("request.hodId", hod); 
+    	return msg;
+    }
+	
+	/**
+     * Constructs a database select message to retrieve Requests.
+     *
+     * @param hod The User ID String for whom to retrieve the request.
+     * @return A Msg object representing the database select message.
+     */
+	public Msg selectFoundRequest(String hod) {
+    	Msg msg = new Msg(MsgType.select);
+    	msg.setSelect("request.*");
+    	msg.setFrom("request"); 
     	msg.setWhere("request.hodId", hod); 
     	return msg;
     }

@@ -26,9 +26,14 @@ import javafx.scene.input.MouseEvent;
  * @author Mor Shmuel
  */
 public class QuestionTableController extends HodScreen {
-
+	/**
+     * The list of questions displayed in the table.
+     */
     private ArrayList<Question> questionList = new ArrayList<>();
 
+    /**
+     * The observable list used to populate the question table.
+     */
     private ObservableList<Question> QTable;
     
     /**
@@ -36,8 +41,12 @@ public class QuestionTableController extends HodScreen {
 	 */
     private static UserController userController = new UserController();
 
+    /**
+     * The table view that displays the questions.
+     */
     @FXML
     private TableView<Question> table = new TableView<Question>();
+    
     /**
      * the columns for the table.
      */
@@ -79,8 +88,6 @@ public class QuestionTableController extends HodScreen {
         Msg msg = userController.selectQuestionByhodId(ChatClient.user.getId());
         sendMsg(msg);
         questionList = msgReceived.convertData(Question.class);
-        //System.out.println("questionList = " + questionList); 
-        //System.out.println("course? " + (questionList.get(0).getCourse()==null));
         QTable = FXCollections.observableArrayList(questionList);
     }
 
@@ -91,15 +98,15 @@ public class QuestionTableController extends HodScreen {
      */
     @FXML
     void showAnswers(MouseEvent event) {
-        // Get the selected question from the table.
+        //Get the selected question from the table.
         Question selectedQuestion = table.getSelectionModel().getSelectedItem();
-        // Display the question and answers in the UI.
+        //Display the question and answers in the UI.
         questionLabel.setText(selectedQuestion.getQuestion());
         answer1RadioButton.setText(selectedQuestion.getAnswers()[0]);
         answer2RadioButton.setText(selectedQuestion.getAnswers()[1]);
         answer3RadioButton.setText(selectedQuestion.getAnswers()[2]);
         answer4RadioButton.setText(selectedQuestion.getAnswers()[3]);
-        // Select the correct answer toggle.
+        //Select the correct answer toggle.
         ObservableList<Toggle> toggles = answersToggleGroup.getToggles();
         Toggle toggle = toggles.get(selectedQuestion.getCorrectAnswer()-1); // Index 2 represents the third toggle this is why we minus the answer with 1
         answersToggleGroup.selectToggle(toggle);
@@ -112,9 +119,7 @@ public class QuestionTableController extends HodScreen {
     @FXML
     protected void initialize() {
         idCol.setCellValueFactory(new PropertyValueFactory<Question, String>("id"));
-
         courseCol.setCellValueFactory(new PropertyValueFactory<Question, String>("courseName"));
-
         questionNumberCol.setCellValueFactory(new PropertyValueFactory<Question, Integer>("number"));
         lecturerCol.setCellValueFactory(new PropertyValueFactory<Question, String>("userName"));
         questionTextCol.setCellValueFactory(new PropertyValueFactory<Question, String>("question"));
