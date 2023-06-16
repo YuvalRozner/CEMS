@@ -26,6 +26,12 @@ public class User {
 	CheckBox checkbox;
 	RadioButton radioButton;
 	
+	
+	/**
+	 * for get name of user
+	 */
+	public User(String name) {this.name=name;} 
+	
 	/**
 	 * empty constructor.
 	 */

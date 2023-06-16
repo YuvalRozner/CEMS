@@ -2,258 +2,393 @@ package gui;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
 import JDBC.Msg;
 import client.ChatClient;
 import controllers.CountDown;
 import controllers.QuestionController;
 import controllers.StudentTestController;
-import controllers.TestController;
 import controllers.TestToExecuteController;
+import controllers.TimeController;
 import enteties.Question;
 import enteties.StudentTest;
-import enteties.Test;
 import enteties.TestToExecute;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import notifications.NotificationAlertsController;
 
-
 public class OnlineTestController extends AbstractController implements CountDown, Testing{
-   
-	private ArrayList<ToggleGroup> toggleGroups = new ArrayList<ToggleGroup>();
-   
-    private static QuestionController questionController = new QuestionController();
-    ArrayList<Question> questions = new ArrayList<Question>();
-    private NotificationAlertsController alert= new NotificationAlertsController();
-	private TestController testController =new TestController();
-	private TestToExecuteController testToExecuteController = new TestToExecuteController();
-	private StudentTestController studentTestController =new StudentTestController();
-    
-  
+	 /**
+     * The container for displaying the test data.
+     */
     @FXML
     private VBox dataVbox;
 
+    /**
+     * Labels for displaying test information.
+     */
     @FXML
-    private Label timeLbl;
-    
+    private Label info1, info2, info3, info4, info5, timeLabel;
+
+    /**
+     * Container for displaying instructions for students.
+     */
     @FXML
-    private Label info1,info2,info3,info4,info5,info6;
+    private TextFlow instructionsForStudentTextFlow;
+
+    /**
+     * Labels for displaying points per question.
+     */
     
-    private String code="";
-	private Integer duration=0;
-	private String lock="";
-	private TestToExecute numbersOfStudent; 
-	private Integer grade=0;
-	private String answers="";
-	private Msg msg;
-	private Integer timeOfStudent = 100; //time fiktivy //dor
+    /**
+     * Fields for managing the test questions and answers
+     */
+    private ArrayList<Question> questions = new ArrayList<Question>();
+    private ArrayList<ToggleGroup> toggleGroups = new ArrayList<ToggleGroup>();
+
+    /**
+     * Controllers
+     */
+    private static QuestionController questionController = new QuestionController();
+    private static TestToExecuteController testToExecuteController = new TestToExecuteController();
+    private static StudentTestController studentTestController = new StudentTestController();
+    private NotificationAlertsController alert = new NotificationAlertsController();
+    private TimeController timeController;
     
+    /**
+     * GridPane for displaying the questions
+     */ 
+    GridPane gridPane;
+
+    /**
+     * Test data
+     */
+    private Integer code;
+    private TestToExecute numbersOfStudent;
+    private Integer grade = 0;
+    private String answers = "";
+    private Msg msg;
+    private int timeOfStudent;
+    private String flagEndOrMiddle;
+    private TestToExecute testToExecute;
+   
+    /**
+     * Creates an instance of the OnlineTestController class.
+     * This constructor initializes the controller and sets up the display of the test information and questions.
+     * It populates various labels and text flows with the relevant information about the test and its instructions for students and lecturers.
+     * The formatting and styling of the displayed elements are also adjusted.
+     */
     public OnlineTestController() {
-    	
-    	if (ChatClient.lastCurrentScreen instanceof StartTestController) {
-    		code = ((StartTestController)ChatClient.lastCurrentScreen).getCode();
-    	}
-    	Msg msg = questionController.getQuestionAndPointsByTestCode(Integer.parseInt(code));
-    	sendMsg(msg);
-    	System.out.println();
-    	questions = msgReceived.convertData(Question.class); //ArrayList    	 
-    }
-    class NumberRadioButton extends RadioButton {
-        private int number;
 
-        public NumberRadioButton(String text, int number) {
-            super(text);
-            this.number = number;
+        // Retrieve the test data and questions from the server
+        if (ChatClient.lastCurrentScreen instanceof StartTestController) {
+            testToExecute = ((StartTestController) ChatClient.lastCurrentScreen).getTestToExecuteToShow();
+            code = testToExecute.getTestCode();
         }
+        Msg msg = questionController.getQuestionAndPointsByTestCode(code);
+        sendMsg(msg);
 
-        public int getNumber() {
-            return number;
-        }
+        questions = msgReceived.convertData(Question.class); // ArrayList
+
+        // Create a time controller for managing the test time
+        timeController = new TimeController(testToExecute.getTest().getDuration(), this);
     }
+
+    /**
+     * Initializes the controller and sets up the display of the test information and questions.
+     * This method is automatically called after the FXML file has been loaded.
+     */
     @FXML
     protected void initialize() {
-    	int questionCounter = 1;
-        GridPane gridPane = new GridPane();
-        gridPane.setHgap(10);
+        setInfo();
+
+        int questionCounter = 1;
+        gridPane = new GridPane();
+        gridPane.setHgap(50);
         gridPane.setVgap(10);
         int row = 0;
+
+        // Iterate over the list of questions and create the necessary UI elements
         for (int i = 0; i < questions.size(); i++) {
-            Question question = questions.get(i); //get a question and 4 answers
-            
-            Label questionLabel = new Label(questionCounter + ". " + question.getQuestion()); //set the question label
+	    	gridPane.add(new Label(), 0, i + row);
+	    	row++;
+            Question question = questions.get(i); 
+            // Create and configure the question label
+            Label questionLabel = new Label(questionCounter + ". " + question.getQuestion());
+            Label instuctionsQuestionLabel;
+            if (question.getInstructions() != null)
+                instuctionsQuestionLabel = new Label("Instruction for question: " + question.getInstructions());
+            else
+                instuctionsQuestionLabel = new Label("");
             questionCounter++;
             questionLabel.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-weight: bold; -fx-font-size: 14px;");
-            //Label pointsLabel = new Label("Points: " + "0"); //set the points label
-            Label pointsLabel = new Label("Points: " + question.getPoints()); //set the points label
+
+            // Create and configure the points label
+            Label pointsLabel = new Label("Points: " + question.getPoints());
             pointsLabel.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-size: 14px;");
+
+            // Add the question label, instruction label, and points label to the grid pane
+            gridPane.add(instuctionsQuestionLabel, 0, i + row);
+            row++;
             gridPane.add(questionLabel, 0, i + row);
-            gridPane.add(pointsLabel,1, i + row); 
-            
-            //setting the 4 radiobutton in a toggle group and set each answer
+            gridPane.add(pointsLabel, 1, i + row);
+
+            // Set up the 4 radio buttons in a toggle group and set each answer
             ToggleGroup answerGroup = new ToggleGroup();
             for (int j = 0; j < 4; j++) {
-            	row++;
-            	NumberRadioButton answerRadioButton = new NumberRadioButton(question.getAnswers()[j],j+1);
+                row++;
+                NumberRadioButton answerRadioButton = new NumberRadioButton(question.getAnswers()[j],(j+1));
                 answerRadioButton.setToggleGroup(answerGroup);
-                gridPane.add(answerRadioButton, 0, i + row); // Adjust the row and column indices as needed
+                gridPane.add(answerRadioButton, 0, i + row);
             }
+           
             toggleGroups.add(answerGroup);
         }
+
+        // Add the grid pane to the data VBox
         dataVbox.getChildren().add(gridPane);
+        timeController.startTimer();
+        
     }
- 
+
+    /**
+     * Sets the information of the test and updates the display.
+     * This method populates various labels and text flows with the relevant information
+     * about the test and its instructions for students and lecturers, based on the current screen state.
+     * It also adjusts the formatting and styling of the displayed elements.
+     */
+    public void setInfo() {
+        // Set the info of the test
+        Text textForTextFlow = null;
+        info1.setText("Test Code: " + testToExecute.getTestCode());
+        info2.setText("Course: " + testToExecute.getTest().getCourse().getName());
+        info3.setText("Duration:" + testToExecute.getTest().getDuration() + " minutes");
+        info4.setText("Date: " + testToExecute.getDate());
+        info5.setText("Student Name:" + ChatClient.user.getName());
+        // Set instructions for students
+        if (testToExecute.getTest().getInstructionsForStudent() != null) {
+            textForTextFlow = new Text("Instructions For Student: " + testToExecute.getTest().getInstructionsForStudent());
+            textForTextFlow.wrappingWidthProperty().bind(instructionsForStudentTextFlow.widthProperty());
+            textForTextFlow.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
+            instructionsForStudentTextFlow.getChildren().addAll(textForTextFlow);
+        }
+    }
+
+    /**
+     * Handles the action when the Submit button is clicked.
+     * This method is triggered when the Submit button is clicked by the user to submit their test.
+     * It stops the timer, calculates the time taken by the student, and prompts for confirmation.
+     * If confirmed, it updates the test status, calculates the grade, and saves the student's answers and grade.
+     * It also checks if the student is the last one to submit and locks the test if necessary.
+     * Finally, it updates the average and median grades for the test.
+     *
+     * @param event The action event triggered by clicking the Submit button.
+     * @throws Exception If an exception occurs during the process.
+     */
     @FXML
-    void submmitBtn(ActionEvent event) throws Exception {
-		
-		alert.setOnCancelAction(new Runnable() {	@Override public void run() {
-			((Node)event.getSource()).getScene().getWindow().hide();
-			ChatClient.getScreen("onlineTest").display();
-			getPrimaryStage().setTitle("onlineTest");
-		}});
-		
-		
-		alert.setOnOkAction(new Runnable() {	@Override public void run() {
-			Msg msg=testController.getDurationByCode(code);
-			sendMsg(msg);
-			duration=msgReceived.convertData(Test.class).get(0).getDuration();
+    void submitBtn(ActionEvent event) throws Exception {
+        // Stop the timer
+        timeController.stopTimer();
 
-			
-			if(duration<timeOfStudent) {
-				timeOfStudentIsOverLoad();/////////dor
-				checkIfStudentIsTheLastOne();
-			}
-			else if (checkIfTestIsLock().equals("true")){
-				testIsLockInEndOfTest();/////////dor			
-			}
-			else {
-				testIsSubmit(timeOfStudent);
-				checkIfStudentIsTheLastOne();
-			}
-			try {
-				start("studentMenu", "login");
-			} catch (Exception e) {}}});
-		alert.showConfirmationAlert(ChatClient.user.getName()+" Are you sure ?","After clicking the OK button, the submission is final and there is no option to change it");
-		updateAverageAndMedian();
+        // Calculate the time taken by the student
+        timeOfStudent = testToExecute.getTest().getDuration() - timeController.timeLeft();
+
+        // Prompt for confirmation before submitting the test
+        alert.setOnCancelAction(new Runnable() {
+            @Override
+            public void run() {
+                // If the confirmation is canceled, resume the timer
+                timeController.startTimer();
+            }
+        });
+        alert.setOnOkAction(new Runnable() {
+            @Override
+            public void run() {
+                // If confirmed, proceed with submitting the test
+                if (testToExecute.getLock().equals("true")) {
+                    // Test is locked, cannot submit
+                    flagEndOrMiddle = "End";
+                    flagEndOrMiddle = "Middle";
+                    testIsLockCantSubmit();
+                    updateAverageAndMedian();
+                } else {
+                    // Test can be submitted
+                    testIsSubmit(timeOfStudent);
+                    checkIfStudentIsTheLastOne();
+                    updateAverageAndMedian();
+                }
+                try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
+            }
+        });
+        alert.showConfirmationAlert(ChatClient.user.getName() + " Are you sure?","After clicking the OK button, the submission is final and there is no option to change it");
     }
+
+    /**
+     * Checks if the current student is the last one to submit the test and locks the test if necessary.
+     * It retrieves the number of students who have started and finished the test and calculates
+     * the difference to determine if the current student is the last one.
+     * If the current student is the last one, it sends a message to lock the test.
+     */
     public void checkIfStudentIsTheLastOne() {
-		msg=testToExecuteController.checkIfTheStudentIsLast(StartTestController.getTestToExecute().getTestCode());
-		sendMsg(msg);
-		numbersOfStudent=msgReceived.convertData(TestToExecute.class).get(0);
-		Integer needToLock=numbersOfStudent.getNumberOfStudentsStarted()-numbersOfStudent.getNumberOfStudentsFinished()-numbersOfStudent.getNumberOfStudents();
-		if (needToLock==0) {
-			msg=testToExecuteController.getMsgToLockTest(StartTestController.getTestToExecute());
-			sendMsg(msg);
-		}
-    	
-    }
-	public void updateAverageAndMedian(){
-		double average=0 , median=0;
-		msg=studentTestController.selectAllstudentBySpecificCodeTest(StartTestController.getTestToExecute().getTestCode());
-		sendMsg(msg);
-		ArrayList<StudentTest> listOfStudent =msgReceived.convertData(StudentTest.class);
-		ArrayList<Integer> listOfGrades=new ArrayList<Integer>();
-		for(StudentTest student : listOfStudent) {
-			average+=student.getGrade();
-			listOfGrades.add(student.getGrade());
-		}
-		average=average/listOfGrades.size();
-		Collections.sort(listOfGrades);
-		median=listOfGrades.get(listOfGrades.size()/2);
-		msg=testToExecuteController.updateMedianAndAverage(StartTestController.getTestToExecute().getTestCode(),average,median);
-		sendMsg(msg);
-		
-	}
-	
-    public void getAnswers() {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < toggleGroups.size(); i++) {
-    		if (toggleGroups.get(i).getSelectedToggle() == null) { //checking if the user answer on the question
-    			sb.append("0");
-    		}
-    		else {
-    			sb.append((((NumberRadioButton)toggleGroups.get(i).getSelectedToggle()).getNumber()));
-    		}
-    	}
-		answers=sb.toString();
-    	
-    }
-    public void calculateGrade() {
-		for (int i = 0; i < toggleGroups.size(); i++) {
-    		if (toggleGroups.get(i).getSelectedToggle() != null) { //checking if the user answer on the question
-    			if (questions.get(i).getCorrectAnswer()==(((NumberRadioButton)toggleGroups.get(i).getSelectedToggle()).getNumber())) {
-    				grade+=questions.get(i).getPoints();
-    				System.out.println(grade);
-    			}
-    		}
-		}	
-    }
-    
-    
-	public void testIsSubmit(Integer timeOfStudent) {
-		alert.showInformationAlert("The test was successfully submitted!");
-		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
-		////////update data
-		msg = testToExecuteController.updateNumberOfStudenByOne(1,code,"finish");
-		sendMsg(msg);
-		calculateGrade();
-		getAnswers();
-		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,answers,grade,ChatClient.user.getId() ,code);
-		sendMsg(msg);
-		msg=testToExecuteController.insertDistributionByCode(code,grade,1);
-		sendMsg(msg);
+        // Retrieve the number of students who have started and finished the test
+        msg = testToExecuteController.checkIfTheStudentIsLast(StartTestController.getTestToExecute().getTestCode());
+        sendMsg(msg);
+        numbersOfStudent = msgReceived.convertData(TestToExecute.class).get(0);
 
-	}
-	
-	
-    /**
-     * what heppen if test is lock
-     * @param timeOfStudent
-     */
-	public void testIsLockInEndOfTest() {
-		msg = testToExecuteController.updateNumberOfStudenByOne(1,code,"cantSubmit");
-		sendMsg(msg);
-		alert.showErrorAlert("The test is locked!\n You will not be able to submit the test!");
-		grade=0;
-		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"00000",grade,ChatClient.user.getId() ,code);
-		sendMsg(msg);
-		msg=testToExecuteController.insertDistributionByCode(code,grade,1);
-		sendMsg(msg);
-		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
-	}
-    /**
-     * what heppen if test is lock
-     * @param timeOfStudent
-     */
-	public void testIsLockInMiddleOfTest() {
-		msg = testToExecuteController.updateNumberOfStudenByOne(1,code,"cantSubmit");
-		sendMsg(msg);
-		//alert.showErrorAlert("The test is locked!\n You will not be able to submit the test!");
-		calculateGrade();
-		getAnswers();
-		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,answers,grade,ChatClient.user.getId() ,code);
-		sendMsg(msg);
-		msg=testToExecuteController.insertDistributionByCode(code,grade,1);
-		sendMsg(msg);
-		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
-	}
-	
-	/**
-	 * check if it lock
-	 * @return
-	 */
-    public String checkIfTestIsLock() {
-    	msg=testToExecuteController.checkIfTheTestIsLock(code);
-		sendMsg(msg);
-		lock=msgReceived.convertData(TestToExecute.class).get(0).getLock();
-		return lock;
+        // Calculate the difference between the number of students who started and finished the test
+        Integer needToLock = numbersOfStudent.getNumberOfStudentsStarted() - numbersOfStudent.getNumberOfStudentsFinished() - numbersOfStudent.getNumberOfStudents();
+
+        // Check if the current student is the last one and lock the test if necessary
+        if (needToLock == 0) {
+            msg = testToExecuteController.getMsgToLockTest(StartTestController.getTestToExecute());
+            sendMsg(msg);
+        }
     }
+    
+    /**
+     * Updates the average and median grades for a specific test code.
+     * It retrieves all the student test records for the specified test code,
+     * calculates the average and median grades from the list of grades,
+     * and updates the median and average values in the test record.
+     */
+    public void updateAverageAndMedian() {
+        double average = 0;
+        double median = 0;
+
+        // Retrieve all student test records for the specified test code
+        msg = studentTestController.selectAllstudentBySpecificCodeTest(code.toString());
+        sendMsg(msg);
+        ArrayList<StudentTest> listOfStudent = msgReceived.convertData(StudentTest.class);
+        ArrayList<Integer> listOfGrades = new ArrayList<>();
+
+        // Extract grades from the student test records and calculate the average
+        for (StudentTest student : listOfStudent) {
+            listOfGrades.add(student.getGrade());
+            average += student.getGrade();
+        }
+        average = average / listOfGrades.size();
+
+        // Sort the list of grades and calculate the median
+        Collections.sort(listOfGrades);
+        median = listOfGrades.get(listOfGrades.size() / 2);
+
+        // Update the median and average values in the test record
+        msg = testToExecuteController.updateMedianAndAverage(code.toString(), average, median);
+        sendMsg(msg);
+    }
+    
+    /**
+     * Retrieves the selected answers from the toggle groups and builds a string representation of the answers.
+     * If a toggle group does not have a selected toggle (no answer provided), a "0" is appended to the string.
+     * Otherwise, the number associated with the selected toggle is appended.
+     */
+    public void getAnswers() {
+        StringBuilder sb = new StringBuilder();
+
+        // Iterate over the toggle groups
+        for (int i = 0; i < toggleGroups.size(); i++) {
+            if (toggleGroups.get(i).getSelectedToggle() == null) {
+                // No answer provided for the question, append "0"
+                sb.append("0");
+            } else {
+                // Answer is selected, append the associated number
+                sb.append((((NumberRadioButton) toggleGroups.get(i).getSelectedToggle()).getNumber()));
+            }
+        }
+
+        // Store the answers as a string
+        answers = sb.toString();
+    }
+
+    /**
+     * Calculates the grade for the student based on the selected answers.
+     * Iterates over the toggle groups and checks if the user has answered the question.
+     * If the user has answered and the selected answer is correct, the corresponding points are added to the grade.
+     */
+    public void calculateGrade() {
+        for (int i = 0; i < toggleGroups.size(); i++) {
+            if (toggleGroups.get(i).getSelectedToggle() != null) {
+                // User has answered the question
+                if (questions.get(i).getCorrectAnswer() == (((NumberRadioButton) toggleGroups.get(i).getSelectedToggle()).getNumber())) {
+                    // Selected answer is correct, add points to the grade
+                    grade += questions.get(i).getPoints();
+                    System.out.println(grade);
+                }
+            }
+        }
+    }
+
+    /**
+     * Submits the test for the student.
+     * Updates the necessary data, calculates the grade, inserts the answers and grade into the database,
+     * inserts the distribution data, shows an information alert, and redirects to the student menu.
+     *
+     * @param timeOfStudent The time taken by the student to complete the test.
+     */
+    public void testIsSubmit(Integer timeOfStudent) {
+        // Update data
+        msg = testToExecuteController.updateNumberOfStudenByOne(1, code.toString(), "finish");
+        sendMsg(msg);
+
+        calculateGrade();
+        getAnswers();
+
+        // Insert answers and grade into the database
+        msg = studentTestController.InsertAnswersAndGradeManual("false", timeOfStudent, answers, grade, ChatClient.user.getId(), code.toString());
+        sendMsg(msg);
+
+        // Insert distribution data
+        msg = testToExecuteController.insertDistributionByCode(code.toString(), grade, 1);
+        sendMsg(msg);
+
+        alert.showInformationAlert("The test was successfully submitted!");
+
+        try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
+    }
+
+    /**
+     * Handles the situation when the test is locked and cannot be submitted.
+     * Updates the necessary data, shows an error alert, and inserts the answers and grade into the database.
+     * If the flagEndOrMiddle is set to "End", the grade is set to 0.
+     *
+     * @param timeOfStudent The time taken by the student to complete the test.
+     */
+    public void testIsLockCantSubmit() {
+        msg = testToExecuteController.updateNumberOfStudenByOne(1, Integer.toString(StartTestController.getTestToExecute().getTestCode()), "cantSubmit");
+        sendMsg(msg);
+
+        alert.showErrorAlert("The test is locked!\n You will not be able to submit the test!");
+
+        if (flagEndOrMiddle.equals("End")) {
+            grade = 0;
+            msg = studentTestController.InsertAnswersAndGradeManual("false", timeOfStudent, "00000", grade, ChatClient.user.getId(), code.toString());
+        } else {
+            calculateGrade();
+            getAnswers();
+            msg = studentTestController.InsertAnswersAndGradeManual("false", timeOfStudent, answers, grade, ChatClient.user.getId(), code.toString());
+        }
+
+        sendMsg(msg);
+
+        // Insert distribution data
+        msg = testToExecuteController.insertDistributionByCode(code.toString(), 0, 1);
+        sendMsg(msg);
+
+        try {
+            start("studentMenu", "login");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 	/**
 	 * Handles the case when the student has exceeded the allowed time for the test.
 	 *
@@ -261,26 +396,81 @@ public class OnlineTestController extends AbstractController implements CountDow
 	 */
 	public void timeOfStudentIsOverLoad() {
 		alert.showErrorAlert("You have exceeded the allowed time!");
-		msg = testToExecuteController.updateNumberOfStudenByOne(1,code,"cantSubmit");
+		msg = testToExecuteController.updateNumberOfStudenByOne(1,code.toString(),"cantSubmit");
 		sendMsg(msg);
-		getAnswers();
-		calculateGrade();
-		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,answers.toString(),grade,ChatClient.user.getId() ,code);
+		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"00000",0,ChatClient.user.getId() ,code.toString());
 		sendMsg(msg);
-		msg=testToExecuteController.insertDistributionByCode(code,grade,1);
+		msg=testToExecuteController.insertDistributionByCode(code.toString(),grade,1);
 		sendMsg(msg);
 		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
 	}
 
+	/**
+	 * Sets the text of the countdown label to the specified string.
+	 *
+	 * @param countdownText The string to be set as the text of the countdown label.
+	 */
 	@Override
-	public void setTextCountdown(String s) {
-		timeLbl.setText(s);
+	public void setTextCountdown(String countdownText) {
+	    timeLabel.setText(countdownText);
 	}
-   
+
+	/**
+	 * Callback method called when the time limit for the student has ended.
+	 * Performs necessary actions such as notifying the end of time, checking if the student is the last one,
+	 * and updating the average and median.
+	 */
+	@Override
+	public void endOfTime() {
+	    System.out.println("The time is up, my friend");
+	    timeOfStudentIsOverLoad();
+	    checkIfStudentIsTheLastOne();
+	    updateAverageAndMedian();
+	}
+
+	/**
+	 * Callback method called when the test is manually locked by the lecturer.
+	 * Checks if the provided test code matches the current test code and displays an error alert.
+	 * Sets the flag indicating the test is in the middle state and invokes the method to handle a locked test.
+	 * Finally, updates the average and median.
+	 *
+	 * @param testCode The test code to compare with the current test code.
+	 */
 	@Override
 	public void testGotManualyLockedByLecturer(String testCode) {
-		if(!testCode.equals(code)) return;
-		alert.showErrorAlert("Sorry, but the test got locked by your lecturer..");
-		testIsLockInMiddleOfTest();
+	    if (!testCode.equals(code)) {
+	        return;
+	    }
+	    alert.showErrorAlert("Sorry, but the test got locked by your lecturer.");
+	    flagEndOrMiddle = "Middle";
+	    testIsLockCantSubmit();
+	    updateAverageAndMedian();
+	}
+
+	/**
+	 * A custom radio button that associates a number with its selection.
+	 */
+	class NumberRadioButton extends RadioButton {
+	    private int number;
+
+	    /**
+	     * Constructs a NumberRadioButton with the specified text and number.
+	     *
+	     * @param text   The text to be displayed next to the radio button.
+	     * @param number The number associated with the radio button.
+	     */
+	    public NumberRadioButton(String text, int number) {
+	        super(text);
+	        this.number = number;
+	    }
+
+	    /**
+	     * Returns the number associated with the radio button.
+	     *
+	     * @return The number associated with the radio button.
+	     */
+	    public int getNumber() {
+	        return number;
+	    }
 	}
 }

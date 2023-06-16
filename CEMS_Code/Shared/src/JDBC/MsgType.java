@@ -34,10 +34,13 @@ public enum MsgType {
 	
 	insertSucceeded, // server ---> client. | indicates that the insert query succeeded.
 	
-	lockTest, // server ---> client. | indicates that a test got locked.
+	lockTest, // server <---> client. | indicates that a test got locked.
 	
 	file, // client ---> server indicates that a student upload file.
 	
-	fileToSend // server--->client. | indicates that a student download file.
+	fileToSend, // server--->client. | indicates that a student download file.
+	
+	request, // server <---> client. | indicates that a new request got.
 
+	delete // client ---> server | delete query.
 }

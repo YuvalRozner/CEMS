@@ -235,4 +235,18 @@ public class DB_controller {
 		res.deleteCharAt(res.length() - 1); // remove last comma.
 		return res.toString();
 	}
+	
+	
+	public static String createDELETEquery(String tableToDeleteFrom, HashMap<String, Object> where) {
+		if (tableToDeleteFrom == null)
+			return "";
+		StringBuilder query = new StringBuilder("DELETE FROM ");
+		query.append(dbName + tableToDeleteFrom); // append the name of table wanted to be deleted.;
+		if (where == null)
+			return query.toString() + ";";
+		// get here if and only if there is WHRE to add:
+		query.append(" WHERE ");
+		query.append(buildConditionPartWithAnd(where, true));
+		return query.toString() + ";";
+	}
 }

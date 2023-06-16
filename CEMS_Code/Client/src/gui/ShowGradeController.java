@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import controllers.StudentTestController;
 import enteties.StudentTest;
+import enteties.TestToExecute;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -19,9 +21,10 @@ import javafx.util.Callback;
 
 /**
  * Controller class for the Show Grade screen.
- * Handles the interaction between the UI and the underlying logic for displaying student grades.
+ * Handles the interaction between the UI and the underlying logic for
+ * displaying student grades.
  */
-public class ShowGradeController extends AbstractController {
+public class ShowGradeController extends AbstractController implements Tests {
 	/**
 	 * save the test to shown.
 	 */
@@ -50,6 +53,8 @@ public class ShowGradeController extends AbstractController {
 	 * object to use the StudentTestController class method.
 	 */
 	StudentTestController studentTestController = new StudentTestController();
+
+	StudentTest StudentTestToShow;
 
 	/**
 	 * constructor Creating show buttons and insert information into TableView.
@@ -115,7 +120,32 @@ public class ShowGradeController extends AbstractController {
 	 */
 	@FXML
 	private void showTestOpen(MouseEvent event) throws Exception {
-		start("showTest", "showGrade");
-		System.out.println("Button clicked!");
+		Button clickedButton = (Button) event.getSource(); // get the button that has been clicked
+		for (StudentTest studentTest : allTest) // search for the studentTest.
+			if (studentTest.getShow().equals(clickedButton)) {
+				StudentTestToShow = studentTest;
+				start("showStudentTest", "showGrade");
+				break;
+			}
+	}
+
+	/**
+	 * Returns the TestToExecute object to be shown.
+	 *
+	 * @return The TestToExecute object to be shown.
+	 */
+	@Override
+	public StudentTest getStudentTestToShow() {
+		return StudentTestToShow;
+	}
+
+	@Override
+	public TestToExecute getTestToExecuteToShow() {
+		return null;
+	}
+
+	@Override
+	public String getScreenState() {
+		return "studentShowTest";
 	}
 }

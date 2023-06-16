@@ -6,6 +6,7 @@ import JDBC.Msg;
 import client.ChatClient;
 import controllers.TestController;
 import controllers.TestToExecuteController;
+import enteties.StudentTest;
 import enteties.Test;
 import enteties.TestToExecute;
 import javafx.beans.value.ChangeListener;
@@ -28,7 +29,7 @@ import notifications.NotificationAlertsController;
  * 
  * @author Yuval Rozner 
  */
-public class ExecuteTestController extends AbstractController{
+public class ExecuteTestController extends AbstractController implements Tests{
 
 	/**
 	 * toggleGroup for choosing a test to execute.
@@ -201,7 +202,18 @@ public class ExecuteTestController extends AbstractController{
      *
      * @return The TestToExecute object to be shown.
      */
-    public TestToExecute getTestToShow() {
+    @Override
+    public TestToExecute getTestToExecuteToShow() {
 		return testToExecuteToShow;
     }
+
+	@Override
+	public StudentTest getStudentTestToShow() {
+		return null;
+	}
+
+	@Override
+	public String getScreenState() {
+		return "lecturerHodShowTest";
+	}
 }

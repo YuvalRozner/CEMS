@@ -39,6 +39,12 @@ public class CountDownTimerController extends AbstractController implements Coun
     public void setTextCountdown(String s) {
     	countdown.setText(s);
     }
+
+	@Override
+	public void endOfTime() {
+		// TODO Auto-generated method stub
+		
+	}
     
    
  

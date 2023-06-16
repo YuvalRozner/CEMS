@@ -14,6 +14,13 @@ import enteties.User;
  * 
  */
 public class UserController {
+	public Msg getLecturerNameById(String id) {
+		Msg msg = new Msg(MsgType.select);
+		msg.setSelect("`user`.username");
+		msg.setFrom("`user`");
+		msg.setWhere("id", id);
+		return msg;
+	}
 
 	/**
 	 * Generates a message to update the "loggedin" status of a user to "no" in the database.
@@ -158,5 +165,26 @@ public class UserController {
     	msg.setWhere("hod_subject.hodId", ID);
     	return msg;
 	}
-	
+
+	/**
+	 * Generates a message to select a user (hod) from the database based on the testToExecuteCode.
+	 *
+	 * @param testToExecuteCode The course number of the hod to select by.
+	 * @return The generated Msg object for the user selection.
+	 */
+	public Msg selectHodBystudentTestToEcecuteCode(Integer testCode) {
+		Msg msg = new Msg(MsgType.select);
+    	msg.setSelect("user.*");
+    	msg.setFrom("user ");
+    	msg.setFrom("hod_subject");
+    	msg.setFrom("course");
+    	msg.setFrom("test");
+    	msg.setFrom("testtoexecute");
+    	msg.setWhere("testtoexecute.testCode", testCode);
+    	msg.setWhereCol("user.id", "hod_subject.hodId");
+    	msg.setWhereCol("test.id", "testtoexecute.testId");
+    	msg.setWhereCol("test.courseNumber", "course.number");
+    	msg.setWhereCol("hod_subject.subjectNumber", "course.subjectNum");
+    	return msg;
+	}
 }

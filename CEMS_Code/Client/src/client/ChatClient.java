@@ -2,10 +2,12 @@ package client;
 
 import java.io.IOException;
 import java.util.HashMap;
+
 import JDBC.Msg;
 import controllers.CemsFileController;
 import enteties.User;
 import gui.AbstractController;
+import gui.HodScreen;
 import gui.Testing;
 import ocsf.client.AbstractClient;
 
@@ -92,6 +94,11 @@ public class ChatClient extends AbstractClient {
 			case file:
 				msg.setPathFile("@../../file/");
 				cemsFileController.saveFile(msg);
+				break;
+			case request:
+				System.out.println("hod "+ msg.getHod()+" got a new request.");
+				if(lastCurrentScreen instanceof HodScreen) 
+					((HodScreen)lastCurrentScreen).popRequest();
 				break;
 			default:
 				break;

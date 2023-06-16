@@ -6,6 +6,7 @@ import JDBC.Msg;
 import client.ChatClient;
 import controllers.StudentTestController;
 import controllers.TestToExecuteController;
+import controllers.UserController;
 import enteties.StudentTest;
 import enteties.TestToExecute;
 import enteties.User;
@@ -35,8 +36,12 @@ public class StartTestController extends AbstractController{
     private static StudentTestController studentTestController = new StudentTestController();
     private static TestToExecute testToExecute = new TestToExecute();
     private static StudentTest studentTest = new StudentTest();
+    private UserController userController= new UserController();
     NotificationAlertsController alert = new NotificationAlertsController();
     private String lock=null;
+    private Msg msg;
+    private String lecturerId;
+    private String lecturerName;
 
     
     private String code;
@@ -49,29 +54,37 @@ public class StartTestController extends AbstractController{
     @FXML
     void connectBtn(ActionEvent event) {
     	String code= codeTextField.getText();
-    	Msg msg = testToExecuteController.checkIfTheTestIsLock(code);
+    	if (code.isEmpty() == true){alert.showWarningAlert("You must enter code for a test, 4 digits!");return;}
+    	if (!testToExecuteController.checkValidCode(code)) {return;}
+    	msg=testToExecuteController.checkIfTheTestExict(code);
+    	sendMsg(msg);
+    	if(msgReceived==null) {alert.showWarningAlert("A test with the code you provided is not found in the system. Please check that the code is correct.");return;}
+    	lecturerId=msgReceived.convertData(TestToExecute.class).get(0).getLecturerId();
+    	
+    	msg = testToExecuteController.checkIfTheTestIsLock(code);
     	sendMsg(msg);
     	lock=msgReceived.convertData(TestToExecute.class).get(0).getLock();
     	if(lock.equals("true")) {alert.showErrorAlert("Sorry, this test is lock!");return;}
+    	
     	msg=studentTestController.studentAlreadyAccessed(ChatClient.user,code);
     	sendMsg(msg);
-    	//ArrayList<StudentTest> idOfStudent=msgReceived.convertData(StudentTest.class);////לשאול את רוזנר אם אפשר לגשת למידע ישירות של המאסג רסיב
-    	//System.out.println("1");
     	if (msgReceived==null) {
-    		if (testToExecuteController.checkValidCode(code)) {
-        		Msg msgGetTesttoexeute = testToExecuteController.selectTestToExecuteByCode(code);
-        		sendMsg(msgGetTesttoexeute);
-        		ArrayList<TestToExecute>arr=msgReceived.convertData(TestToExecute.class);
-        		setTestToExecute(arr.get(0));
-        		idTextField.setDisable(false);
-        		//idTextField.editableProperty();
-        		idTextField.setEditable(true);
-        	}
-    	}
+    		msg=userController.getLecturerNameById(lecturerId);
+        	sendMsg(msg);
+        	lecturerName=msgReceived.convertData(User.class).get(0).getName();
+        	//alert.showInformationAlert("The test you are about to enter was written by the lecturer: "+lecturerName);
+        	//Msg msgGetTesttoexeute = testToExecuteController.selectTestToExecuteByCode(code);
+        	Msg msgGetTesttoexeute = testToExecuteController.selectTestToExecuteByTestCode(Integer.parseInt(code));
+        	
+        	sendMsg(msgGetTesttoexeute);
+        	ArrayList<TestToExecute>arr=msgReceived.convertData(TestToExecute.class);
+        	setTestToExecute(arr.get(0));
+        	idTextField.setDisable(false);
+        	idTextField.setEditable(true);
+        }
     	else {
     		alert.showErrorAlert("Sorry, you have already accessed this test and submitted it");
-    	}
-    		
+    	}	
     }
     /**
      * If the id inserted matches the user, 
@@ -91,8 +104,8 @@ public class StartTestController extends AbstractController{
     			studentTest.setTestCode(Integer.valueOf(codeTextField.getText()));
     			studentTest.setStudentId(ChatClient.user.getId());
     			
-    			Msg msgUpdate = testToExecuteController.updateNumberOfStudenByOne(1,code,"start");
-    			sendMsg(msgUpdate);
+    			//Msg msgUpdate = testToExecuteController.updateNumberOfStudenByOne(1,code,"start");
+    			//sendMsg(msgUpdate);
     			
     			if(getTestToExecute().getTestingType().equals("manual")) {
     				start("manualTest", "startTest");
@@ -125,4 +138,7 @@ public class StartTestController extends AbstractController{
 	 public String getCode() {
 			return code;
 		}
+	  public TestToExecute getTestToExecuteToShow() {
+	    	return testToExecute;
+	    }
 }
