@@ -99,14 +99,15 @@ public class RequestController {
 		msg2.setTableToUpdate("testtoexecute");
 		msg2.setSet("timeExtenstion", 0);
 		msg2.setWhere("testCode", req.getTestCode());
-		/*
-		Msg msg3 = new Msg(MsgType.deleteFrom);
-		msg3.setDeleteFrom("request");
-		msg3.setWhere("testCode", req.getTestCode());
-		*/
+		
+		Msg msg3= new Msg(MsgType.delete);
+    	msg3.setDeleteFrom("request");
+    	msg3.setWhere("testCode", req.getTestCode());
+    	msg3.setWhere("lecturerId", req.getLecturerId());
+    
 		msgM.setMsgLst(msg1);
 		msgM.setMsgLst(msg2);
-		//msgM.setMsgLst(msg3);
+		msgM.setMsgLst(msg3);
 		return msgM;
 	}
 	

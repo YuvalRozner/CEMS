@@ -153,6 +153,13 @@ public class CEMSserver extends AbstractServer {
 				System.out.println("client "+client+ " create a new request to hod " + msg.getHod()+".");
 				sendToAllClients(msg);
 				break;
+			case delete:
+				stmt = conn.createStatement();
+				queryStr = DB_controller.createDELETEquery(msg.getDeleteFrom(), msg.getWhere());
+				serverController.addConsole("query: ->" + queryStr + ".\n");
+				System.out.println("query: ->" + queryStr);
+				stmt.executeUpdate(queryStr);
+				sendToClient(new Msg(MsgType.succeeded), client);
 			default:
 				break;
 			}

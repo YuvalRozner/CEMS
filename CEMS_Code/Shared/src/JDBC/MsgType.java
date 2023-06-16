@@ -40,6 +40,7 @@ public enum MsgType {
 	
 	fileToSend, // server--->client. | indicates that a student download file.
 	
-	request // server <---> client. | indicates that a new request got.
+	request, // server <---> client. | indicates that a new request got.
 
+	delete // client ---> server | delete query.
 }

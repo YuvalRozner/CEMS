@@ -3,6 +3,7 @@ package gui;
 import java.util.ArrayList;
 
 import JDBC.Msg;
+import JDBC.MsgType;
 import client.ChatClient;
 import controllers.RequestController;
 import enteties.Request;
@@ -144,8 +145,10 @@ public class ApproveChangesController extends HodScreen{
 					Msg msg1 = requestController.getMsgToUpdateRequestDuration(chooseRequest);
 		        	sendMsg(msg1);
 		        	notification.showInformationAlert("Change approved in DB.");
-	    			return;
+		        	changesTable.remove(chooseRequest);
+		        	return;
 				}});
+        
         	notification.showConfirmationAlert("you can't unapprove after that.", "Are you sure you want to approve the request?");
         } else {notification.showErrorAlert("You didnt select a request to approve."); return;}
     }

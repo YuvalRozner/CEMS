@@ -15,11 +15,13 @@ public class Msg implements Serializable{
 	
 	private MsgType type;
 	private ArrayList<String> select = null; // for the SELECT part of query.
+	
 	private ArrayList<String> from = null; // for the FROM part of query.
 	private HashMap<String, Object> where = null; // for the WHERE part of query.
 	private HashMap<String, Object> whereCol = null; // for the WHERE part of query between two coloums.
 	private ArrayList<String> tableToUpdate = null; // for the UPDATE part of query.
 	private HashMap<String, Object> set = null; // for the SET part of query.
+	private String deleteFrom = null; // for the Delete From part of query.
 	private ArrayList<Msg> msgLst = null; //used to send a bunch of messages all at once.
 	private ArrayList<ArrayList<Object>> data = null; //data from DB to client.
 	private ArrayList<String> colNames = null; //for the INSERT INTO query.
@@ -388,6 +390,18 @@ public class Msg implements Serializable{
 	public void setHod(User hod) {
 		this.hod = hod;
 	}
-	
+	/**
+	 * @return the deleteFrom
+	 */
+	public String getDeleteFrom() {
+		return deleteFrom;
+	}
+
+	/**
+	 * @param deleteFrom the deleteFrom to set
+	 */
+	public void setDeleteFrom(String deleteFrom) {
+		this.deleteFrom = deleteFrom;
+	}
 	
 }
