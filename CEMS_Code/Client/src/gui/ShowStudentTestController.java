@@ -61,8 +61,9 @@ public class ShowStudentTestController extends AbstractController {
      * The state of the screen: {studentShowTest, lecturerHodShowStudentTest, lecturerHodShowTest}.
      */
     private String screenState;
-    
   
+    GridPane gridPane;
+    
     StudentTest studentTest;
     
     TestToExecute testToExecute;
@@ -114,13 +115,15 @@ public class ShowStudentTestController extends AbstractController {
         setInfo();
 
         int questionCounter = 1;
-        GridPane gridPane = new GridPane();
+        gridPane = new GridPane();
         gridPane.setHgap(50);
         gridPane.setVgap(10);
         int row = 0;
 
         // Iterate over the list of questions and create the necessary UI elements
         for (int i = 0; i < questions.size(); i++) {
+	    	gridPane.add(new Label(), 0, i + row);
+	    	row++;
             Question question = questions.get(i); 
             // Create and configure the question label
             Label questionLabel = new Label(questionCounter + ". " + question.getQuestion());
@@ -152,8 +155,7 @@ public class ShowStudentTestController extends AbstractController {
                 answerRadioButton.setToggleGroup(answerGroup);
                 gridPane.add(answerRadioButton, 0, i + row);
             }
-            row++;
-            gridPane.add(new Label(), 0, i + row);
+           
             toggleGroups.add(answerGroup);
         }
 
@@ -264,18 +266,28 @@ public class ShowStudentTestController extends AbstractController {
             correctRadioButton.setText(correctRadioButton.getText() + " - Correct answer");
             // Get the student's selected answer index
             int selectedAnswerIndex = Integer.parseInt(answers[i]) - 1;
-            RadioButton selectedRadioButton = (RadioButton) questionToggleGroup.getToggles().get(selectedAnswerIndex);
-
-            // Highlight the student's selected answer
-            selectedRadioButton.setSelected(true);
-
-            if (selectedAnswerIndex != correctAnswerIndex) {  
-                // The student's selected answer is incorrect
-                pointsLabels.get(i).setText("Points: 0");
+            if (selectedAnswerIndex == -1) { //the student didn't choose an answer
+            	Label didntChooseLabel = new Label((i+1) + ". You didn't choose any answer!");
+            	didntChooseLabel.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-size: 14px; -fx-text-fill: red;");
+            	gridPane.add(didntChooseLabel, 0, i*7);
+            	pointsLabels.get(i).setText("Points: 0");
                 pointsLabels.get(i).setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-size: 14px; -fx-text-fill: red;");
-                selectedRadioButton.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-size: 14px; -fx-text-fill: red;");
-                selectedRadioButton.setText(selectedRadioButton.getText() + " - Wrong answer");
             }
+            else {
+            	 RadioButton selectedRadioButton = (RadioButton) questionToggleGroup.getToggles().get(selectedAnswerIndex);
+
+                 // Highlight the student's selected answer
+                 selectedRadioButton.setSelected(true);
+
+                 if (selectedAnswerIndex != correctAnswerIndex) {  
+                     // The student's selected answer is incorrect
+                     pointsLabels.get(i).setText("Points: 0");
+                     pointsLabels.get(i).setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-size: 14px; -fx-text-fill: red;");
+                     selectedRadioButton.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-size: 14px; -fx-text-fill: red;");
+                     selectedRadioButton.setText(selectedRadioButton.getText() + " - Wrong answer");
+                 }
+            }
+           
         }
     }
 
