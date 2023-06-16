@@ -201,7 +201,7 @@ public class ExecuteTestController extends AbstractController{
      *
      * @return The TestToExecute object to be shown.
      */
-    public TestToExecute getTestToShow() {
+    public TestToExecute getTestToExecuteToShow() {
 		return testToExecuteToShow;
     }
 }

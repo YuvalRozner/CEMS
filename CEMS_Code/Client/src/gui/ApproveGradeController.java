@@ -221,7 +221,6 @@ public class ApproveGradeController extends AbstractController{
      */
     @FXML
     private void showTestOpen(MouseEvent event) throws Exception {
-    	testName =  testComboBox.getValue();
         Button clickedButton = (Button) event.getSource(); //get the button that has been clicked
         for (StudentTest studentTest : TestTable)  //search for the studentTest.
             if (studentTest.getButton().equals(clickedButton)) { 

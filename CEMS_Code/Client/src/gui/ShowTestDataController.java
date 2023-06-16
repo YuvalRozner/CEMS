@@ -118,7 +118,7 @@ public class ShowTestDataController  extends HodScreen{
      *
      * @return The TestToExecute object to be shown.
      */
-    public TestToExecute getTestToShow() {
+    public TestToExecute getTestToExecuteToShow() {
 		return testToExecuteToShow;
     }
 }
