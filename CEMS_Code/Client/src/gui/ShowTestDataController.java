@@ -93,7 +93,7 @@ public class ShowTestDataController  extends HodScreen implements Tests{
          for (TestToExecute testToExecute : showTestTable)  //search for the studentTest.
         	 if (testToExecute.getButton().equals(clickedButton)) { 
              	testToExecuteToShow = testToExecute;
-             	start("showStudentTest", "showTestData");
+             	start("showStudentTest", "showTestsData");
              }		
     }
     
