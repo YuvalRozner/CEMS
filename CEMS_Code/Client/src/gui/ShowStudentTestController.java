@@ -15,16 +15,22 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 //gui.OnlineTestWithAnswersController
 public class ShowStudentTestController extends AbstractController {
 	
 	@FXML
     private VBox dataVbox;
+	
 	@FXML
-    private Label info1,info2,info3,info4,info5,info6;
+    private Label info1,info2,info3,info4,info5,info6,info7;
 	
-	
+	@FXML
+    private TextFlow instructionsForStudentTextFlow,instructionsForLecturerTextFlow;
     
 	private ArrayList<ToggleGroup> toggleGroups = new ArrayList<ToggleGroup>();
 
@@ -32,7 +38,7 @@ public class ShowStudentTestController extends AbstractController {
  
     private static QuestionController questionController = new QuestionController();
     
-    
+    private String screenState; // {studentShowTest, lecturerHodShowStudentTest,lecturerHodShowTest,studentDoTest}
     StudentTest studentTest;// from approveGradeController
     TestToExecute testToExecute;// from ExecuteTestController
     Test test;
@@ -51,10 +57,10 @@ public class ShowStudentTestController extends AbstractController {
     private Msg initializeDataAndGetMsg(){
     	Msg msg = null;
     	if (ChatClient.lastCurrentScreen instanceof ApproveGradeController) {
-    		studentTest =  ((ApproveGradeController)ChatClient.screens.get("approveGrade")).getStudentTestToShow(); //get the studenttest to show from the last screen
-    		test = studentTest.getTest();
-    		//testName = "(code-"+studentTest.getTestCode()+")  " + studentTest.getTest().getCourse().getName() +"  " + studentTest.getTestToExecute().getDate();
-    		testName = "dor";
+    		screenState = "lecturerHodShowStudentTest";
+    		studentTest =  ((ApproveGradeController)ChatClient.lastCurrentScreen).getStudentTestToShow(); //get the studenttest to show from the last screen
+    		testToExecute = ((ApproveGradeController)ChatClient.lastCurrentScreen).getTestToExecuteToShow() ;
+    		testName = "(code-"+testToExecute.getTestCode()+")  " + testToExecute.getTest().getCourse().getName() +"  " + testToExecute.getDate();
     		msg = questionController.getQuestionAndPointsByTestCodeAndStudentId(studentTest.getTestCode(), studentTest.getStudentId());
     
     	}
@@ -69,43 +75,64 @@ public class ShowStudentTestController extends AbstractController {
     }
     @FXML
     protected void initialize() {
+      	//set the info of the test
+    	Text textForTextFlow = null;
+    	info1.setText("Code: "+testToExecute.getTestCode());
+    	info2.setText("Course: "+ testToExecute.getTest().getCourse().getName());
+    	info3.setText("Date: "+ testToExecute.getDate());
+    	info5.setText("Duration:" +  testToExecute.getTest().getDuration() + " minutes");
+    	switch (screenState) {
+    	case "lecturerHodShowStudentTest":
+    		info4.setText("Student Name:" + studentTest.getStudentName());
+    		info6.setText("Grade:" + String.valueOf(studentTest.getGrade()));
+    		if (testToExecute.getTest().getInstructionsForStudent() != null)
+    			textForTextFlow = new Text("Instructions For Student: " + testToExecute.getTest().getInstructionsForStudent());
+	    		textForTextFlow.wrappingWidthProperty().bind(instructionsForStudentTextFlow.widthProperty());
+	    		textForTextFlow.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
+	    		instructionsForStudentTextFlow.getChildren().addAll(textForTextFlow);
+			if (testToExecute.getTest().getInstructionsForLecturer() != null)
+				textForTextFlow = new Text("Instructions For Lecturer: " + testToExecute.getTest().getInstructionsForLecturer());
+				textForTextFlow.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
+				textForTextFlow.wrappingWidthProperty().bind(instructionsForLecturerTextFlow.widthProperty());
+				instructionsForLecturerTextFlow.getChildren().addAll(textForTextFlow);	
+    		break;
+    	case "lecturerHodShowTest":
+    		
+    		break;
+    	case "studentShowTest":
+    		info4.setText("Student Name:" + studentTest.getStudentName());
+    		info6.setText("Grade:" + String.valueOf(studentTest.getGrade()));
+    		break;
+    	case "studentDoTest":
+    		info4.setText("Student Name:" + studentTest.getStudentName());
+    		break;
+    	}
     	
-    	//set the info of the test
-    	if (studentTest!= null) {
-    		info1.setText("Test:" + testName);
-    		info2.setText("Student Name:" + studentTest.getStudentName());
-    		info3.setText("Grade:" + String.valueOf(studentTest.getGrade()));
-    		//System.out.println(studentTest.getTest());
-    		//if (studentTest.getTest().getInstructionsForStudent() != null)
-    		//	info5.setText(studentTest.getTest().getInstructionsForStudent());
-    		//if (studentTest.getTest().getInstructionsForLecturer() != null)
-    		//	info6.setText(studentTest.getTest().getInstructionsForLecturer());
-    	}
-    	else {
-    		info1.setText("Test:" + testName);
-    		info2.setText("Duration:" +  testToExecute.getTest().getDuration());
-    		info3.setText("Instuction for lecturer:" + testToExecute.getTest().getInstructionsForLecturer());
-    		info4.setText("Instuction for student:" + testToExecute.getTest().getInstructionsForStudent());
-    		info5.setText(testToExecute.getTest().getInstructionsForStudent());
-    		info6.setText(testToExecute.getTest().getInstructionsForLecturer());
-    	}
+    	
     	
     	int questionCounter = 1;
         GridPane gridPane = new GridPane();
-        gridPane.setHgap(10);
+        gridPane.setHgap(50);
         gridPane.setVgap(10);
         int row = 0;
         for (int i = 0; i < questions.size(); i++) {
             Question question = questions.get(i); //get a question and 4 answers
             
             Label questionLabel = new Label(questionCounter + ". " + question.getQuestion()); //set the question label
+            Label instuctionsQuestionLabel;
+            if (question.getInstructions() != null)
+            	instuctionsQuestionLabel = new Label( "Instruction for question: " + question.getInstructions()); //set the question label
+            else
+            	instuctionsQuestionLabel = new Label("");
             questionCounter++;
             questionLabel.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-weight: bold; -fx-font-size: 14px;");
             //Label pointsLabel = new Label("Points: " + "0"); //set the points label
             Label pointsLabel = new Label("Points: " + question.getPoints()); //set the points label
             pointsLabels.add(pointsLabel); //save the pointslabel for later changes
             pointsLabel.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-size: 14px;");
-            gridPane.add(questionLabel, 0, i + row);
+            gridPane.add(instuctionsQuestionLabel, 0, i + row);
+            row++;
+            gridPane.add(questionLabel, 0, i + row );
             gridPane.add(pointsLabel,1, i + row); 
             
             //setting the 4 radiobutton in a toggle group and set each answer
@@ -117,6 +144,8 @@ public class ShowStudentTestController extends AbstractController {
                 answerRadioButton.setToggleGroup(answerGroup);
                 gridPane.add(answerRadioButton, 0, i + row); // Adjust the row and column indices as needed
             }
+            row++;
+            gridPane.add(new Label(), 0, i + row); // Adjust the row and column indices as needed
             toggleGroups.add(answerGroup);
         }
         dataVbox.getChildren().add(gridPane);
@@ -148,7 +177,7 @@ public class ShowStudentTestController extends AbstractController {
 	        ToggleGroup questionToggleGroup = toggleGroups.get(i);
 	        int correctAnswerIndex = question.getCorrectAnswer() - 1;
 	        RadioButton correctRadioButton = (RadioButton) questionToggleGroup.getToggles().get(correctAnswerIndex);
-	        correctRadioButton.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
+	        correctRadioButton.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-size: 14px; -fx-text-fill: green;");
 	        correctRadioButton.setText(correctRadioButton.getText() + " - Correct answer");
 	        // Get the student's selected answer index
 	        int selectedAnswerIndex = Integer.parseInt(answers[i]) - 1;
@@ -157,8 +186,8 @@ public class ShowStudentTestController extends AbstractController {
 	        System.out.println("the selected is: " + selectedAnswerIndex  + " , and the corrected is: " +correctAnswerIndex +" -1 on evrything" );
             if (selectedAnswerIndex != correctAnswerIndex) {
             	pointsLabels.get(i).setText("Points: 0");
-            	pointsLabels.get(i).setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
-            	selectedRadioButton.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+            	pointsLabels.get(i).setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-size: 14px; -fx-text-fill: red;");
+            	selectedRadioButton.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-size: 14px; -fx-text-fill: red;");
             	selectedRadioButton.setText(selectedRadioButton.getText() + " - Wrong answer");
             }  
 	    }

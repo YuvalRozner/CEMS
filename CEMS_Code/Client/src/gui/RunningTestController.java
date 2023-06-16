@@ -164,7 +164,7 @@ public class RunningTestController extends AbstractController{
 				Msg msg = testToExecuteController.getMsgToLockTest(selectedTest); //manyMsg -> update & lockTest.
 		    	sendMsg(msg);
 		    	notification.showInformationAlert("The test (code "+selectedTest.getTestCode()+") got locked.");
-		    	resetFields();
+		    	//resetFields(); ///////////////////////////////////////////////////////////////// comment by dor - need to change
 			}});
     	notification.showConfirmationAlert("you can't unlock after that.", "Are you sure you want to lock test "+selectedTest.getTestCode()+" ?");
     }

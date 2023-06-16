@@ -109,9 +109,14 @@ public class ApproveGradeController extends AbstractController{
 	 */
     private static NotificationAlertsController notification = new NotificationAlertsController();
     /**
-     * the StudentTest test wanted to be shown. 
+     * the StudentTest test wanted to be shown in "show" screen. 
      */
     public StudentTest StudentTestToShow;
+    
+    /**
+     * the testName wanted to be shown in "show" screen. 
+     */
+    public String testName;
 	
     /**
      * Constructs an instance of the ApproveGradeController.
@@ -207,11 +212,13 @@ public class ApproveGradeController extends AbstractController{
      */
     @FXML
     private void showTestOpen(MouseEvent event) throws Exception {
+    	testName =  testComboBox.getValue();
         Button clickedButton = (Button) event.getSource(); //get the button that has been clicked
         for (StudentTest studentTest : TestTable)  //search for the studentTest.
             if (studentTest.getButton().equals(clickedButton)) { 
                 StudentTestToShow = studentTest;
                 start("showStudentTest", "approveGrade");
+                break;
             }
     }
 
@@ -275,4 +282,14 @@ public class ApproveGradeController extends AbstractController{
     public StudentTest getStudentTestToShow() {
 		return StudentTestToShow;
 	}
+    
+    
+    public String getTestNameToShow() {
+		return testName;
+	}
+    
+    public TestToExecute getTestToExecuteToShow() {
+		return selectedTestToExecute;
+		
+    }
 }
