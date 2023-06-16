@@ -25,6 +25,7 @@ public class TestToExecute{
     private Integer numberOfStudentsFinished;
     private Integer numberOfStudents;
 	private Integer [] distribusion = new Integer[10]; // 10 separate columns.
+	
 	 
 	 
 	//not in DB: 
@@ -61,6 +62,11 @@ public class TestToExecute{
 		this.numberOfStudents=numberOfStudents;
 		
 	}
+	
+	/**
+	 * for id of lecturer
+	 */
+	public TestToExecute(String lecturerId,Integer testCode) {this.lecturerId=lecturerId;}
 	
 	/**
 	 * for getting the lock.
