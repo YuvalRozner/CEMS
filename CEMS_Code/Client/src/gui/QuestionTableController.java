@@ -78,7 +78,6 @@ public class QuestionTableController extends HodScreen {
     public QuestionTableController() {
         Msg msg = userController.selectQuestionByhodId(ChatClient.user.getId());
         sendMsg(msg);
-        //System.out.println("Data = " + AbstractController.msgReceived.getData());
         questionList = msgReceived.convertData(Question.class);
         //System.out.println("questionList = " + questionList); 
         //System.out.println("course? " + (questionList.get(0).getCourse()==null));
@@ -102,7 +101,7 @@ public class QuestionTableController extends HodScreen {
         answer4RadioButton.setText(selectedQuestion.getAnswers()[3]);
         // Select the correct answer toggle.
         ObservableList<Toggle> toggles = answersToggleGroup.getToggles();
-        Toggle toggle = toggles.get(selectedQuestion.getCorrectAnswer()); // Index 2 represents the third toggle
+        Toggle toggle = toggles.get(selectedQuestion.getCorrectAnswer()-1); // Index 2 represents the third toggle this is why we minus the answer with 1
         answersToggleGroup.selectToggle(toggle);
     }
 
@@ -117,7 +116,7 @@ public class QuestionTableController extends HodScreen {
         courseCol.setCellValueFactory(new PropertyValueFactory<Question, String>("courseName"));
 
         questionNumberCol.setCellValueFactory(new PropertyValueFactory<Question, Integer>("number"));
-        lecturerCol.setCellValueFactory(new PropertyValueFactory<Question, String>("lecturerId"));
+        lecturerCol.setCellValueFactory(new PropertyValueFactory<Question, String>("userName"));
         questionTextCol.setCellValueFactory(new PropertyValueFactory<Question, String>("question"));
 
         table.setItems(QTable);

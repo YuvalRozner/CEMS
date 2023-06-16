@@ -23,6 +23,7 @@ public class Question {
 	private ArrayList<Course> courses = null;
 	private Integer points = null;
 	private Course course = null; //added by mor
+	private User user = null; //added by mor
 	//for FX:
 	CheckBox checkbox;
 	RadioButton radioButton;
@@ -132,6 +133,40 @@ public class Question {
 		this.correctAnswer = correctAnswer;
 		this.instructions = instructions;
 		this.points = points;
+	}
+	
+	/**
+	 * constructor for creating Question object with course and user parameter, belongs to that specific question
+	 * 
+	 * @param id
+	 * @param number
+	 * @param question
+	 * @param subjectNum
+	 * @param lecturerId
+	 * @param answers - ans1,ans2,ans3,ans4
+	 * @param correctAnswer
+	 * @param instructions
+	 * @param numberCourse
+	 * @param name
+	 * @param subjectNumber
+	 * @param userId
+	 * @param userName
+	 * @param username
+	 * @param password
+	 * @param premission
+	 * @param loggedin
+	 */
+	public Question(String id, Integer number, String question, String subjectNum, String lecturerId,  String ans1, String ans2, String ans3, String ans4, Integer correctAnswer, String instructions, String numberCourse, String name, String subjectNumber, String userId, String userName, String username, String password, String premission, String loggedin) {
+		this.id = id;
+		this.number = number;
+		this.question = question;
+		this.subjectNum = subjectNum;
+		this.lecturerId = lecturerId;
+		this.answers = new String[] {ans1, ans2, ans3, ans4};
+		this.correctAnswer = correctAnswer;
+		this.instructions = instructions;
+		this.course = new Course(numberCourse, name, subjectNumber);
+		this.user = new User(userId, userName, username, password, premission, loggedin);
 	}
 	
 	public String getSubjectName() {
@@ -304,6 +339,22 @@ public class Question {
 	 */
 	public void setCourse(Course course) {
 		this.course = course;
+	}
+	
+	/**
+	 * @return the user name
+	 */
+	public String getUserName() {
+		if(user==null)
+			return null;
+		return user.getName();
+	}
+	
+	/**
+	 * @param user
+	 */
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
