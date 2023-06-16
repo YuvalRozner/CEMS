@@ -56,14 +56,18 @@ public class ShowStudentTestController extends AbstractController {
     
     private Msg initializeDataAndGetMsg(){
     	Msg msg = null;
-    	if (ChatClient.lastCurrentScreen instanceof ApproveGradeController) {
-    		screenState = "lecturerHodShowStudentTest";
-    		studentTest =  ((ApproveGradeController)ChatClient.lastCurrentScreen).getStudentTestToShow(); //get the studenttest to show from the last screen
-    		testToExecute = ((ApproveGradeController)ChatClient.lastCurrentScreen).getTestToExecuteToShow() ;
+    	// ExecuteTestController , ShowGradeController , ShowTestDataController , ApproveChangesController
+    	if (ChatClient.lastCurrentScreen instanceof Tests) {
+    		screenState = ((Tests)ChatClient.lastCurrentScreen).getScreenState();
+    		studentTest =  ((Tests)ChatClient.lastCurrentScreen).getStudentTestToShow(); 
+    		testToExecute = ((Tests)ChatClient.lastCurrentScreen).getTestToExecuteToShow();
+    		if (testToExecute == null) 
+    			testToExecute = studentTest.getTestToExecute();
     		testName = "(code-"+testToExecute.getTestCode()+")  " + testToExecute.getTest().getCourse().getName() +"  " + testToExecute.getDate();
-    		msg = questionController.getQuestionAndPointsByTestCodeAndStudentId(studentTest.getTestCode(), studentTest.getStudentId());
-    
+    		//msg = questionController.getQuestionAndPointsByTestCodeAndStudentId(studentTest.getTestCode(), studentTest.getStudentId());
+    		msg = questionController.getQuestionAndPointsByTestId(testToExecute.getTestId());
     	}
+    	/*
     	else if(ChatClient.lastCurrentScreen instanceof ExecuteTestController) {
     		screenState = "lecturerHodShowTest";
     		testToExecute =  ((ExecuteTestController)ChatClient.lastCurrentScreen).getTestToExecuteToShow(); //get the studenttest to show from the last scree
@@ -83,7 +87,7 @@ public class ShowStudentTestController extends AbstractController {
     		testToExecute =  ((ShowTestDataController)ChatClient.lastCurrentScreen).getTestToExecuteToShow(); //get the studenttest to show from the last scree
 			testName = "(code-"+testToExecute.getTestCode()+")  " + testToExecute.getTest().getCourse().getName() +"  " + testToExecute.getDate();
 			msg = questionController.getQuestionAndPointsByTestId(testToExecute.getTestId());
-    	}
+    	}*/
     	return msg;
     }
     @FXML

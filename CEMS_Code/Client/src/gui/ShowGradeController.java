@@ -19,7 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
-public class ShowGradeController extends AbstractController {
+public class ShowGradeController extends AbstractController implements Tests{
 	/**
 	 * save the test to shown.
 	 */
@@ -131,7 +131,18 @@ public class ShowGradeController extends AbstractController {
      *
      * @return The TestToExecute object to be shown.
      */
+	@Override
     public StudentTest getStudentTestToShow() {
 		return StudentTestToShow;
     }
+
+	@Override
+	public TestToExecute getTestToExecuteToShow() {
+		return null;
+	}
+
+	@Override
+	public String getScreenState() {
+		return "studentShowTest";
+	}
 }

@@ -35,7 +35,7 @@ import notifications.NotificationAlertsController;
  * 
  * @author Yuval Rozner 
  */
-public class ApproveGradeController extends AbstractController{
+public class ApproveGradeController extends AbstractController implements Tests{
 	/**
 	 * the columns for the table.
 	 */
@@ -310,17 +310,18 @@ public class ApproveGradeController extends AbstractController{
      *
      * @return The StudentTest object to be shown.
      */
+    @Override
     public StudentTest getStudentTestToShow() {
 		return StudentTestToShow;
 	}
     
-    
-    public String getTestNameToShow() {
-		return testName;
-	}
-    
+    @Override
     public TestToExecute getTestToExecuteToShow() {
 		return selectedTestToExecute;
-		
     }
+
+	@Override
+	public String getScreenState() {
+		return "lecturerHodShowStudentTest";
+	}
 }
