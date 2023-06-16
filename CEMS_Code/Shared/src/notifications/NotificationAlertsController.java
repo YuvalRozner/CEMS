@@ -87,7 +87,7 @@ public class NotificationAlertsController {
 	                    button.setOnMouseExited(e -> button.setStyle(
 	                            "-fx-background-color: #92bce3; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 7px; -fx-font-family: \"Comic Sans MS\";"));
 	                });
-	
+	        
 	        alert.showAndWait();
     	});
     }
@@ -125,7 +125,6 @@ public class NotificationAlertsController {
 	                    button.setOnMouseExited(e -> button.setStyle(
 	                            "-fx-background-color: #92bce3; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 7px; -fx-font-family: \"Comic Sans MS\";"));
 	                });
-	
 	        alert.showAndWait();
     	});
     }

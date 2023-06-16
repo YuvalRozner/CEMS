@@ -455,4 +455,16 @@ public class TestToExecuteController {
 		msgM.setMsgLst(msgLock);
 		return msgM;
 	}
+	
+	public Msg selectTestToExecuteByTestCode(Integer code) {
+    	Msg msg = new Msg(MsgType.select);
+    	msg.setSelect("testtoexecute.*, test.*, course.*");
+    	msg.setFrom("testtoexecute");
+    	msg.setFrom("test");
+    	msg.setFrom("course");
+    	msg.setWhereCol("testtoexecute.testId", "test.id");
+    	msg.setWhereCol("test.courseNumber", "course.number"); 
+    	msg.setWhere("testCode", code); 
+    	return msg;
+    }
 }

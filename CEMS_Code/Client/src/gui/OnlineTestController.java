@@ -22,6 +22,10 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import notifications.NotificationAlertsController;
 
 
@@ -37,16 +41,33 @@ public class OnlineTestController extends AbstractController implements CountDow
 	private StudentTestController studentTestController =new StudentTestController();
     
   
+	/**
+     * The container for displaying the test data.
+     */
     @FXML
     private VBox dataVbox;
-
-    @FXML
-    private Label timeLbl;
     
+    /**
+     * Labels for displaying test information.
+     */
     @FXML
-    private Label info1,info2,info3,info4,info5,info6;
+    private Label info1, info2, info3, info4, info5, info6, info7;
     
-    private String code="";
+    /**
+     * Container for displaying instructions for students/lecturers.
+     */
+    @FXML
+    private TextFlow instructionsForStudentTextFlow,instructionsForLecturerTextFlow;
+    
+    /**
+     * Labels for displaying points per question.
+     */
+    ArrayList<Label> pointsLabels = new ArrayList<>();
+    
+    GridPane gridPane;
+    
+    private String code = "5789";
+    private Integer code1;
 	private Integer duration=0;
 	private String lock="";
 	private TestToExecute numbersOfStudent; 
@@ -56,82 +77,122 @@ public class OnlineTestController extends AbstractController implements CountDow
 	private Integer timeOfStudent = 100; //time fiktivy //dor
 	private String flagEndOrMiddle;
     
+	private TestToExecute testToExecute;
+	
     public OnlineTestController() {
     	
     	if (ChatClient.lastCurrentScreen instanceof StartTestController) {
-    		code = ((StartTestController)ChatClient.lastCurrentScreen).getCode();
+    		testToExecute = ((StartTestController) ChatClient.lastCurrentScreen).getTestToExecuteToShow();
+    		code1 = testToExecute.getTestCode();;
     	}
-    	Msg msg = questionController.getQuestionAndPointsByTestCode(Integer.parseInt(code));
+    	Msg msg = questionController.getQuestionAndPointsByTestCode(code1);
     	sendMsg(msg);
     	System.out.println();
     	questions = msgReceived.convertData(Question.class); //ArrayList    	 
     }
-    class NumberRadioButton extends RadioButton {
-        private int number;
-
-        public NumberRadioButton(String text, int number) {
-            super(text);
-            this.number = number;
-        }
-
-        public int getNumber() {
-            return number;
-        }
-    }
+   
+    /**
+     * Initializes the controller and sets up the display of the test information and questions.
+     * This method is automatically called after the FXML file has been loaded.
+     */
     @FXML
     protected void initialize() {
-    	int questionCounter = 1;
-        GridPane gridPane = new GridPane();
-        gridPane.setHgap(10);
+        setInfo();
+
+        int questionCounter = 1;
+        gridPane = new GridPane();
+        gridPane.setHgap(50);
         gridPane.setVgap(10);
         int row = 0;
+
+        // Iterate over the list of questions and create the necessary UI elements
         for (int i = 0; i < questions.size(); i++) {
-            Question question = questions.get(i); //get a question and 4 answers
-            
-            Label questionLabel = new Label(questionCounter + ". " + question.getQuestion()); //set the question label
+	    	gridPane.add(new Label(), 0, i + row);
+	    	row++;
+            Question question = questions.get(i); 
+            // Create and configure the question label
+            Label questionLabel = new Label(questionCounter + ". " + question.getQuestion());
+            Label instuctionsQuestionLabel;
+            if (question.getInstructions() != null)
+                instuctionsQuestionLabel = new Label("Instruction for question: " + question.getInstructions());
+            else
+                instuctionsQuestionLabel = new Label("");
             questionCounter++;
             questionLabel.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-weight: bold; -fx-font-size: 14px;");
-            //Label pointsLabel = new Label("Points: " + "0"); //set the points label
-            Label pointsLabel = new Label("Points: " + question.getPoints()); //set the points label
+
+            // Create and configure the points label
+            Label pointsLabel = new Label("Points: " + question.getPoints());
+            pointsLabels.add(pointsLabel); // Save the points label for later changes
             pointsLabel.setStyle("-fx-font-family: \"Comic Sans MS\"; -fx-font-size: 14px;");
+
+            // Add the question label, instruction label, and points label to the grid pane
+            gridPane.add(instuctionsQuestionLabel, 0, i + row);
+            row++;
             gridPane.add(questionLabel, 0, i + row);
-            gridPane.add(pointsLabel,1, i + row); 
-            
-            //setting the 4 radiobutton in a toggle group and set each answer
+            gridPane.add(pointsLabel, 1, i + row);
+
+            // Set up the 4 radio buttons in a toggle group and set each answer
             ToggleGroup answerGroup = new ToggleGroup();
             for (int j = 0; j < 4; j++) {
-            	row++;
-            	NumberRadioButton answerRadioButton = new NumberRadioButton(question.getAnswers()[j],j+1);
+                row++;
+                RadioButton answerRadioButton = new RadioButton(question.getAnswers()[j]);
                 answerRadioButton.setToggleGroup(answerGroup);
-                gridPane.add(answerRadioButton, 0, i + row); // Adjust the row and column indices as needed
+                gridPane.add(answerRadioButton, 0, i + row);
             }
+           
             toggleGroups.add(answerGroup);
         }
+
+        // Add the grid pane to the data VBox
         dataVbox.getChildren().add(gridPane);
+
+        
     }
+
+ 
+    /**
+     * Sets the information of the test and updates the display.
+     * This method populates various labels and text flows with the relevant information
+     * about the test and its instructions for students and lecturers, based on the current screen state.
+     * It also adjusts the formatting and styling of the displayed elements.
+     */
+    public void setInfo() {
+        // Set the info of the test
+        Text textForTextFlow = null;
+        info1.setText("Test Code: " + testToExecute.getTestCode());
+        info2.setText("Course: " + testToExecute.getTest().getCourse().getName());
+        info3.setText("Duration:" + testToExecute.getTest().getDuration() + " minutes");
+        info4.setText("Date: " + testToExecute.getDate());
+        info5.setText("Student Name:" + ChatClient.user.getName());
+        // Set instructions for students
+        if (testToExecute.getTest().getInstructionsForStudent() != null) {
+            textForTextFlow = new Text("Instructions For Student: " + testToExecute.getTest().getInstructionsForStudent());
+            textForTextFlow.wrappingWidthProperty().bind(instructionsForStudentTextFlow.widthProperty());
+            textForTextFlow.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 14));
+            instructionsForStudentTextFlow.getChildren().addAll(textForTextFlow);
+        }
+    }
+
  
     @FXML
-    void submmitBtn(ActionEvent event) throws Exception {
+    void submitBtn(ActionEvent event) throws Exception {
 		
-		alert.setOnCancelAction(new Runnable() {	@Override public void run() {
-			((Node)event.getSource()).getScene().getWindow().hide();
-			ChatClient.getScreen("onlineTest").display();
-			getPrimaryStage().setTitle("onlineTest");
+    	testIsSubmit(timeOfStudent);
+    	System.out.println("yey");
+		checkIfStudentIsTheLastOne();
+		updateAverageAndMedian();
+    	/*
+    	
+    	alert.setOnCancelAction(new Runnable() {	@Override public void run() {
+			
 		}});
 		
 		
 		alert.setOnOkAction(new Runnable() {	@Override public void run() {
-			msg=testController.getDurationByCode(code);
-			sendMsg(msg);
-			duration=msgReceived.convertData(Test.class).get(0).getDuration();
-
+	
+			duration = testToExecute.getTest().getDuration();
 			
-			if(duration<timeOfStudent) {
-				timeOfStudentIsOverLoad();
-				checkIfStudentIsTheLastOne();
-				updateAverageAndMedian();
-			}
-			else if (checkIfTestIsLock().equals("true")){
+			if (testToExecute.getLock().equals("true")){
 				flagEndOrMiddle="End";
 				flagEndOrMiddle="Middle";
 				testIsLockCantSubmmit();	
@@ -144,7 +205,19 @@ public class OnlineTestController extends AbstractController implements CountDow
 			}
 			try {start("studentMenu", "login");} catch (Exception e) {}}});
 		alert.showConfirmationAlert(ChatClient.user.getName()+" Are you sure ?","After clicking the OK button, the submission is final and there is no option to change it");
+    */
     }
+    
+    
+    /*
+     * if(duration<timeOfStudent) {
+				timeOfStudentIsOverLoad();
+				checkIfStudentIsTheLastOne();
+				updateAverageAndMedian();
+			}
+			
+     */
+    
     public void checkIfStudentIsTheLastOne() {
 		msg=testToExecuteController.checkIfTheStudentIsLast(StartTestController.getTestToExecute().getTestCode());
 		sendMsg(msg);
@@ -201,7 +274,7 @@ public class OnlineTestController extends AbstractController implements CountDow
     
 	public void testIsSubmit(Integer timeOfStudent) {
 		alert.showInformationAlert("The test was successfully submitted!");
-		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
+		
 		////////update data
 		msg = testToExecuteController.updateNumberOfStudenByOne(1,code,"finish");
 		sendMsg(msg);
@@ -211,6 +284,7 @@ public class OnlineTestController extends AbstractController implements CountDow
 		sendMsg(msg);
 		msg=testToExecuteController.insertDistributionByCode(code,grade,1);
 		sendMsg(msg);
+		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
 
 	}
 	public void testIsLockCantSubmmit() {
@@ -232,16 +306,7 @@ public class OnlineTestController extends AbstractController implements CountDow
 		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
 	}
 	
-	/**
-	 * check if it lock
-	 * @return
-	 */
-    public String checkIfTestIsLock() {
-    	msg=testToExecuteController.checkIfTheTestIsLock(code);
-		sendMsg(msg);
-		lock=msgReceived.convertData(TestToExecute.class).get(0).getLock();
-		return lock;
-    }
+	
 	/**
 	 * Handles the case when the student has exceeded the allowed time for the test.
 	 *
@@ -260,7 +325,7 @@ public class OnlineTestController extends AbstractController implements CountDow
 
 	@Override
 	public void setTextCountdown(String s) {
-		timeLbl.setText(s);
+		//timeLbl.setText(s);
 	}
    
 	@Override
@@ -271,4 +336,17 @@ public class OnlineTestController extends AbstractController implements CountDow
 		testIsLockCantSubmmit();
 		updateAverageAndMedian();
 	}
+	
+	 class NumberRadioButton extends RadioButton {
+	        private int number;
+
+	        public NumberRadioButton(String text, int number) {
+	            super(text);
+	            this.number = number;
+	        }
+
+	        public int getNumber() {
+	            return number;
+	        }
+	    }
 }

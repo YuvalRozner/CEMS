@@ -61,7 +61,6 @@ public class StartTestController extends AbstractController{
     	if(msgReceived==null) {alert.showWarningAlert("A test with the code you provided is not found in the system. Please check that the code is correct.");return;}
     	lecturerId=msgReceived.convertData(TestToExecute.class).get(0).getLecturerId();
     	
-    	
     	msg = testToExecuteController.checkIfTheTestIsLock(code);
     	sendMsg(msg);
     	lock=msgReceived.convertData(TestToExecute.class).get(0).getLock();
@@ -73,8 +72,10 @@ public class StartTestController extends AbstractController{
     		msg=userController.getLecturerNameById(lecturerId);
         	sendMsg(msg);
         	lecturerName=msgReceived.convertData(User.class).get(0).getName();
-        	alert.showInformationAlert("The test you are about to enter was written by the lecturer: "+lecturerName);
-        	Msg msgGetTesttoexeute = testToExecuteController.selectTestToExecuteByCode(code);
+        	//alert.showInformationAlert("The test you are about to enter was written by the lecturer: "+lecturerName);
+        	//Msg msgGetTesttoexeute = testToExecuteController.selectTestToExecuteByCode(code);
+        	Msg msgGetTesttoexeute = testToExecuteController.selectTestToExecuteByTestCode(Integer.parseInt(code));
+        	
         	sendMsg(msgGetTesttoexeute);
         	ArrayList<TestToExecute>arr=msgReceived.convertData(TestToExecute.class);
         	setTestToExecute(arr.get(0));
@@ -103,8 +104,8 @@ public class StartTestController extends AbstractController{
     			studentTest.setTestCode(Integer.valueOf(codeTextField.getText()));
     			studentTest.setStudentId(ChatClient.user.getId());
     			
-    			Msg msgUpdate = testToExecuteController.updateNumberOfStudenByOne(1,code,"start");
-    			sendMsg(msgUpdate);
+    			//Msg msgUpdate = testToExecuteController.updateNumberOfStudenByOne(1,code,"start");
+    			//sendMsg(msgUpdate);
     			
     			if(getTestToExecute().getTestingType().equals("manual")) {
     				start("manualTest", "startTest");
@@ -137,4 +138,7 @@ public class StartTestController extends AbstractController{
 	 public String getCode() {
 			return code;
 		}
+	  public TestToExecute getTestToExecuteToShow() {
+	    	return testToExecute;
+	    }
 }
