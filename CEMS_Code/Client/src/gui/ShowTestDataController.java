@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import JDBC.Msg;
 import client.ChatClient;
 import controllers.TestToExecuteController;
+import enteties.StudentTest;
 import enteties.TestToExecute;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,7 +22,7 @@ import javafx.scene.input.MouseEvent;
  * 
  * @author Mor Shmuel
  */
-public class ShowTestDataController  extends HodScreen{
+public class ShowTestDataController  extends HodScreen implements Tests{
 	
 	private ArrayList<TestToExecute> arrShowTest = new ArrayList<>();
 
@@ -92,7 +93,7 @@ public class ShowTestDataController  extends HodScreen{
          for (TestToExecute testToExecute : showTestTable)  //search for the studentTest.
         	 if (testToExecute.getButton().equals(clickedButton)) { 
              	testToExecuteToShow = testToExecute;
-             	start("showStudentTest", "showTestData");
+             	start("showStudentTest", "showTestsData");
              }		
     }
     
@@ -118,7 +119,18 @@ public class ShowTestDataController  extends HodScreen{
      *
      * @return The TestToExecute object to be shown.
      */
-    public TestToExecute getTestToShow() {
+    @Override
+    public TestToExecute getTestToExecuteToShow() {
 		return testToExecuteToShow;
     }
+
+	@Override
+	public StudentTest getStudentTestToShow() {
+		return null;
+	}
+
+	@Override
+	public String getScreenState() {
+		return "lecturerHodShowTest";
+	}
 }

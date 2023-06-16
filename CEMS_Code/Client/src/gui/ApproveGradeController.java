@@ -35,7 +35,7 @@ import notifications.NotificationAlertsController;
  * 
  * @author Yuval Rozner 
  */
-public class ApproveGradeController extends AbstractController{
+public class ApproveGradeController extends AbstractController implements Tests{
 	/**
 	 * the columns for the table.
 	 */
@@ -221,7 +221,6 @@ public class ApproveGradeController extends AbstractController{
      */
     @FXML
     private void showTestOpen(MouseEvent event) throws Exception {
-    	testName =  testComboBox.getValue();
         Button clickedButton = (Button) event.getSource(); //get the button that has been clicked
         for (StudentTest studentTest : TestTable)  //search for the studentTest.
             if (studentTest.getButton().equals(clickedButton)) { 
@@ -311,17 +310,18 @@ public class ApproveGradeController extends AbstractController{
      *
      * @return The StudentTest object to be shown.
      */
+    @Override
     public StudentTest getStudentTestToShow() {
 		return StudentTestToShow;
 	}
     
-    
-    public String getTestNameToShow() {
-		return testName;
-	}
-    
+    @Override
     public TestToExecute getTestToExecuteToShow() {
 		return selectedTestToExecute;
-		
     }
+
+	@Override
+	public String getScreenState() {
+		return "lecturerHodShowStudentTest";
+	}
 }
