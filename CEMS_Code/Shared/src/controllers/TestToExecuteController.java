@@ -16,6 +16,15 @@ import javafx.collections.ObservableList;
  * Controller class for managing TestToExecute.
  */
 public class TestToExecuteController {
+	
+	
+	public Msg checkIfTheTestExict(String code) {
+		Msg msg = new Msg(MsgType.select);
+		msg.setTableToUpdate("testtoexecute");
+		msg.setFrom("testtoexecute");
+		msg.setWhere("testCode", code);
+		return msg;
+	}
 	/**
 	 * Creates a message to update the median and average grades for a specific test in test to execute.
 	 *
@@ -25,11 +34,12 @@ public class TestToExecuteController {
 	 * @return A Msg object configured for the update operation.
 	 */
 	
-	public Msg updateMedianAndAverage (Integer code ,double average ,double median) {
+	public Msg updateMedianAndAverage (String code ,double average ,double median) {
 		Msg msg = new Msg(MsgType.update);
 		msg.setTableToUpdate("testtoexecute");
 		msg.setSet("average", average);
 		msg.setSet("median", median);
+		msg.setWhere("testCode", code);
 		return msg;
 	}
 	
@@ -68,6 +78,8 @@ public class TestToExecuteController {
 		msg.setWhere("testCode", code);
 		return msg;
 	}
+	
+	
 	
 	/**
 	 * make query to get if the test is lock or not.
@@ -167,7 +179,6 @@ public class TestToExecuteController {
 	
 	public boolean checkValidCode(String code) {
 		NotificationAlertsController alert = new NotificationAlertsController();
-		if (code.isEmpty() == true){alert.showWarningAlert("You must enter code for a test, 4 digits!");return false;}
 		if (code.length()!=4) {alert.showWarningAlert("The code must be 4 in length!");return false;}
 		if (!code.matches("\\d+")) {alert.showWarningAlert("The code must consist of only digits!");return false;}
 		return true;

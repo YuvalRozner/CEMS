@@ -8,6 +8,13 @@ import enteties.User;
  * Controller class for managing user.
  */
 public class UserController {
+	public Msg getLecturerNameById(String id) {
+		Msg msg = new Msg(MsgType.select);
+		msg.setSelect("`user`.username");
+		msg.setFrom("`user`");
+		msg.setWhere("id", id);
+		return msg;
+	}
 
 	/**
 	 * Generates a message to update the "loggedin" status of a user to "no" in the database.

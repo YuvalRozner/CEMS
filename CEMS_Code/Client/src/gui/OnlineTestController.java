@@ -54,6 +54,7 @@ public class OnlineTestController extends AbstractController implements CountDow
 	private String answers="";
 	private Msg msg;
 	private Integer timeOfStudent = 100; //time fiktivy //dor
+	private String flagEndOrMiddle;
     
     public OnlineTestController() {
     	
@@ -120,27 +121,29 @@ public class OnlineTestController extends AbstractController implements CountDow
 		
 		
 		alert.setOnOkAction(new Runnable() {	@Override public void run() {
-			Msg msg=testController.getDurationByCode(code);
+			msg=testController.getDurationByCode(code);
 			sendMsg(msg);
 			duration=msgReceived.convertData(Test.class).get(0).getDuration();
 
 			
 			if(duration<timeOfStudent) {
-				timeOfStudentIsOverLoad();/////////dor
+				timeOfStudentIsOverLoad();
 				checkIfStudentIsTheLastOne();
+				updateAverageAndMedian();
 			}
 			else if (checkIfTestIsLock().equals("true")){
-				testIsLockInEndOfTest();/////////dor			
+				flagEndOrMiddle="End";
+				flagEndOrMiddle="Middle";
+				testIsLockCantSubmmit();	
+				updateAverageAndMedian();
 			}
 			else {
 				testIsSubmit(timeOfStudent);
 				checkIfStudentIsTheLastOne();
+				updateAverageAndMedian();
 			}
-			try {
-				start("studentMenu", "login");
-			} catch (Exception e) {}}});
+			try {start("studentMenu", "login");} catch (Exception e) {}}});
 		alert.showConfirmationAlert(ChatClient.user.getName()+" Are you sure ?","After clicking the OK button, the submission is final and there is no option to change it");
-		updateAverageAndMedian();
     }
     public void checkIfStudentIsTheLastOne() {
 		msg=testToExecuteController.checkIfTheStudentIsLast(StartTestController.getTestToExecute().getTestCode());
@@ -155,7 +158,7 @@ public class OnlineTestController extends AbstractController implements CountDow
     }
 	public void updateAverageAndMedian(){
 		double average=0 , median=0;
-		msg=studentTestController.selectAllstudentBySpecificCodeTest(StartTestController.getTestToExecute().getTestCode());
+		msg=studentTestController.selectAllstudentBySpecificCodeTest(code);
 		sendMsg(msg);
 		ArrayList<StudentTest> listOfStudent =msgReceived.convertData(StudentTest.class);
 		ArrayList<Integer> listOfGrades=new ArrayList<Integer>();
@@ -166,7 +169,7 @@ public class OnlineTestController extends AbstractController implements CountDow
 		average=average/listOfGrades.size();
 		Collections.sort(listOfGrades);
 		median=listOfGrades.get(listOfGrades.size()/2);
-		msg=testToExecuteController.updateMedianAndAverage(StartTestController.getTestToExecute().getTestCode(),average,median);
+		msg=testToExecuteController.updateMedianAndAverage(code,average,median);
 		sendMsg(msg);
 		
 	}
@@ -210,36 +213,21 @@ public class OnlineTestController extends AbstractController implements CountDow
 		sendMsg(msg);
 
 	}
-	
-	
-    /**
-     * what heppen if test is lock
-     * @param timeOfStudent
-     */
-	public void testIsLockInEndOfTest() {
-		msg = testToExecuteController.updateNumberOfStudenByOne(1,code,"cantSubmit");
+	public void testIsLockCantSubmmit() {
+		msg = testToExecuteController.updateNumberOfStudenByOne(1,Integer.toString(StartTestController.getTestToExecute().getTestCode()),"cantSubmit");
 		sendMsg(msg);
 		alert.showErrorAlert("The test is locked!\n You will not be able to submit the test!");
-		grade=0;
-		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"00000",grade,ChatClient.user.getId() ,code);
+		if(flagEndOrMiddle.equals("End")) {
+			grade=0;
+			msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"00000",grade,ChatClient.user.getId() ,code);
+		}
+		else {
+			calculateGrade();
+			getAnswers();
+			msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,answers,grade,ChatClient.user.getId() ,code);
+		}
 		sendMsg(msg);
-		msg=testToExecuteController.insertDistributionByCode(code,grade,1);
-		sendMsg(msg);
-		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
-	}
-    /**
-     * what heppen if test is lock
-     * @param timeOfStudent
-     */
-	public void testIsLockInMiddleOfTest() {
-		msg = testToExecuteController.updateNumberOfStudenByOne(1,code,"cantSubmit");
-		sendMsg(msg);
-		//alert.showErrorAlert("The test is locked!\n You will not be able to submit the test!");
-		calculateGrade();
-		getAnswers();
-		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,answers,grade,ChatClient.user.getId() ,code);
-		sendMsg(msg);
-		msg=testToExecuteController.insertDistributionByCode(code,grade,1);
+		msg=testToExecuteController.insertDistributionByCode(code,0,1);
 		sendMsg(msg);
 		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
 	}
@@ -263,9 +251,7 @@ public class OnlineTestController extends AbstractController implements CountDow
 		alert.showErrorAlert("You have exceeded the allowed time!");
 		msg = testToExecuteController.updateNumberOfStudenByOne(1,code,"cantSubmit");
 		sendMsg(msg);
-		getAnswers();
-		calculateGrade();
-		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,answers.toString(),grade,ChatClient.user.getId() ,code);
+		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"00000",0,ChatClient.user.getId() ,code);
 		sendMsg(msg);
 		msg=testToExecuteController.insertDistributionByCode(code,grade,1);
 		sendMsg(msg);
@@ -281,6 +267,8 @@ public class OnlineTestController extends AbstractController implements CountDow
 	public void testGotManualyLockedByLecturer(String testCode) {
 		if(!testCode.equals(code)) return;
 		alert.showErrorAlert("Sorry, but the test got locked by your lecturer..");
-		testIsLockInMiddleOfTest();
+		flagEndOrMiddle="Middle";
+		testIsLockCantSubmmit();
+		updateAverageAndMedian();
 	}
 }

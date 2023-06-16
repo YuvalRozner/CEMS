@@ -152,7 +152,7 @@ public class StudentTestController {
 	 * @return A Msg object configured for the select operation.
 	 */
 	
-	public Msg selectAllstudentBySpecificCodeTest(Integer code) {
+	public Msg selectAllstudentBySpecificCodeTest(String code) {
 		Msg msg=new Msg(MsgType.select);
 		msg.setSelect("studenttest.grade");
 		msg.setFrom("studenttest");
