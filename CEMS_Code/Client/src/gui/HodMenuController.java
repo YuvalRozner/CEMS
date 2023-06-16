@@ -27,7 +27,7 @@ public class HodMenuController extends HodScreen implements Menu{
 	/**
 	 * the list of Request for finding if there are any requests waiting .
 	 */
-    private ArrayList<Request> request;
+    private ArrayList<Request> request = null;
     
     /**
 	 * object to use the RequestController class method.
@@ -41,10 +41,14 @@ public class HodMenuController extends HodScreen implements Menu{
      * and displaying the pop-up requests if there are any.
      */
 	public HodMenuController(){
+		
 		Msg msg = requestController.selectFoundRequest(ChatClient.user.getId());
     	sendMsg(msg);
-    	request = msgReceived.convertData(Request.class);
+    	if (msgReceived != null)
+    		request = msgReceived.convertData(Request.class);
+    	
     	//Display the pop-up requests if there are any
+    	
     	if(request!=null) {
     		 popRequest();
     	}
