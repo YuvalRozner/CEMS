@@ -137,9 +137,7 @@ public class CEMSserver extends AbstractServer {
 				sendToClient(new Msg(MsgType.succeeded), client);
 				break;
 			case fileToSend:
-				//
 				String LocalfilePath = "@../../file/algebraTest.docx";
-				//String LocalfilePath = "C:\\Users\\liorz\\OneDrive\\Documents\\GitHub\\CEMS\\CEMS_Code\\Server\\file\\algebraTest.docx";
 				Msg msgToCleint = cemsFileController.createMsgWithFile(LocalfilePath);
 				sendToClient(msgToCleint, client);
 				break;
@@ -150,6 +148,11 @@ public class CEMSserver extends AbstractServer {
 				System.out.println("query: ->" + queryStr);
 				stmt.executeUpdate(queryStr);
 				sendToClient(new Msg(MsgType.succeeded), client);
+			case request:
+				serverController.addConsole("client "+client+ " create a new request to hod " + msg.getHod()+".\n");
+				System.out.println("client "+client+ " create a new request to hod " + msg.getHod()+".");
+				sendToAllClients(msg);
+				break;
 			default:
 				break;
 			}

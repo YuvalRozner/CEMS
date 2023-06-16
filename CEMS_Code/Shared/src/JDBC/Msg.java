@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import enteties.CemsFile;
+import enteties.User;
 
 public class Msg implements Serializable{
 	
@@ -26,6 +27,7 @@ public class Msg implements Serializable{
 	private CemsFile file =null;//for send file to student , and get file from student.
 	private Integer testCode = null;
 	private String pathFile = null;
+	private User hod;
 	
 	/**
 	 * Constructs an empty {@code Msg} object.
@@ -372,4 +374,20 @@ public class Msg implements Serializable{
 	public void setPathFile(String pathFile) {
 		this.pathFile = pathFile;
 	}
+
+	/**
+	 * @return the hod
+	 */
+	public User getHod() {
+		return hod;
+	}
+
+	/**
+	 * @param hod the hod to set
+	 */
+	public void setHod(User hod) {
+		this.hod = hod;
+	}
+	
+	
 }
