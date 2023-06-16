@@ -81,7 +81,10 @@ public class StudentTestController {
 	public Msg getMsgForStudentTestsByID(User user) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("studenttest.*,testtoexecute.*, test.*, course.*");
-		msg.setFrom("studenttest, testtoexecute, test, course");
+		msg.setFrom("studenttest");
+		msg.setFrom("testtoexecute");
+		msg.setFrom("test");
+		msg.setFrom("course");
 		msg.setWhereCol("testtoexecute.testId", "test.id");
 		msg.setWhereCol("test.courseNumber", "course.number");
 		msg.setWhereCol("studenttest.testCode", "testtoexecute.testCode");
@@ -100,7 +103,8 @@ public class StudentTestController {
 	public Msg getMsgForStudentTestsByTestToExecute(TestToExecute t) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("studenttest.*, user.name");
-		msg.setFrom("studenttest, user");
+		msg.setFrom("studenttest");
+		msg.setFrom("user");
 		msg.setWhereCol("studenttest.studentId", "user.id");
 		msg.setWhere("testCode", t.getTestCode());
 		msg.setWhere("approved", "false");
@@ -135,7 +139,8 @@ public class StudentTestController {
 	public Msg getMsgForStudentTestsByID(String ID) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("studenttest.*");
-		msg.setFrom("studenttest, user");
+		msg.setFrom("studenttest");
+		msg.setFrom("user");
 		msg.setWhereCol("studenttest.studentId", "user.id");
 		msg.setWhere("user.id", ID);
 		return msg;

@@ -133,7 +133,9 @@ public class QuestionController {
 	public Msg getQuestionAndPointsByTestId(String testId) {
    	Msg msg = new Msg(MsgType.select);
    	msg.setSelect("question.*, test_question.points");
-   	msg.setFrom("test, question, test_question");
+   	msg.setFrom("test");
+   	msg.setFrom("question");
+   	msg.setFrom("test_question");
    	msg.setWhereCol("test.id", "test_question.testId");
    	msg.setWhereCol("test_question.questionId", "question.id"); 
    	msg.setWhere("test.id", testId);
@@ -144,7 +146,10 @@ public class QuestionController {
 	public Msg getQuestionAndPointsByTestCodeAndStudentId(Integer testCode,String studentId) {
    	Msg msg = new Msg(MsgType.select);
    	msg.setSelect("question.*, test_question.points");
-   	msg.setFrom("studentTest, TestToExecute, question, test_question");
+   	msg.setFrom("studentTest");
+   	msg.setFrom("TestToExecute");
+   	msg.setFrom("question");
+   	msg.setFrom("test_question");
 	msg.setWhereCol("studentTest.testCode", "TestToExecute.testCode");
 	msg.setWhereCol("TestToExecute.testId", "test_question.testId");
    	msg.setWhereCol("test_question.questionId", "question.id"); 
@@ -156,7 +161,9 @@ public class QuestionController {
 	public Msg getQuestionAndPointsByTestCode(Integer testCode) {
 	   	Msg msg = new Msg(MsgType.select);
 	   	msg.setSelect("question.*, test_question.points");
-	   	msg.setFrom("testToExecute, question, test_question");
+	   	msg.setFrom("testToExecute");
+	   	msg.setFrom("question");
+	   	msg.setFrom("test_question");
 		msg.setWhereCol("testToExecute.testid", "test_question.testId");
 	   	msg.setWhereCol("test_question.questionId", "question.id"); 
 	   	msg.setWhere("testToExecute.testCode", testCode);

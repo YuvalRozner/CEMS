@@ -99,7 +99,9 @@ public class TestController {
 	public Msg selectTestByUser(User user) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("test.*, course.*");
-		msg.setFrom("test, user_subject, course");
+		msg.setFrom("test");
+		msg.setFrom("user_subject");
+		msg.setFrom("course");
 		msg.setWhereCol("test.courseNumber", "course.number");
 		msg.setWhereCol("user_subject.subjectNum", "course.subjectNum");
 		msg.setWhere("user_subject.userId", user.getId());

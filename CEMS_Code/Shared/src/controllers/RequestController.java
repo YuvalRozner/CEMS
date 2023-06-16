@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import JDBC.Msg;
 import JDBC.MsgType;
 import enteties.Request;
+import enteties.StudentTest;
 import enteties.TestToExecute;
 import enteties.User;
 
@@ -68,7 +69,11 @@ public class RequestController {
 	public Msg selectRequest(String hod) {
     	Msg msg = new Msg(MsgType.select);
     	msg.setSelect("request.*, test.*, user.*, course.*");
-    	msg.setFrom("cems.request, cems.testtoexecute, cems.test, cems.course, cems.user");
+    	msg.setFrom("request");
+    	msg.setFrom("testtoexecute");
+    	msg.setFrom("test");
+    	msg.setFrom("course");
+    	msg.setFrom("user");
     	msg.setWhereCol("request.testCode", "testtoexecute.testCode");
     	msg.setWhereCol("testtoexecute.testId", "test.id");
     	msg.setWhereCol("request.lecturerId", "user.id");
@@ -76,4 +81,33 @@ public class RequestController {
     	msg.setWhere("request.hodId", hod); 
     	return msg;
     }
+	
+	/**
+	 * Constructs a database update message to update a confirms duration change in the needed fields.
+	 *
+	 * @param req The Request.
+	 * @return A Msg object representing the database select message.
+	 */
+	public Msg getMsgToUpdateRequestDuration(Request req) {
+		Msg msgM = new Msg(MsgType.manyMessages);
+		Msg msg1 = new Msg(MsgType.update);
+		msg1.setTableToUpdate("test");
+		msg1.setSet("duration", req.getDuration());
+		msg1.setWhere("id", req.getTestId());
+		
+		Msg msg2 = new Msg(MsgType.update);
+		msg2.setTableToUpdate("testtoexecute");
+		msg2.setSet("timeExtenstion", 0);
+		msg2.setWhere("testCode", req.getTestCode());
+		/*
+		Msg msg3 = new Msg(MsgType.deleteFrom);
+		msg3.setDeleteFrom("request");
+		msg3.setWhere("testCode", req.getTestCode());
+		*/
+		msgM.setMsgLst(msg1);
+		msgM.setMsgLst(msg2);
+		//msgM.setMsgLst(msg3);
+		return msgM;
+	}
+	
 }

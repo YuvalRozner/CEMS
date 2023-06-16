@@ -46,7 +46,8 @@ public class UserController {
 	public Msg selectHodBySubjectNumber(String subjectNumber) {
 		Msg msg = new Msg(MsgType.select);
     	msg.setSelect("user.*");
-    	msg.setFrom("user, hod_subject");
+    	msg.setFrom("user");
+    	msg.setFrom("hod_subject");
     	msg.setWhereCol("user.id", "hod_subject.hodId");
     	msg.setWhere("hod_subject.subjectNumber", subjectNumber);
     	return msg;
@@ -61,7 +62,10 @@ public class UserController {
 	public Msg selectQuestionByhodId(String hodId) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("question.* , course.*");
-        msg.setFrom("question , course , question_course , hod_subject");
+        msg.setFrom("question");
+        msg.setFrom("course");
+        msg.setFrom("question_course");
+        msg.setFrom("hod_subject");
         msg.setWhereCol("hod_subject.subjectNumber", "question.subjectNum");
         msg.setWhereCol("question_course.questionId", "question.id");
         msg.setWhereCol("question_course.courseNum", "course.number");
@@ -76,13 +80,35 @@ public class UserController {
 	 * @return The generated Msg object for the user selection.
 	 */
 	public Msg selectUserByHodAndLecturer(String ID) {
-		Msg msg = new Msg(MsgType.select);
-    	msg.setSelect("user.*");
-    	msg.setFrom("user, user_subject, hod_subject");
-    	msg.setWhereCol("hod_subject.subjectNumber", "user_subject.subjectNum");
-    	msg.setWhereCol("user.id", "user_subject.userId");
-    	msg.setWhere("hod_subject.hodId", ID);
-    	return msg;
+		//Msg msgM = new Msg(MsgType.manyMessages);
+		Msg msg1 = new Msg(MsgType.select);
+    	msg1.setSelect("user.*");
+    	msg1.setFrom("user");
+    	msg1.setFrom("user_subject");
+    	msg1.setFrom("hod_subject");
+    	msg1.setWhereCol("hod_subject.subjectNumber", "user_subject.subjectNum");
+    	msg1.setWhereCol("user.id", "user_subject.userId");
+    	msg1.setWhere("hod_subject.hodId", ID);
+    	/*
+    	Msg msg2 = new Msg(MsgType.select);
+    	msg2.setSelect("user.*");
+    	msg2.setFrom("user");
+    	msg2.setFrom("studenttest");
+    	msg2.setFrom("testtoexecute");
+    	msg2.setFrom("test");
+    	msg2.setFrom("course");
+    	msg2.setFrom("hod_subject");
+    	msg2.setWhereCol("user.id", "studenttest.studentId");
+    	msg2.setWhereCol("studenttest.testCode", "testtoexecute.testCode");
+    	msg2.setWhereCol("testtoexecute.testId", "test.id");
+    	msg2.setWhereCol("test.courseNumber", "course.number");
+    	msg2.setWhereCol("hod_subject.subjectNumber", "course.subjectNum");
+    	msg2.setWhere("hod_subject.hodId", ID);
+    	msgM.setMsgLst(msg1);
+		msgM.setMsgLst(msg2);
+		*/
+    	//return msgM;
+    	return msg1;
 	}
 	
 	/**
@@ -94,7 +120,12 @@ public class UserController {
 	public Msg selectUserByHodAndStudent(String ID) {
 		Msg msg = new Msg(MsgType.select);
     	msg.setSelect("user.*");
-    	msg.setFrom("user, studenttest, testtoexecute, test, course, hod_subject");
+    	msg.setFrom("user");
+    	msg.setFrom("studenttest");
+    	msg.setFrom("testtoexecute");
+    	msg.setFrom("test");
+    	msg.setFrom("course");
+    	msg.setFrom("hod_subject");
     	msg.setWhereCol("user.id", "studenttest.studentId");
     	msg.setWhereCol("studenttest.testCode", "testtoexecute.testCode");
     	msg.setWhereCol("testtoexecute.testId", "test.id");
@@ -113,7 +144,8 @@ public class UserController {
 	public Msg selectUserByHodAndCourse(String ID) {
 		Msg msg = new Msg(MsgType.select);
     	msg.setSelect("course.*");
-    	msg.setFrom("course, hod_subject");
+    	msg.setFrom("course");
+    	msg.setFrom("hod_subject");
     	msg.setWhereCol("course.subjectNum", "hod_subject.subjectNumber");
     	msg.setWhere("hod_subject.hodId", ID);
     	return msg;

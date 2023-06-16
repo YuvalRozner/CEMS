@@ -5,27 +5,27 @@ import java.util.ArrayList;
 import JDBC.Msg;
 import client.ChatClient;
 import controllers.RequestController;
-import enteties.Question;
 import enteties.Request;
-import enteties.StudentTest;
-import enteties.TestToExecute;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import notifications.NotificationAlertsController;
 
+/**
+ * The controller class for the Approve Changes screen in the GUI.
+ * This class handles the logic and behavior of the screen's components.
+ * 
+ * @author Mor Shmuel
+ */
 public class ApproveChangesController extends HodScreen{
 		
 	private ObservableList<Request> changesTable;
@@ -36,7 +36,13 @@ public class ApproveChangesController extends HodScreen{
     private TableView<Request> table  = new TableView<Request>();
     
     @FXML
-    private Text text;
+    private Button back;
+
+    @FXML
+    private Button confirm;
+    
+    @FXML
+    private Text textExplanation;
     
     /**
      * ToggleGroup for the requests in the table.
@@ -61,34 +67,40 @@ public class ApproveChangesController extends HodScreen{
 	 */
     private static RequestController requestController = new RequestController();
     
+    /**
+     * Initializes a new instance of the ApproveChangesController class.
+     * This constructor is called when the screen is loaded.
+     */
     public ApproveChangesController() {
+    	
     	requestToggleGroup = new ToggleGroup();
     	Msg msg = requestController.selectRequest(ChatClient.user.getId());
     	sendMsg(msg);
     	request = msgReceived.convertData(Request.class);
     	
-		for (Request req : request) {
-			 req.setNewRadioButton();
-	         requestToggleGroup.getToggles().add((RadioButton)req.getRadioButton()); 
-		    	
-			 req.getRadioButton().selectedProperty().addListener((observable, oldValue, newValue) -> {
-		    		if (newValue == true) {
-		    			chooseRequest = req;
-		    			//add set disable to confirm button
-		    		}
-		    		else {
-		    			//add set disable to confirm button
-		    		} 
-		    	});
-		}
-    	
-		changesTable = FXCollections.observableArrayList(request);
-		System.out.println("changesTable = " + changesTable);
-	    table.setItems(changesTable);
-	    table.refresh();
-        System.out.println("changesTable = " + changesTable);
+    	try {
+        	if(request==null) {notification.showErrorAlert("There are no tests to confirm grades for."); table.getItems().clear();	table.refresh(); return;}
+        	for (Request req : request) {
+   			 req.setNewRadioButton();
+   	         requestToggleGroup.getToggles().add((RadioButton)req.getRadioButton()); 
+   		    	
+   			 req.getRadioButton().selectedProperty().addListener((observable, oldValue, newValue) -> {
+   		    		if (newValue == true) {
+   		    			chooseRequest = req;
+   		    			confirm.setDisable(false); //Enable the "Approve" button
+   		    		} 
+   			 	});
+        	}
+        	changesTable = FXCollections.observableArrayList(request);
+        	table.setItems(changesTable);
+        	table.refresh();
+    		}catch(Exception e) {System.out.println("Error in constructor method.");}
     }
     
+    /**
+     * Initializes the controller class.
+     * This method is automatically called after the FXML file has been loaded.
+     */
     @FXML
 	protected void initialize() {
     	CourseCol.setCellValueFactory(new PropertyValueFactory<Request, String>("courseName"));
@@ -104,7 +116,7 @@ public class ApproveChangesController extends HodScreen{
 	}
     
     /**
-     * Event handler for displaying the answers of the selected question.
+     * Event handler for displaying the answers of the selected request.
      *
      * @param event The MouseEvent triggering the event.
      */
@@ -113,20 +125,28 @@ public class ApproveChangesController extends HodScreen{
         //Get the selected request from the table.
     	Request selectedReq = table.getSelectionModel().getSelectedItem();
         //Display the explanation in the UI.
-    	text.setText(selectedReq.getExplanation());
-    	//System.out.println("chooseRequest = " + chooseRequest);
+    	textExplanation.setText(selectedReq.getExplanation());
     }
 
+    /**
+     * Event handler for the confirm button.
+     * Approves the selected request.
+     *
+     * @param event The ActionEvent triggering the event.
+     */
     @FXML
-    void aprroveBtn(ActionEvent event) {
-    	Request selectedReq = table.getSelectionModel().getSelectedItem();
-        if (selectedReq != null) {
-            // A request has been selected, perform the necessary actions
-            System.out.println("Selected request: " + selectedReq);
-            // Other logic for handling the selected request
-        } else {
-            // No request has been selected, display an error message or perform other actions
-            System.out.println("No request selected.");
-        }
+    void aprroveBtn(ActionEvent event) { //needed to add delete query
+        if (chooseRequest != null) {
+        	notification.setOnCancelAction(new Runnable() {	@Override public void run() {return;}});
+        	notification.setOnOkAction(new Runnable() {
+				@Override
+				public void run() {
+					Msg msg1 = requestController.getMsgToUpdateRequestDuration(chooseRequest);
+		        	sendMsg(msg1);
+		        	notification.showInformationAlert("Change approved in DB.");
+	    			return;
+				}});
+        	notification.showConfirmationAlert("you can't unapprove after that.", "Are you sure you want to approve the request?");
+        } else {notification.showErrorAlert("You didnt select a request to approve."); return;}
     }
 }

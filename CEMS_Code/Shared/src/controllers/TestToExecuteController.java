@@ -183,7 +183,9 @@ public class TestToExecuteController {
 	public Msg selectTestToExecuteByUser(User user) {
     	Msg msg = new Msg(MsgType.select);
     	msg.setSelect("testtoexecute.*, test.*, course.*");
-    	msg.setFrom("testtoexecute, test, course");
+    	msg.setFrom("testtoexecute");
+    	msg.setFrom("test");
+    	msg.setFrom("course");
     	msg.setWhereCol("testtoexecute.testId", "test.id");
     	msg.setWhereCol("test.courseNumber", "course.number"); 
     	msg.setWhere("testtoexecute.lecturerId", user.getId()); 
@@ -200,7 +202,10 @@ public class TestToExecuteController {
 	public Msg selectTestToExecuteByHod(User user) {
     	Msg msg = new Msg(MsgType.select);
     	msg.setSelect("testtoexecute.*, test.*, course.*");
-    	msg.setFrom("testtoexecute, test, course, hod_subject");
+    	msg.setFrom("testtoexecute");
+    	msg.setFrom("test");
+    	msg.setFrom("course");
+    	msg.setFrom("hod_subject");
     	msg.setWhereCol("testtoexecute.testId", "test.id");
     	msg.setWhereCol("test.courseNumber", "course.number");
     	msg.setWhereCol("hod_subject.subjectNumber", "course.subjectNum"); 
@@ -219,7 +224,9 @@ public class TestToExecuteController {
 	public Msg selectRunningTestToExecuteByUser(User user) {
     	Msg msg = new Msg(MsgType.select);
     	msg.setSelect("testtoexecute.*, test.*, course.*");
-    	msg.setFrom("testtoexecute, test, course");
+    	msg.setFrom("testtoexecute");
+    	msg.setFrom("test");
+    	msg.setFrom("course");
     	msg.setWhereCol("testtoexecute.testId", "test.id");
     	msg.setWhereCol("test.courseNumber", "course.number"); 
     	msg.setWhere("testtoexecute.lock", "false"); 
@@ -237,7 +244,8 @@ public class TestToExecuteController {
 	public Msg selectTestToExecuteByLecturer(String id) {
     	Msg msg = new Msg(MsgType.select);
     	msg.setSelect("testtoexecute.*");
-    	msg.setFrom("testtoexecute, user");
+    	msg.setFrom("testtoexecute");
+    	msg.setFrom("user");
     	msg.setWhereCol("testtoexecute.lecturerId", "user.id"); 
     	msg.setWhere("user.id", id); 
     	return msg;
@@ -253,7 +261,9 @@ public class TestToExecuteController {
 	public Msg selectTestToExecuteByCourseName(String name) {
     	Msg msg = new Msg(MsgType.select);
     	msg.setSelect("testtoexecute.*");
-    	msg.setFrom("testtoexecute, course, test");
+    	msg.setFrom("testtoexecute");
+    	msg.setFrom("course");
+    	msg.setFrom("test");
     	msg.setWhereCol("course.number", "test.courseNumber");
     	msg.setWhereCol("testtoexecute.testId", "test.id"); 
     	msg.setWhere("course.name", name); 

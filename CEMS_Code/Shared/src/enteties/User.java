@@ -19,9 +19,9 @@ public class User {
 	
 	/**
 	 * empty constructor.
-	 
+	 */
 	public User() {super();} 
-	*/
+	
 	/**
 	 * @param id
 	 * @param name
@@ -38,6 +38,8 @@ public class User {
 		this.premission = premission;
 		this.loggedin = loggedin;
 	}
+	
+	
 
 	/**
 	 * @return the id

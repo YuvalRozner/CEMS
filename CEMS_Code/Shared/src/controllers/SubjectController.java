@@ -69,7 +69,8 @@ public class SubjectController {
     public Msg selectSubjectByUser(User user) {
     	Msg msg = new Msg(MsgType.select);
     	msg.setSelect("subject.number, subject.name");
-    	msg.setFrom("subject, user_subject");
+    	msg.setFrom("subject");
+    	msg.setFrom("user_subject");
     	msg.setWhereCol("subject.number", "user_subject.subjectNum"); 
     	msg.setWhere("user_subject.userId", user.getId()); 
     	return msg;
