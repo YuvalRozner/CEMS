@@ -1,12 +1,16 @@
 package gui;
 
 import java.util.ArrayList;
+
 import JDBC.Msg;
+import JDBC.MsgType;
 import client.ChatClient;
 import controllers.StudentTestController;
 import controllers.TestToExecuteController;
+import controllers.UserController;
 import enteties.StudentTest;
 import enteties.TestToExecute;
+import enteties.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -110,6 +114,11 @@ public class ApproveGradeController extends AbstractController{
     private static NotificationAlertsController notification = new NotificationAlertsController();
     /**
      * the StudentTest test wanted to be shown in "show" screen. 
+	 * object to use the UserController class method.
+	 */
+    private static UserController userController = new UserController();
+    /**
+     * the StudentTest test wanted to be shown. 
      */
     public StudentTest StudentTestToShow;
     
@@ -251,9 +260,32 @@ public class ApproveGradeController extends AbstractController{
     		    notification.setOnOkAction(new Runnable() {
 					@Override
 					public void run() {
-						Msg msg = studentTestController.getMsgToUpdateStudentTests(studentTest);
-				    	sendMsg(msg);
-				    	notification.showInformationAlert("grade approved in DB.");
+						Msg msg1 = studentTestController.getMsgToUpdateStudentTests(studentTest);
+						if (!changeGradeVbox.isDisable() && yesRadioButton.isSelected()) { // wanted to change grade
+							System.out.println("Im hereeeeeeeee");
+							// get the hod user to send request to:
+							try {
+							Msg msg2 = userController.selectHodBystudentTestToEcecuteCode(studentTest.getTestCode());
+							sendMsg(msg2);
+							User hod = msgReceived.convertData(User.class).get(0);
+							System.out.println("thatts was the problem 1");
+							Msg msgRequest = new Msg(MsgType.request);
+							//msgRequest.setHod(hod);
+							System.out.println("thatts was the problem 2");
+							Msg msgMany = new Msg(MsgType.manyMessages);
+							System.out.println("thatts was the problem 3");
+							msgMany.setMsgLst(msg1);
+							msgMany.setMsgLst(msgRequest);
+							System.out.println("thatts was the problem 4");
+							sendMsg(msg1);///////////////////////
+							System.out.println("workeddddddd");
+							sendMsg(msgRequest);///////////////////////
+							System.out.println("thatts was the problem 5");
+							notification.showInformationAlert("request sent to hod.");
+							} catch(Exception e){System.out.println("error choosing the matching hod to send request to from DB."); return;}
+						}
+						else {sendMsg(msg1);
+				    	notification.showInformationAlert("grade approved in DB.");}
 				    	resetFields();
 		    			return;
 					}});
