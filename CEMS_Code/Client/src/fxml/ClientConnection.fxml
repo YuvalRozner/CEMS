@@ -47,7 +47,7 @@
             </Lighting>
          </effect>
       </Label>
-      <Button id="btnExit" fx:id="btnExit" layoutX="187.0" layoutY="248.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#exitBtn" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Exit">
+      <Button id="btnExit" layoutX="187.0" layoutY="248.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#exitBtn" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Exit">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>

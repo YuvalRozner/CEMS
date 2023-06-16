@@ -235,8 +235,13 @@ public class DB_controller {
 		res.deleteCharAt(res.length() - 1); // remove last comma.
 		return res.toString();
 	}
-	
-	
+
+	/**
+	 * Creates a DELETE query with the specified parameters.
+	 * @param tableToDeleteFrom The name of the table to delete from.
+	 * @param where The HashMap containing the conditions for the WHERE clause.
+	 * @return The generated SQL DELETE query.
+	*/
 	public static String createDELETEquery(String tableToDeleteFrom, HashMap<String, Object> where) {
 		if (tableToDeleteFrom == null)
 			return "";
@@ -244,7 +249,7 @@ public class DB_controller {
 		query.append(dbName + tableToDeleteFrom); // append the name of table wanted to be deleted.;
 		if (where == null)
 			return query.toString() + ";";
-		// get here if and only if there is WHRE to add:
+		// get here if and only if there is WHERE to add:
 		query.append(" WHERE ");
 		query.append(buildConditionPartWithAnd(where, true));
 		return query.toString() + ";";

@@ -314,12 +314,18 @@ public class ApproveGradeController extends AbstractController implements Tests{
     public StudentTest getStudentTestToShow() {
 		return StudentTestToShow;
 	}
-    
+    /**
+     * Returns the TestToExecute object to be shown.
+     *  @return The TestToExecute object to be shown.
+    */
     @Override
     public TestToExecute getTestToExecuteToShow() {
 		return selectedTestToExecute;
     }
-
+    /**
+     *   Returns the screen state.
+     * @return The screen state.
+    */
 	@Override
 	public String getScreenState() {
 		return "lecturerHodShowStudentTest";

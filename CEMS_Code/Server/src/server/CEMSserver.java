@@ -47,7 +47,14 @@ public class CEMSserver extends AbstractServer {
 	public CEMSserver(int port) {
 		super(port);
 	}
-
+	
+	/**
+	 * Called when a client successfully connects to the server.
+	 * This method is responsible for handling the actions to be taken
+	 * when a client establishes a connection.
+	 *
+	 * @param client The connection to the client that just connected.
+	 */
 	@Override
 	protected void clientConnected(ConnectionToClient client) {
 		// Retrieve the client's IP address and hostname

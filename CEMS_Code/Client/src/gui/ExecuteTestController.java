@@ -199,21 +199,29 @@ public class ExecuteTestController extends AbstractController implements Tests{
     
     /**
      * Returns the TestToExecute object to be shown.
-     *
-     * @return The TestToExecute object to be shown.
+     *  @return The TestToExecute object to be shown.
      */
     @Override
     public TestToExecute getTestToExecuteToShow() {
 		return testToExecuteToShow;
     }
-
+    /**
+     * Returns the StudentTest object to be shown.
+     *
+     * @return The StudentTest object to be shown.
+     */
 	@Override
 	public StudentTest getStudentTestToShow() {
 		return null;
 	}
-
+	/**
+     *   Returns the screen state.
+     * @return The screen state.
+     */
 	@Override
 	public String getScreenState() {
 		return "lecturerHodShowTest";
 	}
+	
+	
 }
