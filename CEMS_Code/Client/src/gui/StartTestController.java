@@ -105,6 +105,8 @@ public class StartTestController extends AbstractController {
 			setTestToExecute(arr.get(0));
 			idTextField.setDisable(false);
 			idTextField.setEditable(true);
+			msg = testToExecuteController.updateNumberOfStudenByOne(1,Integer.toString(StartTestController.getTestToExecute().getTestCode()),"start");
+			sendMsg(msg);
 		} else {
 			alert.showErrorAlert("Sorry, you have already accessed this test and submitted it");
 		}

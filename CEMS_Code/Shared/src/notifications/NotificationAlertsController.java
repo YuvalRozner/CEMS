@@ -132,7 +132,7 @@ public class NotificationAlertsController {
     /**
      * Shows a confirmation alert with the specified label as the content text and
      * header label as the header text.
-     * 
+     * OK and cancel button.
      * @param label       The label to be displayed in the alert.
      * @param headerLabel The header label to be displayed in the alert.
      */
@@ -183,6 +183,58 @@ public class NotificationAlertsController {
     	});
     }
 
+    /**
+     * Shows a confirmation alert with the specified label as the content text and
+     * header label as the header text.
+     * only OK button.
+     * @param label       The label to be displayed in the alert.
+     * @param headerLabel The header label to be displayed in the alert.
+     */
+    public void showConfirmationAlertWithOnlyOk(String label, String headerLabel) {
+    	Platform.runLater(() -> {
+	        Alert alert = new Alert(AlertType.WARNING);
+	        alert.setTitle("Delete File");
+	        alert.setHeaderText(headerLabel);
+	
+	        // Create a label for the content text
+	        Label contentLabel = new Label(label);
+	        contentLabel.setStyle("-fx-font-weight: bold; -fx-font-family: 'Comic Sans MS'; -fx-font-size: 14px;");
+	
+	        // Set the custom label as the content of the alert
+	        alert.getDialogPane().setContent(contentLabel);
+	        alert.getDialogPane().setStyle(
+	                "-fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-padding: 10px;");
+	
+	        // Style the header text
+	        alert.getDialogPane().lookup(".header-panel").setStyle(
+	                "-fx-background-color: #92bce3; -fx-background-radius: 10px; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-family: 'Comic Sans MS';");
+	
+	        // Set button styles and add hover effects
+	        alert.getDialogPane().getButtonTypes().stream()
+	                .map(alert.getDialogPane()::lookupButton)
+	                .forEach(button -> {
+	                    button.setStyle(
+	                            "-fx-background-color: #92bce3; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 7px; -fx-font-family: \"Comic Sans MS\";");
+	                    button.setOnMouseEntered(e -> button.setStyle(
+	                            "-fx-background-color: #4096EE; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 7px; -fx-font-family: \"Comic Sans MS\";"));
+	                    button.setOnMouseExited(e -> button.setStyle(
+	                            "-fx-background-color: #92bce3; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 7px; -fx-font-family: \"Comic Sans MS\";"));
+	                });
+	
+	        Optional<ButtonType> option = alert.showAndWait();
+	
+	        if (option.isPresent()) {
+	        	if (onOkAction != null) {
+                    onOkAction.run();
+                }
+	        }
+    	});
+    }
+    
+    
+    
+    
+    
     /**
      * Sets the action to be performed when the cancel button is clicked in the
      * confirmation alert.
