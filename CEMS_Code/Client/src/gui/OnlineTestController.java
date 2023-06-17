@@ -99,7 +99,7 @@ public class OnlineTestController extends AbstractController implements CountDow
         }
         Msg msg = questionController.getQuestionAndPointsByTestCode(code);
         sendMsg(msg);
-
+        if(msgReceived==null) {return;}
         questions = msgReceived.convertData(Question.class); // ArrayList
 
         // Create a time controller for managing the test time
@@ -439,7 +439,7 @@ public class OnlineTestController extends AbstractController implements CountDow
         sendMsg(msg);
 
         // Insert distribution data
-        msg = testToExecuteController.insertDistributionByCode(code.toString(), 0, 1);
+        msg = testToExecuteController.insertDistributionByCode(code.toString(), grade, 1);
         sendMsg(msg);
 
         try {
