@@ -284,9 +284,16 @@ public class ManualTestController extends AbstractController implements CountDow
 	@Override
 	public void testGotManualyLockedByLecturer(String testCode) {
 		if(!testCode.equals(code)) return;
-		alert.showErrorAlert("Sorry, but the test got locked by your lecturer..");
-		flagEndOrMiddle="Middle";
-		testIsLockCantSubmmit();
+		alert.setOnCancelAction(new Runnable() {	
+			@Override public void run() {
+				return;
+		}});
+		alert.setOnOkAction(new Runnable() {	
+			@Override public void run() {
+				flagEndOrMiddle="Middle";
+				testIsLockCantSubmmit();
+		}});
+		alert.showConfirmationAlert("Sorry, but the test got locked by your lecturer..","");
 	}
 	/**
 	 * Sets the text of the countdown label to the specified string.
