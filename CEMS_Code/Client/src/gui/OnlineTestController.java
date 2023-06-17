@@ -361,6 +361,7 @@ public class OnlineTestController extends AbstractController implements CountDow
      * @param timeOfStudent The time taken by the student to complete the test.
      */
     public void testIsLockCantSubmmit() {
+    	
         msg = testToExecuteController.updateNumberOfStudenByOne(1, Integer.toString(StartTestController.getTestToExecute().getTestCode()), "cantSubmit");
         sendMsg(msg);
 
@@ -440,6 +441,10 @@ public class OnlineTestController extends AbstractController implements CountDow
 	    if (!testCode.equals(Integer.toString(code))) {
 	        return;
 	    }
+	    // Stop the timer
+        timeController.stopTimer();
+        // Calculate the time taken by the student
+        timeOfStudent = testToExecute.getTest().getDuration() - timeController.timeLeft();
 		alert.setOnOkAction(new Runnable() {	
 			@Override public void run() {
 				flagEndOrMiddle="Middle";
