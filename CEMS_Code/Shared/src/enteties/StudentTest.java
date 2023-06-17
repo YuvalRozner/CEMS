@@ -43,6 +43,22 @@ public class StudentTest {
 	private CheckBox select;
 	private TextField note;
 	
+	
+	
+	/**
+	 * get information to copy part.
+	 * @param answers
+	 * @param studentId
+	 * @param name
+	 */
+	
+	public StudentTest(String answers,String studentId , String name,Integer testCode) {
+		this.answers=answers;
+		this.studentId=studentId;
+		this.user= new User (name);
+		this.testCode=testCode;
+	}
+	
 	/**
 	 * to get all grade to calculate average and median.
 	 * @param grade
@@ -369,6 +385,13 @@ public class StudentTest {
 	 */
 	public void setTestToExecute(TestToExecute testToExecute) {
 		this.testToExecute = testToExecute;
+	}
+	
+	/**
+	 * @return the user
+	 */
+	public User getUser() {
+		return user;
 	}
 	
 	/**
