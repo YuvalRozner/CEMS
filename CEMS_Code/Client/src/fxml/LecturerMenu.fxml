@@ -44,11 +44,6 @@
             </Lighting>
          </effect>
       </Label>
-      <Label fx:id="welcomeLbl" layoutX="19.0" layoutY="123.0" text="Welcome Lecturer!">
-         <font>
-            <Font name="Comic Sans MS" size="15.0" />
-         </font>
-      </Label>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="342.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/forMenu.png" />
@@ -92,6 +87,11 @@
             </VBox>
          </children>
       </Pane>
+      <Label fx:id="welcomeLbl" layoutX="19.0" layoutY="123.0" text="Welcome Lecturer!">
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font>
+      </Label>
       <Button layoutX="252.0" layoutY="420.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Logout">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />

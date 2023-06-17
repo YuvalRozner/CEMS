@@ -22,7 +22,7 @@
          </image>
       </ImageView>
       <Pane layoutX="19.0" layoutY="121.0" prefHeight="421.0" prefWidth="285.0" style="-fx-background-color: #92bce3;" />
-      <Pane layoutX="276.0" layoutY="-99.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
+      <Pane layoutX="327.0" layoutY="-99.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
       <Pane layoutX="154.0" layoutY="14.0" style="-fx-background-color: #C5EFFF; -fx-background-radius: 0 50 50 0;">
          <children>
             <VBox>
@@ -55,26 +55,14 @@
                </children>
             </VBox>
          </children></Pane>
-      <ImageView fitHeight="175.0" fitWidth="168.0" layoutX="364.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="200.0" fitWidth="187.0" layoutX="394.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/Cems-logo.png" />
          </image>
       </ImageView>
       <Circle fill="WHITE" layoutX="44.0" layoutY="452.0" radius="110.0" stroke="WHITE" strokeType="INSIDE" />
-      <Pane layoutX="183.0" layoutY="189.0" prefHeight="146.0" prefWidth="120.0" style="-fx-border-color: #CCFFFF; -fx-border-radius: 40 40 7 7; -fx-border-width: 6;">
-         <children>
-            <Label layoutX="13.0" layoutY="58.0" text="Drag PDF here or">
-               <font>
-                  <Font name="Comic Sans MS" size="11.0" />
-               </font>
-            </Label>
-            <Label layoutX="11.0" layoutY="73.0" text="click &quot;Upload Test&quot;">
-               <font>
-                  <Font name="Comic Sans MS" size="11.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
+      <Pane layoutX="44.0" layoutY="271.0" prefHeight="64.0" prefWidth="120.0" style="-fx-border-color: #CCFFFF; -fx-border-radius: 50 50 7 7; -fx-border-width: 6;" />
+      <Pane layoutX="183.0" layoutY="271.0" prefHeight="64.0" prefWidth="120.0" style="-fx-border-color: #CCFFFF; -fx-border-radius: 50 50 7 7; -fx-border-width: 6;" />
       <Button fx:id="downbtn" layoutX="45.0" layoutY="307.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#download" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Download Test">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
@@ -105,7 +93,7 @@
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>
-      <Button layoutX="361.0" layoutY="438.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#submmitBtn" prefWidth="120.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Final Submission">
+      <Button layoutX="406.0" layoutY="438.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#submmitBtn" prefWidth="120.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Final Submission">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>

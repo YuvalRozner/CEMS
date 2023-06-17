@@ -55,10 +55,6 @@
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>
-      <Label fx:id="welcomeLbl" layoutX="19.0" layoutY="123.0" text="Welcome Lecturer!">
-         <font>
-            <Font name="Comic Sans MS" size="15.0" />
-         </font></Label>
       <Label layoutX="19.0" layoutY="78.0" text="H.o.d Menu">
          <font>
             <Font name="Comic Sans MS Bold" size="40.0" />
@@ -81,6 +77,10 @@
                </light>
             </Lighting>
          </effect></Label>
+      <Label fx:id="welcomeLbl" layoutX="19.0" layoutY="123.0" text="Welcome Lecturer!">
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font></Label>
       <ImageView fitHeight="171.0" fitWidth="175.0" layoutX="225.0" layoutY="-37.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/Cems-logo.png" />

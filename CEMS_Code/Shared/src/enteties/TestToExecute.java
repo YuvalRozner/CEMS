@@ -9,6 +9,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
 
 /**
  * The TestToExecute class represents a test to be executed.
@@ -573,6 +575,16 @@ public class TestToExecute {
 	 */
 	public void setNewRadioButton() {
 		radioButton = new RadioButton();
+		radioButton.setStyle(
+				"-fx-border-color: #009494;" +
+                "-fx-border-width: 2px;" +
+                "-fx-border-radius: 50%;" +
+                "-fx-background-color: #FFFFFF;" +
+                "-fx-background-radius: 40%;"
+		);
+		DropShadow hoverEffect = new DropShadow(2, Color.rgb(0, 0, 0, 0.6));
+	    radioButton.setOnMouseEntered(event -> radioButton.setEffect(hoverEffect));
+	    radioButton.setOnMouseExited(event -> radioButton.setEffect(null));
 	}
 
 	/**
@@ -589,6 +601,13 @@ public class TestToExecute {
 	 */
 	public void setNewButton() {
 		button = new Button();
+		button.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30; -fx-font-weight: bold; -fx-font-family: \"Comic Sans MS\";");
+        // Add hover effect
+		button.setOnMouseEntered(e -> button.setStyle("-fx-background-color: #009494; -fx-background-radius: 30 0 0 30; -fx-font-weight: bold; -fx-font-family: \"Comic Sans MS\";"));
+		button.setOnMouseExited(e -> button.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30; -fx-font-weight: bold; -fx-font-family: \"Comic Sans MS\";"));
+        // Add pressed effect
+		button.setOnMousePressed(e -> button.setStyle("-fx-background-color: #82bfb6; -fx-background-radius: 30 0 0 30; -fx-font-weight: bold; -fx-font-family: \"Comic Sans MS\";"));
+		button.setOnMouseReleased(e -> button.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30; -fx-font-weight: bold; -fx-font-family: \"Comic Sans MS\";"));
 	}
 
 	/**
@@ -615,6 +634,16 @@ public class TestToExecute {
 	@SuppressWarnings("rawtypes")
 	public void setNewComboBox() {
 		comboBox = new ComboBox();
+		comboBox.setStyle(
+		        "-fx-border-width: 1px; " +
+		        "-fx-border-color: #92bce3; " +
+		        "-fx-border-radius: 20px; " +
+		        "-fx-background-radius: 20px; " +
+		        "-fx-padding: 4px; " +
+		        "-fx-font-size: 13px; " +
+		        "-fx-font-weight: bold; " +
+		        "-fx-font-family: 'Comic Sans MS';"
+		    );
 	}
 
 	/**
@@ -632,6 +661,12 @@ public class TestToExecute {
 	 */
 	public void setNewTextField() {
 		textField = new TextField();
+		textField.setStyle(
+		        "-fx-border-color:  #92bce3;" +
+		        "-fx-border-radius: 10px;" +
+                "-fx-background-color:  #F8FFFF;" +
+                "-fx-background-radius: 10px;"
+		    );
 	}
 
 	/**
@@ -648,6 +683,12 @@ public class TestToExecute {
 	 */
 	public void setNewTextField1() {
 		textField1 = new TextField();
+		textField1.setStyle(
+		        "-fx-border-color:  #92bce3;" +
+		        "-fx-border-radius: 10px;" +
+                "-fx-background-color:  #F8FFFF;" +
+                "-fx-background-radius: 10px;"
+		    );
 	}
 
 	/**
@@ -710,11 +751,9 @@ public class TestToExecute {
 		this.select.selectedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				// flag = newValue; // why we need it again dor? -rozner.
 				codeField.setDisable(!newValue);
 				type.setDisable(!newValue);
 				durationField.setDisable(!newValue);
-
 				System.out.println("Checkbox " + (newValue ? "pressed" : "unpressed"));
 			}
 		});

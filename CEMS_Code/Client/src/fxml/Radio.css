@@ -3,7 +3,7 @@
     -fx-border-width: 2px;
     -fx-border-radius: 50%;
     -fx-background-color: #FFFFFF; 
-    -fx-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    
 }
 
 .radio-button:selected .radio {
@@ -12,5 +12,5 @@
 }
 
 .radio-button:hover .radio {
-    -fx-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+   
 }
