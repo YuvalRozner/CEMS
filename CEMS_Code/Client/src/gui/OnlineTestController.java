@@ -2,6 +2,10 @@ package gui;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import JDBC.Msg;
 import client.ChatClient;
 import controllers.CountDown;
@@ -181,6 +185,7 @@ public class OnlineTestController extends AbstractController implements CountDow
             instructionsForStudentTextFlow.getChildren().addAll(textForTextFlow);
         }
     }
+    
 
     /**
      * Handles the action when the Submit button is clicked.
@@ -229,6 +234,59 @@ public class OnlineTestController extends AbstractController implements CountDow
         });
         alert.showConfirmationAlert(ChatClient.user.getName() + " Are you sure?","After clicking the OK button, the submission is final and there is no option to change it");
     }
+    /**
+     * yuval rozner
+     * i call to this method in checkIfStudentIsTheLastOne and testGotManualyLockedByLecturer.
+     * in hash map - two student that copy each from each other.
+     * get code for test - code - type Integer
+     * get lecturerId - testToExecute.getLecturerId() 
+     * get name student - studentWhoCopy.get().getUser().getName()
+     * get id student - studentWhoCopy.get().getStudentId()
+     */
+    
+    
+    /**
+     * Checks for copied answers among students who took the test.
+     * Compares the answers of each student to identify potential copies.
+     * pop massage at the right lecturer with information on the students who copied answers.
+     */
+    public void cheakCopy() {
+    	HashMap<StudentTest, StudentTest> studentWhoCopy = new HashMap<>();
+    	
+    	//get the correct answers of a test
+    	StringBuilder sb = new StringBuilder();
+    	for(Question q:questions) {
+    		sb.append(Integer.toString(q.getCorrectAnswer()));
+    	}
+    	
+    	//get answer id and name of all student that did this test.
+    	msg=studentTestController.selectAllAnswersOfstudentCodeTest(code);
+        sendMsg(msg);
+        if(msgReceived==null) {return;}
+        ArrayList<StudentTest> listOfStudent = msgReceived.convertData(StudentTest.class);
+        
+        //get in the hush map the student who copy
+        for(StudentTest student : listOfStudent) {
+        	for(StudentTest copyStudent : listOfStudent) {
+        		if(!student.equals(copyStudent)) {//give up on the cases is the same student.
+        			if(student.getAnswers().equals(copyStudent.getAnswers()) && (!student.getAnswers().equals(sb))) {
+        				if(!(studentWhoCopy.containsKey(copyStudent) && studentWhoCopy.containsValue(student))) {//check if they do not in the hash already.
+        					studentWhoCopy.put(student, copyStudent);
+        					break;
+        				}	
+        			}
+        		}
+        	}
+        }
+        // to itearte hashmap
+        for (Entry<StudentTest, StudentTest> entry : studentWhoCopy.entrySet()) {
+        	StudentTest key = entry.getKey();
+        	StudentTest value = entry.getValue();
+        	System.out.println(key.getUser().getName()+ " copy from " + value.getUser().getName());
+            System.out.println("Key: " + key + ", Value: " + value);
+        }
+        
+    }
 
     /**
      * Checks if the current student is the last one to submit the test and locks the test if necessary.
@@ -249,6 +307,7 @@ public class OnlineTestController extends AbstractController implements CountDow
         if (needToLock == 0) {
             msg = testToExecuteController.getMsgToLockTest(StartTestController.getTestToExecute());
             sendMsg(msg);
+            cheakCopy();
         }
     }
     
@@ -265,6 +324,7 @@ public class OnlineTestController extends AbstractController implements CountDow
         // Retrieve all student test records for the specified test code
         msg = studentTestController.selectAllstudentBySpecificCodeTest(code.toString());
         sendMsg(msg);
+        if(msgReceived==null) {return;}
         ArrayList<StudentTest> listOfStudent = msgReceived.convertData(StudentTest.class);
         ArrayList<Integer> listOfGrades = new ArrayList<>();
 
@@ -361,6 +421,7 @@ public class OnlineTestController extends AbstractController implements CountDow
      * @param timeOfStudent The time taken by the student to complete the test.
      */
     public void testIsLockCantSubmmit() {
+    	
         msg = testToExecuteController.updateNumberOfStudenByOne(1, Integer.toString(StartTestController.getTestToExecute().getTestCode()), "cantSubmit");
         sendMsg(msg);
 
@@ -440,11 +501,16 @@ public class OnlineTestController extends AbstractController implements CountDow
 	    if (!testCode.equals(Integer.toString(code))) {
 	        return;
 	    }
+	    // Stop the timer
+        timeController.stopTimer();
+        // Calculate the time taken by the student
+        timeOfStudent = testToExecute.getTest().getDuration() - timeController.timeLeft();
 		alert.setOnOkAction(new Runnable() {	
 			@Override public void run() {
 				flagEndOrMiddle="Middle";
 				testIsLockCantSubmmit();
 				updateAverageAndMedian();
+				cheakCopy();
 		}});
 		alert.showConfirmationAlertWithOnlyOk("Please click OK to continue the process","Sorry, but the test got locked by your lecturer..");
 	}

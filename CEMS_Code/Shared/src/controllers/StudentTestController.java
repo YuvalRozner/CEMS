@@ -126,7 +126,30 @@ public class StudentTestController {
 		msg.setWhere("testCode", st.getTestCode());
 		return msg;
 	}
+	
+	
+	/**
+	 * Creates a message object to select all answers names and id  of a student's code test.
+	 *
+	 * @param code The code of the test.
+	 * @return A message object representing the select query.
+	 */
+	
+	public Msg selectAllAnswersOfstudentCodeTest(Integer code){
+		Msg msg=new Msg(MsgType.select);
+		msg.setSelect("studenttest.answers");
+		msg.setSelect("studenttest.studentId");
+		msg.setSelect("user.`name`");
+		msg.setSelect("studenttest.testCode");
+		msg.setFrom("studenttest");
+		msg.setFrom("`user`");
+		msg.setWhere("testCode",code);
+		msg.setWhereCol("studenttest.studentId","`user`.id");
+		return msg;
+	}
 
+	
+	
 	/**
 	 * Constructs a database select message to retrieve StudentTest.
 	 *
