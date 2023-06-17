@@ -73,8 +73,8 @@
             <Font name="Comic Sans MS Bold" size="14.0" />
          </font>
       </Label>
-      <Pane layoutX="331.0" layoutY="-97.0" maxHeight="182.0" maxWidth="220.0" minHeight="182.0" minWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
-      <ImageView fitHeight="198.0" fitWidth="198.0" layoutX="398.0" layoutY="-41.0" pickOnBounds="true" preserveRatio="true">
+      <Pane layoutX="338.0" layoutY="-98.0" maxHeight="182.0" maxWidth="220.0" minHeight="182.0" minWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
+      <ImageView fitHeight="198.0" fitWidth="198.0" layoutX="407.0" layoutY="-42.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/Cems-logo.png" />
          </image>
@@ -148,14 +148,14 @@
                </font></RadioButton>
          </children>
       </HBox>
-      <Button layoutX="258.0" layoutY="640.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#save" style="-fx-background-radius: 20;" stylesheets="@Button.css" text="Save">
+      <Button layoutX="258.0" layoutY="640.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#save" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Save">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font>
          <effect>
             <Blend />
          </effect></Button>
-      <Button layoutX="394.0" layoutY="640.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#backBtn" style="-fx-background-radius: 20;" stylesheets="@Button.css" text="Back">
+      <Button layoutX="394.0" layoutY="640.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#backBtn" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font>

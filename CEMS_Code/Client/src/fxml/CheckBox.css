@@ -28,7 +28,3 @@
     -fx-height: 7px;
     -fx-opacity: 1;
 }
-
-.check-box:selected .mark {
-    -fx-background-color: white;
-}

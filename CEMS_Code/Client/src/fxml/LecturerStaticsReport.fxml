@@ -100,12 +100,18 @@
             </Label>
          </children>
       </VBox>
-      <BarChart fx:id="barChart" layoutX="65.0" layoutY="124.0" prefHeight="331.0" title="Score Distribution">
+      <BarChart fx:id="barChart" layoutX="65.0" layoutY="124.0" prefHeight="331.0" stylesheets="@BarChart.css" title="Score Distribution">
         <xAxis>
-          <CategoryAxis label="Grades" side="BOTTOM" />
+          <CategoryAxis label="Grades" side="BOTTOM">
+               <tickLabelFont>
+                  <Font name="Comic Sans MS Bold" size="10.0" />
+               </tickLabelFont></CategoryAxis>
         </xAxis>
         <yAxis>
-          <NumberAxis label="Amount of Students" side="LEFT" />
+          <NumberAxis label="Amount of Students" side="LEFT">
+               <tickLabelFont>
+                  <Font name="Comic Sans MS Bold" size="10.0" />
+               </tickLabelFont></NumberAxis>
         </yAxis>
       </BarChart>
       <Button layoutX="477.0" layoutY="560.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backBtn" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">

@@ -44,7 +44,7 @@
                </light>
             </Lighting>
          </effect></Label>
-      <ImageView fitHeight="193.0" fitWidth="216.0" layoutX="420.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="208.0" fitWidth="209.0" layoutX="407.0" layoutY="-37.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/Cems-logo.png" />
          </image>
@@ -55,31 +55,31 @@
             <TableColumn fx:id="selectcol" prefWidth="42.399993896484375" style="-fx-alignment: CENTER;" text="select" />
           <TableColumn fx:id="numTestcol" prefWidth="68.79998016357422" text="test num" />
           <TableColumn fx:id="coursnamecol" prefWidth="62.4000244140625" text="course" />
-            <TableColumn fx:id="codecol" prefWidth="80.79998779296875" text="code" />
-            <TableColumn fx:id="datecol" prefWidth="94.4000244140625" text="date" />
-            <TableColumn fx:id="typecol" prefWidth="92.0" text="type" />
-            <TableColumn fx:id="showcol" prefWidth="83.60000610351562" text="show" />
+            <TableColumn fx:id="codecol" prefWidth="74.0" text="code" />
+            <TableColumn fx:id="datecol" prefWidth="94.5" text="date" />
+            <TableColumn fx:id="typecol" prefWidth="110.0" text="type" />
+            <TableColumn fx:id="showcol" prefWidth="73.0" text="show" />
         </columns>
       </TableView>
-      <Label layoutX="325.0" layoutY="418.0" text="The code must be 4 digit only.">
+      <Label layoutX="366.0" layoutY="418.0" text="The code must be 4 digit only.">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="286.0" layoutY="418.0" text="Note!" textFill="#c60707">
+      <Label layoutX="327.0" layoutY="418.0" text="Note!" textFill="#c60707">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Label>
-      <Button fx:id="executebtn" layoutX="407.0" layoutY="444.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#executeTestBtn" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Execute">
+      <Button fx:id="executebtn" layoutX="448.0" layoutY="444.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#executeTestBtn" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Execute">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="backbtn" layoutX="440.0" layoutY="565.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backBtn" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
+      <Button fx:id="backbtn" layoutX="452.0" layoutY="565.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backBtn" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>
-      <ImageView fitHeight="187.0" fitWidth="231.0" layoutX="26.0" layoutY="434.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="201.0" fitWidth="196.0" layoutX="25.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/ExecuteTest3.png" />
          </image>
