@@ -18,20 +18,23 @@ import notifications.NotificationAlertsController;
 
 public class StartTestController extends AbstractController{
 
+	/**
+	 * button: complete the test,download test,upload test.
+	 */
     @FXML
-    private Button backbtn;
+    private Button backbtn,startbtn,connectbtn;
 
+	 /**
+     * test fileds to get data from user.
+     */
     @FXML
-    private TextField codeTextField;
+    private TextField codeTextField,idTextField;
 
-    @FXML
-    private Button connectbtn;
-
-    @FXML
-    private TextField idTextField;
-
-    @FXML
-    private Button startbtn;
+    
+    /**
+     * The controller class for a specific view or UI component.
+     * Handles user interactions and contains the necessary fields and methods.
+     */
     private static TestToExecuteController testToExecuteController = new TestToExecuteController();
     private static StudentTestController studentTestController = new StudentTestController();
     private static TestToExecute testToExecute = new TestToExecute();
@@ -135,10 +138,20 @@ public class StartTestController extends AbstractController{
 	public static void setTestToExecute(TestToExecute testToExecute) {
 		StartTestController.testToExecute = testToExecute;
 	}
-	 public String getCode() {
-			return code;
-		}
-	  public TestToExecute getTestToExecuteToShow() {
-	    	return testToExecute;
-	    }
+	/**
+	 * Retrieves the code.
+	 *
+	 * @return The code.
+	 */
+	public String getCode() {
+		return code;
+	}
+	/**
+	 * Retrieves the test to execute.
+	 *
+	 * @return The TestToExecute object.
+	 */
+	public TestToExecute getTestToExecuteToShow() {
+		return testToExecute;
+	}
 }

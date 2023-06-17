@@ -275,6 +275,11 @@ public class ManualTestController extends AbstractController implements CountDow
 		sendMsg(msg);
 		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
 	}
+	/**
+	 * Overrides the method to handle the case when a test is manually locked by a lecturer.
+	 *
+	 * @param testCode The code of the test being checked for manual locking
+	 */
 	
 	@Override
 	public void testGotManualyLockedByLecturer(String testCode) {
