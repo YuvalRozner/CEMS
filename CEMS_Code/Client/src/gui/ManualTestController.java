@@ -141,9 +141,7 @@ public class ManualTestController extends AbstractController implements CountDow
 			else {
 				testIsSubmit(timeOfStudent,grade);
 				checkIfStudentIsTheLastOne();
-				System.out.println("befor average and median");
 				updateAverageAndMedian();	
-				System.out.println("after average and median");
 			}				
 			try {start("studentMenu", "login");} catch (Exception e) {}}});
 		alert.showConfirmationAlert(ChatClient.user.getName()+" Are you sure ?","After clicking the OK button, the submission is final and there is no option to change it");
@@ -283,17 +281,14 @@ public class ManualTestController extends AbstractController implements CountDow
 	
 	@Override
 	public void testGotManualyLockedByLecturer(String testCode) {
-		if(!testCode.equals(code)) return;
-		alert.setOnCancelAction(new Runnable() {	
-			@Override public void run() {
-				return;
-		}});
+		if(!testCode.equals(Integer.toString(StartTestController.getTestToExecute().getTestCode()))) return;
 		alert.setOnOkAction(new Runnable() {	
 			@Override public void run() {
 				flagEndOrMiddle="Middle";
 				testIsLockCantSubmmit();
+				updateAverageAndMedian();
 		}});
-		alert.showConfirmationAlert("Sorry, but the test got locked by your lecturer..","");
+		alert.showConfirmationAlertWithOnlyOk("Please click OK to continue the process","Sorry, but the test got locked by your lecturer..");
 	}
 	/**
 	 * Sets the text of the countdown label to the specified string.

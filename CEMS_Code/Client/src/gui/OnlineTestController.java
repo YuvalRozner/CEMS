@@ -216,8 +216,7 @@ public class OnlineTestController extends AbstractController implements CountDow
                 if (testToExecute.getLock().equals("true")) {
                     // Test is locked, cannot submit
                     flagEndOrMiddle = "End";
-                    flagEndOrMiddle = "Middle";
-                    testIsLockCantSubmit();
+                    testIsLockCantSubmmit();
                     updateAverageAndMedian();
                 } else {
                     // Test can be submitted
@@ -361,7 +360,7 @@ public class OnlineTestController extends AbstractController implements CountDow
      *
      * @param timeOfStudent The time taken by the student to complete the test.
      */
-    public void testIsLockCantSubmit() {
+    public void testIsLockCantSubmmit() {
         msg = testToExecuteController.updateNumberOfStudenByOne(1, Integer.toString(StartTestController.getTestToExecute().getTestCode()), "cantSubmit");
         sendMsg(msg);
 
@@ -438,13 +437,16 @@ public class OnlineTestController extends AbstractController implements CountDow
 	 */
 	@Override
 	public void testGotManualyLockedByLecturer(String testCode) {
-	    if (!testCode.equals(code)) {
+	    if (!testCode.equals(Integer.toString(code))) {
 	        return;
 	    }
-	    alert.showErrorAlert("Sorry, but the test got locked by your lecturer.");
-	    flagEndOrMiddle = "Middle";
-	    testIsLockCantSubmit();
-	    updateAverageAndMedian();
+		alert.setOnOkAction(new Runnable() {	
+			@Override public void run() {
+				flagEndOrMiddle="Middle";
+				testIsLockCantSubmmit();
+				updateAverageAndMedian();
+		}});
+		alert.showConfirmationAlertWithOnlyOk("Please click OK to continue the process","Sorry, but the test got locked by your lecturer..");
 	}
 
 	/**
