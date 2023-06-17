@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
 
 /**
  * The Question class represents a question entity.
@@ -474,6 +476,16 @@ public class Question {
 	 */
 	public void setNewCheckbox() {
 		checkbox = new CheckBox();
+		checkbox.setStyle(
+		        "-fx-border-color: #009494;" +
+		        "-fx-border-width: 2px;" +
+		        "-fx-border-radius: 10%;" +
+                "-fx-background-color: #FFFFFF;" +
+                "-fx-background-radius: 10%;"
+		    );
+		    DropShadow hoverEffect = new DropShadow(4, Color.rgb(0, 0, 0, 0.6));
+		    checkbox.setOnMouseEntered(event -> checkbox.setEffect(hoverEffect));
+		    checkbox.setOnMouseExited(event -> checkbox.setEffect(null));
 	}
 	
 	/**
@@ -506,6 +518,12 @@ public class Question {
 	 */
 	public void setNewTextField() {
 		textField = new TextField();
+		textField.setStyle(
+		        "-fx-border-color:  #92bce3;" +
+		        "-fx-border-radius: 10px;" +
+                "-fx-background-color:  #F8FFFF;" +
+                "-fx-background-radius: 10px;"
+		    );
 	}
 	
 	/**

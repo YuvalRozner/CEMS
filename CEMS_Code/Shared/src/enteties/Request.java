@@ -2,6 +2,8 @@ package enteties;
 
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
+import javafx.scene.paint.Color;
+import javafx.scene.effect.DropShadow;
 
 /**
  * The Request class represents a Request entity.
@@ -244,6 +246,16 @@ public class Request {
      */
 	public void setNewRadioButton() {
 		radioButton = new RadioButton();
+		radioButton.setStyle(
+				"-fx-border-color: #009494;" +
+                "-fx-border-width: 2px;" +
+                "-fx-border-radius: 50%;" +
+                "-fx-background-color: #FFFFFF;" +
+                "-fx-background-radius: 40%;"
+		);
+		DropShadow hoverEffect = new DropShadow(2, Color.rgb(0, 0, 0, 0.6));
+	    radioButton.setOnMouseEntered(event -> radioButton.setEffect(hoverEffect));
+	    radioButton.setOnMouseExited(event -> radioButton.setEffect(null));
 	}
 
 	/**

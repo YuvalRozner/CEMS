@@ -29,7 +29,7 @@
                            <children>
                               <Label alignment="CENTER" text="Test">
                                  <font>
-                                    <Font name="Comic Sans MS Bold" size="50.0" />
+                                    <Font name="Comic Sans MS Bold" size="100.0" />
                                  </font>
                                  <effect>
                                     <Lighting specularConstant="0.8" specularExponent="0.5" surfaceScale="10.0">
