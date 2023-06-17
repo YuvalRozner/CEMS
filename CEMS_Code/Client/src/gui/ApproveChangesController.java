@@ -93,13 +93,11 @@ public class ApproveChangesController extends HodScreen{
     	requestToggleGroup = new ToggleGroup();
     	Msg msg = requestController.selectRequest(ChatClient.user.getId());
     	sendMsg(msg); 
-    
-    	if (msgReceived != null){
-    		request = msgReceived.convertData(Request.class);
-    	}
+    	
+    	if (msgReceived != null){ request = msgReceived.convertData(Request.class); }
     	
     	try {
-        	if(request==null) {notification.showErrorAlert("There are no tests to confirm grades for."); table.getItems().clear();	table.refresh(); return;}
+        	if(request==null) {notification.showErrorAlert("There are no tests to confirm grades for."); return;}
         	for (Request req : request) {
    			 req.setNewRadioButton();
    	         requestToggleGroup.getToggles().add((RadioButton)req.getRadioButton()); 
@@ -123,6 +121,7 @@ public class ApproveChangesController extends HodScreen{
      */
     @FXML
 	protected void initialize() {
+    	if(request==null) {notification.showErrorAlert("There are no tests to confirm grades for."); return;}
     	CourseCol.setCellValueFactory(new PropertyValueFactory<Request, String>("courseName"));
     	ExplanationCol.setCellValueFactory(new PropertyValueFactory<Request, String>("explanation"));
     	IDTestCol.setCellValueFactory(new PropertyValueFactory<Request, String>("testId"));

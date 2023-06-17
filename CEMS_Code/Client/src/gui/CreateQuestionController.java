@@ -9,6 +9,7 @@ import controllers.SubjectController;
 import enteties.Course;
 import enteties.Question;
 import enteties.Subject;
+import enteties.TestToExecute;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -106,7 +107,8 @@ public class CreateQuestionController extends AbstractController{
     public CreateQuestionController() {
     	Msg msg = subjectController.selectSubjectByUser(ChatClient.user);
     	sendMsg(msg);
-    	subjectsLst = msgReceived.convertData(Subject.class);
+    	if (msgReceived != null){ subjectsLst = msgReceived.convertData(Subject.class); } 
+    	
     }
     
     /**
@@ -115,6 +117,7 @@ public class CreateQuestionController extends AbstractController{
      */
     @FXML
     protected void initialize() {
+    	if(subjectsLst==null) {notification.showErrorAlert("There are no subjects"); return;}
         courseCol.setCellValueFactory(new PropertyValueFactory<Course, String>("name"));
         selectCol.setCellValueFactory(new PropertyValueFactory<Course, String>("checkbox"));
         subjectComboBox.setItems(subjectController.getSubjectNames(subjectsLst));

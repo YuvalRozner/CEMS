@@ -112,21 +112,20 @@ public class ChooseReportTypeController extends HodScreen{
     	//msgLecturer ---> users of lecturers belongs to hod subject
     	Msg msgLecturer = userController.selectUserByHodAndLecturer(ChatClient.user.getId());
     	sendMsg(msgLecturer);
-    	//System.out.println("Lecturer Data = " + AbstractController.msgReceived.getData());
-    	userLecturerLst = msgReceived.convertData(User.class);
+    	if (msgReceived != null){ userLecturerLst = msgReceived.convertData(User.class);}
     	lecturerTable = FXCollections.observableArrayList(userLecturerLst);
-    	//System.out.println("lecturerTable = " + lecturerTable);
+    	
     	
     	//msgStudent ---> users of students belongs to hod subject
     	Msg msgStudent = userController.selectUserByHodAndStudent(ChatClient.user.getId());
     	sendMsg(msgStudent);
-    	userStudentLst = msgReceived.convertData(User.class);
+    	if (msgReceived != null){ userStudentLst = msgReceived.convertData(User.class);}
     	studentTable = FXCollections.observableArrayList(userStudentLst);
     	
     	//msgCourse ---> courses belongs to hod subject
     	Msg msgCourse = userController.selectUserByHodAndCourse(ChatClient.user.getId());
     	sendMsg(msgCourse);
-    	courseLst = msgReceived.convertData(Course.class);
+    	if (msgReceived != null){ courseLst = msgReceived.convertData(Course.class);}
     	courseTable = FXCollections.observableArrayList(courseLst);
     }
     

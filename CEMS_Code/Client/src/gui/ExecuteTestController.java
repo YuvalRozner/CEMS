@@ -96,7 +96,8 @@ public class ExecuteTestController extends AbstractController implements Tests{
     	toggleGroupOfTestToExecute = new ToggleGroup();
     	Msg msg = testController.selectTestByUser(ChatClient.user);
     	sendMsg(msg);
-    	testLst = msgReceived.convertData(Test.class);
+    	if (msgReceived != null){ testLst = msgReceived.convertData(Test.class);}
+    	
     	executeTests = testToExecuteController.executeListOfTests(testLst, ChatClient.user);
     	
         for (TestToExecute test : executeTests) {
