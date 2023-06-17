@@ -2,22 +2,18 @@ package gui;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
 import JDBC.Msg;
 import JDBC.MsgType;
 import client.ChatClient;
 import controllers.CemsFileController;
 import controllers.CountDown;
 import controllers.StudentTestController;
-import controllers.TestController;
 import controllers.TestToExecuteController;
 import controllers.TimeController;
 import enteties.StudentTest;
-import enteties.Test;
 import enteties.TestToExecute;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
@@ -26,13 +22,16 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import notifications.NotificationAlertsController;
 
+
+
+
 public class ManualTestController extends AbstractController implements CountDown,Testing {
-
-
+	
+	/**
+	 * button: complete the test,download test,upload test.
+	 */
 	@FXML
 	private Button donebtn,downbtn,upbtn;
-
-
 	 /**
      * Labels for displaying test information.
      */
@@ -44,9 +43,10 @@ public class ManualTestController extends AbstractController implements CountDow
      */
     @FXML
     private TextFlow instructionsForStudentTextFlow;
-
 	
-	private boolean lastMin = false;
+    /**
+     * Test data.
+     */
 	private Integer code;
 	private String lock;
 	private TestToExecute numbersOfStudent; 
@@ -54,29 +54,41 @@ public class ManualTestController extends AbstractController implements CountDow
 	private Msg msg;
 	private Integer grade=75;
 	private String flagEndOrMiddle;
+	private boolean lastMin = false;
 	
-	
-	TestToExecute testToExecute;
-	TimeController timeController;
+	/**
+     * Controllers
+     */
+	private TestToExecute testToExecute;
+	private TimeController timeController;
 	private CemsFileController cemsFileController = new CemsFileController();
 	private StudentTestController studentTestController =new StudentTestController();
 	private NotificationAlertsController alert= new NotificationAlertsController();
 	private TestToExecuteController testToExecuteController = new TestToExecuteController();
 	
+	
+	/**
+	 * Constructs a new ManualTestController.
+	 * retrieves the test to be executed and initializes the code field.
+	 * Initializes the time controller with the test duration.
+	 */
     public ManualTestController() {
-    	
     	if (ChatClient.lastCurrentScreen instanceof StartTestController) {
             testToExecute = ((StartTestController) ChatClient.lastCurrentScreen).getTestToExecuteToShow();
             code = testToExecute.getTestCode();
         }
-    	 //timeController = new TimeController(testToExecute.getTest().getDuration(), this);
-    	 timeController = new TimeController(1, this);
+    	 timeController = new TimeController(testToExecute.getTest().getDuration(), this);
     }
+    
+    /**
+     * Sets the information of the test and starts the timer.
+     */
     @FXML
     protected void initialize() { 
     	setInfo();
     	timeController.startTimer();
     }
+    
     /**
      * Sets the information of the test and updates the display.
      * This method populates various labels and text flows with the relevant information
@@ -126,7 +138,6 @@ public class ManualTestController extends AbstractController implements CountDow
 				testIsLockCantSubmmit();
 				updateAverageAndMedian();	
 			}
-
 			else {
 				testIsSubmit(timeOfStudent,grade);
 				checkIfStudentIsTheLastOne();
@@ -139,7 +150,12 @@ public class ManualTestController extends AbstractController implements CountDow
 
 	}
 	
-	
+	 /**
+     * Checks if the current student is the last one to submit the test and locks the test if necessary.
+     * It retrieves the number of students who have started and finished the test and calculates
+     * the difference to determine if the current student is the last one.
+     * If the current student is the last one, it sends a message to lock the test.
+     */
 	public void checkIfStudentIsTheLastOne() {
 		msg=testToExecuteController.checkIfTheStudentIsLast(StartTestController.getTestToExecute().getTestCode());
 		sendMsg(msg);
@@ -149,12 +165,11 @@ public class ManualTestController extends AbstractController implements CountDow
 			msg=testToExecuteController.getMsgToLockTest(StartTestController.getTestToExecute());
 			sendMsg(msg);
 		}
-    	
     }
    
-	/**
-	 * Updates the average and median grades for a specific test throw the server.
-	 */
+	 /**
+     * Updates the average and median grades for a specific test code.
+     */
 	public void updateAverageAndMedian(){
 		
 		double average=0 , median=0;
@@ -260,20 +275,40 @@ public class ManualTestController extends AbstractController implements CountDow
 		sendMsg(msg);
 		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
 	}
+	/**
+	 * Overrides the method to handle the case when a test is manually locked by a lecturer.
+	 *
+	 * @param testCode The code of the test being checked for manual locking
+	 */
 	
 	@Override
 	public void testGotManualyLockedByLecturer(String testCode) {
 		if(!testCode.equals(code)) return;
-		alert.showErrorAlert("Sorry, but the test got locked by your lecturer..");
-		flagEndOrMiddle="Middle";
-		testIsLockCantSubmmit();
+		alert.setOnCancelAction(new Runnable() {	
+			@Override public void run() {
+				return;
+		}});
+		alert.setOnOkAction(new Runnable() {	
+			@Override public void run() {
+				flagEndOrMiddle="Middle";
+				testIsLockCantSubmmit();
+		}});
+		alert.showConfirmationAlert("Sorry, but the test got locked by your lecturer..","");
 	}
-
+	/**
+	 * Sets the text of the countdown label to the specified string.
+	 *
+	 * @param countdownText The string to be set as the text of the countdown label.
+	 */
 	@Override
 	public void setTextCountdown(String s) {
 		timeLabel.setText(s);
 	}
-
+	/**
+	 * Callback method called when the time limit for the student has ended.
+	 * Performs necessary actions such as notifying the end of time, checking if the student is the last one,
+	 * and updating the average and median.
+	 */
 	@Override
 	public void endOfTime() {
 		if (lastMin == false) {

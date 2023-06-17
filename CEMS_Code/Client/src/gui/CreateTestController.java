@@ -128,7 +128,7 @@ public class CreateTestController extends AbstractController{
     public CreateTestController() {
     	Msg msg = subjectController.selectSubjectByUser(ChatClient.user);
     	sendMsg(msg);
-    	subjectsLst = msgReceived.convertData(Subject.class);
+    	if (msgReceived != null){ subjectsLst = msgReceived.convertData(Subject.class);}
     }
 
     /**
@@ -137,6 +137,7 @@ public class CreateTestController extends AbstractController{
      */
     @FXML
 	protected void initialize() {
+    	if(subjectsLst==null) {notification.showErrorAlert("There are no subjects"); return;}
     	subjectComboBox.setItems(subjectController.getSubjectNames(subjectsLst));
     	//initialize what happens when choosing a subject in the comboBox:
         subjectComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -215,7 +216,7 @@ public class CreateTestController extends AbstractController{
     	answer4RadioButton.setText(selectedQuestion.getAnswers()[3]);
     	// Select the correct answer toggle.
     	ObservableList<Toggle> toggles = answersToggleGroup.getToggles();
-        Toggle toggle = toggles.get(selectedQuestion.getCorrectAnswer());  // Index 2 represents the third toggle
+        Toggle toggle = toggles.get(selectedQuestion.getCorrectAnswer()-1);  // Index 2 represents the third toggle
         answersToggleGroup.selectToggle(toggle); 
     }
     

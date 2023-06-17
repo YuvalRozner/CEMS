@@ -490,7 +490,12 @@ public class TestToExecuteController {
 		msgM.setMsgLst(msgLock);
 		return msgM;
 	}
-
+	/**
+	 * Constructs and returns a Msg object to select test to execute by test code.
+	 *
+	 * @param code The test code to search for.
+	 * @return The Msg object with the select query.
+	 */
 	public Msg selectTestToExecuteByTestCode(Integer code) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("testtoexecute.*, test.*, course.*");

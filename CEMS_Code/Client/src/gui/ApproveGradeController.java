@@ -8,6 +8,7 @@ import client.ChatClient;
 import controllers.StudentTestController;
 import controllers.TestToExecuteController;
 import controllers.UserController;
+import enteties.Request;
 import enteties.StudentTest;
 import enteties.TestToExecute;
 import enteties.User;
@@ -134,7 +135,7 @@ public class ApproveGradeController extends AbstractController implements Tests{
     public ApproveGradeController() {
     	Msg msg = testToExecuteController.selectTestToExecuteByUser(ChatClient.user);
     	sendMsg(msg);
-    	testToExecuteLst = msgReceived.convertData(TestToExecute.class);
+    	if (msgReceived != null){ testToExecuteLst = msgReceived.convertData(TestToExecute.class); } 
     	testToggleGroup = new ToggleGroup();
     }
 
@@ -145,7 +146,7 @@ public class ApproveGradeController extends AbstractController implements Tests{
     @FXML
 	protected void initialize() {
     	try {
-    	if(testToExecuteLst==null) {notification.showErrorAlert("There are no tests to confirm grades for."); table.getItems().clear();	table.refresh(); return;}
+    	if(testToExecuteLst==null) {notification.showErrorAlert("There are no tests to confirm grades for."); return;}
     	// set the list of TestToExecute in the comboBox:
     	testComboBox.getItems().addAll(testToExecuteController.getTestToExecuteNames(testToExecuteLst));
     	// initialize what happens when choosing a TestToExecute in the comboBox:
