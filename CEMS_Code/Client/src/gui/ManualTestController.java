@@ -157,6 +157,7 @@ public class ManualTestController extends AbstractController implements CountDow
 	public void checkIfStudentIsTheLastOne() {
 		msg=testToExecuteController.checkIfTheStudentIsLast(StartTestController.getTestToExecute().getTestCode());
 		sendMsg(msg);
+		if(msgReceived==null) {return;}
 		numbersOfStudent=msgReceived.convertData(TestToExecute.class).get(0);
 		Integer needToLock=numbersOfStudent.getNumberOfStudentsStarted()-numbersOfStudent.getNumberOfStudentsFinished()-numbersOfStudent.getNumberOfStudents();
 		if (needToLock==0) {
@@ -173,6 +174,7 @@ public class ManualTestController extends AbstractController implements CountDow
 		double average=0 , median=0;
 		msg=studentTestController.selectAllstudentBySpecificCodeTest(code.toString());
 		sendMsg(msg);
+		 if(msgReceived==null) {return;}
 		ArrayList<StudentTest> listOfStudent =msgReceived.convertData(StudentTest.class);
 		System.out.println("the grade"+listOfStudent.get(0).getGrade());///////
 		ArrayList<Integer> listOfGrades=new ArrayList<Integer>();

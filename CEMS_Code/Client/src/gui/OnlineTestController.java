@@ -99,9 +99,9 @@ public class OnlineTestController extends AbstractController implements CountDow
         }
         Msg msg = questionController.getQuestionAndPointsByTestCode(code);
         sendMsg(msg);
-        if(msgReceived==null) {return;}
-        questions = msgReceived.convertData(Question.class); // ArrayList
-
+        if(msgReceived!=null) {
+        	questions = msgReceived.convertData(Question.class); // ArrayList
+        }
         // Create a time controller for managing the test time
         timeController = new TimeController(testToExecute.getTest().getDuration(), this);
     }
@@ -112,6 +112,7 @@ public class OnlineTestController extends AbstractController implements CountDow
      */
     @FXML
     protected void initialize() {
+    	if(questions==null) {alert.showErrorAlert("there are no test in this code."); return;}
         setInfo();
 
         int questionCounter = 1;
@@ -298,6 +299,7 @@ public class OnlineTestController extends AbstractController implements CountDow
         // Retrieve the number of students who have started and finished the test
         msg = testToExecuteController.checkIfTheStudentIsLast(StartTestController.getTestToExecute().getTestCode());
         sendMsg(msg);
+        if(msgReceived==null) {return;}
         numbersOfStudent = msgReceived.convertData(TestToExecute.class).get(0);
 
         // Calculate the difference between the number of students who started and finished the test
