@@ -77,6 +77,7 @@ public class RunningTestController extends AbstractController{
     	// get the running TestToExecute from DB:
     	Msg msg = testToExecuteController.selectRunningTestToExecuteByUser(ChatClient.user);
     	sendMsg(msg);
+    	if(msgReceived==null) {notification.showErrorAlert("There are no active tests."); return;}
     	runningTestLst = msgReceived.convertData(TestToExecute.class); //ArrayList
     	runningTestTable = testToExecuteController.getObservLstWithFXValues(runningTestLst); //ObservableList
     	// toggle the radio in the table:
@@ -120,7 +121,6 @@ public class RunningTestController extends AbstractController{
     	final User hod;
     	Msg msg1 = userController.selectHodBySubjectNumber(subjectNumber);
     	sendMsg(msg1);
-    	System.out.println("dataaaaaaaaaaaaaaaa= " + msgReceived.getData()); /////////////////////////////////
     	try { hod = msgReceived.convertData(User.class).get(0);
     	} catch (Exception e) { notification.showErrorAlert("There is no mathing HOD, so you can't send requests for changing duration."); return; }
     	if(hod==null) { notification.showErrorAlert("There is no mathing HOD, so you can't send requests for changing duration."); return; }
@@ -173,7 +173,7 @@ public class RunningTestController extends AbstractController{
 				Msg msg = testToExecuteController.getMsgToLockTest(selectedTest); //manyMsg -> update & lockTest.
 		    	sendMsg(msg);
 		    	notification.showInformationAlert("The test (code "+selectedTest.getTestCode()+") got locked.");
-		    	//resetFields(); ///////////////////////////////////////////////////////////////// comment by dor - need to change
+		    	resetFields();
 			}});
     	notification.showConfirmationAlert("you can't unlock after that.", "Are you sure you want to lock test "+selectedTest.getTestCode()+" ?");
     }
