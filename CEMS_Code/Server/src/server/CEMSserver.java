@@ -105,7 +105,7 @@ public class CEMSserver extends AbstractServer {
 				stmt = conn.createStatement();
 				queryStr = DB_controller.createSELECTquery(msg.getSelect(), msg.getFrom(), msg.getWhere(),
 						msg.getWhereCol());
-				serverController.addConsole("query: ->" + queryStr + ".\n");
+				//serverController.addConsole("query: ->" + queryStr + ".\n");
 				System.out.println("query: ->" + queryStr);
 				rs = stmt.executeQuery(queryStr);
 				MsgType type = (msg.getFrom().get(0).equals("user")) ? MsgType.user : MsgType.data;
@@ -131,14 +131,14 @@ public class CEMSserver extends AbstractServer {
 			case insert:
 				stmt = conn.createStatement();
 				queryStr = DB_controller.createINSERTquery(msg.getTableToUpdate(), msg.getColNames(), msg.getValues());					
-				serverController.addConsole("query: ->" + queryStr + ".\n");
+				//serverController.addConsole("query: ->" + queryStr + ".\n");
 				System.out.println("query: ->" + queryStr);
 				try{stmt.executeUpdate(queryStr);
 				}catch(SQLException e) {System.out.println("insert faild"); sendToClient(new Msg(MsgType.insertFail), client); break;}
 				sendToClient(new Msg(MsgType.insertSucceeded), client);
 				break;
 			case lockTest:
-				serverController.addConsole("client "+client+ " asked to lock test with test code " + msg.getTestCode()+".\n");
+				//serverController.addConsole("client "+client+ " asked to lock test with test code " + msg.getTestCode()+".\n");
 				System.out.println("client "+client+ " asked to lock test with test code " + msg.getTestCode()+".");
 				sendToAllClients(msg);
 				break;
@@ -155,7 +155,7 @@ public class CEMSserver extends AbstractServer {
 			case updatePlusOne:
 				stmt = conn.createStatement();
 				queryStr = DB_controller.createUPDATEPlusOnequery(msg.getTableToUpdate(), msg.getSet(), msg.getWhere());
-				serverController.addConsole("query: ->" + queryStr + ".\n");
+				//serverController.addConsole("query: ->" + queryStr + ".\n");
 				System.out.println("query: ->" + queryStr);
 				stmt.executeUpdate(queryStr);
 				sendToClient(new Msg(MsgType.succeeded), client);
@@ -163,7 +163,7 @@ public class CEMSserver extends AbstractServer {
 			case delete:
 				stmt = conn.createStatement();
 				queryStr = DB_controller.createDELETEquery(msg.getDeleteFrom(), msg.getWhere());
-				serverController.addConsole("query: ->" + queryStr + ".\n");
+				//serverController.addConsole("query: ->" + queryStr + ".\n");
 				System.out.println("query: ->" + queryStr);
 				stmt.executeUpdate(queryStr);
 				sendToClient(new Msg(MsgType.succeeded), client);
@@ -301,7 +301,7 @@ public class CEMSserver extends AbstractServer {
             	System.out.println("words : " + words);
             	System.out.println("temp : " + temp);
             	queryStr = DB_controller.createINSERTquery(msg1.getTableToUpdate(), msg1.getColNames(), msg1.getValues());					
-				serverController.addConsole("query: ->" + queryStr + ".\n");
+				//serverController.addConsole("query: ->" + queryStr + ".\n");
 				System.out.println("query: ->" + queryStr);
 				stmt.executeUpdate(queryStr);
             }}
@@ -311,6 +311,5 @@ public class CEMSserver extends AbstractServer {
                 return false;
             }
 		return true;
-        
 	}
 }
