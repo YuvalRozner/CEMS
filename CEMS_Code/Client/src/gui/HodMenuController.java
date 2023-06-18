@@ -1,7 +1,6 @@
 package gui;
 
 import java.util.ArrayList;
-
 import JDBC.Msg;
 import client.ChatClient;
 import controllers.RequestController;
