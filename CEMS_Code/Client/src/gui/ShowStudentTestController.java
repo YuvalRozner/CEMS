@@ -76,7 +76,10 @@ public class ShowStudentTestController extends AbstractController {
     public ShowStudentTestController() {
         Msg msg = initializeDataAndGetMsg();
         sendMsg(msg);
-        questions = msgReceived.convertData(Question.class); // ArrayList
+        if(msgReceived!=null)
+        	questions = msgReceived.convertData(Question.class); // ArrayList
+        if (questions == null)
+        	return;
     }
     /**
      * Initializes the necessary data and retrieves the message containing the questions for the test.

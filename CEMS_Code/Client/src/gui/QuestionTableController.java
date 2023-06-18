@@ -87,7 +87,8 @@ public class QuestionTableController extends AbstractController {
     public QuestionTableController() {
         Msg msg = userController.selectQuestionByhodId(ChatClient.user.getId());
         sendMsg(msg);
-        questionList = msgReceived.convertData(Question.class);
+        if(msgReceived!=null) 
+        	questionList = msgReceived.convertData(Question.class);
         QTable = FXCollections.observableArrayList(questionList);
     }
 
@@ -127,35 +128,4 @@ public class QuestionTableController extends AbstractController {
         table.setItems(QTable);
         table.refresh();
     }
-
-    /**
-     * Event handler for committing changes to the question text column.
-     *
-     * @param event The ActionEvent triggering the event.
-     */
-    @FXML
-    void onEditCommitQuestionTextCol(ActionEvent event) {
-
-    }
-
-    /**
-     * Event handler for when the mouse enters the "Back" button area.
-     *
-     * @param event The MouseEvent triggering the event.
-     */
-    @FXML
-    void onMouseEnterdBackBtn(MouseEvent event) {
-
-    }
-
-    /**
-     * Event handler for when the mouse exits the "Back" button area.
-     *
-     * @param event The MouseEvent triggering the event.
-     */
-    @FXML
-    void onMouseExitedBackBtn(MouseEvent event) {
-
-    }
-
 }

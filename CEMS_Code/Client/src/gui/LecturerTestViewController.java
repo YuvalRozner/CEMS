@@ -57,8 +57,8 @@ public class LecturerTestViewController extends AbstractController {
     	// get the relevant TestToExecute from DB:
     	Msg msg = testToExecuteController.selectTestToExecuteByUser(ChatClient.user);
     	sendMsg(msg);
+    	if (msgReceived == null) {notification.showInformationAlert("There are no Test relate to you to show statistic on.");return;}
     	testLst = msgReceived.convertData(TestToExecute.class); //ArrayList
-    	if(testLst==null || testLst.isEmpty()) notification.showInformationAlert("There are no Test relate to you to show statistic on.");
     	// put some FX fields but only the RadioButton is relevant :
     	testTable = testToExecuteController.getObservLstWithFXValues(testLst); //ObservableList 
     	// toggle the radio in the table:

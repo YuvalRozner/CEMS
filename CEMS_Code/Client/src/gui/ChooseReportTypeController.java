@@ -95,21 +95,26 @@ public class ChooseReportTypeController extends AbstractController{
     	//msgLecturer ---> users of lecturers belongs to hod subject
     	Msg msgLecturer = userController.selectUserByHodAndLecturer(ChatClient.user.getId());
     	sendMsg(msgLecturer);
-    	if (msgReceived != null){ userLecturerLst = msgReceived.convertData(User.class);}
-    	lecturerTable = FXCollections.observableArrayList(userLecturerLst);
+    	if (msgReceived != null){ 
+    		userLecturerLst = msgReceived.convertData(User.class);
+    		lecturerTable = FXCollections.observableArrayList(userLecturerLst);}
+    	
     	
     	
     	//msgStudent ---> users of students belongs to hod subject
     	Msg msgStudent = userController.selectUserByHodAndStudent(ChatClient.user.getId());
     	sendMsg(msgStudent);
-    	if (msgReceived != null){ userStudentLst = msgReceived.convertData(User.class);}
-    	studentTable = FXCollections.observableArrayList(userStudentLst);
+    	if (msgReceived != null){ 
+    		userStudentLst = msgReceived.convertData(User.class);
+    		studentTable = FXCollections.observableArrayList(userStudentLst);}
+    	
     	
     	//msgCourse ---> courses belongs to hod subject
     	Msg msgCourse = userController.selectUserByHodAndCourse(ChatClient.user.getId());
     	sendMsg(msgCourse);
-    	if (msgReceived != null){ courseLst = msgReceived.convertData(Course.class);}
-    	courseTable = FXCollections.observableArrayList(courseLst);
+    	if (msgReceived != null){ 
+    		courseLst = msgReceived.convertData(Course.class);
+    		courseTable = FXCollections.observableArrayList(courseLst);}	
     }
     
     /**

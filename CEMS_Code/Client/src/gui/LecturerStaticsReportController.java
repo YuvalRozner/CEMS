@@ -7,6 +7,7 @@ import JDBC.Msg;
 //import JDBC.MsgType;
 import client.ChatClient;
 import enteties.Course;
+import enteties.Request;
 import enteties.StudentTest;
 import enteties.TestToExecute;
 import enteties.User;
@@ -81,21 +82,13 @@ public class LecturerStaticsReportController extends AbstractController{
                 case "lecturer":
                     User selectedLecturer = ((ChooseReportTypeController) ChatClient.lastCurrentScreen).getSelectedLecturer();
                     try {
-                    	//System.out.println("im here");
                         Msg msg1 = testToExecuteController.selectTestToExecuteByLecturer(selectedLecturer.getId());
-                        //System.out.println(msg1.getType());
-                        //if(msg1.getType()==MsgType.empty) {notification.showErrorAlert("There are no tests to see."); return;}
-                        //if(AbstractController.msgReceived.getType()==MsgType.empty) {notification.showErrorAlert("There are no tests to see."); return;}
                         
-                        //System.out.println("Data= " + AbstractController.msgReceived.getData());
-                        //System.out.println("Type= " + AbstractController.msgReceived.getType());
-                        //if(AbstractController.msgReceived.getType()==MsgType.empty) {notification.showErrorAlert("There are no tests to see."); return;}
-                        //System.out.println("Data= " + AbstractController.msgReceived.getData());
                         sendMsg(msg1);
-                        //System.out.println("im here 2");
-                        testToExecuteLst = msgReceived.convertData(TestToExecute.class);
-                        //System.out.println("im here 3");
-                        //System.out.println("testToExecuteLst= " + testToExecuteLst);
+                        if (msgReceived != null)
+                        	 testToExecuteLst = msgReceived.convertData(TestToExecute.class);
+                       
+                      
                         if(testToExecuteLst==null) {notification.showErrorAlert("There are no tests to see."); return;}
                         testToexec = true;
                     } catch (Exception e) {
@@ -108,7 +101,8 @@ public class LecturerStaticsReportController extends AbstractController{
                     try {
                         Msg msg2 = studentTestController.getMsgForStudentTestsByID(selectedStudent.getId());
                         sendMsg(msg2);
-                        studenntTestLst = msgReceived.convertData(StudentTest.class);
+                        if (msgReceived != null)
+                        	studenntTestLst = msgReceived.convertData(StudentTest.class);
                         if(studenntTestLst==null) {notification.showErrorAlert("There are no tests to see."); return;}
                         studentTest = true;
                     } catch (Exception e) {
@@ -120,7 +114,8 @@ public class LecturerStaticsReportController extends AbstractController{
                     try {
                         Msg msg3 = testToExecuteController.selectTestToExecuteByCourseName(selectedCourse.getName());
                         sendMsg(msg3);
-                        testToExecuteLst = msgReceived.convertData(TestToExecute.class);
+                        if (msgReceived != null)
+                        	testToExecuteLst = msgReceived.convertData(TestToExecute.class);
                         if(testToExecuteLst==null) {notification.showErrorAlert("There are no tests to see."); return;}
                         testToexec = true;
                         courseFlag = true;

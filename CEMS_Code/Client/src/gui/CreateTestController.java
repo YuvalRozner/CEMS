@@ -125,6 +125,7 @@ public class CreateTestController extends AbstractController{
                     // Find the Subject object based on the new value:
                     selectedSubject = subjectController.findSubjectByName(newValue, subjectsLst);
                     sendMsg(subjectController.getMsgForCourses(selectedSubject));
+                    if (msgReceived == null) {return;}
                     selectedSubject.setCourses(msgReceived.convertData(Course.class)); 
                     // Get the list of courses associated with the selected subject
                     if (selectedSubject != null) {
@@ -145,7 +146,7 @@ public class CreateTestController extends AbstractController{
                     // Find the course object based on the new value:
                 	selectedCourse = courseController.findCourseByName(newValue, coursesLst);
                     sendMsg(courseController.getMsgForQuestions(selectedCourse));
-                    System.out.println("is data empty?  " + (msgReceived.getData()));
+                    if (msgReceived == null) {return;}
                     selectedCourse.setQuestions(msgReceived.convertData(Question.class)); 
                     // Get the list of question associated with the selected subject
                     if (selectedCourse != null) {

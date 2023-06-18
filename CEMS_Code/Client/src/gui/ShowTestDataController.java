@@ -69,6 +69,7 @@ public class ShowTestDataController extends AbstractController implements Tests 
   public ShowTestDataController() {
     Msg msg = testToExecuteController.selectTestToExecuteByHod(ChatClient.user);
     sendMsg(msg);
+    if (msgReceived == null) return;	
     arrShowTest = msgReceived.convertData(TestToExecute.class);
     for (TestToExecute test : arrShowTest) {
       test.setNewButton();

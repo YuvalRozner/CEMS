@@ -83,7 +83,7 @@
         <columns>
           <TableColumn fx:id="idCol" minWidth="70.49710464477539" prefWidth="78.21512222290039" text="Question ID" />
             <TableColumn fx:id="courseCol" minWidth="75.68901062011719" prefWidth="108.0" text="Course" />
-            <TableColumn fx:id="questionTextCol" minWidth="91.59378051757812" onEditCommit="#onEditCommitQuestionTextCol" prefWidth="274.5" text="Question Text" />
+            <TableColumn fx:id="questionTextCol" minWidth="91.59378051757812" prefWidth="274.5" text="Question Text" />
             <TableColumn fx:id="questionNumberCol" minWidth="100.0" prefWidth="108.0" text="Question Number" />
             <TableColumn fx:id="lecturerCol" minWidth="83.409912109375" prefWidth="108.0" text="Lecturer" />
         </columns>

@@ -114,6 +114,7 @@ public class CreateQuestionController extends AbstractController{
                     // Find the Subject object based on the new value
                     selectedSubject = subjectController.findSubjectByName(newValue, subjectsLst);
                     sendMsg(subjectController.getMsgForCourses(selectedSubject));
+                    if (msgReceived == null) {return;}
                     selectedSubject.setCourses(msgReceived.convertData(Course.class)); 
                     // Get the list of courses associated with the selected subject
                     if (selectedSubject != null) {

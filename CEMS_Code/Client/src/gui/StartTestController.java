@@ -73,6 +73,7 @@ public class StartTestController extends AbstractController {
 		// Check if the test is locked
 		msg = testToExecuteController.checkIfTheTestIsLock(code);
 		sendMsg(msg);
+		if (msgReceived == null) return;
 		lock = msgReceived.convertData(TestToExecute.class).get(0).getLock();
 		// Get the lock status
 		if (lock.equals("true")) {
@@ -86,14 +87,12 @@ public class StartTestController extends AbstractController {
 		if (msgReceived == null) {
 			msg = userController.getLecturerNameById(lecturerId);
 			sendMsg(msg);
+			if (msgReceived == null) return;
 			lecturerName = msgReceived.convertData(User.class).get(0).getName();
-			// alert.showInformationAlert("The test you are about to enter was written by
-			// the lecturer: "+lecturerName);
-			// Msg msgGetTesttoexeute =
-			// testToExecuteController.selectTestToExecuteByCode(code);
 			Msg msgGetTesttoexeute = testToExecuteController.selectTestToExecuteByTestCode(Integer.parseInt(code));
 
 			sendMsg(msgGetTesttoexeute);
+			if (msgReceived == null) return;
 			ArrayList<TestToExecute> arr = msgReceived.convertData(TestToExecute.class);
 			setTestToExecute(arr.get(0));
 			idTextField.setDisable(false);
@@ -123,11 +122,6 @@ public class StartTestController extends AbstractController {
 				sendMsg(msgInsert);
 				studentTest.setTestCode(Integer.valueOf(codeTextField.getText()));
 				studentTest.setStudentId(ChatClient.user.getId());
-
-				// Msg msgUpdate =
-				// testToExecuteController.updateNumberOfStudenByOne(1,code,"start");
-				// sendMsg(msgUpdate);
-
 				if (getTestToExecute().getTestingType().equals("manual")) {
 					start("manualTest", "startTest");
 				} else {
