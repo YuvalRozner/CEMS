@@ -2,6 +2,7 @@ package gui;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
 import JDBC.Msg;
 import JDBC.MsgType;
 import client.ChatClient;
@@ -48,6 +49,7 @@ public class ManualTestController extends AbstractController implements CountDow
      * Test data.
      */
 	private Integer code;
+	@SuppressWarnings("unused")
 	private String lock;
 	private TestToExecute numbersOfStudent; 
 	private int timeOfStudent;
@@ -320,5 +322,16 @@ public class ManualTestController extends AbstractController implements CountDow
 			updateAverageAndMedian();	
 		}
 	
+	}
+
+	@Override
+	public void testdurationGotChanged(String testCode, Integer duration) {
+		if(!testCode.equals(Integer.toString(StartTestController.getTestToExecute().getTestCode()))) return;
+		alert.setOnOkAction(new Runnable() {	
+			@Override public void run() {
+				flagEndOrMiddle="Middle";
+				timeController.updateClock(duration-(testToExecute.getTest().getDuration()));
+		}});
+		alert.showConfirmationAlertWithOnlyOk("Please click OK to continue the process","The duration of the test you are taking got changed.");
 	}
 }

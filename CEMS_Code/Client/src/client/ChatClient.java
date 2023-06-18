@@ -7,7 +7,6 @@ import JDBC.Msg;
 import controllers.CemsFileController;
 import enteties.User;
 import gui.AbstractController;
-import gui.HodScreen;
 import gui.Testing;
 import ocsf.client.AbstractClient;
 
@@ -94,11 +93,18 @@ public class ChatClient extends AbstractClient {
 			case file:
 				msg.setPathFile("@../../file/");
 				cemsFileController.saveFile(msg);
+				break; 
+			case pop:
+				User dest = msg.getUser();
+				if(!user.equals(dest)) return;
+				String popText = msg.getPopText();
+				popText += "\n\n  <-- this message sent also to mail: "+ dest.getUsername()+"@gmail.com and to phone number: 052-"+(dest.getId().substring(0,7)+" -->");
+				lastCurrentScreen.popMessage(popText);
 				break;
-			case request:
-				System.out.println("hod "+ msg.getHod()+" got a new request.");
-				if(lastCurrentScreen instanceof HodScreen) 
-					((HodScreen)lastCurrentScreen).popRequest();
+			case changeDuration:
+				System.out.println("Test code " + msg.getTestCode() + " duration got changed.");
+				if(lastCurrentScreen instanceof Testing) 
+					((Testing)lastCurrentScreen).testdurationGotChanged(msg.getTestCode().toString(), msg.getDuration());
 				break;
 			default:
 				break;

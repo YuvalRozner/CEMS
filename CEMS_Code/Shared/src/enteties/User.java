@@ -1,5 +1,7 @@
 package enteties;
 
+import java.io.Serializable;
+
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 
@@ -12,8 +14,10 @@ import javafx.scene.control.RadioButton;
  * The User class is primarily used for user management and display purposes.
  * 
  */
-public class User {
-    //in DB:
+public class User implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	//in DB:
 	private String id;
 	private String name;
 	private String username;
@@ -232,4 +236,6 @@ public class User {
 	public RadioButton getRadioButton() {
 		return radioButton;
 	}
+	
+	
 }

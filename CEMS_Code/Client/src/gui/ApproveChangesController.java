@@ -3,7 +3,6 @@ package gui;
 import java.util.ArrayList;
 
 import JDBC.Msg;
-import JDBC.MsgType;
 import client.ChatClient;
 import controllers.RequestController;
 import enteties.Request;

@@ -115,7 +115,7 @@ public class StudentTestController {
 	 * @param st The StudentTest object to be updated.
 	 * @return A Msg object representing the database select message.
 	 */
-	public Msg getMsgToUpdateStudentTests(StudentTest st) {
+	public Msg getMsgToUpdateStudentTests(StudentTest st, User student) {
 		Msg msg = new Msg(MsgType.update);
 		msg.setTableToUpdate("studenttest");
 		msg.setSet("approved", st.getApproved());
@@ -124,7 +124,16 @@ public class StudentTestController {
 		msg.setSet("changeReason", st.getChangeReason());
 		msg.setWhere("studentId", st.getStudentId());
 		msg.setWhere("testCode", st.getTestCode());
-		return msg;
+		
+		String popText = "You got a new grade for test "+st.getTestCode()+".";
+		Msg msg2 = new Msg(MsgType.pop);
+		msg2.setUser(student);
+		msg2.setPopText(popText);
+		
+		Msg many = new Msg(MsgType.manyMessages);
+		many.setMsgLst(msg);
+		many.setMsgLst(msg2);
+		return many;
 	}
 	
 	

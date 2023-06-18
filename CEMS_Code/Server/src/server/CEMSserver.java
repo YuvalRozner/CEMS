@@ -5,12 +5,15 @@ import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import JDBC.DB_controller;
 import JDBC.DataBaseConnector;
 import JDBC.Msg;
 import JDBC.MsgType;
 import controllers.CemsFileController;
+import enteties.User;
 import gui.ServerController;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
@@ -22,6 +25,11 @@ public class CEMSserver extends AbstractServer {
 
 	Connection conn;
 	public static ServerController serverController;
+	
+	/**
+	 * map to maintain the clients logged in to users. 
+	 */
+	private static Map<User, ConnectionToClient> user_client = new HashMap<>();
 
 	private CemsFileController cemsFileController = new CemsFileController();
 
@@ -104,18 +112,11 @@ public class CEMSserver extends AbstractServer {
 				sendToClient(tmpMsg, client);
 				break;
 			case update:
-				stmt = conn.createStatement();
-				queryStr = DB_controller.createUPDATEquery(msg.getTableToUpdate(), msg.getSet(), msg.getWhere());
-				serverController.addConsole("query: ->" + queryStr + ".\n");
-				System.out.println("query: ->" + queryStr);
-				stmt.executeUpdate(queryStr);
-				//sendToClient(new Msg(MsgType.succeeded), client);
-				sendToClient(new Msg(MsgType.succeeded), client);
+				handleUpdateMsg(client, msg);
 				break;
 			case disconnect:
 				serverController.addConsole("clientDisconnected" + client + ".\n");
 				System.out.println("clientDisconnected" + client);
-				//serverController.removeConnected(client.getInetAddress());
 				serverController.removeConnected(client);
 				sendToClient(new Msg(MsgType.bye), client);
 				break;
@@ -155,11 +156,7 @@ public class CEMSserver extends AbstractServer {
 				System.out.println("query: ->" + queryStr);
 				stmt.executeUpdate(queryStr);
 				sendToClient(new Msg(MsgType.succeeded), client);
-			case request:
-				serverController.addConsole("client "+client+ " create a new request to hod " + msg.getHod()+".\n");
-				System.out.println("client "+client+ " create a new request to hod " + msg.getHod()+".");
-				sendToAllClients(msg);
-				break;
+				break;			
 			case delete:
 				stmt = conn.createStatement();
 				queryStr = DB_controller.createDELETEquery(msg.getDeleteFrom(), msg.getWhere());
@@ -167,12 +164,48 @@ public class CEMSserver extends AbstractServer {
 				System.out.println("query: ->" + queryStr);
 				stmt.executeUpdate(queryStr);
 				sendToClient(new Msg(MsgType.succeeded), client);
+				break;
+			case login:
+				handleUpdateMsg(client, msg);
+				user_client.put(msg.getUser(), client);
+				break;
+			case logout:
+				handleUpdateMsg(client, msg);
+				user_client.remove(msg.getUser());
+				break;
+			case pop:
+				if(!user_client.containsKey(msg.getUser())) return;
+				sendToClient(msg, user_client.get(msg.getUser()));
+				break;
+			case changeDuration:
+				serverController.addConsole("duration changed for code " + msg.getTestCode()+".\n");
+				System.out.println("duration changed for code " + msg.getTestCode()+".");
+				sendToAllClients(msg);
+				break;
 			default:
 				break;
 			}
 		} catch (SQLException ex) {
 			/* handle any errors */}
 		return;
+	}
+
+	/**
+	 * the actions to perform in the handleMessageFromClient, in update type.
+	 * 
+	 * @param client
+	 * @param msg
+	 * @throws SQLException
+	 */
+	public void handleUpdateMsg(ConnectionToClient client, Msg msg) throws SQLException {
+		java.sql.Statement stmt;
+		String queryStr;
+		stmt = conn.createStatement();
+		queryStr = DB_controller.createUPDATEquery(msg.getTableToUpdate(), msg.getSet(), msg.getWhere());
+		serverController.addConsole("query: ->" + queryStr + ".\n");
+		System.out.println("query: ->" + queryStr);
+		stmt.executeUpdate(queryStr);
+		sendToClient(new Msg(MsgType.succeeded), client);
 	}
 
 	/**

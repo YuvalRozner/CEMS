@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import notifications.NotificationAlertsController;
 
 public abstract class AbstractController implements SceneSetter {
 	private static Stage primaryStage;
@@ -23,6 +24,11 @@ public abstract class AbstractController implements SceneSetter {
 	 * object to use the UserController class method.
 	 */
     private static UserController userController = new UserController();
+    
+    /**
+	 * object to use the notifications class.
+	 */
+    private static NotificationAlertsController popNotification = new NotificationAlertsController();
 
 	public void start(String fxmlName, String prevScreen) throws Exception {
 		
@@ -107,7 +113,7 @@ public abstract class AbstractController implements SceneSetter {
 	 * @param input the input string to be converted
 	 * @return the converted string in sentence format
 	 */
-	private  static String convertToSentence(String input) {
+	private static String convertToSentence(String input) {
         StringBuilder output = new StringBuilder();
         // Convert the first character to uppercase
         output.append(Character.toUpperCase(input.charAt(0)));
@@ -126,5 +132,8 @@ public abstract class AbstractController implements SceneSetter {
         return output.toString();
     }
 	
+	public void popMessage(String msg) {
+		popNotification.showInformationAlert(msg);
+	}
 	
 }

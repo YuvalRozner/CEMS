@@ -3,7 +3,6 @@ package gui;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import JDBC.Msg;
@@ -540,5 +539,16 @@ public class OnlineTestController extends AbstractController implements CountDow
 	    public int getNumber() {
 	        return number;
 	    }
+	}
+
+	@Override
+	public void testdurationGotChanged(String testCode, Integer duration) {
+		if(!testCode.equals(Integer.toString(StartTestController.getTestToExecute().getTestCode()))) return;
+		alert.setOnOkAction(new Runnable() {	
+			@Override public void run() {
+				flagEndOrMiddle="Middle";
+				timeController.updateClock(duration-(testToExecute.getTest().getDuration()));
+		}});
+		alert.showConfirmationAlertWithOnlyOk("Please click OK to continue the process","The duration of the test you are taking got changed.");
 	}
 }
