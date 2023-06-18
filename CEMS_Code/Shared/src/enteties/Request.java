@@ -190,7 +190,7 @@ public class Request {
 	}
 
 	/**
-	 * @param explanetion the explanation to set
+	 * @param explanation the explanation to set
 	 */
 	public void setExplanation(String explanation) {
 		this.explanation = explanation;

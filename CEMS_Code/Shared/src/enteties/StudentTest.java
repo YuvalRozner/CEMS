@@ -48,6 +48,7 @@ public class StudentTest {
 	 * @param answers
 	 * @param studentId
 	 * @param name
+	 * @param testCode
 	 */
 	
 	public StudentTest(String answers,String studentId , String name,Integer testCode) {
@@ -379,7 +380,7 @@ public class StudentTest {
 	}
 
 	/**
-	 * @param test the test to set
+	 * @param testToExecute the test to set
 	 */
 	public void setTestToExecute(TestToExecute testToExecute) {
 		this.testToExecute = testToExecute;

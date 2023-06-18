@@ -299,7 +299,7 @@ public class ApproveGradeController extends AbstractController implements Tests{
      * Inserts a new grade into the distribution and removes an old grade
      * from the distribution for the specified test code.
      * @param newGrade 
-     * @param integer 
+     * @param oldGrade 
      */
     public void updateDistribution(Integer oldGrade, Integer newGrade) {
     	Msg msg;

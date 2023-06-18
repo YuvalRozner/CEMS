@@ -56,7 +56,7 @@ public class TestToExecuteController {
 	 *                 1 to ger up the distribution with new grade.
 	 * @param code     key of the test in data.
 	 * @param grade    grade of one sudent when he finish the test.
-	 * @return
+	 * @return Msg
 	 */
 	public Msg insertDistributionByCode(String code, Integer grade, Integer upOrDown) {
 		Msg msg = new Msg(MsgType.updatePlusOne);
@@ -164,8 +164,7 @@ public class TestToExecuteController {
 	 *
 	 * @param id   the id that enter the user to enter a test.
 	 * @param user the user to get the id of the user.
-	 * @return true if the id is valid and corresponding to the user.
-	 * @return false if the id is not valid.
+	 * @return boolean false if the id is not valid. true if the id is valid and corresponding to the user.
 	 */
 	public boolean checkValidId(String id, User user) {
 		NotificationAlertsController alert = new NotificationAlertsController();
@@ -184,8 +183,7 @@ public class TestToExecuteController {
 	 * check if the code is valid to enter a test.
 	 *
 	 * @param code the code for the write test.
-	 * @return true if the code is valid.
-	 * @return false if the code is not valid.
+	 * @return boolean false if the code is not valid. true if the code is valid.
 	 */
 	public boolean checkValidCode(String code) {
 		NotificationAlertsController alert = new NotificationAlertsController();
@@ -272,8 +270,8 @@ public class TestToExecuteController {
 	 * with a Lecturer user.
 	 * it includes the testToExecute object and the User object inside it.
 	 * 
-	 * @param user The User object for whom to retrieve the TestToExecute.
-	 * @return A Msg object representing the database select message.
+	 * @param id user The User object for whom to retrieve the TestToExecute.
+	 * @return Msg object representing the database select message.
 	 */
 	public Msg selectTestToExecuteByLecturer(String id) {
 		Msg msg = new Msg(MsgType.select);
@@ -309,8 +307,8 @@ public class TestToExecuteController {
 	/**
 	 * Retrieves the names of the tests as an ObservableList.
 	 * 
-	 * @param subjectsLst The list of the testToExecuteLst.
-	 * @return The ObservableList of subject names.
+	 * @param testToExecuteLst subjectsLst The list of the testToExecuteLst.
+	 * @return ArrayList The ObservableList of subject names.
 	 */
 	public ArrayList<String> getTestToExecuteNames(ArrayList<TestToExecute> testToExecuteLst) {
 		// ObservableList<String> testToExecuteNames =
@@ -382,8 +380,9 @@ public class TestToExecuteController {
 	 * Checks the inputs for creating a new question.
 	 *
 	 * @param selectedTest The TestToExecute to check the inputs for.
+	 * @param user
 	 * 
-	 * @return An Object representing the new TestToExecute if the inputs are valid,
+	 * @return Object representing the new TestToExecute if the inputs are valid,
 	 *         or a String with an error message if the inputs are not invalid.
 	 */
 	public Object checkInputs(TestToExecute selectedTest, User user) {
@@ -409,8 +408,8 @@ public class TestToExecuteController {
 	/**
 	 * creates and returns a Msg for inserting a TestToExecute to DB.
 	 *
-	 * @param newTestToExecute The newTestToExecute to insert.
-	 * @return A Msg object representing the database insert message.
+	 * @param t newTestToExecute The newTestToExecute to insert.
+	 * @return Msg object representing the database insert message.
 	 */
 	public Msg insertTestToExecute(TestToExecute t) {
 		Msg msg = new Msg(MsgType.insert);

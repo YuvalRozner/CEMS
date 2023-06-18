@@ -22,7 +22,6 @@ import javafx.scene.text.Text;
  * The controller class for the Approve Changes screen in the GUI.
  * This class handles the logic and behavior of the screen's components.
  * 
- * @see HodScreen
  * @author Mor Shmuel
  */
 public class ApproveChangesController extends AbstractController{

@@ -18,7 +18,9 @@ import enteties.CemsFile;
 public class CemsFileController {
 	/**
 	 * make path file to File.
+	 * 
 	 * @param message path of the file.
+	 * @return Msg
 	 */
 	  public Msg createMsgWithFile(String message)
 	  {  
@@ -49,6 +51,7 @@ public class CemsFileController {
 	  }
 	  /**
 	   * take the file in the massage put in the data in the original file and download it in the right location.
+	   * 
 	   * @param msg
 	   */
 	  public void saveFile(Msg msg){

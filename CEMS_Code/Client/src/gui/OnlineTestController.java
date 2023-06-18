@@ -425,8 +425,6 @@ public class OnlineTestController extends AbstractController implements CountDow
      * Handles the situation when the test is locked and cannot be submitted.
      * Updates the necessary data, shows an error alert, and inserts the answers and grade into the database.
      * If the flagEndOrMiddle is set to "End", the grade is set to 0.
-     *
-     * @param timeOfStudent The time taken by the student to complete the test.
      */
     public void testIsLockCantSubmmit() {
     	
@@ -460,8 +458,6 @@ public class OnlineTestController extends AbstractController implements CountDow
 
 	/**
 	 * Handles the case when the student has exceeded the allowed time for the test.
-	 *
-	 * @param timeOfStudent The time taken by the student to complete the test (in minutes).
 	 */
 	public void timeOfStudentIsOverLoad() {
 		notification.showErrorAlert("You have exceeded the allowed time!");

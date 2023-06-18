@@ -32,7 +32,9 @@ public class UserController {
 	 * Generates a message to update the "loggedin" status of a user to "no" in the database.
 	 *
 	 * @param user The User object representing the user to log out.
-	 * @return The generated Msg object for the logout update.
+	 * @param loggedin
+	 * 
+	 * @return Msg The generated Msg object for the logout update.
 	 */
 	public Msg getLoggedinMsg(User user, String loggedin) {
 		Msg msg;
@@ -161,8 +163,8 @@ public class UserController {
 	/**
 	 * Generates a message to select a user (hod) from the database based on the testToExecuteCode.
 	 *
-	 * @param testToExecuteCode The course number of the hod to select by.
-	 * @return The generated Msg object for the user selection.
+	 * @param testCode testToExecuteCode The course number of the hod to select by.
+	 * @return Msg The generated Msg object for the user selection.
 	 */
 	public Msg selectHodBystudentTestToEcecuteCode(Integer testCode) {
 		Msg msg = new Msg(MsgType.select);
@@ -183,8 +185,8 @@ public class UserController {
 	/**
 	 * Generates a message to select a user from the database based on the id.
 	 *
-	 * @param id The id of the user to select.
-	 * @return The generated Msg object for the user selection.
+	 * @param studentId id The id of the user to select.
+	 * @return Msg The generated Msg object for the user selection.
 	 */
 	public static Msg selectUserById(String studentId) {
 		Msg msg = new Msg(MsgType.select);

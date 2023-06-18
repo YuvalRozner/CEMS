@@ -17,7 +17,9 @@ public class RequestController {
      * creates and returns a Request object base on the data in a TestToExecute object.
      *
      * @param test The TestToExecute to create request by.
-     * @return An Object representing the Request if input are valid or error String if inputs are not valid.
+     * @param hod
+     * @param lecturer
+     * @return Object representing the Request if input are valid or error String if inputs are not valid.
      */
 	public Object createRequestByTest(TestToExecute test, User hod, User lecturer) {
 		String error = new String("");
