@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import JDBC.Msg;
+import JDBC.MsgType;
 import client.ChatClient;
 import controllers.CountDown;
 import controllers.QuestionController;
@@ -15,6 +16,7 @@ import controllers.TimeController;
 import enteties.Question;
 import enteties.StudentTest;
 import enteties.TestToExecute;
+import enteties.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -250,7 +252,7 @@ public class OnlineTestController extends AbstractController implements CountDow
      * Compares the answers of each student to identify potential copies.
      * pop massage at the right lecturer with information on the students who copied answers.
      */
-    public void cheakCopy() {
+    public void checkCopy() {
     	HashMap<StudentTest, StudentTest> studentWhoCopy = new HashMap<>();
     	
     	//get the correct answers of a test
@@ -278,14 +280,20 @@ public class OnlineTestController extends AbstractController implements CountDow
         		}
         	}
         }
-        // to itearte hashmap
+        String poptext = "The following students might cheat and copy in test code "+code+":\n";
         for (Entry<StudentTest, StudentTest> entry : studentWhoCopy.entrySet()) {
         	StudentTest key = entry.getKey();
         	StudentTest value = entry.getValue();
-        	System.out.println(key.getUser().getName()+ " copy from " + value.getUser().getName());
-            System.out.println("Key: " + key + ", Value: " + value);
+        	poptext += "\t " + key.getUser().getName()+ " <---> " + value.getUser().getName()+"\n";
         }
-        
+        if(!studentWhoCopy.isEmpty()) {
+        	Msg popMsg = new Msg(MsgType.pop);
+        	User lecturer = new User();
+        	lecturer.setId(testToExecute.getLecturerId());
+        	popMsg.setUser(lecturer);
+        	popMsg.setPopText(poptext);
+        	sendMsg(popMsg);
+        }
     }
 
     /**
@@ -308,7 +316,7 @@ public class OnlineTestController extends AbstractController implements CountDow
         if (needToLock == 0) {
             msg = testToExecuteController.getMsgToLockTest(StartTestController.getTestToExecute());
             sendMsg(msg);
-            cheakCopy();
+            checkCopy();
         }
     }
     
@@ -511,7 +519,7 @@ public class OnlineTestController extends AbstractController implements CountDow
 				flagEndOrMiddle="Middle";
 				testIsLockCantSubmmit();
 				updateAverageAndMedian();
-				cheakCopy();
+				checkCopy();
 		}});
 		alert.showConfirmationAlertWithOnlyOk("Please click OK to continue the process","Sorry, but the test got locked by your lecturer..");
 	}
