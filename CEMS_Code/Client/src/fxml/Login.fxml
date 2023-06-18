@@ -32,8 +32,8 @@
             </Label>
          </children>
       </VBox>
-      <PasswordField fx:id="passwordTxt" layoutX="100.0" layoutY="311.0" style="-fx-background-radius: 7; -fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-border-radius: 7;" text="SaraiShinold123" />
-      <TextField fx:id="userNameTxt" layoutX="100.0" layoutY="277.0" style="-fx-background-radius: 7; -fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-border-radius: 7;" text="SaraiShinold" />
+      <PasswordField fx:id="passwordTxt" layoutX="100.0" layoutY="311.0" promptText="password" style="-fx-background-radius: 7; -fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-border-radius: 7;" />
+      <TextField fx:id="userNameTxt" layoutX="100.0" layoutY="277.0" promptText="username" style="-fx-background-radius: 7; -fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-border-radius: 7;" />
       <ImageView fitHeight="28.0" fitWidth="22.0" layoutX="237.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/Blue%20Modern%20Login%20Page%20Desktop%20Prototype-2.png" />
