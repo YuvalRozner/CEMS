@@ -336,15 +336,8 @@ public class ApproveGradeController extends AbstractController implements Tests{
     		if (t.getRadioButton().isSelected()) {
     			TestTable.remove(t);
     			break;
-    		}
-    			
+    		}		
     	}
-    	
-    	//reasonTextField.setText("");
-    	//newGradeTextField.setText("");
-    	//testComboBox.setValue(null);
-    	//table.getItems().clear();
-		//table.refresh();
     }
     
     /**

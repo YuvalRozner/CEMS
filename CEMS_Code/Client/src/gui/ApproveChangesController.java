@@ -96,7 +96,7 @@ public class ApproveChangesController extends AbstractController{
     	if (msgReceived != null){ request = msgReceived.convertData(Request.class); }
     	
     	try {
-        	if(request==null) {notification.showErrorAlert("There are no tests to confirm grades for."); return;}
+        	if(request==null) {notification.showErrorAlert("There is no change requests"); return;}
         	for (Request req : request) {
    			 req.setNewRadioButton();
    	         requestToggleGroup.getToggles().add((RadioButton)req.getRadioButton()); 

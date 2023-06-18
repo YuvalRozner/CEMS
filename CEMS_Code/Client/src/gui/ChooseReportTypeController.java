@@ -165,8 +165,7 @@ public class ChooseReportTypeController extends AbstractController{
                 show.setDisable(false);
             }
             else {
-            	show.setDisable(true);
-            	notification.showWarningAlert("You must choose from the box!");
+            	show.setDisable(true);  	
             }
         });
     }
@@ -197,8 +196,7 @@ public class ChooseReportTypeController extends AbstractController{
                 show.setDisable(false);
             }
             else {
-            	show.setDisable(true);
-            	notification.showWarningAlert("You must choose from the box!");
+            	show.setDisable(true);           	
             }
         });
     }
@@ -229,9 +227,7 @@ public class ChooseReportTypeController extends AbstractController{
                 show.setDisable(false);
             }
             else {
-            	show.setDisable(true);
-            	notification.showWarningAlert("You must choose from the box!");
-            	
+            	show.setDisable(true);  	
             }
         });
     }

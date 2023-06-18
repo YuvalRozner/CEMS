@@ -95,11 +95,10 @@ public class ShowGradeController extends AbstractController implements Tests {
 						return new SimpleIntegerProperty(value).asObject();
 					}
 				});
-		NameCourseCol
-				.setCellValueFactory(new Callback<CellDataFeatures<StudentTest, String>, ObservableValue<String>>() {
+		NameCourseCol.setCellValueFactory(new Callback<CellDataFeatures<StudentTest, String>, ObservableValue<String>>() {
 					@Override
 					public ObservableValue<String> call(CellDataFeatures<StudentTest, String> param) {
-						return new SimpleStringProperty(param.getValue().getTestToExecute().getDate());
+						return new SimpleStringProperty(param.getValue().getTestToExecute().getCourseName());
 					}
 				});
 		DateCol.setCellValueFactory(new Callback<CellDataFeatures<StudentTest, String>, ObservableValue<String>>() {
