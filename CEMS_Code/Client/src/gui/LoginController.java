@@ -42,7 +42,7 @@ public class LoginController extends AbstractController{
     	User user = ChatClient.user;
     	if(user==null) { notification.showErrorAlert("cant find this usename."); return false;}
     	if(!user.getPassword().equals(password)) { notification.showErrorAlert("username or password are wrong."); return false;}
-    	//if(user.getLoggedin().equals("yes")) { notification.showErrorAlert("this user is already loggedin in another device."); return false;}
+    	if(user.getLoggedin().equals("yes")) { notification.showErrorAlert("this user is already loggedin in another device."); return false;}
     	Msg msg  = userController.getLoggedinMsg(user, "yes");
     	System.out.println("login msg: "+ msg);
     	sendMsg(msg);
