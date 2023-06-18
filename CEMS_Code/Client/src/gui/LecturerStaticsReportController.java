@@ -30,7 +30,7 @@ import notifications.NotificationAlertsController;
  * 
  * @author Mor Shmuel 
  */
-public class LecturerStaticsReportController extends HodScreen{
+public class LecturerStaticsReportController extends AbstractController{
 
 	/**
 	 * Selected lecturer or the student users for the report.
