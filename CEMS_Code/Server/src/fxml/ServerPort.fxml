@@ -19,7 +19,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="595.0" prefWidth="645.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ServerController">
+<Pane prefHeight="642.0" prefWidth="645.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ServerController">
    <children>
       <Pane layoutX="9.0" layoutY="77.0" prefHeight="548.0" prefWidth="240.0" style="-fx-background-color: #92bce3;" />
       <Circle fill="WHITE" layoutX="41.0" layoutY="553.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />
@@ -53,7 +53,7 @@
             </ImageView>
          </children>
       </HBox>
-      <Label layoutX="9.0" layoutY="365.0" text="Console" textFill="#00c2cb">
+      <Label layoutX="13.0" layoutY="410.0" text="Console" textFill="#00c2cb">
          <font>
             <Font name="Comic Sans MS Bold" size="25.0" />
          </font>
@@ -61,7 +61,7 @@
             <InnerShadow height="0.0" radius="0.0" width="0.0" />
          </effect>
       </Label>
-      <TextArea fx:id="console" editable="false" layoutX="9.0" layoutY="401.0" prefHeight="143.0" prefWidth="619.0" style="-fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-background-radius: 7; -fx-border-radius: 7;">
+      <TextArea fx:id="console" editable="false" layoutX="13.0" layoutY="446.0" prefHeight="143.0" prefWidth="619.0" style="-fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-background-radius: 7; -fx-border-radius: 7;">
          <font>
             <Font size="11.0" />
          </font>
@@ -73,7 +73,7 @@
             <TableColumn fx:id="clientStatus" prefWidth="120.0" text="Status" />
         </columns>
       </TableView>
-      <Button fx:id="btnExit" layoutX="510.0" layoutY="553.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@../fxml/Button.css" text="Exit">
+      <Button fx:id="btnExit" layoutX="514.0" layoutY="598.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@../fxml/Button.css" text="Exit">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font></Button>
@@ -148,6 +148,17 @@
          <effect>
             <InnerShadow height="0.0" radius="0.0" width="0.0" />
          </effect>
+      </Label>
+      <Button layoutX="492.0" layoutY="408.0" mnemonicParsing="false" onAction="#importUserBtn" prefHeight="31.0" prefWidth="112.0" stylesheets="@Button.css" text="Import Users">
+         <font>
+            <Font name="Comic Sans MS Bold" size="13.0" />
+         </font>
+      </Button>
+      <TextField fx:id="userFilePath" layoutX="323.0" layoutY="410.0" promptText="Path" style="-fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-background-radius: 7; -fx-border-radius: 7;" />
+      <Label layoutX="205.0" layoutY="414.0" text="Insert File Path:">
+         <font>
+            <Font name="Comic Sans MS Bold" size="13.0" />
+         </font>
       </Label>
    </children>
 </Pane>

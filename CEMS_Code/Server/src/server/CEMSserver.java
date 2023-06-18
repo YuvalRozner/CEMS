@@ -1,10 +1,13 @@
 package server;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import JDBC.DB_controller;
 import JDBC.DataBaseConnector;
@@ -235,5 +238,48 @@ public class CEMSserver extends AbstractServer {
 			serverController.addConsole("error in sending msg to client.");
 			System.out.println("error in sending msg to client.");
 		}
+	}
+
+	/**
+	* Utility import method.
+	* Imports users users.txt  to the DB by executing Update queries.
+	* @param string 
+	 * @return 
+	* @throws SQLException 
+	*/
+	public boolean importUsers(String string) throws SQLException {
+		if (conn == null)
+			return false;
+		java.sql.Statement stmt= conn.createStatement();
+		String queryStr;
+		String filePath = string;
+        try {
+        	BufferedReader br = new BufferedReader(new FileReader(filePath));
+            String line;
+            while ((line = br.readLine()) != null) {
+            	String[] words = line.split(",");
+            	Msg msg1 = new Msg(MsgType.insert);
+            	msg1.setTableToUpdate("user");
+            	msg1.setColNames("id, name, username, password, premission, loggedin");
+            	ArrayList<Object> temp = new ArrayList<Object>();
+            	for (int i =0 ; i< 6;i++) {
+            		temp.add(words[i]);
+            		System.out.println("words[i] : " + i + " "+words[i]);
+            	}		
+            	msg1.setValues(temp);
+            	System.out.println("words : " + words);
+            	System.out.println("temp : " + temp);
+            	queryStr = DB_controller.createINSERTquery(msg1.getTableToUpdate(), msg1.getColNames(), msg1.getValues());					
+				serverController.addConsole("query: ->" + queryStr + ".\n");
+				System.out.println("query: ->" + queryStr);
+				stmt.executeUpdate(queryStr);
+            }}
+        	catch (IOException e) {
+                return false;
+            } catch (SQLException e1) {
+                return false;
+            }
+		return true;
+        
 	}
 }

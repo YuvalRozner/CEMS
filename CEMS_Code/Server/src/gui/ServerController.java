@@ -2,6 +2,7 @@ package gui;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.sql.SQLException;
 
 import JDBC.Msg;
 import JDBC.MsgType;
@@ -17,6 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import notifications.NotificationAlertsController;
 import ocsf.server.ConnectionToClient;
 import server.CEMSserver;
 
@@ -82,8 +84,18 @@ public class ServerController {
 	 */
 	@FXML
 	private TextField serverIdTxt;
-
-    /**
+	/**
+	 * input field.
+	 */
+	@FXML
+    private TextField userFilePath;
+	/**
+	 * object to use the notifications class.
+	 */
+    private static NotificationAlertsController notification = new NotificationAlertsController();
+	
+	
+	/**
      * Handles the event when the "Connect" button is clicked.
      *
      * @param event The action event.
@@ -167,6 +179,16 @@ public class ServerController {
 		clientsTable.setItems(connectedObserv);
 	}
 
+	
+   @FXML
+    void importUserBtn(ActionEvent event) throws SQLException {
+	   if (cemsServer == null )
+		   notification.showErrorAlert("Cant import users. Please connected to the server");
+	   else if (!cemsServer.importUsers(userFilePath.getText()))
+		   notification.showErrorAlert("Cant import users. Please check that the File path is correct and you data is correct!");
+	   
+    }
+	
     /**
      * Adds the given IP to the connectedObserv list.
      *
