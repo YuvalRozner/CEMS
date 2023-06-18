@@ -67,7 +67,6 @@ public class TestToExecute {
 		this.numberOfStudentsStarted = numberOfStudentsStarted;
 		this.numberOfStudentsFinished = numberOfStudentsFinished;
 		this.numberOfStudents = numberOfStudents;
-
 	}
 
 	/*
@@ -811,5 +810,4 @@ public class TestToExecute {
 	public void setNumberOfStudents(Integer numberOfStudents) {
 		this.numberOfStudents = numberOfStudents;
 	}
-
 }

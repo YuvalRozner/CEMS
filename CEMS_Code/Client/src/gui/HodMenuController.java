@@ -35,14 +35,11 @@ public class HodMenuController extends AbstractController implements Menu{
      * and displaying the pop-up requests if there are any.
      */
 	public HodMenuController(){
-		
 		Msg msg = requestController.selectFoundRequest(ChatClient.user.getId());
     	sendMsg(msg);
     	if (msgReceived != null)
     		request = msgReceived.convertData(Request.class);
-    	
     	//Display the pop-up requests if there are any
-    	
     	if(request!=null) {
     		popMessage("You got a new Request waiting for you.");
        	}

@@ -236,6 +236,4 @@ public class User implements Serializable{
 	public RadioButton getRadioButton() {
 		return radioButton;
 	}
-	
-	
 }

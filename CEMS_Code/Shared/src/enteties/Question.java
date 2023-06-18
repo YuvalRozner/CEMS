@@ -34,12 +34,10 @@ public class Question {
 	RadioButton radioButton;
 	TextField textField;
 	
-	
 	//private CheckBox select;
 	//private TextField points;
 	private Button showQ = new Button();
 	
-
 	/**
 	 * empty constructor.
 	 */

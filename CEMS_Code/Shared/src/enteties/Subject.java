@@ -19,8 +19,6 @@ public class Subject {
 	CheckBox checkbox;
 	RadioButton radioButton;
 	
-	
-	
 	/**
 	 * empty constructor.
 	 */
@@ -164,5 +162,4 @@ public class Subject {
 	public RadioButton getRadioButton() {
 		return radioButton;
 	}
-
 }

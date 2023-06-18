@@ -77,5 +77,4 @@ public class TimeController {
 	    int additionalSeconds = (int) (minutes * 60);
 	    totalSeconds += additionalSeconds;
 	}
-
 }

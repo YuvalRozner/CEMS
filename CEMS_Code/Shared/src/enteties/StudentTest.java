@@ -43,8 +43,6 @@ public class StudentTest {
 	private CheckBox select;
 	private TextField note;
 	
-	
-	
 	/**
 	 * get information to copy part.
 	 * @param answers
@@ -80,7 +78,6 @@ public class StudentTest {
 	 * return string that build from two notes , one that the lecturer gave on the test and ond on the grade.
 	 * @return
 	 */
-	
 	public String getAllNotes() {
 		if (changeReason.equals("")) {
 			return lecturerNotes;

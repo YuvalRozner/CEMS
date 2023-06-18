@@ -33,6 +33,7 @@ public class ManualTestController extends AbstractController implements CountDow
 	 */
 	@FXML
 	private Button donebtn,downbtn,upbtn;
+	
 	 /**
      * Labels for displaying test information.
      */
@@ -188,7 +189,6 @@ public class ManualTestController extends AbstractController implements CountDow
 		sendMsg(msg);		
 	}
 	
-	
 	/**
 	 * Handles the submission of a test by a student.
 	 *
@@ -240,7 +240,6 @@ public class ManualTestController extends AbstractController implements CountDow
 		NotificationAlertsController alert = new NotificationAlertsController();
 		alert.showInformationAlert("The test was download successfully!");
 		timeController.startTimer();
-
 	}
 
 	/**
@@ -255,7 +254,6 @@ public class ManualTestController extends AbstractController implements CountDow
 		sendMsg(msg);
 		NotificationAlertsController alert = new NotificationAlertsController();
 		alert.showInformationAlert("The test was uploaded successfully!");
-
 	}
 
 	/**
@@ -326,7 +324,6 @@ public class ManualTestController extends AbstractController implements CountDow
 			checkIfStudentIsTheLastOne();
 			updateAverageAndMedian();	
 		}
-	
 	}
 
 	/**

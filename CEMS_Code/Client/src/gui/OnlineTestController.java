@@ -155,11 +155,9 @@ public class OnlineTestController extends AbstractController implements CountDow
            
             toggleGroups.add(answerGroup);
         }
-
         // Add the grid pane to the data VBox
         dataVbox.getChildren().add(gridPane);
         timeController.startTimer();
-        
     }
 
     /**
@@ -185,7 +183,6 @@ public class OnlineTestController extends AbstractController implements CountDow
         }
     }
     
-
     /**
      * Handles the action when the Submit button is clicked.
      * This method is triggered when the Submit button is clicked by the user to submit their test.

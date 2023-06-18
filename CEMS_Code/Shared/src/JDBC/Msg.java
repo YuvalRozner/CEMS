@@ -9,6 +9,14 @@ import java.util.List;
 import enteties.CemsFile;
 import enteties.User;
 
+/**
+ * The {@code Msg} class represents a message object used for communication between the client and the server.
+ * It encapsulates various components of a database query, such as SELECT, FROM, WHERE, UPDATE, and INSERT INTO clauses,
+ * as well as additional data and metadata related to the message.
+ * The class provides methods for setting and retrieving different parts of the message, such as the message type, query components,
+ * data, file objects, and user information.
+ * It also includes utility methods for converting the data stored in the message to a list of objects of a specified type.
+ */
 public class Msg implements Serializable{
 	
 	private static final long serialVersionUID = 1L; //default serial
@@ -432,6 +440,4 @@ public class Msg implements Serializable{
 	public void setDuration(Integer duration) {
 		this.duration = duration;
 	}
-	
-	
 }

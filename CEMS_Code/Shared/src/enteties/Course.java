@@ -22,7 +22,6 @@ public class Course {
 	CheckBox checkbox;
 	RadioButton radioButton;
 
-
 	/**
 	 * empty constructor.
 	 */

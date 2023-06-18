@@ -360,5 +360,4 @@ public class LecturerStaticsReportController extends AbstractController{
         }
         return median;
 	}
-	
 }
