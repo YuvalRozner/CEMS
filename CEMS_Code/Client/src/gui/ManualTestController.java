@@ -23,9 +23,11 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import notifications.NotificationAlertsController;
 
-
-
-
+/**
+ * Controller class for the ManualTest screen.
+ * 
+ * @author Lior Zucker 
+ */
 public class ManualTestController extends AbstractController implements CountDown,Testing {
 	
 	/**
@@ -88,7 +90,6 @@ public class ManualTestController extends AbstractController implements CountDow
     @FXML
     protected void initialize() { 
     	setInfo();
-    	timeController.startTimer();
     }
     
     /**
@@ -244,6 +245,7 @@ public class ManualTestController extends AbstractController implements CountDow
 		sendMsg(msg);
 		NotificationAlertsController alert = new NotificationAlertsController();
 		alert.showInformationAlert("The test was download successfully!");
+		timeController.startTimer();
 
 	}
 
@@ -333,6 +335,12 @@ public class ManualTestController extends AbstractController implements CountDow
 	
 	}
 
+	/**
+	 * gets a pop message about a change in duration and act properly.
+	 * 
+	 * @param testCode the test code.
+	 * @param duration the new duration.
+	 */
 	@Override
 	public void testdurationGotChanged(String testCode, Integer duration) {
 		if(!testCode.equals(Integer.toString(StartTestController.getTestToExecute().getTestCode()))) return;
