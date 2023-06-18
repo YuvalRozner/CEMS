@@ -51,7 +51,7 @@ public class ClientConnectionController extends AbstractController{
             }  
             start("login", "clientConnection");
         } catch(Throwable t) {
-            System.out.println("input ip and port - error connecting.");
+            System.out.println("input ip and port - error connecting."); return;
         }    	
     }
 }
