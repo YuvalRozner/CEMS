@@ -16,7 +16,7 @@ public class StudentTestController {
 	 * @param approved   The approval status for the test.
 	 * @param timePassed The time passed by the student to complete the test (in
 	 *                   minutes).
-	 * @param answers    The answers provided by the student.
+	 * @param ansewrs    The answers provided by the student.
 	 * @param grade      The grade obtained by the student.
 	 * @param id         The ID of the student.
 	 * @param code       The code of the test.
@@ -55,7 +55,8 @@ public class StudentTestController {
 	 * Constructs a database insert message to insert StudentTest.
 	 *
 	 * @param user The User object for whom to insert the Test..
-	 * @return A Msg object representing the database insert message.
+	 * @param testToExecute
+	 * @return Msg object representing the database insert message.
 	 */
 	public Msg insertStudentTest(TestToExecute testToExecute, User user) {
 		Msg msg = new Msg(MsgType.insert);
@@ -115,7 +116,8 @@ public class StudentTestController {
 	 * grade and lecturerNote.
 	 *
 	 * @param st The StudentTest object to be updated.
-	 * @return A Msg object representing the database select message.
+	 * @param student
+	 * @return Msg object representing the database select message.
 	 */
 	public Msg getMsgToUpdateStudentTests(StudentTest st, User student) {
 		Msg msg = new Msg(MsgType.update);
@@ -161,8 +163,8 @@ public class StudentTestController {
 	/**
 	 * Constructs a database select message to retrieve StudentTest.
 	 *
-	 * @param The ID for whom to retrieve the StudentTest.
-	 * @return A Msg object representing the database select message.
+	 * @param ID The ID for whom to retrieve the StudentTest.
+	 * @return Msg object representing the database select message.
 	 */
 	public Msg getMsgForStudentTestsByID(String ID) {
 		Msg msg = new Msg(MsgType.select);

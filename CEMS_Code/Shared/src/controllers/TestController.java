@@ -56,7 +56,7 @@ public class TestController {
      *
      * @param t The Test object to be inserted.
      * @param newTest_question 
-     * @return A Msg object representing the database insert message.
+     * @return Msg object representing the database insert message.
      */
 	public Msg insertTest(Test t, ArrayList<Question> newTest_question) {
 		Msg msgT = new Msg(MsgType.insert);

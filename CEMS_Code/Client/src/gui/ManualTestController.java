@@ -217,8 +217,6 @@ public class ManualTestController extends AbstractController implements CountDow
 
 	/**
 	 * Handles the case when the student has exceeded the allowed time for the test.
-	 *
-	 * @param timeOfStudent The time taken by the student to complete the test (in minutes).
 	 */
 	public void timeOfStudentIsOverLoad() {
 		Msg msg;
@@ -266,8 +264,6 @@ public class ManualTestController extends AbstractController implements CountDow
 
 	/**
 	 * Handles the case when the test is locked in the middle and the student cannot submit the test.
-	 *
-	 * @param timeOfStudent The time taken by the student to complete the test (in minutes).
 	 */
 	public void testIsLockCantSubmmit() {
 		msg = testToExecuteController.updateNumberOfStudenByOne(1,Integer.toString(StartTestController.getTestToExecute().getTestCode()),"cantSubmit");
@@ -306,7 +302,7 @@ public class ManualTestController extends AbstractController implements CountDow
 	/**
 	 * Sets the text of the countdown label to the specified string.
 	 *
-	 * @param countdownText The string to be set as the text of the countdown label.
+	 * @param s countdownText The string to be set as the text of the countdown label.
 	 */
 	@Override
 	public void setTextCountdown(String s) {

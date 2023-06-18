@@ -106,7 +106,7 @@ public class Question {
      * @param correctAnswer the index of the correct answer
      * @param instructions  the instructions for the question
      * @param courses
-     * @param subject
+     * @param subjectName
      */
 	public Question(String id, Integer number, String question, String subjectNum, String lecturerId, String[] answers, Integer correctAnswer, String instructions, ArrayList<Course> courses, String subjectName) {
 		this.id = id;
@@ -128,7 +128,10 @@ public class Question {
 	 * @param question
 	 * @param subjectNum
 	 * @param lecturerId
-	 * @param answers - ans1,ans2,ans3,ans4
+	 * @param ans1
+	 * @param ans2
+	 * @param ans3 
+	 * @param ans4
 	 * @param correctAnswer
 	 * @param instructions
 	 * @param numberCourse
@@ -155,7 +158,10 @@ public class Question {
      * @param question      the question text
      * @param subjectNum    the subject number
      * @param lecturerId    the lecturer ID
-     * @param answers       the array of answers
+     * @param ans1
+	 * @param ans2
+	 * @param ans3 
+	 * @param ans4
      * @param correctAnswer the index of the correct answer
      * @param instructions  the instructions for the question
      * @param points
@@ -180,7 +186,10 @@ public class Question {
 	 * @param question
 	 * @param subjectNum
 	 * @param lecturerId
-	 * @param answers - ans1,ans2,ans3,ans4
+	 * @param ans1
+	 * @param ans2
+	 * @param ans3 
+	 * @param ans4
 	 * @param correctAnswer
 	 * @param instructions
 	 * @param numberCourse
@@ -290,7 +299,7 @@ public class Question {
 	/**
      * Gets the array of answers.
      *
-     * @return the array of answers
+     * @return String[] the array of answers
      */
 	public String[] getAnswers() {
 		return answers;
@@ -536,7 +545,7 @@ public class Question {
 	/**
      * Gets the button to show the question (for JavaFX).
      *
-     * @return the button to show the question
+     * @return Button the button to show the question
      */
 	public Button getShowQ() {
 		return showQ;
@@ -544,8 +553,6 @@ public class Question {
 
 	/**
      * Sets the button to show the question (for JavaFX).
-     *
-     * @param showQ the button to show the question
      */
 	public void setNewShowQ() {
 		showQ.setText("Show");

@@ -88,9 +88,8 @@ public class CEMSserver extends AbstractServer {
 	/**
 	 * This method handles any messages received from the client.
 	 * 
-	 * @param msg    The message received from the client.
+	 * @param msgObj    The message received from the client.
 	 * @param client The connection from which the message originated.
-	 * @param
 	 */
 	public void handleMessageFromClient(Object msgObj, ConnectionToClient client) {
 		Msg msg = (Msg) msgObj;

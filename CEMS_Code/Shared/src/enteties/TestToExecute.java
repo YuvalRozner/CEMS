@@ -165,7 +165,16 @@ public class TestToExecute {
 	 * @param numberOfStudentsStarted  the number of students who started the test
 	 * @param numberOfStudentsFinished the number of students who finished the test
 	 * @param numberOfStudents         the total number of students
-	 * @param distribution             the distribution array
+	 * @param dis1             the distribution array
+	 * @param dis2
+	 * @param dis3
+	 * @param dis4
+	 * @param dis5
+	 * @param dis6
+	 * @param dis7
+	 * @param dis8
+	 * @param dis9
+	 * @param dis10
 	 */
 	public TestToExecute(Integer testCode, String testId, String testingType, String date, Double average,
 			Double median, String lock, Integer timeExtension,
@@ -467,7 +476,7 @@ public class TestToExecute {
 	/**
 	 * Returns the distribution array.
 	 *
-	 * @return the distribution array
+	 * @return Integer[] the distribution array
 	 */
 	public Integer[] getDistribusion() {
 		return distribusion;
@@ -476,7 +485,7 @@ public class TestToExecute {
 	/**
 	 * Sets the distribution array.
 	 *
-	 * @param distribution the distribution array to set
+	 * @param distribusion the distribution array to set
 	 */
 	public void setDistribusion(Integer[] distribusion) {
 		this.distribusion = distribusion;
