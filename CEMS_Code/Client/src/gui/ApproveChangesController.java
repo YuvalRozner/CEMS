@@ -84,7 +84,7 @@ public class ApproveChangesController extends AbstractController{
     	if (msgReceived != null){ request = msgReceived.convertData(Request.class); }
     	
     	try {
-        	if(request==null) {notification.showErrorAlert("There is no change requests"); return;}
+    		if(request==null) {return;}
         	for (Request req : request) {
    			 req.setNewRadioButton();
    	         requestToggleGroup.getToggles().add((RadioButton)req.getRadioButton()); 

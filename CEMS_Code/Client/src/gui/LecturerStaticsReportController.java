@@ -7,7 +7,6 @@ import JDBC.Msg;
 //import JDBC.MsgType;
 import client.ChatClient;
 import enteties.Course;
-import enteties.Request;
 import enteties.StudentTest;
 import enteties.TestToExecute;
 import enteties.User;
