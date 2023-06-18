@@ -1,9 +1,9 @@
 package gui;
 
 import java.util.ArrayList;
+
 import JDBC.Msg;
 import client.ChatClient;
-import controllers.TestToExecuteController;
 import enteties.TestToExecute;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,7 +13,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import notifications.NotificationAlertsController;
 
 /**
  * Controller class for the LecturerTestView screen.
@@ -44,14 +43,6 @@ public class LecturerTestViewController extends AbstractController {
      * the list of running test (type TestToExecute) got from DB.
      */
     private ArrayList<TestToExecute> testLst;
-    /**
-	 * object to use the TestToExecuteController class method.
-	 */
-    private static TestToExecuteController testToExecuteController = new TestToExecuteController();
-    /**
-	 * object to use the notifications class.
-	 */
-    private static NotificationAlertsController notification = new NotificationAlertsController();
     /**
 	 * object to save the TestToExecute chosen by radio button.
 	 */

@@ -4,6 +4,13 @@ import JDBC.Msg;
 import JDBC.MsgType;
 import client.ChatClient;
 import client.ClientUI;
+import controllers.CourseController;
+import controllers.QuestionController;
+import controllers.RequestController;
+import controllers.StudentTestController;
+import controllers.SubjectController;
+import controllers.TestController;
+import controllers.TestToExecuteController;
 import controllers.UserController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -23,12 +30,39 @@ public abstract class AbstractController implements SceneSetter {
     /**
 	 * object to use the UserController class method.
 	 */
-    private static UserController userController = new UserController();
-    
+    public static UserController userController = new UserController();
+    /**
+	 * object to use the CourseController class method.
+	 */
+    public static CourseController courseController = new CourseController();
+    /**
+	 * object to use the SubjectController class method.
+	 */
+    public static SubjectController subjectController = new SubjectController();
+    /**
+	 * object to use the RequestController class method.
+	 */
+    public static RequestController requestController = new RequestController();
+    /**
+	 * object to use the TestController class method.
+	 */
+    public static TestController testController = new TestController();
+    /**
+	 * object to use the StudentTestController class method.
+	 */
+    public static StudentTestController studentTestController = new StudentTestController();
+    /**
+	 * object to use the TestToExecuteController class method.
+	 */
+    public static TestToExecuteController testToExecuteController = new TestToExecuteController();
+    /**
+	 * object to use the QuestionController class method.
+	 */
+    public static QuestionController questionController = new QuestionController();
     /**
 	 * object to use the notifications class.
 	 */
-    private static NotificationAlertsController popNotification = new NotificationAlertsController();
+    public static NotificationAlertsController notification = new NotificationAlertsController();
 
 	public void start(String fxmlName, String prevScreen) throws Exception {
 		
@@ -133,7 +167,7 @@ public abstract class AbstractController implements SceneSetter {
     }
 	
 	public void popMessage(String msg) {
-		popNotification.showInformationAlert(msg);
+		notification.showInformationAlert(msg);
 	}
 	
 }

@@ -2,13 +2,11 @@ package gui;
 
 import JDBC.Msg;
 import client.ChatClient;
-import controllers.UserController;
 import enteties.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import notifications.NotificationAlertsController;
 
 /**
  * The LoginController class handles the logic and user interface interactions for the login screen.
@@ -22,15 +20,6 @@ public class LoginController extends AbstractController{
     
     @FXML
     private PasswordField passwordTxt;
-    
-    /**
-	 * object to use the UserController class method.
-	 */
-    private static UserController userController = new UserController();
-    /**
-	 * object to use the notifications class.
-	 */
-    private static NotificationAlertsController notification = new NotificationAlertsController();
 
     /**
      * Handles the connect button action event.

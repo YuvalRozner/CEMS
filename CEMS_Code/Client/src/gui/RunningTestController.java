@@ -1,12 +1,10 @@
 package gui;
 
 import java.util.ArrayList;
+
 import JDBC.Msg;
 import JDBC.MsgType;
 import client.ChatClient;
-import controllers.RequestController;
-import controllers.TestToExecuteController;
-import controllers.UserController;
 import enteties.Request;
 import enteties.TestToExecute;
 import enteties.User;
@@ -17,7 +15,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import notifications.NotificationAlertsController;
 
 /**
  * Controller class for the RunningTest screen.
@@ -52,22 +49,6 @@ public class RunningTestController extends AbstractController{
      * the selected (by radio) testToExecute from the list in the table.
      */
     private TestToExecute selectedTest = null;
-    /**
-	 * object to use the TestToExecuteController class method.
-	 */
-    private static TestToExecuteController testToExecuteController = new TestToExecuteController();
-    /**
-	 * object to use the UserController class method.
-	 */
-    private static UserController userController = new UserController();
-    /**
-	 * object to use the RequestController class method.
-	 */
-    private static RequestController requestController = new RequestController();
-    /**
-	 * object to use the notifications class.
-	 */
-    private static NotificationAlertsController notification = new NotificationAlertsController();
     
     /**
      * Constructs a new RunningTestController object.

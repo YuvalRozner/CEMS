@@ -4,10 +4,6 @@ import java.util.ArrayList;
 
 import JDBC.Msg;
 import client.ChatClient;
-import controllers.CourseController;
-import controllers.QuestionController;
-import controllers.SubjectController;
-import controllers.TestController;
 import enteties.Course;
 import enteties.Question;
 import enteties.Subject;
@@ -28,7 +24,6 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import notifications.NotificationAlertsController;
 
 /**
  * Controller class for the Create Test screen.
@@ -100,26 +95,6 @@ public class CreateTestController extends AbstractController{
 	 * the course selected from the comboBox.
 	 */
     private Course selectedCourse;
-    /**
-	 * object to use the SubjectController class method.
-	 */
-    private static SubjectController subjectController = new SubjectController();
-    /**
-	 * object to use the CourseController class method.
-	 */
-    private static CourseController courseController = new CourseController();
-    /**
-	 * object to use the TestController class method.
-	 */
-    private static TestController testController = new TestController();
-    /**
-	 * object to use the QuestionController class method.
-	 */
-    private static QuestionController questionController = new QuestionController();
-    /**
-	 * object to use the notifications class.
-	 */
-    private static NotificationAlertsController notification = new NotificationAlertsController();
     
     /**
      * Default constructor for the CreateTestController class.

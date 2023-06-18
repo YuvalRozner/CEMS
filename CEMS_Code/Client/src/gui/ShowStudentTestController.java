@@ -1,12 +1,11 @@
 package gui;
 
 import java.util.ArrayList;
+
 import JDBC.Msg;
 import client.ChatClient;
-import controllers.QuestionController;
 import enteties.Question;
 import enteties.StudentTest;
-import enteties.Test;
 import enteties.TestToExecute;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -51,11 +50,6 @@ public class ShowStudentTestController extends AbstractController {
      * Labels for displaying points per question.
      */
     ArrayList<Label> pointsLabels = new ArrayList<>();
- 
-    /**
-     * Controller for managing questions.
-     */
-    private static QuestionController questionController = new QuestionController();
     
     /**
      * The state of the screen: {studentShowTest, lecturerHodShowStudentTest, lecturerHodShowTest}.

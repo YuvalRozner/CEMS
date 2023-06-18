@@ -1,9 +1,9 @@
 package gui;
 
 import java.util.ArrayList;
+
 import JDBC.Msg;
 import client.ChatClient;
-import controllers.RequestController;
 import enteties.Request;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,11 +27,6 @@ public class HodMenuController extends AbstractController implements Menu{
 	 * the list of Request for finding if there are any requests waiting .
 	 */
     private ArrayList<Request> request = null;
-    
-    /**
-	 * object to use the RequestController class method.
-	 */
-    private static RequestController requestController = new RequestController();
 	
     /**
      * Constructs a new instance of HodMenuController.

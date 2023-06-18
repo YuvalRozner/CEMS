@@ -6,7 +6,6 @@ import java.util.Set;
 
 import JDBC.Msg;
 import client.ChatClient;
-import controllers.UserController;
 import enteties.Course;
 import enteties.User;
 import javafx.collections.FXCollections;
@@ -17,7 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import notifications.NotificationAlertsController;
 
 /**
  * Controller class for the Choose Report Type screen.
@@ -88,21 +86,6 @@ public class ChooseReportTypeController extends AbstractController{
 	 * string that represent the chosen radio button.
 	 */
     private String reportType;
-    
-    /**
-	 * object to use the UserController class method.
-	 */
-    private static UserController userController = new UserController();
-    /**
-	 * object to use the notifications class.
-	 */
-    private static NotificationAlertsController notification = new NotificationAlertsController();
- 
-    /**
-	 * object to use the LecturerStaticsReportController class.
-	 */
-    LecturerStaticsReportController lecturerStaticsReportController = new LecturerStaticsReportController();
-
     
     /**
      * Default constructor for the ChooseReportTypeController class.

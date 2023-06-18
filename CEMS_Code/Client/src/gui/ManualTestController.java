@@ -8,8 +8,6 @@ import JDBC.MsgType;
 import client.ChatClient;
 import controllers.CemsFileController;
 import controllers.CountDown;
-import controllers.StudentTestController;
-import controllers.TestToExecuteController;
 import controllers.TimeController;
 import enteties.StudentTest;
 import enteties.TestToExecute;
@@ -65,11 +63,7 @@ public class ManualTestController extends AbstractController implements CountDow
      */
 	private TestToExecute testToExecute;
 	private TimeController timeController;
-	private CemsFileController cemsFileController = new CemsFileController();
-	private StudentTestController studentTestController =new StudentTestController();
-	private NotificationAlertsController alert= new NotificationAlertsController();
-	private TestToExecuteController testToExecuteController = new TestToExecuteController();
-	
+	private CemsFileController cemsFileController = new CemsFileController();	
 	
 	/**
 	 * Constructs a new ManualTestController.
@@ -129,11 +123,11 @@ public class ManualTestController extends AbstractController implements CountDow
         // Calculate the time taken by the student
         timeOfStudent = testToExecute.getTest().getDuration() - timeController.timeLeft();
         
-		alert.setOnCancelAction(new Runnable() {	
+        notification.setOnCancelAction(new Runnable() {	
 			@Override public void run() {
 			 timeController.startTimer();
 		}});
-		alert.setOnOkAction(new Runnable() {	
+        notification.setOnOkAction(new Runnable() {	
 			@Override public void run() {
 
 			if(testToExecute.getLock().equals("true")){
@@ -149,7 +143,7 @@ public class ManualTestController extends AbstractController implements CountDow
 			try {start("studentMenu", "login");
 			((Menu)ChatClient.getScreen(ChatClient.user.getPremission()+"Menu")).setWelcome("Welcome " + ChatClient.user.getName());
 			} catch (Exception e) {}}});
-		alert.showConfirmationAlert(ChatClient.user.getName()+" Are you sure ?","After clicking the OK button, the submission is final and there is no option to change it");
+        notification.showConfirmationAlert(ChatClient.user.getName()+" Are you sure ?","After clicking the OK button, the submission is final and there is no option to change it");
 
 	}
 	
@@ -203,7 +197,7 @@ public class ManualTestController extends AbstractController implements CountDow
 	 */
 	public void testIsSubmit(Integer timeOfStudent,Integer grade) {
 		Msg msg;
-		alert.showInformationAlert("The test was successfully submitted!");
+		notification.showInformationAlert("The test was successfully submitted!");
 		try {start("studentMenu", "login");
 		((Menu)ChatClient.getScreen(ChatClient.user.getPremission()+"Menu")).setWelcome("Welcome " + ChatClient.user.getName());} catch (Exception e) {e.printStackTrace();}
 		////////update data
@@ -222,7 +216,7 @@ public class ManualTestController extends AbstractController implements CountDow
 	 */
 	public void timeOfStudentIsOverLoad() {
 		Msg msg;
-		alert.showErrorAlert("You have exceeded the allowed time!");
+		notification.showErrorAlert("You have exceeded the allowed time!");
 		Msg msgUpdate = testToExecuteController.updateNumberOfStudenByOne(1,Integer.toString(StartTestController.getTestToExecute().getTestCode()),"cantSubmit");
 		sendMsg(msgUpdate);
 		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"00000",0,ChatClient.user.getId() ,code.toString());
@@ -272,7 +266,7 @@ public class ManualTestController extends AbstractController implements CountDow
 	public void testIsLockCantSubmmit() {
 		msg = testToExecuteController.updateNumberOfStudenByOne(1,Integer.toString(StartTestController.getTestToExecute().getTestCode()),"cantSubmit");
 		sendMsg(msg);
-		alert.showErrorAlert("The test is locked!\n You will not be able to submit the test!");
+		notification.showErrorAlert("The test is locked!\n You will not be able to submit the test!");
 		if(flagEndOrMiddle.equals("End")) {
 			msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"00000",0,ChatClient.user.getId() ,code.toString());
 		}
@@ -295,13 +289,13 @@ public class ManualTestController extends AbstractController implements CountDow
 	@Override
 	public void testGotManualyLockedByLecturer(String testCode) {
 		if(!testCode.equals(Integer.toString(StartTestController.getTestToExecute().getTestCode()))) return;
-		alert.setOnOkAction(new Runnable() {	
+		notification.setOnOkAction(new Runnable() {	
 			@Override public void run() {
 				flagEndOrMiddle="Middle";
 				testIsLockCantSubmmit();
 				updateAverageAndMedian();
 		}});
-		alert.showConfirmationAlertWithOnlyOk("Please click OK to continue the process","Sorry, but the test got locked by your lecturer..");
+		notification.showConfirmationAlertWithOnlyOk("Please click OK to continue the process","Sorry, but the test got locked by your lecturer..");
 	}
 	/**
 	 * Sets the text of the countdown label to the specified string.
@@ -344,11 +338,11 @@ public class ManualTestController extends AbstractController implements CountDow
 	@Override
 	public void testdurationGotChanged(String testCode, Integer duration) {
 		if(!testCode.equals(Integer.toString(StartTestController.getTestToExecute().getTestCode()))) return;
-		alert.setOnOkAction(new Runnable() {	
+		notification.setOnOkAction(new Runnable() {	
 			@Override public void run() {
 				flagEndOrMiddle="Middle";
 				timeController.updateClock(duration-(testToExecute.getTest().getDuration()));
 		}});
-		alert.showConfirmationAlertWithOnlyOk("Please click OK to continue the process","The duration of the test you are taking got changed.");
+		notification.showConfirmationAlertWithOnlyOk("Please click OK to continue the process","The duration of the test you are taking got changed.");
 	}
 }

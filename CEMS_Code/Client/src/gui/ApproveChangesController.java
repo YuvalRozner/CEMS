@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import JDBC.Msg;
 import client.ChatClient;
-import controllers.RequestController;
 import enteties.Request;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +17,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import notifications.NotificationAlertsController;
 
 /**
  * The controller class for the Approve Changes screen in the GUI.
@@ -64,19 +62,9 @@ public class ApproveChangesController extends AbstractController{
     private Request chooseRequest; 
     
     /**
-	 * object to use the notifications class.
-	 */
-    private static NotificationAlertsController notification = new NotificationAlertsController();
-    
-    /**
 	 * list of Requests.
 	 */
     private ArrayList<Request> request;
-    
-    /**
-	 * object to use the RequestController class method.
-	 */
-    private static RequestController requestController = new RequestController();
     
     /**
      * The observable list of changes for the table.

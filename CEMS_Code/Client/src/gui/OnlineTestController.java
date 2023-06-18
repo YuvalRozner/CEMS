@@ -9,9 +9,6 @@ import JDBC.Msg;
 import JDBC.MsgType;
 import client.ChatClient;
 import controllers.CountDown;
-import controllers.QuestionController;
-import controllers.StudentTestController;
-import controllers.TestToExecuteController;
 import controllers.TimeController;
 import enteties.Question;
 import enteties.StudentTest;
@@ -28,7 +25,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import notifications.NotificationAlertsController;
 
 /**
  * Controller class for the OnlineTest screen.
@@ -67,10 +63,6 @@ public class OnlineTestController extends AbstractController implements CountDow
     /**
      * Controllers
      */
-    private static QuestionController questionController = new QuestionController();
-    private static TestToExecuteController testToExecuteController = new TestToExecuteController();
-    private static StudentTestController studentTestController = new StudentTestController();
-    private NotificationAlertsController alert = new NotificationAlertsController();
     private TimeController timeController;
     
     /**
@@ -118,7 +110,7 @@ public class OnlineTestController extends AbstractController implements CountDow
      */
     @FXML
     protected void initialize() {
-    	if(questions==null) {alert.showErrorAlert("there are no test in this code."); return;}
+    	if(questions==null) {notification.showErrorAlert("there are no test in this code."); return;}
         setInfo();
 
         int questionCounter = 1;
@@ -214,14 +206,14 @@ public class OnlineTestController extends AbstractController implements CountDow
         timeOfStudent = testToExecute.getTest().getDuration() - timeController.timeLeft();
 
         // Prompt for confirmation before submitting the test
-        alert.setOnCancelAction(new Runnable() {
+        notification.setOnCancelAction(new Runnable() {
             @Override
             public void run() {
                 // If the confirmation is canceled, resume the timer
                 timeController.startTimer();
             }
         });
-        alert.setOnOkAction(new Runnable() {
+        notification.setOnOkAction(new Runnable() {
             @Override
             public void run() {
                 // If confirmed, proceed with submitting the test
@@ -240,7 +232,7 @@ public class OnlineTestController extends AbstractController implements CountDow
                 ((Menu)ChatClient.getScreen(ChatClient.user.getPremission()+"Menu")).setWelcome("Welcome " + ChatClient.user.getName());} catch (Exception e) {e.printStackTrace();}
             }
         });
-        alert.showConfirmationAlert(ChatClient.user.getName() + " Are you sure?","After clicking the OK button, the submission is final and there is no option to change it");
+        notification.showConfirmationAlert(ChatClient.user.getName() + " Are you sure?","After clicking the OK button, the submission is final and there is no option to change it");
     }
     /**
      * yuval rozner
@@ -426,7 +418,7 @@ public class OnlineTestController extends AbstractController implements CountDow
         msg = testToExecuteController.insertDistributionByCode(code.toString(), grade, 1);
         sendMsg(msg);
 
-        alert.showInformationAlert("The test was successfully submitted!");
+        notification.showInformationAlert("The test was successfully submitted!");
 
         try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();
         ((Menu)ChatClient.getScreen(ChatClient.user.getPremission()+"Menu")).setWelcome("Welcome " + ChatClient.user.getName());}
@@ -444,7 +436,7 @@ public class OnlineTestController extends AbstractController implements CountDow
         msg = testToExecuteController.updateNumberOfStudenByOne(1, Integer.toString(StartTestController.getTestToExecute().getTestCode()), "cantSubmit");
         sendMsg(msg);
 
-        alert.showErrorAlert("The test is locked!\n You will not be able to submit the test!");
+        notification.showErrorAlert("The test is locked!\n You will not be able to submit the test!");
 
         if (flagEndOrMiddle.equals("End")) {
             grade = 0;
@@ -475,7 +467,7 @@ public class OnlineTestController extends AbstractController implements CountDow
 	 * @param timeOfStudent The time taken by the student to complete the test (in minutes).
 	 */
 	public void timeOfStudentIsOverLoad() {
-		alert.showErrorAlert("You have exceeded the allowed time!");
+		notification.showErrorAlert("You have exceeded the allowed time!");
 		msg = testToExecuteController.updateNumberOfStudenByOne(1,code.toString(),"cantSubmit");
 		sendMsg(msg);
 		msg=studentTestController.InsertAnswersAndGradeManual("false",timeOfStudent,"00000",0,ChatClient.user.getId() ,code.toString());
@@ -525,14 +517,14 @@ public class OnlineTestController extends AbstractController implements CountDow
         timeController.stopTimer();
         // Calculate the time taken by the student
         timeOfStudent = testToExecute.getTest().getDuration() - timeController.timeLeft();
-		alert.setOnOkAction(new Runnable() {	
+        notification.setOnOkAction(new Runnable() {	
 			@Override public void run() {
 				flagEndOrMiddle="Middle";
 				testIsLockCantSubmmit();
 				updateAverageAndMedian();
 				checkCopy();
 		}});
-		alert.showConfirmationAlertWithOnlyOk("Please click OK to continue the process","Sorry, but the test got locked by your lecturer..");
+        notification.showConfirmationAlertWithOnlyOk("Please click OK to continue the process","Sorry, but the test got locked by your lecturer..");
 	}
 
 	/**
@@ -571,11 +563,11 @@ public class OnlineTestController extends AbstractController implements CountDow
 	@Override
 	public void testdurationGotChanged(String testCode, Integer duration) {
 		if(!testCode.equals(Integer.toString(StartTestController.getTestToExecute().getTestCode()))) return;
-		alert.setOnOkAction(new Runnable() {	
+		notification.setOnOkAction(new Runnable() {	
 			@Override public void run() {
 				flagEndOrMiddle="Middle";
 				timeController.updateClock(duration-(testToExecute.getTest().getDuration()));
 		}});
-		alert.showConfirmationAlertWithOnlyOk("Please click OK to continue the process","The duration of the test you are taking got changed.");
+		notification.showConfirmationAlertWithOnlyOk("Please click OK to continue the process","The duration of the test you are taking got changed.");
 	}
 }

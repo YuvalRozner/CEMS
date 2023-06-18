@@ -6,8 +6,6 @@ import java.util.Collections;
 import JDBC.Msg;
 //import JDBC.MsgType;
 import client.ChatClient;
-import controllers.TestToExecuteController;
-import controllers.StudentTestController;
 import enteties.Course;
 import enteties.StudentTest;
 import enteties.TestToExecute;
@@ -17,7 +15,6 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.control.Label;
-import notifications.NotificationAlertsController;
 
 /**
  * Controller class for the Lecturer Statistics Report screen.
@@ -58,16 +55,6 @@ public class LecturerStaticsReportController extends AbstractController{
 	 */
 	@FXML
 	private BarChart<String, Integer> barChart;
-	
-	/**
-	 * object to use the StudentTestController class method.
-	 */
-    private static StudentTestController studentTestController = new StudentTestController();
-    
-    /**
-	 * object to use the TestToExecuteController class method.
-	 */
-    private static TestToExecuteController testToExecuteController = new TestToExecuteController();
     
     /**
 	 * the list of StudentTest for the BarChart according to the tests of the student.
@@ -78,11 +65,6 @@ public class LecturerStaticsReportController extends AbstractController{
 	 * the list of TestToExecute for the BarChart according to the tests to execute of the user.
 	 */
     private ArrayList<TestToExecute> testToExecuteLst;
-    
-    /**
-	 * object to use the notifications class.
-	 */
-    private static NotificationAlertsController notification = new NotificationAlertsController();
     
     /**
 	 * boolean flags for knowing what type of report is needed.

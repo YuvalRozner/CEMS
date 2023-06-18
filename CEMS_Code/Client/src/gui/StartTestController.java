@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 import JDBC.Msg;
 import client.ChatClient;
-import controllers.StudentTestController;
-import controllers.TestToExecuteController;
-import controllers.UserController;
 import enteties.StudentTest;
 import enteties.TestToExecute;
 import enteties.User;
@@ -14,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import notifications.NotificationAlertsController;
 
 public class StartTestController extends AbstractController {
 
@@ -34,15 +30,12 @@ public class StartTestController extends AbstractController {
 	 * The controller class for a specific view or UI component. Handles user
 	 * interactions and contains the necessary fields and methods.
 	 */
-	private static TestToExecuteController testToExecuteController = new TestToExecuteController();
-	private static StudentTestController studentTestController = new StudentTestController();
 	private static TestToExecute testToExecute = new TestToExecute();
 	private static StudentTest studentTest = new StudentTest();
-	private UserController userController = new UserController();
-	NotificationAlertsController alert = new NotificationAlertsController();
 	private String lock = null;
 	private Msg msg;
 	private String lecturerId;
+	@SuppressWarnings("unused")
 	private String lecturerName;
 
 	private String code;
@@ -59,7 +52,7 @@ public class StartTestController extends AbstractController {
 		String code = codeTextField.getText();
 		// Check if the code is empty
 		if (code.isEmpty() == true) {
-			alert.showWarningAlert("You must enter code for a test, 4 digits!");
+			notification.showWarningAlert("You must enter code for a test, 4 digits!");
 			return;
 		}
 		// Check if the code is valid
@@ -71,7 +64,7 @@ public class StartTestController extends AbstractController {
 		sendMsg(msg);
 		// Show a warning if the test is not found
 		if (msgReceived == null) {
-			alert.showWarningAlert(
+			notification.showWarningAlert(
 					"A test with the code you provided is not found in the system. Please check that the code is correct.");
 			return;
 		}
@@ -83,7 +76,7 @@ public class StartTestController extends AbstractController {
 		lock = msgReceived.convertData(TestToExecute.class).get(0).getLock();
 		// Get the lock status
 		if (lock.equals("true")) {
-			alert.showErrorAlert("Sorry, this test is lock!");
+			notification.showErrorAlert("Sorry, this test is lock!");
 			return;
 		}
 		// Check if the student has already accessed the test
@@ -108,7 +101,7 @@ public class StartTestController extends AbstractController {
 			msg = testToExecuteController.updateNumberOfStudenByOne(1,Integer.toString(StartTestController.getTestToExecute().getTestCode()),"start");
 			sendMsg(msg);
 		} else {
-			alert.showErrorAlert("Sorry, you have already accessed this test and submitted it");
+			notification.showErrorAlert("Sorry, you have already accessed this test and submitted it");
 		}
 	}
 

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import JDBC.Msg;
 import client.ChatClient;
-import controllers.TestToExecuteController;
 import enteties.StudentTest;
 import enteties.TestToExecute;
 import javafx.collections.FXCollections;
@@ -33,11 +32,6 @@ public class ShowTestDataController extends AbstractController implements Tests 
    * The observable list used to populate the show test table.
    */
   private ObservableList<TestToExecute> showTestTable;
-
-  /**
-   * object to use the TestToExecuteController class method.
-   */
-  private static TestToExecuteController testToExecuteController = new TestToExecuteController();
 
   /**
    * The back button.

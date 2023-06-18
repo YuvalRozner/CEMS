@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import JDBC.Msg;
 import client.ChatClient;
-import controllers.StudentTestController;
 import enteties.StudentTest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,11 +22,6 @@ public class StudentMenuController extends AbstractController implements Menu{
 	 */
 	@SuppressWarnings("unused") // it uses to catch an exception if the grades list from DB is empty.
 	private ArrayList<StudentTest> allTest=new ArrayList<StudentTest>() ;	
-	
-	/**
-	 * object to use the StudentTestController class method.
-	 */
-	StudentTestController studentTestController =new StudentTestController();
 	
 	/**
 	 * logout from the system return to login screen and change in the db to lodged out.

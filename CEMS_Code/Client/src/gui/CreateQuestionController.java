@@ -4,12 +4,9 @@ import java.util.ArrayList;
 
 import JDBC.Msg;
 import client.ChatClient;
-import controllers.QuestionController;
-import controllers.SubjectController;
 import enteties.Course;
 import enteties.Question;
 import enteties.Subject;
-import enteties.TestToExecute;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -22,7 +19,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import notifications.NotificationAlertsController;
 
 /**
  * Controller class for the Create Question screen.
@@ -83,18 +79,6 @@ public class CreateQuestionController extends AbstractController{
 	 * the subject selected from the comboBox.
 	 */
     private Subject selectedSubject;
-    /**
-	 * object to use the QuestionController class method.
-	 */
-    private static QuestionController questionController = new QuestionController();
-    /**
-	 * object to use the SubjectController class method.
-	 */
-    private static SubjectController subjectController = new SubjectController();
-    /**
-	 * object to use the notifications class.
-	 */
-    private static NotificationAlertsController notification = new NotificationAlertsController();
     /**
 	 * boolean variable to indicate that any subject has already been chose. for not letting the user create a question without choosing subject.
 	 */

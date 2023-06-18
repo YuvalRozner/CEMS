@@ -5,8 +5,6 @@ import java.util.Collections;
 
 import JDBC.Msg;
 import client.ChatClient;
-import controllers.StudentTestController;
-import controllers.TestToExecuteController;
 import controllers.UserController;
 import enteties.StudentTest;
 import enteties.TestToExecute;
@@ -28,7 +26,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import notifications.NotificationAlertsController;
 
 /**
  * Controller class for the Approve Grades screen.
@@ -100,18 +97,6 @@ public class ApproveGradeController extends AbstractController implements Tests{
 	 * the list of testToExecute for the comboBox according to the user logged in.
 	 */
     private ArrayList<TestToExecute> testToExecuteLst;
-    /**
-	 * object to use the TestToExecuteController class method.
-	 */
-    private static TestToExecuteController testToExecuteController = new TestToExecuteController();
-    /**
-	 * object to use the StudentTestController class method.
-	 */
-    private static StudentTestController studentTestController = new StudentTestController();
-    /**
-	 * object to use the notifications class.
-	 */
-    private static NotificationAlertsController notification = new NotificationAlertsController();
     /**
      * the StudentTest test wanted to be shown. 
      */

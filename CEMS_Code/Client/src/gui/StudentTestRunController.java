@@ -8,8 +8,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 
-
-
 public class StudentTestRunController extends AbstractController {
     private ArrayList<ArrayList<String>> quizData; // ArrayList of ArrayList of Strings
     private ArrayList<ToggleGroup> toggleGroups = new ArrayList<ToggleGroup>();
@@ -69,7 +67,6 @@ public class StudentTestRunController extends AbstractController {
             toggleGroups.add(answerGroup);
         }
     }
- 
 
     @FXML
     void endBtn() {
@@ -83,6 +80,4 @@ public class StudentTestRunController extends AbstractController {
     		
     	}
     }
-
-
 }

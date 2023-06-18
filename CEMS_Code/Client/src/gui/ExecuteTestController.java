@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import JDBC.Msg;
 import client.ChatClient;
-import controllers.TestController;
-import controllers.TestToExecuteController;
 import enteties.StudentTest;
 import enteties.Test;
 import enteties.TestToExecute;
@@ -22,7 +20,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import notifications.NotificationAlertsController;
 
 /**
  * Controller class for the ExecuteTest screen.
@@ -70,18 +67,6 @@ public class ExecuteTestController extends AbstractController implements Tests{
 	 * the list of tests for the comboBox according to the user logged in.
 	 */
     private ArrayList<Test> testLst;
-    /**
-	 * object to use the TestController class method.
-	 */
-    private static TestController testController = new TestController();
-    /**
-	 * object to use the TestToExecuteController class method.
-	 */
-    private static TestToExecuteController testToExecuteController = new TestToExecuteController();
-    /**
-	 * object to use the notifications class.
-	 */
-    private static NotificationAlertsController notification = new NotificationAlertsController();
 
     /**
      * Constructs an instance of ExecuteTestController.

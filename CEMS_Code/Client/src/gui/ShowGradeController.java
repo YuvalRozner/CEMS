@@ -2,7 +2,6 @@ package gui;
 
 import java.util.ArrayList;
 
-import controllers.StudentTestController;
 import enteties.StudentTest;
 import enteties.TestToExecute;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -48,11 +47,6 @@ public class ShowGradeController extends AbstractController implements Tests {
 	 */
 	@FXML
 	private TableView<StudentTest> table;
-
-	/**
-	 * object to use the StudentTestController class method.
-	 */
-	StudentTestController studentTestController = new StudentTestController();
 
 	StudentTest StudentTestToShow;
 
