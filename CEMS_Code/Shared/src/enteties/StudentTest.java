@@ -151,7 +151,7 @@ public class StudentTest {
 			Integer numberOfStudents, Integer dis1,Integer dis2,Integer dis3,Integer dis4,
 			Integer dis5,Integer dis6,Integer dis7,Integer dis8,Integer dis9,
 			Integer dis10, String id, String number, String courseNumber, Integer duration, 
-			String instructionsForStudent, String instructionsForLecturer,String course_number, String name, String subjectNum) {
+			String instructionsForStudent, String instructionsForLecturer,String course_number, String name, String subjectNum, String studentName) {
 		this.studentId = studentId;
 		this.testCode = testCode;
 		this.timePassed = timePassed;
@@ -167,6 +167,7 @@ public class StudentTest {
 				dis9, dis10, id,  number,  courseNumber,
 				duration,  instructionsForStudent,  instructionsForLecturer,course_number,  name,
 				subjectNum);
+		this.studentName=studentName;
 	}
 	
 	/**
