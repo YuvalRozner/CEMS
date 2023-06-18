@@ -1,6 +1,7 @@
 package gui;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import JDBC.Msg;
 import client.ChatClient;
@@ -120,6 +121,10 @@ public class ApproveGradeController extends AbstractController implements Tests{
      * the testName wanted to be shown in "show" screen. 
      */
     public String testName;
+    /**
+     * old grade before changing
+     */
+    private Integer oldGrade;
 	
     /**
      * Constructs an instance of the ApproveGradeController.
@@ -241,6 +246,7 @@ public class ApproveGradeController extends AbstractController implements Tests{
         		    try{
         		    	if(Integer.valueOf(newGradeTextField.getText())<0 || Integer.valueOf(newGradeTextField.getText())>100)
         		    		{notification.showErrorAlert("the new grade must be a number between 0 and 100."); return;}
+        		    	oldGrade=studentTest.getGrade();
         		    	studentTest.setGrade(Integer.valueOf(newGradeTextField.getText()));}
         		    catch(Exception e) {notification.showErrorAlert("the new grade must be a number between 0 and 100."); return;}
         		    if (reasonTextField.getText().isEmpty()) {notification.showErrorAlert("you must add a reason for changing the grade."); return;}
@@ -259,6 +265,10 @@ public class ApproveGradeController extends AbstractController implements Tests{
 						Msg msg1 = studentTestController.getMsgToUpdateStudentTests(studentTest, student);
 						sendMsg(msg1);
 				    	notification.showInformationAlert("grade approved in DB.");
+				    	updateAverageAndMedian();
+				    	updateDistribution();
+				    	
+				    	
 				    	resetFields();
 		    			return;
 					}});
@@ -267,6 +277,52 @@ public class ApproveGradeController extends AbstractController implements Tests{
     	}
     	if (found == false) notification.showErrorAlert("you didnt select a grade to approve.");
     }
+    /**
+     * Updates the average and median values for a specified test.
+     * Retrieves all student test records for the specified test code,
+     * calculates the average and median grades, and updates the test record
+     * with the new average and median values.
+     */
+    public void updateAverageAndMedian() {
+        double average = 0;
+        double median = 0;
+        Msg msg;
+        // Retrieve all student test records for the specified test code
+        msg = studentTestController.selectAllstudentBySpecificCodeTest(Integer.toString(selectedTestToExecute.getTestCode()));
+        sendMsg(msg);
+        if(msgReceived==null) {return;}
+        ArrayList<StudentTest> listOfStudent = msgReceived.convertData(StudentTest.class);
+        ArrayList<Integer> listOfGrades = new ArrayList<>();
+
+        // Extract grades from the student test records and calculate the average
+        for (StudentTest student : listOfStudent) {
+            listOfGrades.add(student.getGrade());
+            average += student.getGrade();
+        }
+        average = average / listOfGrades.size();
+
+        // Sort the list of grades and calculate the median
+        Collections.sort(listOfGrades);
+        median = listOfGrades.get(listOfGrades.size() / 2);
+
+        // Update the median and average values in the test record
+        msg = testToExecuteController.updateMedianAndAverage(Integer.toString(selectedTestToExecute.getTestCode()), average, median);
+        sendMsg(msg);
+    }
+    /**
+     * Updates the distribution of grades for a specified test.
+     * Inserts a new grade into the distribution and removes an old grade
+     * from the distribution for the specified test code.
+     */
+    public void updateDistribution() {
+    	Msg msg;
+    	msg = testToExecuteController.insertDistributionByCode(Integer.toString(selectedTestToExecute.getTestCode()), Integer.parseInt(newGradeTextField.getText()), 1);
+        sendMsg(msg);
+        
+        msg = testToExecuteController.insertDistributionByCode(Integer.toString(selectedTestToExecute.getTestCode()), oldGrade, -1);
+        sendMsg(msg);
+    }
+    
     
     /**
      * Resets all input fields to their default values.
