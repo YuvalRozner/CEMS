@@ -1,5 +1,7 @@
 package gui;
 
+
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -15,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -28,6 +31,9 @@ import notifications.NotificationAlertsController;
  */
 public class ManualTestController extends AbstractController implements CountDown,Testing {
 	
+	
+    @FXML
+    private TextField downloadField,uploadField;
 	/**
 	 * button: complete the test,download test,upload test.
 	 */
@@ -236,6 +242,7 @@ public class ManualTestController extends AbstractController implements CountDow
 	@FXML
 	void download(ActionEvent event) {
 		Msg msg = new Msg(MsgType.fileToSend);
+		msg.setPathFile(downloadField.getText());
 		sendMsg(msg);
 		NotificationAlertsController alert = new NotificationAlertsController();
 		alert.showInformationAlert("The test was download successfully!");
@@ -249,7 +256,8 @@ public class ManualTestController extends AbstractController implements CountDow
 	 */
 	@FXML
 	void upload(ActionEvent event) {
-		String path ="@../../file/algebraTestAnswers.docx";
+		String path =uploadField.getText();
+		//String path ="@../../file/algebraTestAnswers.docx";
 		Msg msg = cemsFileController.createMsgWithFile(path);
 		sendMsg(msg);
 		NotificationAlertsController alert = new NotificationAlertsController();

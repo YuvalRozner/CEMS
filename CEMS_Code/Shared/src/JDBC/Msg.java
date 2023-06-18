@@ -39,6 +39,7 @@ public class Msg implements Serializable{
 	private User user = null;
 	private String popText = null;
 	private Integer duration = null;
+
 	
 	/**
 	 * Constructs an empty {@code Msg} object.
