@@ -281,5 +281,4 @@ public class Request {
 	public RadioButton getRadioButton() {
 		return radioButton;
 	}
-
 }

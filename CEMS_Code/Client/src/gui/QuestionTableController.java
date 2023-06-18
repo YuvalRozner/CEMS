@@ -157,5 +157,4 @@ public class QuestionTableController extends AbstractController {
     void onMouseExitedBackBtn(MouseEvent event) {
 
     }
-
 }

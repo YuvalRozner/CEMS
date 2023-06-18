@@ -18,7 +18,6 @@ public class TestController {
 	 * @param code of test the student take.
 	 * @return msg representing select query.
 	 */
-
 	public Msg getDurationByCode(String code) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("test.duration");
@@ -27,7 +26,6 @@ public class TestController {
 		msg.setWhere("testtoexecute.testCode", code);
 		msg.setWhereCol("testtoexecute.testId", "test.id");
 		return msg;
-
 	}
 
 	/**
@@ -107,6 +105,4 @@ public class TestController {
 		msg.setWhere("user_subject.userId", user.getId());
 		return msg;
 	}
-	
-	
 }

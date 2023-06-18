@@ -17,6 +17,11 @@ import javafx.collections.ObservableList;
  */
 public class TestToExecuteController {
 
+	/**
+	 * create a messge for select query.
+	 * @param code
+	 * @return Msg
+	 */
 	public Msg checkIfTheTestExict(String code) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("testtoexecute.lecturerId");

@@ -123,7 +123,6 @@ public class QuestionController {
 		return questionWithPoints;
 	}
 	
-
 	/**
 	 * Retrieves the questions related to the given test ID from the database.
 	 *

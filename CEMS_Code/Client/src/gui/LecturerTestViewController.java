@@ -70,8 +70,6 @@ public class LecturerTestViewController extends AbstractController {
             	selectedTest = test;
             });
         }
-    	
-       
     }
     
     /**

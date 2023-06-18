@@ -101,7 +101,6 @@ public class ApproveGradeController extends AbstractController implements Tests{
      * the StudentTest test wanted to be shown. 
      */
     public StudentTest StudentTestToShow;
-    
     /**
      * the testName wanted to be shown in "show" screen. 
      */
@@ -254,7 +253,6 @@ public class ApproveGradeController extends AbstractController implements Tests{
 				    	if (oldGrade != studentTest.getGrade() ) {
 				    		updateAverageAndMedian();
 					    	updateDistribution(oldGrade,studentTest.getGrade());
-					    	
 				    	}
 				    	resetFields();
 		    			return;
@@ -307,7 +305,6 @@ public class ApproveGradeController extends AbstractController implements Tests{
     	Msg msg;
     	msg = testToExecuteController.insertDistributionByCode(Integer.toString(selectedTestToExecute.getTestCode()), newGrade, 1);
         sendMsg(msg);
-        
         msg = testToExecuteController.insertDistributionByCode(Integer.toString(selectedTestToExecute.getTestCode()), oldGrade, -1);
         sendMsg(msg);
     }

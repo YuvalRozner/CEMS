@@ -231,10 +231,6 @@ public class NotificationAlertsController {
     	});
     }
     
-    
-    
-    
-    
     /**
      * Sets the action to be performed when the cancel button is clicked in the
      * confirmation alert.

@@ -20,6 +20,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import notifications.NotificationAlertsController;
 
+/**
+ * The AbstractController class is an abstract class that serves as a base class for other controller classes in the GUI package.
+ * It implements the SceneSetter interface and provides common methods and fields used by the controllers.
+ */
 public abstract class AbstractController implements SceneSetter {
 	private static Stage primaryStage;
 	public static Msg msgReceived;
@@ -64,15 +68,19 @@ public abstract class AbstractController implements SceneSetter {
 	 */
     public static NotificationAlertsController notification = new NotificationAlertsController();
 
+    /**
+     * Starts the controller by setting the FXML name and previous screen, and loading the FXML file.
+     * 
+     * @param fxmlName    the name of the FXML file
+     * @param prevScreen  the name of the previous screen
+     * @throws Exception if an error occurs during the loading of the FXML file
+     */
 	public void start(String fxmlName, String prevScreen) throws Exception {
-		
 		this.fxmlName = convertToSentence(fxmlName);
-
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlName + ".fxml"));
 		Parent root = loader.load();
 		ChatClient.screens.put(fxmlName, loader.getController());
 		Scene tmpScene = new Scene(root);
-		
 		((SceneSetter)loader.getController()).setScene(tmpScene);
 		((SceneSetter)loader.getController()).setPrevScreen(prevScreen);
 		ChatClient.lastCurrentScreen = loader.getController();
@@ -82,28 +90,58 @@ public abstract class AbstractController implements SceneSetter {
 		primaryStage.show();
 	}
 
+	/**
+	 * Sets the name of the previous screen.
+	 * 
+	 * @param prevScreen the name of the previous screen
+	 */
 	public void setPrevScreen(String prevScreen) {
 		this.prevScreen = prevScreen;
 	}
 
+	/**
+	 * Sets the scene for the controller.
+	 * 
+	 * @param scene the scene to be set
+	 */
 	public void setScene(Scene scene) {
 		this.scene = scene;
 	}
 
+	/**
+	 * Sends a message to the server using the ChatClient.
+	 * 
+	 * @param msg the message to be sent
+	 */
 	public static void sendMsg(Msg msg) {
 		ClientUI.client.handleMessageFromClientUI(msg);
 	}
 
+	/**
+	 * Sets the primary stage for the application.
+	 * 
+	 * @param primaryStage the primary stage to be set
+	 */
 	public static void setPrimaryStage(Stage primaryStage) {
 		AbstractController.primaryStage = primaryStage;
 	}
 
+	/**
+	 * Displays the scene on the primary stage.
+	 */
 	public void display() {
 		primaryStage.setTitle(fxmlName);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
 
+	/**
+	 * Handles the action event when the exit button is clicked.
+	 * It performs the logout and disconnect operations before exiting the application.
+	 * 
+	 * @param event the action event
+	 * @throws Exception if an error occurs during the logout operation
+	 */
 	public void exitBtn(ActionEvent event) throws Exception {
 		try {
 			logout();
@@ -114,21 +152,48 @@ public abstract class AbstractController implements SceneSetter {
 		}
 		System.exit(0); // exit
 	}
-
+	/**
+	 * Retrieves the name of the FXML file.
+	 * 
+	 * @return the name of the FXML file
+	 */
 	public String getFxmlName() {
 		return fxmlName;
 	}
+	
+	/**
+	 * Retrieves the primary stage.
+	 * 
+	 * @return the primary stage
+	 */
 	public static Stage getPrimaryStage() {
 		return primaryStage;
 	}
+	/**
+	 * Retrieves the received message.
+	 * 
+	 * @return the received message
+	 */
 	public static Msg getMsgReceived() {
 		return msgReceived;
 	}
 
+	/**
+	 * Sets the received message.
+	 * 
+	 * @param msgReceived the received message to be set
+	 */
 	public static void setDataReceived(Msg msgReceived) {
 		AbstractController.msgReceived = msgReceived;
 	}
 	
+	/**
+	 * Handles the action event when the back button is clicked.
+	 * It hides the current window and displays the previous screen.
+	 * 
+	 * @param event the action event
+	 * @throws Exception if an error occurs during the display of the previous screen
+	 */
 	public void backBtn(ActionEvent event) throws Exception {
 		((Node)event.getSource()).getScene().getWindow().hide();
 		ChatClient.getScreen(prevScreen).display();
@@ -136,6 +201,11 @@ public abstract class AbstractController implements SceneSetter {
 		primaryStage.setTitle(convertToSentence(prevScreen));
 	}
 	
+	/**
+	 * Performs the logout operation by sending a loggedin message with status "no" to the server.
+	 * 
+	 * @throws Exception if an error occurs during the logout operation
+	 */
 	public void logout() throws Exception {
 		if(ChatClient.user==null) return;
     	sendMsg(userController.getLoggedinMsg(ChatClient.user, "no"));
@@ -166,8 +236,12 @@ public abstract class AbstractController implements SceneSetter {
         return output.toString();
     }
 	
+	/**
+	 * Displays a popup message with the given message.
+	 * 
+	 * @param msg the message to be displayed
+	 */
 	public void popMessage(String msg) {
 		notification.showInformationAlert(msg);
 	}
-	
 }

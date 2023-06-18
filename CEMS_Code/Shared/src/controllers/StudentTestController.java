@@ -138,7 +138,6 @@ public class StudentTestController {
 		return many;
 	}
 	
-	
 	/**
 	 * Creates a message object to select all answers names and id  of a student's code test.
 	 *
@@ -159,8 +158,6 @@ public class StudentTestController {
 		return msg;
 	}
 
-	
-	
 	/**
 	 * Constructs a database select message to retrieve StudentTest.
 	 *
@@ -176,13 +173,13 @@ public class StudentTestController {
 		msg.setWhere("user.id", ID);
 		return msg;
 	}
+	
 	/**
 	 * Creates a message to select all student tests with a specific test code.
 	 *
 	 * @param code The test code to filter the student tests.
 	 * @return A Msg object configured for the select operation.
 	 */
-	
 	public Msg selectAllstudentBySpecificCodeTest(String code) {
 		Msg msg=new Msg(MsgType.select);
 		msg.setSelect("studenttest.grade");

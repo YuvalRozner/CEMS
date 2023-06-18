@@ -10,7 +10,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import notifications.NotificationAlertsController;
 
+/**
+ * The StudentMenuController class is a controller class for the student menu GUI.
+ * It extends the AbstractController class and handles user interactions and events.
+ */
 public class StudentMenuController extends AbstractController implements Menu{
+	
 	/**
 	 * lable for headline
 	 */

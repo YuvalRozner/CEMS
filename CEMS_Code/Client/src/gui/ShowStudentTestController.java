@@ -220,7 +220,6 @@ public class ShowStudentTestController extends AbstractController {
         }
     }
 
-    
     /**
      * Displays the correct answers for each question.
      * This method highlights the correct answer for each question by styling the corresponding radio button,
@@ -240,7 +239,6 @@ public class ShowStudentTestController extends AbstractController {
         }
     }
 
-	
     /**
      * Displays the correct answers for each question and highlights the student's selected answer.
      * This method highlights the correct answer for each question by styling the corresponding radio button,
@@ -284,7 +282,4 @@ public class ShowStudentTestController extends AbstractController {
            
         }
     }
-  
-    
-
 }

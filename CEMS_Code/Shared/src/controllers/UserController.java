@@ -14,6 +14,12 @@ import enteties.User;
  * 
  */
 public class UserController {
+	/**
+	 * Generates a message to select a user from the database based on the id.
+	 *
+	 * @param id The User object representing the user to log out.
+	 * @return The generated Msg object for the logout update.
+	 */
 	public Msg getLecturerNameById(String id) {
 		Msg msg = new Msg(MsgType.select);
 		msg.setSelect("`user`.username");
@@ -109,25 +115,6 @@ public class UserController {
     	msg1.setWhereCol("hod_subject.subjectNumber", "user_subject.subjectNum");
     	msg1.setWhereCol("user.id", "user_subject.userId");
     	msg1.setWhere("hod_subject.hodId", ID);
-    	/*
-    	Msg msg2 = new Msg(MsgType.select);
-    	msg2.setSelect("user.*");
-    	msg2.setFrom("user");
-    	msg2.setFrom("studenttest");
-    	msg2.setFrom("testtoexecute");
-    	msg2.setFrom("test");
-    	msg2.setFrom("course");
-    	msg2.setFrom("hod_subject");
-    	msg2.setWhereCol("user.id", "studenttest.studentId");
-    	msg2.setWhereCol("studenttest.testCode", "testtoexecute.testCode");
-    	msg2.setWhereCol("testtoexecute.testId", "test.id");
-    	msg2.setWhereCol("test.courseNumber", "course.number");
-    	msg2.setWhereCol("hod_subject.subjectNumber", "course.subjectNum");
-    	msg2.setWhere("hod_subject.hodId", ID);
-    	msgM.setMsgLst(msg1);
-		msgM.setMsgLst(msg2);
-		*/
-    	//return msgM;
     	return msg1;
 	}
 	

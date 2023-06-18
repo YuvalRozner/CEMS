@@ -208,6 +208,4 @@ public class ExecuteTestController extends AbstractController implements Tests{
 	public String getScreenState() {
 		return "lecturerHodShowTest";
 	}
-	
-	
 }

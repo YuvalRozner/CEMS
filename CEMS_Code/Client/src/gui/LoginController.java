@@ -15,9 +15,14 @@ import javafx.scene.control.TextField;
  */
 public class LoginController extends AbstractController{
 	
+	/**
+	 * input
+	 */
     @FXML
     private TextField userNameTxt;
-    
+	/**
+	 * input
+	 */
     @FXML
     private PasswordField passwordTxt;
 
