@@ -78,9 +78,9 @@
       <TableView fx:id="table" layoutX="44.0" layoutY="243.0" prefHeight="249.0" stylesheets="@TableView.css">
         <columns>
             <TableColumn fx:id="idCol" minWidth="40.00000190734863" prefWidth="85.0" text="Student ID" />
-            <TableColumn fx:id="nameCol" minWidth="150.0" prefWidth="-1.0" text="Student Name" />
+            <TableColumn fx:id="nameCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="Student Name" />
             <TableColumn fx:id="gradeCol" minWidth="50.0" prefWidth="60.0" text="Grade" />
-            <TableColumn fx:id="showCol" minWidth="60.0" prefWidth="-1.0" text="Show" />
+            <TableColumn fx:id="showCol" minWidth="60.0" prefWidth="60.0" text="Show" />
             <TableColumn fx:id="noteCol" maxWidth="198.39996337890625" minWidth="300.0" prefWidth="300.0" text="Note" />
             <TableColumn fx:id="radioButtonCol" maxWidth="152.0" minWidth="50.0" prefWidth="50.0" style="-fx-alignment: CENTER;" text="Select" />
         </columns>

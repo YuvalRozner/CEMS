@@ -239,6 +239,7 @@ public class ApproveGradeController extends AbstractController implements Tests{
     	if(!chooseTestToExecute) {notification.showErrorAlert("you didnt select a grade to approve."); return;}
     	boolean found = false;
     	for (StudentTest studentTest : TestTable) {
+    		oldGrade=studentTest.getGrade();
     		if (studentTest.getRadioButton().isSelected()) {
     			found = true;
     			if (!changeGradeVbox.isDisable() && yesRadioButton.isSelected()) { // wanted to change grade.
@@ -265,10 +266,11 @@ public class ApproveGradeController extends AbstractController implements Tests{
 						Msg msg1 = studentTestController.getMsgToUpdateStudentTests(studentTest, student);
 						sendMsg(msg1);
 				    	notification.showInformationAlert("grade approved in DB.");
-				    	updateAverageAndMedian();
-				    	updateDistribution();
-				    	
-				    	
+				    	if (oldGrade != studentTest.getGrade() ) {
+				    		updateAverageAndMedian();
+					    	updateDistribution(oldGrade,studentTest.getGrade());
+					    	
+				    	}
 				    	resetFields();
 		    			return;
 					}});
@@ -313,10 +315,12 @@ public class ApproveGradeController extends AbstractController implements Tests{
      * Updates the distribution of grades for a specified test.
      * Inserts a new grade into the distribution and removes an old grade
      * from the distribution for the specified test code.
+     * @param newGrade 
+     * @param integer 
      */
-    public void updateDistribution() {
+    public void updateDistribution(Integer oldGrade, Integer newGrade) {
     	Msg msg;
-    	msg = testToExecuteController.insertDistributionByCode(Integer.toString(selectedTestToExecute.getTestCode()), Integer.parseInt(newGradeTextField.getText()), 1);
+    	msg = testToExecuteController.insertDistributionByCode(Integer.toString(selectedTestToExecute.getTestCode()), newGrade, 1);
         sendMsg(msg);
         
         msg = testToExecuteController.insertDistributionByCode(Integer.toString(selectedTestToExecute.getTestCode()), oldGrade, -1);
@@ -328,11 +332,19 @@ public class ApproveGradeController extends AbstractController implements Tests{
      * Resets all input fields to their default values.
      */
     private void resetFields() {
-    	reasonTextField.setText("");
-    	newGradeTextField.setText("");
-    	testComboBox.setValue(null);
-    	table.getItems().clear();
-		table.refresh();
+    	for (StudentTest t: TestTable) {
+    		if (t.getRadioButton().isSelected()) {
+    			TestTable.remove(t);
+    			break;
+    		}
+    			
+    	}
+    	
+    	//reasonTextField.setText("");
+    	//newGradeTextField.setText("");
+    	//testComboBox.setValue(null);
+    	//table.getItems().clear();
+		//table.refresh();
     }
     
     /**
