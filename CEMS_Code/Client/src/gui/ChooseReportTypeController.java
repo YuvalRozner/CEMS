@@ -26,7 +26,7 @@ import notifications.NotificationAlertsController;
  * 
  * Author: Mor Shmuel
  */
-public class ChooseReportTypeController extends HodScreen{
+public class ChooseReportTypeController extends AbstractController{
 
 	/**
 	 * back and shoe buttons.

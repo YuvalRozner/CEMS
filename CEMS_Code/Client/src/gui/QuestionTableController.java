@@ -25,7 +25,7 @@ import javafx.scene.input.MouseEvent;
  * 
  * @author Mor Shmuel
  */
-public class QuestionTableController extends HodScreen {
+public class QuestionTableController extends AbstractController {
 	/**
      * The list of questions displayed in the table.
      */

@@ -29,10 +29,15 @@ public class UserController {
 	 * @return The generated Msg object for the logout update.
 	 */
 	public Msg getLoggedinMsg(User user, String loggedin) {
-		Msg msg = new Msg(MsgType.update);
+		Msg msg;
+		if(loggedin.equals("yes"))
+			msg = new Msg(MsgType.login);
+		else
+			msg = new Msg(MsgType.logout);
 		msg.setTableToUpdate("user");
 		msg.setSet("loggedin", loggedin);
 		msg.setWhere("username", user.getUsername());
+		msg.setUser(user);
 		return msg;
 	}
 	
@@ -59,7 +64,7 @@ public class UserController {
 	public Msg selectHodBySubjectNumber(String subjectNumber) {
 		Msg msg = new Msg(MsgType.select);
     	msg.setSelect("user.*");
-    	msg.setFrom("user");
+    	msg.setFrom("user ");
     	msg.setFrom("hod_subject");
     	msg.setWhereCol("user.id", "hod_subject.hodId");
     	msg.setWhere("hod_subject.subjectNumber", subjectNumber);
@@ -185,6 +190,20 @@ public class UserController {
     	msg.setWhereCol("test.id", "testtoexecute.testId");
     	msg.setWhereCol("test.courseNumber", "course.number");
     	msg.setWhereCol("hod_subject.subjectNumber", "course.subjectNum");
+    	return msg;
+	}
+
+	/**
+	 * Generates a message to select a user from the database based on the id.
+	 *
+	 * @param id The id of the user to select.
+	 * @return The generated Msg object for the user selection.
+	 */
+	public static Msg selectUserById(String studentId) {
+		Msg msg = new Msg(MsgType.select);
+    	msg.setSelect("*");
+    	msg.setFrom("user ");
+    	msg.setWhere("id", studentId);
     	return msg;
 	}
 }

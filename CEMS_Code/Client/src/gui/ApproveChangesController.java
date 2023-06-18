@@ -3,7 +3,6 @@ package gui;
 import java.util.ArrayList;
 
 import JDBC.Msg;
-import JDBC.MsgType;
 import client.ChatClient;
 import controllers.RequestController;
 import enteties.Request;
@@ -28,7 +27,7 @@ import notifications.NotificationAlertsController;
  * @see HodScreen
  * @author Mor Shmuel
  */
-public class ApproveChangesController extends HodScreen{
+public class ApproveChangesController extends AbstractController{
 	
 	 /**
      * The table column for the course name, explanation, test ID, lecturer name, radio button, duration, new doration.

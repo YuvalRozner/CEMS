@@ -2,6 +2,7 @@ package gui;
 
 import java.util.ArrayList;
 import JDBC.Msg;
+import JDBC.MsgType;
 import client.ChatClient;
 import controllers.RequestController;
 import controllers.TestToExecuteController;
@@ -116,9 +117,10 @@ public class RunningTestController extends AbstractController{
     	if(subjectNumber==null) { notification.showErrorAlert("Error geting subject number for checking who is the relevant hod."); return; }
     	// get the relevant hod from DB:
     	User lecturer = ChatClient.user;
-    	User hod = null;
-    	Msg msg = userController.selectHodBySubjectNumber(subjectNumber);
-    	sendMsg(msg);
+    	final User hod;
+    	Msg msg1 = userController.selectHodBySubjectNumber(subjectNumber);
+    	sendMsg(msg1);
+    	System.out.println("dataaaaaaaaaaaaaaaa= " + msgReceived.getData()); /////////////////////////////////
     	try { hod = msgReceived.convertData(User.class).get(0);
     	} catch (Exception e) { notification.showErrorAlert("There is no mathing HOD, so you can't send requests for changing duration."); return; }
     	if(hod==null) { notification.showErrorAlert("There is no mathing HOD, so you can't send requests for changing duration."); return; }
@@ -134,7 +136,14 @@ public class RunningTestController extends AbstractController{
 				Msg msg;
 				try{ msg = requestController.insertRequest((Request)request); //insert to request table.
 				}catch(Exception e) {System.out.println("there was a problem getting a msg for inserting the request"); return;}
-		    	sendMsg(msg);
+				String popText = "You got a new request from "+ ChatClient.user.getName();
+				Msg popMsg = new Msg(MsgType.pop);
+				popMsg.setUser(hod);
+				popMsg.setPopText(popText);
+				Msg many = new Msg(MsgType.manyMessages);
+				many.setMsgLst(msg);
+				many.setMsgLst(popMsg);
+		    	sendMsg(many);
 		    	notification.showInformationAlert("A request for changing duration sent to your HOD for consideration.");
 		    	resetFields();
 			}});

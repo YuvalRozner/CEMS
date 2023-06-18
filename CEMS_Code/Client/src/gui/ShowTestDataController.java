@@ -23,7 +23,7 @@ import javafx.scene.input.MouseEvent;
  * 
  * @author Mor Shmuel
  */
-public class ShowTestDataController extends HodScreen implements Tests {
+public class ShowTestDataController extends AbstractController implements Tests {
   /**
    * The list of all test executions to be shown.
    */

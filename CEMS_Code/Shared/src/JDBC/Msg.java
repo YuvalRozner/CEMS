@@ -15,7 +15,6 @@ public class Msg implements Serializable{
 	
 	private MsgType type;
 	private ArrayList<String> select = null; // for the SELECT part of query.
-	
 	private ArrayList<String> from = null; // for the FROM part of query.
 	private HashMap<String, Object> where = null; // for the WHERE part of query.
 	private HashMap<String, Object> whereCol = null; // for the WHERE part of query between two coloums.
@@ -29,7 +28,9 @@ public class Msg implements Serializable{
 	private CemsFile file =null;//for send file to student , and get file from student.
 	private Integer testCode = null;
 	private String pathFile = null;
-	private User hod;
+	private User user = null;
+	private String popText = null;
+	private Integer duration = null;
 	
 	/**
 	 * Constructs an empty {@code Msg} object.
@@ -378,17 +379,17 @@ public class Msg implements Serializable{
 	}
 
 	/**
-	 * @return the hod
+	 * @return the user
 	 */
-	public User getHod() {
-		return hod;
+	public User getUser() {
+		return user;
 	}
 
 	/**
-	 * @param hod the hod to set
+	 * @param hod the user to set
 	 */
-	public void setHod(User hod) {
-		this.hod = hod;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	/**
 	 * @return the deleteFrom
@@ -403,5 +404,34 @@ public class Msg implements Serializable{
 	public void setDeleteFrom(String deleteFrom) {
 		this.deleteFrom = deleteFrom;
 	}
+
+	/**
+	 * @return the popText
+	 */
+	public String getPopText() {
+		return popText;
+	}
+
+	/**
+	 * @param popText the popText to set
+	 */
+	public void setPopText(String popText) {
+		this.popText = popText;
+	}
+
+	/**
+	 * @return the duration
+	 */
+	public Integer getDuration() {
+		return duration;
+	}
+
+	/**
+	 * @param duration the duration to set
+	 */
+	public void setDuration(Integer duration) {
+		this.duration = duration;
+	}
+	
 	
 }

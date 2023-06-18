@@ -1,7 +1,6 @@
 package gui;
 
 import java.util.ArrayList;
-
 import JDBC.Msg;
 import client.ChatClient;
 import controllers.RequestController;
@@ -19,7 +18,7 @@ import javafx.scene.control.Label;
  * 
  * @author Mor Shmuel
  */
-public class HodMenuController extends HodScreen implements Menu{
+public class HodMenuController extends AbstractController implements Menu{
 	
 	@FXML
     private Label welcomeLbl;
@@ -50,8 +49,8 @@ public class HodMenuController extends HodScreen implements Menu{
     	//Display the pop-up requests if there are any
     	
     	if(request!=null) {
-    		 popRequest();
-    	}
+    		popMessage("You got a new Request waiting for you.");
+       	}
 	}
 
 	/**

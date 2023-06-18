@@ -117,10 +117,21 @@ public class RequestController {
     	msg3.setDeleteFrom("request");
     	msg3.setWhere("testCode", req.getTestCode());
     	msg3.setWhere("lecturerId", req.getLecturerId());
+    	
+    	String popText = "Your request to change duration of test "+req.getTestCode()+" to "+ req.getDuration()+"min confirmed by your HOD " +req.getUser().getName()+".";
+		Msg msg4 = new Msg(MsgType.pop);
+		msg4.setUser(req.getUser());
+		msg4.setPopText(popText);
+		
+		Msg msg5 = new Msg(MsgType.changeDuration);
+		msg5.setTestCode(req.getTestCode());
+		msg5.setDuration(req.getDuration());
     
 		msgM.setMsgLst(msg1);
 		msgM.setMsgLst(msg2);
 		msgM.setMsgLst(msg3);
+		msgM.setMsgLst(msg4);
+		msgM.setMsgLst(msg5);
 		return msgM;
 	}
 	

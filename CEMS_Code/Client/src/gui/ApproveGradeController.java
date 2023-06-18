@@ -10,6 +10,7 @@ import controllers.TestToExecuteController;
 import controllers.UserController;
 import enteties.StudentTest;
 import enteties.TestToExecute;
+import enteties.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -111,11 +112,6 @@ public class ApproveGradeController extends AbstractController implements Tests{
 	 * object to use the notifications class.
 	 */
     private static NotificationAlertsController notification = new NotificationAlertsController();
-    /**
-     * the StudentTest test wanted to be shown in "show" screen. 
-	 * object to use the UserController class method.
-	 */
-    private static UserController userController = new UserController();
     /**
      * the StudentTest test wanted to be shown. 
      */
@@ -263,7 +259,10 @@ public class ApproveGradeController extends AbstractController implements Tests{
     		    notification.setOnOkAction(new Runnable() {
 					@Override
 					public void run() {
-						Msg msg1 = studentTestController.getMsgToUpdateStudentTests(studentTest);
+						Msg getStudent = UserController.selectUserById(studentTest.getStudentId());
+						sendMsg(getStudent);
+						User student = msgReceived.convertData(User.class).get(0);
+						Msg msg1 = studentTestController.getMsgToUpdateStudentTests(studentTest, student);
 						sendMsg(msg1);
 				    	notification.showInformationAlert("grade approved in DB.");
 				    	updateAverageAndMedian();

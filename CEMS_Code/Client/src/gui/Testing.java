@@ -9,4 +9,6 @@ public interface Testing {
      * @param testCode The code of the test being checked for manual locking.
      */
 	public void testGotManualyLockedByLecturer(String testCode);
+
+	public void testdurationGotChanged(String string, Integer duration);
 }

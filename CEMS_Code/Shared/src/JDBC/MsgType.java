@@ -39,8 +39,14 @@ public enum MsgType {
 	file, // client ---> server indicates that a student upload file.
 	
 	fileToSend, // server--->client. | indicates that a student download file.
-	
-	request, // server <---> client. | indicates that a new request got.
 
-	delete // client ---> server | delete query.
+	delete, // client ---> server | delete query.
+	
+	login, // client ---> server. | user login.
+	
+	logout, // client ---> server. | user logout.
+	
+	pop, // server <---> client. | pop message from client to client.
+	
+	changeDuration // server <---> client. | indicates that a test duration got changed.
 }
