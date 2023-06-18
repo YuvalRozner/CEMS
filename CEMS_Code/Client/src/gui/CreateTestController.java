@@ -119,6 +119,7 @@ public class CreateTestController extends AbstractController{
         	@Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if (newValue != null) {
+                	table.getItems().clear();
                 	subjectChoose = true;
                     // Code to be executed when the selected item changes and newValue is not null
                     // Find the Subject object based on the new value:
