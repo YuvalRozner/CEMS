@@ -285,9 +285,8 @@ public class CEMSserver extends AbstractServer {
 		java.sql.Statement stmt= conn.createStatement();
 		String queryStr;
 		String filePath = string;
-        try {
-        	BufferedReader br = new BufferedReader(new FileReader(filePath));
-            String line;
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        	String line;
             while ((line = br.readLine()) != null) {
             	String[] words = line.split(",");
             	Msg msg1 = new Msg(MsgType.insert);

@@ -290,9 +290,12 @@ public class OnlineTestController extends AbstractController implements CountDow
         	Msg popMsg = new Msg(MsgType.pop);
         	User lecturer = new User();
         	lecturer.setId(testToExecute.getLecturerId());
+        	lecturer.setUsername("lecturer12");
         	popMsg.setUser(lecturer);
         	popMsg.setPopText(poptext);
-        	sendMsg(popMsg);
+        	Msg many = new Msg(MsgType.manyMessages);
+        	many.setMsgLst(popMsg);
+        	sendMsg(many);
         }
     }
 
