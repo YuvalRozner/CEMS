@@ -145,7 +145,9 @@ public class ManualTestController extends AbstractController implements CountDow
 				checkIfStudentIsTheLastOne();
 				updateAverageAndMedian();	
 			}				
-			try {start("studentMenu", "login");} catch (Exception e) {}}});
+			try {start("studentMenu", "login");
+			((Menu)ChatClient.getScreen(ChatClient.user.getPremission()+"Menu")).setWelcome("Welcome " + ChatClient.user.getName());
+			} catch (Exception e) {}}});
 		alert.showConfirmationAlert(ChatClient.user.getName()+" Are you sure ?","After clicking the OK button, the submission is final and there is no option to change it");
 
 	}
@@ -201,7 +203,8 @@ public class ManualTestController extends AbstractController implements CountDow
 	public void testIsSubmit(Integer timeOfStudent,Integer grade) {
 		Msg msg;
 		alert.showInformationAlert("The test was successfully submitted!");
-		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
+		try {start("studentMenu", "login");
+		((Menu)ChatClient.getScreen(ChatClient.user.getPremission()+"Menu")).setWelcome("Welcome " + ChatClient.user.getName());} catch (Exception e) {e.printStackTrace();}
 		////////update data
 		Msg msgUpdate = testToExecuteController.updateNumberOfStudenByOne(1,code.toString(),"finish");
 		sendMsg(msgUpdate);
@@ -225,7 +228,9 @@ public class ManualTestController extends AbstractController implements CountDow
 		sendMsg(msg);
 		msg=testToExecuteController.insertDistributionByCode(code.toString(),0,1);
 		sendMsg(msg);
-		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
+		try {start("studentMenu", "login");
+		((Menu)ChatClient.getScreen(ChatClient.user.getPremission()+"Menu")).setWelcome("Welcome " + ChatClient.user.getName());
+		} catch (Exception e) {e.printStackTrace();}
 	}
 	
 	/**
@@ -275,7 +280,9 @@ public class ManualTestController extends AbstractController implements CountDow
 		sendMsg(msg);
 		msg=testToExecuteController.insertDistributionByCode(code.toString(),0,1);
 		sendMsg(msg);
-		try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();}
+		try {start("studentMenu", "login");
+		((Menu)ChatClient.getScreen(ChatClient.user.getPremission()+"Menu")).setWelcome("Welcome " + ChatClient.user.getName());
+		} catch (Exception e) {e.printStackTrace();}
 	}
 	/**
 	 * Overrides the method to handle the case when a test is manually locked by a lecturer.
