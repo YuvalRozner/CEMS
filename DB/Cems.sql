@@ -322,7 +322,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('21234560','Mor Shmuel','MorShmuel','MorShmuel123','student','no'),('21234561','Dor Shabat','DorShabat','DorShabat123','student','no'),('21234562','Lior Zucker','LiorZucker','LiorZucker123','student','no'),('21234563','Yuval Rozner','YuvalRozner','YuvalRozner123','student','yes'),('21234564','Yoni Azeraf','YoniAzeraf','YoniAzeraf123','student','no'),('21234565','Itamar Kraus','ItamarKraus','ItamarKraus123','student','no'),('21234566','Maayan Avittan','MaayanAvittan','MaayanAvittan123','student','no'),('21234567','Rotem Porat','RotemPorat','RotemPorat123','student','no'),('21234568','OfekAvraham','OfekAvraham','OfekAvraham123','student','no'),('31234560','Dan Lemberg','DanLemberg','DanLemberg123','lecturer','no'),('31234561','Sarai Shinold','SaraiShinold','SaraiShinold123','lecturer','no'),('31234562','Elena Kramer','ElenaKramer','ElenaKramer123','lecturer','no'),('41234560','Dvora Toledano','DvoraToledano','DvoraToledano123','hod','no'),('41234561','Ninet Tayeb','NinetTayeb','NinetTayeb123','hod','no'),('41234562','Dana Frider','DanaFrider','DanaFrider123','hod','no'),('41234563','Yuda Levi','YudaLevi','YudaLevi123','hod','no'),('41234564','Ravid Plotnik','RavidPlotnik','RavidPlotnik123','hod','no');
+INSERT INTO `user` VALUES ('21234560','Mor Shmuel','MorShmuel','MorShmuel123','Student','no'),('21234561','Dor Shabat','DorShabat','DorShabat123','Student','no'),('21234562','Lior Zucker','LiorZucker','LiorZucker123','Student','no'),('21234563','Yuval Rozner','YuvalRozner','YuvalRozner123','Student','no'),('21234564','Yoni Azeraf','YoniAzeraf','YoniAzeraf123','Student','no'),('21234565','Itamar Kraus','ItamarKraus','ItamarKraus123','Student','no'),('21234566','Maayan Avittan','MaayanAvittan','MaayanAvittan123','Student','no'),('21234567','Rotem Porat','RotemPorat','RotemPorat123','Student','no'),('21234568','OfekAvraham','OfekAvraham','OfekAvraham123','Student','no'),('31234560','Dan Lemberg','DanLemberg','DanLemberg123','Lecturer','no'),('31234561','Sarai Shinold','SaraiShinold','SaraiShinold123','Lecturer','no'),('31234562','Elena Kramer','ElenaKramer','ElenaKramer123','Lecturer','no'),('41234560','Dvora Toledano','DvoraToledano','DvoraToledano123','Hod','no'),('41234561','Ninet Tayeb','NinetTayeb','NinetTayeb123','Hod','no'),('41234562','Dana Frider','DanaFrider','DanaFrider123','Hod','no'),('41234563','Yuda Levi','YudaLevi','YudaLevi123','Hod','no'),('41234564','Ravid Plotnik','RavidPlotnik','RavidPlotnik123','Hod','no');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -359,4 +359,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-18  8:28:21
+-- Dump completed on 2023-06-19 10:25:17
