@@ -185,8 +185,9 @@ public class ServerController {
 	   if (cemsServer == null )
 		   notification.showErrorAlert("Cant import users. Please connected to the server");
 	   else if (!cemsServer.importUsers(userFilePath.getText()))
-		   notification.showErrorAlert("Cant import users. Please check that the File path is correct and you data is correct!");
-	   
+		   notification.showErrorAlert("Can't import users. Please check that the File path is correct and you data is correct!");
+	   else
+		   notification.showInformationAlert("Data imported successfuly!");
     }
 	
     /**
