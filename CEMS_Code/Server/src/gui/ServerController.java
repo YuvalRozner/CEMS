@@ -90,6 +90,11 @@ public class ServerController {
 	@FXML
     private TextField userFilePath;
 	/**
+	 * input field.
+	 */
+	@FXML
+	private TextField folderTxt;
+	/**
 	 * object to use the notifications class.
 	 */
     private static NotificationAlertsController notification = new NotificationAlertsController();
@@ -270,4 +275,12 @@ public class ServerController {
 	public String getPasswordTxt() {
 		return passwordTxt.getText();
 	}
+
+	/**
+	 * @return the folderTxt
+	 */
+	public String getFolderTxt() {
+		return folderTxt.getText();
+	}
+	
 }

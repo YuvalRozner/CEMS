@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import JDBC.Msg;
+import JDBC.MsgType;
 import controllers.CemsFileController;
 import enteties.User;
 import gui.AbstractController;
+import gui.ManualTestController;
 import gui.Testing;
+import notifications.NotificationAlertsController;
 import ocsf.client.AbstractClient;
 
 /**
@@ -91,8 +94,16 @@ public class ChatClient extends AbstractClient {
 					((Testing)lastCurrentScreen).testGotManualyLockedByLecturer(msg.getTestCode().toString());
 				break;
 			case file:
-				//msg.setPathFile("@file/");
-				cemsFileController.saveFile(msg);
+				try {
+					cemsFileController.saveFile(msg);
+					new NotificationAlertsController().showInformationAlert("The test was download successfully!");
+					((ManualTestController)lastCurrentScreen).timeController.startTimer();
+				}catch (Exception e) {
+					Msg msg1 = new Msg(MsgType.filePopMsg);
+					msg1.setPopText("Error getting file from server");
+					handleMessageFromServer(msg1);
+				}
+				
 				break; 
 			case pop:
 				User dest = msg.getUser();
@@ -105,6 +116,9 @@ public class ChatClient extends AbstractClient {
 				System.out.println("Test code " + msg.getTestCode() + " duration got changed.");
 				if(lastCurrentScreen instanceof Testing) 
 					((Testing)lastCurrentScreen).testdurationGotChanged(msg.getTestCode().toString(), msg.getDuration());
+				break;
+			case filePopMsg:
+				lastCurrentScreen.popMessage(msg.getPopText());
 				break;
 			default:
 				break;

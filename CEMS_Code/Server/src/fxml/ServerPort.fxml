@@ -21,15 +21,33 @@
 
 <Pane prefHeight="642.0" prefWidth="645.0" style="-fx-background-color: #b2cfeb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ServerController">
    <children>
-      <Pane layoutX="9.0" layoutY="77.0" prefHeight="548.0" prefWidth="240.0" style="-fx-background-color: #92bce3;" />
-      <Circle fill="WHITE" layoutX="41.0" layoutY="553.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />
+      <Pane layoutX="9.0" layoutY="77.0" prefHeight="548.0" prefWidth="240.0" style="-fx-background-color: #92bce3;">
+         <children>
+            <Button fx:id="btnConnect" layoutX="4.0" layoutY="234.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#connect" prefWidth="100.0" style="-fx-background-radius: 7;" stylesheets="@../fxml/Button.css" text="Connect">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnDisconnect" disable="true" layoutX="111.0" layoutY="234.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#disconnect" prefWidth="100.0" style="-fx-background-radius: 7;" stylesheets="@../fxml/Button.css" text="Disconnect">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="13.0" />
+               </font>
+            </Button>
+            <Label layoutX="1.0" layoutY="202.0" text="Manual Test:">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="folderTxt" alignment="CENTER" layoutX="91.0" layoutY="201.0" promptText="Folder Path" style="-fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-background-radius: 7; -fx-border-radius: 7;" />
+         </children></Pane>
+      <Circle fill="WHITE" layoutX="41.0" layoutY="537.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />
       <Pane layoutX="402.0" layoutY="-97.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
       <ImageView fitHeight="183.0" fitWidth="185.0" layoutX="478.0" layoutY="-33.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/Cems-logo.png" />
          </image>
       </ImageView>
-      <HBox layoutX="226.0" layoutY="298.0" prefHeight="74.0" prefWidth="374.0" spacing="10.0">
+      <HBox layoutX="234.0" layoutY="310.0" prefHeight="74.0" prefWidth="374.0" spacing="10.0">
          <children>
             <ImageView fitHeight="97.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -118,10 +136,6 @@
             <InnerShadow height="0.0" radius="0.0" width="0.0" />
          </effect>
       </Label>
-      <Button fx:id="btnConnect" layoutX="9.0" layoutY="283.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#connect" prefWidth="100.0" style="-fx-background-radius: 7;" stylesheets="@../fxml/Button.css" text="Connect">
-         <font>
-            <Font name="Comic Sans MS Bold" size="13.0" />
-         </font></Button>
       <Label layoutX="9.0" layoutY="127.0" text="IP:">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
@@ -137,10 +151,6 @@
       <TextField fx:id="serverIdTxt" alignment="CENTER" layoutX="100.0" layoutY="127.0" style="-fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-background-radius: 7; -fx-border-radius: 7;" text="localhost" />
       <TextField fx:id="DBNameTxt" alignment="CENTER" layoutX="100.0" layoutY="187.0" style="-fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-background-radius: 7; -fx-border-radius: 7;" text="cems" />
       <TextField fx:id="DBUsernameTxt" alignment="CENTER" layoutX="100.0" layoutY="217.0" style="-fx-border-color: #92bce3; -fx-background-color: #F8FFFF; -fx-background-radius: 7; -fx-border-radius: 7;" text="root" />
-      <Button fx:id="btnDisconnect" disable="true" layoutX="116.0" layoutY="283.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#disconnect" prefWidth="100.0" style="-fx-background-radius: 7;" stylesheets="@../fxml/Button.css" text="Disconnect">
-         <font>
-            <Font name="Comic Sans MS Bold" size="13.0" />
-         </font></Button>
       <Label layoutX="9.0" layoutY="91.0" text="Configuration" textFill="#00c2cb">
          <font>
             <Font name="Comic Sans MS Bold" size="25.0" />
@@ -154,8 +164,8 @@
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font>
       </Button>
-      <TextField fx:id="userFilePath" layoutX="323.0" layoutY="410.0" promptText="Path" style="-fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-background-radius: 7; -fx-border-radius: 7;" />
-      <Label layoutX="205.0" layoutY="414.0" text="Insert File Path:">
+      <TextField fx:id="userFilePath" layoutX="323.0" layoutY="410.0" promptText="txt File Path" style="-fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-background-radius: 7; -fx-border-radius: 7;" />
+      <Label layoutX="200.0" layoutY="414.0" text="Third Party Users:">
          <font>
             <Font name="Comic Sans MS Bold" size="13.0" />
          </font>

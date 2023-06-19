@@ -142,17 +142,27 @@ public class CEMSserver extends AbstractServer {
 				sendToAllClients(msg);
 				break;
 			case file:
-				msg.setPathFile("@file/");
+				Msg msg1 = new Msg(MsgType.filePopMsg);
+				try {String LocalfilePath = serverController.getFolderTxt();
+				msg.setPathFile(LocalfilePath);
 				cemsFileController.saveFile(msg);
-				sendToClient(new Msg(MsgType.succeeded), client);
+				msg1.setPopText("Successfully upload file to server");
+				sendToClient(msg1, client);
+				}catch (Throwable t) {
+					msg1.setPopText("Error upload file to server");
+					sendToClient(msg1, client);
+				}
 				break;
 			case fileToSend:
-				String LocalfilePath = "@file/algebraTest.docx";
+				try {String LocalfilePath = serverController.getFolderTxt() + "/algebraTest.docx";
 				Msg msgToCleint = cemsFileController.createMsgWithFile(LocalfilePath);
-				System.out.println("msg craete");
 				msgToCleint.setPathFile(msg.getPathFile());
-				System.out.println("path to save the file is " + msgToCleint);
 				sendToClient(msgToCleint, client);
+				}catch (Throwable t) {
+					Msg msg2 = new Msg(MsgType.filePopMsg);
+					msg2.setPopText("Error getting file from server");
+					sendToClient(msg2, client);
+				}
 				break;
 			case updatePlusOne:
 				stmt = conn.createStatement();

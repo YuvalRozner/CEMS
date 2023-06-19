@@ -69,7 +69,7 @@ public class ManualTestController extends AbstractController implements CountDow
      * Controllers
      */
 	private TestToExecute testToExecute;
-	private TimeController timeController;
+	public TimeController timeController;
 	private CemsFileController cemsFileController = new CemsFileController();	
 	
 	/**
@@ -240,11 +240,9 @@ public class ManualTestController extends AbstractController implements CountDow
 	@FXML
 	void download(ActionEvent event) {
 		Msg msg = new Msg(MsgType.fileToSend);
-		msg.setPathFile(downloadField.getText());
-		sendMsg(msg);
-		NotificationAlertsController alert = new NotificationAlertsController();
-		alert.showInformationAlert("The test was download successfully!");
-		timeController.startTimer();
+		try {msg.setPathFile(downloadField.getText());
+			sendMsg(msg);
+		}catch(Exception e){notification.showErrorAlert("Enter folder path to download.");}
 	}
 
 	/**
@@ -254,12 +252,11 @@ public class ManualTestController extends AbstractController implements CountDow
 	 */
 	@FXML
 	void upload(ActionEvent event) {
-		String path =uploadField.getText();
-		//String path ="@file/algebraTestAnswers.docx";
-		Msg msg = cemsFileController.createMsgWithFile(path);
-		sendMsg(msg);
-		NotificationAlertsController alert = new NotificationAlertsController();
-		alert.showInformationAlert("The test was uploaded successfully!");
+		try {
+			String path = uploadField.getText();
+			Msg msg = cemsFileController.createMsgWithFile(path);
+			sendMsg(msg);
+		}catch(Exception e) {notification.showErrorAlert("Error uploading file to server.");}
 	}
 
 	/**

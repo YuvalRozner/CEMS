@@ -48,5 +48,7 @@ public enum MsgType {
 	
 	pop, // server <---> client. | pop message from client to client.
 	
-	changeDuration // server <---> client. | indicates that a test duration got changed.
+	changeDuration, // server <---> client. | indicates that a test duration got changed.
+	
+	filePopMsg
 }

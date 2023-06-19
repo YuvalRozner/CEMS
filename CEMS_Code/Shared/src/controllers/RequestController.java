@@ -120,7 +120,7 @@ public class RequestController {
     	msg3.setWhere("testCode", req.getTestCode());
     	msg3.setWhere("lecturerId", req.getLecturerId());
     	
-    	String popText = "Your request to change duration of test "+req.getTestCode()+" to "+ req.getDuration()+"min confirmed by your HOD " +req.getUser().getName()+".";
+    	String popText = "Your request to change duration of test "+req.getTestCode()+" to "+ req.getDuration()+"min confirmed by your HOD.";
 		Msg msg4 = new Msg(MsgType.pop);
 		msg4.setUser(req.getUser());
 		msg4.setPopText(popText);
