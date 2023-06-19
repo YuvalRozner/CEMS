@@ -27,7 +27,7 @@ public class LecturerMenuController extends AbstractController implements Menu{
      */
 	@FXML
     void approveGrades(ActionEvent event) throws Exception{
-		start("approveGrade", "lecturerMenu");
+		start("ApproveGrade", "LecturerMenu");
     }
 
 	/**
@@ -38,7 +38,7 @@ public class LecturerMenuController extends AbstractController implements Menu{
 	 */
     @FXML
     void createQuestion(ActionEvent event) throws Exception {
-		start("createQuestion", "lecturerMenu");
+		start("CreateQuestion", "LecturerMenu");
     }
 
     /**
@@ -49,7 +49,7 @@ public class LecturerMenuController extends AbstractController implements Menu{
      */
     @FXML
     void createTest(ActionEvent event) throws Exception {
-		start("createTest", "lecturerMenu");
+		start("CreateTest", "LecturerMenu");
     }
 
     /**
@@ -60,7 +60,7 @@ public class LecturerMenuController extends AbstractController implements Menu{
      */
     @FXML
     void executeTest(ActionEvent event) throws Exception {
-    	start("executeTest", "lecturerMenu"); 
+    	start("ExecuteTest", "LecturerMenu"); 
     }
 
     /**
@@ -71,7 +71,7 @@ public class LecturerMenuController extends AbstractController implements Menu{
      */
     @FXML
     void reports(ActionEvent event) throws Exception {
-		start("lecturerTestView", "lecturerMenu");
+		start("LecturerTestView", "LecturerMenu");
     }
 
     /**
@@ -82,7 +82,7 @@ public class LecturerMenuController extends AbstractController implements Menu{
      */
     @FXML
     void runningTest(ActionEvent event) throws Exception {
-    	start("runningTest", "lecturerMenu");
+    	start("RunningTest", "LecturerMenu");
     }
     
     /**

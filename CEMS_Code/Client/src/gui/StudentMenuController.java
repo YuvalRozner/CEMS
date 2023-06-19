@@ -55,7 +55,7 @@ public class StudentMenuController extends AbstractController implements Menu{
         	noGradesAlert.showErrorAlert("No grades to show !");
         	return;
         	}
-		start("showGrade", "studentMenu");
+		start("ShowGrade", "StudentMenu");
 	}
 	/**
 	 * go to start test window to connect for a test.
@@ -64,7 +64,7 @@ public class StudentMenuController extends AbstractController implements Menu{
 	 */
 	@FXML
 	void startTest(ActionEvent event) throws Exception {
-		start("startTest", "studentMenu");
+		start("StartTest", "StudentMenu");
 	}
 	/**
 	 * put for any client his own name in the welcome lable.

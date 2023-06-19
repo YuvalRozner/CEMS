@@ -163,7 +163,7 @@ public class RunningTestController extends AbstractController{
      * Resets all input fields to their default values.
      */
     private void resetFields() {
-    	try { start("runningTest", "lecturerMenu");
+    	try { start("RunningTest", "LecturerMenu");
 		} catch (Exception e) {	e.printStackTrace();}
     }
 }

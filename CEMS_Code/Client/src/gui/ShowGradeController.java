@@ -117,7 +117,7 @@ public class ShowGradeController extends AbstractController implements Tests {
 		for (StudentTest studentTest : allTest) // search for the studentTest.
 			if (studentTest.getShow().equals(clickedButton)) {
 				StudentTestToShow = studentTest;
-				start("showStudentTest", "showGrade");
+				start("ShowStudentTest", "ShowGrade");
 				break;
 			}
 	}

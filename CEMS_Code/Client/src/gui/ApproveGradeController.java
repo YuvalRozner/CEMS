@@ -208,7 +208,7 @@ public class ApproveGradeController extends AbstractController implements Tests{
         for (StudentTest studentTest : TestTable)  //search for the studentTest.
             if (studentTest.getButton().equals(clickedButton)) { 
                 StudentTestToShow = studentTest;
-                start("showStudentTest", "approveGrade");
+                start("ShowStudentTest", "ApproveGrade");
                 break;
             }
     }

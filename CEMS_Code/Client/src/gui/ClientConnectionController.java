@@ -49,7 +49,7 @@ public class ClientConnectionController extends AbstractController{
                 System.out.println("Error: Can't setup connection! Terminating client.");
                 System.exit(1);
             }  
-            start("login", "clientConnection");
+            start("Login", "ClientConnection");
         } catch(Throwable t) {
             System.out.println("input ip and port - error connecting."); return;
         }    	

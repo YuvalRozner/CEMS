@@ -310,6 +310,6 @@ public class ChooseReportTypeController extends AbstractController{
         }else if(reportType == "course") {
         	LecturerStaticsReportController.selectedCourse = selectedCourse;
         }
-    	start("lecturerStaticsReport", "chooseReportType");
+    	start("LecturerStaticsReport", "ChooseReportType");
     }
 }

@@ -55,7 +55,7 @@ public class HodMenuController extends AbstractController implements Menu{
      */
     @FXML
     void ShowQuestions(ActionEvent event) throws Exception {
-    	start("questionTable", "hodMenu");
+    	start("QuestionTable", "HodMenu");
     }
 
     /**
@@ -68,7 +68,7 @@ public class HodMenuController extends AbstractController implements Menu{
      */
     @FXML
     void approveChange(ActionEvent event) throws Exception {
-		start("approveChanges", "hodMenu");
+		start("ApproveChanges", "HodMenu");
     }
 
     /**
@@ -95,7 +95,7 @@ public class HodMenuController extends AbstractController implements Menu{
      */
     @FXML
     void reports(ActionEvent event) throws Exception {
-		start("chooseReportType", "hodMenu");
+		start("ChooseReportType", "HodMenu");
     }
 
     /**
@@ -108,7 +108,7 @@ public class HodMenuController extends AbstractController implements Menu{
      */
     @FXML
     void showTest(ActionEvent event) throws Exception {
-		start("showTestsData", "hodMenu");
+		start("ShowTestsData", "HodMenu");
     }
     
     /**

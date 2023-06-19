@@ -103,7 +103,7 @@ public class ShowTestDataController extends AbstractController implements Tests 
     for (TestToExecute testToExecute : showTestTable) // search for the studentTest.
       if (testToExecute.getButton().equals(clickedButton)) {
         testToExecuteToShow = testToExecute;
-        start("showStudentTest", "showTestsData");
+        start("ShowStudentTest", "ShowTestsData");
       }
   }
 

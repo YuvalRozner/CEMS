@@ -173,7 +173,7 @@ public class CreateTestController extends AbstractController{
      */
     @FXML
     private void createNewQuestion(ActionEvent event) throws Exception{
-    	start("createQuestion", "createTest");
+    	start("CreateQuestion", "CreateTest");
     }
     
     /**

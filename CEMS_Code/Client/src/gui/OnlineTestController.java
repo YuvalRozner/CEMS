@@ -225,7 +225,7 @@ public class OnlineTestController extends AbstractController implements CountDow
                     checkIfStudentIsTheLastOne();
                     updateAverageAndMedian();
                 }
-                try {start("studentMenu", "login");
+                try {start("StudentMenu", "Login");
                 ((Menu)ChatClient.getScreen(ChatClient.user.getPremission()+"Menu")).setWelcome("Welcome " + ChatClient.user.getName());} catch (Exception e) {e.printStackTrace();}
             }
         });
@@ -417,7 +417,7 @@ public class OnlineTestController extends AbstractController implements CountDow
 
         notification.showInformationAlert("The test was successfully submitted!");
 
-        try {start("studentMenu", "login");} catch (Exception e) {e.printStackTrace();
+        try {start("StudentMenu", "Login");} catch (Exception e) {e.printStackTrace();
         ((Menu)ChatClient.getScreen(ChatClient.user.getPremission()+"Menu")).setWelcome("Welcome " + ChatClient.user.getName());}
     }
 
@@ -449,7 +449,7 @@ public class OnlineTestController extends AbstractController implements CountDow
         sendMsg(msg);
 
         try {
-            start("studentMenu", "login");
+            start("StudentMenu", "Login");
             ((Menu)ChatClient.getScreen(ChatClient.user.getPremission()+"Menu")).setWelcome("Welcome " + ChatClient.user.getName());
         } catch (Exception e) {
             e.printStackTrace();
@@ -467,7 +467,7 @@ public class OnlineTestController extends AbstractController implements CountDow
 		sendMsg(msg);
 		msg=testToExecuteController.insertDistributionByCode(code.toString(),grade,1);
 		sendMsg(msg);
-		try {start("studentMenu", "login"); ((Menu)ChatClient.getScreen(ChatClient.user.getPremission()+"Menu")).setWelcome("Welcome " + ChatClient.user.getName());} catch (Exception e) {e.printStackTrace();}
+		try {start("StudentMenu", "Login"); ((Menu)ChatClient.getScreen(ChatClient.user.getPremission()+"Menu")).setWelcome("Welcome " + ChatClient.user.getName());} catch (Exception e) {e.printStackTrace();}
 	}
 
 	/**

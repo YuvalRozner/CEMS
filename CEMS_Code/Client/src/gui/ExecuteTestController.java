@@ -162,7 +162,7 @@ public class ExecuteTestController extends AbstractController implements Tests{
      * @throws Exception 
      */
     private void resetFields() throws Exception {
-    	start("executeTest", "lecturerMenu"); 
+    	start("ExecuteTest", "LecturerMenu"); 
     }
     
     /**
@@ -179,7 +179,7 @@ public class ExecuteTestController extends AbstractController implements Tests{
          for (TestToExecute testToExecute : testToExecuteTable)  //search for the studentTest.
         	 if (testToExecute.getButton().equals(clickedButton)) { 
              	testToExecuteToShow = testToExecute;
-             	start("showStudentTest", "executeTest");
+             	start("ShowStudentTest", "ExecuteTest");
              }		
     }
     

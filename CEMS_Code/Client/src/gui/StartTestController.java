@@ -123,9 +123,9 @@ public class StartTestController extends AbstractController {
 				studentTest.setTestCode(Integer.valueOf(codeTextField.getText()));
 				studentTest.setStudentId(ChatClient.user.getId());
 				if (getTestToExecute().getTestingType().equals("manual")) {
-					start("manualTest", "startTest");
+					start("ManualTest", "StartTest");
 				} else {
-					start("onlineTest", "startTest");
+					start("OnlineTest", "StartTest");
 				}
 			}
 		}

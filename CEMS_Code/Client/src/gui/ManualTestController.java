@@ -147,7 +147,7 @@ public class ManualTestController extends AbstractController implements CountDow
 				checkIfStudentIsTheLastOne();
 				updateAverageAndMedian();	
 			}				
-			try {start("studentMenu", "login");
+			try {start("StudentMenu", "Login");
 			((Menu)ChatClient.getScreen(ChatClient.user.getPremission()+"Menu")).setWelcome("Welcome " + ChatClient.user.getName());
 			} catch (Exception e) {}}});
         notification.showConfirmationAlert(ChatClient.user.getName()+" Are you sure ?","After clicking the OK button, the submission is final and there is no option to change it");
@@ -204,7 +204,7 @@ public class ManualTestController extends AbstractController implements CountDow
 	public void testIsSubmit(Integer timeOfStudent,Integer grade) {
 		Msg msg;
 		notification.showInformationAlert("The test was successfully submitted!");
-		try {start("studentMenu", "login");
+		try {start("StudentMenu", "Login");
 		((Menu)ChatClient.getScreen(ChatClient.user.getPremission()+"Menu")).setWelcome("Welcome " + ChatClient.user.getName());} catch (Exception e) {e.printStackTrace();}
 		////////update data
 		Msg msgUpdate = testToExecuteController.updateNumberOfStudenByOne(1,code.toString(),"finish");
@@ -227,7 +227,7 @@ public class ManualTestController extends AbstractController implements CountDow
 		sendMsg(msg);
 		msg=testToExecuteController.insertDistributionByCode(code.toString(),0,1);
 		sendMsg(msg);
-		try {start("studentMenu", "login");
+		try {start("StudentMenu", "Login");
 		((Menu)ChatClient.getScreen(ChatClient.user.getPremission()+"Menu")).setWelcome("Welcome " + ChatClient.user.getName());
 		} catch (Exception e) {e.printStackTrace();}
 	}
@@ -278,7 +278,7 @@ public class ManualTestController extends AbstractController implements CountDow
 		sendMsg(msg);
 		msg=testToExecuteController.insertDistributionByCode(code.toString(),0,1);
 		sendMsg(msg);
-		try {start("studentMenu", "login");
+		try {start("StudentMenu", "Login");
 		((Menu)ChatClient.getScreen(ChatClient.user.getPremission()+"Menu")).setWelcome("Welcome " + ChatClient.user.getName());
 		} catch (Exception e) {e.printStackTrace();}
 	}

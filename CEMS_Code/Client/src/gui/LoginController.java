@@ -37,7 +37,7 @@ public class LoginController extends AbstractController{
     	ChatClient.resetUser();
     	if(!login(userNameTxt.getText(), passwordTxt.getText())) return; 
     	User user = ChatClient.user;
-    	start(user.getPremission()+"Menu", "login");
+    	start(user.getPremission()+"Menu", "Login");
     	((Menu)ChatClient.getScreen(user.getPremission()+"Menu")).setWelcome("Welcome " + user.getName());
     }
 
