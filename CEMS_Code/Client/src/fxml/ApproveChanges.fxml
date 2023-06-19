@@ -20,20 +20,20 @@
       <Pane layoutX="31.0" layoutY="117.0" maxHeight="569.0" maxWidth="200.0" minHeight="509.0" minWidth="200.0" prefHeight="509.0" prefWidth="200.0" style="-fx-background-color: #92bce3;" />
       <ImageView fitHeight="346.0" fitWidth="260.0" layoutX="75.0" layoutY="-39.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/durationConfirmation.png" />
+            <Image url="@images/durationConfirmation.png" />
          </image>
       </ImageView>
       <Pane layoutX="474.0" layoutY="-103.0" maxHeight="182.0" maxWidth="220.0" minHeight="182.0" minWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
       <ImageView fitHeight="340.0" fitWidth="478.0" layoutX="430.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/durationConfirmation.png" />
+            <Image url="@images/durationConfirmation.png" />
          </image>
       </ImageView>
       <Pane layoutX="31.0" layoutY="140.0" maxHeight="40.0" maxWidth="493.0" minHeight="21.0" minWidth="493.0" prefHeight="21.0" prefWidth="493.0" style="-fx-background-color: #C5EFFF; -fx-background-radius: 0 50 50 0;" />
       <Circle fill="WHITE" layoutX="60.0" layoutY="561.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />
       <ImageView fitHeight="213.0" fitWidth="242.0" layoutX="25.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/durationConfirmation.png" />
+            <Image url="@images/durationConfirmation.png" />
          </image>
       </ImageView>
       <Label layoutX="33.0" layoutY="420.0" text="Note!" textFill="#b20000">
@@ -99,7 +99,7 @@
       </TableView>
       <ImageView fitHeight="181.0" fitWidth="201.0" layoutX="546.0" layoutY="-28.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/Cems-logo.png" />
+            <Image url="@images/Cems-logo.png" />
          </image>
       </ImageView>
    </children>

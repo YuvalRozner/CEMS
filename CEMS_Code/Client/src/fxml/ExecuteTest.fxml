@@ -46,7 +46,7 @@
          </effect></Label>
       <ImageView fitHeight="208.0" fitWidth="209.0" layoutX="407.0" layoutY="-37.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/Cems-logo.png" />
+            <Image url="@images/Cems-logo.png" />
          </image>
       </ImageView>
       <Circle fill="WHITE" layoutX="54.0" layoutY="565.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />
@@ -81,7 +81,7 @@
          </font></Button>
       <ImageView fitHeight="201.0" fitWidth="196.0" layoutX="25.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/ExecuteTest3.png" />
+            <Image url="@images/ExecuteTest3.png" />
          </image>
       </ImageView>
    </children>

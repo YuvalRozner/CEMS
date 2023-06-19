@@ -30,7 +30,7 @@
       <Pane layoutX="731.0" layoutY="-101.0" maxHeight="182.0" maxWidth="220.0" minHeight="182.0" minWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
       <ImageView fitHeight="221.0" fitWidth="232.0" layoutX="772.0" layoutY="-45.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/Cems-logo.png" />
+            <Image url="@images/Cems-logo.png" />
          </image>
       </ImageView>
       <Button layoutX="541.0" layoutY="319.0" mnemonicParsing="false" onAction="#createNewQuestion" prefHeight="28.0" prefWidth="157.0" style="-fx-background-radius: 10;" stylesheets="@Button.css" text="Create New Question">
@@ -41,17 +41,17 @@
       <TextField fx:id="durationTextField" layoutX="213.0" layoutY="520.0" promptText="Minutes" style="-fx-background-color: #F8FFFF; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #92bce3;" />
       <ImageView fitHeight="191.0" fitWidth="574.0" layoutX="423.0" layoutY="424.0" pickOnBounds="true" preserveRatio="true" rotate="-16.5">
          <image>
-            <Image url="@../../images/beautifulLineForCreateTest.png" />
+            <Image url="@images/beautifulLineForCreateTest.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="564.0" fitWidth="641.0" layoutX="-116.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true" rotate="-25.2">
          <image>
-            <Image url="@../../images/beautifulLineForCreateTest.png" />
+            <Image url="@images/beautifulLineForCreateTest.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="130.0" fitWidth="140.0" layoutX="817.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/createTest.png" />
+            <Image url="@images/createTest.png" />
          </image>
       </ImageView>
       <Circle fill="WHITE" layoutX="57.0" layoutY="594.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" />

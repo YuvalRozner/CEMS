@@ -26,29 +26,29 @@
       <Pane layoutX="402.0" layoutY="-97.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
       <ImageView fitHeight="183.0" fitWidth="185.0" layoutX="478.0" layoutY="-33.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/Cems-logo.png" />
+            <Image url="@images/Cems-logo.png" />
          </image>
       </ImageView>
       <HBox layoutX="226.0" layoutY="298.0" prefHeight="74.0" prefWidth="374.0" spacing="10.0">
          <children>
             <ImageView fitHeight="97.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/rozni.jpeg" />
+                  <Image url="@images/rozni.jpeg" />
                </image>
             </ImageView>
             <ImageView fitHeight="93.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/Mor.JPG" />
+                  <Image url="@images/Mor.JPG" />
                </image>
             </ImageView>
             <ImageView fitHeight="97.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/Lior.jpeg" />
+                  <Image url="@images/Lior.jpeg" />
                </image>
             </ImageView>
             <ImageView fitHeight="97.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/dor.png" />
+                  <Image url="@images/dor.png" />
                </image>
             </ImageView>
          </children>

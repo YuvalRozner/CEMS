@@ -20,13 +20,13 @@
    <children>
       <ImageView fitHeight="180.0" fitWidth="189.0" layoutX="448.0" layoutY="449.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/arrows_statistics.png" />
+            <Image url="@images/arrows_statistics.png" />
          </image>
       </ImageView>
       <Pane layoutX="364.0" layoutY="-100.0" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
       <ImageView fitHeight="184.0" fitWidth="180.0" layoutX="437.0" layoutY="-29.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/Cems-logo.png" />
+            <Image url="@images/Cems-logo.png" />
          </image>
       </ImageView>
       <Pane layoutX="34.0" layoutY="92.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="189.0" style="-fx-background-color: #92bce3;" />

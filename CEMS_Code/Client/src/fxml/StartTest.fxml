@@ -18,12 +18,12 @@
       <Pane layoutX="273.0" layoutY="-98.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
       <ImageView fitHeight="216.0" fitWidth="217.0" layoutX="12.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/students2.png" />
+            <Image url="@images/students2.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="178.0" fitWidth="199.0" layoutX="348.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/Cems-logo.png" />
+            <Image url="@images/Cems-logo.png" />
          </image>
       </ImageView>
       <Pane layoutX="40.0" layoutY="161.0" prefHeight="365.0" prefWidth="179.0" style="-fx-background-color: #92bce3;" />

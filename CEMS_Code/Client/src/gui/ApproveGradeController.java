@@ -246,6 +246,7 @@ public class ApproveGradeController extends AbstractController implements Tests{
 					public void run() {
 						Msg getStudent = UserController.selectUserById(studentTest.getStudentId());
 						sendMsg(getStudent);
+						if (msgReceived == null) {return;} 
 						User student = msgReceived.convertData(User.class).get(0);
 						Msg msg1 = studentTestController.getMsgToUpdateStudentTests(studentTest, student);
 						sendMsg(msg1);

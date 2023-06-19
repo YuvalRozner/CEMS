@@ -91,7 +91,7 @@ public class ChatClient extends AbstractClient {
 					((Testing)lastCurrentScreen).testGotManualyLockedByLecturer(msg.getTestCode().toString());
 				break;
 			case file:
-				//msg.setPathFile("@../../file/");
+				//msg.setPathFile("@file/");
 				cemsFileController.saveFile(msg);
 				break; 
 			case pop:

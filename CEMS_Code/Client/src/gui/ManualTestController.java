@@ -255,7 +255,7 @@ public class ManualTestController extends AbstractController implements CountDow
 	@FXML
 	void upload(ActionEvent event) {
 		String path =uploadField.getText();
-		//String path ="@../../file/algebraTestAnswers.docx";
+		//String path ="@file/algebraTestAnswers.docx";
 		Msg msg = cemsFileController.createMsgWithFile(path);
 		sendMsg(msg);
 		NotificationAlertsController alert = new NotificationAlertsController();

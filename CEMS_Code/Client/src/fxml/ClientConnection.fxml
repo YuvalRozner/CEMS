@@ -20,7 +20,7 @@
       <Pane layoutX="86.0" layoutY="-95.0" maxHeight="182.0" maxWidth="220.0" minHeight="182.0" minWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
       <ImageView fitHeight="172.0" fitWidth="162.0" layoutX="187.0" layoutY="-36.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/Cems-logo.png" />
+            <Image url="@images/Cems-logo.png" />
          </image>
       </ImageView>
       <Circle fill="WHITE" layoutX="14.0" layoutY="286.0" radius="80.0" stroke="WHITE" strokeType="INSIDE" />

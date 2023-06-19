@@ -67,12 +67,12 @@
       </VBox>
       <ImageView fitHeight="190.0" fitWidth="586.0" layoutX="-124.0" layoutY="-39.0" pickOnBounds="true" preserveRatio="true" rotate="-7.4">
          <image>
-            <Image url="@../../images/beautifulLineForCreateTest.png" />
+            <Image url="@images/beautifulLineForCreateTest.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="137.0" fitWidth="264.0" layoutX="282.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" rotate="21.8">
          <image>
-            <Image url="@../../images/hodQuestionsList.png" />
+            <Image url="@images/hodQuestionsList.png" />
          </image>
       </ImageView>
       <Button layoutX="661.0" layoutY="554.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backBtn" onMouseEntered="#onMouseEnterdBackBtn" onMouseExited="#onMouseExitedBackBtn" prefWidth="118.0" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Back">
@@ -114,7 +114,7 @@
       <Pane layoutX="557.0" layoutY="-95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
       <ImageView fitHeight="212.0" fitWidth="206.0" layoutX="608.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/Cems-logo.png" />
+            <Image url="@images/Cems-logo.png" />
          </image>
       </ImageView>
    </children>

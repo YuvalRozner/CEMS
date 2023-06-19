@@ -18,7 +18,7 @@
       <Pane layoutX="149.0" layoutY="-107.0" maxHeight="182.0" maxWidth="220.0" minHeight="182.0" minWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
       <ImageView fitHeight="171.0" fitWidth="175.0" layoutX="225.0" layoutY="-37.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/Cems-logo.png" />
+            <Image url="@images/Cems-logo.png" />
          </image>
       </ImageView>
       <Label layoutX="19.0" layoutY="78.0" text="Lecturer Menu">
@@ -46,7 +46,7 @@
       </Label>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="342.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/forMenu.png" />
+            <Image url="@images/forMenu.png" />
          </image>
       </ImageView>
       <Pane layoutX="-15.0" layoutY="142.0" maxHeight="292.0" maxWidth="218.0" minHeight="292.0" minWidth="218.0" style="-fx-background-color: #92bce3; -fx-background-radius: 0;">
@@ -101,7 +101,7 @@
          </effect></Button>
       <ImageView fitHeight="43.0" fitWidth="222.0" layoutX="-3.0" layoutY="422.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/CEMS@reallygreatsystem.com.png" />
+            <Image url="@images/CEMS@reallygreatsystem.com.png" />
          </image>
       </ImageView>
    </children>

@@ -76,7 +76,7 @@
       <Pane layoutX="338.0" layoutY="-98.0" maxHeight="182.0" maxWidth="220.0" minHeight="182.0" minWidth="220.0" rotate="-41.0" style="-fx-background-color: white;" />
       <ImageView fitHeight="198.0" fitWidth="198.0" layoutX="407.0" layoutY="-42.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/Cems-logo.png" />
+            <Image url="@images/Cems-logo.png" />
          </image>
       </ImageView>
       <Label alignment="CENTER" layoutX="24.0" layoutY="51.0" text="Create Question">
@@ -164,7 +164,7 @@
          </effect></Button>
       <ImageView fitHeight="74.0" fitWidth="114.0" layoutX="90.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" rotate="14.6">
          <image>
-            <Image url="@../../images/questions.png" />
+            <Image url="@images/questions.png" />
          </image>
       </ImageView>
       <TextField fx:id="instructionTextField" layoutX="213.0" layoutY="594.0" prefWidth="300.0" promptText="Instruction for student" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #F8FFFF; -fx-border-color: #92bce3;" />

@@ -14,7 +14,7 @@
    <children>
       <ImageView fitHeight="542.0" fitWidth="696.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/Blue%20Modern%20Login%20Page%20Desktop%20Prototype.png" />
+            <Image url="@images/Blue%20Modern%20Login%20Page%20Desktop%20Prototype.png" />
          </image>
       </ImageView>
       <Pane layoutX="395.0" layoutY="189.0" prefHeight="65.0" prefWidth="100.0" style="-fx-background-color: white;" />
@@ -36,12 +36,12 @@
       <TextField fx:id="userNameTxt" layoutX="100.0" layoutY="277.0" promptText="username" style="-fx-background-radius: 7; -fx-background-color: #F8FFFF; -fx-border-color: #92bce3; -fx-border-radius: 7;" />
       <ImageView fitHeight="28.0" fitWidth="22.0" layoutX="237.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/Blue%20Modern%20Login%20Page%20Desktop%20Prototype-2.png" />
+            <Image url="@images/Blue%20Modern%20Login%20Page%20Desktop%20Prototype-2.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="28.0" fitWidth="23.0" layoutX="237.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/Blue%20Modern%20Login%20Page%20Desktop%20Prototype-3.png" />
+            <Image url="@images/Blue%20Modern%20Login%20Page%20Desktop%20Prototype-3.png" />
          </image>
       </ImageView>
       <Button layoutX="142.0" layoutY="342.0" maxWidth="118.0" minWidth="118.0" mnemonicParsing="false" onAction="#connect" style="-fx-background-radius: 7;" stylesheets="@Button.css" text="Connect">
@@ -50,12 +50,12 @@
          </font></Button>
       <ImageView fitHeight="65.0" fitWidth="350.0" layoutY="372.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/CEMS@reallygreatsystem.com.png" />
+            <Image url="@images/CEMS@reallygreatsystem.com.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="298.0" fitWidth="346.0" layoutX="296.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/Cems-logo.png" />
+            <Image url="@images/Cems-logo.png" />
          </image>
       </ImageView>
    </children>
