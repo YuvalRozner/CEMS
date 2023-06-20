@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import notifications.NotificationAlertsController;
 
 /**
  * The LoginController class handles the logic and user interface interactions for the login screen.
@@ -14,6 +15,8 @@ import javafx.scene.control.TextField;
  *
  */
 public class LoginController extends AbstractController{
+	
+	private NotificationAlertsController notificationAlertsController;
 	
 	/**
 	 * input
@@ -48,8 +51,8 @@ public class LoginController extends AbstractController{
      * @param password The password entered by the user.
      * @return {@code true} if the login is successful, {@code false} otherwise.
      */
-	private boolean login(String username, String password) {
-		if(username==null || password==null) { notification.showErrorAlert("you must enter username and password."); return false;}
+	public boolean login(String username, String password) {
+		if(username==null || password==null) { notificationAlertsController.showErrorAlert("you must enter username and password."); return false;}
     	sendMsg(userController.selectUser(username));
     	User user = ChatClient.user;
     	if(user==null) { notification.showErrorAlert("cant find this usename."); return false;}
@@ -60,4 +63,11 @@ public class LoginController extends AbstractController{
     	sendMsg(msg);
     	return true;
 	}
+
+	public void setNotificationAlertsController(NotificationAlertsController notification) {
+		
+		this.notificationAlertsController=notification;
+	}
+
+
 }
