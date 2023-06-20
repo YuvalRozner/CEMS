@@ -2,6 +2,7 @@ package gui;
 
 import JDBC.Msg;
 import client.ChatClient;
+import controllers.UserController;
 import enteties.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,9 +15,20 @@ import notifications.NotificationAlertsController;
  * It is responsible for authenticating users and displaying appropriate error messages.
  *
  */
-public class LoginController extends AbstractController{
+public class LoginController extends AbstractController{	
 	
-	private NotificationAlertsController notificationAlertsController;
+	private UserController userController=new UserController();
+    private NotificationAlertsController notificationAlertsController=new NotificationAlertsController();
+    private ChatClientInterface chatClientIF;
+
+    public LoginController() {
+    	this.chatClientIF=new ChatClientController ();
+    }
+    
+    public LoginController(ChatClientInterface chatClientIf) {
+    	this.chatClientIF=chatClientIf;
+    }
+	
 	
 	/**
 	 * input
@@ -53,21 +65,45 @@ public class LoginController extends AbstractController{
      */
 	public boolean login(String username, String password) {
 		if(username==null || password==null) { notificationAlertsController.showErrorAlert("you must enter username and password."); return false;}
-    	sendMsg(userController.selectUser(username));
-    	User user = ChatClient.user;
-    	if(user==null) { notification.showErrorAlert("cant find this usename."); return false;}
-    	if(!user.getPassword().equals(password)) { notification.showErrorAlert("username or password are wrong."); return false;}
-    	if(user.getLoggedin().equals("yes")) { notification.showErrorAlert("this user is already loggedin in another device."); return false;}
+		chatClientIF.sendMsgIF(userController.selectUser(username));
+    	User user = chatClientIF.getUser();
+    	if(user==null) { notificationAlertsController.showErrorAlert("cant find this usename."); return false;}
+    	if(!user.getPassword().equals(password)) { notificationAlertsController.showErrorAlert("username or password are wrong."); return false;}
+    	if(user.getLoggedin().equals("yes")) { notificationAlertsController.showErrorAlert("this user is already loggedin in another device."); return false;}
     	Msg msg  = userController.getLoggedinMsg(user, "yes");
     	System.out.println("login msg: "+ msg);
-    	sendMsg(msg);
+    	chatClientIF.sendMsgIF(msg);
     	return true;
 	}
+	
+	
 
+	public class ChatClientController implements ChatClientInterface {
+		User user;
+	    @Override
+	    public void sendMsgIF(Msg msg) {
+	    	sendMsg(msg);
+	    }
+
+		@Override
+		public User getUser() {
+			return ChatClient.user;
+		}
+
+		@Override
+		public void setUser(User user) {
+			user=ChatClient.user;		
+		}
+	}
+	
+	
 	public void setNotificationAlertsController(NotificationAlertsController notification) {
 		
 		this.notificationAlertsController=notification;
 	}
-
-
+	
+	public void setuserController(UserController userController) {
+		
+		this.userController=userController;
+	}
 }
