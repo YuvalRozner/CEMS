@@ -1,7 +1,8 @@
 package controllers;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 
@@ -61,7 +62,7 @@ class SubjectControllerTest {
         Msg result = null;
         try {
         	result = subjectController.getMsgForCourses(subject);
-        }catch(Exception e) {assertTrue(false);}
+        }catch(Exception e) {fail("exception.");}
         assertEquals(null, result);
     }
 	
@@ -82,9 +83,8 @@ class SubjectControllerTest {
 		tmpLst.add("Algebra");
 		tmpLst.add("Object Oriented");
 		ObservableList<String> expected = FXCollections.observableArrayList(tmpLst);
-        try {
-        	result = subjectController.getSubjectNames(lst);
-        }catch(Exception e) {assertTrue(false);}
+        try {result = subjectController.getSubjectNames(lst);
+        }catch(Exception e) {fail("exception.");}
         assertEquals(expected, result);
     }
 	
@@ -98,7 +98,7 @@ class SubjectControllerTest {
 		ObservableList<String> expected = FXCollections.observableArrayList();
         try {
         	result = subjectController.getSubjectNames(lst);
-        }catch(Exception e) {assertTrue(false);}
+        }catch(Exception e) {fail("exception.");}
         assertEquals(expected, result);
     }
 	
@@ -108,11 +108,9 @@ class SubjectControllerTest {
 	@Test
     void getSubjectNamesTest_subjectListInputIsNull() {
 		ObservableList<String> result = null;
-		ObservableList<String> expected = null;
-        try {
-        	result = subjectController.getSubjectNames(null);
-        }catch(Exception e) {assertTrue(false);}
-        assertEquals(expected, result);
+        try {result = subjectController.getSubjectNames(null);
+        }catch(Exception e) {fail("exception.");}
+        assertNull(result);
     }
 	
 	//Description: verifies the behavior of the getSubjectNames method when the input is not empty list of Subject with null values.
@@ -127,7 +125,7 @@ class SubjectControllerTest {
 		ObservableList<String> expected = null;
         try {
         	result = subjectController.getSubjectNames(lst);
-        }catch(Exception e) {assertTrue(false);}
+        }catch(Exception e) {fail("exception.");}
         assertEquals(expected, result);
     }
 	
@@ -147,28 +145,9 @@ class SubjectControllerTest {
 		ObservableList<String> expected = FXCollections.observableArrayList(tmpLst);
         try {
         	result = subjectController.getSubjectNames(lst);
-        }catch(Exception e) {assertTrue(false);}
+        }catch(Exception e) {fail("exception.");}
         assertEquals(expected, result);
     }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
     // Description: verifies the behavior of the findSubjectByName method, searching for an existing subject in the list.
     // Input: subjectName = "Math", subjectsLst = [Subject("Physics"), Subject("Math"), Subject("Chemistry")].
@@ -188,7 +167,7 @@ class SubjectControllerTest {
         Subject expected = sub2;
         Subject result = new Subject();
         try{ result = subjectController.findSubjectByName("Math", subjectsLst);
-        }catch(Exception e) {assertTrue(false);}
+        }catch(Exception e) {fail("exception.");}
         assertEquals(expected.getName(), result.getName());
     }
 	
@@ -204,11 +183,10 @@ class SubjectControllerTest {
         Subject sub2 = new Subject();
         sub2.setName("Math");
         subjectsLst.add(sub2);
-        Subject expected = null;
         Subject result = null;
         try{ result = subjectController.findSubjectByName("Software", subjectsLst);
-        }catch(Exception e) {assertTrue(false);}
-        assertEquals(expected, result);
+        }catch(Exception e) {fail("exception.");}
+        assertNull(result);
     }
 	
     // Description: verifies the behavior of the findSubjectByName method, searching in an empty subject list.
@@ -217,11 +195,10 @@ class SubjectControllerTest {
 	@Test
     public void findSubjectByNameTest_emptySubjectListInput() {
         ArrayList<Subject> subjectsLst = new ArrayList<>();
-        Subject expected = null;
         Subject result = null;
         try{ result = subjectController.findSubjectByName("Software", subjectsLst);
-        }catch(Exception e) {assertTrue(false);}
-        assertEquals(expected, result);
+        }catch(Exception e) {fail("exception.");}
+        assertNull(result);
     }
 	
     // Description: verifies the behavior of the findSubjectByName method, searching in an a null subject list.
@@ -230,11 +207,10 @@ class SubjectControllerTest {
 	@Test
     public void findSubjectByNameTest_subjectListInputIsNull() {
         ArrayList<Subject> subjectsLst = null;
-        Subject expected = null;
         Subject result = null;
         try{ result = subjectController.findSubjectByName("Software", subjectsLst);
-        }catch(Exception e) {assertTrue(false);}
-        assertEquals(expected, result);
+        }catch(Exception e) {fail("exception.");}
+        assertNull(result);
     }
 	
     // Description: verifies the behavior of the findSubjectByName method, searching a null string in a legal subject list.
@@ -249,11 +225,10 @@ class SubjectControllerTest {
         Subject sub2 = new Subject();
         sub2.setName("Math");
         subjectsLst.add(sub2);
-        Subject expected = null;
         Subject result = null;
         try{ result = subjectController.findSubjectByName(null, subjectsLst);
-        }catch(Exception e) {assertTrue(false);}
-        assertEquals(expected, result);
+        }catch(Exception e) {fail("exception.");}
+        assertNull(result);
     }
 	
 	
