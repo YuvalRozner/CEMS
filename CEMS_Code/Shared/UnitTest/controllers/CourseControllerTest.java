@@ -39,9 +39,8 @@ class CourseControllerTest {
     }
 	
 	//Description: verifies the behavior of the getMsgForQuestions method when the course number is not set.
-	//Input: Course object.
-	//Expected Result: Msg object should have the type MsgType.select, select all attributes of a question, have two table names: "question_course" and "question", 
-	//					condition that joins the two tables on "question_course.questionId" and "question.id", condition that does not filter by the course number(null).
+	//Input: Course object with null number.
+	//Expected Result: Msg object should be initialize but without a where section(null).
 	@Test
     void getMsgForQuestionsTest_CourseNumberNotSet() {  
         Course course = new Course();
@@ -52,8 +51,7 @@ class CourseControllerTest {
         assertEquals("question", result.getFrom().get(1));
         assertEquals("question_course.questionId", result.getWhereCol().keySet().iterator().next());
         assertEquals("question.id", result.getWhereCol().values().iterator().next());
-        assertEquals("courseNum", result.getWhere().keySet().iterator().next());
-        assertEquals(null, result.getWhere().values().iterator().next());
+        assertEquals(null, result.getWhere());
     }
 	
 	//Description: verifies the behavior of the getMsgForQuestions method when the course input is null.
