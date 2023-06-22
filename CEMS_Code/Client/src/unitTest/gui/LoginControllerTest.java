@@ -68,14 +68,6 @@ class LoginControllerTest{
 
     @BeforeEach
     void setUp() throws Exception {
-        if (Boolean.getBoolean("headless")) {
-            System.setProperty("java.awt.headless", "true");
-        } else {
-            // Initialize JavaFX toolkit if not already initialized
-            if (System.getProperty("javafx.embed.singleThread", "false").equals("false")) {
-                new javafx.embed.swing.JFXPanel();
-            }
-        }
         //set up login controller object
         testChatClient = new TestChatClient();
         loginController  = new LoginController(testChatClient);
