@@ -56,6 +56,18 @@ class CourseControllerTest {
         assertEquals(null, result.getWhere().values().iterator().next());
     }
 	
+	//Description: verifies the behavior of the getMsgForQuestions method when the course input is null.
+	//Input: Course object = null.
+	//Expected Result: Msg object should not be initialize and should return as null.
+	@Test
+    void getMsgForQuestionsTest_CourseIsNull() {  
+        Course course = null;
+        Msg result = null;
+        try {
+        	result = courseController.getMsgForQuestions(course);
+        }catch(Exception e) {assertTrue(false);}
+        assertEquals(null, result);
+    }	
 	
 	//Description: verifies the behavior of the findCourseByName method when the course exists in the course list.
 	//Input: course name "Algebra" and a list of courses including a course with the name "Algebra".
