@@ -21,10 +21,9 @@ class UserControllerTest {
 	}
 
 	/**
-	 * Description: This test verifies that the selectUser method keep the message
-	 * null when the username is null. 
+	 * Description: verifies the behavior of the selectUser method when the username is null. 
 	 * Input: username=null. 
-	 * Expected Result: The message with the appropriate type, select query, and WHERE clause for the null username.
+	 * Expected Result: Null message object.
 	 */
 	@Test
 	void selectUserTestUsernameIsNull() {
@@ -39,10 +38,9 @@ class UserControllerTest {
 	}
 
 	/**
-	 * Description: This test verifies that the selectUser method constructs the
-	 * expected message when the username is valid. Input: username="liorzucker".
-	 * Expected Result: The message with the appropriate type, select query, and WHERE clause
-	 * for the valid username.
+	 * Description: verifies the behavior of the selectUser method  when the username is valid. 
+	 * Input: username="liorzucker".
+	 * Expected Result: actualMsg with the appropriate type, select query, and WHERE clause for the valid username.
 	 */
 	@Test
 	void selectUserTestUsernameIsValid() {
@@ -65,11 +63,9 @@ class UserControllerTest {
 	}
 
 	/**
-	 * Description: This test verifies that the selectUser method constructs the
-	 * expected message when the username is empty. 
+	 * Description: verifies the behavior of the selectUser method when the username is empty. 
 	 * Input:usernam= "". 
-	 * Expected Result: The message with the appropriate type, select query, and WHERE clause for the
-	 * empty username.
+	 * Expected Result: The message with the appropriate type, select query, and WHERE clause with empty username.
 	 */
 	@Test
 	void selectUserTestUsernameIsEmpty() {
@@ -92,8 +88,7 @@ class UserControllerTest {
 	}
 
 	/**
-	 * Description: This test verifies that the getLoggedinMsg method constructs the
-	 * correct message object when the user is logged in. 
+	 * Description: verifies the behavior of the getLoggedinMsg method when the user is logged in. 
 	 * Input: User object with a valid username username=liorzucker, loggedIn = "yes" 
 	 * Expected Result: Message object with type "login", tableToUpdate set to "user", set field with "loggedin" key
 	 * set to "yes", and where field with "username" key set to the user's username.
@@ -121,8 +116,7 @@ class UserControllerTest {
 	}
 
 	/**
-	 * Description: This test verifies that the getLoggedinMsg method constructs the
-	 * correct message object when the user is logged out. 
+	 * Description: verifies the behavior of the getLoggedinMsg method when the user is logged out. 
 	 * Input: User object with a valid username username="liorzucker", loggedIn = "no". 
 	 * Expected Result: Message object with type "logout", tableToUpdate set to "user", set field with "loggedin"
 	 * key set to "no", and where field with "username" key set to the user's
@@ -151,8 +145,7 @@ class UserControllerTest {
 	}
 
 	/**
-	 * Description: This test verifies that the getLoggedinMsg method throws an
-	 * exception when the loggedIn parameter is null. 
+	 * Description: verifies the behavior of the getLoggedinMsg method when the loggedIn parameter is null. 
 	 * Input: User object with a valid username, loggedIn = null. 
 	 * Expected Result: An exception is thrown.
 	 */
@@ -171,10 +164,9 @@ class UserControllerTest {
 	}
 
 	/**
-	 * Description: This test verifies that the getLoggedinMsg method throws an
-	 * exception when the user parameter is null. 
+	 * Description: verifies the behavior of the getLoggedinMsg method when the user parameter is null. 
 	 * Input: User = null, loggedIn ="yes".
-	 * Expected Result: An exception is thrown.
+	 * Expected Result: actualMsg is null.
 	 */
 
 	@Test
