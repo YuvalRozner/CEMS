@@ -51,10 +51,10 @@ public class TestToExecute {
 	TextField textField1;
 
 	private CheckBox select;
-	private TextField codeField = new TextField();
-	private TextField type = new TextField();
+	private TextField codeField;
+	private TextField type;
 	private Button show;
-	private TextField durationField = new TextField();
+	private TextField durationField;
 
 	/**
 	 * Constructs a TestToExecute object with the specified number of students.

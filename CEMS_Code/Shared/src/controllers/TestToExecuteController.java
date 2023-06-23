@@ -385,23 +385,23 @@ public class TestToExecuteController {
 	 * @return Object representing the new TestToExecute if the inputs are valid,
 	 *         or a String with an error message if the inputs are not invalid.
 	 */
-	public Object checkInputs(TestToExecute selectedTest, User user) {
+	public Object checkInputs(TestToExecute selectedTest, String userId, String date, String testCode, String testingType) {
 		String error = new String("");
-		if (selectedTest.getTextField().getText().length() == 0)
+		if (date.length() == 0)
 			error += "You must enter test date.\n";
-		selectedTest.setDate(selectedTest.getTextField().getText());
+		selectedTest.setDate(date);
 		try {
-			if (Integer.valueOf(selectedTest.getTextField1().getText()) > 9999
-					|| Integer.valueOf(selectedTest.getTextField1().getText()) < 1000)
+			if (Integer.valueOf(testCode) > 9999
+					|| Integer.valueOf(testCode) < 1000)
 				error += "Test code must be a number between 1000 and 9999.\n";
-			selectedTest.setTestCode(Integer.valueOf(selectedTest.getTextField1().getText()));
+			selectedTest.setTestCode(Integer.valueOf(testCode));
 		} catch (Exception e) {
 			error += "Test code must be an integer.\n";
 		}
-		selectedTest.setTestingType((String) selectedTest.getComboBox().getValue());
+		selectedTest.setTestingType(testingType);
 		if (error.length() != 0)
 			return error;
-		selectedTest.setLecturerId(user.getId());
+		selectedTest.setLecturerId(userId);
 		return selectedTest;
 	}
 

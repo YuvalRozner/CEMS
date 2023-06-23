@@ -141,7 +141,7 @@ public class ExecuteTestController extends AbstractController implements Tests{
     @FXML
     void executeTestBtn(ActionEvent event) throws Exception {
     	if(selectedTest==null) {notification.showErrorAlert("You must choose a test to execute."); return;}
-    	Object newTestToExecute = testToExecuteController.checkInputs(selectedTest, ChatClient.user);
+    	Object newTestToExecute = testToExecuteController.checkInputs(selectedTest, ChatClient.user.getId(), selectedTest.getTextField().getText(), selectedTest.getTextField1().getText(),(String)selectedTest.getComboBox().getValue());
     	if(newTestToExecute instanceof String) {notification.showErrorAlert((String)newTestToExecute); return;}
     	notification.setOnCancelAction(new Runnable() {	@Override public void run() {return;}});
 	    notification.setOnOkAction(new Runnable() {
