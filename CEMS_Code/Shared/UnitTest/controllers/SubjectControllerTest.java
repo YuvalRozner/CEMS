@@ -44,7 +44,7 @@ class SubjectControllerTest {
 	//Input: Course object = Course object with null number.
 	//Expected Result: Msg object should be initialize but without a where section(null).
 	@Test
-    void getMsgForCoursesTest_SubjectNumberNuoSet() {  
+    void getMsgForCoursesTest_SubjectNumberNotSet() {  
         Subject subject = new Subject();
         Msg result = subjectController.getMsgForCourses(subject);
         assertEquals(MsgType.select, result.getType());
@@ -229,7 +229,5 @@ class SubjectControllerTest {
         try{ result = subjectController.findSubjectByName(null, subjectsLst);
         }catch(Exception e) {fail("exception.");}
         assertNull(result);
-    }
-	
-	
+    }	
 }
