@@ -39,6 +39,7 @@ public class DataBaseConnector {
 			System.out.println("VendorError: " + ex.getErrorCode());
 			return false;
 		}
+		DB_controller.dbName = CEMSserver.serverController.getDBNameTxt() + ".";
 		return true;
 	}
 }
