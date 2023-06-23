@@ -86,25 +86,30 @@ class CourseControllerTest {
 	
 	//Description: verifies the behavior of the findCourseByName method when the course list is null.
 	//Input: course name "Algorithms" and a null course list.
-	//Expected Result: throw a NullPointerException.
+	//Expected Result: result = null.
 	@Test
     void FindCourseByNameTest_CourseListNull() {
+		Course result = null;
         try {
-        	courseController.findCourseByName("Algorithms", null);
-		}catch(NullPointerException e) {e.getMessage();};
+        	result = courseController.findCourseByName("Algorithms", null);
+		}catch(NullPointerException e) {fail("Exception");};
+		assertNull(result);
     }
 	
 	//Description: verifies the behavior of the findCourseByName method when the course name is null.
 	//Input: null course name and a list of courses.
-	//Expected Result: throw a NullPointerException.
+	//Expected Result: result = null.
 	@Test
     void FindCourseByNameTest_CourseNameNull() {
 		ArrayList<Course> courseList = new ArrayList<>();
         courseList.add(new Course("11", "Logic" , "22"));
         courseList.add(new Course("12", "Algebra" , "23"));
+        Course result = null;
         try {
-        	courseController.findCourseByName(null, courseList);
-		}catch(NullPointerException e) {assertEquals(null, e.getMessage());};
+        	result = courseController.findCourseByName(null, courseList);
+		}catch(NullPointerException e) {fail("Exception");};
+		assertNull(result);
+		
     }
 	
 	//Description: verifies the behavior of the findCourseByName method when the course list is empty.

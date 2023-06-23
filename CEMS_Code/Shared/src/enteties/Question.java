@@ -36,7 +36,7 @@ public class Question {
 	
 	//private CheckBox select;
 	//private TextField points;
-	private Button showQ = new Button();
+	//private Button showQ = new Button();
 	
 	/**
 	 * empty constructor.
@@ -542,27 +542,5 @@ public class Question {
 		return textField;
 	}
 	
-	/**
-     * Gets the button to show the question (for JavaFX).
-     *
-     * @return Button the button to show the question
-     */
-	public Button getShowQ() {
-		return showQ;
-	}
-
-	/**
-     * Sets the button to show the question (for JavaFX).
-     */
-	public void setNewShowQ() {
-		showQ.setText("Show");
-		showQ.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30; -fx-font-weight: bold; -fx-font-family: \"Comic Sans MS\";");
-        //Add hover effect
-		showQ.setOnMouseEntered(e -> showQ.setStyle("-fx-background-color: #009494; -fx-background-radius: 30 0 0 30; -fx-font-weight: bold; -fx-font-family: \"Comic Sans MS\";"));
-		showQ.setOnMouseExited(e -> showQ.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30; -fx-font-weight: bold; -fx-font-family: \"Comic Sans MS\";"));
-        //Add pressed effect
-		showQ.setOnMousePressed(e -> showQ.setStyle("-fx-background-color: #82bfb6; -fx-background-radius: 30 0 0 30; -fx-font-weight: bold; -fx-font-family: \"Comic Sans MS\";"));
-		showQ.setOnMouseReleased(e -> showQ.setStyle("-fx-background-color: #CCFFFF; -fx-background-radius: 30 0 0 30; -fx-font-weight: bold; -fx-font-family: \"Comic Sans MS\";"));
-		
-	}
+	
 }
