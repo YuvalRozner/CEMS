@@ -61,9 +61,8 @@ class CourseControllerTest {
     void getMsgForQuestionsTest_CourseIsNull() {  
         Course course = null;
         Msg result = null;
-        try {
-        	result = courseController.getMsgForQuestions(course);
-        }catch(Exception e) {assertTrue(false);}
+        try {result = courseController.getMsgForQuestions(course);
+        }catch(Exception e) {fail("exception.");}
         assertEquals(null, result);
     }	
 	
@@ -94,6 +93,7 @@ class CourseControllerTest {
         assertNull(result);
     }
 	
+	//////////////////////////////////////////////// not good////////////////////////////////////////////////
 	//Description: verifies the behavior of the findCourseByName method when the course list is null.
 	//Input: course name "Algorithms" and a null course list.
 	//Expected Result: throw a NullPointerException.

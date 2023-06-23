@@ -1,14 +1,14 @@
 package JDBC;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class MsgTest {
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	@BeforeEach
+	void setUpBeforeClass() throws Exception {
 	}
 
 	@Test
