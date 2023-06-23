@@ -8,28 +8,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import notifications.NotificationAlertsController;
 
 /**
  * The LoginController class handles the logic and user interface interactions for the login screen.
  * It is responsible for authenticating users and displaying appropriate error messages.
  *
  */
-public class LoginController extends AbstractController{	
-	
+public class LoginController extends AbstractController{
 	private UserController userController=new UserController();
-    private NotificationAlertsController notificationAlertsController=new NotificationAlertsController();
-    private ChatClientInterface chatClientIF;
-
-    public LoginController() {
-    	this.chatClientIF=new ChatClientController ();
-    }
-    
-    public LoginController(ChatClientInterface chatClientIf) {
-    	this.chatClientIF=chatClientIf;
-    }
-	
-	
 	/**
 	 * input
 	 */
@@ -64,46 +50,13 @@ public class LoginController extends AbstractController{
      * @return {@code true} if the login is successful, {@code false} otherwise.
      */
 	public boolean login(String username, String password) {
-		if(username==null || password==null) { notificationAlertsController.showErrorAlert("you must enter username and password."); return false;}
-		chatClientIF.sendMsgIF(userController.selectUser(username));
-    	User user = chatClientIF.getUser();
-    	if(user==null) { notificationAlertsController.showErrorAlert("cant find this usename."); return false;}
-    	if(!user.getPassword().equals(password)) { notificationAlertsController.showErrorAlert("username or password are wrong."); return false;}
-    	if(user.getLoggedin().equals("yes")) { notificationAlertsController.showErrorAlert("this user is already loggedin in another device."); return false;}
+		if(!userController.checkValid(username, password)) {return false;}
+		sendMsg(userController.selectUser(username));
+    	User user = ChatClient.user;
+    	if(!userController.cheakuser(username,password,user)){return false;}
     	Msg msg  = userController.getLoggedinMsg(user, "yes");
     	System.out.println("login msg: "+ msg);
-    	chatClientIF.sendMsgIF(msg);
+    	sendMsg(msg);
     	return true;
-	}
-	
-	
-
-	public class ChatClientController implements ChatClientInterface {
-		User user;
-	    @Override
-	    public void sendMsgIF(Msg msg) {
-	    	sendMsg(msg);
-	    }
-
-		@Override
-		public User getUser() {
-			return ChatClient.user;
-		}
-
-		@Override
-		public void setUser(User user) {
-			user=ChatClient.user;		
-		}
-	}
-	
-	
-	public void setNotificationAlertsController(NotificationAlertsController notification) {
-		
-		this.notificationAlertsController=notification;
-	}
-	
-	public void setuserController(UserController userController) {
-		
-		this.userController=userController;
-	}
+	}	
 }

@@ -3,6 +3,7 @@ package controllers;
 import JDBC.Msg;
 import JDBC.MsgType;
 import enteties.User;
+import notifications.NotificationAlertsController;
 
 /**
  * The UserController class is a controller class for managing user-related operations.
@@ -14,6 +15,38 @@ import enteties.User;
  * 
  */
 public class UserController {
+	private NotificationAlertsController notificationAlertsController=new NotificationAlertsController();
+	/**
+     * Authenticates the user with the provided username and password.
+     *
+     * @param username The username entered by the user.
+     * @param password The password entered by the user.
+     * @return {@code true} if the login is successful, {@code false} otherwise.
+     */
+	public boolean checkValid(String username, String password) {
+		if(username==null || password==null) { notificationAlertsController.showErrorAlert("you must enter username and password."); return false;}
+		return true;
+	}
+	
+	/**
+     * Authenticates the user with the provided username and password.
+     *
+     * @param username The username entered by the user.
+     * @param password The password entered by the user.
+     * @return {@code true} if the login is successful, {@code false} otherwise.
+     */
+	public boolean cheakuser(String username, String password, User user) {
+		if(user==null) { notificationAlertsController.showErrorAlert("cant find this usename."); return false;}
+    	if(!user.getPassword().equals(password)) { notificationAlertsController.showErrorAlert("username or password are wrong."); return false;}
+    	if(user.getLoggedin().equals("yes")) { notificationAlertsController.showErrorAlert("this user is already loggedin in another device."); return false;}
+    	return true;
+	}
+	
+	public void setNotificationAlertsController(NotificationAlertsController notification) {
+		
+		this.notificationAlertsController=notification;
+	}
+
 	/**
 	 * Generates a message to select a user from the database based on the id.
 	 *
