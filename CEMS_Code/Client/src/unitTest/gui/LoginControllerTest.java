@@ -68,14 +68,6 @@ class LoginControllerTest{
 
     @BeforeEach
     void setUp() throws Exception {
-        if (Boolean.getBoolean("headless")) {
-            System.setProperty("java.awt.headless", "true");
-        } else {
-            // Initialize JavaFX toolkit if not already initialized
-            if (System.getProperty("javafx.embed.singleThread", "false").equals("false")) {
-                new javafx.embed.swing.JFXPanel();
-            }
-        }
         //set up login controller object
         testChatClient = new TestChatClient();
         loginController  = new LoginController(testChatClient);
@@ -87,13 +79,11 @@ class LoginControllerTest{
         
     }
     /**
-     * Description: This test checks if the login method correctly handles the scenario where the password is null.
-     * It verifies that an error alert is shown and the login result is false.
+     * Description: verifies the behavior of the login method when the password is null.
      *
-     * Input: The test case sets the username to "testUser" and the password to null.
+     * Input: username= "testUser" and the password= null.
      *
-     * Output: The test case verifies that the error alert is shown using the notification object,
-     * and the login result is false.
+     * Expected Result: use notification.showErrorAlert with the msg "you must enter username and password." method return false.
      */
 	@Test
 	void loginTestPasswordIsNull() {
@@ -112,13 +102,11 @@ class LoginControllerTest{
         
 	}
 	/**
-	 * Description: This test checks if the login method correctly handles the scenario where the username is null.
-     * It verifies that an error alert is shown and the login result is false.
+	 * Description: verifies the behavior of the login method when the username is null.
 	 *
-	 * Input: The test case sets the password to "testUser" and the username to null.
+	 * Input: password="testUser" , username= null.
 	 *
-	 * Output:the expected output is a boolean value indicating whether the login was successful or not. 
-	 * In this case, the result is expected to be false since the username is null.
+	 * Expected Result:use notification.showErrorAlert with the msg "you must enter username and password." method return false.
 	 * 
 	 */
 	@Test
@@ -138,11 +126,11 @@ class LoginControllerTest{
         
 	}
 	/**
-	 * Description: This test case verifies the behavior of the loginController's login method when the user is not found.
+	 * Description: verifies the behavior of the login method when the user is not null.
 	 *
-	 * Input: The input for this test is a username and password combination where the user is not found in the system.
+	 * Input: username = "testuser", password = "testpassword",user=null.
 	 *
-	 * Output:The expected output is a boolean value indicating whether the login was successful or not. In this case, the result is expected to be false since the user is not found.
+	 * Expected Result:use notification.showErrorAlert with the msg "cant find this usename." method return false.
 	 */
 	@Test
 	void loginTestUserIsNull() {
@@ -164,16 +152,11 @@ class LoginControllerTest{
 	}
 	
 	/**
-	 * Tests the login functionality when the password is incorrect.
-	 *
-	 * Description: Verifies the behavior of the loginController's login method when the provided password is incorrect.
-	 * Sets up necessary mock behavior for the 'userController' dependency and creates a mock user with a different password.
-	 * The login method is called with the username and incorrect password.
+	 * Description: verifies the behavior of the login method when got incorrect password.
 	 * 
-	 * Input:The input for this test is a username and an incorrect password combination.
+	 * Input:username = "testuser" ,  password = "incorrectpassword".
 	 *
-	 * Output: The expected output is a boolean value indicating whether the login was successful or not.
-	 *  In this case, the result is expected to be false since the password is incorrect.
+	 * Expected Result: use notification.showErrorAlert with the msg "username or password are wrong." method return false.
 	 */
 	@Test
 	void loginTestIncorrectPassword() {
@@ -198,14 +181,11 @@ class LoginControllerTest{
 
 	}
 	/**
-	 * Description:Verifies the behavior of the loginController's login method when the user is already logged in.
-	 * Sets up necessary mock behavior for the 'userController' dependency and creates a mock user with a matching password and 'loggedin' status set to "yes".
-	 * The login method is called with the username and password, expecting a false result and verifying an error alert message.
+	 * Description: verifies the behavior of the login method when user is loggedin.
 	 * 
-	 * Input: The input for this test is a username and a password combination where the user is already logged in.
+	 * Input: username = "testuser", password = "incorrectpassword", Loggedin="yes".
 	 *
-	 * Output:The expected output is a boolean value indicating whether the login was successful or not.
-	 *  In this case, the result is expected to be false since the user is already logged in.
+	 * Expected Result: use notification.showErrorAlert with the msg "this user is already loggedin in another device." method return false.
 	 */
 	@Test
 	void loginTestlogginIsYes() {
@@ -231,15 +211,11 @@ class LoginControllerTest{
 	    
 	}
 	/**
-	 * Tests the login functionality when all parameters are valid.
-	 *
-	 * Description: Verifies the behavior of the loginController's login method when all parameters are valid, including valid username,
-	 *  password, and user status.
+	 * Description:  verifies the behavior of the login method when user is loggedin with all parameter is valid and user is loggesout.
 
-	 * Input: The input for this test is a username and a password combination where all parameters are valid.
+	 * Input: username = "testuser", password = "incorrectpassword",  Loggedin="no".
 
-	 * Output: The expected output is a boolean value indicating whether the login was successful or not. 
-	 * In this case, the result is expected to be true since all parameters are valid.
+	 * Expected Result:method return true.
 	 */
 	@Test
 	void loginTestAllparametersAreValids() {
