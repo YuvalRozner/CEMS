@@ -1,24 +1,205 @@
 package controllers;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import JDBC.Msg;
 import JDBC.MsgType;
 import enteties.User;
+import javafx.application.Platform;
+import notifications.NotificationAlertsController;
 
 class UserControllerTest {
+	
 	private UserController userController;
+	private NotificationAlertsController notification;
+	private UserController userControllerMock;
+	
+	@BeforeAll
+	public static void initializeJavaFXToolkit() {
+	    // Initialize the JavaFX toolkit
+	    Platform.startup(() -> {});
+	}
+	
 
 	@BeforeEach
 	void setUp() throws Exception {
 		userController = new UserController();
+		
+		//set up login controller object
+        notification = Mockito.mock(NotificationAlertsController.class);
+        userController.setNotificationAlertsController(notification);
+        userControllerMock =  Mockito.mock(UserController.class);
+
 	}
+
+    /**
+     * Description: verifies the behavior of the checkValid method when the password is null.
+     *
+     * Input: username= "testUser" and the password= null.
+     *
+     * Expected Result: use notification.showErrorAlert with the msg "you must enter username and password." method return false.
+     */
+	@Test
+	void checkValidTestPasswordIsNull() {
+        // Arrange
+        String username = "testUser";
+        String password = null;  	
+        
+		// Act
+        boolean result = userController.checkValid(username, password);
+        
+        // Assert
+        Mockito.verify(notification).showErrorAlert("you must enter username and password.");
+        
+        assertFalse(result);
+        // Add any additional assertions based on your requirements
+        
+	}
+	/**
+	 * Description: verifies the behavior of the checkValid method when the username is null.
+	 *
+	 * Input: password="testUser" , username= null.
+	 *
+	 * Expected Result:use notification.showErrorAlert with the msg "you must enter username and password." method return false.
+	 * 
+	 */
+	@Test
+	void checkValidTestUsernameIsNull() {
+        // Arrange
+        String username = null;
+        String password = "testUser";  	
+        
+		// Act
+        boolean result = userController.checkValid(username, password);
+        
+        // Assert
+        Mockito.verify(notification).showErrorAlert("you must enter username and password.");
+        
+        assertFalse(result);
+        // Add any additional assertions based on your requirements
+        
+	}
+	/**
+	 * Description: verifies the behavior of the cheakuser method when the user is not null.
+	 *
+	 * Input: username = "testuser", password = "testpassword",user=null.
+	 *
+	 * Expected Result:use notification.showErrorAlert with the msg "cant find this usename." method return false.
+	 */
+	@Test
+	void cheakuserTestUserIsNull() {
+		// Arrange
+        String username = "testuser";
+        String password = "testpassword";
+
+        
+        // Mock the behavior of the dependencies
+        Mockito.when(userControllerMock.selectUser(username)).thenReturn(null);
+        
+        // Act
+        boolean result = userController.cheakuser(username, password,null);
+
+        // Assert
+        assertFalse(result);
+        Mockito.verify(notification).showErrorAlert("cant find this usename.");
+    
+	}
+	
+	/**
+	 * Description: verifies the behavior of the cheakuser method when got incorrect password.
+	 * 
+	 * Input:username = "testuser" ,  password = "incorrectpassword".
+	 *
+	 * Expected Result: use notification.showErrorAlert with the msg "username or password are wrong." method return false.
+	 */
+	@Test
+	void cheakuserTestIncorrectPassword() {
+	    // Arrange
+	    String username = "testuser";
+	    String password = "incorrectpassword";
+	    
+	    // Create a mock user with a different password
+	    User user=new User();
+	    user.setPassword("correctpassword");
+	    
+	    // Mock the behavior of the dependencies
+	    Mockito.when(userControllerMock.selectUser(username)).thenReturn(null);
+	    
+	    // Act
+	    boolean result = userController.cheakuser(username, password,user);
+
+	    // Assert
+	    assertFalse(result);
+	    Mockito.verify(notification).showErrorAlert("username or password are wrong.");
+
+	}
+	/**
+	 * Description: verifies the behavior of the cheakuser method when user is loggedin.
+	 * 
+	 * Input: username = "testuser", password = "incorrectpassword", Loggedin="yes".
+	 *
+	 * Expected Result: use notification.showErrorAlert with the msg "this user is already loggedin in another device." method return false.
+	 */
+	@Test
+	void cheakuserTestlogginIsYes() {
+	    // Arrange
+	    String username = "testuser";
+	    String password = "incorrectpassword";
+	    
+	    // Create a mock user with a different password
+	    User user=new User();
+	    user.setPassword("incorrectpassword");
+	    user.setLoggedin("yes");
+	    
+	    // Mock the behavior of the dependencies
+	    Mockito.when(userControllerMock.selectUser(username)).thenReturn(null);
+	    
+	    // Act
+	    boolean result = userController.cheakuser(username, password,user);
+
+	    // Assert
+	    assertFalse(result);
+	    Mockito.verify(notification).showErrorAlert("this user is already loggedin in another device.");
+	    
+	}
+	/**
+	 * Description:  verifies the behavior of the cheakuser method when user is loggedin with all parameter is valid and user is loggesout.
+
+	 * Input: username = "testuser", password = "incorrectpassword",  Loggedin="no".
+
+	 * Expected Result:method return true.
+	 */
+	@Test
+	void cheakuserTestAllparametersAreValids() {
+	    // Arrange
+	    String username = "testuser";
+	    String password = "incorrectpassword";
+	    
+	    // Create a mock user with a different password
+	    User user=new User();
+	    user.setPassword("incorrectpassword");
+	    user.setLoggedin("no");
+	    
+	    // Mock the behavior of the dependencies
+	    Mockito.when(userControllerMock.selectUser(username)).thenReturn(null);
+	    Mockito.when(userControllerMock.getLoggedinMsg(user,"yes")).thenReturn(null);
+	    
+	    // Act
+	    boolean result = userController.cheakuser(username, password,user);
+
+	    // Assert
+	    assertTrue(result);
+	    
+	}	
 
 	/**
 	 * Description: verifies the behavior of the selectUser method when the username is null. 

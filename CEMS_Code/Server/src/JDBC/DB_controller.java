@@ -6,15 +6,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import server.CEMSserver;
-
 /**
  * The DB_controller class provides methods for generating SQL queries for database operations.
  * it supports creating UPDATE, SELECT, and INSERT queries.
  */
 public class DB_controller {
 	
-	private static String dbName = CEMSserver.serverController.getDBNameTxt() + ".";
+	public static String dbName = "cems.";
 
     /**
      * Creates an UPDATE query that increments the specified columns by one.
@@ -152,7 +150,7 @@ public class DB_controller {
      * @param lst The ArrayList containing the elements to separate.
      * @return A string with the elements separated by commas.
      */
-	private static String separateWithComma(ArrayList<String> lst, boolean withDbName) {
+	public static String separateWithComma(ArrayList<String> lst, boolean withDbName) {
 		if (lst == null || lst.size() == 0)
 			return "";
 		StringBuilder res = new StringBuilder();
@@ -168,7 +166,7 @@ public class DB_controller {
      * @param lists The ArrayList of ArrayLists containing the values to separate.
      * @return A string with the values separated by commas and parentheses.
      */
-	private static String separateValuesWithComma(ArrayList<ArrayList<Object>> lists) {
+	public static String separateValuesWithComma(ArrayList<ArrayList<Object>> lists) {
 		if (lists == null || lists.size() == 0)	return "";
 		StringBuilder res = new StringBuilder();
 		for (ArrayList<Object> lst : lists) {
@@ -192,7 +190,7 @@ public class DB_controller {
      * @param condition The HashMap containing the conditions.
      * @return The generated condition part of the query.
      */
-	private static String buildConditionPartWithComma(HashMap<String, Object> condition) {
+	public static String buildConditionPartWithComma(HashMap<String, Object> condition) {
 		if (condition == null)
 			return "";
 		StringBuilder res = new StringBuilder();
@@ -216,7 +214,7 @@ public class DB_controller {
      * @param needGeresh A flag indicating if single quotes are needed for string values.
      * @return The generated condition part of the query.
      */
-	private static String buildConditionPartWithAnd(HashMap<String, Object> condition, boolean needGeresh) {
+	public static String buildConditionPartWithAnd(HashMap<String, Object> condition, boolean needGeresh) {
 		if (condition == null)
 			return "";
 		StringBuilder res = new StringBuilder();
