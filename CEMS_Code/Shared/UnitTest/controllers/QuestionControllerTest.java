@@ -24,7 +24,11 @@ class QuestionControllerTest {
 	void setUpBeforeClass() throws Exception {
 		questionController = new QuestionController();
 	}
-
+	
+	//Description: checks the insertQuestion method in the QuestionController class when inserting a question with associated courses.
+	//Input: a new Question object and set its properties(id, number, question, subjectNum, lecturerId, answers, correct answer, instructions, courses).
+	//			2 Msg object (tempMsg1, expectedMsg1) 
+	//Expected Result: a Msg object (actualMsg1) with the same type, tableToUpdate, colNames, and values as expectedMsg1.
 	@Test
 	void InsertQuestionTest_WithCourses() {
 	    Question question = new Question();
@@ -70,6 +74,10 @@ class QuestionControllerTest {
 	    assertEquals(expectedMsg1.getValues(), actualMsg1.getValues());
 	}
 	
+	//Description: checks the insertQuestion method in the QuestionController class when inserting a question without any associated courses.
+	//Input: a new Question object and set its properties(id, number, question, subjectNum, lecturerId, answers, correct answer, instructions, courses-empty ArrayList).
+	//			2 Msg object (tempMsg1, expectedMsg1) 
+	//Expected Result: a Msg object (actualMsg1) with the same type, tableToUpdate, colNames, and values as expectedMsg1.
 	@Test
 	void InsertQuestionTest_WithoutCourses() {
 	    Question question = new Question();
@@ -112,6 +120,10 @@ class QuestionControllerTest {
 	    assertEquals(expectedMsg1.getValues(), actualMsg1.getValues());
 	}
 	
+	//Description: checks the insertQuestion method in the QuestionController class when inserting a question with null values for all its fields.
+	//Input: a new Question object and set its properties all set to null(id, number, question, subjectNum, lecturerId, answers, correct answer, instructions, courses-empty ArrayList).
+	//			2 Msg object (tempMsg1, expectedMsg1) 
+	//Expected Result: a Msg object (actualMsg1) with the same type, tableToUpdate, colNames, and values as expectedMsg1(all null).
 	@Test
 	void InsertQuestionTest_WithNullQuestionFields() {
 	    Question question = new Question();
@@ -158,7 +170,9 @@ class QuestionControllerTest {
 	    assertEquals(expectedMsg1.getValues(), actualMsg1.getValues());
 	}
 
-
+	//Description: checks the checkInputs method in the QuestionController class when validating valid input values.
+	//Input: id, number, question, subjectNum, lecturerId, ans1, ans2, ans3, ans4, correct answer, instructions.
+	//Expected Result: a Question object with the same input values.
 	@Test
     public void checkInputsTest_ValidInputs() {
         String id = "22101";
@@ -186,6 +200,9 @@ class QuestionControllerTest {
         assertEquals(instructions, createdQuestion.getInstructions());
     }
 
+	//Description: checks the checkInputs method in the QuestionController class when validating an invalid question ID.
+	//Input: id, number, question, subjectNum, lecturerId, ans1, ans2, ans3, ans4, correct answer, instructions, but set an invalid question ID ("22990").
+	//Expected Result: an error message indicating that the question ID must be built by the subject number + question number.
     @Test
     public void checkInputsTest_InvalidId() {
         String id = "22990";
@@ -206,6 +223,9 @@ class QuestionControllerTest {
         assertEquals(errorMessage1, "the question id must buit by the subject number + question number.\n");
     }
     
+    //Description: checks the checkInputs method in the QuestionController class when validating an invalid question number.
+  	//Input: id, number, question, subjectNum, lecturerId, ans1, ans2, ans3, ans4, correct answer, instructions, but set an invalid question number ("99").
+  	//Expected Result: an error message indicating that the question number must be between 100 and 999
     @Test
     public void checkInputsTest_InvalidNumber() {
         String id = "2299";
@@ -226,6 +246,9 @@ class QuestionControllerTest {
         assertEquals(errorMessage, "the question number must be between 100 and 999.\n");
     }
     
+    //Description: checks the checkInputs method in the QuestionController class when validating an invalid question content.
+  	//Input: id, number, question, subjectNum, lecturerId, ans1, ans2, ans3, ans4, correct answer, instructions, but set an empty question content.
+  	//Expected Result: an error message indicating that the question content can't be empty.
     @Test
     public void checkInputsTest_InvalidQuestion() {
         String id = "22101";
@@ -246,6 +269,9 @@ class QuestionControllerTest {
         assertEquals(errorMessage, "the question content can't be empty.\n");
     }
     
+    //Description: checks the checkInputs method in the QuestionController class when validating an invalid subject number
+  	//Input: id, number, question, subjectNum, lecturerId, ans1, ans2, ans3, ans4, correct answer, instructions, but set an invalid subject number ("100").
+  	//Expected Result: an error message indicating that the subject number must be a number between 01 to 99.
     @Test
     public void checkInputsTest_InvalidSubject() {
         String id = "100101";
@@ -266,6 +292,9 @@ class QuestionControllerTest {
         assertEquals(errorMessage, "the subject number must be a number between 01 to 99.\n");
     }
 
+    //Description: checks the checkInputs method in the QuestionController class when validating invalid answer options.
+  	//Input: id, number, question, subjectNum, lecturerId, ans1, ans2, ans3, ans4, correct answer, instructions, but set an empty answer option.
+  	//Expected Result: an error message indicating that an empty answer is not allowed.
     @Test
     public void checkInputsTest_InvalidAnswers() {
         String id = "22101";
@@ -286,6 +315,9 @@ class QuestionControllerTest {
         assertEquals(errorMessage, "you can't enter an empty answer.\n");
     }
     
+    //Description: checks the checkInputs method in the QuestionController class when validating an invalid correct answer.
+  	//Input: id, number, question, subjectNum, lecturerId, ans1, ans2, ans3, ans4, correct answer, instructions, but set an invalid correct answer (5).
+  	//Expected Result: an error message indicating that the correct answer must be a digit between 1 to 4.
     @Test
     public void checkInputsTest_InvalidCorrectAnswer() {
         String id = "22101";
@@ -306,6 +338,9 @@ class QuestionControllerTest {
         assertEquals(errorMessage, "the correct answer must be a digit between 1 to 4.\n");
     }
     
+    //Description: checks the checkInputs method in the QuestionController class when validating an invalid instructions string.
+  	//Input: id, number, question, subjectNum, lecturerId, ans1, ans2, ans3, ans4, correct answer, instructions(length>128).
+  	//Expected Result: an error message indicating that the instructions can be a string up to 128 characters.
     @Test
     public void checkInputsTest_InvalidInstructions() {
         String id = "22101";
@@ -326,6 +361,9 @@ class QuestionControllerTest {
         assertEquals(errorMessage, "the instructions can be a string up to 128 characters.");
     }
     
+    //Description: checks the checkInputs method in the QuestionController class when validating a null answer option.
+  	//Input: id, number, question, subjectNum, lecturerId, ans1, ans2, ans3(null), ans4, correct answer, instructions.
+  	//Expected Result: result = null. 
     @Test
     public void checkInputsTest_NullAnswer() {
     	Object result = null;
@@ -346,6 +384,9 @@ class QuestionControllerTest {
         assertNull(result);
     }
     
+    //Description: checks the QuestionController class when validating a valid points sum.
+  	//Input: ArrayList of valid questions with different point values - 30, 40, 30.
+  	//Expected Result: same ArrayList of valid questions since the points sum is equal to 100.
     @Test
     public void checkPointsTest_ValidPointsSum() {
         ArrayList<Question> validQuestions = new ArrayList<>();
@@ -357,6 +398,9 @@ class QuestionControllerTest {
         assertEquals(validQuestions, result);
     }
     
+    //Description: checks the QuestionController class when validating a points sum that is less than 100.
+  	//Input: ArrayList of valid questions with a points sum of 90 - 30, 30, 30.
+  	//Expected Result: an error message indicating that the points sum must be 100.
     @Test
     public void checkPointsTest_PointsSumLessThan100() {
         ArrayList<Question> validQuestions = new ArrayList<>();
@@ -368,6 +412,9 @@ class QuestionControllerTest {
         assertEquals("the points sum must be 100.", result);
     }
     
+    //Description: checks the QuestionController class when validating a points sum that is greater than 100.
+  	//Input: ArrayList of valid questions with a points sum of 110 - 40, 40, 30.
+  	//Expected Result: an error message indicating that the points sum must be 100.
     @Test
     public void checkPointsTest_PointsSumGreaterThan100() {
         ArrayList<Question> validQuestions = new ArrayList<>();
@@ -379,6 +426,9 @@ class QuestionControllerTest {
         assertEquals("the points sum must be 100.", result);
     }
     
+    //Description: checks the QuestionController class when validating an empty list of questions.
+  	//Input: an empty ArrayList of questions.
+  	//Expected Result: result = null.
     @Test
     public void checkPointsTest_EmptyQuestionsList() { 
         ArrayList<Question> emptyQuestions = new ArrayList<>();
@@ -386,6 +436,9 @@ class QuestionControllerTest {
         assertEquals(null, result);
     }
     
+    //Description: checks the QuestionController class when validating a null list of questions.
+  	//Input: null value as the list of questions.
+  	//Expected Result: result = null.
     @Test
     public void checkPointsTest_NullQuestionsList() { 
     	Object result = null;
