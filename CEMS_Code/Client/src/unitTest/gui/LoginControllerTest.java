@@ -84,7 +84,7 @@ class LoginControllerTest{
      *
      * Input: The test case sets the username to "testUser" and the password to null.
      *
-     * Output: The test case verifies that the error alert is shown using the notification object,
+     * Expected Result: The test case verifies that the error alert is shown using the notification object,
      * and the login result is false.
      */
 	@Test
@@ -109,7 +109,7 @@ class LoginControllerTest{
 	 *
 	 * Input: The test case sets the password to "testUser" and the username to null.
 	 *
-	 * Output:the expected output is a boolean value indicating whether the login was successful or not. 
+	 * Expected Result:the expected output is a boolean value indicating whether the login was successful or not. 
 	 * In this case, the result is expected to be false since the username is null.
 	 * 
 	 */
@@ -134,7 +134,7 @@ class LoginControllerTest{
 	 *
 	 * Input: The input for this test is a username and password combination where the user is not found in the system.
 	 *
-	 * Output:The expected output is a boolean value indicating whether the login was successful or not. In this case, the result is expected to be false since the user is not found.
+	 * Expected Result:The expected output is a boolean value indicating whether the login was successful or not. In this case, the result is expected to be false since the user is not found.
 	 */
 	@Test
 	void loginTestUserIsNull() {
@@ -164,7 +164,7 @@ class LoginControllerTest{
 	 * 
 	 * Input:The input for this test is a username and an incorrect password combination.
 	 *
-	 * Output: The expected output is a boolean value indicating whether the login was successful or not.
+	 * Expected Result: The expected output is a boolean value indicating whether the login was successful or not.
 	 *  In this case, the result is expected to be false since the password is incorrect.
 	 */
 	@Test
@@ -196,7 +196,7 @@ class LoginControllerTest{
 	 * 
 	 * Input: The input for this test is a username and a password combination where the user is already logged in.
 	 *
-	 * Output:The expected output is a boolean value indicating whether the login was successful or not.
+	 * Expected Result:The expected output is a boolean value indicating whether the login was successful or not.
 	 *  In this case, the result is expected to be false since the user is already logged in.
 	 */
 	@Test
@@ -230,7 +230,7 @@ class LoginControllerTest{
 
 	 * Input: The input for this test is a username and a password combination where all parameters are valid.
 
-	 * Output: The expected output is a boolean value indicating whether the login was successful or not. 
+	 * Expected Result: The expected output is a boolean value indicating whether the login was successful or not. 
 	 * In this case, the result is expected to be true since all parameters are valid.
 	 */
 	@Test

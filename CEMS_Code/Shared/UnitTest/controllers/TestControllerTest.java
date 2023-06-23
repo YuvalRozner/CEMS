@@ -33,7 +33,9 @@ class TestControllerTest {
 
 	/**
 	 * Description: This test verifies that the selectTestByUser method returns null
-	 * when the user is null. Input: Null user object. Output: Null message object.
+	 * when the user is null.
+	 * Input: Null user object. 
+	 * Expected Result: Null message object.
 	 */
 	@Test
 	void selectTestByUserTestUserIsNull() {
@@ -49,11 +51,10 @@ class TestControllerTest {
 
 	/**
 	 * Description: This test verifies that the selectTestByUser method constructs
-	 * the correct message object when a valid user is provided. Input: User object
-	 * with a valid ID = 123456 Output: Message object with type "select", select
-	 * field set to "test.*, course.*", from field set to ["test", "user_subject",
-	 * "course"], whereCol field containing mapping between
-	 * "user_subject.subjectNum" and "course.subjectNum", "test.courseNumber" and
+	 * the correct message object when a valid user is provided. 
+	 * Input: User object with a valid ID = 123456 
+	 * Expected Result: Message object with type "select", select field set to "test.*, course.*", from field set to ["test", "user_subject",
+	 * "course"], whereCol field containing mapping between "user_subject.subjectNum" and "course.subjectNum", "test.courseNumber" and
 	 * "course.number", and where field with "user_subject.userId" key set to the
 	 * user's ID.
 	 */
@@ -89,7 +90,7 @@ class TestControllerTest {
 	/**
 	 * Description: Tests the scenario when the 'id' parameter is null.
 	 * Input: id = null, number = "70", courseNumber = "13", duration = "300", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
-	 * Expected Output: null
+	 * Expected Result: null
 	 */
 	@Test
 	void checkInputsTestIdIsNull() {
@@ -105,7 +106,7 @@ class TestControllerTest {
 	/**
 	 * Description: Tests the scenario when the 'number' parameter is null.
 	 * Input: id = "22222", number = null, courseNumber = "13", duration = "300", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
-	 * Expected Output: null
+	 * Expected Result: null
 	 */
 	@Test
 	void checkInputsTestNumberIsNull() {
@@ -121,7 +122,7 @@ class TestControllerTest {
 	/**
 	 * Description: Tests the scenario when the 'courseNumber' parameter is null.
 	 * Input: id = "22222", number = "70", courseNumber = null, duration = "300", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
-	 * Expected Output: null
+	 * Expected Result: null
 	 */
 	@Test
 	void checkInputsTestCourseNumberIsNull() {
@@ -142,7 +143,7 @@ class TestControllerTest {
 	/**
 	 * Description: Tests the scenario when the 'duration' parameter is null.
 	 * Input: id = "22222", number = "70", courseNumber = "13", duration = null, instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
-	 * Expected Output: null
+	 * Expected Result: null
 	 */
 	@Test
 	void checkInputsTestDurationIsNull() {
@@ -158,7 +159,7 @@ class TestControllerTest {
 	/**
 	 * Description: Tests the scenario when the 'instructionsForStudent' parameter is null.
 	 * Input: id = "22222", number = "70", courseNumber = "13", duration = "300", instructionsForStudent = null, instructionsForLecturer = "instructions"
-	 * Expected Output: null
+	 * Expected Result: null.
 	 */
 	@Test
 	void checkInputsTestInstructionsForStudentIsNull() {
@@ -174,7 +175,7 @@ class TestControllerTest {
 	/**
 	 * Description: Tests the scenario when the 'instructionsForLecturer' parameter is null.
 	 * Input: id = "22222", number = "70", courseNumber = "13", duration = "300", instructionsForStudent = "instructions", instructionsForLecturer = null
-	 * Expected Output: null
+	 * Expected Result: null.
 	 */
 	@Test
 	void checkInputsTestInstructionsForLecturerIsNull() {
@@ -190,7 +191,7 @@ class TestControllerTest {
 	/**
 	 * Description: Tests the scenario when the 'id' parameter exceeds the upper limit of 999999.
 	 * Input: id = "9999999", number = "90", courseNumber = "13", duration = "300", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
-	 * Expected Output: "id is not leagal.\n"
+	 * Expected Result: "id is not leagal.\n".
 	 */
 	@Test
 	void checkInputsTestIdIsUpTo999999() {
@@ -201,7 +202,7 @@ class TestControllerTest {
 	/**
 	 * Description: Tests the scenario when the 'id' parameter is below the lower limit of 10101.
 	 * Input: id = "1", number = "90", courseNumber = "13", duration = "300", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
-	 * Expected Output: "id is not leagal.\n"
+	 * Expected Result: "id is not leagal.\n".
 	 */
 	@Test
 	void checkInputsTestIdIsDownOf10101() {
@@ -212,7 +213,7 @@ class TestControllerTest {
 	/**
 	 * Description: Tests the scenario when the 'number' parameter exceeds the upper limit of 99.
 	 * Input: id = "22222", number = "999", courseNumber = "13", duration = "300", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
-	 * Expected Output: "test number must be an integer between 01 and 99.\n"
+	 * Expected Result: "test number must be an integer between 01 and 99.\n"
 	 */
 	@Test
 	void checkInputsTestNumberIsUpTo99() {
@@ -223,7 +224,7 @@ class TestControllerTest {
 	/**
 	 * Description: Tests the scenario when the 'number' parameter is below the lower limit of 01.
 	 * Input: id = "22222", number = "-6", courseNumber = "13", duration = "300", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
-	 * Expected Output: "test number must be an integer between 01 and 99.\n"
+	 * Expected Result: "test number must be an integer between 01 and 99.\n"
 	 */
 	@Test
 	void checkInputsTestNumberIsDownOf01() {
@@ -234,7 +235,7 @@ class TestControllerTest {
 	/**
 	 * Description: Tests the scenario when the 'duration' parameter exceeds the upper limit of 500.
 	 * Input: id = "22222", number = "70", courseNumber = "13", duration = "550", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
-	 * Expected Output: "the test duration must be between 1 and 500.\n"
+	 * Expected Result: "the test duration must be between 1 and 500.\n"
 	 */
 	@Test
 	void checkInputsTestDurationIsUpTo500() {
@@ -245,7 +246,7 @@ class TestControllerTest {
 	/**
 	 * Description: Tests the scenario when the 'duration' parameter is below the lower limit of 1.
 	 * Input: id = "22222", number = "70", courseNumber = "13", duration = "0", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
-	 * Expected Output: Exception
+	 * Expected Result: Exception
 	 * Note: This test case is expected to throw an exception because the input is invalid. Therefore, the assertion is not necessary.
 	 */
 	@Test
@@ -260,7 +261,7 @@ class TestControllerTest {
 	/**
 	 * Description: Tests the scenario when all input parameters are valid.
 	 * Input: id = "22222", number = "70", courseNumber = "13", duration = "300", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
-	 * Expected Output: An instance of the Test object with the provided inputs.
+	 * Expected Result: An instance of the Test object with the provided inputs.
 	 */
 	@Test
 	void checkInputsTestValidInput() {
@@ -272,7 +273,7 @@ class TestControllerTest {
 	/**
 	 * Description: Tests the scenario when the 'test' parameter is null.
 	 * Input: test = null, newTest_question = [ArrayList of Question objects]
-	 * Expected Output: null
+	 * Expected Result: null
 	 */
 	@Test
 	void insertTestTest_test_IsNull() {
@@ -290,7 +291,7 @@ class TestControllerTest {
 	/**
 	 * Description: Tests the scenario when the 'questionList' parameter is null.
 	 * Input: test = Test("22222", "70", "13", 300, "instructions", "instructions"), questionList = null
-	 * Expected Output: null
+	 * Expected Result: null
 	 */
 	@Test
 	void insertTestTestQuestionListIsNull() {
@@ -306,11 +307,9 @@ class TestControllerTest {
 	/**
 	 * description:Tests the insertTest method of the TestController class.
 	 * Verifies that the method generates the correct messages for inserting a test and its questions.
-	 * Input:
-	 * - New test object with a unique ID=22222, number=70, course number=13, duration=300, instructions for students=instruction, and instructions for lecturers=instruction.
-	 * - List of new questions associated with the test.
-	 * Output:
-	 * - Expected messages for inserting the test and its questions into the database.
+	 * Input: New test object with a unique ID=22222, number=70, course number=13, duration=300, instructions for students=instruction, and instructions for lecturers=instruction.
+	 * List of new questions associated with the test.
+	 * Expected Result: Expected messages for inserting the test and its questions into the database.
 	 */
 	@Test
 	void insertTestTestVaildInsert() {
