@@ -3,8 +3,8 @@ package controllers;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import JDBC.Msg;
-import JDBC.MsgType;
+import communication.Msg;
+import communication.MsgType;
 import enteties.Test;
 import enteties.TestToExecute;
 import enteties.User;

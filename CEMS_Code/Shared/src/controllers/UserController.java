@@ -1,7 +1,7 @@
 package controllers;
 
-import JDBC.Msg;
-import JDBC.MsgType;
+import communication.Msg;
+import communication.MsgType;
 import enteties.User;
 import notifications.NotificationAlertsController;
 
@@ -35,7 +35,7 @@ public class UserController {
      * @param password The password entered by the user.
      * @return {@code true} if the login is successful, {@code false} otherwise.
      */
-	public boolean cheakuser(String username, String password, User user) {
+	public boolean checkUser(String username, String password, User user) {
 		if(user==null) { notificationAlertsController.showErrorAlert("cant find this usename."); return false;}
     	if(!user.getPassword().equals(password)) { notificationAlertsController.showErrorAlert("username or password are wrong."); return false;}
     	if(user.getLoggedin().equals("yes")) { notificationAlertsController.showErrorAlert("this user is already loggedin in another device."); return false;}

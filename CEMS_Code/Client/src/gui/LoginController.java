@@ -1,7 +1,7 @@
 package gui;
 
-import JDBC.Msg;
 import client.ChatClient;
+import communication.Msg;
 import controllers.UserController;
 import enteties.User;
 import javafx.event.ActionEvent;
@@ -53,7 +53,7 @@ public class LoginController extends AbstractController{
 		if(!userController.checkValid(username, password)) {return false;}
 		sendMsg(userController.selectUser(username));
     	User user = ChatClient.user;
-    	if(!userController.cheakuser(username,password,user)){return false;}
+    	if(!userController.checkUser(username,password,user)){return false;}
     	Msg msg  = userController.getLoggedinMsg(user, "yes");
     	System.out.println("login msg: "+ msg);
     	sendMsg(msg);

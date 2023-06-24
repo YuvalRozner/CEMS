@@ -13,8 +13,8 @@ import java.util.Map;
 
 import JDBC.DB_controller;
 import JDBC.DataBaseConnector;
-import JDBC.Msg;
-import JDBC.MsgType;
+import communication.Msg;
+import communication.MsgType;
 import controllers.CemsFileController;
 import enteties.User;
 import gui.ServerController;

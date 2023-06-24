@@ -1,9 +1,9 @@
 package gui;
 
-import JDBC.Msg;
-import JDBC.MsgType;
 import client.ChatClient;
 import client.ClientUI;
+import communication.Msg;
+import communication.MsgType;
 import controllers.CourseController;
 import controllers.QuestionController;
 import controllers.RequestController;

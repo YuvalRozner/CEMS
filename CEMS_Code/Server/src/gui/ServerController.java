@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.sql.SQLException;
 
-import JDBC.Msg;
-import JDBC.MsgType;
+import communication.Msg;
+import communication.MsgType;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;

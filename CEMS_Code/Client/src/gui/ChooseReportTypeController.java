@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import JDBC.Msg;
 import client.ChatClient;
+import communication.Msg;
 import enteties.Course;
 import enteties.User;
 import javafx.collections.FXCollections;

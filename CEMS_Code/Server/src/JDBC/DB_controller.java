@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import communication.Msg;
+import communication.MsgType;
+
 /**
  * The DB_controller class provides methods for generating SQL queries for database operations.
  * it supports creating UPDATE, SELECT, and INSERT queries.
@@ -42,7 +45,7 @@ public class DB_controller {
      * @param condition The HashMap containing the columns and their corresponding values to increment.
      * @return The generated SET clause of the UPDATE query.
      */
-	private static String buildConditionPlusOnePartWithComma(HashMap<String, Object> condition) {
+	public static String buildConditionPlusOnePartWithComma(HashMap<String, Object> condition) {
 		if (condition == null)
 			return "";
 		StringBuilder res = new StringBuilder();

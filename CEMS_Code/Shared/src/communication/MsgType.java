@@ -1,4 +1,4 @@
-package JDBC;
+package communication;
 
 /**
  * The {@code MsgType} enum represents the different types of messages exchanged between the client and server

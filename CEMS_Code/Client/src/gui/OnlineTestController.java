@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import JDBC.Msg;
-import JDBC.MsgType;
 import client.ChatClient;
+import communication.Msg;
+import communication.MsgType;
 import controllers.CountDown;
 import controllers.TimeController;
 import enteties.Question;

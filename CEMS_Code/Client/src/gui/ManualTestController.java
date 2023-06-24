@@ -1,13 +1,11 @@
 package gui;
 
-
-
 import java.util.ArrayList;
 import java.util.Collections;
 
-import JDBC.Msg;
-import JDBC.MsgType;
 import client.ChatClient;
+import communication.Msg;
+import communication.MsgType;
 import controllers.CemsFileController;
 import controllers.CountDown;
 import controllers.TimeController;
@@ -22,7 +20,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import notifications.NotificationAlertsController;
 
 /**
  * Controller class for the ManualTest screen.

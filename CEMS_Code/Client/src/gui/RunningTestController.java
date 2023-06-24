@@ -2,9 +2,9 @@ package gui;
 
 import java.util.ArrayList;
 
-import JDBC.Msg;
-import JDBC.MsgType;
 import client.ChatClient;
+import communication.Msg;
+import communication.MsgType;
 import enteties.Request;
 import enteties.TestToExecute;
 import enteties.User;

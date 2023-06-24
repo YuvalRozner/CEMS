@@ -2,8 +2,8 @@ package gui;
 
 import java.util.ArrayList;
 
-import JDBC.Msg;
 import client.ChatClient;
+import communication.Msg;
 import controllers.UserController;
 import enteties.Question;
 import javafx.collections.FXCollections;

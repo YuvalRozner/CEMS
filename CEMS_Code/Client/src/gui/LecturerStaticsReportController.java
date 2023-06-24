@@ -3,9 +3,9 @@ package gui;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import JDBC.Msg;
 //import JDBC.MsgType;
 import client.ChatClient;
+import communication.Msg;
 import enteties.Course;
 import enteties.StudentTest;
 import enteties.TestToExecute;

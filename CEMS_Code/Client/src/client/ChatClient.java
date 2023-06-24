@@ -3,8 +3,8 @@ package client;
 import java.io.IOException;
 import java.util.HashMap;
 
-import JDBC.Msg;
-import JDBC.MsgType;
+import communication.Msg;
+import communication.MsgType;
 import controllers.CemsFileController;
 import enteties.User;
 import gui.AbstractController;

@@ -3,8 +3,8 @@ package gui;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import JDBC.Msg;
 import client.ChatClient;
+import communication.Msg;
 import controllers.UserController;
 import enteties.StudentTest;
 import enteties.TestToExecute;
