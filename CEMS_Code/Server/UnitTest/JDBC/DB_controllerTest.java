@@ -10,7 +10,7 @@ import java.util.HashMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class DB_controllerTest {
+public class DB_controllerTest {
 	
 	//for select:
     private ArrayList<String> select;

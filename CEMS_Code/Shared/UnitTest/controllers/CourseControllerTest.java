@@ -10,7 +10,7 @@ import JDBC.Msg;
 import JDBC.MsgType;
 import enteties.Course;
 
-class CourseControllerTest {
+public class CourseControllerTest {
 
 	CourseController courseController;
 	

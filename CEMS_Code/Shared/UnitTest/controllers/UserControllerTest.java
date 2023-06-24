@@ -17,7 +17,7 @@ import enteties.User;
 import javafx.application.Platform;
 import notifications.NotificationAlertsController;
 
-class UserControllerTest {
+public class UserControllerTest {
 	
 	private UserController userController;
 	private NotificationAlertsController notification;
@@ -29,7 +29,6 @@ class UserControllerTest {
 	    Platform.startup(() -> {});
 	}
 	
-
 	@BeforeEach
 	void setUp() throws Exception {
 		userController = new UserController();
@@ -49,7 +48,7 @@ class UserControllerTest {
      * Expected Result: use notification.showErrorAlert with the msg "you must enter username and password." method return false.
      */
 	@Test
-	void checkValidTestPasswordIsNull() {
+	void checkValidTest_PasswordIsNull() {
         // Arrange
         String username = "testUser";
         String password = null;  	
@@ -73,7 +72,7 @@ class UserControllerTest {
 	 * 
 	 */
 	@Test
-	void checkValidTestUsernameIsNull() {
+	void checkValidTest_UsernameIsNull() {
         // Arrange
         String username = null;
         String password = "testUser";  	
@@ -96,7 +95,7 @@ class UserControllerTest {
 	 * Expected Result:use notification.showErrorAlert with the msg "cant find this usename." method return false.
 	 */
 	@Test
-	void cheakuserTestUserIsNull() {
+	void cheakuserTest_UserIsNull() {
 		// Arrange
         String username = "testuser";
         String password = "testpassword";
@@ -122,7 +121,7 @@ class UserControllerTest {
 	 * Expected Result: use notification.showErrorAlert with the msg "username or password are wrong." method return false.
 	 */
 	@Test
-	void cheakuserTestIncorrectPassword() {
+	void cheakuserTest_IncorrectPassword() {
 	    // Arrange
 	    String username = "testuser";
 	    String password = "incorrectpassword";
@@ -150,7 +149,7 @@ class UserControllerTest {
 	 * Expected Result: use notification.showErrorAlert with the msg "this user is already loggedin in another device." method return false.
 	 */
 	@Test
-	void cheakuserTestlogginIsYes() {
+	void cheakuserTest_logginIsYes() {
 	    // Arrange
 	    String username = "testuser";
 	    String password = "incorrectpassword";
@@ -179,7 +178,7 @@ class UserControllerTest {
 	 * Expected Result:method return true.
 	 */
 	@Test
-	void cheakuserTestAllparametersAreValids() {
+	void cheakuserTest_AllparametersAreValids() {
 	    // Arrange
 	    String username = "testuser";
 	    String password = "incorrectpassword";
@@ -207,7 +206,7 @@ class UserControllerTest {
 	 * Expected Result: Null message object.
 	 */
 	@Test
-	void selectUserTestUsernameIsNull() {
+	void selectUserTest_UsernameIsNull() {
 		String username = null;
 		Msg actualMsg = null;
 		try {
@@ -224,7 +223,7 @@ class UserControllerTest {
 	 * Expected Result: actualMsg with the appropriate type, select query, and WHERE clause for the valid username.
 	 */
 	@Test
-	void selectUserTestUsernameIsValid() {
+	void selectUserTest_UsernameIsValid() {
 		String username = "liorzucker";
 
 		Msg actualMsg = userController.selectUser(username);
@@ -249,7 +248,7 @@ class UserControllerTest {
 	 * Expected Result: The message with the appropriate type, select query, and WHERE clause with empty username.
 	 */
 	@Test
-	void selectUserTestUsernameIsEmpty() {
+	void selectUserTest_UsernameIsEmpty() {
 		String username = "";
 
 		Msg actualMsg = userController.selectUser(username);
@@ -275,7 +274,7 @@ class UserControllerTest {
 	 * set to "yes", and where field with "username" key set to the user's username.
 	 */
 	@Test
-	void getLoggedinMsgTestUserLoggedIn() {
+	void getLoggedinMsgTest_UserLoggedIn() {
 		User user = new User();
 		user.setUsername("liorzucker");
 		String loggedIn = "yes";
@@ -304,7 +303,7 @@ class UserControllerTest {
 	 * username.
 	 */
 	@Test
-	void getLoggedinMsgTestUserLoggedOut() {
+	void getLoggedinMsgTest_UserLoggedOut() {
 		User user = new User();
 		user.setUsername("liorzucker");
 		String loggedIn = "no";
@@ -331,7 +330,7 @@ class UserControllerTest {
 	 * Expected Result: An exception is thrown.
 	 */
 	@Test
-	void getLoggedinMsgTestloggedInIsNull() {
+	void getLoggedinMsgTest_loggedInIsNull() {
 		User user = new User();
 		user.setUsername("liorzucker");
 		String loggedIn = null;
@@ -351,7 +350,7 @@ class UserControllerTest {
 	 */
 
 	@Test
-	void getLoggedinMsgTestUserIsNull() {
+	void getLoggedinMsgTest_UserIsNull() {
 		User user = null;
 		String loggedIn = "yes";
 		Msg actualMsg = null;
@@ -362,5 +361,4 @@ class UserControllerTest {
 		}
 		assertEquals(actualMsg, null);
 	}
-
 }

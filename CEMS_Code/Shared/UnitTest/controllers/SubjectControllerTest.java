@@ -15,7 +15,7 @@ import enteties.Subject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-class SubjectControllerTest {
+public class SubjectControllerTest {
 
 	SubjectController subjectController;
 	

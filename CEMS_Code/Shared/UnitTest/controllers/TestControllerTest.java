@@ -17,7 +17,7 @@ import enteties.User;
 import javafx.application.Platform;
 
 
-class TestControllerTest {
+public class TestControllerTest {
 	TestController testController;
 	
 	@BeforeAll
@@ -38,7 +38,7 @@ class TestControllerTest {
 	 * Expected Result: Null message object.
 	 */
 	@Test
-	void selectTestByUserTestUserIsNull() {
+	void selectTestByUserTest_UserIsNull() {
 		User user = null;
 		Msg actualMsg = null;
 		try {
@@ -58,7 +58,7 @@ class TestControllerTest {
 	 * user's ID.
 	 */
 	@Test
-	void selectTestByUserTestValidUser() {
+	void selectTestByUserTest_ValidUser() {
 		User user = new User();
 		user.setId("123456");
 		Msg actualMsg = null;
@@ -86,13 +86,14 @@ class TestControllerTest {
 		assertEquals("user_subject.userId", actualMsg.getWhere().keySet().iterator().next());
 		assertEquals("123456", actualMsg.getWhere().values().iterator().next());
 	}
+	
 	/**
 	 * Description: verifies the behavior of the checkInputs method when the 'id' parameter is null.
 	 * Input: id = null, number = "70", courseNumber = "13", duration = "300", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
 	 * Expected Result: actualMsg is null.
 	 */
 	@Test
-	void checkInputsTestIdIsNull() {
+	void checkInputsTest_IdIsNull() {
 		Object actualMsg = null;
 		try {
 			actualMsg = testController.checkInputs(null,"70","13","300","instructions","instructions");
@@ -100,15 +101,15 @@ class TestControllerTest {
 			assertFalse(true);
 		}
 		assertEquals(actualMsg, null);
-		
 	}
+	
 	/**
 	 * Description: verifies the behavior of the checkInputs method when the 'number' parameter is null.
 	 * Input: id = "22222", number = null, courseNumber = "13", duration = "300", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
 	 * Expected Result: actualMsg is null.
 	 */
 	@Test
-	void checkInputsTestNumberIsNull() {
+	void checkInputsTest_NumberIsNull() {
 		Object actualMsg = null;
 		try {
 			actualMsg = testController.checkInputs("22222",null,"13","300","instructions","instructions");
@@ -116,15 +117,15 @@ class TestControllerTest {
 			assertFalse(true);
 		}
 		assertEquals(actualMsg, null);
-		
 	}
+	
 	/**
 	 * Description: verifies the behavior of the checkInputs method when the 'courseNumber' parameter is null.
 	 * Input: id = "22222", number = "70", courseNumber = null, duration = "300", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
 	 * Expected Result: actualMsg is null.
 	 */
 	@Test
-	void checkInputsTestCourseNumberIsNull() {
+	void checkInputsTest_CourseNumberIsNull() {
 		Object actualMsg = null;
 		try {
 			actualMsg = testController.checkInputs("22222","70",null,"300","instructions","instructions");
@@ -136,16 +137,15 @@ class TestControllerTest {
 		}catch (Exception e) {
 			assertFalse(true);
 		}
-		
-		
 	}
+	
 	/**
 	 * Description: verifies the behavior of the checkInputs method when the 'duration' parameter is null.
 	 * Input: id = "22222", number = "70", courseNumber = "13", duration = null, instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
 	 * Expected Result: actualMsg is null.
 	 */
 	@Test
-	void checkInputsTestDurationIsNull() {
+	void checkInputsTest_DurationIsNull() {
 		Object actualMsg = null;
 		try {
 			actualMsg = testController.checkInputs("22222","70","13",null,"instructions","instructions");
@@ -155,13 +155,14 @@ class TestControllerTest {
 		assertEquals(actualMsg, null);
 		
 	}
+	
 	/**
 	 * Description: verifies the behavior of the checkInputs method when the 'instructionsForStudent' parameter is null.
 	 * Input: id = "22222", number = "70", courseNumber = "13", duration = "300", instructionsForStudent = null, instructionsForLecturer = "instructions"
 	 * Expected Result: actualMsg is null.
 	 */
 	@Test
-	void checkInputsTestInstructionsForStudentIsNull() {
+	void checkInputsTest_InstructionsForStudentIsNull() {
 		Object actualMsg = null;
 		try {
 			actualMsg = testController.checkInputs("22222","70","13","300",null,"instructions");
@@ -169,15 +170,15 @@ class TestControllerTest {
 			assertFalse(true);
 		}
 		assertEquals(actualMsg, null);
-		
 	}
+	
 	/**
 	 * Description: verifies the behavior of the checkInputs method when the 'instructionsForLecturer' parameter is null.
 	 * Input: id = "22222", number = "70", courseNumber = "13", duration = "300", instructionsForStudent = "instructions", instructionsForLecturer = null
 	 * Expected Result: actualMsg is null.
 	 */
 	@Test
-	void checkInputsTestInstructionsForLecturerIsNull() {
+	void checkInputsTest_InstructionsForLecturerIsNull() {
 		Object actualMsg = null;
 		try {
 			actualMsg = testController.checkInputs("22222","70","13","300","instructions",null);
@@ -187,82 +188,88 @@ class TestControllerTest {
 		assertEquals(actualMsg, null);
 		
 	}
+	
 	/**
 	 * Description: verifies the behavior of the checkInputs method when the 'id' parameter exceeds the upper limit of 999999.
 	 * Input: id = "9999999", number = "90", courseNumber = "13", duration = "300", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
 	 * Expected Result: string - "id is not leagal.\n".
 	 */
 	@Test
-	void checkInputsTestIdIsUpTo999999() {
+	void checkInputsTest_IdIsUpTo999999() {
 		Object actualMsg = null;
 		actualMsg = testController.checkInputs("9999999","90","13","300","instructions","instructions");
 		assertEquals(actualMsg, "id is not leagal.\n");
 	}
+	
 	/**
 	 * Description: verifies the behavior of the checkInputs method when the 'id' parameter is below the lower limit of 10101.
 	 * Input: id = "1", number = "90", courseNumber = "13", duration = "300", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
 	 * Expected Result:string- "id is not leagal.\n".
 	 */
 	@Test
-	void checkInputsTestIdIsDownOf10101() {
+	void checkInputsTest_IdIsDownOf10101() {
 		Object actualMsg = null;
 		actualMsg = testController.checkInputs("1","90","13","300","instructions","instructions");
 		assertEquals(actualMsg, "id is not leagal.\n");
 	}
+	
 	/**
 	 * Description: verifies the behavior of the checkInputs method when the 'number' parameter exceeds the upper limit of 99.
 	 * Input: id = "22222", number = "999", courseNumber = "13", duration = "300", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
 	 * Expected Result: string-"test number must be an integer between 01 and 99.\n"
 	 */
 	@Test
-	void checkInputsTestNumberIsUpTo99() {
+	void checkInputsTest_NumberIsUpTo99() {
 		Object actualMsg = null;
 		actualMsg = testController.checkInputs("22222","999","13","300","instructions","instructions");
 		assertEquals(actualMsg, "test number must be an integer between 01 and 99.\n");
 	}
+	
 	/**
 	 * Description: verifies the behavior of the checkInputs method when the 'number' parameter is below the lower limit of 01.
 	 * Input: id = "22222", number = "-6", courseNumber = "13", duration = "300", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
 	 * Expected Result: string-"test number must be an integer between 01 and 99.\n"
 	 */
 	@Test
-	void checkInputsTestNumberIsDownOf01() {
+	void checkInputsTest_NumberIsDownOf01() {
 		Object actualMsg = null;
 		actualMsg = testController.checkInputs("22222","-6","13","300","instructions","instructions");
 		assertEquals(actualMsg, "test number must be an integer between 01 and 99.\n");
 	}
+	
 	/**
 	 * Description: verifies the behavior of the checkInputs method when the 'duration' parameter exceeds the upper limit of 500.
 	 * Input: id = "22222", number = "70", courseNumber = "13", duration = "550", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
 	 * Expected Result:string- "the test duration must be between 1 and 500.\n"
 	 */
 	@Test
-	void checkInputsTestDurationIsUpTo500() {
+	void checkInputsTest_DurationIsUpTo500() {
 		Object actualMsg = null;
 		actualMsg = testController.checkInputs("22222","70","13","550","instructions","instructions");
 		assertEquals(actualMsg, "the test duration must be between 1 and 500.\n");
 	}
+	
 	/**
 	 * Description: verifies the behavior of the checkInputs method when the 'duration' parameter is below the lower limit of 1.
 	 * Input: id = "22222", number = "70", courseNumber = "13", duration = "0", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
 	 * Expected Result: string- "the test duration must be between 1 and 500.\n"
 	 */
 	@Test
-	void checkInputsTestDurationIsDownOf1() {
+	void checkInputsTest_DurationIsDownOf1() {
 		Object actualMsg = null;
 		actualMsg = testController.checkInputs("22222","70","13","0","instructions","instructions");
 		try {
 			assertEquals(actualMsg, "the test duration must be between 1 and 500.\n");
 		}catch(Exception e) {assertFalse(true);}
-		
 	}
+	
 	/**
 	 * Description: verifies the behavior of the checkInputs method when all input parameters are valid.
 	 * Input: id = "22222", number = "70", courseNumber = "13", duration = "300", instructionsForStudent = "instructions", instructionsForLecturer = "instructions"
 	 * Expected Result: An instance of the Test object with the provided inputs.
 	 */
 	@Test
-	void checkInputsTestValidInput() {
+	void checkInputsTest_ValidInput() {
 		Object actualMsg = null;
 		actualMsg = testController.checkInputs("22222","70","13","300","instructions","instructions");
 		assertEquals(actualMsg,new enteties.Test("22222","70","13",300,"instructions","instructions"));
@@ -286,13 +293,14 @@ class TestControllerTest {
 		assertEquals(actualMsg, null);
 		
 	}
+	
 	/**
 	 * Description: verifies the behavior of the insertTest when the 'questionList' parameter is null.
 	 * Input: test = Test("22222", "70", "13", 300, "instructions", "instructions"), questionList = null
 	 * Expected Result: actualMsg is null.
 	 */
 	@Test
-	void insertTestTestQuestionListIsNull() {
+	void insertTestTest_QuestionListIsNull() {
 		Object actualMsg = null;
 		try {
 			actualMsg = testController.insertTest(new enteties.Test("22222","70","13",300,"instructions","instructions"),null);
@@ -310,7 +318,7 @@ class TestControllerTest {
 	 * Expected Result: Expected messages for inserting the test and its questions into the database.
 	 */
 	@Test
-	void insertTestTestVaildInsert() {
+	void insertTestTest_VaildInsert() {
 		 // Initialize variables
 		Msg actualMsg = null;
 		ArrayList<Question> newTest_question= new ArrayList<Question>();
@@ -367,24 +375,5 @@ class TestControllerTest {
 		assertEquals( actualMsg.getMsgLst().get(1).getTableToUpdate(),arrSelect2);
 		assertEquals(actualMsg.getMsgLst().get(1).getColNames(),arrNames2);
 		assertEquals( actualMsg.getMsgLst().get(1).getValues(),arrQuestionInformation1);
-		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

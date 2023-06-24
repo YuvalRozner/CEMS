@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class MsgTest {
+public class MsgTest {
 	
 	private static Msg msgBeingTested;
 	private static ArrayList<ArrayList<Object>> data;

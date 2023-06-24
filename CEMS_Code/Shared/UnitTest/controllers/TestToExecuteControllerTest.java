@@ -10,7 +10,7 @@ import JDBC.MsgType;
 import enteties.TestToExecute;
 import java.util.ArrayList;
 
-class TestToExecuteControllerTest {
+public class TestToExecuteControllerTest {
 
 	TestToExecuteController testToExecuteController;
 	

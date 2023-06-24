@@ -16,7 +16,7 @@ import enteties.Question;
 import java.util.ArrayList;
 
 
-class QuestionControllerTest {
+public class QuestionControllerTest {
 
 	QuestionController questionController;
 	
