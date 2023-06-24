@@ -23,7 +23,7 @@ class TestToExecuteControllerTest {
     //Input: TestToExecute object with valid values(testCode, testId, testType, date, lecturerId).
     //Expected Result: Msg object representing the database insert message(expectedMsg = resultMsg).
     @Test
-    public void insertTestToExecute_ValidTestToExecute() {
+    public void insertTestToExecuteTest_ValidTestToExecute() {
     	TestToExecute testToExecute = new TestToExecute();
     	testToExecute.setTestCode(1000);
     	testToExecute.setTestId("231201");
@@ -53,7 +53,7 @@ class TestToExecuteControllerTest {
     //Input: null TestToExecute object.
     //Expected Result: Msg object representing the database insert message with null values and column names.
     @Test
-    public void insertTestToExecute_NullTestToExecute() {
+    public void insertTestToExecuteTest_NullTestToExecute() {
         TestToExecute testToExecute = null;
         Msg expectedMsg = new Msg(MsgType.insert);
         expectedMsg.setTableToUpdate("testtoexecute");
@@ -75,7 +75,7 @@ class TestToExecuteControllerTest {
     //Expected Result: Msg object representing the database insert message with the provided values 
     //					and empty column names for the missing values([[1000, Online, 25.06.2023]]).
     @Test
-    public void insertTestToExecute_PartialTestToExecute() {
+    public void insertTestToExecuteTest_PartialTestToExecute() {
         TestToExecute testToExecute = new TestToExecute();
         testToExecute.setTestCode(1000);
         testToExecute.setTestingType("Online");
@@ -101,7 +101,7 @@ class TestToExecuteControllerTest {
     //Input: TestToExecute object with valid values (date, testCode, testingType) and a valid userId.
     //Expected Result: TestToExecute object with properties set according to the provided inputs.
     @Test
-    public void checkInputs_ValidInputs() {
+    public void checkInputsTest_ValidInputs() {
         TestToExecute selectedTest = new TestToExecute();
         String userId = "31234561";
         String date = "25.06.2023";
@@ -121,7 +121,7 @@ class TestToExecuteControllerTest {
     //Input: TestToExecute object with a missing test date (date is an empty string, testCode, testingType) and a valid userId.
     //Expected Result: error message string: "You must enter test date.\n"
     @Test
-    public void checkInputs_MissingTestDate() {
+    public void checkInputsTest_MissingTestDate() {
         TestToExecute selectedTest = new TestToExecute();
         String userId = "31234561";
         String date = "";
@@ -136,7 +136,7 @@ class TestToExecuteControllerTest {
     //Input: TestToExecute object with an invalid test code (testCode is "12345", date, testingType) and a valid userId.
     //Expected Result: error message string: "Test code must be a number between 1000 and 9999.\n"
     @Test
-    public void checkInputs_InvalidTestCode() {
+    public void checkInputsTest_InvalidTestCode() {
         TestToExecute selectedTest = new TestToExecute();
         String userId = "31234561";
         String date = "25.06.2023";
@@ -151,7 +151,7 @@ class TestToExecuteControllerTest {
     //Input: TestToExecute object with an invalid test code format (testCode is "abc", date, testingType) and a valid userId.
     //Expected Result: error message string: "Test code must be an integer.\n"
     @Test
-    public void checkInputs_InvalidTestCodeFormat() {
+    public void checkInputsTest_InvalidTestCodeFormat() {
         TestToExecute selectedTest = new TestToExecute();
         String userId = "31234561";
         String date = "25.06.2023";
@@ -166,7 +166,7 @@ class TestToExecuteControllerTest {
     //Input: TestToExecute object with valid values (date, testCode, testingType) and a missing user ID (userId is an empty string).
     //Expected Result: result = null, indicating that the user ID is not set.
     @Test
-    public void checkInputs_ValidInputsAndMissingUserId() {
+    public void checkInputsTest_ValidInputsAndMissingUserId() {
         TestToExecute selectedTest = new TestToExecute();
         String userId = "";
         String date = "25.06.2023";
@@ -181,7 +181,7 @@ class TestToExecuteControllerTest {
     //Input: null TestToExecute object, null userId, null date, null testCode, null testingType.
     //Expected Result: result = null, indicating that the inputs are not valid.
     @Test
-    public void checkInputs_NullInputs() {
+    public void checkInputsTest_NullInputs() {
         TestToExecute selectedTest = null;
         String userId = null;
         String date = null;
